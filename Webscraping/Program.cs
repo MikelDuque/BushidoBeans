@@ -1,5 +1,5 @@
 ﻿using PruebaPlaywright;
-using WebScrapping1;
+using WebScrapping;
 
 namespace WebScraping;
 
@@ -12,6 +12,7 @@ public class Program {
         listaProductosTotales.AddRange(await WebTes.Scraping());
         listaProductosTotales.AddRange(await WebTesImportados.Scraping());
         listaProductosTotales.AddRange(await WebCafes.Scraping());
+        listaProductosTotales.AddRange(await WebCafes2.Scraping());
 
         //Producto más barato
         Product cheapest = listaProductosTotales.MinBy(p => p.Price);

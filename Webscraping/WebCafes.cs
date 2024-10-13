@@ -1,7 +1,7 @@
 ﻿using Microsoft.Playwright;
 using System.Diagnostics;
 
-namespace WebScrapping1;
+namespace WebScrapping;
 
 public class WebCafes
 {
