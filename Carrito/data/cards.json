@@ -1,0 +1,110 @@
+[
+    {
+        "id":"1",
+        "imagen": "img/curso1.jpg",
+        "nombre": "HTML5, CSS3, JavaScript para Principiantes",
+        "autor": "Juan Pedro",
+        "imgEstrellas": "img/estrellas.png",
+        "precioAntiguo": "200$",
+        "precioNuevo": "15$"
+    },
+    {
+        "id":"2",
+        "imagen": "img/curso2.jpg",
+        "nombre": "Curso de Comida Vegetariana",
+        "autor": "Juan Pedro",
+        "imgEstrellas": "img/estrellas.png",
+        "precioAntiguo": "200$",
+        "precioNuevo": "15$"
+    },
+    {
+        "id":"3",
+        "imagen": "img/curso3.jpg",
+        "nombre": "Guitarra para Principantes",
+        "autor": "Juan Pedro",
+        "imgEstrellas": "img/estrellas.png",
+        "precioAntiguo": "200$",
+        "precioNuevo": "15$"
+    },
+    {
+        "id":"4",
+        "imagen": "img/curso4.jpg",
+        "nombre": "Huerto en tu Casa",
+        "autor": "Juan Pedro",
+        "imgEstrellas": "img/estrellas.png",
+        "precioAntiguo": "200$",
+        "precioNuevo": "15$"
+    },
+    {
+        "id":"5",
+        "imagen": "img/curso5.jpg",
+        "nombre": "Decoración con Productos de tu Hogar",
+        "autor": "Juan Pedro",
+        "imgEstrellas": "img/estrellas.png",
+        "precioAntiguo": "200$",
+        "precioNuevo": "15$"
+    },
+    {
+        "id":"6",
+        "imagen": "img/curso1.jpg",
+        "nombre": "Diseño Web para Principiantes",
+        "autor": "Juan Pedro",
+        "imgEstrellas": "img/estrellas.png",
+        "precioAntiguo": "200$",
+        "precioNuevo": "15$"
+    },
+    {
+        "id":"7",
+        "imagen": "img/curso2.jpg",
+        "nombre": "Comida Mexicana para Principiantes",
+        "autor": "Juan Pedro",
+        "imgEstrellas": "img/estrellas.png",
+        "precioAntiguo": "200$",
+        "precioNuevo": "15$"
+    },
+    {
+        "id":"8",
+        "imagen": "img/curso3.jpg",
+        "nombre": "Estudio Musical en tu Casa",
+        "autor": "Juan Pedro",
+        "imgEstrellas": "img/estrellas.png",
+        "precioAntiguo": "200$",
+        "precioNuevo": "15$"
+    },
+    {
+        "id":"9",
+        "imagen": "img/curso4.jpg",
+        "nombre": "Cosecha tus Propias Frutas y Verduras",
+        "autor": "Juan Pedro",
+        "imgEstrellas": "img/estrellas.png",
+        "precioAntiguo": "200$",
+        "precioNuevo": "15$"
+    },
+    {
+        "id":"10",
+        "imagen": "img/curso5.jpg",
+        "nombre": "Prepara Galletas Caseras",
+        "autor": "Juan Pedro",
+        "imgEstrellas": "img/estrellas.png",
+        "precioAntiguo": "200$",
+        "precioNuevo": "15$"
+    },
+    {
+        "id":"11",
+        "imagen": "img/curso1.jpg",
+        "nombre": "JavaScript Moderno con ES6",
+        "autor": "Juan Pedro",
+        "imgEstrellas": "img/estrellas.png",
+        "precioAntiguo": "200$",
+        "precioNuevo": "15$"
+    },
+    {
+        "id":"12",
+        "imagen": "img/curso2.jpg",
+        "nombre": "100 Recetas de Comida Natural",
+        "autor": "Juan Pedro",
+        "imgEstrellas": "img/estrellas.png",
+        "precioAntiguo": "200$",
+        "precioNuevo": "15$"
+    }
+]
