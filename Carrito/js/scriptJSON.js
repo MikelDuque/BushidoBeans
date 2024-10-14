@@ -1,7 +1,7 @@
 //VARIABLES
 const LS = localStorage;
 let arrayCarrito = [];
-const URL = "http://127.0.0.1:5500/Carrito/data/cards.json"; 
+const URL = "http://127.0.0.1:5500/JavaScript_Vanilla/Carrito/data/cards.json"; 
 
 const listaCursos = document.querySelector("#lista-cursos");
 const carrito = document.querySelector("#carrito")
@@ -43,7 +43,7 @@ function extraerDatosJSON(elementoArray) {
             <h4>${elementoArray.nombre}</h4>
             <p>${elementoArray.autor}</p>
             <img src="img/estrellas.png"/>
-            <p class="precio>${elementoArray.precioAntiguo}<span class="u-pull-right">${elementoArray.precioNuevo}</span></p>
+            <p class="precio">${elementoArray.precioAntiguo}<span class="u-pull-right">${elementoArray.precioNuevo}</span></p>
             <a href="#" class="u-full-width button-primary button input agregar-carrito" data-id="${elementoArray.id}">Agregar al Carrito</a>
         </div>`
     );
@@ -61,8 +61,6 @@ function comprobarBoton(event) {
 function comprobarBotonCarrito(event) {
     event.preventDefault();
     let btnPulsado = event.target;
-    console.log("id: ", btnPulsado.getAttribute("id"));
-    
 
     if (btnPulsado.getAttribute("id") === "vaciar-carrito") {
         vaciarCarrito();
@@ -102,13 +100,13 @@ function addProducto(producto) {
 };
 
 function crearElementosTabla() {
-    let tabla = ListaCarrito.children[1];
-    tabla.innerHTML = "";
+    let tbody = ListaCarrito.children[1];
+    tbody.innerHTML = "";
     let tr = "";
 
     arrayCarrito.forEach((elemento) => {
         tr = document.createElement("tr");
-        tabla.appendChild(tr).innerHTML =
+        tbody.appendChild(tr).innerHTML =
             `<td><img src="${elemento.imagen}"/></td>` +
             `<td>${elemento.nombre}</td>` +
             `<td>${elemento.precio}</td>` +
@@ -130,7 +128,7 @@ function cargarLocalStorage() {
 function actualizarCarrito() {
     cargarLocalStorage();
     crearElementosTabla();
-}
+};
 
 //Eliminación de elementos
 function vaciarCarrito() {

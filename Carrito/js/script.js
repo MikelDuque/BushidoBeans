@@ -66,13 +66,13 @@ function addProducto(producto) {
 };
 
 function crearElementosTabla() {
-    let tabla = ListaCarrito.children[1];
-    tabla.innerHTML = "";
+    let tbody = ListaCarrito.children[1];
+    tbody.innerHTML = "";
     let tr = "";
 
     arrayCarrito.forEach((elemento) => {
         tr = document.createElement("tr");
-        tabla.appendChild(tr).innerHTML =
+        tbody.appendChild(tr).innerHTML =
             `<td><img src="${elemento.imagen}"/></td>` +
             `<td>${elemento.nombre}</td>` +
             `<td>${elemento.precio}</td>` +

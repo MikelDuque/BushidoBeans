@@ -59,8 +59,10 @@ public class WebTesImportados {
         Console.WriteLine($"Oferta más cara:\n{expensive} ");
 
         // Con los datos recolectados, buscamos la media
-        decimal media = products.Average(p => p.Price);
-        Console.WriteLine($"Media de los productos: {media} ");
+        try {
+            decimal media = products.Average(p => p.Price);
+            Console.WriteLine($"Media de los productos: {media} ");
+        } catch (System.Exception) {}
         
         return products;
        
