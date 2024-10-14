@@ -17,7 +17,7 @@ public class WebTesImportados {
         await using IBrowserContext context = await browser.NewContextAsync();
         IPage page = await context.NewPageAsync();
         // Ir a la página del vendedor
-        await page.GotoAsync("https://www.asianfoodlovers.com/en/products/drinks-juices-alcohol/drinks-juices/iced-tea");
+        await page.GotoAsync("https://www.asianfoodlovers.com/en/products/drinks-juices-alcohol/drinks-juices/iced-tea?query=:position:allCategories:B2C_3_0039:priceFacet:€0%20-%20€5");
 
         // Recorremos la lista de productos y recolectamos los datos
         List<Product> products = new List<Product>();
@@ -42,23 +42,25 @@ public class WebTesImportados {
             try {
                 Product product = await GetProductAsync(productElements[i]);
                 products.Add(product);
-                Console.WriteLine(product);
+                //Console.WriteLine(product);
             }
             catch {}
         }
         
-
+        System.Console.WriteLine("\n=================================================\n");
+        System.Console.WriteLine("Los datos objetidos de ASIANFOODLOVERS.COM han sido:\n");
+        
         // Con los datos recolectados, buscamos el producto más barato
         Product cheapest = products.MinBy(p => p.Price);
-        Console.WriteLine($"La oferta más barata es: {cheapest}");
+        Console.WriteLine($"Oferta más barata:\n{cheapest} ");
 
-        //Producto más caro
+        // Con los datos recolectados, buscamos el producto más caro
         Product expensive = products.MaxBy(p => p.Price);
-        Console.WriteLine($"La oferta más cara es: {expensive}");
+        Console.WriteLine($"Oferta más cara:\n{expensive} ");
 
-        //Media total
+        // Con los datos recolectados, buscamos la media
         decimal media = products.Average(p => p.Price);
-        System.Console.WriteLine($"La media es: {media}");
+        Console.WriteLine($"Media de los productos: {media} ");
         
         return products;
        

@@ -11,8 +11,8 @@ public class Product {
     public override string ToString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.AppendLine($"Name: {Name}");
-        sb.AppendLine($"Price: {Price} €");
+        sb.AppendLine($"Nombre: {Name}");
+        sb.AppendLine($"Precio: {Price} €");
         
         return sb.ToString();
     }

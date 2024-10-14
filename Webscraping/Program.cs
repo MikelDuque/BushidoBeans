@@ -14,17 +14,20 @@ public class Program {
         listaProductosTotales.AddRange(await WebCafes.Scraping());
         listaProductosTotales.AddRange(await WebCafes2.Scraping());
 
+        System.Console.WriteLine("\n=================================================\n");
+        System.Console.WriteLine("Finalmente, los datos globales han sido los siguientes:\n");
+
         //Producto más barato
         Product cheapest = listaProductosTotales.MinBy(p => p.Price);
-        Console.WriteLine($"La oferta más barata de todas es: {cheapest} ");
+        Console.WriteLine($"Oferta más barata de todas:\n{cheapest} ");
 
         //Producto más caro
         Product expensive = listaProductosTotales.MaxBy(p => p.Price);
-        Console.WriteLine($"La oferta más cara de todas es: {expensive} ");
+        Console.WriteLine($"Oferta más cara de todas:\n{expensive} ");
 
         //Media
         
         decimal media = listaProductosTotales.Average(p => p.Price);
-        Console.WriteLine($"La media de todos los productos es: {media} ");
+        Console.WriteLine($"Media de todos los productos:\n{media} ");
     }
 }

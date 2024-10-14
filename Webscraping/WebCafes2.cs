@@ -40,20 +40,25 @@ public class WebCafes2
             try {
                 Product product = await GetProductAsync(productElements[i]);
                 products.Add(product);
-                Console.WriteLine(product);
+                //Console.WriteLine(product);
             }
             catch {}
         }
 
+        System.Console.WriteLine("\n=================================================\n");
+        System.Console.WriteLine("Los datos objetidos de KAIKU.ES han sido:\n");
+        
         // Con los datos recolectados, buscamos el producto más barato
         Product cheapest = products.MinBy(p => p.Price);
-        Console.WriteLine($"La oferta más barata es: {cheapest}");
+        Console.WriteLine($"Oferta más barata:\n{cheapest} ");
+
         // Con los datos recolectados, buscamos el producto más caro
         Product expensive = products.MaxBy(p => p.Price);
-        Console.WriteLine($"La oferta más barata es: {expensive}");
-        // Con los datos recolectados, buscamos el precio del producto medio
-        decimal average = products.Average(p => p.Price);
-        Console.WriteLine($"La oferta media es: {average}");
+        Console.WriteLine($"Oferta más cara:\n{expensive} ");
+
+        // Con los datos recolectados, buscamos la media
+        decimal media = products.Average(p => p.Price);
+        Console.WriteLine($"Media de los productos: {media} ");
 
         return products;
     }
