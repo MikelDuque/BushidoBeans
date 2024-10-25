@@ -21,30 +21,30 @@
 .login {
     background-color: var(--fondo-vistas);
     margin: 0 auto; 
-    width: 1850px; 
+    width: 1300px; 
     height: 980px; 
     padding: 20px; 
-    border-radius: 8px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
 }
 
 .accede {
     color: #0B5E04;
     font-weight: 600;
     font-size: 30px;
-    margin-left: 200px;
+    margin-left: 450px;
 }
 
 .usaGmail {
     font-weight: 400;
     font-size: 25px;
-    margin-left: 190px;
+    margin-left: 425px;
 }
 
 /* Estilos para los inputs */
 #email, #password {
     padding-left: 30px;
     margin: 10px;
+    margin-left: 225px;
     width: 712px;
     height: 97px;
     background-color: #EDE6E0;
@@ -77,8 +77,8 @@
 
 /* Estilos para el botón de acceder */
 .Acceder {
-    margin-left: 20px;
-    margin-top: 100px;
+    margin-left: 400px;
+    margin-top: 300px;
     width: 363px;
     height: 125px;
     background-color: #295026;
@@ -89,10 +89,66 @@
     font-size: 25px; /* Tamaño de fuente del botón */
     border: none; /* Sin borde */
     cursor: pointer; /* Cambia el cursor al pasar por encima */
-    transition: background-color 0.3s; /* Efecto de transición para el color de fondo */
+    transition: background-color 1s; /* Efecto de transición para el color de fondo */
 }
 
 /* Cambia el color del botón al pasar el mouse */
 .Acceder:hover {
     color: var(--nav-hover); /* Color al pasar el mouse */
+}
+
+.container{
+    margin: 60px 60px 60px ;
+    display: inline-flex;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+}
+.crearCuenta{
+    padding: 20px; 
+    border-top-left-radius: 200px;
+    border-bottom-left-radius:200px;
+    background-color: #295026;
+    width: 1000px;
+    height: 980px;
+}
+
+.btnCrearCuenta{
+    margin-left: 300px;
+    margin-top: 100px;
+    width: 363px;
+    height: 125px;
+    background-color: #295026;
+    color: #EFF7EE;
+    border-radius: 41px;
+    font-family: 'Poppins', sans-serif; /* Asegura que el botón use la misma fuente */
+    font-weight: 600; /* Peso de fuente del botón */
+    font-size: 25px; /* Tamaño de fuente del botón */
+    border: 1px solid #EFF7EE; /* Sin borde */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    transition: background-color 1s; /* Efecto de transición para el color de fondo */
+}
+.btnCrearCuenta:hover {
+    color: var(--nav-hover); /* Color al pasar el mouse */
+    border:1px solid var(--nav-hover);
+}
+.preguntaCuenta{
+    color:#EFF7EE;
+    font-weight: 600;
+    font-size: 30px;
+    margin-left: 300px;
+    margin-top: 10px;
+    background-color:#295026 ;
+}
+.crearAhora{
+    color:#EFF7EE;
+    font-weight: 400;
+    font-size: 25px;
+    margin-left: 345px;
+    background-color:#295026 ;
+    margin-bottom: -30px;
+}
+.logoBushidoBeans{
+    background-color:#295026 ;
+    margin-left: 300px;
+    margin-top: 100px;
 }
