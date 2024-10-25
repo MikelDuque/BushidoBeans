@@ -152,3 +152,10 @@
     margin-left: 300px;
     margin-top: 100px;
 }
+
+.password-message, .email-message{
+    font-weight: 600;
+    font-size: 20px;
+    color: red;
+    margin-left: 250px;
+}
