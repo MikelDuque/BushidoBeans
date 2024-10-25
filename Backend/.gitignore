@@ -2,3 +2,4 @@
 .vs/
 eCommerce/bin/
 eCommerce/obj/
+*.user

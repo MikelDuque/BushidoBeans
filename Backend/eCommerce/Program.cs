@@ -1,5 +1,6 @@
 using eCommerce.Controllers;
 using eCommerce.Models.Database;
+using eCommerce.Models.Database.Repositories;
 
 namespace eCommerce;
 
@@ -20,6 +21,8 @@ public class Program
         //Contextos
         builder.Services.AddScoped<DataContext>();
         builder.Services.AddScoped<UnitOfWork>();
+
+        builder.Services.AddScoped<UserRepository>();
 
         var app = builder.Build();
 
