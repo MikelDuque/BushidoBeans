@@ -1,3 +1,27 @@
 * {
-  
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Colores principales */
+  --fondo-pagina: #1E1E1E;
+  --fondo-vistas: #F3EEEB;
+  --nav-footer: #295026;
+  --letras-nav: #FFFDEA;
+  --nav-hover: #E6D429;
+  --nav-click: #736A14;
+  --dark-brown: #654326;
+  --dark-hover: #50351E;
+  --dark-active-brown: #3C2816;
+  --darker-brown: #2F1F12;
+  --texto-principal: #0B5E04;
+  --texto-oscuro: #3C2816;
+  --texto-claro: #EFF7EE;
+
+  /* Estilos de texto */
+  --titulos-size: 25px;
+  --subtitulos-size: 20px;
+  --font-weight-bold: 600;
+  --font-weight-regular: 400;
 }
