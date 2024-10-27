@@ -15,18 +15,17 @@ function Inicio() {
 
         <Header />
         <main>
-          <div>INICIO<br></br>
+          <div>INICIO
+            <br></br>
+            <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br>            <br></br>
             <br></br>
             <br></br>
             <br></br>
             <br></br>
-            <br></br><br></br>
             <br></br>
-            <br></br>
-            <br></br><br></br>
-            <br></br>
-            <br></br><br></br>
-            <br></br>
+            <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+            <br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
             <br></br>
             <br></br><br></br><br></br><br></br>
             <br></br>

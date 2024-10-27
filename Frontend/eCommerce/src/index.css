@@ -20,8 +20,9 @@
   --texto-claro: #EFF7EE;
 
   /* Estilos de texto */
-  --titulos-size: 25px;
+  --titulos-size: 23px;
   --subtitulos-size: 20px;
+  --texto-size: 15px;
   --font-weight-bold: 600;
   --font-weight-regular: 400;
 }

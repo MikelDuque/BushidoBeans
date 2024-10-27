@@ -4,20 +4,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to bottom, var(--nav-footer) 0%,rgb(20, 20, 20) 10%, rgb(20, 20, 20) 90%, var(--nav-footer) 100%);}
-
-.introImg{
-  width: 35%;
-  transition: opacity 2s ease-in;
+  background: linear-gradient(
+    to bottom, var(--nav-footer) 0%,rgb(20, 20, 20) 10%, rgb(20, 20, 20) 90%, var(--nav-footer) 100%
+    );
 }
+
 .introImg {
-  opacity: 0; /* Inicialmente la imagen es invisible */
-  animation: aparecer 2s forwards; /* Ejecuta la animación */
+  width: 35%;
+  opacity: 0;
+  animation: aparecerImagen 2s forwards;
   animation-delay: 1s;
 }
 
-@keyframes aparecer {
+@keyframes aparecerImagen {
   to {
-      opacity: 1; /* Cambia a visible al final de la animación */
+      opacity: 1;
   }
 }

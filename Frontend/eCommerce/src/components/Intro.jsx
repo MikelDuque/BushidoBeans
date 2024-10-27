@@ -5,12 +5,18 @@ const ScrollIntro = () => {
     const [esVisible, setEsVisible] = useState(true);
 
     useEffect(() => {
+
+        document.body.style.overflow = 'hidden';
+
         const timer = setTimeout(() => {
             window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
-            setTimeout(() => { setEsVisible(false) }, 450); //Tiempo para eliminar la imagen
-        }, 2000); //Tiempo total animación
+            setTimeout(() => { setEsVisible(false);
+            window.scrollTo({top: 0});
+            document.body.style.overflow = ''; }, 450); //Tiempo para eliminar la imagen
+        }, 3000); //Tiempo total animación
 
         return () => clearTimeout(timer);
+        document.body.style.overflow = '';
     }, []
     );
 
