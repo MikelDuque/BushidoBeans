@@ -30,7 +30,7 @@ namespace eCommerce.Controllers
                 .TokenValidationParameters;
         }
 
-        [Authorize]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public string GetSecret()
         {

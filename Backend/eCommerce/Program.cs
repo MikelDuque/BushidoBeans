@@ -10,10 +10,11 @@ namespace eCommerce;
 
 public class Program
 {
-    public static async Task Main(string[] args) {
+    public static async Task Main(string[] args)
+    {
         //Especificamos el directorio de trabajo
         Directory.SetCurrentDirectory(AppContext.BaseDirectory);
-        
+
         //Constructor
         var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +31,34 @@ public class Program
 
         builder.Services.AddScoped<UserRepository>();
         builder.Services.AddTransient<UserMapper>();
+
+        //por defecto el navegador bloqueará las peticiones debido a la política de CORS.
+        //por eso hay que habilitar Cors
+        if (builder.Environment.IsDevelopment())
+        {
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
+        }
+
+        var app = builder.Build();
+
+        // Configure the HTTP request pipeline.
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
+            //permite cors
+            app.UseCors();
+        }
+
 
         //Configuramos program para que use el servicio de autenticacion
         builder.Services.AddAuthentication()
@@ -50,15 +79,6 @@ public class Program
                         //Ahora creamos un controlador de api en blanco
                     };
                 });
-
-        var app = builder.Build();
-
-        // Configure the HTTP request pipeline.
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseSwagger();
-            app.UseSwaggerUI();
-        }
 
         app.UseHttpsRedirection();
         //Habilita la autenticación
@@ -85,6 +105,6 @@ public class Program
         }
     }
 }
-    
+
 
 
