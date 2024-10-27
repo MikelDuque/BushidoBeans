@@ -24,7 +24,7 @@ public class Seeder
         Mail = "imongut0701@g.educaand.es",
         Name = "Ivan",
         Password = "Hola#123456789",
-        Apellidos = "Montes Gutierrez",
+        Surname = "Montes Gutierrez",
         Phone = 683956402,
         Admin = true
       }

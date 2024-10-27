@@ -1,6 +1,7 @@
 using eCommerce.Controllers;
 using eCommerce.Models.Database;
 using eCommerce.Models.Database.Repositories;
+using eCommerce.Models.Mappers;
 
 namespace eCommerce;
 
@@ -23,6 +24,7 @@ public class Program
         builder.Services.AddScoped<UnitOfWork>();
 
         builder.Services.AddScoped<UserRepository>();
+        builder.Services.AddTransient<UserMapper>();
 
         var app = builder.Build();
 
