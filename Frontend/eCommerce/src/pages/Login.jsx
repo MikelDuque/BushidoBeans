@@ -1,8 +1,9 @@
-import './Login.css';
+// import jwt_decode from 'jwt-decode';
+import "../styles/Login.css"
 import { useRef, useState } from "react";
-import logo from "../../public/recursos/logo.svg";
+import logo from "../../public/logo.svg";
 import { validation } from '../utils/validationForm';
-// import jwt_decode from "jwt-decode"; // Asegúrate de tener instalada la librería jwt-decode
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
     const emailRef = useRef(null);
@@ -10,22 +11,63 @@ function Login() {
     const [emailError, setEmailError] = useState(null);
     const [passwordError, setPasswordError] = useState(null);
     const [promesaError, setPromesaError] = useState(null);
-    const [isLoading, setIsLoading] = useState(false); // Cambia null a false para indicar que no se está cargando.
+    const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate(); // Inicializa useNavigate
 
-    const handleAcceder = (event) => {
+    const handleCrearCuenta = () =>{
+        navigate('/register');
+    }
+    const fetchingData = async (url, data) => {
+        // try {
+        //     setIsLoading(true);
+        //     const response = await fetch(url, {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //         body: JSON.stringify(data)
+        //     });
+
+        //     if (response.ok) {
+        //         const dataPromesa = await response.json();
+        //         const token = dataPromesa.token;
+        //         const decoded = jwt_decode(token);
+
+        //         if (decoded) {
+        //             const userInfo = {
+        //                 username: decoded.username,
+        //                 email: decoded.email,
+        //                 rol: decoded.rol
+        //             };
+        //             console.log(userInfo);
+        //         }
+
+        //         setPromesaError(null);
+        //     } else {
+        //         setPromesaError("Error en la autenticacion: " + response.statusText);
+        //     }
+        // } catch (error) {
+        //     setPromesaError("Error en la autenticacion: " + error.message);
+        // } finally {
+        //     setIsLoading(false);
+        // }
+    };
+
+    const handleAcceder = async (event) => {
         event.preventDefault();
 
-        const emailValue = emailRef.current.value; // Almacena el valor del email
+        const emailValue = emailRef.current.value;
+        const passwordValue = passwordRef.current.value;
+
         if (!validation.isValidEmail(emailValue)) {
-            setEmailError("Por favor, introduce un formato de email válido."); 
+            setEmailError("Por favor, introduce un formato de email válido.");
             return;
         } else {
             setEmailError(null);
         }
 
-        const passwordValue = passwordRef.current.value; // Almacena el valor de la contraseña
         if (!validation.isValidPassword(passwordValue)) {
-            setPasswordError("Por favor, introduce una contraseña válida."); 
+            setPasswordError("Por favor, introduce un formato de contraseña válido.");
             return;
         } else {
             setPasswordError(null);
@@ -37,8 +79,14 @@ function Login() {
         };
         console.log(objetoBackend);
 
-        // Aquí puedes agregar la lógica para manejar el inicio de sesión
+        //await fetchingData("URL_API_AQUI", objetoBackend);
+        // resetForm();
     };
+
+    function resetForm() {
+        emailRef.current.value = "";
+        passwordRef.current.value = "";
+    }
 
     return (
         <div className='container'>
@@ -59,13 +107,14 @@ function Login() {
                     <button type="submit" disabled={isLoading} className='Acceder'>
                         {isLoading ? 'Cargando...' : 'Acceder'}
                     </button>
+                    {promesaError && <p className="error-message">{promesaError}</p>}
                 </form>
             </div>
             <div className='crearCuenta'>
                 <img src={logo} alt="Bushido Beans" className='logoBushidoBeans' />
                 <p className='preguntaCuenta'>¿Aún no tienes cuenta?</p>
                 <p className='crearAhora'>Crea tu cuenta ahora</p>
-                <button className='btnCrearCuenta'>Crear cuenta</button>
+                <button className='btnCrearCuenta' onClick={handleCrearCuenta}>Crear cuenta</button>
             </div>
         </div>
     );
