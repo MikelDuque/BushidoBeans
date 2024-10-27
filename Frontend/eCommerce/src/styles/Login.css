@@ -76,6 +76,7 @@
 .container {
     display: inline-flex;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
     background-color: var(--fondo-vistas);
 }
 
@@ -83,6 +84,8 @@
     margin-left: 250px;
     border-top-left-radius: 200px;
     border-bottom-left-radius: 200px;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
     background-color: var(--nav-footer);
     width: 825px;
     height: 901px;

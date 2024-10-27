@@ -3,6 +3,71 @@
 * {
     font-family: 'Poppins', sans-serif; /* Aplica Poppins a todos los elementos */
     background-color: var(--fondo-pagina);
-    overflow: hidden; /*Quitar barra de scroll*/
+    overflow: hidden; 
+}
+.login-secundario{
+    width: 905px;
+    height: 899px;
+    border-top-right-radius: 200px;
+    border-bottom-right-radius: 200px;
+    background-color: var(--fondo-vistas);
+}
+.preguntaCuenta-secundario{
+    margin: 20px 0px 0px 250px;
+    background-color: var(--fondo-vistas);
+}
+.registrarseTexto{
+    margin: 20px 0px 0px 245px;
+    background-color: var(--fondo-vistas);
+    font-weight: var(--subtitulo);
+}
+.logoBushidoBeans-secundario{
+    margin: 20px 0px 0px 215px;
+    background-color: var(--fondo-vistas);
+}
+.Acceder-secundario{
+    margin:90px 0px 0px 205px;
 }
 
+
+
+.register{
+    width: 1005px;
+    height: 899px;
+    background-color: var(--nav-footer);
+}
+.contenedorEmail-secundario, .contenedorPassword-secundario, .CrearCuenta{
+    background-color: var(--nav-footer);
+}
+
+.btnCrearCuenta-secundario{
+    margin-top: 40px;
+    background-color: var(--nav-footer);
+    margin-left: 31%;
+    width: 363px;
+    height: 125px;
+    background-color: var(--nav-footer);
+    color: var(--texto-claro);
+    border-radius: 41px;
+    font-size: var(--subtitulos-size);
+    font-weight: var(--font-weight-regular);
+    border: 1px solid var(--texto-claro);
+    cursor: pointer;
+    transition: background-color 1s;
+}
+.container-secundario{
+    background-color: var(--nav-footer);
+}
+.preguntaCuenta-terciario-uno{
+    margin-top: 100px;
+    margin-left: 370px;
+}
+.preguntaCuenta-terciario-dos{
+    margin: 0px 0px 50px 290px;
+}
+.password-message-secundario, .email-message-secundario {
+    background-color: var(--nav-footer);
+    font-style: var(--subtitulos);
+    color: red;
+    margin-left: 250px;
+}

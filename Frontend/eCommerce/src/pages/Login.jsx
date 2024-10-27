@@ -4,7 +4,6 @@ import { useRef, useState } from "react";
 import logo from "../../public/logo.svg";
 import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
-
 function Login() {
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
@@ -12,7 +11,7 @@ function Login() {
     const [passwordError, setPasswordError] = useState(null);
     const [promesaError, setPromesaError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate(); // Inicializa useNavigate
+    const navigate = useNavigate();
 
     const handleCrearCuenta = () =>{
         navigate('/register');
@@ -35,9 +34,9 @@ function Login() {
 
         //         if (decoded) {
         //             const userInfo = {
-        //                 username: decoded.username,
+        //                 nombre: decoded.username,
         //                 email: decoded.email,
-        //                 rol: decoded.rol
+        //                 rol: decoded.rol   
         //             };
         //             console.log(userInfo);
         //         }
@@ -80,7 +79,8 @@ function Login() {
         console.log(objetoBackend);
 
         //await fetchingData("URL_API_AQUI", objetoBackend);
-        // resetForm();
+        
+        resetForm();
     };
 
     function resetForm() {
