@@ -49,7 +49,7 @@ function Header() {
         <NavLink className="nl" to="/" end>
           <div className="hLogo" />
         </NavLink>
-        <NavLink className="nl" to="/prueba">
+        <NavLink className="nl" to="/catalogo">
           <div className="btn">Café</div>
         </NavLink>
         <NavLink className="nl" to="">

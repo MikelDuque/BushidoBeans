@@ -83,6 +83,7 @@ header{
   color: var(--letras-nav);
   z-index: 1000;
 }
+
 .desplOpcion {
   padding: 10px;
   cursor: pointer;

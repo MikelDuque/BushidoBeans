@@ -1,25 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap');
 
 footer{
-  background: linear-gradient(
-    to bottom, var(--nav-footer) 0%, var(--nav-footer) 80%, #ffffff00 100%
-    );
-  height: 120px;
+  background: var(--nav-footer);
+  height: 150px;
   font-family: 'Vollkorn';
   font-size: var(--texto-size);
   font-weight: var(--font-weight-regular);
   color: var(--letras-nav);
+  position: relative;
 }
 
 .fLogo{
   display: inline-block;
-  height: 80px;
-  width: 200px;
+  height: 100px;
+  width: 240px;
   background-image: url(recursos/FootLogoD.png);
   background-size: cover;
   transition: transform 0.2s ease;
   position: relative;
-  top: 10px;
+  top: 25px;
   left: 50px;
 }
 .fLogo:hover{
@@ -38,13 +37,14 @@ footer{
   width: 40px;
   height: 40px;
   position: relative;
-  bottom: 10px;
+  top: -10px;
+
 }
 .redes a{
   display: inline-flex;
   position: relative;
-  left: 100vh;
-  bottom: 40px;
+  top: -60px;
+  left: 30%;
   transition: transform 0.2s ease;
   text-decoration: none;
   color: inherit;
@@ -59,5 +59,7 @@ footer{
 
 footer p{
   text-align: center;
-  color:rgb(88, 88, 88);
+  color: var(--letras-nav);
+  position: relative;
+  bottom: 50px;
 }

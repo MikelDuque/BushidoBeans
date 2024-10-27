@@ -1,8 +1,7 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import ScrollIntro from "../components/Intro";
 
-function Prueba() {
+function Catalogo() {
   return (
     <>
       <head>
@@ -22,4 +21,4 @@ function Prueba() {
   );
 }
 
-export default Prueba;
+export default Catalogo;

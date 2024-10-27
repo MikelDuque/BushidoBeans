@@ -1,0 +1,36 @@
+@import url(https://fonts.googleapis.com/css2?family=Poppins&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Poppins&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap);
+
+main{
+  background-color: #1a1a1a;
+  color: var(--letras-nav);
+}
+
+.content{
+  display: inline-flex;
+  align-items: center;
+  margin: 5% 15%;
+}
+
+.texto{
+  display: block;
+  width: 50%;
+  text-align: justify;
+  margin: 0 5%;
+}
+.texto h2{
+  font-family: 'Poppins';
+  font-size: var(--subtitulos-size);
+  text-align: center;
+  margin-bottom: 15px;
+}
+.texto p{
+  font-family: 'Vollkorn';
+  font-size: var(--texto-size);
+}
+
+main img{
+  width: 40%;
+  margin: 0 5%;
+  border-radius: 20px;
+}

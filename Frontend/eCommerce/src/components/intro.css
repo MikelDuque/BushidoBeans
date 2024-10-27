@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   background: linear-gradient(
-    to bottom, var(--nav-footer) 0%,rgb(20, 20, 20) 10%, rgb(20, 20, 20) 90%, var(--nav-footer) 100%
+    to bottom, var(--nav-footer) 0%,#1a1a1a 10%, #1a1a1a 90%, var(--nav-footer) 100%
     );
 }
 
