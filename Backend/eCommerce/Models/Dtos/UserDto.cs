@@ -9,5 +9,5 @@ public class UserDto
   public string Name {get; set;}
   public string Surname {get; set;}
   public int Phone {get; set;}
-  public bool Admin {get;set;}
+  public string Admin {get;set;}
 }

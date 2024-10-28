@@ -18,24 +18,21 @@ public class UserRepository : Repository<User>
         .Where(user => user.Mail == mail).FirstAsync();
     }
 
-    public async Task<bool> ThisUserExists(string Mail, string PassWord)
+    //Especifica si existe un usuario a partir de su email
+    public async Task<bool> ExistByMailAsync(string mail)
     {
-        var user = await GetByMailAsync(Mail);
-        string userPassword = user.Password;
-        //_unitOfWork.UserRepository.GetByIdAsync(Mail);
-        if (userPassword == PassWord)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
+        return await GetByMailAsync(mail) != null;
     }
 
-
-
-
+    //Especifica si existe un usuario con mismo email y contraseña
+    public async Task<bool> ThisUserExists(string mail, string password)
+    {
+        if (await ExistByMailAsync(mail))
+        {
+            var user = await GetByMailAsync(mail);
+            return user.Password == password;
+        }
+        return false;
+    }
 }
 

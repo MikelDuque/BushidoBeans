@@ -1,4 +1,5 @@
-﻿using eCommerce.Models.Database.Entities;
+﻿using System.Net.Mail;
+using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Database.Repositories;
 using eCommerce.Models.Dtos;
 using eCommerce.Models.Mappers;
@@ -42,6 +43,24 @@ public class UserController : ControllerBase
     {
         User newUser = await _service.InsertAsync(user);
 
+        return _mapper.ToDto(newUser);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<UserDto>> InsertAsyncByMail(RegisterRequest userRequest) {
+        
+        
+        User user = new User {
+            Mail = userRequest.Mail,
+            Password = AuthService.HashPassword(userRequest.Password),
+            Name = userRequest.Name,
+            Surname = "",
+            Phone = 0,
+            Admin = null
+        };
+
+        User newUser = await _service.InsertAsync(user);
+        
         return _mapper.ToDto(newUser);
     }
 

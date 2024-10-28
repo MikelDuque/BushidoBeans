@@ -1,5 +1,7 @@
 ﻿using eCommerce.Controllers;
 using eCommerce.Models.Database.Entities;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace eCommerce.Services
 {
@@ -12,11 +14,19 @@ namespace eCommerce.Services
             _unitOfWork = unitOfWork;
         }
 
-        public Task<bool> ThisUserExist(string mail, string password)
+        public static string HashPassword(string password)
         {
-            return _unitOfWork.UserRepository.ThisUserExists(mail,password);
+            byte[] inputBytes = Encoding.UTF8.GetBytes(password);
+            byte[] inputHash = SHA256.HashData(inputBytes);
+            return Encoding.UTF8.GetString(inputHash);
         }
 
-        
+        /*
+        //Compara las contraseñas hasheadas
+        public static bool ComparaPasswords(string hashedPassword, string incomingPassword)
+        {
+            return hashedPassword == HashPassword(incomingPassword);
+        }
+        */
     }
 }
