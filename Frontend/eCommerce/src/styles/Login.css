@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif; /* Aplica Poppins a todos los elementos */
+    background-color: var(--fondo-pagina);
+    overflow: hidden; /*Quitar barra de scroll*/
+}
+
+.login {
+    background-color: var(--fondo-vistas);
+    width: 835px;
+}
+
+.accede {
+    margin: 150px 0px 0px 300px;
+    background-color: var(--fondo-vistas);
+    color: var(--texto-principal);
+    font-size: 30px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+}
+
+.usaGmail {
+    background-color: var(--fondo-vistas);
+    font-size: 25px;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+    margin: 0px 0px 120px 290px ;
+}
+
+#email, #password {
+    padding-left: 30px;
+    margin: 10px 0px 0px 150px;
+    width: 600px;
+    height: 97px;
+    background-color: var(--fondo-vistas);
+    border-radius: 8px;
+    border: 1.25px solid var(--nav-footer);
+    color: var(--texto-oscuro);
+}
+
+#email::placeholder, #password::placeholder {
+    color: var(--nav-footer);
+    font-style: var(--subtitulos);
+}
+
+#email:focus, #password:focus {
+    outline: none;
+    border-color: var(--nav-hover);
+    background-color: #EDE6E0;
+}
+
+#email:focus::placeholder, #password:focus::placeholder {
+    color: transparent;
+}
+
+.Acceder {
+    margin-left: 280px;
+    margin-top: 60px;
+    width: 363px;
+    height: 125px;
+    background-color: var(--nav-footer);
+    color: var(--texto-claro);
+    border-radius: 41px;
+    font-size: var(--subtitulos-size);
+    font-weight: var(--font-weight-regular);
+    border: none;
+    cursor: pointer;
+    transition: background-color 1s;
+}
+
+.Acceder:hover {
+    color: var(--nav-hover);
+}
+
+.container {
+    display: inline-flex;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+    background-color: var(--fondo-vistas);
+}
+
+.crearCuenta {
+    margin-left: 250px;
+    border-top-left-radius: 200px;
+    border-bottom-left-radius: 200px;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    background-color: var(--nav-footer);
+    width: 825px;
+    height: 901px;
+}
+
+.btnCrearCuenta {
+    margin-left: 31%;
+    width: 363px;
+    height: 125px;
+    background-color: var(--nav-footer);
+    color: var(--texto-claro);
+    border-radius: 41px;
+    font-size: var(--subtitulos-size);
+    font-weight: var(--font-weight-regular);
+    border: 1px solid var(--texto-claro);
+    cursor: pointer;
+    transition: background-color 1s;
+}
+
+.btnCrearCuenta:hover {
+    color: var(--nav-hover);
+    border: 1px solid var(--nav-hover);
+}
+
+.preguntaCuenta {
+    color: var(--texto-claro);
+    font-size: var(--subtitulos-size);
+    font-weight: var(--font-weight-regular);
+    margin-left: 35%;
+    background-color: var(--nav-footer);
+}
+
+.crearAhora {
+    color: var(--texto-claro);
+    font-size: var(--subtitulos-size);
+    font-weight: var(--font-weight-regular);
+    margin-left: 36%;
+    background-color: var(--nav-footer);    
+}
+
+.logoBushidoBeans {
+    background-color: var(--nav-footer);
+    margin-left: 27%;
+}
+
+form {
+    background-color: var(--fondo-vistas);
+}
+
+.password-message, .email-message {
+    background-color: var(--fondo-vistas);
+    font-style: var(--subtitulos);
+    color: red;
+    margin-left: 250px;
+}
+
+.contenedorEmail {
+    background-color: var(--fondo-vistas);
+}
+
+.contenedorPassword {
+    background-color: var(--fondo-vistas);
+}
+
