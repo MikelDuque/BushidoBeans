@@ -1,6 +1,8 @@
 @import url(https://fonts.googleapis.com/css2?family=Poppins&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=Poppins&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap);
 
+
+/* -----GENERAL----- */
 header{
   background-color: var(--nav-footer);
   height: 60px;
@@ -9,6 +11,9 @@ header{
   font-weight: var(--font-weight-bold);
   position: relative;
 }
+
+
+/* -----BOTONES DEL HEADER----- */
 .nl div{
   display: inline-flex;
   color: var(--letras-nav);
@@ -22,7 +27,20 @@ header{
 .nl div:active {
   color: var(--nav-click);
 }
+.btn{
+  position: relative;
+  bottom: 15px;
+  margin: 0 60px;
+}
+.btnc{
+  position: absolute;
+  top: 13px;
+  right: 70px;
+  margin: 0 30px;
+}
 
+
+/* -----LOGO----- */
 .hLogo{
   height: 50px;
   width: 50px;
@@ -37,18 +55,8 @@ header{
   background-image: url(recursos/LogoA.png);
 }
 
-.btn{
-  position: relative;
-  bottom: 15px;
-  margin: 0 60px;
-}
-.btnc{
-  position: absolute;
-  top: 13px;
-  right: 70px;
-  margin: 0 30px;
-}
 
+/* -----BOTON DESPLEGABLE----- */
 .despl {
   position: absolute;
   top: 10px;
@@ -70,6 +78,9 @@ header{
   transform: scale(1.05);
   background-image: url(recursos/PerfilA.png);
 }
+
+
+/* -----MENU DESPLEGABLE + OPCIONES----- */
 .desplMenu {
   position: absolute;
   top: 130%;
@@ -83,7 +94,6 @@ header{
   color: var(--letras-nav);
   z-index: 1000;
 }
-
 .desplOpcion {
   padding: 10px;
   cursor: pointer;
@@ -100,6 +110,8 @@ header{
   color: inherit;
 }
 
+
+/* -----BOTON CESTA----- */
 .cesta{
   height: 50px;
   width: 50px;

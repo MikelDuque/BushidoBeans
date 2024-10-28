@@ -1,3 +1,4 @@
+/* -----FONDO----- */
 .introDiv {
   height: 99vh;
   width: 100%;
@@ -9,13 +10,14 @@
     );
 }
 
+
+/* -----IMAGEN + ANIMACIÓN----- */
 .introImg {
   width: 35%;
   opacity: 0;
   animation: aparecerImagen 2s forwards;
   animation-delay: 1s;
 }
-
 @keyframes aparecerImagen {
   to {
       opacity: 1;

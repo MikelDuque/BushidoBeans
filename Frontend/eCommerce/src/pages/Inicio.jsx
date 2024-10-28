@@ -11,9 +11,7 @@ function Inicio() {
       </head>
 
       <body>
-
         <ScrollIntro />
-
         <Header />
         <main>
           <div className="content">

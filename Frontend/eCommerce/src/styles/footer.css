@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap');
 
+
+/* -----GENERAL----- */
 footer{
   background: var(--nav-footer);
   height: 150px;
@@ -10,6 +12,8 @@ footer{
   position: relative;
 }
 
+
+/* -----LOGO----- */
 .fLogo{
   display: inline-block;
   height: 100px;
@@ -29,6 +33,7 @@ footer{
   background-image: url(recursos/FootLogoA.png);
 }
 
+/* -----REDES SOCIALES----- */
 .redes{
   display: flex;
   gap: 100px;
@@ -38,7 +43,6 @@ footer{
   height: 40px;
   position: relative;
   top: -10px;
-
 }
 .redes a{
   display: inline-flex;
@@ -57,6 +61,8 @@ footer{
   color: var(--nav-click);
 }
 
+
+/* -----DERECHOS----- */
 footer p{
   text-align: center;
   color: var(--letras-nav);

@@ -12,8 +12,8 @@ const ScrollIntro = () => {
             window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
             setTimeout(() => { setEsVisible(false);
             window.scrollTo({top: 0});
-            document.body.style.overflow = ''; }, 450);
-        }, 3000);
+            document.body.style.overflow = ''; }, 450);     //Tiempo de animación
+        }, 3500);   //Delay antes de animación
 
         return () => clearTimeout(timer);
         document.body.style.overflow = '';

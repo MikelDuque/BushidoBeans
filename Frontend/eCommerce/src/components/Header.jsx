@@ -5,7 +5,7 @@ import '../styles/header.css'
 const isLogged = false;
 
 
-//DESPLEGABLE
+// -----DESPLEGABLE----- //
 
 const Desplegable = () => {
   const [abierto, setAbierto] = useState(false);
@@ -40,7 +40,7 @@ const Desplegable = () => {
 };
 
 
-//HEADER
+// -----HEADER----- //
 
 function Header() {
   return (
