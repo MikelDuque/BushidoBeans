@@ -1,5 +1,5 @@
 // import jwt_decode from 'jwt-decode';
-import "../styles/Login.css"
+import "../styles/login.css"
 import { useRef, useState } from "react";
 import logo from "../../public/logo.svg";
 import { validation } from '../utils/validationForm';
@@ -11,6 +11,7 @@ function Login() {
     const [passwordError, setPasswordError] = useState(null);
     const [promesaError, setPromesaError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+
     const navigate = useNavigate();
 
     const handleCrearCuenta = () =>{

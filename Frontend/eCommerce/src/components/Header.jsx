@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import React, { useState, useRef, useEffect } from 'react';
-import '..\styles\header.css'
+import '../styles/header.css'
 
 const isLogged = true;
 
@@ -52,10 +52,10 @@ function Header() {
         <NavLink className="nl" to="/catalogo">
           <div className="btn">Café</div>
         </NavLink>
-        <NavLink className="nl" to="">
+        <NavLink className="nl" to="/catalogo">
           <div className="btn">Té</div>
         </NavLink>
-        <NavLink className="nl" to="">
+        <NavLink className="nl" to="/catalogo">
           <div className="btn">Tienda</div>
         </NavLink>
         <NavLink className="nl" to="">
@@ -65,7 +65,7 @@ function Header() {
         {isLogged ? (
           <Desplegable />
         ) : (
-          <NavLink className="nl" to="">
+          <NavLink className="nl" to="/login">
             <div className="btnc">Login</div>
           </NavLink>
         )}

@@ -1,6 +1,6 @@
 import logo from '../../public/logo-secundario.svg';
 import React, { useRef, useState } from 'react';
-import '../styles/Register.css'; 
+import '../styles/register.css'; 
 import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ function Register() {
     const navigate = useNavigate();
 
     const handleAcceder = () =>{
-        navigate('/');
+        navigate('/login');
     }
     const handleRegister = (event) => {
         event.preventDefault();
