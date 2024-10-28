@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import logo from "../../public/logo.svg";
 import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
+
 function Login() {
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
@@ -90,7 +91,8 @@ function Login() {
     }
 
     return (
-        <div className='container'>
+        <body>
+        <div className='container body'>
             <div className='login'>
                 <p className='accede'>Accede a tu cuenta</p>
                 <p className='usaGmail'>Usa tu email y contraseña</p>
@@ -118,6 +120,7 @@ function Login() {
                 <button className='btnCrearCuenta' onClick={handleCrearCuenta}>Crear cuenta</button>
             </div>
         </div>
+        </body>
     );
 }
 
