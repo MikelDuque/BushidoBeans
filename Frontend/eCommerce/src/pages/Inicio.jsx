@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ScrollIntro from "../components/Intro";
-import "./inicio.css"
+import "../styles/inicio.css"
 
 function Inicio() {
   return (
