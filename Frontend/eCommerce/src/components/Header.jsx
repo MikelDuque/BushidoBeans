@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import React, { useState, useRef, useEffect } from 'react';
-import './header.css'
+import '../styles/header.css'
 
 const isLogged = true;
 

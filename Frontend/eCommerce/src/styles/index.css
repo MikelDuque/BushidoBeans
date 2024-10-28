@@ -1,8 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-*{
+* {
+    margin: 0;
+    padding: 0;
     background-color: var();
 }
+
 :root {
     /* Colores principales */
     --fondo-pagina: #1E1E1E;
@@ -10,7 +13,7 @@
     --nav-footer: #295026;
     --letras-nav: #FFFDEA;
     --nav-hover: #E6D429;
-    --nav-click: #BFB022;
+    --nav-click: #736A14;
     --dark-brown: #654326;
     --dark-hover: #50351E;
     --dark-active-brown: #3C2816;
@@ -20,8 +23,9 @@
     --texto-claro: #EFF7EE;
 
     /* Estilos de texto */
-    --titulos-size: 30px;
-    --subtitulos-size: 25px;
+    --titulos-size: 23px;
+    --subtitulos-size: 20px;
+    --texto-size: 15px;
     --font-weight-bold: 600;
     --font-weight-regular: 400;
 }

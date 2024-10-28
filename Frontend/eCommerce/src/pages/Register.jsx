@@ -1,6 +1,6 @@
 import logo from '../../public/logo-secundario.svg';
 import React, { useRef, useState } from 'react';
-import '../styles/Register.css'; 
+import '../styles/register.css'; 
 import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
 
