@@ -1,12 +1,15 @@
-import { NavLink } from "react-router-dom";
-import '../styles/footer.css'
+import {useNavigate} from "react-router-dom";
+import '../styles/footer.css';
 
 function Footer() {
+
+  const navigate = useNavigate()
+  const handleInicio = ()=>{navigate('/')}
+
   return (
     <footer>
-      <NavLink to="/" end>
-        <div className="fLogo" src="recursos/FootLogoD.png" />
-      </NavLink>
+
+        <div className="fLogo" src="recursos/FootLogoD.png" onClick={handleInicio}/>
 
       <div className="redes">
         <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">

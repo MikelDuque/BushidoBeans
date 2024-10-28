@@ -1,8 +1,8 @@
 /* -----FONDO----- */
 .introDiv {
+  display: flex;
   height: 99vh;
   width: 100%;
-  display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(
@@ -13,7 +13,7 @@
 
 /* -----IMAGEN + ANIMACIÓN----- */
 .introImg {
-  width: 35%;
+  width: 45%;
   opacity: 0;
   animation: aparecerImagen 2s forwards;
   animation-delay: 1s;

@@ -1,11 +1,8 @@
-@import url(https://fonts.googleapis.com/css2?family=Poppins&display=swap);
-@import url(https://fonts.googleapis.com/css2?family=Poppins&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap);
-
-
 /* -----GENERAL----- */
 main{
   background-color: #1a1a1a;
   color: var(--letras-nav);
+  font-family: "Vollkorn", sans-serif;
 }
 
 
@@ -19,7 +16,7 @@ main{
 
 /* -----TEXTO----- */
 .texto{
-  display: block;
+  
   width: 50%;
   text-align: justify;
   margin: 0 5%;

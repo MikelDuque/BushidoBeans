@@ -7,6 +7,7 @@ const ScrollIntro = () => {
     useEffect(() => {
 
         document.body.style.overflow = 'hidden';
+        
 
         const timer = setTimeout(() => {
             window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
@@ -24,7 +25,7 @@ const ScrollIntro = () => {
         <div>
             {esVisible && (
                 <div className='introDiv'>
-                    <img className='introImg' src='/recursos/FootLogoD.png'/>
+                    <img className='introImg' src='/recursos/LogoIntro.png'/>
                 </div>
             )}
         </div>
