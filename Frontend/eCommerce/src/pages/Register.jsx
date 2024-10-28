@@ -53,6 +53,7 @@ function Register() {
     }
 
     return (
+        <body>
         <div className='container container-secundario'>
             <div className='login-secundario'>
                 <img src={logo} alt="" className='logoBushidoBeans-secundario'/>
@@ -85,6 +86,7 @@ function Register() {
                 </form>
             </div>
         </div>
+        </body>
     );
 }
 
