@@ -15,7 +15,7 @@ public class UserRepository : Repository<User>
     public async Task<User> GetByMailAsync(string mail)
     {
         return await GetQueryable()
-        .Where(user => user.Mail == mail).FirstAsync();
+        .Where(user => user.Mail == mail).FirstOrDefaultAsync();
     }
 
     //Especifica si existe un usuario a partir de su email

@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eCommerce.Controllers;
-[Route("api/[controller]")]
 [ApiController]
+[Route("api/[controller]")]
 public class UserController : ControllerBase
 {
     //private readonly UserRepository _userRepository;
@@ -38,6 +38,7 @@ public class UserController : ControllerBase
         return _mapper.ToDto(user);
     }
 
+/*
     [HttpPost]
     public async Task<ActionResult<UserDto>> InsertAsync(User user)
     {
@@ -45,7 +46,7 @@ public class UserController : ControllerBase
 
         return _mapper.ToDto(newUser);
     }
-
+*/
     [HttpPost]
     public async Task<ActionResult<UserDto>> InsertAsyncByMail(RegisterRequest userRequest) {
         
