@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './intro.css'
+import '..\styles\intro.css'
 
 const ScrollIntro = () => {
     const [esVisible, setEsVisible] = useState(true);
