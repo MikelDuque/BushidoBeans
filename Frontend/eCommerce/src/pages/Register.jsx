@@ -14,7 +14,7 @@ function Register() {
     const navigate = useNavigate();
 
     const handleAcceder = () =>{
-        navigate('/');
+        navigate('/login');
     }
     const handleRegister = (event) => {
         event.preventDefault();
