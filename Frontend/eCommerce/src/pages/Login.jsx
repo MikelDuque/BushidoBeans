@@ -91,8 +91,7 @@ function Login() {
     }
 
     return (
-        <body>
-        <div className='container body'>
+        <div className='container'>
             <div className='login'>
                 <p className='accede'>Accede a tu cuenta</p>
                 <p className='usaGmail'>Usa tu email y contraseña</p>
@@ -120,7 +119,7 @@ function Login() {
                 <button className='btnCrearCuenta' onClick={handleCrearCuenta}>Crear cuenta</button>
             </div>
         </div>
-        </body>
+        
     );
 }
 
