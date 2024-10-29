@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react';
 import '../styles/register.css'; 
 import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
-import Login from './Login';
+import  from './Login';
 import * as jwt_decode from 'jwt-decode';
 
 function Register() {
