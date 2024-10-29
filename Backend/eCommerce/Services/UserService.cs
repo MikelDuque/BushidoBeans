@@ -1,6 +1,7 @@
 using System;
 using eCommerce.Controllers;
 using eCommerce.Models.Database.Entities;
+using Microsoft.IdentityModel.Tokens;
 
 namespace eCommerce.Services;
 
@@ -33,6 +34,7 @@ public class UserService
     User newUser = new User
     {
       Mail = user.Mail,
+      Password = user.Password,
       Name = user.Name,
       Surname = user.Surname,
       Phone = user.Phone,
@@ -60,5 +62,11 @@ public class UserService
     _unitOfWork.UserRepository.Delete(user);
 
     await _unitOfWork.SaveAsync();
+  }
+
+  public Task<bool> ThisUserExist(string mail, string password)
+  {
+    string hashedPassword = AuthService.HashPassword(password);
+    return _unitOfWork.UserRepository.ThisUserExists(mail, hashedPassword);
   }
 }

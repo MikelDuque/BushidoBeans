@@ -1,5 +1,6 @@
 using System;
 using eCommerce.Models.Database.Entities;
+using eCommerce.Services;
 
 namespace eCommerce.Models.Database;
 
@@ -23,10 +24,10 @@ public class Seeder
       {
         Mail = "imongut0701@g.educaand.es",
         Name = "Ivan",
-        Password = "Hola#123456789",
+        Password = AuthService.HashPassword("Hola#123456789") ,
         Surname = "Montes Gutierrez",
         Phone = 683956402,
-        Admin = true
+        Admin = "admin"
       }
     ];
 
