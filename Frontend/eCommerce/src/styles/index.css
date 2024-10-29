@@ -5,6 +5,10 @@
     padding: 0;
 }
 
+body {
+width: 100;
+}
+
 :root {
     /* Colores principales */
     --fondo-pagina: #1E1E1E;
