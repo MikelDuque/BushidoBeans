@@ -3,7 +3,8 @@ import React, { useRef, useState } from 'react';
 import '../styles/register.css'; 
 import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
-
+import Login from './Login';
+import * as jwt_decode from 'jwt-decode';
 
 function Register() {
     const emailRef = useRef(null);
@@ -21,7 +22,7 @@ function Register() {
         const emailValue = emailRef.current.value;
         const passwordValue = passwordRef.current.value;
         const nameValue = nameRef.current.value;
-    
+        
         if (!validation.isValidEmail(emailValue)) {
             setEmailError("Por favor, introduce un formato de email válido.");
             return;
@@ -37,13 +38,53 @@ function Register() {
         }
 
         const objetoBackend = {
-            name: nameValue,
-            email: emailValue,
-            password: passwordValue,
+            Name: nameValue,
+            Mail: emailValue,
+            Password: passwordValue,
         };
         console.log(objetoBackend);
-        // Resetea el formulario después de enviar
+        fetchingData("http://localhost:5257/api/Auth", objetoBackend);
+        
         resetForm();
+    };
+
+    const fetchingData = async (url, data) => {
+        try {
+            setIsLoading(true);
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                const dataPromesa = await response.json();
+                console.log("dataPromesa",dataPromesa);
+                const token = dataPromesa.accessToken;
+                console.log("token", token);
+                const decoded = jwt_decode.jwtDecode(token);
+                console.log("decoded", decoded);
+
+                if (decoded) {
+                    const userInfo = {
+                        Mail: decoded.email,
+                        Password: decoded.password,
+                        Name: decoded.name   
+                    };
+                    console.log(userInfo);
+                }
+
+                setPromesaError(null);
+            } else {
+                setPromesaError((await response.text()).toString);
+            }
+        } catch (error) {
+            setPromesaError(error.message);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     function resetForm() {
@@ -53,9 +94,9 @@ function Register() {
     }
 
     return (
-        <body>
-        <div className='container container-secundario'>
-            <div className='login-secundario'>
+        <div className='container-supremo'>
+        <div className='container-secundario'>
+            <div className='login login-secundario'>
                 <img src={logo} alt="" className='logoBushidoBeans-secundario'/>
                 <p className='preguntaCuenta-secundario accede'>¿Ya tienes cuenta?</p>
                 <p className='registrarseTexto accede'>Registrese de nuevo</p>
@@ -65,8 +106,8 @@ function Register() {
 
 
             <div className='register'>
-                <p className='preguntaCuenta preguntaCuenta-terciario-uno'>Crea tu cuenta</p>
-                <p className='preguntaCuenta preguntaCuenta-terciario-dos'>Añade tus datos personales</p>
+                <p className='preguntaCuenta-terciario'>Crea tu cuenta</p>
+                <p className='preguntaCuenta-terciario'>Añade tus datos personales</p>
                 <form className='formRegister' onSubmit={handleRegister}>
                     <div className='contenedorNombre contenedorEmail contenedorEmail-secundario'>
                         <label htmlFor="name" />
@@ -86,8 +127,9 @@ function Register() {
                 </form>
             </div>
         </div>
-        </body>
+        </div>
     );
 }
 
 export default Register;
+

@@ -1,13 +1,13 @@
-// import jwt_decode from 'jwt-decode';
+import * as jwt_decode from 'jwt-decode';
 import "../styles/login.css"
 import { useRef, useState } from "react";
 import logo from "../../public/logo.svg";
 import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
 
-function Login() {
-    const emailRef = useRef(null);
-    const passwordRef = useRef(null);
+function Login(emailRef, passwordRef) {
+    emailRef = useRef(null);
+    passwordRef = useRef(null);
     const [emailError, setEmailError] = useState(null);
     const [passwordError, setPasswordError] = useState(null);
     const [promesaError, setPromesaError] = useState(null);
@@ -19,39 +19,41 @@ function Login() {
         navigate('/register');
     }
     const fetchingData = async (url, data) => {
-        // try {
-        //     setIsLoading(true);
-        //     const response = await fetch(url, {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //         body: JSON.stringify(data)
-        //     });
+        try {
+            setIsLoading(true);
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
 
-        //     if (response.ok) {
-        //         const dataPromesa = await response.json();
-        //         const token = dataPromesa.token;
-        //         const decoded = jwt_decode(token);
+            if (response.ok) {
+                const dataPromesa = await response.json();
+                console.log("dataPromesa",dataPromesa);
+                const token = dataPromesa.accessToken;
+                console.log("token", token);
+                const decoded = jwt_decode.jwtDecode(token);
+                console.log("decoded", decoded);
 
-        //         if (decoded) {
-        //             const userInfo = {
-        //                 nombre: decoded.username,
-        //                 email: decoded.email,
-        //                 rol: decoded.rol   
-        //             };
-        //             console.log(userInfo);
-        //         }
+                if (decoded) {
+                    const userInfo = {
+                        Mail: decoded.email,
+                        Admin: decoded.rol   
+                    };
+                    console.log(userInfo);
+                }
 
-        //         setPromesaError(null);
-        //     } else {
-        //         setPromesaError("Error en la autenticacion: " + response.statusText);
-        //     }
-        // } catch (error) {
-        //     setPromesaError("Error en la autenticacion: " + error.message);
-        // } finally {
-        //     setIsLoading(false);
-        // }
+                setPromesaError(null);
+            } else {
+                setPromesaError((await response.text()).toString);
+            }
+        } catch (error) {
+            setPromesaError(error.message);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const handleAcceder = async (event) => {
@@ -75,14 +77,14 @@ function Login() {
         }
 
         const objetoBackend = {
-            email: emailValue,
-            password: passwordValue,
+            Mail: emailValue,
+            Password: passwordValue,
         };
         console.log(objetoBackend);
 
-        //await fetchingData("URL_API_AQUI", objetoBackend);
-        
+        await fetchingData("http://localhost:5257/api/Auth", objetoBackend);
         resetForm();
+        navigate('/');
     };
 
     function resetForm() {
@@ -91,6 +93,7 @@ function Login() {
     }
 
     return (
+    <div className="container-supremo">
         <div className='container'>
             <div className='login'>
                 <p className='accede'>Accede a tu cuenta</p>
@@ -119,7 +122,7 @@ function Login() {
                 <button className='btnCrearCuenta' onClick={handleCrearCuenta}>Crear cuenta</button>
             </div>
         </div>
-        
+    </div>
     );
 }
 
