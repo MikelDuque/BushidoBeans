@@ -27,7 +27,7 @@ public class Seeder
         Password = AuthService.HashPassword("Hola#123456789") ,
         Surname = "Montes Gutierrez",
         Phone = 683956402,
-        Admin = null
+        Admin = "admin"
       }
     ];
 

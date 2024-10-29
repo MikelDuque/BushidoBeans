@@ -8,8 +8,7 @@ import { useNavigate } from 'react-router-dom';
 function Login() {
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
-    const [emailError, setEmailError] = useState(null);
-    const [passwordError, setPasswordError] = useState(null);
+    const [authError, setAuthError] = useState(null);
     const [promesaError, setPromesaError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -31,25 +30,29 @@ function Login() {
 
             if (response.ok) {
                 const dataPromesa = await response.json();
-                const token = dataPromesa.token;
-                const decoded = jwt_decode(token);
+                console.log("dataPromesa", dataPromesa);
+                
+                const token = dataPromesa.accessToken;
+                console.log("token", token);
+                
+                const decoded = jwt_decode.jwtDecode(token);
+                console.log("decoded", decoded);
 
                 if (decoded) {
                     const userInfo = {
-                        nombre: decoded.username,
-                        email: decoded.email,
-                        rol: decoded.rol   
+                        Mail: decoded.unique_name,
+                        Admin: decoded.role 
                     };
-                    console.log(userInfo);
-                    console.log(token);
+                    console.log("userInfo", userInfo);
+                    console.log("token",token);
                 }
-
+                
                 setPromesaError(null);
             } else {
-                setPromesaError("Error en la autenticacion: " + response.statusText);
+                setPromesaError("Error en la autenticacion (else): " + (await response.text()).toString());
             }
         } catch (error) {
-            setPromesaError("Error en la autenticacion: " + error.message);
+            setPromesaError("Error en la autenticacion (catch)): " + error.message);
         } finally {
             setIsLoading(false);
         }
@@ -61,23 +64,17 @@ function Login() {
         const emailValue = emailRef.current.value;
         const passwordValue = passwordRef.current.value;
 
-        if (!validation.isValidEmail(emailValue)) {
-            setEmailError("Por favor, introduce un formato de email válido.");
+        if (!validation.isValidEmail(emailValue) || !validation.isValidPassword(passwordValue)) {
+            setAuthError("Por favor, introduce un formato de email válido.");
             return;
         } else {
-            setEmailError(null);
-        }
-
-        if (!validation.isValidPassword(passwordValue)) {
-            setPasswordError("Por favor, introduce un formato de contraseña válido.");
-            return;
-        } else {
-            setPasswordError(null);
+            setAuthError(null);
         }
 
         const objetoBackend = {
-            email: emailValue,
-            password: passwordValue,
+            Mail: emailValue,
+            Password: passwordValue,
+            Name
         };
         console.log(objetoBackend);
 
@@ -101,12 +98,12 @@ function Login() {
                     <div className='contenedorEmail'>
                         <label htmlFor="email" />
                         <input type="email" name="email" id="email" ref={emailRef} placeholder='Email' />
-                        {emailError && <p className="email-message">{emailError}</p>}
+                        {authError && <p className="email-message">{authError}</p>}
                     </div>
                     <div className='contenedorPassword'>
                         <label htmlFor="password" />
                         <input type="password" name="password" id="password" ref={passwordRef} placeholder='Contraseña' />
-                        {passwordError && <p className="password-message">{passwordError}</p>}
+                        {authError && <p className="password-message">{authError}</p>}
                     </div>
                     <button type="submit" disabled={isLoading} className='Acceder'>
                         {isLoading ? 'Cargando...' : 'Acceder'}
