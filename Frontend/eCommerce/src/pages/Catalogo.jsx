@@ -9,7 +9,6 @@ function Catalogo() {
       </head>
 
       <body>
-
         <Header />
         <main>
           <div>Probando

@@ -1,19 +1,22 @@
-@import url(https://fonts.googleapis.com/css2?family=Poppins&display=swap);
-@import url(https://fonts.googleapis.com/css2?family=Poppins&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap);
-
+/* -----GENERAL----- */
 main{
   background-color: #1a1a1a;
   color: var(--letras-nav);
+  font-family: "Vollkorn", sans-serif;
 }
 
+
+/* -----CONTENIDO----- */
 .content{
   display: inline-flex;
   align-items: center;
   margin: 5% 15%;
 }
 
+
+/* -----TEXTO----- */
 .texto{
-  display: block;
+  
   width: 50%;
   text-align: justify;
   margin: 0 5%;
@@ -29,6 +32,8 @@ main{
   font-size: var(--texto-size);
 }
 
+
+/* -----IMAGEN----- */
 main img{
   width: 40%;
   margin: 0 5%;

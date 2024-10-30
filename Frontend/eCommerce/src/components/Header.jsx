@@ -5,7 +5,7 @@ import '../styles/header.css'
 const isLogged = false;
 
 
-//DESPLEGABLE
+// -----DESPLEGABLE----- //
 
 const Desplegable = () => {
   const [abierto, setAbierto] = useState(false);
@@ -30,8 +30,8 @@ const Desplegable = () => {
       <div className={`desplToggle ${abierto ? 'active' : ''}`} onClick={abrirDesplegable} />
       {abierto && (
         <div className="desplMenu">
-          <NavLink className="dnl" to=""><div className="desplOpcion">Ver Perfil</div></NavLink>
-          <NavLink className="dnl" to=""><div className="desplOpcion">Administración</div></NavLink>
+          <NavLink className="dnl desplOpcion" to="">Ver Perfil</NavLink>
+          <NavLink className="dnl desplOpcion" to="">Administración</NavLink>
           <div className="desplOpcion">Cerrar Sesión</div>
         </div>
       )}
@@ -40,39 +40,25 @@ const Desplegable = () => {
 };
 
 
-//HEADER
+// -----HEADER----- //
 
 function Header() {
   return (
     <header>
       <nav>
-        <NavLink className="nl" to="/" end>
-          <div className="hLogo" />
-        </NavLink>
-        <NavLink className="nl" to="/catalogo">
-          <div className="btn">Café</div>
-        </NavLink>
-        <NavLink className="nl" to="/catalogo">
-          <div className="btn">Té</div>
-        </NavLink>
-        <NavLink className="nl" to="/catalogo">
-          <div className="btn">Tienda</div>
-        </NavLink>
-        <NavLink className="nl" to="">
-          <div className="btn">Nosotros</div>
-        </NavLink>
+        <NavLink className="nl hLogo" to="/" end />
+        <NavLink className="nl btn" to="/catalogo"> Café </NavLink>
+        <NavLink className="nl btn" to="/catalogo"> Té </NavLink>
+        <NavLink className="nl btn" to="/catalogo"> Tienda </NavLink>
+        <NavLink className="nl btn" to=""> Nosotros </NavLink>
 
         {isLogged ? (
           <Desplegable />
         ) : (
-          <NavLink className="nl" to="/login">
-            <div className="btnc">Login</div>
-          </NavLink>
+          <NavLink className="nl btnc" to="/login"> Login </NavLink>
         )}
 
-        <NavLink className="nl" to="">
-          <div className="cesta" />
-        </NavLink>
+        <NavLink className="nl cesta" to=""/>
       </nav>
     </header>
   );
