@@ -5,9 +5,9 @@ import logo from "../../public/logo.svg";
 import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
 
-function Login(emailRef, passwordRef) {
-    emailRef = useRef(null);
-    passwordRef = useRef(null);
+function Login() {
+    const emailRef = useRef(null);
+    const passwordRef = useRef(null);
     const [emailError, setEmailError] = useState(null);
     const [passwordError, setPasswordError] = useState(null);
     const [promesaError, setPromesaError] = useState(null);
@@ -82,7 +82,8 @@ function Login(emailRef, passwordRef) {
         };
         console.log(objetoBackend);
 
-        await fetchingData("http://localhost:5257/api/Auth", objetoBackend);
+        await fetchingData("https://localhost:7015/api/Auth", objetoBackend);
+        alert("Te has logeado👍.")
         resetForm();
         navigate('/');
     };

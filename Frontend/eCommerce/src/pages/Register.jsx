@@ -1,19 +1,18 @@
 import logo from '../../public/logo-secundario.svg';
-import React, { useRef, useState } from 'react';
+import React, { useReducer, useRef, useState } from 'react';
 import '../styles/register.css'; 
 import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
-import Login from './Login';
 import * as jwt_decode from 'jwt-decode';
 
 function Register() {
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
+    const confirmacionRef = useRef(null)
     const nameRef  = useRef(null);
     const [emailError, setEmailError] = useState(null);
     const [passwordError, setPasswordError] = useState(null);
     const navigate = useNavigate();
-
     const handleAcceder = () =>{
         navigate('/login');
     }
@@ -21,8 +20,9 @@ function Register() {
         event.preventDefault();
         const emailValue = emailRef.current.value;
         const passwordValue = passwordRef.current.value;
+        const confirmacionValue = confirmacionRef.current.value;
         const nameValue = nameRef.current.value;
-        
+        const comprobarPassword = () =>{return passwordValue === confirmacionValue;}
         if (!validation.isValidEmail(emailValue)) {
             setEmailError("Por favor, introduce un formato de email válido.");
             return;
@@ -31,21 +31,28 @@ function Register() {
         }
 
         if (!validation.isValidPassword(passwordValue)) {
-            setPasswordError("Por favor, introduce un formato de contraseña válido.");
+            setPasswordError("Por favor, introduce un formato de contraseña válido.");   
             return;
-        } else {
+        } 
+        else {
             setPasswordError(null);
         }
+        //No funciona, no comprueba bien las contraseñas
+        if(comprobarPassword){
+            const objetoBackend = {
+                Name: nameValue,
+                Mail: emailValue,
+                Password: passwordValue,
+            };
+            console.log(objetoBackend);
+            fetchingData("https://localhost:7015/api/User", objetoBackend);
+            alert("Te has registrado👍👍.")
+            navigate('/');       
+            resetForm();
+        }else{
+            alert("Las contraseñas no coinciden.")
+        }
 
-        const objetoBackend = {
-            Name: nameValue,
-            Mail: emailValue,
-            Password: passwordValue,
-        };
-        console.log(objetoBackend);
-        fetchingData("http://localhost:5257/api/Auth", objetoBackend);
-        
-        resetForm();
     };
 
     const fetchingData = async (url, data) => {
@@ -121,6 +128,11 @@ function Register() {
                     <div className='contenedorPassword contenedorPassword-secundario'>
                         <label htmlFor="password" />
                         <input type="password" name="password" id="password" ref={passwordRef} placeholder='Contraseña' />
+                        {passwordError && <p className="password-message password-message-secundario">{passwordError}</p>}
+                    </div>
+                    <div className='contenedorPassword contenedorPassword-secundario'>
+                        <label htmlFor="password" />
+                        <input type="password" name="password" id="password" ref={confirmacionRef} placeholder='Repetir Contraseña' />
                         {passwordError && <p className="password-message password-message-secundario">{passwordError}</p>}
                     </div>
                     <div className='CrearCuenta'><button type="submit" className='btnCrearCuenta btnCrearCuenta-secundario'>Crear Cuenta</button></div>
