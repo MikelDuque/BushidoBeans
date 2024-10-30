@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react';
 import '../styles/register.css';
 import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
-import * as jwt_decode from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 import Alert from '../components/Alerta.jsx';
 
 function Register() {
@@ -57,7 +57,7 @@ function Register() {
 
             if (response.ok) {
                 const accessToken = await response.json();
-                const decoded = jwt_decode.jwtDecode(accessToken);
+                const decoded = jwtDecode(accessToken);
                 console.log({ email: decoded.email, name: decoded.name });
                 setAlertMessage("Te has registrado correctamente!"); 
                 resetForm();
