@@ -6,7 +6,7 @@ import '../styles/header.css';
 // -----HEADER----- //
 
 function Header() {
-  const [isLogged, setIsLogged] = useState(true);
+  const [isLogged, setIsLogged] = useState(false);
   const handleLogin = () => { setIsLogged(true); };
   const handleLogout = () => { setIsLogged(false); };
 
