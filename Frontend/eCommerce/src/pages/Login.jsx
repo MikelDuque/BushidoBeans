@@ -1,4 +1,4 @@
-import * as jwt_decode from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 import "../styles/login.css";
 import { useRef, useState } from "react";
 import logo from "../../public/logo.svg";
@@ -30,7 +30,7 @@ function Login() {
 
             if (response.ok) {
                 const { accessToken } = await response.json();
-                const { email, rol: admin } = jwt_decode.jwtDecode(accessToken);
+                const { email, rol: admin } = jwtDecode(accessToken);
                 console.log({ email, admin });
                 setAlertMessage("Te has logeado correctamente!");
                 resetForm();

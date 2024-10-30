@@ -6,11 +6,6 @@ import "../styles/inicio.css"
 function Inicio() {
   return (
     <>
-      <head>
-        <title>Bushido Beans</title>
-      </head>
-
-      <body>
         <ScrollIntro />
         <Header />
         <main>
@@ -30,7 +25,6 @@ function Inicio() {
           </div>
         </main>
         <Footer />
-      </body>
     </>
   );
 }
