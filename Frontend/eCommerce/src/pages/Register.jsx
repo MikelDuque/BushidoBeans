@@ -1,147 +1,121 @@
 import logo from '../../public/logo-secundario.svg';
-import React, { useReducer, useRef, useState } from 'react';
-import '../styles/register.css'; 
+import React, { useRef, useState } from 'react';
+import '../styles/register.css';
 import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
 import * as jwt_decode from 'jwt-decode';
+import Alert from '../components/Alerta.jsx';
 
 function Register() {
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
-    const confirmacionRef = useRef(null)
-    const nameRef  = useRef(null);
+    const confirmPasswordRef = useRef(null);
+    const nameRef = useRef(null);
     const [emailError, setEmailError] = useState(null);
     const [passwordError, setPasswordError] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [alertMessage, setAlertMessage] = useState(null);
     const navigate = useNavigate();
-    const handleAcceder = () =>{
-        navigate('/login');
-    }
-    const handleRegister = (event) => {
+
+    const handleAcceder = () => navigate('/login');
+
+    const handleRegister = async (event) => {
         event.preventDefault();
-        const emailValue = emailRef.current.value;
-        const passwordValue = passwordRef.current.value;
-        const confirmacionValue = confirmacionRef.current.value;
-        const nameValue = nameRef.current.value;
-        const comprobarPassword = () =>{return passwordValue === confirmacionValue;}
-        if (!validation.isValidEmail(emailValue)) {
+        const email = emailRef.current.value;
+        const password = passwordRef.current.value;
+        const confirmPassword = confirmPasswordRef.current.value;
+        const name = nameRef.current.value;
+
+        if (!validation.isValidEmail(email)) {
             setEmailError("Por favor, introduce un formato de email válido.");
             return;
-        } else {
-            setEmailError(null);
         }
+        setEmailError(null);
 
-        if (!validation.isValidPassword(passwordValue)) {
-            setPasswordError("Por favor, introduce un formato de contraseña válido.");   
+        if (!validation.isValidPassword(password)) {
+            setPasswordError("Por favor, introduce un formato de contraseña válido.");
             return;
-        } 
-        else {
-            setPasswordError(null);
         }
-        //No funciona, no comprueba bien las contraseñas
-        if(comprobarPassword){
-            const objetoBackend = {
-                Name: nameValue,
-                Mail: emailValue,
-                Password: passwordValue,
-            };
-            console.log(objetoBackend);
-            fetchingData("https://localhost:7015/api/User", objetoBackend);
-            alert("Te has registrado👍👍.")
-            navigate('/');       
-            resetForm();
-        }else{
-            alert("Las contraseñas no coinciden.")
+        setPasswordError(null);
+
+        if (password !== confirmPassword) {
+            setPasswordError("Las contraseñas no coinciden.");
+            return;
         }
 
+        await registerUser({ Name: name, Mail: email, Password: password });
     };
 
-    const fetchingData = async (url, data) => {
+    const registerUser = async (data) => {
+        setIsLoading(true);
         try {
-            setIsLoading(true);
-            const response = await fetch(url, {
+            const response = await fetch("https://localhost:7015/api/User", {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
             });
 
             if (response.ok) {
-                const dataPromesa = await response.json();
-                console.log("dataPromesa",dataPromesa);
-                const token = dataPromesa.accessToken;
-                console.log("token", token);
-                const decoded = jwt_decode.jwtDecode(token);
-                console.log("decoded", decoded);
-
-                if (decoded) {
-                    const userInfo = {
-                        Mail: decoded.email,
-                        Password: decoded.password,
-                        Name: decoded.name   
-                    };
-                    console.log(userInfo);
-                }
-
-                setPromesaError(null);
+                const accessToken = await response.json();
+                const decoded = jwt_decode.jwtDecode(accessToken);
+                console.log({ email: decoded.email, name: decoded.name });
+                setAlertMessage("Te has registrado correctamente!"); 
+                resetForm();
+                navigate('/'); 
             } else {
-                setPromesaError((await response.text()).toString);
-            }
+                const errorText = await response.text();
+                console.error(errorText);
+                setAlertMessage("Error al registrarse: " + errorText);             }
         } catch (error) {
-            setPromesaError(error.message);
+            console.error("Error en la autenticación:", error.message);
+            setAlertMessage("Error: " + error.message); 
         } finally {
             setIsLoading(false);
         }
     };
 
-    function resetForm() {
+    const resetForm = () => {
         emailRef.current.value = "";
         passwordRef.current.value = "";
+        confirmPasswordRef.current.value = "";
         nameRef.current.value = "";
-    }
+    };
 
     return (
-        <div className='container-supremo'>
-        <div className='container-secundario'>
-            <div className='login login-secundario'>
-                <img src={logo} alt="" className='logoBushidoBeans-secundario'/>
-                <p className='preguntaCuenta-secundario accede'>¿Ya tienes cuenta?</p>
-                <p className='registrarseTexto accede'>Registrese de nuevo</p>
-                <button className='Acceder Acceder-secundario' onClick={handleAcceder}>Acceder</button>
+        <div className="container-supremo">
+            <div className="container-secundario">
+                <div className="login login-secundario">
+                    <img src={logo} alt="" className="logoBushidoBeans-secundario" />
+                    <p className="preguntaCuenta-secundario accede">¿Ya tienes cuenta?</p>
+                    <button className="Acceder Acceder-secundario" onClick={handleAcceder}>Acceder</button>
+                </div>
+                <div className="register">
+                    <p className="preguntaCuenta-terciario">Crea tu cuenta</p>
+                    <p className="preguntaCuenta-terciario">Añade tus datos personales</p>
+                    <form className="formRegister" onSubmit={handleRegister}>
+                        <div className="contenedorEmail contenedorEmail-secundario">
+                            <input type="text" name="name" id="email"ref={nameRef} placeholder="Nombre" className="nombre" />
+                        </div>
+                        <div className="contenedorEmail contenedorEmail-secundario">
+                            <input type="email" id="email" name="email" ref={emailRef} placeholder="Email" />
+                            {emailError && <p className="email-message email-message-secundario">{emailError}</p>}
+                        </div>
+                        <div className="contenedorPassword contenedorPassword-secundario">
+                            <input type="password" id='password' name="password" ref={passwordRef} placeholder="Contraseña" />
+                            {passwordError && <p className="password-message password-message-secundario">{passwordError}</p>}
+                        </div>
+                        <div className="contenedorPassword contenedorPassword-secundario">
+                            <input type="password" id='password' name="confirmPassword" ref={confirmPasswordRef} placeholder="Repetir Contraseña" />
+                        </div>
+                        <button type="submit" disabled={isLoading} className="btnCrearCuenta btnCrearCuenta-secundario">
+                            {isLoading ? 'Cargando...' : 'Crear Cuenta'}
+                        </button>
+                    </form>
+                </div>
+                {alertMessage && <Alert message={alertMessage} onClose={() => setAlertMessage(null)} />}
             </div>
-
-
-
-            <div className='register'>
-                <p className='preguntaCuenta-terciario'>Crea tu cuenta</p>
-                <p className='preguntaCuenta-terciario'>Añade tus datos personales</p>
-                <form className='formRegister' onSubmit={handleRegister}>
-                    <div className='contenedorNombre contenedorEmail contenedorEmail-secundario'>
-                        <label htmlFor="name" />
-                        <input type="text" name="name" id="email" ref={nameRef} placeholder='Nombre' />
-                    </div>
-                    <div className='contenedorEmail contenedorEmail-secundario'>
-                        <label htmlFor="email" />
-                        <input type="email" name="email" id="email" ref={emailRef} placeholder='Email' />
-                        {emailError && <p className="email-message email-message-secundario ">{emailError}</p>}
-                    </div>
-                    <div className='contenedorPassword contenedorPassword-secundario'>
-                        <label htmlFor="password" />
-                        <input type="password" name="password" id="password" ref={passwordRef} placeholder='Contraseña' />
-                        {passwordError && <p className="password-message password-message-secundario">{passwordError}</p>}
-                    </div>
-                    <div className='contenedorPassword contenedorPassword-secundario'>
-                        <label htmlFor="password" />
-                        <input type="password" name="password" id="password" ref={confirmacionRef} placeholder='Repetir Contraseña' />
-                        {passwordError && <p className="password-message password-message-secundario">{passwordError}</p>}
-                    </div>
-                    <div className='CrearCuenta'><button type="submit" className='btnCrearCuenta btnCrearCuenta-secundario'>Crear Cuenta</button></div>
-                </form>
-            </div>
-        </div>
         </div>
     );
 }
 
 export default Register;
-

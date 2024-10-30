@@ -1,10 +1,7 @@
-﻿using System.Net.Mail;
-using eCommerce.Models.Database.Entities;
-using eCommerce.Models.Database.Repositories;
+﻿using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 using eCommerce.Models.Mappers;
 using eCommerce.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eCommerce.Controllers;
@@ -37,7 +34,6 @@ public class UserController : ControllerBase
 
         return _mapper.ToDto(user);
     }
-
 /*
     [HttpPost]
     public async Task<ActionResult<UserDto>> InsertAsync(User user)
@@ -48,9 +44,7 @@ public class UserController : ControllerBase
     }
 */
     [HttpPost]
-    public async Task<ActionResult<UserDto>> InsertAsyncByMail(RegisterRequest userRequest) {
-        
-        
+    public async Task<ActionResult<UserDto>> InsertAsyncByMail(RegisterRequest userRequest) { 
         User user = new User {
             Mail = userRequest.Mail,
             Password = AuthService.HashPassword(userRequest.Password),

@@ -28,6 +28,10 @@ body {
     margin:20% 0px 0px 31.5%;
 }
 
+.contenedorEmail-secundario, .contenedorPassword-secundario{
+    background-color: var(--nav-footer);
+
+}
 
 .container-secundario{
     display: inline-flex;
@@ -41,9 +45,6 @@ body {
     border-top-right-radius: 40px;
     border-bottom-right-radius: 40px;
     width: 60%;
-    background-color: var(--nav-footer);
-}
-.contenedorEmail-secundario, .contenedorPassword-secundario, .CrearCuenta{
     background-color: var(--nav-footer);
 }
 .CrearCuenta{
@@ -78,8 +79,35 @@ body {
 }
 
 .password-message-secundario, .email-message-secundario {
+    text-align: center;
     background-color: var(--nav-footer);
     font-style: var(--subtitulos);
     color: red;
     margin-left: 250px;
+}
+
+#email, #password {
+    width: 300px;
+    height: 45px;
+    padding-left: 15px;
+    margin: 1% 0 1% 30%;
+    background-color: var(--fondo-vistas);
+    border-radius: 8px;
+    border: 1.25px solid var(--nav-footer);
+    color: var(--texto-oscuro);
+}
+
+#email::placeholder, #password::placeholder {
+    color: var(--nav-footer);
+    font-style: var(--subtitulos);
+}
+
+#email:focus, #password:focus {
+    outline: none;
+    border-color: var(--nav-hover);
+    background-color: #EDE6E0;
+}
+
+#email:focus::placeholder, #password:focus::placeholder {
+    color: transparent;
 }

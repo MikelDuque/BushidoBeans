@@ -1,5 +1,6 @@
 using eCommerce.Models.Database.Repositories;
 using eCommerce.Models.Dtos;
+using eCommerce.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +34,7 @@ public class AuthController : ControllerBase
     public async Task<ActionResult<LoginResult>> Login([FromBody] LoginRequest model)
     {
         // Si el usuario existe entonces creamos y le damos su token
-        bool userExists = await _userRepository.ThisUserExists(model.Mail, model.Password);
+        bool userExists = await _userRepository.ThisUserExists(model.Mail, AuthService.HashPassword(model.Password));
         if (userExists)
         {
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor

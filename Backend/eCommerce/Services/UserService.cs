@@ -42,6 +42,7 @@ public class UserService
     };
 
     await _unitOfWork.UserRepository.InsertAsync(newUser);
+    await _unitOfWork.SaveAsync();
 
     return newUser;
   }
