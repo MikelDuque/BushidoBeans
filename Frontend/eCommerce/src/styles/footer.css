@@ -62,7 +62,7 @@ footer{
 /* -----DERECHOS----- */
 footer p{
   text-align: center;
-  color: var(--letras-nav);
+  color: #fffdea8d;
   position: relative;
-  bottom: 50px;
+  bottom: 40px;
 }
