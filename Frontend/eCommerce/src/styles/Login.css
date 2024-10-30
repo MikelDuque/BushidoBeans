@@ -1,46 +1,52 @@
 .container-supremo {
-        display: flex;
-        margin: 8vh auto;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
+    display: flex;
+    margin: 8vh auto;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
 
-    }
-    
+.container {
+    display: inline-flex;
+    width: 75%;
+    background-color: var(--fondo-vistas);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+}
+
 .login {
     width: 60%;
     border-radius: 50px;
 }
 
-.accede {
+.accede, .usaGmail {
     text-align: center;
-    margin: 10% 0% 0% 0%;
     background-color: var(--fondo-vistas);
+    font-family: 'Poppins', sans-serif;
     color: var(--texto-principal);
+}
+
+.accede {
+    margin-top: 10%;
     font-size: var(--subtitulos-size);
     font-weight: 600;
-    font-family: 'Poppins', sans-serif;
 }
 
 .usaGmail {
-    text-align: center;
-    background-color: var(--fondo-vistas);
     font-size: var(--subtitulos-principal);
     font-weight: 400;
-    font-family: 'Poppins', sans-serif;
-    margin: 0px 0px 10% 0% ;
+    margin-bottom: 10%;
 }
 
 #email, #password {
-    padding-left: 15px;
-    margin: 1% 0px 1% 30%;
     width: 300px;
     height: 45px;
+    padding-left: 15px;
+    margin: 1% 0 1% 30%;
     background-color: var(--fondo-vistas);
     border-radius: 8px;
     border: 1.25px solid var(--nav-footer);
     color: var(--texto-oscuro);
-    align-items: center;
 }
 
 #email::placeholder, #password::placeholder {
@@ -58,9 +64,7 @@
     color: transparent;
 }
 
-.Acceder {
-    margin-top: 15%;
-    margin-left: 33%;
+.Acceder, .btnCrearCuenta {
     width: 240px;
     height: 100px;
     background-color: var(--nav-footer);
@@ -73,86 +77,60 @@
     transition: background-color 1s;
 }
 
-.Acceder:hover {
+.Acceder {
+    margin: 15% 0 0 33%;
+}
+
+.Acceder:hover, .btnCrearCuenta:hover {
     color: var(--nav-hover);
 }
 
-.container {
-    display: inline-flex;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 50px;
-    width: 75%;
-    background-color: var(--fondo-vistas);
-
-}
 .crearCuenta {
-    border-top-left-radius: 200px;
-    border-bottom-left-radius: 200px;
-    border-top-right-radius: 40px;
-    border-bottom-right-radius: 40px;
-    background-color: var(--nav-footer);
     width: 40%;
     padding-bottom: 10%;
-    display: block;
-    
+    background-color: var(--nav-footer);
+    border-radius: 200px 40px 40px 200px;
 }
 
 .btnCrearCuenta {
     margin-left: 29%;
-    width: 240px;
-    height: 100px;
-    background-color: var(--nav-footer);
-    color: var(--texto-claro);
-    border-radius: 41px;
-    font-size: var(--subtitulos-size);
-    font-weight: var(--font-weight-regular);
     border: 1px solid var(--texto-claro);
-    cursor: pointer;
-    transition: background-color 1s;
 }
 
 .btnCrearCuenta:hover {
-    color: var(--nav-hover);
-    border: 1px solid var(--nav-hover);
+    border-color: var(--nav-hover);
+}
+
+.preguntaCuenta, .crearAhora {
+    text-align: center;
+    color: var(--texto-claro);
+    font-size: var(--subtitulos-size);
+    font-weight: var(--font-weight-regular);
+    background-color: var(--nav-footer);
 }
 
 .preguntaCuenta {
-    text-align: center;
-    color: var(--texto-claro);
-    font-size: var(--subtitulos-size);
-    font-weight: var(--font-weight-regular);
     margin-bottom: 1%;
-    background-color: var(--nav-footer);
 }
 
 .crearAhora {
-    text-align: center;
-    color: var(--texto-claro);
-    font-size: var(--subtitulos-size);
-    font-weight: var(--font-weight-regular);
     margin-bottom: 10%;
-    background-color: var(--nav-footer);    
 }
 
 .logoBushidoBeans {
-    background-color: var(--nav-footer);
     width: 46%;
-    margin-left: 28%;
-    margin-top: 5%;
-   }
-
+    margin: 5% 0 0 28%;
+    background-color: var(--nav-footer);
+}
 
 .password-message, .email-message {
     text-align: center;
+    color: red;
     background-color: var(--fondo-vistas);
     font-style: var(--subtitulos);
-    color: red;
 }
 
-.contenedorEmail {
+.contenedorEmail, .contenedorPassword {
     background-color: var(--fondo-vistas);
 }
 
-.contenedorPassword {
-    background-color: var(--fondo-vistas);
-}
