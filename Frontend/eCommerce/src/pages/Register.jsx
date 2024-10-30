@@ -4,6 +4,7 @@ import '../styles/register.css';
 import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
 import * as jwt_decode from 'jwt-decode';
+import Alert from '../components/Alerta.jsx';
 
 function Register() {
     const emailRef = useRef(null);
