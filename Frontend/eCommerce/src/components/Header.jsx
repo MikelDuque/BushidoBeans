@@ -1,20 +1,50 @@
 import { NavLink } from "react-router-dom";
 import React, { useState, useRef, useEffect } from 'react';
-import '../styles/header.css'
+import '../styles/header.css';
 
-const isLogged = false;
+
+// -----HEADER----- //
+
+function Header() {
+  const [isLogged, setIsLogged] = useState(true);
+  const handleLogin = () => { setIsLogged(true); };
+  const handleLogout = () => { setIsLogged(false); };
+
+  return (
+    <header>
+      <nav>
+        <NavLink className="nl hLogo" to="/" end />
+        <NavLink className="nl btn" to="/catalogo"> Café </NavLink>
+        <NavLink className="nl btn" to="/catalogo"> Té </NavLink>
+        <NavLink className="nl btn" to="/catalogo"> Tienda </NavLink>
+        <NavLink className="nl btn" to=""> Nosotros </NavLink>
+
+        {isLogged ? (
+          <Desplegable handleLogout={handleLogout} />
+        ) : (
+          <NavLink className="nl btnc" to="/login"> Login </NavLink>
+        )}
+
+        <NavLink className="nl cesta" to="" />
+      </nav>
+    </header>
+  );
+}
 
 
 // -----DESPLEGABLE----- //
 
-const Desplegable = () => {
+const Desplegable = ({ handleLogout }) => {
   const [abierto, setAbierto] = useState(false);
   const desplegableRef = useRef(null);
-  const abrirDesplegable = () => { setAbierto((prev) => !prev); };
+
+  const abrirDesplegable = () => {
+    setAbierto((prev) => !prev);
+  };
 
   const clickFuera = (event) => {
     if (desplegableRef.current && !desplegableRef.current.contains(event.target)) {
-      setAbierto(false)
+      setAbierto(false);
     }
   };
 
@@ -32,36 +62,11 @@ const Desplegable = () => {
         <div className="desplMenu">
           <NavLink className="dnl desplOpcion" to="">Ver Perfil</NavLink>
           <NavLink className="dnl desplOpcion" to="">Administración</NavLink>
-          <div className="desplOpcion">Cerrar Sesión</div>
+          <div className="desplOpcion" onClick={handleLogout}>Cerrar Sesión</div>
         </div>
       )}
     </div>
   );
 };
-
-
-// -----HEADER----- //
-
-function Header() {
-  return (
-    <header>
-      <nav>
-        <NavLink className="nl hLogo" to="/" end />
-        <NavLink className="nl btn" to="/catalogo"> Café </NavLink>
-        <NavLink className="nl btn" to="/catalogo"> Té </NavLink>
-        <NavLink className="nl btn" to="/catalogo"> Tienda </NavLink>
-        <NavLink className="nl btn" to=""> Nosotros </NavLink>
-
-        {isLogged ? (
-          <Desplegable />
-        ) : (
-          <NavLink className="nl btnc" to="/login"> Login </NavLink>
-        )}
-
-        <NavLink className="nl cesta" to=""/>
-      </nav>
-    </header>
-  );
-}
 
 export default Header;
