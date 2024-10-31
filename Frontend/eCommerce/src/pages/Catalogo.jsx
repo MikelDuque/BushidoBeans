@@ -1,5 +1,6 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import CardPrueba from "../components/CardPrueba";
 
 function Catalogo() {
   return (
@@ -11,8 +12,9 @@ function Catalogo() {
       <body>
         <Header />
         <main>
-          <div>Probando
-          </div>
+          <CardPrueba />
+          <CardPrueba />
+          <CardPrueba />
         </main>
         <Footer />
       </body>
