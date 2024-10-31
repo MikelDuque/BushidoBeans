@@ -1,6 +1,9 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import CardPrueba from "../components/CardPrueba";
+import { CardPrueba } from "../components/CardPrueba.jsx";
+import '../styles/CardPrueba.css'
+import productData from "../data/dataPrueba.js";
+
 
 function Catalogo() {
   return (
@@ -12,9 +15,26 @@ function Catalogo() {
       <body>
         <Header />
         <main>
-          <CardPrueba />
-          <CardPrueba />
-          <CardPrueba />
+        <div className="inventario">
+          
+        {(productData.length > 0) ? (
+            productData.map((dataP) => (
+              //imagen, nombre, intensidad, precio, soldout
+            <CardPrueba 
+            imagen={dataP.imagen} 
+            nombre={dataP.nombre} 
+            intensidad={dataP.intensidad} 
+            precio={dataP.precio}
+            key={dataP.name}
+            soldout={dataP.soldout}
+            />
+            
+        ))
+        ) : (
+        <p>Estamos en mantenimiento</p>
+        )}
+        </div>
+      
         </main>
         <Footer />
       </body>
