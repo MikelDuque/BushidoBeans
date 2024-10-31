@@ -5,6 +5,7 @@ import logo from "../../public/logo.svg";
 import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
 import Alert from './../components/Alerta';
+// import Input from './../components/Input';
 
 function Login() {
     const emailRef = useRef(null);
@@ -80,6 +81,12 @@ function Login() {
                     <p className="usaGmail">Usa tu email y contraseña</p>
                     <form className="formLogin" onSubmit={handleAcceder}>
                         <div className="contenedorEmail">
+                            {/* <Input type="email"
+                                name="email"
+                                id="email"
+                                inputRef={emailRef}
+                                placeholder="Email"/> */}
+
                             <input
                                 type="email"
                                 name="email"
@@ -90,6 +97,12 @@ function Login() {
                             {emailError && <p className="email-message">{emailError}</p>}
                         </div>
                         <div className="contenedorPassword">
+                            {/* <input                                 
+                                type="password"
+                                name="password"
+                                id="password"
+                                inputRef={passwordRef}
+                                placeholder="Contraseña"/> */}
                             <input
                                 type="password"
                                 name="password"

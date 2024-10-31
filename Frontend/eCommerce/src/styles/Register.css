@@ -4,57 +4,56 @@ body {
 }
 .login-secundario{
     background-color: var(--fondo-vistas);
-    border-top-right-radius: 200px;
-    border-bottom-right-radius: 200px;
-    border-top-left-radius: 40px;
-    border-bottom-left-radius: 40px;
-    width: 40%;
-    padding-bottom: 7%;
-}
-.preguntaCuenta-secundario{
-    text-align: center;
-    margin: 0px 0px 0px 6.5%;
-}
-.registrarseTexto{
-    text-align: center;
-    margin: 0px 0px 0px 5%;
-    font-weight: var(--subtitulo);
-}
-.logoBushidoBeans-secundario{
-    width: 46%;
-    margin: 2% 0px 0px 30%;
-}
-.Acceder-secundario{
-    margin:20% 0px 0px 31.5%;
-}
-
-.contenedorEmail-secundario, .contenedorPassword-secundario{
-    background-color: var(--nav-footer);
+    border-radius: 40px 200px 200px 40px;
+    padding-bottom: 10%;
 
 }
-
-.container-secundario{
-    display: inline-flex;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 50px;
+.container-secundario {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 75%;
     background-color: var(--nav-footer);
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.register{
-    margin-top: 5%;
-    border-top-right-radius: 40px;
-    border-bottom-right-radius: 40px;
+
+.register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 60%;
     background-color: var(--nav-footer);
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    padding: 5% 0;
 }
-.CrearCuenta{
+
+.CrearCuenta {
+    font-size: var(--subtitulos-size);
+    font-weight: var(--font-weight-regular);
+    color: var(--texto-principal);
+    text-align: center;
     margin-top: 30px;
 }
 
-.btnCrearCuenta-secundario{
-    margin-top: 5%;
+.Acceder-secundario {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenedorEmail-secundario,
+.contenedorPassword-secundario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: var(--nav-footer);
-    margin-left: 34%;
+    width: 100%;
+    margin-bottom: 5%;
+}
+
+.btnCrearCuenta-secundario {
     width: 240px;
     height: 100px;
     background-color: var(--nav-footer);
@@ -65,49 +64,19 @@ body {
     border: 1px solid var(--texto-claro);
     cursor: pointer;
     transition: background-color 1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5% auto;
 }
 
-.preguntaCuenta-terciario{
+.preguntaCuenta-terciario {
     color: var(--texto-claro);
     text-align: center;
-    background-color: var(--nav-footer);
     font-size: var(--subtitulos-principal);
     font-weight: 400;
-    font-family: 'Poppins', sans-serif;
-    margin: 0px 0px 0% 0% ;
     padding: 1%;
 }
-
-.password-message-secundario, .email-message-secundario {
-    text-align: center;
+.email-message-secundario, .password-message-secundario{
     background-color: var(--nav-footer);
-    font-style: var(--subtitulos);
-    color: red;
-    margin-left: 250px;
-}
-
-#email, #password {
-    width: 300px;
-    height: 45px;
-    padding-left: 15px;
-    margin: 1% 0 1% 30%;
-    background-color: var(--fondo-vistas);
-    border-radius: 8px;
-    border: 1.25px solid var(--nav-footer);
-    color: var(--texto-oscuro);
-}
-
-#email::placeholder, #password::placeholder {
-    color: var(--nav-footer);
-    font-style: var(--subtitulos);
-}
-
-#email:focus, #password:focus {
-    outline: none;
-    border-color: var(--nav-hover);
-    background-color: #EDE6E0;
-}
-
-#email:focus::placeholder, #password:focus::placeholder {
-    color: transparent;
 }

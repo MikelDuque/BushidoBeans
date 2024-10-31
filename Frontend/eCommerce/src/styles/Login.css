@@ -16,6 +16,9 @@
 
 .login {
     width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border-radius: 50px;
 }
 
@@ -38,30 +41,13 @@
     margin-bottom: 10%;
 }
 
-#email, #password {
-    width: 300px;
-    height: 45px;
-    padding-left: 15px;
-    margin: 1% 0 1% 30%;
+.contenedorEmail, .contenedorPassword {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: var(--fondo-vistas);
-    border-radius: 8px;
-    border: 1.25px solid var(--nav-footer);
-    color: var(--texto-oscuro);
-}
-
-#email::placeholder, #password::placeholder {
-    color: var(--nav-footer);
-    font-style: var(--subtitulos);
-}
-
-#email:focus, #password:focus {
-    outline: none;
-    border-color: var(--nav-hover);
-    background-color: #EDE6E0;
-}
-
-#email:focus::placeholder, #password:focus::placeholder {
-    color: transparent;
+    width: 100%;
+    margin-bottom: 5%;
 }
 
 .Acceder, .btnCrearCuenta {
@@ -75,10 +61,13 @@
     border: none;
     cursor: pointer;
     transition: background-color 1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .Acceder {
-    margin: 15% 0 0 33%;
+    margin: 5% auto 0 auto; /* Centra horizontalmente */
 }
 
 .Acceder:hover, .btnCrearCuenta:hover {
@@ -90,10 +79,14 @@
     padding-bottom: 10%;
     background-color: var(--nav-footer);
     border-radius: 200px 40px 40px 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .btnCrearCuenta {
-    margin-left: 29%;
+    margin-top: 10%;
     border: 1px solid var(--texto-claro);
 }
 
@@ -119,7 +112,7 @@
 
 .logoBushidoBeans {
     width: 46%;
-    margin: 5% 0 0 28%;
+    margin: 5% 0;
     background-color: var(--nav-footer);
 }
 
@@ -129,8 +122,3 @@
     background-color: var(--fondo-vistas);
     font-style: var(--subtitulos);
 }
-
-.contenedorEmail, .contenedorPassword {
-    background-color: var(--fondo-vistas);
-}
-
