@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode';
 import Alert from '../components/Alerta.jsx';
 import * as jwt_decode from 'jwt-decode';
-import Alert from './../components/Alerta';
+//import Alert from './../components/Alerta';
 import Input from '../components/Input';
 
 function Register() {

@@ -11,7 +11,13 @@ export function CardPrueba({imagen, nombre, intensidad, precio, soldout}){
                 <div className="detallesDiv">
                     <p className="detalles">{intensidad}</p>
                     <p className="detalles">{precio} €</p>
+                    
                 </div>
+                <div className='añadirCestaJ'>
+                    <p>Añadir a la cesta</p>
+                    <button className='botonPrueba'>🛒</button>
+                </div>
+                
             </div>
         </div>
     );
