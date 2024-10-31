@@ -5,6 +5,7 @@ import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
 import * as jwt_decode from 'jwt-decode';
 import Alert from './../components/Alerta';
+import Input from '../components/Input';
 
 function Register() {
     const emailRef = useRef(null);
@@ -13,6 +14,7 @@ function Register() {
     const nameRef = useRef(null);
     const [emailError, setEmailError] = useState(null);
     const [passwordError, setPasswordError] = useState(null);
+    const [nameError, setNameError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [alertMessage, setAlertMessage] = useState(null);
     const navigate = useNavigate();
@@ -31,6 +33,12 @@ function Register() {
             return;
         }
         setEmailError(null);
+
+        if (!validation.isValidName(name)) {
+            setNameError("Por favor, introduce un formato de nombre válido.");
+            return;
+        }
+        setNameError(null);
 
         if (!validation.isValidPassword(password)) {
             setPasswordError("Por favor, introduce un formato de contraseña válido.");
@@ -59,16 +67,17 @@ function Register() {
                 const accessToken = await response.json();
                 const decoded = jwt_decode.jwtDecode(accessToken);
                 console.log({ email: decoded.email, name: decoded.name });
-                setAlertMessage("Te has registrado correctamente!"); 
+                setAlertMessage("Te has registrado correctamente!");
                 resetForm();
-                navigate('/'); 
+                navigate('/');
             } else {
                 const errorText = await response.text();
                 console.error(errorText);
-                setAlertMessage("Error al registrarse: " + errorText);             }
+                setAlertMessage("Error al registrarse: " + errorText);
+            }
         } catch (error) {
             console.error("Error en la autenticación:", error.message);
-            setAlertMessage("Error: " + error.message); 
+            setAlertMessage("Error: " + error.message);
         } finally {
             setIsLoading(false);
         }
@@ -85,7 +94,7 @@ function Register() {
         <div className="container-supremo">
             <div className="container-secundario">
                 <div className="login login-secundario">
-                    <img src={logo} alt="" className="logoBushidoBeans-secundario" />
+                    <img src={logo} alt="Logo" className="logoBushidoBeans-secundario" />
                     <p className="preguntaCuenta-secundario accede">¿Ya tienes cuenta?</p>
                     <button className="Acceder Acceder-secundario" onClick={handleAcceder}>Acceder</button>
                 </div>
@@ -93,19 +102,20 @@ function Register() {
                     <p className="preguntaCuenta-terciario">Crea tu cuenta</p>
                     <p className="preguntaCuenta-terciario">Añade tus datos personales</p>
                     <form className="formRegister" onSubmit={handleRegister}>
-                        <div className="contenedorEmail contenedorEmail-secundario">
-                            <input type="text" name="name" id="email"ref={nameRef} placeholder="Nombre" className="nombre" />
+                        <div className="contenedorNombre contenedorEmail contenedorEmail-secundario">
+                            <input type="text" name="name" id="name" ref={nameRef} placeholder="Nombre" className="nombre" />
+                            {nameError && <p className="name-message email-message email-message-secundario ">{nameError}</p>}
                         </div>
                         <div className="contenedorEmail contenedorEmail-secundario">
                             <input type="email" id="email" name="email" ref={emailRef} placeholder="Email" />
                             {emailError && <p className="email-message email-message-secundario">{emailError}</p>}
                         </div>
                         <div className="contenedorPassword contenedorPassword-secundario">
-                            <input type="password" id='password' name="password" ref={passwordRef} placeholder="Contraseña" />
+                            <input type="password" id="password" name="password" ref={passwordRef} placeholder="Contraseña" />
                             {passwordError && <p className="password-message password-message-secundario">{passwordError}</p>}
                         </div>
                         <div className="contenedorPassword contenedorPassword-secundario">
-                            <input type="password" id='password' name="confirmPassword" ref={confirmPasswordRef} placeholder="Repetir Contraseña" />
+                            <input type="password" id="confirmPassword" name="confirmPassword" ref={confirmPasswordRef} placeholder="Repetir Contraseña" />
                         </div>
                         <button type="submit" disabled={isLoading} className="btnCrearCuenta btnCrearCuenta-secundario">
                             {isLoading ? 'Cargando...' : 'Crear Cuenta'}
