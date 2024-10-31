@@ -5,7 +5,7 @@ import logo from "../../public/logo.svg";
 import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
 import Alert from './../components/Alerta';
-// import Input from './../components/Input';
+import Input from './../components/Input';
 
 function Login() {
     const emailRef = useRef(null);
@@ -19,6 +19,7 @@ function Login() {
     const navigate = useNavigate();
 
     const handleCrearCuenta = () => navigate('/register');
+    const handleLogoClick = () => navigate('/'); 
 
     const fetchingData = async (url, data) => {
         setIsLoading(true);
@@ -119,7 +120,7 @@ function Login() {
                     </form>
                 </div>
                 <div className="crearCuenta">
-                    <img src={logo} alt="Bushido Beans" className="logoBushidoBeans" />
+                    <button onClick={handleLogoClick} className='logo-button'><img src={logo} alt="Bushido Beans" className="logoBushidoBeans" /></button>
                     <p className="preguntaCuenta">¿Aún no tienes cuenta?</p>
                     <p className="crearAhora">Crea tu cuenta ahora</p>
                     <button className="btnCrearCuenta" onClick={handleCrearCuenta}>Crear cuenta</button>

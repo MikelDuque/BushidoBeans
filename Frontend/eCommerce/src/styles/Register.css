@@ -80,3 +80,8 @@ body {
 .email-message-secundario, .password-message-secundario{
     background-color: var(--nav-footer);
 }
+.logo-button-secundario{
+background-color: var(--fondo-vistas);
+border: none;
+border-radius:33% ;
+}

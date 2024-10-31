@@ -20,6 +20,7 @@ function Register() {
     const navigate = useNavigate();
 
     const handleAcceder = () => navigate('/login');
+    const handleLogoClick = () => navigate('/'); 
 
     const handleRegister = async (event) => {
         event.preventDefault();
@@ -94,7 +95,7 @@ function Register() {
         <div className="container-supremo">
             <div className="container-secundario">
                 <div className="login login-secundario">
-                    <img src={logo} alt="Logo" className="logoBushidoBeans-secundario" />
+                    <button onClick={handleLogoClick} className='logo-button-secundario'><img src={logo} alt="Logo" className="logoBushidoBeans-secundario" /></button>
                     <p className="preguntaCuenta-secundario accede">¿Ya tienes cuenta?</p>
                     <button className="Acceder Acceder-secundario" onClick={handleAcceder}>Acceder</button>
                 </div>

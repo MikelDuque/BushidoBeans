@@ -122,3 +122,8 @@
     background-color: var(--fondo-vistas);
     font-style: var(--subtitulos);
 }
+.logo-button{
+    border: none;
+    border-radius:33% ;
+    background-color: var(--nav-footer);
+}
