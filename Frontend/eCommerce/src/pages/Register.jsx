@@ -3,8 +3,6 @@ import React, { useRef, useState } from 'react';
 import '../styles/register.css';
 import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode';
-import Alert from '../components/Alerta.jsx';
 import * as jwt_decode from 'jwt-decode';
 import Alert from './../components/Alerta';
 import Input from '../components/Input';
@@ -22,6 +20,7 @@ function Register() {
     const navigate = useNavigate();
 
     const handleAcceder = () => navigate('/login');
+    const handleLogoClick = () => navigate('/'); 
 
     const handleRegister = async (event) => {
         event.preventDefault();
@@ -67,7 +66,7 @@ function Register() {
 
             if (response.ok) {
                 const accessToken = await response.json();
-                const decoded = jwtDecode(accessToken);
+                const decoded = jwt_decode.jwtDecode(accessToken);
                 console.log({ email: decoded.email, name: decoded.name });
                 setAlertMessage("Te has registrado correctamente!");
                 resetForm();
@@ -96,7 +95,7 @@ function Register() {
         <div className="container-supremo">
             <div className="container-secundario">
                 <div className="login login-secundario">
-                    <img src={logo} alt="Logo" className="logoBushidoBeans-secundario" />
+                    <button onClick={handleLogoClick} className='logo-button-secundario'><img src={logo} alt="Logo" className="logoBushidoBeans-secundario" /></button>
                     <p className="preguntaCuenta-secundario accede">¿Ya tienes cuenta?</p>
                     <button className="Acceder Acceder-secundario" onClick={handleAcceder}>Acceder</button>
                 </div>
