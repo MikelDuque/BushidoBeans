@@ -1,4 +1,4 @@
-import './styles/app.css'
+import './styles/App.css'
 import Inicio from "./pages/Inicio";
 import Catalogo from "./pages/Catalogo"
 import Login from './pages/Login'
