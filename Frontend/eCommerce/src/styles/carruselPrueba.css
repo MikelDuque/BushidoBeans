@@ -1,0 +1,21 @@
+
+.carrusel {
+    height: 200px; /* Alto fijo, ajusta según sea necesario */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Oculta cualquier contenido que desborde */
+    position: relative; /* Para posicionar los botones correctamente */
+}
+
+.carrusel-item {
+
+}
+
+.carrusel img {
+
+    width: 90%; /* Ancho fijo */
+   
+    
+
+}

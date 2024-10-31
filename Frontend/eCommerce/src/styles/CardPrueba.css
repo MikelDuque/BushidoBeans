@@ -1,20 +1,21 @@
 
 
 .inventario{
-    padding: 25px;
+    padding: 20px;
+    padding-inline: 10%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    
 }
 
 .cardPrueba{
-    padding: 20px;
+    padding: 10px;
     border: 2px solid black;
     border-radius: 10px;
     box-shadow: 0px 0px 10px hsla(0, 31%, 76%, 0.333);
     text-align: center;
-    background-color: var(--nav-footer);
-    
+    background-color: var(--nav-footer);   
 }
 
 .productName{
@@ -26,6 +27,8 @@
 .imgPrueba{
     height: 200px;
     width: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 .detallesDiv{
@@ -36,7 +39,18 @@
     padding-top: 10px;
 }
 
-.detalles{
 
-   
-}
+.cardPrueba.sold-out {
+    color: #888;
+  }
+  
+  .cardPrueba.sold-out img {
+    filter: grayscale();
+    opacity: 0.8;
+  }
+
+  .cardPrueba.sold-out p {
+    filter: grayscale();
+    opacity: 0.8;
+  }
+  

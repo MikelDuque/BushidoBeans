@@ -7,10 +7,10 @@ export function CardPrueba({imagen, nombre, intensidad, precio, soldout}){
         <div className="inventario">
            <div className={`cardPrueba ${soldout && "sold-out"}`}>
                 <img className="imgPrueba" src={imagen} alt={nombre} />
-                <h4 className="productName">{name}</h4>
+                <h4 className="productName">{nombre}</h4>
                 <div className="detallesDiv">
                     <p className="detalles">{intensidad}</p>
-                    <p className="detalles">{precio}</p>
+                    <p className="detalles">{precio} €</p>
                 </div>
             </div>
         </div>

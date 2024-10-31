@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import { CardPrueba } from "../components/CardPrueba.jsx";
 import '../styles/CardPrueba.css'
 import productData from "../data/dataPrueba.js";
+import CatalogoIntro from "../components/CatalagoIntro.jsx";
 
 
 function Catalogo() {
@@ -15,6 +16,7 @@ function Catalogo() {
       <body>
         <Header />
         <main>
+        <CatalogoIntro />
         <div className="inventario">
           
         {(productData.length > 0) ? (

@@ -1,0 +1,21 @@
+.filtrosProducts{
+    padding-top: 40px;
+    padding-inline: 12%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.botonFiltroG{
+    display: flex;
+    border: 2px solid rgba(0, 0, 0, 0.258);
+    border-radius: 10px;
+    background-color: var(--nav-footer);
+    padding: 5px;
+    text-align: center;
+    justify-content: space-between;
+}
+
+.botonFiltroG select{
+    border-radius: 10px;
+}
