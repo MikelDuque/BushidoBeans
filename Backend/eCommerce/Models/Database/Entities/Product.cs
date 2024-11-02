@@ -16,26 +16,5 @@ public class Product
     public decimal Score { get; set; }
 
     public ICollection<Review> Reviews { get; set; } //Colección de Reviews, Mik, para que un producto pueda almacenar muchas Reviews distintas.
-    public ICollection<Cart> Carts { get; set; }
+    public ICollection<Cart_Product> Cart_Products { get; set; }
 }
-
-/*
- EJEMPLO DE ENUM
- 
- public enum IntensityLevel
-{
-    Low = 0,
-    MediumLow = 1,
-    Medium = 2,
-    MediumHigh = 3,
-    High = 4,
-    VeryHigh = 5
-}
-
-public class ProductDTO
-{
-    public blablablabla....
-    public IntensityLevel Intensity { get; set; }
-}
- 
- */

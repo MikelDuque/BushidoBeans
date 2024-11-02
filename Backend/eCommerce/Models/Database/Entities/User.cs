@@ -15,6 +15,5 @@ public class User
     public string Admin { get; set; }
 
     public ICollection<Review> Reviews { get; set; }
-    public ICollection<Cart> Carts { get; set; }
-
+    public Cart Cart { get; set; }
 }

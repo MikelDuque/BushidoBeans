@@ -14,3 +14,24 @@ public class ProductDto
     public List<ReviewDto> Reviews { get; set; }
     public List<CartDto> Carts { get; set; }
 }
+
+/*
+ EJEMPLO DE ENUM
+ 
+ public enum IntensityLevel
+{
+    Low = 0,
+    MediumLow = 1,
+    Medium = 2,
+    MediumHigh = 3,
+    High = 4,
+    VeryHigh = 5
+}
+
+public class ProductDTO
+{
+    public blablablabla....
+    public IntensityLevel Intensity { get; set; }
+}
+ 
+ */
