@@ -2,18 +2,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace eCommerce.Models.Database.Entities;
 
-[PrimaryKey(nameof(ID))]
 [Index(nameof(Mail), IsUnique = true)]
 public class User
 {
-    public long ID { get; set; }
-    public string Mail { get; set; }
-    public string Password { get; set; }
-    public string Name { get; set; }
-    public string Surname { get; set; }
+    public long Id { get; set; }
+    public required string Mail { get; set; }
+    public string Password { get; set; } = null!;
+    public required string Name { get; set; }
+    public string? Surname { get; set; }
     public int Phone { get; set; }
-    public string Admin { get; set; }
+    public required string? Role { get; set; }
 
     public ICollection<Review> Reviews { get; } = new List<Review>();
-    public Cart Cart { get; set; }
+    public Cart? Cart { get; set; }
 }

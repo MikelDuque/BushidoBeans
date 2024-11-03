@@ -9,7 +9,6 @@ namespace eCommerce.Controllers;
 [Route("api/[controller]")]
 public class UserController : ControllerBase
 {
-    //private readonly UserRepository _userRepository;
     private readonly UserService _service;
     private readonly UserMapper _mapper;
 
@@ -51,7 +50,7 @@ public class UserController : ControllerBase
             Name = userRequest.Name,
             Surname = "",
             Phone = 0,
-            Admin = null
+            Role = null
         };
 
         User newUser = await _service.InsertAsync(user);

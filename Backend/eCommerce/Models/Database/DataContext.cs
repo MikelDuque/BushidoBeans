@@ -12,6 +12,7 @@ public class DataContext : DbContext
     public DbSet<Product> Products { get; set; }
     public DbSet<Review> Reviews { get; set; }
     public DbSet<Cart> Carts { get; set; }
+    public DbSet<CartProduct> CartProducts { get; set; }
 
     //Configuración del Entity Framework para la creación del archivo de BDD Sqlite
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

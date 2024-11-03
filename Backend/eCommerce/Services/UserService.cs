@@ -17,12 +17,12 @@ public class UserService
     return _unitOfWork.UserRepository.GetAllAsync();
   }
 
-  public Task<User> GetByIdAsync(long id)
+  public Task<User?> GetByIdAsync(long id)
   {
     return _unitOfWork.UserRepository.GetByIdAsync(id);
   }
 
-  public Task<User> GetByMailAsync(string mail)
+  public Task<User?> GetByMailAsync(string mail)
   {
     return _unitOfWork.UserRepository.GetByMailAsync(mail);
   }
@@ -36,7 +36,7 @@ public class UserService
       Name = user.Name,
       Surname = user.Surname,
       Phone = user.Phone,
-      Admin = user.Admin
+      Role = user.Role
     };
 
     await _unitOfWork.UserRepository.InsertAsync(newUser);
@@ -46,24 +46,24 @@ public class UserService
   }
 
   public async Task<User> UpdateAsync(long id, User user) {
-    User userEntity = await _unitOfWork.UserRepository.GetByIdAsync(id);
+    User? userEntity = await _unitOfWork.UserRepository.GetByIdAsync(id);
     userEntity.Mail = user.Mail;
     userEntity.Name = user.Name;
     userEntity.Surname = user.Surname;
     userEntity.Phone = user.Phone;
-    userEntity.Admin = user.Admin;
+    userEntity.Role = user.Role;
 
     return userEntity;
   }
 
   public async Task DeleteAsync(long id) {
-    User user = await _unitOfWork.UserRepository.GetByIdAsync(id);
-    _unitOfWork.UserRepository.Delete(user);
+    User? user = await _unitOfWork.UserRepository.GetByIdAsync(id);
+    await _unitOfWork.UserRepository.DeleteAsync(user);
 
     await _unitOfWork.SaveAsync();
   }
 
-  public Task<bool> ThisUserExist(string mail, string password)
+  public Task<bool> ThisUserExists(string mail, string password)
   {
     string hashedPassword = AuthService.HashPassword(password);
     return _unitOfWork.UserRepository.ThisUserExists(mail, hashedPassword);

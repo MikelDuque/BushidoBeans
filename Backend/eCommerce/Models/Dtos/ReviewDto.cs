@@ -2,9 +2,9 @@
 
 public class ReviewDto
 {
-    public long Id { get; set; }
-    public string Body { get; set; }
-    public byte Score { get; set; } //puede ser byte, int o enum, preguntar a Mik
-    public long ProductID { get; set; }
-    public long UserID { get; set; }
+    public required long Id { get; set; }
+    public required byte Score { get; set; } //puede ser byte, int o enum, preguntar a Mik
+    public string? Body { get; set; }
+    public long ProductId { get; set; }
+    public long UserId { get; set; }
 }

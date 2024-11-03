@@ -9,12 +9,12 @@ public class UserMapper
   //Mapea los datos de un Usuario al DTO de Usuario
   public UserDto ToDto(User user) {
     return new UserDto() {
-      ID = user.ID,
+      Id = user.Id,
       Mail = user.Mail,
       Name = user.Name,
       Surname = user.Surname,
       Phone = user.Phone,
-      Admin = user.Admin
+      Role = user.Role
     };
   }
 
@@ -26,12 +26,12 @@ public class UserMapper
 //Mapea los datos de un DTO de usuario a la entidad Usuario
   public User ToEntity(UserDto user) {
     return new User() {
-      ID = user.ID,
+      Id = user.Id,
       Mail = user.Mail,
       Name = user.Name,
       Surname = user.Surname,
       Phone = user.Phone,
-      Admin = user.Admin 
+      Role = user.Role 
     };
   }
 

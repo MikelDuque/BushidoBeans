@@ -1,9 +1,9 @@
-﻿namespace eCommerce.Models.Dtos;
+using System;
+
+namespace eCommerce.Models.Dtos;
 
 public class CartDto
 {
-    public long UserID { get; set; }
-    public long ProductID { get; set; }
-    public int Quantity { get; set; }
+  public long Id { get; set; }
+  public Dictionary<long, byte> Products { get; set; } = [];
 }
-

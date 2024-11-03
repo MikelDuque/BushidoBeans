@@ -1,10 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace eCommerce.Models.Database.Entities;
 
-[Owned]
 public class Cart
 {
+    public long Id { get; set; }
+    [ForeignKey(nameof(Id))]
+    public User User { get; set; } = null!;
+
     public List<Product> Products { get; } = [];
-    public List<ProductCart> ProductCarts { get; } = [];
+    public List<CartProduct> CartProducts { get; } = [];
 }

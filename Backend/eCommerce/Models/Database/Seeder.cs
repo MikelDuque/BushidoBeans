@@ -27,7 +27,40 @@ public class Seeder
         Password = AuthService.HashPassword("Hola#123456789") ,
         Surname = "Montes Gutierrez",
         Phone = 683956402,
-        Admin = "admin"
+        Role = "admin"
+      }
+    ];
+    Product[] products =
+    [
+      new Product
+      {
+        Name = "La especialidad de Fígaro",
+        Description = "El mejor café de \"El Alpiste\" traído hasta aquí.",
+        NutritionalInfo = null,
+        Intensity = 3,
+        Price = 2.50M,
+        Discount = 0,
+        Stock = 5,
+        Score = 1
+      }
+    ];
+    Review[] reviews =
+    [
+      new Review
+      {
+        Score = 3,
+        Body = "Pues menuda mierda, no?",
+        ProductId = 1,
+        UserId = 1
+      }
+    ];
+    CartProduct[] cartProducts =
+    [
+      new CartProduct
+      {
+        CartId = 1,
+        ProductId = 1,
+        Quantity = 3
       }
     ];
 
