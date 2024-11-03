@@ -10,4 +10,6 @@ public class UserDto
   public string Surname {get; set;}
   public int Phone {get; set;}
   public string Admin {get;set;}
+  public List<ReviewDto> Reviews { get; set; }
+  public List<CartDto> Carts { get; set; }
 }
