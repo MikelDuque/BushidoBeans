@@ -1,8 +1,5 @@
-using System;
 using eCommerce.Models.Database.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Microsoft.VisualBasic;
 
 namespace eCommerce.Models.Database;
 

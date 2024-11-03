@@ -1,7 +1,5 @@
-using System;
 using eCommerce.Controllers;
 using eCommerce.Models.Database.Entities;
-using Microsoft.IdentityModel.Tokens;
 
 namespace eCommerce.Services;
 
