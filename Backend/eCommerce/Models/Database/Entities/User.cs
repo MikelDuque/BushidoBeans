@@ -14,6 +14,6 @@ public class User
     public int Phone { get; set; }
     public string Admin { get; set; }
 
-    public ICollection<Review> Reviews { get; set; }
+    public ICollection<Review> Reviews { get; } = new List<Review>();
     public Cart Cart { get; set; }
 }
