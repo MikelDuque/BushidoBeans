@@ -15,6 +15,7 @@ public class Product
     public int Quantity { get; set; }
     public decimal Score { get; set; }
 
-    public ICollection<Review> Reviews { get; set; } //Colección de Reviews, Mik, para que un producto pueda almacenar muchas Reviews distintas.
-    public ICollection<Cart_Product> Cart_Products { get; set; }
+    public ICollection<Review> Reviews { get; } = new List<Review>();
+    public List<Cart> Carts { get; } = [];
+    public List<ProductCart> ProductCarts { get; } = [];
 }

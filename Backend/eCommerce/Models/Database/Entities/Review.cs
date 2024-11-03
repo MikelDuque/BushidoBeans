@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace eCommerce.Models.Database.Entities;
 
@@ -12,8 +13,13 @@ public class Review
 
     //---Foreign Keys---//
     public long ProductId { get; set; }
-    public Product Product { get; set; } //Esto es para que Review pueda acceder a los datos de Product, no entiendo del todo por qué se hace así, imagino que para que pueda coger la id de Product.
+
+    [ForeignKey(nameof(ProductId))]
+    public Product Product { get; set; } = null!;
+
 
     public long UserId { get; set; }
-    public User User { get; set; }
+
+    [ForeignKey(nameof(UserId))]
+    public User User { get; set; } = null!;
 }
