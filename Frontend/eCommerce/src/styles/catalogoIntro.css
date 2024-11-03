@@ -1,6 +1,7 @@
 .filtrosProducts{
     padding-top: 40px;
     padding-inline: 12%;
+    padding-bottom: 30px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
@@ -18,4 +19,11 @@
 
 .botonFiltroG select{
     border-radius: 10px;
+}
+
+.botonBusqueda{
+    gap: 30px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto; /* Centrar horizontalmente */
 }

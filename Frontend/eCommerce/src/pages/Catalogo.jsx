@@ -4,6 +4,7 @@ import { CardPrueba } from "../components/CardPrueba.jsx";
 import '../styles/CardPrueba.css'
 import productData from "../data/dataPrueba.js";
 import CatalogoIntro from "../components/CatalagoIntro.jsx";
+import BusquedaProductos from "../components/BusquedaP.jsx";
 
 
 function Catalogo() {
@@ -17,26 +18,7 @@ function Catalogo() {
         <Header />
         <main>
         <CatalogoIntro />
-        <div className="inventario">
-          
-        {(productData.length > 0) ? (
-            productData.map((dataP) => (
-              //imagen, nombre, intensidad, precio, soldout
-            <CardPrueba 
-            imagen={dataP.imagen} 
-            nombre={dataP.nombre} 
-            intensidad={dataP.intensidad} 
-            precio={dataP.precio}
-            key={dataP.name}
-            soldout={dataP.soldout}
-            />
-            
-        ))
-        ) : (
-        <p>Estamos en mantenimiento</p>
-        )}
-        </div>
-      
+        <BusquedaProductos />
         </main>
         <Footer />
       </body>

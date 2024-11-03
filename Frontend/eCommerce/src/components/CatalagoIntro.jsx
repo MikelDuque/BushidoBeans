@@ -74,6 +74,7 @@ function CatalogoIntro(){
     return(
         <>
         <Carrusel />
+        
         <div className='filtrosProducts'>
             
             <Dropdown /> 
