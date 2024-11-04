@@ -17,7 +17,7 @@ function Header() {
         <NavLink className="nl btn" to="/catalogo"> Café </NavLink>
         <NavLink className="nl btn" to="/catalogo"> Té </NavLink>
         <NavLink className="nl btn" to="/catalogo"> Tienda </NavLink>
-        <NavLink className="nl btn" to=""> Nosotros </NavLink>
+        <NavLink className="nl btn" to="/sobreNosotros"> Nosotros </NavLink>
 
         {isLogged ? (
           <Desplegable handleLogout={handleLogout} />

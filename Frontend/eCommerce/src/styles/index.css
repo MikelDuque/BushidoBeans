@@ -29,8 +29,31 @@ width: 100;
 
     /* Estilos de texto */
     --titulos-size: 23px;
-    --subtitulos-size: 20px;
+    --subtitulos-size: 18px;
     --texto-size: 15px;
     --font-weight-bold: 600;
     --font-weight-regular: 400;
+    --font-family-titulos-subtitulos : 'Poppins', sans-serif;
+    --font-family-texto : 'Vollkorn', sans-serif;
+
+}
+.texto{
+    font-family: var(--font-family-texto);
+    font-size: var(--texto-size);
+    font-weight: var(--font-weight-regular);
+    color: var(--nav-footer);
+
+}
+.titulo{
+    font-family: var(--font-family-titulos-subtitulos);
+    font-size: var(--titulos-size);
+    font-weight: var(--font-weight-bold);
+    color: var(--nav-footer);
+}
+.subtitulo{
+    font-family: var(--font-family-titulos-subtitulos);
+    font-size: var(--subtitulos-size);
+    font-weight: var(--font-weight-regular);
+    color: var(--nav-footer);
+
 }
