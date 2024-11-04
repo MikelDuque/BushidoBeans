@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import "../styles/SobreNosotros.css";
 import Carrusel from "../components/Carrusel";
 import logo from "../../public/recursos/logo2.png";
-import Card from "../components/Card";
+import Card from "../components/Card-Equipo";
 import kirby from "../../public/recursos/kirby.svg";
 import sonic from "../../public/recursos/sonic.svg";
 import pikachu from "../../public/recursos/pikachu.svg";
@@ -13,14 +13,13 @@ import ig from "../../public/recursos/ig.svg";
 import tw from "../../public/recursos/x.svg";
 import fc from "../../public/recursos/fc.svg";
 import Maps from "../components/Maps";
-
+import imagen1 from "../../public/recursos/carrusel1.svg";
+import imagen2 from "../../public/recursos/carrusel2.svg";
+import imagen3 from "../../public/recursos/carrusel3.svg";
+import imagen4 from "../../public/recursos/carrusel4.svg";
 
 function SobreNosotros() {
-    const imagenes = [
-        "https://t1.uc.ltmcdn.com/es/posts/8/6/6/cual_es_la_diferencia_entre_cafe_natural_y_mezcla_53668_600.jpg",
-        "https://t1.uc.ltmcdn.com/es/posts/8/6/6/cual_es_la_diferencia_entre_cafe_natural_y_mezcla_53668_600.jpg",
-        "https://t1.uc.ltmcdn.com/es/posts/8/6/6/cual_es_la_diferencia_entre_cafe_natural_y_mezcla_53668_600.jpg"
-    ]
+    const imagenes = [imagen1,imagen2,imagen3,imagen4]
     return (
         <div className='container-sobre-nosotros'>
 

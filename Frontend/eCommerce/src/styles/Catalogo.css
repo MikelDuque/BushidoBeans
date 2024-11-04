@@ -1,0 +1,19 @@
+.contenedor-catalogo{
+    background-color: var(--fondo-vistas);
+}
+
+.carrusel-catalogo{
+    width: 1429px;
+    height: 451px;
+    margin: 2% auto 0;
+    border-radius: 20px;
+    background-color: transparent;
+    overflow: hidden;
+}
+.filtro{
+    margin:2%;
+    display: flex;
+    flex: 2;
+    justify-content: center;
+    gap: 3%;
+}

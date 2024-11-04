@@ -1,0 +1,36 @@
+.filtrosProducts {
+    padding-top: 40px;
+    padding-left: 12%;
+    padding-right: 12%;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.botonFiltroG {
+    display: flex;
+    align-items: center;
+    border: 2px solid rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    background-color: var(--nav-footer);
+    padding: 6px;
+    max-width: 300px;
+    width: 100%;
+}
+
+.botonFiltroG label {
+    margin-right: 5px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.botonFiltroG select {
+    border-radius: 4px;
+    padding: 2px;
+    border: none;
+    outline: none;
+    background-color: var(--fondo-vistas);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+}

@@ -3,14 +3,15 @@
 @import url(https://fonts.googleapis.com/css2?family=Poppins&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=Poppins&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap);
 
-.carrusel{
-    width: 25%;
-    margin: 0 auto;
-    margin-top: 2%;
-    border: none;
+.carrusel {
+    width: 1527px;
+    height: 388px;
+    margin: 2% auto 0;
+    border-radius: 20px;
     background-color: transparent;
-    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
 }
+
 .container-descripcion{
     display: flex;
     flex: 2;
