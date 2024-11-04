@@ -34,6 +34,7 @@ function Login() {
                 const { accessToken } = await response.json();
                 const { email, rol: admin } = jwt_decode.jwtDecode(accessToken);
                 console.log({ email, admin });
+                localStorage.setItem('accessToken', accessToken);
                 setAlertMessage("Te has logeado correctamente!");
                 resetForm();
                 navigate('/');

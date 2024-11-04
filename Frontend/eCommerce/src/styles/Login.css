@@ -1,11 +1,11 @@
 .container-supremo {
     font-family: 'Poppins', sans-serif;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    background-color: #1f1f1f;
+    background-color: var(--fondo-pagina);
+    height: 100vh;
 }
 
 .container {
@@ -116,6 +116,7 @@
     width: 350px;
     margin: 5% 0;
     background-color: transparent;
+    margin: 5%;
 }
 
 .password-message, .email-message {

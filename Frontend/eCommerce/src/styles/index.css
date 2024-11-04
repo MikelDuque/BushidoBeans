@@ -1,10 +1,10 @@
-@import url(https://fonts.googleapis.com/css2?family=Poppins&display=swap);
-@import url(https://fonts.googleapis.com/css2?family=Poppins&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap);
-
-
 * {
     margin: 0;
     padding: 0;
+}
+
+body {
+width: 100;
 }
 
 :root {
@@ -25,8 +25,31 @@
 
     /* Estilos de texto */
     --titulos-size: 23px;
-    --subtitulos-size: 20px;
+    --subtitulos-size: 18px;
     --texto-size: 15px;
     --font-weight-bold: 600;
     --font-weight-regular: 400;
+    --font-family-titulos-subtitulos : 'Poppins', sans-serif;
+    --font-family-texto : 'Vollkorn', sans-serif;
+
+}
+.texto{
+    font-family: var(--font-family-texto);
+    font-size: var(--texto-size);
+    font-weight: var(--font-weight-regular);
+    color: var(--nav-footer);
+
+}
+.titulo{
+    font-family: var(--font-family-titulos-subtitulos);
+    font-size: var(--titulos-size);
+    font-weight: var(--font-weight-bold);
+    color: var(--nav-footer);
+}
+.subtitulo{
+    font-family: var(--font-family-titulos-subtitulos);
+    font-size: var(--subtitulos-size);
+    font-weight: var(--font-weight-regular);
+    color: var(--nav-footer);
+
 }
