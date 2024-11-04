@@ -2,30 +2,43 @@ import React, { useState, useEffect } from 'react';
 import productData from '../data/dataPrueba'; 
 import { CardPrueba } from "../components/Card-Producto.jsx"; 
 
-const BusquedaProductos = () => {
-  const [productoBuscado, setPorductoBuscado] = useState('');
+const BusquedaProductos = ({ filtro, ordenar }) => {
+  const [productoBuscado, setProductoBuscado] = useState('');
   const [datosFiltrados, setDatosFiltrados] = useState(productData);
 
   useEffect(() => {
-    const results = productData.filter(dataP =>
-      dataP.nombre.toLowerCase().includes(productoBuscado.toLowerCase())
-    );
-    setDatosFiltrados(results);
-  }, [productoBuscado]);
+    const filteredProducts = productData.filter(dataP => {
+      const matchesSearch = dataP.nombre.toLowerCase().includes(productoBuscado.toLowerCase());
+      const matchesFiltro = filtro === 'opcion2' ? dataP.nombre.toLowerCase().includes('café') :
+                            filtro === 'opcion3' ? dataP.nombre.toLowerCase().includes('té') : true;
+      return matchesSearch && matchesFiltro;
+    });
+
+    const sortedProducts = filteredProducts.sort((a, b) => {
+      if (ordenar === 'opcion2') return a.precio - b.precio;
+      if (ordenar === 'opcion3') return b.precio - a.precio;
+      if (ordenar === 'opcion4') return a.nombre.localeCompare(b.nombre);
+      if (ordenar === 'opcion5') return b.nombre.localeCompare(a.nombre);
+      return 0; // Sin orden específico (Novedades)
+    });
+
+    setDatosFiltrados(sortedProducts);
+  }, [productoBuscado, filtro, ordenar]);
 
   return (
     <div>
-      <input className='botonBusqueda'
+      <input
+        className='botonBusqueda'
         type="text"
         placeholder="Buscar..."
         value={productoBuscado}
-        onChange={e => setPorductoBuscado(e.target.value)}
+        onChange={e => setProductoBuscado(e.target.value)}
       />
       <div className="inventario">
         {datosFiltrados.length > 0 ? (
-          datosFiltrados.map((dataP) => (
+          datosFiltrados.map(dataP => (
             <CardPrueba 
-              key={dataP.name}
+              key={dataP.nombre}
               imagen={dataP.imagen} 
               nombre={dataP.nombre} 
               intensidad={dataP.intensidad} 
