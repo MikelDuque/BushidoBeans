@@ -17,7 +17,15 @@ public class ProductMapper
       Price = product.Price,
       Discount = product.Discount,
       Stock = product.Stock,
-      Score = product.Score
+      Score = product.Score,
+      Reviews = product.Reviews.Select(review => new ReviewDto
+      {
+        Id = review.Id,
+        Score = review.Score,
+        Body = review.Body,
+        UserId = review.UserId
+      })
+      .ToList()
     };
   }
   public IEnumerable<ProductDto> ToDto(IEnumerable<Product> products) {

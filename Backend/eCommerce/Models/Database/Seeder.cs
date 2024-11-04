@@ -48,7 +48,7 @@ public class Seeder
     [
       new Review
       {
-        Score = 3,
+        Score = 2,
         Body = "Pues menuda mierda, no?",
         ProductId = 1,
         UserId = 1
@@ -66,6 +66,9 @@ public class Seeder
 
     //Añadimos el rango de usuarios a la BDD
     await _dbContext.Users.AddRangeAsync(users);
+    await _dbContext.Products.AddRangeAsync(products);
+    await _dbContext.Reviews.AddRangeAsync(reviews);
+    await _dbContext.CartProducts.AddRangeAsync(cartProducts);
   }
 
   

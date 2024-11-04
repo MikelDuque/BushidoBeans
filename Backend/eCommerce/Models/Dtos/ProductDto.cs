@@ -12,7 +12,7 @@ public class ProductDto
     public required int Stock { get; set; }
     public byte Score { get; set; }
     
-    public List<ReviewDto>? Reviews { get; set; }
+    public ICollection<ReviewDto> Reviews { get; set; } = new List<ReviewDto>();
 }
 
 /*
