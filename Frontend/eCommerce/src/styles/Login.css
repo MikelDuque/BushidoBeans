@@ -1,9 +1,11 @@
 .container-supremo {
+    font-family: 'Poppins', sans-serif;
     display: flex;
-    margin: 8vh auto;
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    background-color: var(--fondo-pagina);
+    height: 100vh;
 }
 
 .container {
@@ -111,9 +113,10 @@
 }
 
 .logoBushidoBeans {
-    width: 46%;
+    width: 350px;
     margin: 5% 0;
-    background-color: var(--nav-footer);
+    background-color: transparent;
+    margin: 5%;
 }
 
 .password-message, .email-message {
@@ -121,4 +124,8 @@
     color: red;
     background-color: var(--fondo-vistas);
     font-style: var(--subtitulos);
+}
+.logo-button{
+    border: none;
+    background-color: transparent;
 }

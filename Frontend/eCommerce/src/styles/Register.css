@@ -1,13 +1,11 @@
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--fondo-pagina);
-}
-.login-secundario{
+
+.login-secundario {
     background-color: var(--fondo-vistas);
     border-radius: 40px 200px 200px 40px;
     padding-bottom: 10%;
 
 }
+
 .container-secundario {
     display: flex;
     justify-content: center;
@@ -77,6 +75,13 @@ body {
     font-weight: 400;
     padding: 1%;
 }
-.email-message-secundario, .password-message-secundario{
+
+.email-message-secundario,
+.password-message-secundario {
     background-color: var(--nav-footer);
+}
+
+.logo-button-secundario {
+    background-color: transparent;
+    border: none;
 }
