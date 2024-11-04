@@ -6,7 +6,7 @@ import Carrusel from "../components/Carrusel.jsx";
 import Filtro from "../components/Filtro.jsx";
 import "../styles/Catalogo.css";
 import { useState } from "react";
-
+import BusquedaProductos from "../components/BusquedaProductos.jsx";
 function Catalogo() {
   const imagenes = [
     "../../public/recursos/imgCarrusel1.png",
@@ -57,6 +57,7 @@ function Catalogo() {
   return (
     <div className="contenedor-catalogo">
       <Header />
+      <div className="barraBusqueda"><BusquedaProductos></BusquedaProductos></div>
         <div className='carrusel-catalogo'>
           <Carrusel images={imagenes} />
         </div>
