@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import productData from '../data/dataPrueba'; 
-import { CardPrueba } from "../components/Card-Producto.jsx"; 
+import { CardPrueba } from "../components/Card-Producto.jsx";
+import "../styles/Catalogo.css";
 
 const BusquedaProductos = ({ filtro, ordenar }) => {
   const [productoBuscado, setProductoBuscado] = useState('');
@@ -27,13 +28,16 @@ const BusquedaProductos = ({ filtro, ordenar }) => {
 
   return (
     <div>
-      <input
+      <div className='botonCentrado'>
+        <input
         className='botonBusqueda'
         type="text"
         placeholder="Buscar..."
         value={productoBuscado}
         onChange={e => setProductoBuscado(e.target.value)}
       />
+      </div>
+      
       <div className="inventario">
         {datosFiltrados.length > 0 ? (
           datosFiltrados.map(dataP => (

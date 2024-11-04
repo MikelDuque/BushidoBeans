@@ -39,13 +39,15 @@ function Catalogo() {
       <div className='carrusel-catalogo'>
         <Carrusel images={imagenes} />
       </div>
+      
       <div className="filtro">
         <Filtro options={mostrarOptions} label="Mostrar" onChange={setFiltro} />
         <Filtro options={ordenarPor} label="Ordenar por" onChange={setOrdenar} />
       </div>
-      <div className="barraBusqueda">
+      <div>
         <BusquedaProductos filtro={filtro} ordenar={ordenar} />
       </div>
+      
       <Footer />
     </div>
   );
