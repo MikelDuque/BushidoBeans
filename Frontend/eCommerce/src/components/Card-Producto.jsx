@@ -20,21 +20,19 @@ export function CardPrueba({ imagen, nombre, intensidad, precio, soldout }) {
             <div className={`cardPrueba ${soldout ? "sold-out" : ""}`}>
                 <img className="imgPrueba" src={imagen} alt={nombre} />
                 <h4 className="productName">{nombre}</h4>
-                <div className="detallesDiv">
+                
                     <p className="detalles">
-                        Intensidad: {intensidadEmojis.map((emoji, index) => (
+                         {intensidadEmojis.map((emoji, index) => (
                             <span key={index}>{emoji}</span>
                         ))}
                     </p>
-                    <p className="detalles">Precio: {precioFormateado} €</p>
-                </div>
+                    <p className="detalles">{precioFormateado} €</p>
+                
                 {!soldout && (
-                    <div className="añadirCestaJ">
-                        <p>Añadir a la cesta</p>
-                        <button className="botonPrueba" aria-label={`Añadir ${nombre} a la cesta`}>
-                            🛒
-                        </button>
-                    </div>
+                    <button className="botonPrueba" aria-label={`Añadir ${nombre} a la cesta`}>
+                        Añadir a la cesta 🛒
+                    </button>
+                   
                 )}
             </div>
         </div>

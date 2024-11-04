@@ -2,7 +2,7 @@ const productData = [
     {
         imagen: "recursos/pouchdrinkprueba.jpg",
         nombre: "Pouch Drink Café Negro",
-        intensidad: 5,
+        intensidad: 2,
         precio: 2.4,
         soldout: false,
     },
@@ -44,21 +44,21 @@ const productData = [
     {
         imagen: "recursos/pouchdrinkprueba.jpg",
         nombre: "Pouch Drink Special Edition",
-        intensidad: 4,
+        intensidad: 1,
         precio: 2.4,
         soldout: false,
     },
     {
         imagen: "recursos/pouchdrinkprueba.jpg",
         nombre: "Pouch Drink Halloween Edition",
-        intensidad: 4,
+        intensidad: 3,
         precio: 2.3,
         soldout: false,
     },
     {
         imagen: "recursos/pouchdrinkprueba.jpg",
         nombre: "Pack de Café",
-        intensidad: 5,
+        intensidad: 1,
         precio: 2.4,
         soldout: false,
     },
@@ -86,7 +86,7 @@ const productData = [
     {
         imagen: "recursos/pouchdrinkprueba.jpg",
         nombre: "Pouch Drink Espresso",
-        intensidad: 5,
+        intensidad: 2,
         precio: 2.3,
         soldout: false,
     },
@@ -107,7 +107,7 @@ const productData = [
     {
         imagen: "recursos/pouchdrinkprueba.jpg",
         nombre: "Pouch Drink Té Negro",
-        intensidad: 4,
+        intensidad: 3,
         precio: 2.0,
         soldout: false,
     },
@@ -135,7 +135,7 @@ const productData = [
     {
         imagen: "recursos/pouchdrinkprueba.jpg",
         nombre: "Pouch Drink Irish Coffee",
-        intensidad: 4,
+        intensidad: 2,
         precio: 2.3,
         soldout: false,
     },
@@ -156,7 +156,7 @@ const productData = [
     {
         imagen: "recursos/pouchdrinkprueba.jpg",
         nombre: "Pouch Drink Cold Brew",
-        intensidad: 4,
+        intensidad: 3,
         precio: 2.4,
         soldout: false,
     },
@@ -191,7 +191,7 @@ const productData = [
     {
         imagen: "recursos/pouchdrinkprueba.jpg",
         nombre: "Pouch Drink Espresso Doble",
-        intensidad: 5,
+        intensidad: 3,
         precio: 2.4,
         soldout: false,
     },
