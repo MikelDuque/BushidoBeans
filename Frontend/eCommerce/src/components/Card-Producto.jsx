@@ -19,7 +19,7 @@ export function CardPrueba({ imagen, nombre, intensidad, precio, soldout }) {
         <div className="inventario">
             <div className={`cardPrueba ${soldout ? "sold-out" : ""}`}>
                 <img className="imgPrueba" src={imagen} alt={nombre} />
-                <h4 className="productName">{nombre}</h4>
+                <a className="productName" href="../components/Input.jsx"><h4>{nombre}</h4></a>
                 
                     <p className="detalles">
                          {intensidadEmojis.map((emoji, index) => (
