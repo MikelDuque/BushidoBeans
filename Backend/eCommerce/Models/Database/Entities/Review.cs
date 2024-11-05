@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace eCommerce.Models.Database.Entities;
+﻿namespace eCommerce.Models.Database.Entities;
 
 public class Review
 {

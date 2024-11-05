@@ -12,4 +12,5 @@ public class UserDto
   public required string? Role {get;set;}
 
   public List<ReviewDto>? Reviews { get; set; }
+  public List<CartDto>? Carts { get; set; }
 }

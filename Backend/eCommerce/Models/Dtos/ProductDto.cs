@@ -6,13 +6,16 @@ public class ProductDto
     public required string Name { get; set; }
     public string? Description { get; set; }
     public string? NutritionalInfo { get; set; }
+    public string? Category { get; set; }
     public byte Intensity { get; set; } //puede ser byte, int o enum, preguntar a Mik
     public decimal Price { get; set; }
     public float Discount { get; set; }
     public required int Stock { get; set; }
-    public byte Score { get; set; }
-    
-    public ICollection<ReviewDto> Reviews { get; set; } = new List<ReviewDto>();
+    public decimal Score { get; set; }
+
+    public List<ReviewDto>? Reviews { get; set; }
+    public List<CartDto>? Carts { get; set; }
+    public List<CartProductDto>? CartProducts { get; set; }
 }
 
 /*
