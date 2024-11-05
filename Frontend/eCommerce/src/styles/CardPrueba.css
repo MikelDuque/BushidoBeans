@@ -72,6 +72,13 @@
   display: none;
 }
 
+.cardPrueba.sold-out a {
+  filter: grayscale();
+  opacity: 0.2;
+  pointer-events: none;
+  
+}
+
 
 .botonPrueba{
   grid-column: span 2;
