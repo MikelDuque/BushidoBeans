@@ -1,17 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata;
-
-namespace eCommerce.Models.Database.Entities;
+﻿namespace eCommerce.Models.Database.Entities;
 
 public class Product
 {
     public long Id { get; set; }
-    public Blob Image { get; set; }
+    public string Image { get; set; }
     public required string Name { get; set; }
     public string Description { get; set; }
     public string NutritionalInfo { get; set; }
-    public string Category { get; set; }
-    public byte Intensity { get; set; } //puede ser byte, int o enum, preguntar a Mik
+    public byte Category { get; set; }
+    public byte Intensity { get; set; }
     public required decimal Price { get; set; }
     public float Discount { get; set; }
     public int Stock { get; set; }

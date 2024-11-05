@@ -3,7 +3,7 @@
 public class Review
 {
     public long Id { get; set; }
-    public required byte Score { get; set; } //puede ser byte, int o enum, preguntar a Mik
+    public required byte Score { get; set; }
     public string Body { get; set; }
 
     //---Foreign Keys---//
