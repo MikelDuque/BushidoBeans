@@ -16,6 +16,7 @@ public class UserMapper
             Surname = user.Surname,
             Phone = user.Phone,
             Role = user.Role,
+            Cart = new CartDto(),
             Reviews = user.Reviews.Select(review => new ReviewDto
             {
                 Id = review.Id,
@@ -33,6 +34,7 @@ public class UserMapper
         return users.Select(ToDto);
     }
 
+    /*
     //Mapea los datos de un DTO de usuario a la entidad Usuario
     public User ToEntity(UserDto user)
     {
@@ -52,4 +54,5 @@ public class UserMapper
     {
         return users.Select(ToEntity);
     }
+    */
 }

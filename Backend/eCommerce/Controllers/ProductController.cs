@@ -14,15 +14,22 @@ public class ProductController : ControllerBase
     _service = service;
   }
 
+  /*
   [HttpGet]
   public async Task<IEnumerable<ProductDto>> GetAllAsync()
   {
     return await _service.GetAllAsync();
   }
-
+  */
   [HttpGet("{id}")]
   public async Task<ProductDto> GetByIdAsync(long id)
   {
     return await _service.GetByIdAsync(id);
   }
+  /*
+  [HttpPost]
+  public async Task<FilteredProducts> GetFilteredProducts(Filter filter) {
+    return await _service.GetFilteredProducts(filter);
+  }
+  */
 }

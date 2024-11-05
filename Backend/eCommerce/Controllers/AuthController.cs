@@ -44,10 +44,8 @@ public class AuthController : ControllerBase
         }
     }
 
+    /*
     [Authorize(Roles = "admin")]
     [HttpGet]
-    public string GetSecret()
-    {
-        return "Esto es un secreto que no todo el mundo deberia leer";
-    }
+    */
 }
