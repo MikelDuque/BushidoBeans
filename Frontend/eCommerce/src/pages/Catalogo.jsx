@@ -36,19 +36,29 @@ function Catalogo() {
   return (
     <div className="contenedor-catalogo">
       <Header />
-      <div className='carrusel-catalogo'>
-        <Carrusel images={imagenes} />
-      </div>
+      <section>
+        <div className='carrusel-catalogo'>
+              <Carrusel images={imagenes} />
+            </div>
+      </section>
+            
+      <aside>
+          <div className="filtro">
+              <Filtro options={mostrarOptions} label="Mostrar" onChange={setFiltro} />
+              <Filtro options={ordenarPor} label="Ordenar por" onChange={setOrdenar} />
+          </div>
+      </aside>
+      <section className="sectionFloat">
+            
+            <div>
+            <BusquedaProductos filtro={filtro} ordenar={ordenar} />
+            </div>
+      </section>
+      <footer className="footerFloat">
+        <Footer />
+      </footer>
       
-      <div className="filtro">
-        <Filtro options={mostrarOptions} label="Mostrar" onChange={setFiltro} />
-        <Filtro options={ordenarPor} label="Ordenar por" onChange={setOrdenar} />
-      </div>
-      <div>
-        <BusquedaProductos filtro={filtro} ordenar={ordenar} />
-      </div>
       
-      <Footer />
     </div>
   );
 }

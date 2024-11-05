@@ -7,15 +7,26 @@
     flex-wrap: wrap;
 }
 
+.filtro{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px 10px;
+    padding: 5px 5px 5px ;
+}
+
 .botonFiltroG {
-    display: flex;
-    align-items: center;
-    border: 2px solid rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    background-color: var(--nav-footer);
-    padding: 6px;
-    max-width: 300px;
-    width: 100%;
+    height: auto;
+    width: 90%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 12px;
+    box-shadow: 0px 0px 10px hsla(96, 65%, 49%, 0.333);
+    text-align: center;
+    background-color: var(--nav-footer);  
+    gap: 10px;
 }
 
 .botonFiltroG label {
@@ -31,6 +42,6 @@
     outline: none;
     background-color: var(--fondo-vistas);
     cursor: pointer;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: bold;
 }
