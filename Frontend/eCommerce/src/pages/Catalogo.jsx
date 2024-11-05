@@ -1,7 +1,5 @@
 import Header from "../components/Header.jsx";
 import Footer from "../components/Footer.jsx";
-import { CardPrueba } from "../components/Card-Producto.jsx";
-import productData from "../data/dataPrueba.js";
 import Carrusel from "../components/Carrusel.jsx";
 import Filtro from "../components/Filtro.jsx";
 import "../styles/Catalogo.css";

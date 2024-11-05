@@ -1,0 +1,23 @@
+.container-info-producto{
+    width: 50%;
+    height: 50vh;
+    
+    margin: 0 auto;
+    align-items: center;
+    display: flex;
+    flex: 5;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--nav-footer);
+    color: var(--fondo-vistas);
+}
+
+.nombreProducto, .intensidad, .precio, .disponibilidad{
+    color: var(--fondo-vistas);
+}
+
+.imagen-producto{
+    width: 100%;
+    height: auto;
+    margin-left: 20%;
+}

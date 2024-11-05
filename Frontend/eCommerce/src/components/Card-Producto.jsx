@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import '../styles/CardPrueba.css';
+import '../styles/Card-Producto.css';
 
 export function CardPrueba({ imagen, nombre, intensidad, precio, soldout }) {
     // Formatear el precio a dos decimales con coma
@@ -19,9 +19,9 @@ export function CardPrueba({ imagen, nombre, intensidad, precio, soldout }) {
         <div className="inventario">
             <div className={`cardPrueba ${soldout ? "sold-out" : ""}`}>
                 <img className="imgPrueba" src={imagen} alt={nombre} />
-                <h4 className="productName">{nombre}</h4>
+                <p className="productName subtitulo">{nombre}</p>
                 <div className="detallesDiv">
-                    <p className="detalles">
+                    <p className="detalles texto">
                         Intensidad: {intensidadEmojis.map((emoji, index) => (
                             <span key={index}>{emoji}</span>
                         ))}

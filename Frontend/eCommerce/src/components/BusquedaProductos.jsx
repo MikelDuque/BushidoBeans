@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import productData from '../data/dataPrueba'; 
 import { CardPrueba } from "../components/Card-Producto.jsx"; 
+import { useNavigate } from 'react-router-dom';
 
 const BusquedaProductos = ({ filtro, ordenar }) => {
   const [productoBuscado, setProductoBuscado] = useState('');
   const [datosFiltrados, setDatosFiltrados] = useState(productData);
+
+  const navigate = useNavigate();
+  const mostrarProducto = (id) => {
+    navigate(`/producto/${id}`);
+  };
 
   useEffect(() => {
     const filteredProducts = productData.filter(dataP => {
@@ -37,14 +43,15 @@ const BusquedaProductos = ({ filtro, ordenar }) => {
       <div className="inventario">
         {datosFiltrados.length > 0 ? (
           datosFiltrados.map(dataP => (
-            <CardPrueba 
-              key={dataP.nombre}
-              imagen={dataP.imagen} 
-              nombre={dataP.nombre} 
-              intensidad={dataP.intensidad} 
-              precio={dataP.precio}
-              soldout={dataP.soldout}
-            />
+            <button key={dataP.id} onClick={() => mostrarProducto(dataP.id)}>
+              <CardPrueba 
+                imagen={dataP.imagen} 
+                nombre={dataP.nombre} 
+                intensidad={dataP.intensidad} 
+                precio={dataP.precio}
+                soldout={dataP.soldout}
+              />
+            </button>
           ))
         ) : (
           <p>No se encontraron productos.</p>
