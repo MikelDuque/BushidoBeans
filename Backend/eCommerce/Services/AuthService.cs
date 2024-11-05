@@ -42,7 +42,7 @@ public class AuthService
         SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
         {
             //Se añaden los datos necesarios para autorizar al usuario
-            Claims = new Dictionary<string, object?>
+            Claims = new Dictionary<string, object>
             {
                 //Para definir el id, se usa el "ClaimTypes.NameIdentifier"
                 { "id", Guid.NewGuid().ToString() },

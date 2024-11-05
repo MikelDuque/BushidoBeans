@@ -11,12 +11,12 @@ public class UserRepository : Repository<User>
 
     }
 
-    public async Task<string?> GetRoleByMailAsync(string mail) {
-        User? user = await GetByMailAsync(mail);
+    public async Task<string> GetRoleByMailAsync(string mail) {
+        User user = await GetByMailAsync(mail);
         return user.Role;
     }
 
-    public async Task<User?> GetByMailAsync(string mail)
+    public async Task<User> GetByMailAsync(string mail)
     {
         return await GetQueryable()
         .Where(user => user.Mail == mail).SingleOrDefaultAsync();
@@ -31,8 +31,8 @@ public class UserRepository : Repository<User>
     {
         if (await ExistByMailAsync(mail))
         {
-            User? user = await GetByMailAsync(mail);
-            return user?.Password == password;
+            User user = await GetByMailAsync(mail);
+            return user.Password == password;
         }
         return false;
     }

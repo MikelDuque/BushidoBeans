@@ -23,9 +23,9 @@ public class ProductService
     return _mapper.ToDto(products);
   }
 
-  public async Task<ProductDto?> GetByIdAsync(long id)
+  public async Task<ProductDto> GetByIdAsync(long id)
   {
-    Product? product = await _unitOfWork.ProductRepository.GetByIdAsync(id);
+    Product product = await _unitOfWork.ProductRepository.GetByIdAsync(id);
     return _mapper.ToDto(product);
   }
 }

@@ -24,9 +24,9 @@ public class UserService
     return _mapper.ToDto(users);
   }
 
-  public async Task<UserDto?> GetByIdAsync(long id)
+  public async Task<UserDto> GetByIdAsync(long id)
   {
-    User? user = await _unitOfWork.UserRepository.GetByIdAsync(id);
+    User user = await _unitOfWork.UserRepository.GetByIdAsync(id);
     return _mapper.ToDto(user);
   }
 
@@ -49,7 +49,7 @@ public class UserService
     return newUser;
   }
 
-  public async Task<UserDto?> InsertByMailAsync(RegisterRequest userRequest)
+  public async Task<UserDto> InsertByMailAsync(RegisterRequest userRequest)
   {
     User user = new User {
       Mail = userRequest.Mail,
@@ -66,7 +66,7 @@ public class UserService
 
   //Actualización
   public async Task<UserDto> UpdateAsync(long id, User user) {
-    User? userEntity = await _unitOfWork.UserRepository.GetByIdAsync(id);
+    User userEntity = await _unitOfWork.UserRepository.GetByIdAsync(id);
     userEntity.Mail = user.Mail;
     userEntity.Name = user.Name;
     userEntity.Surname = user.Surname;
@@ -78,9 +78,8 @@ public class UserService
 
   //Eliminación
   public async Task DeleteAsync(long id) {
-    User? user = await _unitOfWork.UserRepository.GetByIdAsync(id);
+    User user = await _unitOfWork.UserRepository.GetByIdAsync(id);
     await _unitOfWork.UserRepository.DeleteAsync(user);
-
     await _unitOfWork.SaveAsync();
   }
 
@@ -91,7 +90,7 @@ public class UserService
     return _unitOfWork.UserRepository.ThisUserExists(mail, hashedPassword);
   }
 
-  public Task<User?> GetByMailAsync(string mail)
+  public Task<User> GetByMailAsync(string mail)
   {
     return _unitOfWork.UserRepository.GetByMailAsync(mail);
   }

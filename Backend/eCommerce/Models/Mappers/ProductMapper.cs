@@ -11,6 +11,7 @@ public class ProductMapper
         return new ProductDto()
         {
             Id = product.Id,
+            Image = product.Image,
             Name = product.Name,
             Description = product.Description,
             NutritionalInfo = product.NutritionalInfo,
@@ -41,6 +42,7 @@ public class ProductMapper
         return new Product()
         {
             Id = product.Id,
+            Image = product.Image,
             Name = product.Name,
             Description = product.Description,
             NutritionalInfo = product.NutritionalInfo,

@@ -24,7 +24,7 @@ public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity :
     }
 
     //Funciones de Obtención, Inserción, Actualización y Eliminación de Datos
-    public async Task<TEntity?> GetByIdAsync(object id)
+    public async Task<TEntity> GetByIdAsync(object id)
     {
         return await _dbContext.Set<TEntity>().FindAsync(id);
     }
@@ -48,6 +48,7 @@ public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity :
     {
         return await _dbContext.SaveChangesAsync() > 0;
     }
+
     //Función para saber si existe en la base de datos
     public async Task<bool> ExistAsync(object id)
     {
