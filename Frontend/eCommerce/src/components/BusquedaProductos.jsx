@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import productData from '../data/dataPrueba'; 
-import { CardPrueba } from "../components/Card-Producto.jsx"; 
-import { useNavigate } from 'react-router-dom';
+import { CardPrueba } from "../components/Card-Producto.jsx";
+import "../styles/Catalogo.css";
 
 const BusquedaProductos = ({ filtro, ordenar }) => {
   const [productoBuscado, setProductoBuscado] = useState('');
   const [datosFiltrados, setDatosFiltrados] = useState(productData);
-
-  const navigate = useNavigate();
-  const mostrarProducto = (id) => {
-    navigate(`/producto/${id}`);
-  };
 
   useEffect(() => {
     const filteredProducts = productData.filter(dataP => {
@@ -33,25 +28,27 @@ const BusquedaProductos = ({ filtro, ordenar }) => {
 
   return (
     <div>
-      <input
+      <div className='botonCentrado'>
+        <input
         className='botonBusqueda'
         type="text"
         placeholder="Buscar..."
         value={productoBuscado}
         onChange={e => setProductoBuscado(e.target.value)}
       />
+      </div>
+      
       <div className="inventario">
         {datosFiltrados.length > 0 ? (
           datosFiltrados.map(dataP => (
-            <button key={dataP.id} onClick={() => mostrarProducto(dataP.id)}>
-              <CardPrueba 
-                imagen={dataP.imagen} 
-                nombre={dataP.nombre} 
-                intensidad={dataP.intensidad} 
-                precio={dataP.precio}
-                soldout={dataP.soldout}
-              />
-            </button>
+            <CardPrueba 
+              key={dataP.nombre}
+              imagen={dataP.imagen} 
+              nombre={dataP.nombre} 
+              intensidad={dataP.intensidad} 
+              precio={dataP.precio}
+              soldout={dataP.soldout}
+            />
           ))
         ) : (
           <p>No se encontraron productos.</p>
