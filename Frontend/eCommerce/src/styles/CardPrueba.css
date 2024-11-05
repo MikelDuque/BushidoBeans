@@ -74,7 +74,7 @@
 
 .cardPrueba.sold-out a {
   filter: grayscale();
-  opacity: 0.2;
+  opacity: 0.5;
   pointer-events: none;
   
 }
