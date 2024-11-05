@@ -4,6 +4,7 @@ import '../styles/CardPrueba.css';
 export function CardPrueba({ imagen, nombre, intensidad, precio, soldout }) {
     // Formatear el precio a dos decimales con coma
     const precioFormateado = precio.toFixed(2).replace('.', ',');
+    const checksoldout = soldout ? "❌" : "✔️";
 
     // Determinar la imagen de intensidad (café o té)
     const intensidadImg = nombre.toLowerCase().includes("café")
@@ -27,6 +28,12 @@ export function CardPrueba({ imagen, nombre, intensidad, precio, soldout }) {
                         ))}
                     </p>
                     <p className="detalles">{precioFormateado} €</p>
+                    <p className="detalles">
+                         {intensidadEmojis.map((emoji, index) => (
+                            <span key={index}>{emoji}</span>
+                        ))}
+                    </p>
+                    <p className="detalles">Stock: {checksoldout}</p>
                 
                 {!soldout && (
                     <button className="botonPrueba" aria-label={`Añadir ${nombre} a la cesta`}>
