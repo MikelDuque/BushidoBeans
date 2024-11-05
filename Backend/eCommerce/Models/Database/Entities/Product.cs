@@ -6,7 +6,7 @@ namespace eCommerce.Models.Database.Entities;
 public class Product
 {
     public long Id { get; set; }
-    public Blob Image { get; set; }
+    public string Image { get; set; }   //URL de la imagen en el frontend
     public required string Name { get; set; }
     public string Description { get; set; }
     public string NutritionalInfo { get; set; }

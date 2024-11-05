@@ -113,6 +113,9 @@ public class Program
         //Habilita la autorización
         app.UseAuthorization();
 
+        //Permite transmitir archivos estáticos
+        app.UseStaticFiles();
+
         app.MapControllers();
 
         //Llamamos al método de creación de base de datos de respaldo (seed)
