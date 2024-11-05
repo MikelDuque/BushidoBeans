@@ -6,8 +6,8 @@ namespace eCommerce.Models.Dtos;
 public class Filter
 {
   public required string search;
-  public required Categories categories;
-  public required Order order;
+  public required ECategory categories;
+  public required EOrder order;
   public required bool thereStock;
   public required int productsPerPage;
   public required int page;

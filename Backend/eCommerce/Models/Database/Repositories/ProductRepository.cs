@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Metrics;
-using eCommerce.Models.Database.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using eCommerce.Models.Database.Entities;
 
 namespace eCommerce.Models.Database.Repositories;
 

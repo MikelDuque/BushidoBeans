@@ -12,7 +12,4 @@ public class User
     public string Surname { get; set; }
     public int Phone { get; set; }
     public required string Role { get; set; }
-
-    public ICollection<Review> Reviews { get; } = new List<Review>();
-    public Cart Cart { get; set; }
 }

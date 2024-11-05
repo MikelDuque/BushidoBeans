@@ -16,7 +16,4 @@ public class ProductDto
     public required int Stock { get; set; }
     public float Score { get; set; }
 
-    public List<ReviewDto> Reviews { get; set; }
-    public List<CartDto> Carts { get; set; }
-    public List<CartProductDto> CartProducts { get; set; }
 }
