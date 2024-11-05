@@ -26,15 +26,13 @@ export function CardPrueba({ imagen, nombre, intensidad, precio, soldout }) {
                             <span key={index}>{emoji}</span>
                         ))}
                     </p>
-                    <p className="detalles">Precio: {precioFormateado} €</p>
-                </div>
+                    <p className="detalles">{precioFormateado} €</p>
+                
                 {!soldout && (
-                    <div className="añadirCestaJ">
-                        <p>Añadir a la cesta</p>
-                        <button className="botonPrueba" aria-label={`Añadir ${nombre} a la cesta`}>
-                            🛒
-                        </button>
-                    </div>
+                    <button className="botonPrueba" aria-label={`Añadir ${nombre} a la cesta`}>
+                        Añadir a la cesta 🛒
+                    </button>
+                   
                 )}
             </div>
         </div>

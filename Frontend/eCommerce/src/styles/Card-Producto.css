@@ -41,12 +41,43 @@
 
 
 .cardPrueba.sold-out {
-    color: #888;
-  }
+  color: #888;
+}
+
+.cardPrueba.sold-out img {
+  filter: grayscale();
+  opacity: 0.8;
+}
+
+.cardPrueba.sold-out p {
+  filter: grayscale();
+  opacity: 0.8;
+}
+
+.cardPrueba.sold-out button {
+  display: none;
+}
+
+
+.botonPrueba{
+  grid-column: span 2;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.89);
+  height: 30px;
   
-  .cardPrueba.sold-out img {
-    filter: grayscale();
-    opacity: 0.8;
+}
+
+.añadirCestaJ{
+  display: flex;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  justify-content: space-between;
+}
+
+@media (max-width: 500px){
+  .imgPrueba{
+    height: auto;
+    width: 100%;
   }
 
   .cardPrueba.sold-out p {
@@ -71,3 +102,4 @@
     font-size: 16px;
     justify-content: space-between;
   }
+}

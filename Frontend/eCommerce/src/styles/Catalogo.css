@@ -17,3 +17,10 @@
     justify-content: center;
     gap: 3%;
 }
+
+
+.botonCentrado{
+
+    display: flex;
+    justify-content: center;
+}
