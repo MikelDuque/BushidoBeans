@@ -37,7 +37,7 @@ public class AuthService
     */
 
     public async Task<string> LoginResult (LoginRequest model) {
-        string? modelRole = await _unitOfWork.UserRepository.GetRoleByMailAsync(model.Mail);
+        string modelRole = await _unitOfWork.UserRepository.GetRoleByMailAsync(model.Mail);
 
         SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
         {
