@@ -46,6 +46,7 @@ const BusquedaProductos = ({ filtro, ordenar }) => {
               imagen={dataP.imagen} 
               nombre={dataP.nombre} 
               intensidad={dataP.intensidad} 
+              valoracion={dataP.valoracion} 
               precio={dataP.precio}
               soldout={dataP.soldout}
             />
