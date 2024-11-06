@@ -53,24 +53,14 @@ public class Seeder
     [
       new Review
       {
-        Score = Enums.EScore.Positive,
+        Score = EScore.Positive,
         Body = "Pues menuda mierda, no?",
         ProductId = 1,
         UserId = 1
       }
     ];
-    CartProduct[] cartProducts =
-    [
-      new CartProduct
-      {
-        CartId = 1,
-        ProductId = 1,
-        Quantity = 3
-      }
-    ];
-
-        //Añadimos el rango de usuarios a la BDD
-        await _dbContext.Users.AddRangeAsync(users);
-        await _dbContext.Products.AddRangeAsync(products);
+    //Añadimos el rango de usuarios a la BDD
+    await _dbContext.Users.AddRangeAsync(users);
+    await _dbContext.Products.AddRangeAsync(products);
     }
 }

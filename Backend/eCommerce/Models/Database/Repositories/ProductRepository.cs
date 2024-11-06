@@ -1,6 +1,7 @@
 using System.Diagnostics.Metrics;
 using System.Security.Cryptography.X509Certificates;
 using eCommerce.Models.Database.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace eCommerce.Models.Database.Repositories;
 
