@@ -15,16 +15,7 @@ public class UserMapper
             Name = user.Name,
             Surname = user.Surname,
             Phone = user.Phone,
-            Role = user.Role,
-            Cart = new CartDto(),
-            Reviews = user.Reviews.Select(review => new ReviewDto
-            {
-                Id = review.Id,
-                Score = review.Score,
-                Body = review.Body,
-                ProductId = review.ProductId
-            })
-          .ToList(),
+            Role = user.Role
         };
     }
 

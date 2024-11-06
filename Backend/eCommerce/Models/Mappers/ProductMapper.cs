@@ -1,5 +1,6 @@
 using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
+using eCommerce.Models.Enums;
 
 namespace eCommerce.Models.Mappers;
 
@@ -14,46 +15,16 @@ public class ProductMapper
             Image = product.Image,
             Name = product.Name,
             Description = product.Description,
-            NutritionalInfo = product.NutritionalInfo,
-            Category = product.Category,
+            Category = (ECategory)product.CategoryId,
             Intensity = product.Intensity,
             Price = product.Price,
-            Discount = product.Discount,
             Stock = product.Stock,
-            Reviews = product.Reviews.Select(review => new ReviewDto
-            {
-                Id = review.Id,
-                Score = review.Score,
-                Body = review.Body,
-                UserId = review.UserId
-            })
-          .ToList()
+            TotalReviews = product.Reviews.Count,
+            Score = product.Reviews.Select(review => (int)review.Score).Average()
         };
     }
     public IEnumerable<ProductDto> ToDto(IEnumerable<Product> products)
     {
         return products.Select(ToDto);
-    }
-
-    //TO ENTITY
-    public Product ToEntity(ProductDto product)
-    {
-        return new Product()
-        {
-            Id = product.Id,
-            Image = product.Image,
-            Name = product.Name,
-            Description = product.Description,
-            NutritionalInfo = product.NutritionalInfo,
-            Category = product.Category,
-            Intensity = product.Intensity,
-            Price = product.Price,
-            Discount = product.Discount,
-            Stock = product.Stock,
-        };
-    }
-    public IEnumerable<Product> ToEntity(IEnumerable<ProductDto> products)
-    {
-        return products.Select(ToEntity);
     }
 }
