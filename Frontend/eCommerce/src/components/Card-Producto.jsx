@@ -1,38 +1,40 @@
 import PropTypes from "prop-types";
-import '../styles/Card-Producto.css';
+import { useNavigate } from 'react-router-dom';
+import '../styles/CardPrueba.css';
+import { getIntensidadImg } from '../utils/intensidad';
 
-export function CardPrueba({ imagen, nombre, intensidad, precio, soldout }) {
-    // Formatear el precio a dos decimales con coma
+export function CardPrueba({ id, imagen, nombre, intensidad, precio, soldout }) {
+    const navigate = useNavigate();
+
     const precioFormateado = precio.toFixed(2).replace('.', ',');
+    const intensidadImg = getIntensidadImg(nombre);
 
-    // Determinar la imagen de intensidad (café o té)
-    const intensidadImg = nombre.toLowerCase().includes("café")
-        ? "/recursos/cafeIntensidad.svg"
-        : "/recursos/teIntensidad.svg";
-
-    // Crear un array para mostrar las imágenes de intensidad según el número
     const intensidadEmojis = Array(intensidad).fill(
         <img src={intensidadImg} alt="Intensidad" className="intensidadIcono" />
     );
 
+    const handleCardClick = () => {
+        navigate(`/producto/${id}`);
+        
+    };
+
     return (
         <div className="inventario">
             <div className={`cardPrueba ${soldout ? "sold-out" : ""}`}>
-                <img className="imgPrueba" src={imagen} alt={nombre} />
-                <p className="productName subtitulo">{nombre}</p>
-                <div className="detallesDiv">
-                    <p className="detalles texto">
-                        Intensidad: {intensidadEmojis.map((emoji, index) => (
-                            <span key={index}>{emoji}</span>
-                        ))}
-                    </p>
-                    <p className="detalles">{precioFormateado} €</p>
+                <img className="imgPrueba" src={imagen} alt={nombre} onClick={handleCardClick} />
+                <h4 onClick={handleCardClick}>{nombre}</h4>
+                
+                <p className="detalles">
+                    {intensidadEmojis.map((emoji, index) => (
+                        <span key={index}>{emoji}</span>
+                    ))}
+                </p>
+                <p className="detalles">{precioFormateado} €</p>
                 
                 {!soldout && (
                     <button className="botonPrueba" aria-label={`Añadir ${nombre} a la cesta`}>
                         Añadir a la cesta 🛒
                     </button>
-                   
                 )}
             </div>
         </div>
@@ -40,6 +42,7 @@ export function CardPrueba({ imagen, nombre, intensidad, precio, soldout }) {
 }
 
 CardPrueba.propTypes = {
+    id: PropTypes.string.isRequired,
     imagen: PropTypes.string.isRequired,
     nombre: PropTypes.string.isRequired,
     intensidad: PropTypes.number.isRequired,
