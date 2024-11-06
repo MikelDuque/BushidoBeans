@@ -13,7 +13,6 @@ public class Product
     public required decimal Price { get; set; }
     public float Discount { get; set; }
     public int Stock { get; set; }
-    public float Score { get; set; }
 
     public int CategoryId { get; set; }
     public Category Category { get; set; } = null!;

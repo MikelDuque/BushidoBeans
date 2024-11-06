@@ -45,8 +45,7 @@ public class Seeder
         Intensity = EIntensity.Strong,
         Price = 2.50M,
         Discount = 0,
-        Stock = 5,
-        Score = 1
+        Stock = 5
       }
     ];
     Review[] reviews =

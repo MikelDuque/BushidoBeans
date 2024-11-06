@@ -14,5 +14,4 @@ public class ProductDto
     public decimal Price { get; set; }
     public float Discount { get; set; }
     public required int Stock { get; set; }
-    public float Score { get; set; }
 }

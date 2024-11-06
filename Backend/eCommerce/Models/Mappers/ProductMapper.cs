@@ -20,7 +20,6 @@ public class ProductMapper
             Price = product.Price,
             Discount = product.Discount,
             Stock = product.Stock,
-            Score = product.Score,
             Reviews = product.Reviews.Select(review => new ReviewDto
             {
                 Id = review.Id,
@@ -51,7 +50,6 @@ public class ProductMapper
             Price = product.Price,
             Discount = product.Discount,
             Stock = product.Stock,
-            Score = product.Score
         };
     }
     public IEnumerable<Product> ToEntity(IEnumerable<ProductDto> products)
