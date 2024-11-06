@@ -2,5 +2,5 @@
 <h3>Proyecto E-Commerce Bushido Beans</h3>
 <p>Realizado por Iván Montes Gutiérrez, Yasir Bel Maalem Ouhadou, Miguel Ángel Platero Duque y David Andrino Ferreira</p>
 <div align="center">
-  <img width= "auto" height="auto" src="https://cdn.discordapp.com/attachments/1288177994552315917/1299030044014018641/image.png?ex=6720fd81&is=671fac01&hm=83791899d470500ea562d69740d516f356b8dab9dcc493cb0c3767b721ff2bdc&"/>
+  <img width= "auto" height="auto" src="https://cdn.discordapp.com/attachments/1288177994552315917/1299029260249469018/image.png?ex=672cda46&is=672b88c6&hm=1a5411fe93611c161364f66f3973f02cc8acc0f3b81eff7881e6ac3f485d543b&"/>
 </div>
