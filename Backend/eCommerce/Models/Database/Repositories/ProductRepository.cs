@@ -51,11 +51,11 @@ public class ProductRepository : Repository<Product>
         return query;
     }
 
-    private async Task<IQueryable<Product>> FilterByFuzzySearch(IQueryable<Product> query, string searchTerm)
+    private async Task<IQueryable<Product>> FilterByFuzzySearch(IQueryable<Product> query, string search)
     {
         return await Task.FromResult(query.Where(product => product.Name
             .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
-            .Any(word => Fuzz.Ratio(searchTerm, word) >= 80)));
+            .Any(word => Fuzz.Ratio(search, word) >= 80)));
     }
 
     private async Task<IQueryable<Product>> ApplyOrder(IQueryable<Product> query, Filter filter)
