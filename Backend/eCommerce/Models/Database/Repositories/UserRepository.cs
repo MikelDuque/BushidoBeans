@@ -1,5 +1,8 @@
 ﻿using eCommerce.Models.Database.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore.Query.Internal;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace eCommerce.Models.Database.Repositories;
 

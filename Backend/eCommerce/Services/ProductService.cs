@@ -17,12 +17,17 @@ public class ProductService
     _mapper = mapper;
   }
 
+  public async Task<IEnumerable<ProductDto>> GetFilteredProducts(Filter filter) {
+    _unitOfWork.ProductRepository.
+  }
+
+  /*
   public async Task<IEnumerable<ProductDto>> GetAllAsync()
   {
     IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetAllAsync();
     return _mapper.ToDto(products);
   }
-
+  */
   public async Task<ProductDto> GetByIdAsync(long id)
   {
     Product product = await _unitOfWork.ProductRepository.GetByIdAsync(id);
