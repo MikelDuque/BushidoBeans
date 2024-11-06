@@ -34,23 +34,22 @@ export function CardPrueba({ imagen, nombre, intensidad, valoracion, precio, sol
     ];
 
     return (
-        <div className="inventario">
+      
             <div className={`cardPrueba ${soldout ? "sold-out" : ""}`}>
                 <img className="imgPrueba" src={imagen} alt={nombre} />
-                <a className="productName" href="../components/Input.jsx"><h4>{nombre}</h4></a>
-                    <p className="detalles">
-                         {intensidadEmojis.map((emoji, index) => (
+                <h4 className="productName">{nombre}</h4>
+                            <div className="iconos">
+                            {intensidadEmojis.map((emoji, index) => (
+                            <span key={index}>{emoji}</span>
+                            ))}
+                            </div>
+                            <p className="detalles">{precioFormateado} €</p>
+                        <div className="iconos">
+                        {valoracionEstrellas.map((emoji, index) => (
                             <span key={index}>{emoji}</span>
                         ))}
-                    </p>
-                    <p className="detalles">{precioFormateado} €</p>
-                    <p className="detalles">
-                    {valoracionEstrellas.map((emoji, index) => (
-                        <span key={index}>{emoji}</span>
-                    ))}
-                    </p>
-                    <p className="detalles2">Stock: {checksoldout}</p>
-                
+                        </div>
+                        <p className="detalles">{checksoldout} Stock</p>
                 {!soldout && (
                     <button className="botonPrueba" aria-label={`Añadir ${nombre} a la cesta`}>
                         Añadir a la cesta 🛒
@@ -58,7 +57,7 @@ export function CardPrueba({ imagen, nombre, intensidad, valoracion, precio, sol
                    
                 )}
             </div>
-        </div>
+       
     );
 }
 

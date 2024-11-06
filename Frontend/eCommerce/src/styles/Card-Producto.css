@@ -2,29 +2,31 @@ html, body {padding:0; margin:0; height:100%;}
 
 .inventario{
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 5px;
-  padding: 5px 5px 5px ;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  padding: 20px;
+  
 
 }
 
 .cardPrueba{
   height: auto;
-  width: 90%;
+
   display: grid;
-  grid-template-columns: auto 1fr;
-  margin-top: 20px;
-  padding: 10px;
-  border: 1px solid #000000;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 20px;
+
   border-radius: 12px;
   box-shadow: 0px 0px 10px hsla(96, 65%, 49%, 0.333);
   text-align: center;
   background-color: var(--nav-footer);  
-  gap: 1px;
+  gap: 10px;
   font-family: var(--font-family-texto);
   font-size: var(--texto-size);
   font-weight: var(--font-weight-regular);
   color: white;
+
   
 
 }
@@ -32,10 +34,10 @@ html, body {padding:0; margin:0; height:100%;}
 .productName{
   font-family: var(--font-family-titulos-subtitulos);
   font-size: var(--subtitulos-size);
-  font-weight: var(--font-weight-regular);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 1px;
   color: white;
   grid-column: span 2;
-  padding-top: 10px;
 }
 
 
@@ -44,21 +46,27 @@ html, body {padding:0; margin:0; height:100%;}
   grid-column: span 2;
   align-items: center;
   border-radius: 10px;
-  height: auto;
   width: 100%;
   display: block;
   margin: 0 auto;
   border: 1px solid black;
   box-shadow: 0px 0px 10px hsla(96, 65%, 49%, 0.333);
-
+  grid-column: span 2;
 
 }
 
-.detallesDiv{
+.iconos{
   display: flex;
+  justify-self: right;
+  width: 100%;
+  text-align: left;
+}
 
-  padding-top: 10px;
-  
+.detalles{
+  font-family: var(--font-family-titulos-subtitulos);
+  font-size: var(--subtitulos-size);
+  font-weight: var(--font-weight-regular);
+  text-align: right;
 }
 
 
@@ -81,10 +89,11 @@ html, body {padding:0; margin:0; height:100%;}
 
 .botonPrueba{
   grid-column: span 2;
-  border-radius: 3px;
-  border: 1px solid rgba(0, 0, 0, 0.89);
-  height: 30px;
+  justify-self: center;
+  height: 40px;
+  width: 80%;
   border-radius: 10px;
+  font-family: var(--font-family-titulos-subtitulos);
 }
 
 

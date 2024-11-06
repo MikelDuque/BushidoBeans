@@ -1,14 +1,9 @@
-.carousel-container {
-    overflow: hidden;
-    border-radius: 20px;
-    background-color: transparent;
-    
-}
 
 .slick-slide img {
     width: 100%;
     height: auto;
     border-radius: 8px;
+    
 }
 
 .slick-prev, .slick-next {
@@ -33,3 +28,4 @@
 .slick-dots {
     display: none;
 }
+

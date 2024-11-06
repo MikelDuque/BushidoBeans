@@ -1,47 +1,42 @@
-.filtrosProducts {
-    padding-top: 40px;
-    padding-left: 12%;
-    padding-right: 12%;
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
 .filtro{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 15px 10px;
-    padding: 5px 5px 5px ;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    width: 100%;
+    margin-top: 20px;
+    border-right: 2px solid var(--nav-footer);
 }
 
 .botonFiltroG {
     height: auto;
     width: 90%;
     display: grid;
-    grid-template-columns: auto 1fr;
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #000000;
+    grid-template-rows: repeat(2, 1fr);
+    padding: 5px;
+
     border-radius: 12px;
-    box-shadow: 0px 0px 10px hsla(96, 65%, 49%, 0.333);
-    text-align: center;
-    background-color: var(--nav-footer);  
+    box-shadow: 0px 0px 10px hsla(96, 79%, 70%, 0.333);
+    text-align: left;
+    
     gap: 10px;
 }
 
 .botonFiltroG label {
-    margin-right: 5px;
-    font-weight: bold;
-    font-size: 12px;
+    font-family: var(--font-family-titulos-subtitulos);
+    font-size: var(--texto-size);
+    font-weight: var(--font-weight-regular);
 }
 
 .botonFiltroG select {
+    width: 100%;
     border-radius: 4px;
     padding: 2px;
     border: none;
     outline: none;
     background-color: var(--fondo-vistas);
     cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
+    font-family: var(--font-family-texto);
+    font-size:  var(--texto-size);
+    font-weight: var(--font-weight-regular);
+    border: 1px solid #00000081 ;
 }

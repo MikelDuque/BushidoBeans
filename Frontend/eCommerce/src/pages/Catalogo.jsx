@@ -32,8 +32,11 @@ function Catalogo() {
   ];
 
   return (
+    <>
+    
+    <Header />
     <div className="contenedor-catalogo">
-      <Header />
+      
       <section>
             <div className='carrusel-catalogo'>
               <Carrusel images={imagenes} />
@@ -47,18 +50,18 @@ function Catalogo() {
           </div>
       </aside>
       <section className="sectionFloat">
-            
-            <div>
             <BusquedaProductos filtro={filtro} ordenar={ordenar} />
-            </div>
       </section>
-      <footer className="footerFloat">
-        <Footer />
-      </footer>
+      
       
       
     </div>
+   
+        <Footer />
+    
+    </>
   );
+  
 }
 
 export default Catalogo;
