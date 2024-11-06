@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import '../styles/CardPrueba.css';
+import '../styles/Card-Producto.css';
 
 export function CardPrueba({ imagen, nombre, intensidad, valoracion, precio, soldout }) {
     // Formatear el precio a dos decimales con coma
