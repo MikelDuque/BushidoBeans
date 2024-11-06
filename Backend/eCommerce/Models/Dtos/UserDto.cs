@@ -10,7 +10,4 @@ public class UserDto
   public string Surname {get; set;}
   public int Phone {get; set;}
   public required string Role {get;set;}
-
-  public List<ReviewDto> Reviews { get; set; }
-  public CartDto Cart { get; set; }
 }
