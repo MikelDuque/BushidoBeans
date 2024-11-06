@@ -1,4 +1,5 @@
 using eCommerce.Models.Database.Entities;
+using eCommerce.Models.Enums;
 using eCommerce.Services;
 
 namespace eCommerce.Models.Database;
@@ -40,14 +41,24 @@ public class Seeder
         Name = "La especialidad de Fígaro",
         Description = "El mejor café de \"El Alpiste\" traído hasta aquí.",
         NutritionalInfo = null,
-        Category = 0,
-        Intensity = Enum.EIntensity.1,
+        CategoryId = ((int)ECategory.Coffee),
+        Intensity = EIntensity.Strong,
         Price = 2.50M,
         Discount = 0,
         Stock = 5,
         Score = 1
       }
         ];
+
+        Review[] reviews =
+            [
+            new Review {
+                UserId = 1,
+                ProductId = 1,
+                Body = "Puta mierda de café, llevo una semana cagándome",
+                Score = EScore.Negative
+            }
+                ];
 
         //Añadimos el rango de usuarios a la BDD
         await _dbContext.Users.AddRangeAsync(users);
