@@ -1,8 +1,8 @@
 using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
+using eCommerce.Models.Enums;
 using FuzzySharp;
 using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace eCommerce.Models.Database.Repositories;
 
@@ -26,6 +26,7 @@ public class ProductRepository : Repository<Product>
         return product.Reviews.Average(review => (float)review.Score);
     }
 
+    //----- FILTRO -----//
     public async Task<ICollection<Product>> GetFilteredProducts(Filter filter)
     {
         var query = FilterByCategoryAndStock(filter);
@@ -35,9 +36,12 @@ public class ProductRepository : Repository<Product>
             query = FilterByFuzzySearch(query, filter.search);
         }
 
+        query = ApplyOrder(query, filter);
+
         return await query.ToListAsync();
     }
 
+    //----- FUNCIONES DEL FILTRO -----//
     private IQueryable<Product> FilterByCategoryAndStock(Filter filter)
     {
         var query = GetQueryable()
@@ -53,7 +57,23 @@ public class ProductRepository : Repository<Product>
             .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
             .Any(word => Fuzz.Ratio(searchTerm, word) >= 80));
     }
+
+    private IQueryable<Product> ApplyOrder(IQueryable<Product> query, Filter filter)
+    {
+        switch (filter.order)
+        {
+            case EOrder.ABC_Asc:
+                return query.OrderBy(product => product.Name);
+            case EOrder.ABC_Desc:
+                return query.OrderByDescending(product => product.Name);
+            case EOrder.Price_Asc:
+                return query.OrderBy(product => product.Price);
+            case EOrder.Price_Desc:
+                return query.OrderByDescending(product => product.Price);
+            default:
+                return query;
+        }
+    }
 }
 
-//Order
 //Paginación
