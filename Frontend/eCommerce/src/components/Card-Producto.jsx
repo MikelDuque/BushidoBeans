@@ -3,10 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/CardPrueba.css';
 import { getIntensidadImg } from '../utils/intensidad';
 
-export function CardPrueba({ imagen, nombre, intensidad, precio, soldout, valoracion }) {
+export function CardPrueba({ id, imagen, nombre, intensidad, precio, soldout, valoracion }) {
     const navigate = useNavigate();
-    const checksoldout = soldout ? "❌" : "✅";
 
+    // Modificamos el manejo de la navegación para aceptar el id como argumento
+    const handlePageChange = () => {
+        navigate(`/producto/${id}`);  // Ahora se navega correctamente usando el id
+    };
+
+    const checksoldout = soldout ? "❌" : "✅";
     const precioFormateado = precio.toFixed(2).replace('.', ',');
 
     const valImg = "/recursos/star.svg";
@@ -33,7 +38,7 @@ export function CardPrueba({ imagen, nombre, intensidad, precio, soldout, valora
     return (
         <div className={`cardPrueba ${soldout ? "sold-out" : ""}`}>
             <img className="imgPrueba" src={imagen} alt={nombre} />
-            <h4 className="productName">{nombre}</h4>
+            <h4 className="productName" onClick={handlePageChange}>{nombre}</h4>
             <div className="iconos">
                 {intensidadEmojis}
             </div>
@@ -52,6 +57,7 @@ export function CardPrueba({ imagen, nombre, intensidad, precio, soldout, valora
 }
 
 CardPrueba.propTypes = {
+    id: PropTypes.string.isRequired, // Ahora el id es requerido como prop
     imagen: PropTypes.string.isRequired,
     nombre: PropTypes.string.isRequired,
     intensidad: PropTypes.number.isRequired,
