@@ -14,5 +14,5 @@ public class User
     public required string Role { get; set; }
 
     public ICollection<Review> Reviews { get; } = new List<Review>();
-    public Cart Cart { get; set; }
+
 }

@@ -1,17 +1,17 @@
-﻿using eCommerce.Controllers;
-using eCommerce.Models.Database.Entities;
+﻿using eCommerce.Models.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace eCommerce.Models.Database.Repositories;
 
 public class UserRepository : Repository<User>
 {
-    public UserRepository (DataContext dbContext) : base(dbContext)
+    public UserRepository(DataContext dbContext) : base(dbContext)
     {
 
     }
 
-    public async Task<string> GetRoleByMailAsync(string mail) {
+    public async Task<string> GetRoleByMailAsync(string mail)
+    {
         User user = await GetByMailAsync(mail);
         return user.Role;
     }
@@ -37,4 +37,3 @@ public class UserRepository : Repository<User>
         return false;
     }
 }
-

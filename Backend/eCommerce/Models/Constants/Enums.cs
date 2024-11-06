@@ -9,7 +9,7 @@ public enum EIntensity
 public enum ECategory
 {
     All,
-    Cofee,
+    Coffee,
     Tea,
     Other
 }

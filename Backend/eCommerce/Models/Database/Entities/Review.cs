@@ -1,9 +1,11 @@
-﻿namespace eCommerce.Models.Database.Entities;
+﻿using eCommerce.Models.Enums;
+
+namespace eCommerce.Models.Database.Entities;
 
 public class Review
 {
     public long Id { get; set; }
-    public required byte Score { get; set; }
+    public required EScore Score { get; set; }
     public string Body { get; set; }
 
     //---Foreign Keys---//
