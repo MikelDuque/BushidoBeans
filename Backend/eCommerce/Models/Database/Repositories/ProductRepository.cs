@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.Metrics;
+using System.Security.Cryptography.X509Certificates;
 using eCommerce.Models.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,4 +13,18 @@ public class ProductRepository : Repository<Product>
         //ORDERER BY
         //LIMIT
     }
+
+    public async Task<int> GetTotalReviews() {
+        return await GetQueryable().Select(product => product.Reviews).CountAsync();
+    }
+
+    public async Task<float> GetAverageScore() {
+        return await GetQueryable().Select(review => review.Score).AverageAsync();
+    }
+
+    /*
+    public async Task<ICollection<Product>> GetFilteredProducts(string name) {
+        
+    }
+    */
 }

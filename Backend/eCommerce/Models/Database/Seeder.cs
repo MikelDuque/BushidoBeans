@@ -48,7 +48,7 @@ public class Seeder
     [
       new Review
       {
-        Score = 2,
+        Score = Enums.EScore.Positive,
         Body = "Pues menuda mierda, no?",
         ProductId = 1,
         UserId = 1
