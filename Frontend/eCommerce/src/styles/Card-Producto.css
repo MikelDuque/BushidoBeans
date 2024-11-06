@@ -1,31 +1,44 @@
+html, body {padding:0; margin:0; height:100%;}
+
 .inventario{
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-  padding-inline: 10% 10%;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px 10px;
+  padding: 5px 5px 5px ;
+
 }
 
 .cardPrueba{
+  height: auto;
+  width: 90%;
   display: grid;
   grid-template-columns: auto 1fr;
   margin-top: 20px;
-  padding: 20px;
+  padding: 10px;
   border: 1px solid #000000;
   border-radius: 12px;
   box-shadow: 0px 0px 10px hsla(96, 65%, 49%, 0.333);
   text-align: center;
   background-color: var(--nav-footer);  
   gap: 10px;
+  font-family: var(--font-family-texto);
+  font-size: var(--texto-size);
+  font-weight: var(--font-weight-regular);
+  color: white;
   
 
 }
 
 .productName{
+  font-family: var(--font-family-titulos-subtitulos);
+  font-size: var(--subtitulos-size);
+  font-weight: var(--font-weight-regular);
+  color: white;
   grid-column: span 2;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
   padding-top: 10px;
 }
+
+
 
 .imgPrueba{
   grid-column: span 2;
@@ -42,12 +55,10 @@
 }
 
 .detallesDiv{
-  
   display: flex;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
-  justify-content: space-between;
+  justify-content: space-between ;
   padding-top: 10px;
+  
 }
 
 
@@ -60,14 +71,12 @@
   opacity: 0.8;
 }
 
-.cardPrueba.sold-out p {
-  filter: grayscale();
-  opacity: 0.8;
-}
+
 
 .cardPrueba.sold-out button {
   display: none;
 }
+
 
 
 .botonPrueba{
