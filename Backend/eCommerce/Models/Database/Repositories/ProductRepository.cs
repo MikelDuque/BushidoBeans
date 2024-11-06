@@ -10,9 +10,7 @@ public class ProductRepository : Repository<Product>
 {
     public ProductRepository(DataContext dbContext) : base(dbContext)
     {
-        //WHERE con los filtros (NO incluir los NULL)
-        //ORDERER BY
-        //LIMIT
+
     }
 
     public async Task<int> GetTotalReviews()
@@ -37,6 +35,9 @@ public class ProductRepository : Repository<Product>
         }
 
         query = ApplyOrder(query, filter);
+
+        query = ApplyPagination(query, filter);
+
 
         return await query.ToListAsync();
     }
@@ -74,6 +75,11 @@ public class ProductRepository : Repository<Product>
                 return query;
         }
     }
-}
 
-//Paginación
+    private IQueryable<Product> ApplyPagination(IQueryable<Product> query, Filter filter)
+    {
+        int skip = (filter.currentPage - 1) * filter.productsPerPage;
+        query = query.Skip(skip).Take(filter.productsPerPage);
+        return query;
+    }
+}

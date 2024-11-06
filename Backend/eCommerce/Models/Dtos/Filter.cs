@@ -10,5 +10,5 @@ public class Filter
   public required EOrder order;
   public required bool thereStock;
   public required int productsPerPage;
-  public required int page;
+  public required int currentPage;
 }
