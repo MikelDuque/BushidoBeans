@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import productData from '../data/dataPrueba';
 import { CardPrueba } from "../components/Card-Producto.jsx";
 import ReactPaginate from 'react-paginate';
 import "../styles/Catalogo.css";
-import "../styles/Paginacion.css"; // Asegúrate de tener un archivo CSS para personalizar la paginación
 
 const BusquedaProductos = ({ filtro, ordenar, productosPorPagina }) => {
   const [productoBuscado, setProductoBuscado] = useState('');
@@ -12,50 +12,31 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina }) => {
   const [error, setError] = useState(null);  // Para manejar errores
   const [totalProductos, setTotalProductos] = useState(0);  // Para almacenar el total de productos
 
-  // Realizar la solicitud a la API para obtener los productos filtrados y ordenados
   useEffect(() => {
-    const fetchProductos = async () => {
-      try {
-        setLoading(true);
-        // Construir los parámetros de búsqueda
-        const params = new URLSearchParams({
-          busqueda: productoBuscado,
-          filtro: filtro,  // 'opcion2' para café, 'opcion3' para té, etc.
-          ordenar: ordenar,  // 'opcion2' para precio ascendente, 'opcion3' para precio descendente, etc.
-          pagina: paginaActual + 1,  // Asegúrate de enviar la página como 1-based
-          productosPorPagina: productosPorPagina
-        });
+    const filteredProducts = productData.filter(dataP => {
+      const matchesSearch = dataP.nombre.toLowerCase().includes(productoBuscado.toLowerCase());
+      const matchesFiltro = filtro === 'opcion2' ? dataP.nombre.toLowerCase().includes('café') :
+        filtro === 'opcion3' ? dataP.nombre.toLowerCase().includes('té') : true;
+      return matchesSearch && matchesFiltro;
+    });
 
-        // Reemplaza esta URL con la URL de tu API
-        const response = await fetch(`/api/productos?${params.toString()}`);  // Cambia la URL según tu backend
-        if (!response.ok) {
-          throw new Error('Error al cargar los productos');
-        }
-        const data = await response.json();  // Parsear la respuesta como JSON
-        
-        setDatosFiltrados(data.productos);  // Los productos recibidos se almacenan en el estado
-        setTotalProductos(data.total); // Asegúrate de que tu API devuelva el total de productos
-      } catch (error) {
-        setError('Hubo un error al cargar los productos');
-        console.error('Error fetching products:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    const sortedProducts = filteredProducts.sort((a, b) => {
+      if (ordenar === 'opcion2') return a.precio - b.precio;
+      if (ordenar === 'opcion3') return b.precio - a.precio;
+      if (ordenar === 'opcion4') return a.nombre.localeCompare(b.nombre);
+      if (ordenar === 'opcion5') return b.nombre.localeCompare(a.nombre);
+      return 0; // Sin orden específico (Novedades)
+    });
 
-    fetchProductos();
-  }, [productoBuscado, filtro, ordenar, paginaActual, productosPorPagina]);
+    setDatosFiltrados(sortedProducts);
+    setTotalProductos(sortedProducts.length); // Establece el total de productos filtrados
+  }, [productoBuscado, filtro, ordenar]);
 
-  // Configura los productos mostrados en la página actual
-  const productosMostrados = datosFiltrados;
+  const productosMostrados = datosFiltrados.slice(paginaActual * productosPorPagina, (paginaActual + 1) * productosPorPagina);
 
-  // Maneja el cambio de página
-  const handlePageChange = ({ selected }) => {
-    setPaginaActual(selected);
+  const handlePageChange = (selectedPage) => {
+    setPaginaActual(selectedPage.selected);
   };
-
-  if (loading) return <p>Cargando productos...</p>;
-  if (error) return <p>{error}</p>;
 
   return (
     <div>
@@ -70,18 +51,16 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina }) => {
       </div>
 
       <div className="inventario">
-        {productosMostrados.length > 0 ? (
-          productosMostrados.map(dataP => (
-            <CardPrueba 
-              key={dataP.id}
-              id={dataP.id}
+        {datosFiltrados.length > 0 ? (
+          datosFiltrados.map(dataP => (
+            <CardPrueba
+              key={dataP.nombre}
               imagen={dataP.imagen}  // Usamos imagen del backend
               nombre={dataP.nombre}   // Usamos nombre del backend
-              descripcion={dataP.description}  // Nueva propiedad
               intensidad={dataP.intensidad}  // Usamos intensidad del backend
+              valoracion={dataP.valoracion}  // Usamos valoracion del backend
               precio={dataP.precio}  // Usamos precio del backend
-              stock={dataP.stock}   // Usamos stock del backend
-              puntuacion={dataP.Score}  // Usamos Score del backend
+              soldout={dataP.soldout}  // Usamos soldout del backend
             />
           ))
         ) : (

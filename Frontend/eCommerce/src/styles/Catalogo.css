@@ -1,26 +1,34 @@
 .contenedor-catalogo{
     background-color: var(--fondo-vistas);
+    width: 95%;
+    margin: auto;
+
+}
+
+.contenedor-catalogo aside{
+    width: 20%;
+    margin-top: 15px;
+    position: sticky;
+    top: 0;
+    float: left;
+    display: grid;
+    
+
 }
 
 .carrusel-catalogo{
-    width: 1429px;
-    height: 451px;
-    margin: 2% auto 0;
+    width: 100%;
+    height: 40vh;
+    margin-bottom: 30px ;
     border-radius: 20px;
     background-color: transparent;
-    overflow: hidden;
+    overflow: hidden; 
 }
-.filtro{
-    margin:2%;
-    display: flex;
-    flex: 2;
-    justify-content: center;
-    gap: 3%;
-}
-
 
 .botonCentrado{
-
+    padding-bottom: 30px;
     display: flex;
     justify-content: center;
+
+    
 }

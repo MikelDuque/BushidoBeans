@@ -46,6 +46,7 @@ function Catalogo() {
     setPagina(0);  // Reinicia la página actual a la primera página
   };
   return (
+    <>
     <div className="contenedor-catalogo">
       <Header />
       <div className='carrusel-catalogo'>
@@ -61,9 +62,13 @@ function Catalogo() {
         <BusquedaProductos filtro={filtro} ordenar={ordenar} productosPorPagina={productos} />
       </div>
       
-      <Footer />
     </div>
+   
+        <Footer />
+    
+    </>
   );
+  
 }
 
 export default Catalogo;
