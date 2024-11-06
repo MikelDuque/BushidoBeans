@@ -33,7 +33,7 @@ export function CardPrueba({ imagen, nombre, intensidad, precio, soldout }) {
                             <span key={index}>{emoji}</span>
                         ))}
                     </p>
-                    <p className="detalles">Stock: {checksoldout}</p>
+                    <p className="detalles2">Stock: {checksoldout}</p>
                 
                 {!soldout && (
                     <button className="botonPrueba" aria-label={`Añadir ${nombre} a la cesta`}>

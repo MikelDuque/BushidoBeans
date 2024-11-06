@@ -37,7 +37,7 @@ function Catalogo() {
     <div className="contenedor-catalogo">
       <Header />
       <section>
-        <div className='carrusel-catalogo'>
+            <div className='carrusel-catalogo'>
               <Carrusel images={imagenes} />
             </div>
       </section>

@@ -20,12 +20,15 @@
     background-color: transparent;
     overflow: hidden;
     
+    
 }
 
 
 
 .botonCentrado{
-
+    padding-top: 30px;
     display: flex;
     justify-content: center;
+
+    
 }

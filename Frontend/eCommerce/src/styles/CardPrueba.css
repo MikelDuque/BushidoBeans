@@ -21,13 +21,18 @@ html, body {padding:0; margin:0; height:100%;}
   text-align: center;
   background-color: var(--nav-footer);  
   gap: 10px;
+  font-family: var(--font-family-texto);
+  font-size: var(--texto-size);
+  font-weight: var(--font-weight-regular);
+  color: white;
   
 
 }
 
 .productName{
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-family-titulos-subtitulos);
   font-size: var(--subtitulos-size);
+  font-weight: var(--font-weight-regular);
   color: white;
   grid-column: span 2;
   padding-top: 10px;
@@ -53,6 +58,7 @@ html, body {padding:0; margin:0; height:100%;}
   display: flex;
   justify-content: space-between ;
   padding-top: 10px;
+  
 }
 
 
@@ -65,21 +71,12 @@ html, body {padding:0; margin:0; height:100%;}
   opacity: 0.8;
 }
 
-.cardPrueba.sold-out p {
-  filter: grayscale();
-  opacity: 0.8;
-}
+
 
 .cardPrueba.sold-out button {
   display: none;
 }
 
-.cardPrueba.sold-out a {
-  filter: grayscale();
-  opacity: 0.5;
-  pointer-events: none;
-  
-}
 
 
 .botonPrueba{
