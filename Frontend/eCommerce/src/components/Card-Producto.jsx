@@ -38,7 +38,6 @@ export function CardPrueba({ imagen, nombre, intensidad, valoracion, precio, sol
             <div className={`cardPrueba ${soldout ? "sold-out" : ""}`}>
                 <img className="imgPrueba" src={imagen} alt={nombre} />
                 <a className="productName" href="../components/Input.jsx"><h4>{nombre}</h4></a>
-                
                     <p className="detalles">
                          {intensidadEmojis.map((emoji, index) => (
                             <span key={index}>{emoji}</span>
