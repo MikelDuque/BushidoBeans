@@ -1,6 +1,6 @@
 const productData = [
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Café Negro",
         intensidad: 2,
         valoracion: 2.5,
@@ -8,7 +8,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Café con Leche",
         intensidad: 3,
         valoracion: 3,
@@ -16,7 +16,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Café Vainilla",
         intensidad: 3,
         valoracion: 1.5,
@@ -24,7 +24,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Café de Avellana",
         intensidad: 3,
         valoracion: 2.5,
@@ -32,7 +32,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Té de Hierbas",
         intensidad: 2,
         valoracion: 2,
@@ -40,7 +40,7 @@ const productData = [
         soldout: true,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Té con Leche",
         intensidad: 2,
         valoracion: 2.5,
@@ -48,7 +48,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Special Edition",
         intensidad: 1,
         valoracion: 3,
@@ -56,7 +56,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Halloween Edition",
         intensidad: 3,
         valoracion: 3,
@@ -64,7 +64,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pack de Café",
         intensidad: 1,
         valoracion: 2.5,
@@ -72,7 +72,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pack de Té",
         intensidad: 2,
         valoracion: 1.5,
@@ -80,7 +80,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Té Frío",
         intensidad: 2,
         valoracion: 3,
@@ -88,7 +88,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Latte",
         intensidad: 3,
         valoracion: 2,
@@ -96,7 +96,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Espresso",
         intensidad: 2,
         valoracion: 3,
@@ -104,7 +104,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Mocha",
         intensidad: 3,
         valoracion: 3,
@@ -112,7 +112,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Té Verde",
         intensidad: 2,
         valoracion: 3,
@@ -120,7 +120,7 @@ const productData = [
         soldout: true,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Té Negro",
         intensidad: 3,
         valoracion: 2.5,
@@ -128,7 +128,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Té Chai",
         intensidad: 3,
         valoracion: 3,
@@ -136,7 +136,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Té de Frutas",
         intensidad: 2,
         valoracion: 2,
@@ -144,7 +144,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Latte de Vainilla",
         intensidad: 3,
         valoracion: 1.5,
@@ -152,7 +152,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Irish Coffee",
         intensidad: 2,
         valoracion: 2.5,
@@ -160,7 +160,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Caramel Macchiato",
         intensidad: 3,
         valoracion: 3,
@@ -168,7 +168,7 @@ const productData = [
         soldout: true,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Té de Menta",
         intensidad: 2,
         valoracion: 3,
@@ -176,7 +176,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Cold Brew",
         intensidad: 3,
         valoracion: 2,
@@ -184,7 +184,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Chai Latte",
         intensidad: 3,
         valoracion: 2,
@@ -192,7 +192,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Té de Hibisco",
         intensidad: 2,
         valoracion: 2.5,
@@ -200,7 +200,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Café con Avellanas",
         intensidad: 3,
         valoracion: 3,
@@ -208,7 +208,7 @@ const productData = [
         soldout: true,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Té de Limón",
         intensidad: 2,
         valoracion: 3,
@@ -216,7 +216,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Espresso Doble",
         intensidad: 3,
         valoracion: 2.5,
@@ -224,7 +224,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Latte de Caramelo",
         intensidad: 3,
         valoracion: 3,
@@ -232,7 +232,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Café con Chocolate",
         intensidad: 3,
         valoracion: 2,
@@ -240,7 +240,7 @@ const productData = [
         soldout: false,
     },
     {
-        imagen: "recursos/pouchdrinkprueba.jpg",
+        imagen: "recursos/lata.svg",
         nombre: "Pouch Drink Té de Manzana",
         intensidad: 2,
         valoracion: 3,
