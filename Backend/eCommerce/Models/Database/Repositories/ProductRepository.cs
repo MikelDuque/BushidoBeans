@@ -26,58 +26,55 @@ public class ProductRepository : Repository<Product>
     //----- FILTRO -----//
     public IEnumerable<Product> GetFilteredProducts(Filter filter)
     {
-        var query = FilterByCategoryAndStock(filter);
+        var query = await FilterByCategoryAndStock(filter);
 
         if (!string.IsNullOrEmpty(filter.search))
         {
-            query = FilterByFuzzySearch(query, filter.search);
+            query = await FilterByFuzzySearch(query, filter.search);
         }
 
-        query = ApplyOrder(query, filter);
+        query = await ApplyOrder(query, filter);
 
-        query = ApplyPagination(query, filter);
+        query = await ApplyPagination(query, filter);
 
-        return query.AsEnumerable();
+        return await query.ToListAsync();
     }
 
     //----- FUNCIONES DEL FILTRO -----//
-    private IQueryable<Product> FilterByCategoryAndStock(Filter filter)
+    private async Task<IQueryable<Product>> FilterByCategoryAndStock(Filter filter)
     {
-        var query = GetQueryable()
+        var query = await Task.FromResult(GetQueryable()
                     .Where(product => product.CategoryId == (int)filter.categories)
-                    .Where(product => filter.thereStock ? product.Stock > 0 : product.Stock <= 0);
+                    .Where(product => filter.thereStock ? product.Stock > 0 : product.Stock <= 0));
 
         return query;
     }
 
-    private IQueryable<Product> FilterByFuzzySearch(IQueryable<Product> query, string searchTerm)
+    private async Task<IQueryable<Product>> FilterByFuzzySearch(IQueryable<Product> query, string search)
     {
-        return query.Where(product => product.Name
+        return await Task.FromResult(query.Where(product => product.Name
             .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
-            .Any(word => Fuzz.Ratio(searchTerm, word) >= 80));
+            .Any(word => Fuzz.Ratio(search, word) >= 80)));
     }
 
-    private IQueryable<Product> ApplyOrder(IQueryable<Product> query, Filter filter)
+    private async Task<IQueryable<Product>> ApplyOrder(IQueryable<Product> query, Filter filter)
     {
-        switch (filter.order)
+        IQueryable<Product> orderedQuery = filter.order switch
         {
-            case EOrder.ABC_Asc:
-                return query.OrderBy(product => product.Name);
-            case EOrder.ABC_Desc:
-                return query.OrderByDescending(product => product.Name);
-            case EOrder.Price_Asc:
-                return query.OrderBy(product => product.Price);
-            case EOrder.Price_Desc:
-                return query.OrderByDescending(product => product.Price);
-            default:
-                return query;
-        }
+            EOrder.ABC_Asc => query.OrderBy(product => product.Name),
+            EOrder.ABC_Desc => query.OrderByDescending(product => product.Name),
+            EOrder.Price_Asc => query.OrderBy(product => product.Price),
+            EOrder.Price_Desc => query.OrderByDescending(product => product.Price),
+            _ => query
+        };
+
+        return await Task.FromResult(orderedQuery);
     }
 
-    private IQueryable<Product> ApplyPagination(IQueryable<Product> query, Filter filter)
+    private async Task<IQueryable<Product>> ApplyPagination(IQueryable<Product> query, Filter filter)
     {
         int skip = (filter.currentPage - 1) * filter.productsPerPage;
-        query = query.Skip(skip).Take(filter.productsPerPage);
-        return query;
+        var paginatedQuery = query.Skip(skip).Take(filter.productsPerPage);
+        return await Task.FromResult(paginatedQuery);
     }
 }
