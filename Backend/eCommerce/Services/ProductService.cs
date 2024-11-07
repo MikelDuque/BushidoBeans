@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using eCommerce.Controllers;
 using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
@@ -16,9 +17,9 @@ public class ProductService
         _mapper = mapper;
     }
 
-  public IEnumerable<ProductDto> GetFilteredProducts(Filter filter)
+  public async Task<IEnumerable<ProductDto>> GetFilteredProducts(Filter filter)
   {
-    IEnumerable<Product> filteredProduct = _unitOfWork.ProductRepository.GetFilteredProducts(filter);
+    IEnumerable<Product> filteredProduct = await _unitOfWork.ProductRepository.GetFilteredProducts(filter);
 
     return _mapper.ToDto(filteredProduct);
   }
@@ -33,6 +34,7 @@ public class ProductService
   public async Task<ProductDto> GetByIdAsync(long id)
   {
     Product product = await _unitOfWork.ProductRepository.GetByIdAsync(id);
+    Debug.WriteLine("Reviews", product.Reviews);
     return _mapper.ToDto(product);
   }
 }

@@ -28,7 +28,7 @@ public class AuthController : ControllerBase
         _authService = authService;
     }
 
-    [HttpPost]
+    [HttpPost("Inicio Sesión")]
     public async Task<ActionResult<LoginResult>> Login([FromBody] LoginRequest model)
     {
         bool userExists = await _userService.ThisUserExists(model.Mail, model.Password);

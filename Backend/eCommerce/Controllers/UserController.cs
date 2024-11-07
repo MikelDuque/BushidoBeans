@@ -36,7 +36,7 @@ public class UserController : ControllerBase
     }
     */
 
-    [HttpPost]
+    [HttpPost("Registro")]
     public async Task<ActionResult<UserDto>> InsertAsyncByMail(RegisterRequest userRequest)
     {
         return await _service.InsertByMailAsync(userRequest);

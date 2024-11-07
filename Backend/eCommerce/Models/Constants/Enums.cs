@@ -11,7 +11,7 @@ public enum ECategory
     All,
     Coffee,
     Tea,
-    Other
+    Others
 }
 
 public enum EScore

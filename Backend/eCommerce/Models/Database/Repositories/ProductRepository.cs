@@ -12,6 +12,13 @@ public class ProductRepository : Repository<Product>
     {
     }
 
+    /*
+    public async Task<Product> GetByIdWithReviewsAsync(object id)
+    {
+        return await GetQueryable().Include(product => product.Reviews).FirstOrDefaultAsync();
+    }
+    */
+
     public async Task<int> GetTotalReviews()
     {
         return await GetQueryable().Select(product => product.Reviews).CountAsync();
@@ -24,40 +31,40 @@ public class ProductRepository : Repository<Product>
     }
 
     //----- FILTRO -----//
-    public IEnumerable<Product> GetFilteredProducts(Filter filter)
+    public async Task<IEnumerable<Product>> GetFilteredProducts(Filter filter)
     {
-        var query = await FilterByCategoryAndStock(filter);
+        var query = FilterByCategoryAndStock(filter);
 
         if (!string.IsNullOrEmpty(filter.search))
         {
-            query = await FilterByFuzzySearch(query, filter.search);
+            query = FilterByFuzzySearch(query, filter.search);
         }
 
-        query = await ApplyOrder(query, filter);
+        query = ApplyOrder(query, filter);
 
-        query = await ApplyPagination(query, filter);
+        query = ApplyPagination(query, filter);
 
         return await query.ToListAsync();
     }
 
     //----- FUNCIONES DEL FILTRO -----//
-    private async Task<IQueryable<Product>> FilterByCategoryAndStock(Filter filter)
+    private IQueryable<Product> FilterByCategoryAndStock(Filter filter)
     {
-        var query = await Task.FromResult(GetQueryable()
-                    .Where(product => product.CategoryId == (int)filter.categories)
-                    .Where(product => filter.thereStock ? product.Stock > 0 : product.Stock <= 0));
+        var query = GetQueryable()
+                    .Where(product => product.CategoryId == (int)filter.category)
+                    .Where(product => filter.thereStock ? product.Stock > 0 : product.Stock <= 0);
 
         return query;
     }
 
-    private async Task<IQueryable<Product>> FilterByFuzzySearch(IQueryable<Product> query, string search)
+    private IQueryable<Product> FilterByFuzzySearch(IQueryable<Product> query, string search)
     {
-        return await Task.FromResult(query.Where(product => product.Name
+        return query.Where(product => product.Name
             .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
-            .Any(word => Fuzz.Ratio(search, word) >= 80)));
+            .Any(word => Fuzz.Ratio(search, word) >= 80));
     }
 
-    private async Task<IQueryable<Product>> ApplyOrder(IQueryable<Product> query, Filter filter)
+    private IQueryable<Product> ApplyOrder(IQueryable<Product> query, Filter filter)
     {
         IQueryable<Product> orderedQuery = filter.order switch
         {
@@ -68,13 +75,13 @@ public class ProductRepository : Repository<Product>
             _ => query
         };
 
-        return await Task.FromResult(orderedQuery);
+        return orderedQuery;
     }
 
-    private async Task<IQueryable<Product>> ApplyPagination(IQueryable<Product> query, Filter filter)
+    private IQueryable<Product> ApplyPagination(IQueryable<Product> query, Filter filter)
     {
         int skip = (filter.currentPage - 1) * filter.productsPerPage;
         var paginatedQuery = query.Skip(skip).Take(filter.productsPerPage);
-        return await Task.FromResult(paginatedQuery);
+        return paginatedQuery;
     }
 }

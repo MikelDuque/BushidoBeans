@@ -1,4 +1,5 @@
-﻿using eCommerce.Models.Enums;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using eCommerce.Models.Enums;
 
 namespace eCommerce.Models.Database.Entities;
 
@@ -14,7 +15,9 @@ public class Product
     public float Discount { get; set; }
     public int Stock { get; set; }
 
-    public int CategoryId { get; set; }
+    //---Foreign Keys---//
+
+    public required long CategoryId { get; set; }
     public Category Category { get; set; } = null!;
     public ICollection<Review> Reviews { get; } = new List<Review>();
 }

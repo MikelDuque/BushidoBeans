@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace eCommerce;
 
@@ -27,17 +28,25 @@ public class Program
         //Controladores
         builder.Services.AddControllers();
 
+        builder.Services.AddControllers().AddJsonOptions(options => {
+            options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+        });
+
         //Contextos
         builder.Services.AddScoped<DataContext>();
         builder.Services.AddScoped<UnitOfWork>();
+        builder.Services.AddScoped<CategoryRepository>();
         builder.Services.AddScoped<UserRepository>();
+        builder.Services.AddScoped<ProductRepository>();
 
         //Servicios
-        builder.Services.AddScoped<UserService>();
         builder.Services.AddScoped<AuthService>();
+        builder.Services.AddScoped<UserService>();
+        builder.Services.AddScoped<ProductService>();
 
         //Mappers
         builder.Services.AddTransient<UserMapper>();
+        builder.Services.AddTransient<ProductMapper>();
 
         //Swagger/OpenApi
         builder.Services.AddEndpointsApiExplorer();
