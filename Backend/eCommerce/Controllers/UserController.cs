@@ -1,5 +1,4 @@
-﻿using eCommerce.Models.Database.Entities;
-using eCommerce.Models.Dtos;
+﻿using eCommerce.Models.Dtos;
 using eCommerce.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,13 +14,13 @@ public class UserController : ControllerBase
         _service = service;
     }
 
-    /*
+    
     [HttpGet]
     public async Task<IEnumerable<UserDto>> GetAllAsync()
     {
         return await _service.GetAllAsync();
     }
-    */
+    
     [HttpGet("{id}")]
     public async Task<UserDto> GetByIdAsync(long id)
     {
