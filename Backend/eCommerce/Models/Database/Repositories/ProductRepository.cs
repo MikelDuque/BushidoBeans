@@ -10,7 +10,6 @@ public class ProductRepository : Repository<Product>
 {
     public ProductRepository(DataContext dbContext) : base(dbContext)
     {
-
     }
 
     public async Task<int> GetTotalReviews()
@@ -25,7 +24,7 @@ public class ProductRepository : Repository<Product>
     }
 
     //----- FILTRO -----//
-    public async Task<ICollection<Product>> GetFilteredProducts(Filter filter)
+    public IEnumerable<Product> GetFilteredProducts(Filter filter)
     {
         var query = FilterByCategoryAndStock(filter);
 
@@ -38,8 +37,7 @@ public class ProductRepository : Repository<Product>
 
         query = ApplyPagination(query, filter);
 
-
-        return await query.ToListAsync();
+        return query.AsEnumerable();
     }
 
     //----- FUNCIONES DEL FILTRO -----//
