@@ -22,21 +22,21 @@ public class Seeder
     private async Task Seed()
     {
 
-      Category[] categories =
-      [
-        new Category
-        {
-          Name = "Coffee"
-        },
-        new Category
-        {
-          Name = "Tea"
-        },
-        new Category
-        {
-          Name = "Others"
-        }
-      ];
+        Category[] categories =
+        [
+            new Category
+            {
+                Name = "Coffee"
+            },
+            new Category
+            {
+                Name = "Tea"
+            },
+            new Category
+            {
+                Name = "Others"
+            }
+        ];
 
       User[] users =
       [
@@ -92,10 +92,12 @@ public class Seeder
         },
       ];
       
-      //Añadimos el rango de usuarios a la BDD
-      await _dbContext.Categories.AddRangeAsync(categories);
-      await _dbContext.Users.AddRangeAsync(users);
-      await _dbContext.Products.AddRangeAsync(products);
-      await _dbContext.Reviews.AddRangeAsync(reviews);
+        //Añadimos el rango de usuarios a la BDD
+        await _dbContext.Categories.AddRangeAsync(categories);
+        await _dbContext.Users.AddRangeAsync(users);
+        await _dbContext.Products.AddRangeAsync(products);
+        await _dbContext.SaveChangesAsync();
+
+        await _dbContext.Reviews.AddRangeAsync(reviews);
     }
 }

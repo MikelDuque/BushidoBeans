@@ -17,7 +17,9 @@ public class Product
 
     //---Foreign Keys---//
 
+    [ForeignKey(nameof(Category))]
     public required long CategoryId { get; set; }
-    public Category Category { get; set; } = null!;
+    public Category Category { get; set; }
+
     public ICollection<Review> Reviews { get; } = new List<Review>();
 }

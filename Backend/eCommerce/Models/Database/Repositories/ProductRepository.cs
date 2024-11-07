@@ -12,12 +12,12 @@ public class ProductRepository : Repository<Product>
     {
     }
 
-    /*
-    public async Task<Product> GetByIdWithReviewsAsync(object id)
+    
+    public async Task<Product> GetByIdWithReviewsAsync(long id)
     {
-        return await GetQueryable().Include(product => product.Reviews).FirstOrDefaultAsync();
+        return await GetQueryable().Include(product => product.Reviews).FirstOrDefaultAsync(producto => producto.Id == id);
     }
-    */
+    
 
     public async Task<int> GetTotalReviews()
     {

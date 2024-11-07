@@ -9,11 +9,14 @@ public class Review
     public required EScore Score { get; set; }
     public string Body { get; set; }
 
+
     //---Foreign Keys---//
 
+    [ForeignKey(nameof(Product))]
     public required long ProductId { get; set; }
-    public Product Product { get; set; } = null!;
+    public Product Product { get; set; }
 
+    [ForeignKey(nameof(User))]
     public required long UserId { get; set; }
-    public User User { get; set; } = null!;
+    public User User { get; set; }
 }
