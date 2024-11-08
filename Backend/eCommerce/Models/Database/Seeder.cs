@@ -198,7 +198,7 @@ public class Seeder
     },
     new Product
     {
-        Image = "./wwwroot/images/lataBushidoCafe.png",
+        Image = "images/lataBushidoCafe.png",
         Name = "Café Caramelizado",
         Description = "Café con un toque dulce de caramelo, para los que disfrutan del café con un toque especial.",
         NutritionalInfo = null,

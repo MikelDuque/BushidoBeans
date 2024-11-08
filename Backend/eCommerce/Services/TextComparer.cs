@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 using eCommerce.Models.Database.Entities;
@@ -20,6 +21,7 @@ public class TextComparer
 
   public IEnumerable<Product> SearchFilter(IQueryable<Product> query, string search)
   {
+    Debug.WriteLine(search);
     List<Product> listaFiltrada = new List<Product>();
 
     if (!string.IsNullOrWhiteSpace(search))
