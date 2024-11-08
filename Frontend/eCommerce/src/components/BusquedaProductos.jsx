@@ -30,14 +30,11 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina }) => {
         
         if(response.ok){
           const data = await response.json();
-          console.log("Producto:", data);
 
           setDatosFiltrados(data || []);
-          console.log("Datos filtrados:", data);
-          console.log("Datos:", data);
+
           setTotalProductos(data.total || 0);
         }
-        console.log("Solicitud enviada a:", response);
         if (!response.ok) throw new Error("Error al cargar los productos");
 
       } catch (err) {
@@ -55,7 +52,6 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina }) => {
     setPaginaActual(selectedPage.selected);
   };
 
-  console.log("datos filtrados", datosFiltrados);
 
   return (
     <div>
