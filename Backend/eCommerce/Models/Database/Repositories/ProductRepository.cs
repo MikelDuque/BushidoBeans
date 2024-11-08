@@ -1,8 +1,9 @@
 using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 using eCommerce.Models.Enums;
-using FuzzySharp;
+using eCommerce.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace eCommerce.Models.Database.Repositories;
 
@@ -12,12 +13,11 @@ public class ProductRepository : Repository<Product>
     {
     }
 
-    /*
     public async Task<Product> GetByIdWithReviewsAsync(object id)
     {
         return await GetQueryable().Include(product => product.Reviews).FirstOrDefaultAsync();
     }
-    */
+    
 
     public async Task<int> GetTotalReviews()
     {
@@ -33,13 +33,26 @@ public class ProductRepository : Repository<Product>
     //----- FILTRO -----//
     public async Task<IEnumerable<Product>> GetFilteredProducts(Filter filter)
     {
-        var query = FilterByCategoryAndStock(filter);
+        TextComparer _textComparer = new();
+        IQueryable<Product> query = FilterByCategoryAndStock(filter);
 
+        /*
         if (!string.IsNullOrEmpty(filter.Search))
         {
             query = FilterByFuzzySearch(query, filter.Search);
         }
+        */
 
+        List<Product> listaProductos = _textComparer.SearchFilter(query, filter.Search).ToList();
+
+        
+        if (listaProductos.IsNullOrEmpty())
+        {
+            return listaProductos;
+        }
+
+        listaProductos.ForEach(nuevoProducto => query.Where(producto => producto == nuevoProducto));
+        
         query = ApplyOrder(query, filter);
 
         query = ApplyPagination(query, filter);
@@ -51,23 +64,15 @@ public class ProductRepository : Repository<Product>
     private IQueryable<Product> FilterByCategoryAndStock(Filter filter)
     {
         var query = GetQueryable()
-                    .Where(product => product.CategoryId == (int)filter.category)
-                    .Where(product => filter.thereStock ? product.Stock > 0 : product.Stock <= 0)
+                    .Where(product => product.CategoryId == (long)filter.Category)
+                    .Where(product => filter.ThereStock ? product.Stock > 0 : product.Stock <= 0)
                     .Include(product => product.Reviews);
-
         return query;
-    }
-
-    private IQueryable<Product> FilterByFuzzySearch(IQueryable<Product> query, string search)
-    {
-        return query.Where(product => product.Name
-            .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
-            .Any(word => Fuzz.Ratio(search, word) >= 80));
     }
 
     private IQueryable<Product> ApplyOrder(IQueryable<Product> query, Filter filter)
     {
-        IQueryable<Product> orderedQuery = filter.order switch
+        IQueryable<Product> orderedQuery = filter.Order switch
         {
             EOrder.ABC_Asc => query.OrderBy(product => product.Name),
             EOrder.ABC_Desc => query.OrderByDescending(product => product.Name),
@@ -81,8 +86,58 @@ public class ProductRepository : Repository<Product>
 
     private IQueryable<Product> ApplyPagination(IQueryable<Product> query, Filter filter)
     {
-        int skip = (filter.currentPage - 1) * filter.productsPerPage;
-        var paginatedQuery = query.Skip(skip).Take(filter.productsPerPage);
+        int skip = (filter.CurrentPage - 1) * filter.ProductsPerPage;
+        var paginatedQuery = query.Skip(skip).Take(filter.ProductsPerPage);
         return paginatedQuery;
     }
+
+    /*
+    private IQueryable<Product> FilterByFuzzySearch(IQueryable<Product> query, string search)
+    {
+        string name = query.Select(product => product.Name).ToString();
+        return query.Where(product => product.Name
+            .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+            .Any(word => Fuzz.Ratio(NormalizeText(search.ToLower()), NormalizeText(word.ToLower())) >= 80));
+    }
+    
+
+    private IQueryable<Product> CompareText(IQueryable<Product> query, string search)
+    {
+        if (!string.IsNullOrWhiteSpace(search)) {
+            return query.Where(product => { ClearText(product.Name).Contains(ClearText(search));
+            });
+        }
+        return query;
+    }
+
+    // Normaliza el texto quitándole las tildes y pasándolo a minúsculas
+    private List<string> ClearText(string text)
+    {
+        return GetTokens(RemoveDiacritics(text.ToLower())).ToList();
+    }
+
+    private string[] GetTokens(string query)
+    {
+        return query.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+    }
+
+    // Quita las tildes a un texto
+    private string RemoveDiacritics(string text)
+    {
+        string normalizedString = text.Normalize(NormalizationForm.FormD);
+        StringBuilder stringBuilder = new StringBuilder(normalizedString.Length);
+
+        for (int i = 0; i < normalizedString.Length; i++)
+        {
+            char c = normalizedString[i];
+            UnicodeCategory unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+            if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+            {
+                stringBuilder.Append(c);
+            }
+        }
+
+        return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
+    }
+    */
 }
