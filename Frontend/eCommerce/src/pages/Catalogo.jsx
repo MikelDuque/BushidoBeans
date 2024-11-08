@@ -16,7 +16,7 @@ function Catalogo() {
 
   const [filtro, setFiltro] = useState('opcion3');
   const [ordenar, setOrdenar] = useState('opcion1');
-  let [productosPorPagina, setProductosPorPagina] = useState(10); // Estado para controlar productos por página
+  let [productosPorPagina, setProductosPorPagina] = useState(3); // Estado para controlar productos por página
   const [pagina, setPagina] = useState(0);
 
   const productosPorPaginaChange = (value) => {
@@ -74,3 +74,5 @@ function Catalogo() {
 }
 
 export default Catalogo;
+
+
