@@ -20,7 +20,7 @@ public class ProductMapper
             Price = product.Price,
             Stock = product.Stock,
             TotalReviews = product.Reviews.Count,
-            Score = product.Reviews.Select(review => (int)review.Score).Average()
+            //Score = product.Reviews.Select(review => (int)review.Score).Average()
         };
     }
     public IEnumerable<ProductDto> ToDto(IEnumerable<Product> products)
