@@ -51,8 +51,8 @@ public class ProductRepository : Repository<Product>
     private IQueryable<Product> FilterByCategoryAndStock(Filter filter)
     {
         var query = GetQueryable()
-                    .Where(product => product.CategoryId == (int)filter.category)
-                    .Where(product => filter.thereStock ? product.Stock > 0 : product.Stock <= 0)
+                    .Where(product => product.CategoryId == (int)filter.Category)
+                    .Where(product => filter.ThereStock ? product.Stock > 0 : product.Stock <= 0)
                     .Include(product => product.Reviews);
 
         return query;
@@ -67,7 +67,7 @@ public class ProductRepository : Repository<Product>
 
     private IQueryable<Product> ApplyOrder(IQueryable<Product> query, Filter filter)
     {
-        IQueryable<Product> orderedQuery = filter.order switch
+        IQueryable<Product> orderedQuery = filter.Order switch
         {
             EOrder.ABC_Asc => query.OrderBy(product => product.Name),
             EOrder.ABC_Desc => query.OrderByDescending(product => product.Name),
@@ -81,8 +81,8 @@ public class ProductRepository : Repository<Product>
 
     private IQueryable<Product> ApplyPagination(IQueryable<Product> query, Filter filter)
     {
-        int skip = (filter.currentPage - 1) * filter.productsPerPage;
-        var paginatedQuery = query.Skip(skip).Take(filter.productsPerPage);
+        int skip = (filter.CurrentPage - 1) * filter.ProductsPerPage;
+        var paginatedQuery = query.Skip(skip).Take(filter.ProductsPerPage);
         return paginatedQuery;
     }
 }
