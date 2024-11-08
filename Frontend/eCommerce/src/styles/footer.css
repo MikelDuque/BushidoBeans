@@ -8,6 +8,7 @@ footer{
   color: var(--letras-nav);
   position: relative;
   clear: both;
+  margin-top: 20px;
   
 }
 
