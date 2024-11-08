@@ -21,7 +21,6 @@ public class Seeder
 
     private async Task Seed()
     {
-
       Category[] categories =
       [
         new Category
@@ -64,6 +63,18 @@ public class Seeder
           Price = 2.50M,
           Discount = 0,
           Stock = 5
+        },
+        new Product
+        {
+          Image = "./wwwroot/images/lataBushidoCafe.png",
+          Name = "El té del destino",
+          Description = "PD: El destino es el suspenso",
+          NutritionalInfo = null,
+          CategoryId = (long)ECategory.Tea,
+          Intensity = EIntensity.Soft,
+          Price = 1.36M,
+          Discount = 0,
+          Stock = 4
         }
       ];
 
@@ -90,13 +101,27 @@ public class Seeder
           ProductId = 1,
           UserId = 1
         },
+        new Review
+        {
+          Score = EScore.Negative,
+          Body = "Hola",
+          ProductId = 2,
+          UserId = 1
+        },
+        new Review
+        {
+          Score = EScore.Positive,
+          Body = "Adios",
+          ProductId = 2,
+          UserId = 1
+        }
       ];
       
       //Añadimos el rango de usuarios a la BDD
-      _dbContext.Categories.AddRange(categories);
-      _dbContext.Users.AddRange(users);
-      _dbContext.Products.AddRange(products);
-      _dbContext.SaveChanges();
-      _dbContext.Reviews.AddRange(reviews);
+      await _dbContext.Categories.AddRangeAsync(categories);
+      await _dbContext.Users.AddRangeAsync(users);
+      await _dbContext.Products.AddRangeAsync(products);
+      await _dbContext.SaveChangesAsync();
+      await _dbContext.Reviews.AddRangeAsync(reviews);
     }
 }
