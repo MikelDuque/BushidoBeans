@@ -118,7 +118,7 @@ html, body {padding:0; margin:0; height:100%;}
 }
 
 .botonPrueba:hover {
-  background-color: yellow; /* Cambia el fondo a amarillo en hover */
+  background-color: rgb(255, 255, 108); /* Cambia el fondo a amarillo en hover */
   color: green; /* Cambia el texto a verde en hover */
 }
 
