@@ -36,13 +36,6 @@ public class ProductRepository : Repository<Product>
         TextComparer _textComparer = new();
         IQueryable<Product> query = FilterByCategoryAndStock(filter);
 
-        /*
-        if (!string.IsNullOrEmpty(filter.Search))
-        {
-            query = FilterByFuzzySearch(query, filter.Search);
-        }
-        */
-
         List<Product> listaProductos = _textComparer.SearchFilter(query, filter.Search).ToList();
 
         
@@ -63,11 +56,11 @@ public class ProductRepository : Repository<Product>
     //----- FUNCIONES DEL FILTRO -----//
     private IQueryable<Product> FilterByCategoryAndStock(Filter filter)
     {
-        var query = GetQueryable()
-                    .Where(product => product.CategoryId == (long)filter.Category)
-                    .Where(product => filter.ThereStock ? product.Stock > 0 : product.Stock <= 0)
-                    .Include(product => product.Reviews);
-        return query;
+        IQueryable<Product> query = GetQueryable().Where(product => filter.ThereStock ? product.Stock > 0 : product.Stock <= 0);
+
+        if(filter.Category > 0) { query = query.Where(product => product.CategoryId == (long)filter.Category); };
+
+        return query.Include(product => product.Reviews);
     }
 
     private IQueryable<Product> ApplyOrder(IQueryable<Product> query, Filter filter)
