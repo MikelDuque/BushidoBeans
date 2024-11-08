@@ -1,56 +1,46 @@
 import React, { useState, useEffect } from 'react';
-import productData from '../data/dataPrueba';
 import { CardPrueba } from "../components/Card-Producto.jsx";
 import ReactPaginate from 'react-paginate';
 import "../styles/Catalogo.css";
 import "../styles/Paginacion.css";
 
-const BusquedaProductos = ({ filtro, ordenar, productosPorPagina }) => {
+const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   const [productoBuscado, setProductoBuscado] = useState('');
   const [datosFiltrados, setDatosFiltrados] = useState([]);
   const [paginaActual, setPaginaActual] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [totalProductos, setTotalProductos] = useState(0);
+  const [totalProductos, setTotalProductos] = useState(0); // Total que se actualiza al recibir respuesta del backend
 
   useEffect(() => {
-    setLoading(true);
-    try {
-      // Filtrar productos según la búsqueda y el filtro
-      const filteredProducts = productData.filter(dataP => {
-        const matchesSearch = dataP.nombre.toLowerCase().includes(productoBuscado.toLowerCase());
-        const matchesFiltro = filtro === '1' ? dataP.nombre.toLowerCase().includes('café') :
-          filtro === '2' ? dataP.nombre.toLowerCase().includes('té') : true;
-        return matchesSearch && matchesFiltro;
-      });
+    // Llamada a la API cuando cambian el filtro, orden, o búsqueda
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
 
-      // Ordenar los productos filtrados
-      const sortedProducts = filteredProducts.sort((a, b) => {
-        if (ordenar === '0') return a.nombre.localeCompare(b.nombre);
-        if (ordenar === '1') return b.nombre.localeCompare(a.nombre);
-        if (ordenar === '2') return a.precio - b.precio;
-        if (ordenar === '3') return b.precio - a.precio;
-        return 0; // Sin orden específico
-      });
+      try {
+        // API del backend que retorna los productos ya filtrados y paginados
+        const response = await fetch(`/api/productos?buscar=${productoBuscado}&filtro=${filtro}&ordenar=${ordenar}&pagina=${paginaActual}&productosPorPagina=${productosPorPagina}`);
+        
+        if (!response.ok) throw new Error("Error al cargar los productos");
 
+        const data = await response.json();
 
-      setDatosFiltrados(sortedProducts);
-      setTotalProductos(sortedProducts.length);
-    } catch (err) {
-      setError("Hubo un error al cargar los productos.");
-    } finally {
-      setLoading(false);
-    }
-  }, [productoBuscado, filtro, ordenar]); // Se vuelve a ejecutar cuando cambian estos valores
+        setDatosFiltrados(data.productos);  // Datos de productos recibidos
+        setTotalProductos(data.total);       // Total de productos para paginación
+      } catch (err) {
+        setError("Hubo un error al cargar los productos.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-
-  // Paginación: Mostrar solo los productos correspondientes a la página actual
-  const productosMostrados = datosFiltrados.slice(paginaActual * productosPorPagina, (paginaActual + 1) * productosPorPagina);
+    fetchData();
+  }, [productoBuscado, filtro, ordenar, paginaActual, productosPorPagina]);
 
   const handlePageChange = (selectedPage) => {
-    setPaginaActual(selectedPage.selected);
+    setPaginaActual(selectedPage.selected); // Cambia la página actual según la selección del usuario
   };
-
 
   return (
     <div>
@@ -69,8 +59,8 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina }) => {
           <p>Cargando productos...</p>
         ) : error ? (
           <p>{error}</p>
-        ) : productosMostrados.length > 0 ? (
-          productosMostrados.map(dataP => (
+        ) : datosFiltrados.length > 0 ? (
+          datosFiltrados.map(dataP => (
             <CardPrueba
               key={dataP.id}
               id={dataP.id}
@@ -91,7 +81,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina }) => {
         previousLabel={'←'}
         nextLabel={'→'}
         breakLabel={'...'}
-        pageCount={Math.ceil(totalProductos / productosPorPagina)} // Calcula el total de páginas según productosPorPagina
+        pageCount={Math.ceil(totalProductos / productosPorPagina)} // Cálculo del número de páginas
         marginPagesDisplayed={2}
         pageRangeDisplayed={3}
         onPageChange={handlePageChange}
