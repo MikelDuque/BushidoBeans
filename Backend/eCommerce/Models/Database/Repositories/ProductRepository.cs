@@ -15,7 +15,7 @@ public class ProductRepository : Repository<Product>
 
     public async Task<Product> GetByIdWithReviewsAsync(object id)
     {
-        return await GetQueryable().Include(product => product.Reviews).FirstOrDefaultAsync();
+        return await GetQueryable().Where(product => product.Id == (long)id).Include(product => product.Reviews).FirstOrDefaultAsync();
     }
     
 

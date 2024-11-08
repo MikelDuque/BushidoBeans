@@ -21,7 +21,6 @@ public class Seeder
 
     private async Task Seed()
     {
-
       Category[] categories =
       [
         new Category
@@ -209,12 +208,7 @@ public class Seeder
         Discount = 0,
         Stock = 11
     }
-
-
-
-
-
-      ];
+    ];
 
       Review[] reviews =
       [
@@ -239,13 +233,27 @@ public class Seeder
           ProductId = 1,
           UserId = 1
         },
+        new Review
+        {
+          Score = EScore.Negative,
+          Body = "Hola",
+          ProductId = 2,
+          UserId = 1
+        },
+        new Review
+        {
+          Score = EScore.Positive,
+          Body = "Adios",
+          ProductId = 2,
+          UserId = 1
+        }
       ];
       
       //Añadimos el rango de usuarios a la BDD
-      _dbContext.Categories.AddRange(categories);
-      _dbContext.Users.AddRange(users);
-      _dbContext.Products.AddRange(products);
-      _dbContext.SaveChanges();
-      _dbContext.Reviews.AddRange(reviews);
+      await _dbContext.Categories.AddRangeAsync(categories);
+      await _dbContext.Users.AddRangeAsync(users);
+      await _dbContext.Products.AddRangeAsync(products);
+      await _dbContext.SaveChangesAsync();
+      await _dbContext.Reviews.AddRangeAsync(reviews);
     }
 }
