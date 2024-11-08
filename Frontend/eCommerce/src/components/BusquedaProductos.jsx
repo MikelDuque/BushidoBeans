@@ -87,7 +87,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina }) => {
           <p>No se encontraron productos.</p>
         )}
       </div>
-
+      
       <ReactPaginate
         previousLabel={'←'}
         nextLabel={'→'}
@@ -108,6 +108,6 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina }) => {
         breakLinkClassName={'page-link'}
       />
     </div>
-  );
+  );a
 }
 export default BusquedaProductos;
