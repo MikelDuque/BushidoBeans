@@ -27,7 +27,7 @@ public class ProductController : ControllerBase
     return await _service.GetByIdAsync(id);
   }
   
-  [HttpGet("Filtered Products")]
+  [HttpGet("FilteredProducts")]
   public async Task<IEnumerable<ProductDto>> GetFilteredProducts(Filter filter)
   {
     return await _service.GetFilteredProducts(filter);

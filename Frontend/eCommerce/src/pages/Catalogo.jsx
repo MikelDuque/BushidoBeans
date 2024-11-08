@@ -14,9 +14,9 @@ function Catalogo() {
     "../../public/recursos/imgCarrusel4.jpg",
   ];
 
-  const [filtro, setFiltro] = useState('opcion3');
-  const [ordenar, setOrdenar] = useState('opcion1');
-  let [productosPorPagina, setProductosPorPagina] = useState(3); // Estado para controlar productos por página
+  const [filtro, setFiltro] = useState('0');
+  const [ordenar, setOrdenar] = useState('0');
+  let [productosPorPagina, setProductosPorPagina] = useState(10); // Estado para controlar productos por página
   const [pagina, setPagina] = useState(0);
 
   const productosPorPaginaChange = (value) => {

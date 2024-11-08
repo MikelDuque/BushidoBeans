@@ -4,32 +4,34 @@ import ReactPaginate from 'react-paginate';
 import "../styles/Catalogo.css";
 import "../styles/Paginacion.css";
 
-const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
+const BusquedaProductos = ({ filtro, ordenar, productosPorPagina }) => {
   const [productoBuscado, setProductoBuscado] = useState('');
   const [datosFiltrados, setDatosFiltrados] = useState([]);
   const [paginaActual, setPaginaActual] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [totalProductos, setTotalProductos] = useState(0); // Total que se actualiza al recibir respuesta del backend
+  const [totalProductos, setTotalProductos] = useState(0);
 
   useEffect(() => {
-    // Llamada a la API cuando cambian el filtro, orden, o búsqueda
     const fetchData = async () => {
       setLoading(true);
       setError(null);
 
       try {
-        // API del backend que retorna los productos ya filtrados y paginados
-        const response = await fetch(`/api/productos?buscar=${productoBuscado}&filtro=${filtro}&ordenar=${ordenar}&pagina=${paginaActual}&productosPorPagina=${productosPorPagina}`);
+        console.log("Iniciando solicitud de productos...");
+        const response = await fetch(`https://localhost:7015/FilteredProducts?Search=${productoBuscado}&Category=${filtro}&Order=${ordenar}&ThereStock=true&ProductsPerPage=${productosPorPagina}&CurrentPage=${paginaActual}`);
         
         if (!response.ok) throw new Error("Error al cargar los productos");
 
         const data = await response.json();
+        console.log("Datos recibidos:", data);
 
-        setDatosFiltrados(data.productos);  // Datos de productos recibidos
-        setTotalProductos(data.total);       // Total de productos para paginación
+        setDatosFiltrados(data.productos || []);
+        setTotalProductos(data.total || 0);
       } catch (err) {
+        console.error("Error en la solicitud:", err);
         setError("Hubo un error al cargar los productos.");
+        setDatosFiltrados([]);
       } finally {
         setLoading(false);
       }
@@ -38,8 +40,9 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
     fetchData();
   }, [productoBuscado, filtro, ordenar, paginaActual, productosPorPagina]);
 
+
   const handlePageChange = (selectedPage) => {
-    setPaginaActual(selectedPage.selected); // Cambia la página actual según la selección del usuario
+    setPaginaActual(selectedPage.selected);
   };
 
   return (
@@ -81,7 +84,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
         previousLabel={'←'}
         nextLabel={'→'}
         breakLabel={'...'}
-        pageCount={Math.ceil(totalProductos / productosPorPagina)} // Cálculo del número de páginas
+        pageCount={Math.ceil(totalProductos / productosPorPagina)}
         marginPagesDisplayed={2}
         pageRangeDisplayed={3}
         onPageChange={handlePageChange}
@@ -99,5 +102,4 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
     </div>
   );
 };
-
 export default BusquedaProductos;
