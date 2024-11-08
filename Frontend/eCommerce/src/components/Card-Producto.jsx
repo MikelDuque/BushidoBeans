@@ -57,7 +57,7 @@ export function CardPrueba({ id, imagen, nombre, intensidad, precio, soldout, va
 }
 
 CardPrueba.propTypes = {
-    id: PropTypes.string.isRequired, // Ahora el id es requerido como prop
+    id: PropTypes.string.isRequired, 
     imagen: PropTypes.string.isRequired,
     nombre: PropTypes.string.isRequired,
     intensidad: PropTypes.number.isRequired,

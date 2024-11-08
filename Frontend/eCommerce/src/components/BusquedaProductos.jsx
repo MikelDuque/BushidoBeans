@@ -12,6 +12,8 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina }) => {
   const [error, setError] = useState(null);
   const [totalProductos, setTotalProductos] = useState(0);
 
+  const url = `https://localhost:7015/api/Product/FilteredProducts?Search=${productoBuscado}&Category=${filtro}&Order=${ordenar}&ThereStock=true&ProductsPerPage=${productosPorPagina}&CurrentPage=${paginaActual}`;
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -19,15 +21,25 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina }) => {
 
       try {
         console.log("Iniciando solicitud de productos...");
-        const response = await fetch(`https://localhost:7015/FilteredProducts?Search=${productoBuscado}&Category=${filtro}&Order=${ordenar}&ThereStock=true&ProductsPerPage=${productosPorPagina}&CurrentPage=${paginaActual}`);
+
+
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        });
         
+        if(response.ok){
+          const data = await response.json();
+          console.log("Producto:", data);
+
+          setDatosFiltrados(data || []);
+          console.log("Datos filtrados:", data);
+          console.log("Datos:", data);
+          setTotalProductos(data.total || 0);
+        }
+        console.log("Solicitud enviada a:", response);
         if (!response.ok) throw new Error("Error al cargar los productos");
 
-        const data = await response.json();
-        console.log("Datos recibidos:", data);
-
-        setDatosFiltrados(data.productos || []);
-        setTotalProductos(data.total || 0);
       } catch (err) {
         console.error("Error en la solicitud:", err);
         setError("Hubo un error al cargar los productos.");
@@ -36,14 +48,14 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina }) => {
         setLoading(false);
       }
     };
-
-    fetchData();
+    fetchData()
   }, [productoBuscado, filtro, ordenar, paginaActual, productosPorPagina]);
-
 
   const handlePageChange = (selectedPage) => {
     setPaginaActual(selectedPage.selected);
   };
+
+  console.log("datos filtrados", datosFiltrados);
 
   return (
     <div>
@@ -67,12 +79,12 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina }) => {
             <CardPrueba
               key={dataP.id}
               id={dataP.id}
-              imagen={dataP.imagen}
-              nombre={dataP.nombre}
-              intensidad={dataP.intensidad}
-              valoracion={dataP.valoracion}
-              precio={dataP.precio}
-              soldout={dataP.soldout}
+              imagen={dataP.image}
+              nombre={dataP.name}
+              intensidad={dataP.intensity}
+              valoracion={dataP.score}
+              precio={dataP.price}
+              soldout={dataP.stock === 0}
             />
           ))
         ) : (
@@ -101,5 +113,5 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina }) => {
       />
     </div>
   );
-};
+}
 export default BusquedaProductos;

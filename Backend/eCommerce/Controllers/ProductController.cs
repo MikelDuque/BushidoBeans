@@ -5,7 +5,7 @@ using eCommerce.Models.Dtos;
 
 namespace eCommerce.Controllers;
 
-[ApiController]
+//[ApiController]
 [Route("api/[controller]")]
 public class ProductController : ControllerBase
 {
