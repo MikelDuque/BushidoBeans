@@ -40,6 +40,7 @@ public class Program
         builder.Services.AddScoped<ProductRepository>();
 
         //Servicios
+        builder.Services.AddScoped<TextComparer>();
         builder.Services.AddScoped<AuthService>();
         builder.Services.AddScoped<UserService>();
         builder.Services.AddScoped<ProductService>();
