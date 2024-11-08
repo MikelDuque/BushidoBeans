@@ -1,6 +1,6 @@
 .contenedor-catalogo{
     background-color: var(--fondo-vistas);
-    width: 95%;
+    width: 99%;
     margin: auto;
 
 }
@@ -12,7 +12,7 @@
     top: 0;
     float: left;
     display: grid;
-    
+
 
 }
 
@@ -30,5 +30,5 @@
     display: flex;
     justify-content: center;
 
-    
+
 }

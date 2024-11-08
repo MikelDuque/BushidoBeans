@@ -16,52 +16,63 @@ function Catalogo() {
 
   const [filtro, setFiltro] = useState('opcion3');
   const [ordenar, setOrdenar] = useState('opcion1');
+  let [productosPorPagina, setProductosPorPagina] = useState(3); // Estado para controlar productos por página
+  const [pagina, setPagina] = useState(0);
+
+  const productosPorPaginaChange = (value) => {
+    setProductosPorPagina(value);
+  };
+
 
   const mostrarOptions = [
-    { value: 'opcion1', label: 'Todos los productos' },
-    { value: 'opcion2', label: 'Café' },
-    { value: 'opcion3', label: 'Té' }
+    { value: '0', label: 'Todos los productos' },
+    { value: '1', label: 'Café' },
+    { value: '2', label: 'Té' },
+    { value: '3', label: 'Otros' }
   ];
 
   const ordenarPor = [
-    { value: 'opcion1', label: 'Novedades' },
-    { value: 'opcion2', label: 'Precio Ascendente' },
-    { value: 'opcion3', label: 'Precio Descendente' },
-    { value: 'opcion4', label: 'Alfabéticamente (A-Z)' },
-    { value: 'opcion5', label: 'Alfabéticamente (Z-A)' }
+    { value: '0', label: 'Alfabéticamente (A-Z)' },
+    { value: '1', label: 'Alfabéticamente (Z-A)' },
+    { value: '2', label: 'Precio Descendente' },
+    { value: '3', label: 'Precio Ascendente' },
   ];
+
+  const mostrarProductos = [
+    { value: '3', label: '3 productos' },
+    { value: '5', label: '5 productos' },
+    { value: '10', label: '10 productos' },
+    { value: '20', label: '20 productos' },
+  ];
+
+  // Función para manejar el cambio en la cantidad de productos por página
+
 
   return (
     <>
-    
-    <Header />
-    <div className="contenedor-catalogo">
-      
-      <section>
-            <div className='carrusel-catalogo'>
-              <Carrusel images={imagenes} />
-            </div>
-      </section>
-            
-      <aside>
-          <div className="filtro">
-              <Filtro options={mostrarOptions} label="Mostrar" onChange={setFiltro} />
-              <Filtro options={ordenarPor} label="Ordenar por" onChange={setOrdenar} />
+      <Header />
+      <div className="contenedor-catalogo">
+        <section>
+          <div className='carrusel-catalogo'>
+            <Carrusel images={imagenes} />
           </div>
-      </aside>
-      <section className="sectionFloat">
-            <BusquedaProductos filtro={filtro} ordenar={ordenar} />
-      </section>
-      
-      
-      
-    </div>
-   
-        <Footer />
-    
+        </section>
+        <aside>
+          <div className="filtro">
+            <Filtro options={mostrarOptions} label="Mostrar" onChange={setFiltro} />
+            <Filtro options={ordenarPor} label="Ordenar por" onChange={setOrdenar} />
+            <Filtro options={mostrarProductos} label="Mostrar" onChange={productosPorPaginaChange} />
+          </div>
+        </aside>
+        <section className="sectionFloat">
+          <BusquedaProductos filtro={filtro} ordenar={ordenar} productosPorPagina={productosPorPagina} />
+        </section>
+      </div>
+      <Footer />
     </>
   );
-  
 }
 
 export default Catalogo;
+
+

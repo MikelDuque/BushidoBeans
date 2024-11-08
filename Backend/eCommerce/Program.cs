@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace eCommerce;
 
@@ -27,17 +28,26 @@ public class Program
         //Controladores
         builder.Services.AddControllers();
 
+        builder.Services.AddControllers().AddJsonOptions(options => {
+            options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+        });
+
         //Contextos
         builder.Services.AddScoped<DataContext>();
         builder.Services.AddScoped<UnitOfWork>();
+        builder.Services.AddScoped<CategoryRepository>();
         builder.Services.AddScoped<UserRepository>();
+        builder.Services.AddScoped<ProductRepository>();
 
         //Servicios
-        builder.Services.AddScoped<UserService>();
+        builder.Services.AddScoped<TextComparer>();
         builder.Services.AddScoped<AuthService>();
+        builder.Services.AddScoped<UserService>();
+        builder.Services.AddScoped<ProductService>();
 
         //Mappers
         builder.Services.AddTransient<UserMapper>();
+        builder.Services.AddTransient<ProductMapper>();
 
         //Swagger/OpenApi
         builder.Services.AddEndpointsApiExplorer();
@@ -61,7 +71,7 @@ public class Program
         .AddJwtBearer(options =>
         {
             //Accedemos a la clase settings donde esta el get de JwtKey (Donde se encuentra nuestra clave)
-            Settings settings = builder.Configuration.GetSection(Settings.SECTION_NAME).Get<Settings>();
+            Settings settings = builder.Configuration.GetSection(Settings.SECTION_NAME).Get<Settings>()!;
             //nuestra clave se guarda en la variable key
             string key = settings.JwtKey;
             //string key = Environment.GetEnvironmentVariable("JWT_KEY");
@@ -113,6 +123,9 @@ public class Program
         //Habilita la autorización
         app.UseAuthorization();
 
+        //Permite transmitir archivos estáticos
+        app.UseStaticFiles();
+
         app.MapControllers();
 
         //Llamamos al método de creación de base de datos de respaldo (seed)
@@ -124,7 +137,7 @@ public class Program
     static async Task SeedDatabase(IServiceProvider serviceProvider)
     {
         using IServiceScope scope = serviceProvider.CreateScope();
-        using DataContext dbContext = scope.ServiceProvider.GetService<DataContext>();
+        using DataContext dbContext = scope.ServiceProvider.GetService<DataContext>()!;
 
         if (dbContext.Database.EnsureCreated())
         {

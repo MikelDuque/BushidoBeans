@@ -1,0 +1,133 @@
+
+.inventario{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1%;
+  justify-items: center;
+  padding: 10px;
+  
+
+}
+
+.cardPrueba{
+  height: auto;
+  align-items: center;
+  justify-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0px 0px 10px hsla(96, 65%, 49%, 0.333);
+  text-align: center;
+  background-color: var(--nav-footer);  
+  gap: 5px;
+  font-family: var(--font-family-texto);
+  font-size: var(--texto-size);
+  font-weight: var(--font-weight-regular);
+  color: white;
+
+  
+
+}
+
+.productName{
+  font-family: var(--font-family-titulos-subtitulos);
+  font-size: var(--subtitulos-size);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 1px;
+  color: white;
+  grid-column: span 2;
+}
+
+
+
+
+.imgPrueba{
+  height: auto;
+  grid-column: span 2;
+  align-items: center;
+  border-radius: 10px;
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  border: 1px solid black;
+  box-shadow: 0px 0px 10px hsla(96, 65%, 49%, 0.333);
+  grid-column: span 2;
+
+}
+
+.iconos{
+  display: flex;
+  height: 30%;
+  width: 100%;
+  text-align: left;
+  justify-content: center;
+  align-items: center;
+}
+
+.detalles{
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-family-titulos-subtitulos);
+  font-size: var(--subtitulos-size);
+  font-weight: var(--font-weight-regular);
+  text-align: right;
+}
+
+
+
+.cardPrueba.sold-out {
+  color: #888;
+}
+
+.cardPrueba.sold-out img {
+  filter: grayscale();
+  opacity: 0.8;
+}
+
+.cardPrueba.sold-out p {
+  filter: grayscale();
+  opacity: 0.8;
+}
+
+.cardPrueba.sold-out button {
+  display: none;
+}
+
+
+/* Estilos para el botón transparente sin borde */
+.botonCardClick {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* Estilos para el botón del carrito */
+.botonPrueba {
+  grid-column: span 2;
+  justify-self: center;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.89);
+  height: 40px;
+  width: 80%;
+  font-family: var(--font-family-titulos-subtitulos);
+  background-color: var(--fondo-vistas);
+  color: rgb(11, 37, 17);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.botonPrueba:hover {
+  background-color: rgb(255, 255, 108); /* Cambia el fondo a amarillo en hover */
+  color: green; /* Cambia el texto a verde en hover */
+}
+
+.botonCardClick{
+  background: transparent;
+  border: none;
+}
+@media (max-width: 500px){
+  .imgPrueba{
+    height: auto;
+    width: 100%;
+  }
+}
