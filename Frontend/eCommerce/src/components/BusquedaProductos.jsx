@@ -5,7 +5,7 @@ import ReactPaginate from 'react-paginate';
 import "../styles/Catalogo.css";
 import "../styles/Paginacion.css";
 
-const BusquedaProductos = ({ filtro, ordenar, productosPorPagina }) => {
+const BusquedaProductos = ({ filtro, ordenar, productosPorPagina}) => {
   const [productoBuscado, setProductoBuscado] = useState('');
   const [datosFiltrados, setDatosFiltrados] = useState([]);
   const [paginaActual, setPaginaActual] = useState(0);

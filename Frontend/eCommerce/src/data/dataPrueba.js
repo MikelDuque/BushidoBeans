@@ -118,7 +118,207 @@ const productData = [
         precio: 2.1,
         soldout: false,
         descripcion: "El Pouch Drink Latte es la combinación perfecta entre el café suave y la cremosidad de la leche. Con una intensidad media-alta, esta bebida ofrece un sabor equilibrado que te cautivará. Su textura suave y cremosa es ideal para disfrutar en cualquier momento del día, ya sea para empezar la mañana con energía o como una merienda reconfortante. El latte es ideal para quienes disfrutan de un sabor más suave sin renunciar a la intensidad del café."
+    },    {
+        id: 13,
+        imagen: "/productos/Designer (12).jpeg",
+        nombre: "Pouch Drink Caramelo",
+        intensidad: 2,
+        valoracion: 4,
+        precio: 2.3,
+        soldout: false,
+        descripcion: "Una mezcla dulce y seductora que combina la suavidad del café con el caramelo, ideal para una experiencia reconfortante."
+    },
+    {
+        id: 14,
+        imagen: "/productos/Designer (13).jpeg",
+        nombre: "Pouch Drink Mocca",
+        intensidad: 4,
+        valoracion: 3.5,
+        precio: 2.5,
+        soldout: false,
+        descripcion: "El perfecto equilibrio entre el chocolate y el café, con una intensidad alta que deleita a quienes buscan sabores profundos y dulces."
+    },
+    {
+        id: 15,
+        imagen: "/productos/Designer (14).jpeg",
+        nombre: "Pouch Drink Chai Latte",
+        intensidad: 3,
+        valoracion: 4.5,
+        precio: 2.6,
+        soldout: false,
+        descripcion: "Una mezcla de té con especias aromáticas y leche, perfecta para quienes disfrutan de sabores exóticos y cálidos."
+    },
+    {
+        id: 16,
+        imagen: "/productos/Designer (15).jpeg",
+        nombre: "Pouch Drink Menta Helada",
+        intensidad: 2,
+        valoracion: 3,
+        precio: 2.0,
+        soldout: false,
+        descripcion: "Una bebida refrescante de té con menta, ideal para los días de calor y para quienes buscan un toque de frescura."
+    },
+    {
+        id: 17,
+        imagen: "/productos/Designer (16).jpeg",
+        nombre: "Pouch Drink Matcha",
+        intensidad: 3,
+        valoracion: 4,
+        precio: 2.7,
+        soldout: false,
+        descripcion: "El clásico té matcha japonés en una versión lista para llevar, con el equilibrio perfecto entre intensidad y sabor herbáceo."
+    },
+    {
+        id: 18,
+        imagen: "/productos/Designer (17).jpeg",
+        nombre: "Pouch Drink Chocolate Caliente",
+        intensidad: 1,
+        valoracion: 5,
+        precio: 2.2,
+        soldout: false,
+        descripcion: "Un chocolate caliente espeso y cremoso, ideal para los días fríos o para momentos de indulgencia pura."
+    },
+    {
+        id: 19,
+        imagen: "/productos/Designer (18).jpeg",
+        nombre: "Pouch Drink Café Irish Cream",
+        intensidad: 4,
+        valoracion: 4,
+        precio: 2.8,
+        soldout: false,
+        descripcion: "Una bebida inspirada en el famoso licor Irish Cream, con una combinación de café intenso y toques de crema irlandesa."
+    },
+    {
+        id: 20,
+        imagen: "/productos/Designer (19).jpeg",
+        nombre: "Pouch Drink Café con Coco",
+        intensidad: 3,
+        valoracion: 3.5,
+        precio: 2.4,
+        soldout: false,
+        descripcion: "Un sabor exótico que combina la cremosidad del coco con la intensidad del café, ideal para los amantes de los sabores tropicales."
+    },
+    {
+        id: 21,
+        imagen: "/productos/Designer (20).jpeg",
+        nombre: "Pouch Drink Canela y Miel",
+        intensidad: 2,
+        valoracion: 3,
+        precio: 2.3,
+        soldout: false,
+        descripcion: "Una combinación cálida y suave de canela y miel, perfecta para momentos de relajación y para quienes buscan un toque dulce."
+    },
+    {
+        id: 22,
+        imagen: "/productos/Designer (21).jpeg",
+        nombre: "Pouch Drink Espresso Intenso",
+        intensidad: 5,
+        valoracion: 4,
+        precio: 2.9,
+        soldout: false,
+        descripcion: "Para los verdaderos amantes del café, un espresso con una intensidad alta y un sabor profundo que recarga la energía."
+    },
+    {
+        id: 23,
+        imagen: "/productos/Designer (22).jpeg",
+        nombre: "Pouch Drink Té Verde",
+        intensidad: 2,
+        valoracion: 3.5,
+        precio: 1.9,
+        soldout: false,
+        descripcion: "Un refrescante té verde que proporciona un sabor suave y herbáceo, ideal para quienes buscan una bebida ligera y natural."
+    },
+    {
+        id: 24,
+        imagen: "/productos/Designer (23).jpeg",
+        nombre: "Pouch Drink Choco Menta",
+        intensidad: 3,
+        valoracion: 4.5,
+        precio: 2.6,
+        soldout: false,
+        descripcion: "La combinación de chocolate y menta en una bebida refrescante, ideal para una experiencia dulce y fresca."
+    },
+    {
+        id: 25,
+        imagen: "/productos/Designer (24).jpeg",
+        nombre: "Pouch Drink Café Avena",
+        intensidad: 2,
+        valoracion: 4,
+        precio: 2.3,
+        soldout: false,
+        descripcion: "Un suave café con leche de avena, ideal para aquellos que buscan alternativas sin lácteos y un sabor delicado."
+    },
+    {
+        id: 26,
+        imagen: "/productos/Designer (25).jpeg",
+        nombre: "Pouch Drink Café Almendra",
+        intensidad: 3,
+        valoracion: 4.2,
+        precio: 2.4,
+        soldout: false,
+        descripcion: "Una mezcla de café y leche de almendra con un toque sutil de nuez, perfecta para un sabor único y libre de lácteos."
+    },
+    {
+        id: 27,
+        imagen: "/productos/Designer (26).jpeg",
+        nombre: "Pouch Drink Mocha Blanco",
+        intensidad: 3,
+        valoracion: 4.5,
+        precio: 2.8,
+        soldout: false,
+        descripcion: "Un latte con un toque de chocolate blanco, que ofrece una experiencia dulce y suave para cualquier momento del día."
+    },
+    {
+        id: 28,
+        imagen: "/productos/Designer (27).jpeg",
+        nombre: "Pouch Drink Golden Latte",
+        intensidad: 2,
+        valoracion: 4.7,
+        precio: 3.0,
+        soldout: false,
+        descripcion: "Una bebida con cúrcuma y especias, ideal para quienes buscan un sabor cálido y saludable, con un toque de exotismo."
+    },
+    {
+        id: 29,
+        imagen: "/productos/Designer (28).jpeg",
+        nombre: "Pack de Chocolates",
+        intensidad: 1,
+        valoracion: 4,
+        precio: 5.5,
+        soldout: false,
+        descripcion: "Un pack con una variedad de chocolates que van desde el amargo al cremoso, para disfrutar en cualquier ocasión."
+    },
+    {
+        id: 30,
+        imagen: "/productos/Designer (29).jpeg",
+        nombre: "Pouch Drink Café Moka Avellana",
+        intensidad: 3,
+        valoracion: 3.8,
+        precio: 2.7,
+        soldout: false,
+        descripcion: "Un moka con un toque de avellana, ideal para una experiencia aromática y reconfortante con sabor a frutos secos."
+    },
+    {
+        id: 31,
+        imagen: "/productos/Designer (30).jpeg",
+        nombre: "Pack de Matcha",
+        intensidad: 3,
+        valoracion: 5,
+        precio: 6.0,
+        soldout: false,
+        descripcion: "Para los amantes del matcha, este pack ofrece una selección especial de sabores de té verde en polvo para una experiencia premium."
+    },
+    {
+        id: 32,
+        imagen: "/productos/Designer (31).jpeg",
+        nombre: "Pouch Drink Té Rooibos",
+        intensidad: 2,
+        valoracion: 4,
+        precio: 2.0,
+        soldout: false,
+        descripcion: "Un té rooibos suave y naturalmente libre de cafeína, con un toque dulce y terroso, ideal para relajarse al final del día."
     }
+
 ];
 
 export default productData;
