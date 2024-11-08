@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System.Security.Cryptography;
 
 namespace eCommerce.Models.Database.Repositories;
 public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : class
@@ -41,14 +40,14 @@ public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity :
     public void Delete(TEntity entity)
     {
         _dbContext.Set<TEntity>().Remove(entity);
-        
+
     }
 
-    //Función para guardar los cambios
     public async Task<bool> SaveAsync()
     {
         return await _dbContext.SaveChangesAsync() > 0;
     }
+
     //Función para saber si existe en la base de datos
     public async Task<bool> ExistAsync(object id)
     {

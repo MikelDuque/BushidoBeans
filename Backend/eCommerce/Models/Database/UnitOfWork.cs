@@ -7,9 +7,11 @@ namespace eCommerce.Controllers;
 public class UnitOfWork
 {
     private readonly DataContext _dataContext;
-    private UserRepository _userRepository;
+    private UserRepository _userRepository = null!;
+    private ProductRepository _productRepository = null!;
 
     public UserRepository UserRepository => _userRepository ??= new UserRepository(_dataContext);
+    public ProductRepository ProductRepository => _productRepository ??= new ProductRepository(_dataContext);
 
     public UnitOfWork(DataContext dataContext)
     {
