@@ -133,3 +133,100 @@
 .fc{
     margin-top: 8%;
 }
+.container-mision {
+    background-color: var(--nav-footer);
+    margin: 0 auto;
+    width: 95%;
+    height: 80vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    justify-content: center; 
+    padding: 2%; /* Espacio alrededor del contenido */
+}
+
+.imagen-mision {
+    width: 100%; /* Ajusta el tamaño de la imagen aquí */
+    height: auto;
+    margin-right: 2%; /* Separación de la imagen y el texto */
+}
+.texto-mision{
+    color: var(--fondo-vistas);
+    margin:0 auto;
+    justify-content: center;
+    align-items: center;
+    padding: 5%;
+    text-align: justify;
+
+}
+
+
+/* Estilos para la sección de Visión */
+.container-vision {
+    width: 95%;
+    height: 80vh;
+    margin: 0 auto;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.titulo-vision{
+    font-size: 100px;
+}
+.titulo-mision{
+    color: var(--fondo-vistas);
+    align-items: top;
+    font-size: 100px;
+    text-align: center;
+}
+.texto-vision {
+    color: var(--nav-footer); /* Ajusta el color si es necesario */
+    margin: 0 auto;
+    font-size: 30px;
+
+}
+
+.container-valores {
+    background-color: var(--nav-footer);
+    margin: 0 auto;
+    width: 95%;
+    height: 85vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 2%;
+}
+
+.container-imagen-valores {
+    width: 50%;
+    height: auto;
+    padding-left: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagen-valores {
+    width:80%;
+    height: auto;
+}
+
+.container-valores ul {
+    padding-left: 20px;
+    color: var(--fondo-vistas);
+    text-align: left;
+    max-width: 45%;
+}
+
+.container-valores ul li {
+    margin:  -40px; /* Ajusta el espacio entre los elementos */
+}
+
+.spanBeans{
+    font-weight: bolder;
+    font-size: 30px;
+}

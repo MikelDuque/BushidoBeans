@@ -1,0 +1,55 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.page-item {
+    margin: 0 8px;
+}
+
+.page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: var(--nav-footer);  /* Color verde */
+    border-radius: 50%;
+    text-decoration: none;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.page-link:hover {
+    background-color: #3e8e41;  /* Verde más oscuro en hover */
+    transform: scale(1.1);      /* Efecto de agrandamiento */
+}
+
+.active .page-link {
+    background-color: #2e7d32;  /* Verde más oscuro para el activo */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);  /* Sombra más intensa para el activo */
+    transform: scale(1.15);
+}
+
+.previous-link, .next-link {
+    font-size: 14px;
+    padding: 8px 16px;          /* Ampliar padding para más ancho */
+    color: #4CAF50;
+    background-color: transparent;
+    border-radius: 20px;        /* Bordes redondeados */
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.previous-link:hover, .next-link:hover {
+    color: #ffffff;
+    background-color: #3e8e41;  /* Fondo verde en hover */
+}
