@@ -5,6 +5,8 @@ using eCommerce.Models.Dtos;
 
 namespace eCommerce.Controllers;
 
+[ApiController]
+[Route("api/[controller]")]
 public class ProductController : ControllerBase
 {
   private readonly ProductService _service;
