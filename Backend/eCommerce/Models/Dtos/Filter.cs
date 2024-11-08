@@ -5,10 +5,10 @@ namespace eCommerce.Models.Dtos;
 
 public class Filter
 {
-  public required string search;
-  public required ECategory category;
-  public required EOrder order;
-  public required bool thereStock;
-  public required int productsPerPage;
-  public required int currentPage;
+  public string Search { get; set; }
+  public ECategory category = ECategory.Coffee;
+  public EOrder order = EOrder.ABC_Desc;
+  public bool thereStock = true;
+  public int productsPerPage = 5;
+  public int currentPage = 1;
 }

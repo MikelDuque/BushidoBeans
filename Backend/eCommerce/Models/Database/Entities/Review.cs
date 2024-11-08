@@ -11,9 +11,11 @@ public class Review
 
     //---Foreign Keys---//
 
-    public required long ProductId { get; set; }
-    public Product Product { get; set; } = null!;
+    [ForeignKey(nameof(Product))]
+    public long ProductId { get; set; }
+    public Product Product { get; set; }
 
-    public required long UserId { get; set; }
-    public User User { get; set; } = null!;
+    [ForeignKey(nameof(User))]
+    public long UserId { get; set; }
+    public User User { get; set; }
 }

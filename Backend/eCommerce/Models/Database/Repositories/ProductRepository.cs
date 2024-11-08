@@ -35,9 +35,9 @@ public class ProductRepository : Repository<Product>
     {
         var query = FilterByCategoryAndStock(filter);
 
-        if (!string.IsNullOrEmpty(filter.search))
+        if (!string.IsNullOrEmpty(filter.Search))
         {
-            query = FilterByFuzzySearch(query, filter.search);
+            query = FilterByFuzzySearch(query, filter.Search);
         }
 
         query = ApplyOrder(query, filter);
@@ -52,7 +52,8 @@ public class ProductRepository : Repository<Product>
     {
         var query = GetQueryable()
                     .Where(product => product.CategoryId == (int)filter.category)
-                    .Where(product => filter.thereStock ? product.Stock > 0 : product.Stock <= 0);
+                    .Where(product => filter.thereStock ? product.Stock > 0 : product.Stock <= 0)
+                    .Include(product => product.Reviews);
 
         return query;
     }
