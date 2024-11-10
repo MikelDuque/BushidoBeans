@@ -17,11 +17,28 @@ public class ProductService
         _mapper = mapper;
     }
 
-  public async Task<IEnumerable<ProductDto>> GetFilteredProducts(Filter filter)
+  public async Task<Catalog> GetFilteredProducts(Filter filter)
   {
-    IEnumerable<Product> filteredProduct = await _unitOfWork.ProductRepository.GetFilteredProducts(filter);
+    Catalog catalog = new Catalog()
+    {
+      TotalPages = 0,
+      FilteredProducts = []
+    };
 
-    return _mapper.ToDto(filteredProduct);
+    Dictionary<int, List<Product>> categoryDictionary = await _unitOfWork.ProductRepository.GetFilteredProducts(filter);
+    int totalFilteredProducts = categoryDictionary.Keys.FirstOrDefault();
+
+    if (totalFilteredProducts > 0)
+    {
+      List<ProductDto> filteredProducts = [];
+
+      filteredProducts = _mapper.ToDto(categoryDictionary[totalFilteredProducts]).ToList();
+
+      catalog.TotalPages = (int)Math.Ceiling((double)totalFilteredProducts / filter.ProductsPerPage);
+      catalog.FilteredProducts = filteredProducts;
+    };
+
+    return catalog;
   }
 
   /*
