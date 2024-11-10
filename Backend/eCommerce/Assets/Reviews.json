@@ -413,27 +413,6 @@
     "UserId": 4
   },
   {
-    "Id": 60,
-    "Score": 2,
-    "Body": "Muy buen accesorio para preparar café, es práctico y fácil de usar.",
-    "ProductId": 29,
-    "UserId": 5
-  },
-  {
-    "Id": 61,
-    "Score": 2,
-    "Body": "Este accesorio me ha facilitado mucho la preparación de mi café, muy recomendable.",
-    "ProductId": 29,
-    "UserId": 1
-  },
-  {
-    "Id": 62,
-    "Score": 0,
-    "Body": "No lo encontré útil, el café lo preparo de otra forma.",
-    "ProductId": 29,
-    "UserId": 2
-  },
-  {
     "Id": 63,
     "Score": 2,
     "Body": "La cafetera italiana hace un café delicioso. Me encanta su diseño tradicional y su fácil uso.",
