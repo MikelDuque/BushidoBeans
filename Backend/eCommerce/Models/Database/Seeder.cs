@@ -54,7 +54,7 @@ public class Seeder
       [
         new Product
         {
-          Image = "./wwwroot/images/lataBushidoCafe.png",
+          Image = "images/lataBushidoCafe.png",
           Name = "La especialidad de Fígaro",
           Description = "El mejor café de \"El Alpiste\" traído hasta aquí.",
           NutritionalInfo = null,
@@ -150,7 +150,7 @@ public class Seeder
     },
     new Product
     {
-        Image = "./wwwroot/images/lataBushidoCafe.png",
+        Image = "/images/lataBushidoCafe.png",
         Name = "Café Irish",
         Description = "Un café con un toque de whisky irlandés, ideal para una experiencia única.",
         NutritionalInfo = null,

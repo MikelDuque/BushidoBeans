@@ -10,8 +10,8 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina }) => {
   const [paginaActual, setPaginaActual] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [totalProductos, setTotalProductos] = useState(0);
-
+  const [totalProductos, setTotalProductos] = useState(0);  //  Cambiar por variable
+  
   const url = `https://localhost:7015/api/Product/FilteredProducts?Search=${productoBuscado}&Category=${filtro}&Order=${ordenar}&ThereStock=true&ProductsPerPage=${productosPorPagina}&CurrentPage=${paginaActual}`;
 
   useEffect(() => {
