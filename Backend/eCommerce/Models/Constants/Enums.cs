@@ -3,7 +3,8 @@ public enum EIntensity
 {
     Soft,
     Medium,
-    Strong
+    Strong,
+    No
 }
 
 public enum ECategory
