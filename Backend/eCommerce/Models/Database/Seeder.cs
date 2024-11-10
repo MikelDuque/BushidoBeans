@@ -793,122 +793,116 @@ public class Seeder
             new Review {
                 Score = EScore.Positive,
                 Body = "La cafetera italiana hace un café delicioso. Me encanta su diseño tradicional y su fácil uso.",
-                ProductId = 31,
+                ProductId = 30,
                 UserId = 1
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Es perfecta para hacer café como en Italia. El único problema es que ocupa un poco de espacio.",
-                ProductId = 31,
+                ProductId = 30,
                 UserId = 2
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Muy buena cafetera, prepara el café de forma rápida y eficaz. El sabor es inigualable.",
-                ProductId = 31,
+                ProductId = 30,
                 UserId = 3
             },
             new Review {
                 Score = EScore.Negative,
                 Body = "No me terminó de convencer, el café sale demasiado fuerte para mi gusto.",
-                ProductId = 31,
+                ProductId = 30,
                 UserId = 4
             },
             new Review {
                 Score = EScore.Regular,
                 Body = "No es lo que esperaba, la cafetera tiene varios problemas con el goteo.",
-                ProductId = 31,
+                ProductId = 30,
                 UserId = 5
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "La taza con infusor es perfecta para tés de hojas sueltas. Me encanta el diseño.",
-                ProductId = 32,
+                ProductId = 31,
                 UserId = 1
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Ideal para preparar tés, el infusor es fácil de usar y el material es muy resistente.",
-                ProductId = 32,
+                ProductId = 31,
                 UserId = 2
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Muy buena opción para disfrutar tés sueltos. La taza es cómoda y el infusor funciona de maravilla.",
-                ProductId = 32,
+                ProductId = 31,
                 UserId = 3
             },
             new Review {
                 Score = EScore.Regular,
                 Body = "El infusor no me gusta mucho, prefiero otros métodos para preparar té.",
-                ProductId = 32,
+                ProductId = 31,
                 UserId = 4
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Me encanta la botella termal de viaje, mantiene el café caliente por horas y es muy práctica.",
-                ProductId = 33,
+                ProductId = 32,
                 UserId = 5
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Perfecta para mis viajes, mantiene el café caliente todo el tiempo y no gotea.",
-                ProductId = 33,
+                ProductId = 32,
                 UserId = 1
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Excelente calidad, me encanta cómo mantiene la temperatura de las bebidas durante todo el día.",
-                ProductId = 33,
+                ProductId = 32,
                 UserId = 2
             },
             new Review {
                 Score = EScore.Negative,
                 Body = "No es tan térmica como esperaba, el café se enfría más rápido de lo que pensaba.",
-                ProductId = 33,
+                ProductId = 32,
                 UserId = 3
             },
             new Review {
                 Score = EScore.Regular,
                 Body = "La botella se ve bien, pero no mantiene tanto el calor. Me decepcionó un poco.",
-                ProductId = 33,
+                ProductId = 32,
                 UserId = 4
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "La botella térmica para café mantiene el café caliente por mucho tiempo, es muy eficiente.",
-                ProductId = 34,
+                ProductId = 33,
                 UserId = 5
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Ideal para llevar café al trabajo. Muy buena calidad y mantiene el calor durante varias horas.",
-                ProductId = 34,
+                ProductId = 33,
                 UserId = 1
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Me encanta esta botella, mantiene mi café caliente como si acabara de hacerlo.",
-                ProductId = 34,
+                ProductId = 33,
                 UserId = 2
             },
             new Review {
                 Score = EScore.Negative,
                 Body = "No es lo que esperaba, se enfría un poco más rápido de lo que me dijeron.",
-                ProductId = 34,
+                ProductId = 33,
                 UserId = 3
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "La botella térmica es práctica y perfecta para el café. Su diseño es bastante atractivo también.",
-                ProductId = 34,
+                ProductId = 33,
                 UserId = 4
-            },
-            new Review {
-                Score = EScore.Regular,
-                Body = "La botella es buena, pero esperaba que mantuviera el café caliente durante más tiempo.",
-                ProductId = 34,
-                UserId = 5
             }
             ];
 
