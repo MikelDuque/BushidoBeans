@@ -33,8 +33,6 @@ public class ProductMapper
 
         int TotalReviews = product.Reviews.Count;
 
-        if (TotalReviews > 0) return product.Reviews.Select(review => (int)review.Score).Average();
-
-        return score;
+        return TotalReviews > 0? product.Reviews.Select(review => (int)review.Score).Average() : score;
     }
 }

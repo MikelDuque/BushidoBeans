@@ -23,8 +23,8 @@ public enum EScore
 
 public enum EOrder
 {
-    ABC_Desc,
     ABC_Asc,
-    Price_Desc,
-    Price_Asc
+    ABC_Desc,
+    Price_Asc,
+    Price_Desc
 }

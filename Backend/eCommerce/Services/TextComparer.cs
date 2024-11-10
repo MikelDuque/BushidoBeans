@@ -22,7 +22,7 @@ public class TextComparer
   public IEnumerable<Product> SearchFilter(IQueryable<Product> query, string search)
   {
     Debug.WriteLine(search);
-    List<Product> listaFiltrada = new List<Product>();
+    List<Product> listaFiltrada = [];
 
     if (!string.IsNullOrWhiteSpace(search))
     {

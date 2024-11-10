@@ -34,56 +34,64 @@ public class ProductRepository : Repository<Product>
     }
 
     //----- FILTRO -----//
-    public async Task<IEnumerable<Product>> GetFilteredProducts(Filter filter)
+    public async Task<Dictionary<int, List<Product>>> GetFilteredProducts(Filter filter)
     {
+        //Creamos el diccionario que incorporará el total de productos filtrados + lista de esos productos
+        Dictionary<int, List<Product>> diccionarioFinal = [];
         TextComparer _textComparer = new();
-        IQueryable<Product> query = FilterByCategoryAndStock(filter);
 
-        List<Product> listaProductos = _textComparer.SearchFilter(query, filter.Search).ToList();
+        IQueryable<Product> query = FilterByCategoryAndStock(filter.ThereStock, filter.Category);
 
+        List<Product> listaProductosBuscados = _textComparer.SearchFilter(query, filter.Search).ToList();
+
+        if (listaProductosBuscados.IsNullOrEmpty()) return await Task.FromResult(diccionarioFinal) ;
         
-        if (listaProductos.IsNullOrEmpty())
-        {
-            return listaProductos;
-        }
+        //------------------------------------------------------------------//
 
-        listaProductos.ForEach(nuevoProducto => query.Where(producto => producto == nuevoProducto));
-        
-        query = ApplyOrder(query, filter);
+        //Si la lista de productos buscados es distinta a la query original, transformala a la nueva query
+        query = listaProductosBuscados == query.ToList() ? query : listaProductosBuscados.AsQueryable();
 
-        query = ApplyPagination(query, filter);
+        query = ApplyOrder(query, filter.Order);
 
-        return await query.ToListAsync();
+        int totalProductosFiltrados = query.Count();
+
+        query = ApplyPagination(query, filter.CurrentPage, filter.ProductsPerPage);
+
+        diccionarioFinal[totalProductosFiltrados] = await Task.FromResult(query.ToList());
+
+        return diccionarioFinal;
     }
 
-    //----- FUNCIONES DEL FILTRO -----//
-    private IQueryable<Product> FilterByCategoryAndStock(Filter filter)
-    {
-        IQueryable<Product> query = GetQueryable().Where(product => filter.ThereStock ? product.Stock > 0 : product.Stock <= 0);
 
-        if(filter.Category > 0) { query = query.Where(product => product.CategoryId == (long)filter.Category); };
+    //----- FUNCIONES DEL FILTRO -----//
+    private IQueryable<Product> FilterByCategoryAndStock(bool isThereStock, ECategory category)
+    {
+        IQueryable<Product> query = GetQueryable().Where(product => isThereStock ? product.Stock > 0 : product.Stock <= 0);
+
+        if(category > 0) { query = query.Where(product => product.CategoryId == (long)category); };
 
         return query.Include(product => product.Reviews);
     }
 
-    private IQueryable<Product> ApplyOrder(IQueryable<Product> query, Filter filter)
+    private IQueryable<Product> ApplyOrder(IQueryable<Product> query, EOrder order)
     {
-        IQueryable<Product> orderedQuery = filter.Order switch
+        IQueryable<Product> orderedQuery = order switch
         {
             EOrder.ABC_Asc => query.OrderBy(product => product.Name),
             EOrder.ABC_Desc => query.OrderByDescending(product => product.Name),
             EOrder.Price_Asc => query.OrderBy(product => product.Price),
             EOrder.Price_Desc => query.OrderByDescending(product => product.Price),
-            _ => query
+            _ => query.OrderBy(product => product.Name)
         };
+        
 
         return orderedQuery;
     }
 
-    private IQueryable<Product> ApplyPagination(IQueryable<Product> query, Filter filter)
+    private IQueryable<Product> ApplyPagination(IQueryable<Product> query, int currentPage, int productsPerPage)
     {
-        int skip = (filter.CurrentPage - 1) * filter.ProductsPerPage;
-        var paginatedQuery = query.Skip(skip).Take(filter.ProductsPerPage);
+        int skip = (currentPage - 1) * productsPerPage;
+        var paginatedQuery = query.Skip(skip).Take(productsPerPage);
         return paginatedQuery;
     }
 
