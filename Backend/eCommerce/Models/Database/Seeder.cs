@@ -29,12 +29,44 @@ public class Seeder
 
         User[] users = [
             new User {
-                Mail = "imongut0701@g.educaand.es",
-                Name = "Ivan",
-                Password = AuthService.HashPassword("Hola#123456789") ,
-                Surname = "Montes Gutierrez",
-                Phone = 683956402,
+                Mail = "mikel@gmail.es",
+                Name = "Mikel",
+                Password = AuthService.HashPassword("Mikel#1234567890") ,
+                Surname = "Platero Duque",
+                Phone = 611111111,
+                Role = "admin",
+            },
+            new User {
+                Mail = "david@gmail.es",
+                Name = "Mr.",
+                Password = AuthService.HashPassword("David#1234567890") ,
+                Surname = "Andrino",
+                Phone = 622222222,
                 Role = "admin"
+            },
+            new User {
+                Mail = "yasir@gmail.es",
+                Name = "Yasir",
+                Password = AuthService.HashPassword("Yasir#1234567890") ,
+                Surname = "Bel Maalem Ouhadou Abdenour",
+                Phone = 633333333,
+                Role = "admin"
+            },
+            new User {
+                Mail = "ivan@gmail.es",
+                Name = "Ivan",
+                Password = AuthService.HashPassword("Ivan#1234567890") ,
+                Surname = "Montes Gutierrez",
+                Phone = 644444444,
+                Role = "admin"
+            },
+            new User {
+                Mail = "raquel@gmail.es",
+                Name = "Raquel",
+                Password = AuthService.HashPassword("Raquel#1234567890") ,
+                Surname = "López Bermúdez",
+                Phone = 644444444,
+                Role = null
             }
         ];
 
