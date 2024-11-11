@@ -16,8 +16,8 @@ public class ProductRepository : Repository<Product>
     public async Task<Product> GetByIdWithReviewsAsync(object id)
     {
         return await GetQueryable().Where(product => product.Id == (long)id)
-        .Include(product => product.Reviews)
         .Include(product => product.Category)
+        .Include(product => product.Reviews)
         .FirstOrDefaultAsync();
     }
     
@@ -70,7 +70,7 @@ public class ProductRepository : Repository<Product>
 
         if(category > 0) { query = query.Where(product => product.CategoryId == (long)category); };
 
-        return query.Include(product => product.Reviews);
+        return query.Include(product => product.Category).Include(product => product.Reviews);
     }
 
     private IQueryable<Product> ApplyOrder(IQueryable<Product> query, EOrder order)
