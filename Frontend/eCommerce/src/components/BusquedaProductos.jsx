@@ -7,10 +7,10 @@ import "../styles/Paginacion.css";
 const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   const [productoBuscado, setProductoBuscado] = useState('');
   const [datosFiltrados, setDatosFiltrados] = useState([]);
-  const [paginaActual, setPaginaActual] = useState(0);
+  const [paginaActual, setPaginaActual] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [totalProductos, setTotalProductos] = useState(0); // Total que se actualiza al recibir respuesta del backend
+  const [totalPaginas, setTotalPaginas] = useState(1); // Total que se actualiza al recibir respuesta del backend
 
   useEffect(() => {
     // Llamada a la API cuando cambian el filtro, orden, o búsqueda
@@ -20,14 +20,18 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
 
       try {
         // API del backend que retorna los productos ya filtrados y paginados
-        const response = await fetch(`/api/productos?buscar=${productoBuscado}&filtro=${filtro}&ordenar=${ordenar}&pagina=${paginaActual}&productosPorPagina=${productosPorPagina}`);
+
+        const Url = 'https://localhost:7015/api/Product/Filtered_Products'
+        const response = await fetch(`${Url}?Search=${productoBuscado}&Category=${filtro}&Order=${ordenar}&IncludeStockless=true&ProductsPerPage=${productosPorPagina}&CurrentPage=${paginaActual}`, {method: 'GET', headers:{'Content-Type':'aplication/json'}});
         
         if (!response.ok) throw new Error("Error al cargar los productos");
 
         const data = await response.json();
 
-        setDatosFiltrados(data.productos);  // Datos de productos recibidos
-        setTotalProductos(data.total);       // Total de productos para paginación
+        setDatosFiltrados(Array.isArray(data.FilteredProducts)? data.FilteredProducts:[]);  // Datos de productos recibidos
+        setTotalPaginas(data.TotalPages);       // Total de productos para paginación
+        console.log("data", data);
+        
       } catch (err) {
         setError("Hubo un error al cargar los productos.");
       } finally {
@@ -64,12 +68,12 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
             <CardPrueba
               key={dataP.id}
               id={dataP.id}
-              imagen={dataP.imagen}
-              nombre={dataP.nombre}
-              intensidad={dataP.intensidad}
-              valoracion={dataP.valoracion}
-              precio={dataP.precio}
-              soldout={dataP.soldout}
+              imagen={dataP.Image}
+              nombre={dataP.Name}
+              intensidad={dataP.Intensity}
+              valoracion={dataP.Score}
+              precio={dataP.Price}
+              soldout={dataP.Stock}
             />
           ))
         ) : (
@@ -81,7 +85,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
         previousLabel={'←'}
         nextLabel={'→'}
         breakLabel={'...'}
-        pageCount={Math.ceil(totalProductos / productosPorPagina)} // Cálculo del número de páginas
+        pageCount={totalPaginas} // Cálculo del número de páginas
         marginPagesDisplayed={2}
         pageRangeDisplayed={3}
         onPageChange={handlePageChange}

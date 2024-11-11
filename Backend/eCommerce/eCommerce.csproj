@@ -28,7 +28,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Assets/" />
+    <Content Update="Assets\Products.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Assets\Reviews.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

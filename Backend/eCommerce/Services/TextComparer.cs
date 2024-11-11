@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 using eCommerce.Models.Database.Entities;
@@ -9,7 +10,7 @@ namespace eCommerce.Services;
 
 public class TextComparer
 {
-  private const double THRESHOLD = 0.75;
+  private const double THRESHOLD = 0.80;
 
   private readonly INormalizedStringSimilarity _stringSimilarityComparer;
 
@@ -20,7 +21,8 @@ public class TextComparer
 
   public IEnumerable<Product> SearchFilter(IQueryable<Product> query, string search)
   {
-    List<Product> listaFiltrada = new List<Product>();
+    Debug.WriteLine(search);
+    List<Product> listaFiltrada = [];
 
     if (!string.IsNullOrWhiteSpace(search))
     {
