@@ -1,6 +1,7 @@
 ﻿namespace eCommerce.Models.Enums;
 public enum EIntensity
 {
+    No,
     Soft,
     Medium,
     Strong
@@ -16,6 +17,7 @@ public enum ECategory
 
 public enum EScore
 {
+    No,
     Negative,
     Regular,
     Positive

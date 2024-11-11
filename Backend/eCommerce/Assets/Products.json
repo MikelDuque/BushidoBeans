@@ -336,18 +336,6 @@
     "Stock": 30
   },
   {
-    "Id": 29,
-    "Image": "./wwwroot/images/accesorioCafe.png",
-    "Name": "Accesorio de café",
-    "Description": "Accesorio esencial para preparar tu café.",
-    "NutritionalInfo": null,
-    "CategoryId": 3,
-    "Intensity": null,
-    "Price": 5.00,
-    "Discount": 0,
-    "Stock": 0
-  },
-  {
     "Id": 30,
     "Image": "./wwwroot/images/botellaTermica.png",
     "Name": "Botella térmica",
