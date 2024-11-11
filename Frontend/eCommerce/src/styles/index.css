@@ -39,14 +39,14 @@ height: 100%;
     font-family: var(--font-family-texto);
     font-size: var(--texto-size);
     font-weight: var(--font-weight-regular);
-    color: var(--nav-footer) !important;
+    color: var(--nav-footer);
 
 }
 .titulo{
     font-family: var(--font-family-titulos-subtitulos);
     font-size: var(--titulos-size);
     font-weight: var(--font-weight-bold);
-    color: var(--nav-footer) ;
+    color: var(--nav-footer);
 }
 .subtitulo{
     font-family: var(--font-family-titulos-subtitulos);

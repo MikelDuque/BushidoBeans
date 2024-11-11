@@ -28,7 +28,7 @@ function SobreNosotros() {
             <div className="carrusel"><Carrusel images={imagenes} /></div>
             <div className='container-descripcion'>
                 <div className='imagen-logo-bushido-beans'><img src={logo} alt="" /></div>
-                <p className='sobrenosotros texto'>En Bushido Beans, creemos que cada momento merece ser disfrutado con una taza de café o té de la más alta calidad. Fundada con la misión de ofrecer bebidas exquisitas y prácticas, nuestra marca está diseñada para aquellos que llevan un estilo de vida ajetreado y buscan un respiro en su día a día. <br /><br />
+                <p className='descripcion texto'>En Bushido Beans, creemos que cada momento merece ser disfrutado con una taza de café o té de la más alta calidad. Fundada con la misión de ofrecer bebidas exquisitas y prácticas, nuestra marca está diseñada para aquellos que llevan un estilo de vida ajetreado y buscan un respiro en su día a día. <br /><br />
                     Nuestra selección incluye una variedad de cafés y tés cuidadosamente preparados, todos listos para beber y disfrutar en cualquier lugar y en cualquier momento. Ya sea que necesites un impulso de energía inmediata para afrontar una larga jornada, o simplemente desees saborear un momento de tranquilidad, Bushido Beans tiene la bebida perfecta para ti.<br /><br />
                     Cada producto que ofrecemos combina ingredientes de calidad premium con sabores únicos, presentados en formatos convenientes que se adaptan a tu ritmo de vida. Desde intensos cafés hasta delicados tés, nuestra variedad está diseñada para satisfacer todos los paladares.</p>
             </div>
