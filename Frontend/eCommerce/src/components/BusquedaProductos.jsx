@@ -47,7 +47,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   }, [productoBuscado, filtro, ordenar, paginaActual, productosPorPagina]);
 
   const handlePageChange = ({selected: selectedPage}) => {
-    setPaginaActual(selectedPage); // Cambia la página actual según la selección del usuario
+    setPaginaActual(selectedPage+1); // Cambia la página actual según la selección del usuario
   };
   console.log("Algo",datosFiltrados);
   return (
