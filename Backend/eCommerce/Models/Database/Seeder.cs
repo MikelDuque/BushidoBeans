@@ -80,7 +80,7 @@ public class Seeder
                 Intensity = EIntensity.Strong,
                 Price = 2.50M,
                 Discount = 0,
-                Stock = 0
+                Stock = 1
             },
             new Product{
                 Image = "images/lataBushidoCafe.png",
