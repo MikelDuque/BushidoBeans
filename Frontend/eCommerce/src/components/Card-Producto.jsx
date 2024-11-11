@@ -14,6 +14,7 @@ export function CardPrueba({ id, imagen, nombre, intensidad, precio, stock, valo
     
     const checksoldout = stock > 0 ? "✅" : "❌";
     const precioFormateado = precio.toFixed(2).replace('.', ',');
+    const soldout = stock >0 ? true : false;
 
     const valImg = "/recursos/star.svg";
 
@@ -48,7 +49,7 @@ export function CardPrueba({ id, imagen, nombre, intensidad, precio, stock, valo
                 {valoracionEstrellas}
             </div>
             <div className="detalles">Stock {checksoldout}</div>
-            {stock && (
+            {soldout && (
                 <button className="botonPrueba" aria-label={`Añadir ${nombre} a la cesta`}>
                     Añadir a la cesta
                 </button>
