@@ -14,9 +14,10 @@ function Catalogo() {
     "/recursos/imgCarrusel4.jpg",
   ];
 
-  const [filtro, setFiltro] = useState('0');
-  const [ordenar, setOrdenar] = useState('0');
-  const [productosPorPagina, setProductosPorPagina] = useState(10); // Estado para controlar productos por página
+  const [filtro, setFiltro] = useState('opcion3');
+  const [ordenar, setOrdenar] = useState('opcion1');
+  let [productosPorPagina, setProductosPorPagina] = useState(5); // Estado para controlar productos por página
+  const [pagina, setPagina] = useState(1);
 
   const productosPorPaginaChange = (value) => {
     setProductosPorPagina(value);
@@ -38,12 +39,13 @@ function Catalogo() {
   ];
 
   const mostrarProductos = [
-    { value: '3', label: '3 productos' },
     { value: '5', label: '5 productos' },
     { value: '10', label: '10 productos' },
     { value: '20', label: '20 productos' },
+    { value: '30', label: '30 productos' },
   ];
 
+  // Función para manejar el cambio en la cantidad de productos por página
 
 
   return (
