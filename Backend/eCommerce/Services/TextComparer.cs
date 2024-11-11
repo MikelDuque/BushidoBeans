@@ -10,7 +10,7 @@ namespace eCommerce.Services;
 
 public class TextComparer
 {
-  private const double THRESHOLD = 0.75;
+  private const double THRESHOLD = 0.80;
 
   private readonly INormalizedStringSimilarity _stringSimilarityComparer;
 

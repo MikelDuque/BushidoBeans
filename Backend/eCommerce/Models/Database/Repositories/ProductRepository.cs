@@ -40,7 +40,7 @@ public class ProductRepository : Repository<Product>
         Dictionary<int, List<Product>> diccionarioFinal = [];
         TextComparer _textComparer = new();
 
-        IQueryable<Product> query = FilterByCategoryAndStock(filter.ThereStock, filter.Category);
+        IQueryable<Product> query = FilterByCategoryAndStock(filter.IncludeStockless, filter.Category);
 
         List<Product> listaProductosBuscados = _textComparer.SearchFilter(query, filter.Search).ToList();
 
@@ -64,9 +64,10 @@ public class ProductRepository : Repository<Product>
 
 
     //----- FUNCIONES DEL FILTRO -----//
-    private IQueryable<Product> FilterByCategoryAndStock(bool isThereStock, ECategory category)
+    private IQueryable<Product> FilterByCategoryAndStock(bool includeStockless, ECategory category)
     {
-        IQueryable<Product> query = GetQueryable().Where(product => isThereStock ? product.Stock > 0 : product.Stock <= 0);
+        //IQueryable<Product> query = GetQueryable().Where(product => isThereStock ? product.Stock > 0 : product.Stock <= 0);
+        IQueryable<Product> query = includeStockless ? GetQueryable() : GetQueryable().Where(product => product.Stock > 0);
 
         if(category > 0) { query = query.Where(product => product.CategoryId == (long)category); };
 

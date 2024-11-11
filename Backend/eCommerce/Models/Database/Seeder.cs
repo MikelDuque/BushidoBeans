@@ -21,13 +21,15 @@ public class Seeder
 
     private async Task Seed()
     {
-        Category[] categories = [
+        Category[] categories =
+        [
             new Category {Name = "Coffee"},
             new Category {Name = "Tea"},
             new Category {Name = "Others"}
         ];
 
-        User[] users = [
+        User[] users =
+        [
             new User {
                 Mail = "mikel@gmail.es",
                 Name = "Mikel",
@@ -70,7 +72,8 @@ public class Seeder
             }
         ];
 
-        Product[] products = [
+        Product[] products =
+        [
             new Product{
                 Image = "images/lataBushidoCafe.png",
                 Name = "La especialidad de Fígaro",
