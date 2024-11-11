@@ -5,7 +5,6 @@ public enum EIntensity
     Soft,
     Medium,
     Strong,
-    No
 }
 
 public enum ECategory
