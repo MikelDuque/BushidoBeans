@@ -108,9 +108,9 @@ public class Seeder
                 Stock = 8
             },
             new Product{
-                Image = "images/cafeLateVainilla.jpeg",
+                Image = "images/cafeLatteVainilla.jpeg",
                 Name = "Café Latte",
-                Description = "Un café suave con leche cremosa, ideal para quienes prefieren una bebida dulce.",
+                Description = "Un café avainillado con leche cremosa, ideal para quienes prefieren una bebida dulce.",
                 NutritionalInfo = "Energia: 150 kcal, Grasas: 6g, Azúcares: 12g",
                 CategoryId = (long)ECategory.Coffee,
                 Intensity = EIntensity.Medium,
@@ -119,9 +119,9 @@ public class Seeder
                 Stock = 12
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
-                Name = "Café Mocha",
-                Description = "La combinación perfecta de café y chocolate, para los amantes del dulce.",
+                Image = "images/drinkHalloWeen.jpeg",
+                Name = "Café HalloWeen",
+                Description = "Un café terrorificamente dulce, para morir del gusto.",
                 NutritionalInfo = "Energia: 160 kcal, Grasas: 7g, Azúcares: 15g",
                 CategoryId = (long)ECategory.Coffee,
                 Intensity = EIntensity.Medium,
@@ -130,7 +130,7 @@ public class Seeder
                 Stock = 10
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
+                Image = "images/cafeConLeche.jpeg",
                 Name = "Café Cappuccino",
                 Description = "Un clásico con leche espumosa y un toque de cacao en polvo.",
                 NutritionalInfo = "Energia: 130 kcal, Grasas: 4g, Azúcares: 8g",
@@ -141,9 +141,9 @@ public class Seeder
                 Stock = 15
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
-                Name = "Café Macchiato",
-                Description = "Un espresso con un toque de leche espumosa, ideal para los que buscan intensidad.",
+                Image = "images/cafeVainilla.jpeg",
+                Name = "Café Vainilla",
+                Description = "Un espresso con sabor a vainilla, ideal para los que buscan un toque diferente.",
                 NutritionalInfo = "Energia: 120 kcal, Grasas: 2g, Azúcares: 1g",
                 CategoryId = (long)ECategory.Coffee,
                 Intensity = EIntensity.Strong,
@@ -152,7 +152,7 @@ public class Seeder
                 Stock = 0
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
+                Image = "images/cafeFrio.jpeg",
                 Name = "Café Cold Brew",
                 Description = "Café frío, con un sabor suave y refrescante, perfecto para los días calurosos.",
                 NutritionalInfo = "Energia: 110 kcal, Grasas: 1g, Azúcares: 0g",
@@ -163,7 +163,7 @@ public class Seeder
                 Stock = 6
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
+                Image = "images/cafeIrish.jpeg",
                 Name = "Café Irish",
                 Description = "Un café con un toque de whisky irlandés, ideal para una experiencia única.",
                 NutritionalInfo = "Energia: 180 kcal, Grasas: 8g, Azúcares: 10g",
@@ -174,9 +174,9 @@ public class Seeder
                 Stock = 3
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
-                Name = "Café Frapuccino",
-                Description = "Un café helado con leche y hielo, ideal para los amantes de lo dulce y refrescante.",
+                Image = "images/cafeHazelnut.jpeg",
+                Name = "Café Avellana",
+                Description = "Un café con sabor a avellana, ideal para los amantes de lo dulce y la avellana.",
                 NutritionalInfo = "Energia: 140 kcal, Grasas: 5g, Azúcares: 12g",
                 CategoryId = (long)ECategory.Coffee,
                 Intensity = EIntensity.Soft,
@@ -185,7 +185,7 @@ public class Seeder
                 Stock = 5
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
+                Image = "images/cafent.jpeg",
                 Name = "Café de la Casa",
                 Description = "Un café suave y equilibrado para todos los gustos, ideal para cualquier momento del día.",
                 NutritionalInfo = "Energia: 120 kcal, Grasas: 3g, Azúcares: 2g",
@@ -196,9 +196,9 @@ public class Seeder
                 Stock = 9
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
-                Name = "Café Vienés",
-                Description = "Un café suave con nata montada, ideal para disfrutar en una tarde relajante.",
+                Image = "images/cafeLateChai.jpeg",
+                Name = "Café Chai",
+                Description = "Un café estilo chai, ideal para disfrutar en una tarde relajante.",
                 NutritionalInfo = "Energia: 170 kcal, Grasas: 8g, Azúcares: 10g",
                 CategoryId = (long)ECategory.Coffee,
                 Intensity = EIntensity.Soft,
@@ -207,7 +207,7 @@ public class Seeder
                 Stock = 13
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
+                Image = "images/cafeCaramel.jpeg",
                 Name = "Café Caramelizado",
                 Description = "Café con un toque dulce de caramelo, para los que disfrutan del café con un toque especial.",
                 NutritionalInfo = "Energia: 160 kcal, Grasas: 6g, Azúcares: 14g",
@@ -218,7 +218,7 @@ public class Seeder
                 Stock = 0
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
+                Image = "images/cafeConLeche.jpeg",
                 Name = "Café Cortado",
                 Description = "Un café espresso con un toque de leche, ideal para quienes prefieren una mezcla suave.",
                 NutritionalInfo = "Energia: 130 kcal, Grasas: 4g, Azúcares: 2g",
@@ -229,7 +229,7 @@ public class Seeder
                 Stock = 0
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
+                Image = "images/teaHerbal.jpeg",
                 Name = "Té Verde Orgánico",
                 Description = "Un té verde orgánico que promueve la salud con su toque refrescante.",
                 NutritionalInfo = "Energia: 5 kcal, Grasas: 0g, Azúcares: 0g",
@@ -240,7 +240,7 @@ public class Seeder
                 Stock = 15
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
+                Image = "images/teNegro.jpeg",
                 Name = "Té Negro",
                 Description = "Un té negro clásico, ideal para una bebida revitalizante.",
                 NutritionalInfo = "Energia: 10 kcal, Grasas: 0g, Azúcares: 0g",
@@ -251,8 +251,8 @@ public class Seeder
                 Stock = 12
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
-                Name = "Té Rooibos",
+                Image = "images/teDouck.jpeg",
+                Name = "Té Douck",
                 Description = "Un té herbal, naturalmente libre de cafeína y con un sabor suave.",
                 NutritionalInfo = "Energia: 5 kcal, Grasas: 0g, Azúcares: 0g",
                 CategoryId = (long)ECategory.Tea,
@@ -262,9 +262,9 @@ public class Seeder
                 Stock = 8
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
-                Name = "Té Oolong",
-                Description = "Un té semifermentado, con un sabor intermedio entre el té verde y negro.",
+                Image = "images/teFruit.jpeg",
+                Name = "Té Afrutado",
+                Description = "Un té afrutado, con un sabor para los más atrevidos.",
                 NutritionalInfo = "Energia: 7 kcal, Grasas: 0g, Azúcares: 0g",
                 CategoryId = (long)ECategory.Tea,
                 Intensity = EIntensity.Strong,
@@ -273,9 +273,9 @@ public class Seeder
                 Stock = 6
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
-                Name = "Té de Jazmín",
-                Description = "Té verde aromatizado con jazmín, para una experiencia floral y relajante.",
+                Image = "images/teMenta.jpeg",
+                Name = "Té Menta",
+                Description = "Té verde mentolado, para una experiencia floral y relajante.",
                 NutritionalInfo = "Energia: 5 kcal, Grasas: 0g, Azúcares: 0g",
                 CategoryId = (long)ECategory.Tea,
                 Intensity = EIntensity.Medium,
@@ -284,9 +284,9 @@ public class Seeder
                 Stock = 5
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
-                Name = "Té Matcha",
-                Description = "Té verde concentrado, con un sabor umami y muchos beneficios antioxidantes.",
+                Image = "images/teMilk.jpeg",
+                Name = "Té con Leche",
+                Description = "Té con leche concentrado, con un sabor umami y muchos beneficios antioxidantes.",
                 NutritionalInfo = "Energia: 10 kcal, Grasas: 0g, Azúcares: 0g",
                 CategoryId = (long)ECategory.Tea,
                 Intensity = EIntensity.Strong,
@@ -295,9 +295,9 @@ public class Seeder
                 Stock = 0
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
-                Name = "Té de Manzanilla",
-                Description = "Un té relajante con un toque dulce y floral.",
+                Image = "images/teIced.jpeg",
+                Name = "Té Frío",
+                Description = "Un té refrescante con un toque dulce y floral.",
                 NutritionalInfo = "Energia: 0 kcal, Grasas: 0g, Azúcares: 0g",
                 CategoryId = (long)ECategory.Tea,
                 Intensity = EIntensity.Medium,
@@ -306,7 +306,7 @@ public class Seeder
                 Stock = 10
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
+                Image = "images/teEarlGrey.jpeg",
                 Name = "Té Earl Grey",
                 Description = "Té negro aromatizado con aceite de bergamota, para un sabor único.",
                 NutritionalInfo = "Energia: 10 kcal, Grasas: 0g, Azúcares: 0g",
@@ -317,7 +317,7 @@ public class Seeder
                 Stock = 9
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
+                Image = "images/teChai.jpeg",
                 Name = "Té Chai",
                 Description = "Un té especiado con canela, cardamomo y otras especias, para una bebida cálida y reconfortante.",
                 NutritionalInfo = "Energia: 5 kcal, Grasas: 0g, Azúcares: 0g",
@@ -328,7 +328,7 @@ public class Seeder
                 Stock = 7
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
+                Image = "images/teRooibos.jpeg",
                 Name = "Té Rooibos Limón",
                 Description = "Rooibos con un toque de limón, refrescante y libre de cafeína.",
                 NutritionalInfo = "Energia: 5 kcal, Grasas: 0g, Azúcares: 0g",
@@ -339,7 +339,7 @@ public class Seeder
                 Stock = 6
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
+                Image = "images/teHibisco.jpeg",
                 Name = "Té de Hibisco",
                 Description = "Un té rojo, floral y ácido, perfecto para el calor del verano.",
                 NutritionalInfo = "Energia: 0 kcal, Grasas: 0g, Azúcares: 0g",
@@ -350,7 +350,7 @@ public class Seeder
                 Stock = 11
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
+                Image = "images/termoAcero.jpeg",
                 Name = "Termo de acero inoxidable",
                 Description = "Termo de alta calidad para mantener tus bebidas calientes o frías.",
                 NutritionalInfo = null,
@@ -361,7 +361,7 @@ public class Seeder
                 Stock = 20
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
+                Image = "images/tazaCeramica.jpeg",
                 Name = "Taza cerámica",
                 Description = "Taza de cerámica con diseño exclusivo.",
                 NutritionalInfo = null,
@@ -372,7 +372,7 @@ public class Seeder
                 Stock = 25
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
+                Image = "images/botellaReutilizable.jpeg",
                 Name = "Botella de agua",
                 Description = "Botella reutilizable para mantener tu agua fresca.",
                 NutritionalInfo = null,
@@ -383,7 +383,7 @@ public class Seeder
                 Stock = 30
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
+                Image = "images/botellaTermica.jpeg",
                 Name = "Botella térmica",
                 Description = "Mantén tus bebidas calientes con esta botella térmica de alta calidad.",
                 CategoryId = (long)ECategory.Others,
@@ -393,7 +393,7 @@ public class Seeder
                 Stock = 7
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
+                Image = "images/cafetera.jpeg",
                 Name = "Cafetera italiana",
                 Description = "Cafetera para preparar un delicioso café al estilo tradicional italiano.",
                 NutritionalInfo = null,
@@ -404,7 +404,7 @@ public class Seeder
                 Stock = 15
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
+                Image = "images/tazaInfusor.jpeg",
                 Name = "Taza con infusor",
                 Description = "Taza ideal para preparar tés de hojas sueltas.",
                 NutritionalInfo = null,
@@ -415,7 +415,7 @@ public class Seeder
                 Stock = 22
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
+                Image = "images/botellaViaje.jpeg",
                 Name = "Botella termal de viaje",
                 Description = "Botella termal que mantiene tus bebidas a la temperatura ideal mientras viajas.",
                 NutritionalInfo = null,
@@ -426,7 +426,7 @@ public class Seeder
                 Stock = 18
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
+                Image = "images/botellaTermica2.jpeg",
                 Name = "Botella térmica para café",
                 Description = "Botella térmica especialmente diseñada para mantener el café caliente.",
                 NutritionalInfo = null,

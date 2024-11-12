@@ -1,4 +1,4 @@
-﻿using eCommerce.Models.Dtos;
+﻿using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Enums;
 
 namespace eCommerce.Models.Dtos;
@@ -15,6 +15,7 @@ public class ProductDto
     public required int Stock { get; set; }
     public double Score { get; set; }
     public int TotalReviews {get; set; }
-    public ICollection<ReviewDto> Reviews { get; set; }
+    public ICollection<Review> Reviews { get; set; }
 
+    
 }
