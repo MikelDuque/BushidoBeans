@@ -9,7 +9,6 @@ import "../styles/Paginacion.css";
 const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   const [productoBuscado, setProductoBuscado] = useState('');
   const [datosFiltrados, setDatosFiltrados] = useState([]);
-  const [arrayProductos, setArrayProductos] = useState([]);
   const [paginaActual, setPaginaActual] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -33,7 +32,6 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
 
         const data = await response.json();
 
-        setArrayProductos(Array.isArray(data)? data:[])
         setDatosFiltrados(Array.isArray(data.filteredProducts)? data.filteredProducts:[]);  // Datos de productos recibidos
         setTotalPaginas(data.totalPages);       // Total de productos para paginación
         
@@ -54,7 +52,6 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   };
   
   console.log("objeto datos filtrados",datosFiltrados);
-  console.log("productos",arrayProductos);
   return (
     <div>
       <div className='botonCentrado'>

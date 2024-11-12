@@ -86,7 +86,7 @@ public class Seeder
                 Stock = 1
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
+                Image = "images/cafeEspresso.jpeg",
                 Name = "Café Espresso",
                 Description = "Un espresso auténtico, fuerte y con cuerpo, ideal para comenzar el día.",
                 NutritionalInfo = "Energia: 100 kcal, Grasas: 1g, Azúcares: 0g",
@@ -97,7 +97,7 @@ public class Seeder
                 Stock = 5
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
+                Image = "images/cafeOscuro.jpeg",
                 Name = "Café Americano",
                 Description = "Un café suave y diluido, perfecto para los que disfrutan de un sabor más ligero.",
                 NutritionalInfo = "Energia: 110 kcal, Grasas: 1g, Azúcares: 1g",
@@ -108,7 +108,7 @@ public class Seeder
                 Stock = 8
             },
             new Product{
-                Image = "images/lataBushidoCafe.png",
+                Image = "images/cafeLateVainilla.jpeg",
                 Name = "Café Latte",
                 Description = "Un café suave con leche cremosa, ideal para quienes prefieren una bebida dulce.",
                 NutritionalInfo = "Energia: 150 kcal, Grasas: 6g, Azúcares: 12g",
