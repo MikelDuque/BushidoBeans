@@ -14,9 +14,10 @@ function Catalogo() {
     "/recursos/imgCarrusel4.jpg",
   ];
 
-  const [filtro, setFiltro] = useState('0');
-  const [ordenar, setOrdenar] = useState('0');
-  const [productosPorPagina, setProductosPorPagina] = useState(10); // Estado para controlar productos por página
+  const [filtro, setFiltro] = useState('opcion3');
+  const [ordenar, setOrdenar] = useState('opcion1');
+  let [productosPorPagina, setProductosPorPagina] = useState(5); // Estado para controlar productos por página
+  const [pagina, setPagina] = useState(1);
 
   const productosPorPaginaChange = (value) => {
     setProductosPorPagina(value);
@@ -33,8 +34,8 @@ function Catalogo() {
   const ordenarPor = [
     { value: '0', label: 'Alfabéticamente (A-Z)' },
     { value: '1', label: 'Alfabéticamente (Z-A)' },
-    { value: '2', label: 'Precio Descendente' },
-    { value: '3', label: 'Precio Ascendente' },
+    { value: '2', label: 'Precio Ascendente' },
+    { value: '3', label: 'Precio Descendente' },
   ];
 
   const mostrarProductos = [

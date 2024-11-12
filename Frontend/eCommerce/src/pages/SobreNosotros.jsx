@@ -69,6 +69,8 @@ function SobreNosotros() {
                     <hr className='separador-secundario' />
                     <p className='subtitulo subtitulo-equipo'>Nos une la pasión por la tecnología, el aprendizaje continuo, el café y el té, con el fin de mejorar la vida de nuestros clientes</p>
                 </div>
+            <div className='padree'>
+                
                 <div className='container-componentes'>
                     <Card nombre="Ivan Montes" cargo="Marketing" imagen={kirby}></Card>
                     <Card nombre="David Andrino" cargo="Logistica" imagen={sonic}></Card>
@@ -76,8 +78,13 @@ function SobreNosotros() {
                     <Card nombre="Mikel Duque" cargo="CEO & Fundador" imagen={link}></Card>
                 </div>
             </div>
+            </div>
 
             <hr className='separador' />
+            <div className='padree'>
+
+
+            
 
             <div className='container-informacionAdicional'>
                 <div className='container-informacion'>
@@ -112,6 +119,7 @@ function SobreNosotros() {
                 <div className='container-maps'>
                     <Maps className="maps" direccion="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3792.447613777691!2d-4.558384723732234!3d36.74307277091706!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd72f1d3dde02b7b%3A0x499336c8cdfb308a!2sC.%20Charles%20Darwin%2C%203%2C%20Campanillas%2C%2029590%20M%C3%A1laga!5e1!3m2!1sen!2ses!4v1730662620262!5m2!1sen!2ses"></Maps>
                 </div>
+            </div>
             </div>
 
 
