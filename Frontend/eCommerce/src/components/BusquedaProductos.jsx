@@ -10,7 +10,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   const [paginaActual, setPaginaActual] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [totalPaginas, setTotalPaginas] = useState(1); // Total que se actualiza al recibir respuesta del backend
+  const [totalPaginas, setTotalPaginas] = useState(1); 
 
   useEffect(() => {
     // Llamada a la API cuando cambian el filtro, orden, o búsqueda
@@ -22,14 +22,18 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
         // API del backend que retorna los productos ya filtrados y paginados
 
         const Url = 'https://localhost:7015/api/Product/Filtered_Products'
-        const response = await fetch(`${Url}?Search=${productoBuscado}&Category=${filtro}&Order=${ordenar}&IncludeStockless=true&ProductsPerPage=${productosPorPagina}&CurrentPage=${paginaActual}`, {method: 'GET', headers:{'Content-Type':'aplication/json'}});
+
+        const response = await fetch(`${Url}?Search=${productoBuscado}&Category=${filtro}&Order=${ordenar}&IncludeStockless=true&ProductsPerPage=${productosPorPagina}&CurrentPage=${paginaActual}`, {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' }
+        });
         
         if (!response.ok) throw new Error("Error al cargar los productos");
 
         const data = await response.json();
 
-        setDatosFiltrados(Array.isArray(data.FilteredProducts)? data.FilteredProducts:[]);  // Datos de productos recibidos
-        setTotalPaginas(data.TotalPages);       // Total de productos para paginación
+        setDatosFiltrados(Array.isArray(data.FilteredProducts)? data.FilteredProducts:[]);  
+        setTotalPaginas(data.TotalPages ? Math.ceil(data.TotalPages): 1);       
         console.log("data", data);
         
       } catch (err) {
@@ -43,7 +47,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   }, [productoBuscado, filtro, ordenar, paginaActual, productosPorPagina]);
 
   const handlePageChange = (selectedPage) => {
-    setPaginaActual(selectedPage.selected); // Cambia la página actual según la selección del usuario
+    setPaginaActual(selectedPage.selected); 
   };
 
   return (
@@ -85,7 +89,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
         previousLabel={'←'}
         nextLabel={'→'}
         breakLabel={'...'}
-        pageCount={totalPaginas} // Cálculo del número de páginas
+        pageCount={totalPaginas} 
         marginPagesDisplayed={2}
         pageRangeDisplayed={3}
         onPageChange={handlePageChange}
