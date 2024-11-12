@@ -5,6 +5,7 @@ import ReactPaginate from 'react-paginate';
 import "../styles/Catalogo.css";
 import "../styles/Paginacion.css";
 
+
 const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   const [productoBuscado, setProductoBuscado] = useState('');
   const [datosFiltrados, setDatosFiltrados] = useState([]);
@@ -13,6 +14,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   const [error, setError] = useState(null);
   const [totalPaginas, setTotalPaginas] = useState(1); // Total que se actualiza al recibir respuesta del backend
 
+  
   useEffect(() => {
     // Llamada a la API cuando cambian el filtro, orden, o búsqueda
     const fetchData = async () => {
@@ -33,8 +35,8 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
 
         setDatosFiltrados(Array.isArray(data.filteredProducts)? data.filteredProducts:[]);  // Datos de productos recibidos
         setTotalPaginas(data.totalPages);       // Total de productos para paginación
-        console.log("data", data);
-        console.log();
+        
+        
         
       } catch (error) {
         setError("Hubo un error al cargar los productos.");
@@ -49,7 +51,8 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   const handlePageChange = ({selected: selectedPage}) => {
     setPaginaActual(selectedPage+1); // Cambia la página actual según la selección del usuario
   };
-  console.log("Algo",datosFiltrados);
+  console.log("objeto datos filtrados",datosFiltrados);
+  
   return (
     <div>
       <div className='botonCentrado'>
@@ -72,6 +75,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
             
             <CardPrueba 
               key={dataP.id}
+              id={dataP.id}
               imagen={dataP.image}
               nombre={dataP.name}
               intensidad={dataP.intensity}
