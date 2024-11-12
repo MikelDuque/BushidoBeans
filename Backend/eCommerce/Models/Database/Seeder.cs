@@ -443,469 +443,547 @@ public class Seeder
                 Score = EScore.Positive,
                 Body = "Me encanta este café, muy fuerte y delicioso.",
                 ProductId = 1,
-                UserId = 1
+                UserId = 1,
+                PubliDate = new DateTime(2024, 11, 12)
             },
             new Review {
                 Score = EScore.Regular,
                 Body = "Está bien, pero me esperaba algo más intenso.",
                 ProductId = 1,
-                UserId = 2
+                UserId = 2,
+                PubliDate = new DateTime(2024, 8, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Un café espresso auténtico, ideal para comenzar el día.",
                 ProductId = 2,
-                UserId = 3
+                UserId = 3,
+                PubliDate = new DateTime(2024, 9, 12)
             },
             new Review {
                 Score = EScore.Negative,
                 Body = "No me gustó, demasiado amargo para mi gusto.",
                 ProductId = 2,
-                UserId = 4
+                UserId = 4,
+                PubliDate = new DateTime(2024, 11, 12)
             },
             new Review {
                 Score = EScore.Regular,
                 Body = "Está bien, pero me gustaría que tuviera más sabor a café.",
                 ProductId = 4,
-                UserId = 2
+                UserId = 2,
+                PubliDate = new DateTime(2024, 10, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "La combinación de café y chocolate es perfecta, me encanta.",
                 ProductId = 5,
-                UserId = 3
+                UserId = 3,
+                PubliDate = new DateTime(2024, 8, 12)
             },
             new Review {
                 Score = EScore.Negative,
                 Body = "No me gustó, muy dulce para mi gusto.",
                 ProductId = 5,
-                UserId = 4
+                UserId = 4,
+                PubliDate = new DateTime(2024, 10, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Un clásico, excelente con un toque de cacao.",
                 ProductId = 6,
-                UserId = 4
+                UserId = 4,
+                PubliDate = new DateTime(2024, 8, 12)
             },
             new Review {
                 Score = EScore.Regular,
                 Body = "Está bueno, pero me gustaría que tuviera más espuma.",
                 ProductId = 6,
-                UserId = 5
+                UserId = 5,
+                PubliDate = new DateTime(2024, 11, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Perfecto para los días calurosos, refrescante y suave.",
                 ProductId = 8,
-                UserId = 2
+                UserId = 2,
+                PubliDate = new DateTime(2024, 7, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Lo mejor para el calor, muy refrescante.",
                 ProductId = 8,
-                UserId = 3
+                UserId = 3,
+                PubliDate = new DateTime(2024, 10, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Un café único con un toque de whisky, increíble.",
                 ProductId = 9,
-                UserId = 3
+                UserId = 3,
+                PubliDate = new DateTime(2024, 10, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Muy refrescante y dulce, ideal para un día caluroso.",
                 ProductId = 10,
-                UserId = 5
+                UserId = 5,
+                PubliDate = new DateTime(2024, 11, 12)
             },
             new Review {
                 Score = EScore.Regular,
                 Body = "Está bien, pero me esperaba algo más cremoso.",
                 ProductId = 10,
-                UserId = 1
+                UserId = 1,
+                PubliDate = new DateTime(2024, 10, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Perfecto para acompañar una tarde tranquila, me encanta su suavidad.",
                 ProductId = 12,
-                UserId = 4
+                UserId = 4,
+                PubliDate = new DateTime(2024, 8, 12)
             },
             new Review {
                 Score = EScore.Negative,
                 Body = "Demasiado dulce para mi gusto, no me convenció.",
                 ProductId = 12,
-                UserId = 5
+                UserId = 5,
+                PubliDate = new DateTime(2024, 7, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "El toque de nata montada lo hace delicioso, perfecto para una tarde relajante.",
                 ProductId = 12,
-                UserId = 1
+                UserId = 1,
+                PubliDate = new DateTime(2024, 9, 12)
             },
             new Review {
                 Score = EScore.Regular,
                 Body = "Me gusta el sabor, pero esperaba un toque más de café en lugar de azúcar.",
                 ProductId = 13,
-                UserId = 2
+                UserId = 2,
+                PubliDate = new DateTime(2024, 7, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Un toque perfecto de caramelo, me encanta la mezcla dulce con el café.",
                 ProductId = 13,
-                UserId = 3
+                UserId = 3,
+                PubliDate = new DateTime(2024, 11, 12)
             },
             new Review {
                 Score = EScore.Negative,
                 Body = "Demasiado dulce para mi, no volvería a pedirlo.",
                 ProductId = 13,
-                UserId = 4
+                UserId = 4,
+                PubliDate = new DateTime(2024, 8, 12)
             },
             new Review {
                 Score = EScore.Regular,
                 Body = "Lo esperaba más fuerte, pero tiene un sabor ligero.",
                 ProductId = 13,
-                UserId = 1
+                UserId = 1,
+                PubliDate = new DateTime(2024, 7, 12)
             },
             new Review {
                 Score = EScore.Regular,
                 Body = "El café está bien, pero no es lo suficientemente fuerte para mí.",
                 ProductId = 14,
-                UserId = 5
+                UserId = 5,
+                PubliDate = new DateTime(2024, 9, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Muy buen café, perfecto para aquellos que disfrutan un toque de leche.",
                 ProductId = 14,
-                UserId = 1
+                UserId = 1,
+                PubliDate = new DateTime(2024, 6, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Me encanta este café, muy cremoso y con un toque dulce ideal para la tarde.",
                 ProductId = 14,
-                UserId = 2
+                UserId = 2,
+                PubliDate = new DateTime(2024, 11, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Un té verde muy suave y refrescante, ideal para cualquier hora del día.",
                 ProductId = 15,
-                UserId = 2
+                UserId = 2,
+                PubliDate = new DateTime(2024, 7, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Un té verde orgánico con un sabor natural, excelente para la salud.",
                 ProductId = 15,
-                UserId = 3
+                UserId = 3,
+                PubliDate = new DateTime(2024, 8, 12)
             },
             new Review {
                 Score = EScore.Regular,
                 Body = "Me gusta el té verde, pero este me pareció un poco soso.",
                 ProductId = 15,
-                UserId = 4
+                UserId = 4,
+                PubliDate = new DateTime(2024, 8, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Un té verde fresco y revitalizante. Me encanta como me hace sentir.",
                 ProductId = 15,
-                UserId = 4
+                UserId = 4,
+                PubliDate = new DateTime(2024, 7, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Un té con mucho sabor, perfecto para los que buscan algo natural y energizante.",
                 ProductId = 15,
-                UserId = 5
+                UserId = 5,
+                PubliDate = new DateTime(2024, 9, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Me encanta este té, tiene un sabor muy suave y natural.",
                 ProductId = 17,
-                UserId = 2
+                UserId = 2,
+                PubliDate = new DateTime(2024, 11, 12)
             },
             new Review {
                 Score = EScore.Regular,
                 Body = "El sabor es muy sutil, no me convence del todo.",
                 ProductId = 17,
-                UserId = 3
+                UserId = 3,
+                PubliDate = new DateTime(2024, 7, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Un té Oolong muy bien equilibrado, excelente para quienes disfrutan de un sabor intermedio.",
                 ProductId = 18,
-                UserId = 4
+                UserId = 4,
+                PubliDate = new DateTime(2024, 6, 12)
             },
             new Review {
                 Score = EScore.Regular,
                 Body = "Es interesante, pero esperaba un sabor más pronunciado.",
                 ProductId = 18,
-                UserId = 5
+                UserId = 5,
+                PubliDate = new DateTime(2024, 11, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "El sabor floral del té de jazmín es maravilloso, muy relajante.",
                 ProductId = 19,
-                UserId = 1
+                UserId = 1,
+                PubliDate = new DateTime(2024, 11, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Me encanta el toque floral, perfecto para mis tardes de descanso.",
                 ProductId = 19,
-                UserId = 2
+                UserId = 2,
+                PubliDate = new DateTime(2024, 10, 12)
             },
             new Review {
                 Score = EScore.Negative,
                 Body = "No me gusta el sabor floral, no lo volveré a comprar.",
                 ProductId = 19,
-                UserId = 3
+                UserId = 3,
+                PubliDate = new DateTime(2024, 8, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Un té matcha increíblemente refrescante, muy saludable y lleno de energía.",
                 ProductId = 20,
-                UserId = 4
+                UserId = 4,
+                PubliDate = new DateTime(2024, 10, 12)
             },
             new Review {
                 Score = EScore.Regular,
                 Body = "No es malo, pero me resulta demasiado amargo para mi gusto.",
                 ProductId = 20,
-                UserId = 5
+                UserId = 5,
+                PubliDate = new DateTime(2024, 10, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Un té suave y relajante, ideal para antes de dormir. Me gusta el toque floral.",
                 ProductId = 21,
-                UserId = 1
+                UserId = 1,
+                PubliDate = new DateTime(2024, 11, 12)
             },
             new Review {
                 Score = EScore.Regular,
                 Body = "Demasiado suave para mí, esperaba un sabor más pronunciado.",
                 ProductId = 21,
-                UserId = 2
+                UserId = 2,
+                PubliDate = new DateTime(2024, 11, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Muy buen té para relajarse, tiene un toque dulce natural.",
                 ProductId = 21,
-                UserId = 3
+                UserId = 3,
+                PubliDate = new DateTime(2024, 6, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Me encanta este té, tiene justo el equilibrio entre sabor y suavidad.",
                 ProductId = 22,
-                UserId = 4
+                UserId = 4,
+                PubliDate = new DateTime(2024, 9, 12)
             },
             new Review {
                 Score = EScore.Negative,
                 Body = "No me convenció, el sabor a bergamota es muy fuerte para mi gusto.",
                 ProductId = 22,
-                UserId = 5
+                UserId = 5,
+                PubliDate = new DateTime(2024, 10, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "El Té Earl Grey tiene un sabor único, me encanta con un toque de leche.",
                 ProductId = 22,
-                UserId = 1
+                UserId = 1,
+                PubliDate = new DateTime(2024, 7, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Especiado y cálido, perfecto para las tardes frías. El toque de canela es muy sabroso.",
                 ProductId = 23,
-                UserId = 2
+                UserId = 2,
+                PubliDate = new DateTime(2024, 8, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Un té Chai muy sabroso y con el balance perfecto de especias. Ideal para reconfortarse.",
                 ProductId = 23,
-                UserId = 3
+                UserId = 3,
+                PubliDate = new DateTime(2024, 8, 12)
             },
             new Review {
                 Score = EScore.Regular,
                 Body = "Demasiado especiado para mi gusto, no volvería a comprarlo.",
                 ProductId = 23,
-                UserId = 4
+                UserId = 4,
+                PubliDate = new DateTime(2024, 6, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Un té muy refrescante, perfecto para el verano.",
                 ProductId = 25,
-                UserId = 3
+                UserId = 3,
+                PubliDate = new DateTime(2024, 10, 12)
             },
             new Review {
                 Score = EScore.Regular,
                 Body = "Es un poco ácido para mí, no es el té que prefiero para el verano.",
                 ProductId = 25,
-                UserId = 4
+                UserId = 4,
+                PubliDate = new DateTime(2024, 8, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "El Té de Hibisco tiene un sabor único y refrescante, perfecto para los días calurosos.",
                 ProductId = 25,
-                UserId = 5
+                UserId = 5,
+                PubliDate = new DateTime(2024, 7, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Es un termo de excelente calidad, mantiene las bebidas frías por mucho tiempo.",
                 ProductId = 26,
-                UserId = 1
+                UserId = 1,
+                PubliDate = new DateTime(2024, 9, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Muy útil, mantiene el café caliente durante horas. Es bastante resistente.",
                 ProductId = 26,
-                UserId = 2
+                UserId = 2,
+                PubliDate = new DateTime(2024, 6, 12)
             },
             new Review {
                 Score = EScore.Regular,
                 Body = "No me terminó de convencer, esperaba que fuera más duradero.",
                 ProductId = 26,
-                UserId = 3
+                UserId = 3,
+                PubliDate = new DateTime(2024, 8, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Me encanta la taza cerámica, tiene un diseño muy bonito y resistente.",
                 ProductId = 27,
-                UserId = 4
+                UserId = 4,
+                PubliDate = new DateTime(2024, 8, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "La taza tiene un diseño elegante, ideal para mi colección.",
                 ProductId = 27,
-                UserId = 5
+                UserId = 5,
+                PubliDate = new DateTime(2024, 7, 12)
             },
             new Review {
                 Score = EScore.Regular,
                 Body = "No es lo que esperaba, el diseño no es tan atractivo como pensaba.",
                 ProductId = 27,
-                UserId = 1
+                UserId = 1,
+                PubliDate = new DateTime(2024, 10, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "La botella de agua es perfecta para llevar a todas partes, mantiene el agua fresca todo el día.",
                 ProductId = 28,
-                UserId = 2
+                UserId = 2,
+                PubliDate = new DateTime(2024, 8, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Es muy práctica y ligera, ideal para hacer ejercicio o llevar en el bolso.",
                 ProductId = 28,
-                UserId = 3
+                UserId = 3,
+                PubliDate = new DateTime(2024, 6, 12)
             },
             new Review {
                 Score = EScore.Regular,
                 Body = "No la veo tan útil para el día a día, prefiero botellas más grandes.",
                 ProductId = 28,
-                UserId = 4
+                UserId = 4,
+                PubliDate = new DateTime(2024, 9, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "La cafetera italiana hace un café delicioso. Me encanta su diseño tradicional y su fácil uso.",
                 ProductId = 30,
-                UserId = 1
+                UserId = 1,
+                PubliDate = new DateTime(2024, 7, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Es perfecta para hacer café como en Italia. El único problema es que ocupa un poco de espacio.",
                 ProductId = 30,
-                UserId = 2
+                UserId = 2,
+                PubliDate = new DateTime(2024, 9, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Muy buena cafetera, prepara el café de forma rápida y eficaz. El sabor es inigualable.",
                 ProductId = 30,
-                UserId = 3
+                UserId = 3,
+                PubliDate = new DateTime(2024, 7, 12)
             },
             new Review {
                 Score = EScore.Negative,
                 Body = "No me terminó de convencer, el café sale demasiado fuerte para mi gusto.",
                 ProductId = 30,
-                UserId = 4
+                UserId = 4,
+                PubliDate = new DateTime(2024, 10, 12)
             },
             new Review {
                 Score = EScore.Regular,
                 Body = "No es lo que esperaba, la cafetera tiene varios problemas con el goteo.",
                 ProductId = 30,
-                UserId = 5
+                UserId = 5,
+                PubliDate = new DateTime(2024, 9, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "La taza con infusor es perfecta para tés de hojas sueltas. Me encanta el diseño.",
                 ProductId = 31,
-                UserId = 1
+                UserId = 1,
+                PubliDate = new DateTime(2024, 10, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Ideal para preparar tés, el infusor es fácil de usar y el material es muy resistente.",
                 ProductId = 31,
-                UserId = 2
+                UserId = 2,
+                PubliDate = new DateTime(2024, 7, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Muy buena opción para disfrutar tés sueltos. La taza es cómoda y el infusor funciona de maravilla.",
                 ProductId = 31,
-                UserId = 3
+                UserId = 3,
+                PubliDate = new DateTime(2024, 9, 12)
             },
             new Review {
                 Score = EScore.Regular,
                 Body = "El infusor no me gusta mucho, prefiero otros métodos para preparar té.",
                 ProductId = 31,
-                UserId = 4
+                UserId = 4,
+                PubliDate = new DateTime(2024, 10, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Me encanta la botella termal de viaje, mantiene el café caliente por horas y es muy práctica.",
                 ProductId = 32,
-                UserId = 5
+                UserId = 5,
+                PubliDate = new DateTime(2024, 7, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Perfecta para mis viajes, mantiene el café caliente todo el tiempo y no gotea.",
                 ProductId = 32,
-                UserId = 1
+                UserId = 1,
+                PubliDate = new DateTime(2024, 9, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Excelente calidad, me encanta cómo mantiene la temperatura de las bebidas durante todo el día.",
                 ProductId = 32,
-                UserId = 2
+                UserId = 2,
+                PubliDate = new DateTime(2024, 10, 12)
             },
             new Review {
                 Score = EScore.Negative,
                 Body = "No es tan térmica como esperaba, el café se enfría más rápido de lo que pensaba.",
                 ProductId = 32,
-                UserId = 3
+                UserId = 3,
+                PubliDate = new DateTime(2024, 9, 12)
             },
             new Review {
                 Score = EScore.Regular,
                 Body = "La botella se ve bien, pero no mantiene tanto el calor. Me decepcionó un poco.",
                 ProductId = 32,
-                UserId = 4
+                UserId = 4,
+                PubliDate = new DateTime(2024, 9, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "La botella térmica para café mantiene el café caliente por mucho tiempo, es muy eficiente.",
                 ProductId = 33,
-                UserId = 5
+                UserId = 5,
+                PubliDate = new DateTime(2024, 7, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Ideal para llevar café al trabajo. Muy buena calidad y mantiene el calor durante varias horas.",
                 ProductId = 33,
-                UserId = 1
+                UserId = 1,
+                PubliDate = new DateTime(2024, 9, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "Me encanta esta botella, mantiene mi café caliente como si acabara de hacerlo.",
                 ProductId = 33,
-                UserId = 2
+                UserId = 2,
+                PubliDate = new DateTime(2024, 7, 12)
             },
             new Review {
                 Score = EScore.Negative,
                 Body = "No es lo que esperaba, se enfría un poco más rápido de lo que me dijeron.",
                 ProductId = 33,
-                UserId = 3
+                UserId = 3,
+                PubliDate = new DateTime(2024, 9, 12)
             },
             new Review {
                 Score = EScore.Positive,
                 Body = "La botella térmica es práctica y perfecta para el café. Su diseño es bastante atractivo también.",
                 ProductId = 33,
-                UserId = 4
+                UserId = 4,
+                PubliDate = new DateTime(2024, 10, 12)
             }
             ];
 
