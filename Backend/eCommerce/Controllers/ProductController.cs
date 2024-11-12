@@ -2,6 +2,7 @@ using System;
 using eCommerce.Services;
 using Microsoft.AspNetCore.Mvc;
 using eCommerce.Models.Dtos;
+using eCommerce.Models.Database.Entities;
 
 namespace eCommerce.Controllers;
 
@@ -34,4 +35,14 @@ public class ProductController : ControllerBase
   {
     return await _service.GetFilteredProducts(filter);
   }
+
+    [HttpGet("details/{id}")]
+    public async Task<ProductDto> GetProductDetailsAsync(long id)
+    {
+        return await _service.GetByIdAsync(id);
+    }
+
+
+
+
 }

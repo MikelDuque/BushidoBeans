@@ -53,4 +53,5 @@ public class ProductService
     Product product = await _unitOfWork.ProductRepository.GetByIdWithReviewsAsync(id);
     return _mapper.ToDto(product);
   }
+
 }
