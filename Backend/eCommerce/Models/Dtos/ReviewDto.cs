@@ -12,6 +12,6 @@ public class ReviewDto
     public string UserName { get; set; }
     public DateTime PubliDate { get; set; }
 
-    public long ProductId { get; set; }
-    public long UserId { get; set; }
+    //public long ProductId { get; set; }
+    //public long UserId { get; set; }
 }

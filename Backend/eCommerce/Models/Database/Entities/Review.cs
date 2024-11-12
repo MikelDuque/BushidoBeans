@@ -19,5 +19,6 @@ public class Review
 
     [ForeignKey(nameof(UserId))]
     public required long UserId { get; set; }
+    public string UserName { get; set; }
     public User User { get; set; }
 }

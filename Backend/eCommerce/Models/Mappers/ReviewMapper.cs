@@ -13,8 +13,7 @@ public class ReviewMapper
             Id = review.Id,
             Score = review.Score,
             Body = review.Body,
-            ProductId = review.ProductId,
-            UserId = review.UserId,
+            UserName = review.UserName,
             PubliDate = review.PubliDate,
         };
     }
