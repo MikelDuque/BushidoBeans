@@ -34,8 +34,8 @@ function Catalogo() {
   const ordenarPor = [
     { value: '0', label: 'Alfabéticamente (A-Z)' },
     { value: '1', label: 'Alfabéticamente (Z-A)' },
-    { value: '2', label: 'Precio Descendente' },
-    { value: '3', label: 'Precio Ascendente' },
+    { value: '2', label: 'Precio Ascendente' },
+    { value: '3', label: 'Precio Descendente' },
   ];
 
   const mostrarProductos = [
