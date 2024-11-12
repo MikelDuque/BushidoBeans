@@ -35,7 +35,7 @@ function DetallesProducto() {
                     <img src={`https://localhost:7015/${producto.imagen}`} alt={producto.nombre} />
                 </div>
 
-                <div className='detalles'>
+                <div>
                     <p className='nombreProducto titulo'>{producto.nombre}</p>
                     <p className='subtitulo intensidad'>
                         Intensidad: 
