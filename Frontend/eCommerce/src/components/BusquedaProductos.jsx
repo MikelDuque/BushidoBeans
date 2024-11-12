@@ -1,58 +1,60 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from "prop-types";
 import { CardPrueba } from "../components/Card-Producto.jsx";
 import ReactPaginate from 'react-paginate';
 import "../styles/Catalogo.css";
 import "../styles/Paginacion.css";
 
-const BusquedaProductos = ({ filtro, ordenar, productosPorPagina }) => {
+
+const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   const [productoBuscado, setProductoBuscado] = useState('');
   const [datosFiltrados, setDatosFiltrados] = useState([]);
+  const [arrayProductos, setArrayProductos] = useState([]);
   const [paginaActual, setPaginaActual] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [totalProductos, setTotalProductos] = useState(0);  //  Cambiar por variable
-  
-  const url = `https://localhost:7015/api/Product/FilteredProducts?Search=${productoBuscado}&Category=${filtro}&Order=${ordenar}&ThereStock=true&ProductsPerPage=${productosPorPagina}&CurrentPage=${paginaActual}`;
+  const [totalPaginas, setTotalPaginas] = useState(1); // Total que se actualiza al recibir respuesta del backend
 
+  
   useEffect(() => {
+    // Llamada a la API cuando cambian el filtro, orden, o búsqueda
     const fetchData = async () => {
       setLoading(true);
       setError(null);
 
       try {
-        console.log("Iniciando solicitud de productos...");
+        // API del backend que retorna los productos ya filtrados y paginados
 
-
-        const response = await fetch(url, {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-        });
+        const Url = 'https://localhost:7015/api/Product/Filtered_Products'
+        const response = await fetch(`${Url}?Search=${productoBuscado}&Category=${filtro}&Order=${ordenar}&IncludeStockless=true&ProductsPerPage=${productosPorPagina}&CurrentPage=${paginaActual}`, {method: 'GET', headers:{'Content-Type':'aplication/json'}});
         
-        if(response.ok){
-          const data = await response.json();
-
-          setDatosFiltrados(data || []);
-
-          setTotalProductos(data.total || 0);
-        }
         if (!response.ok) throw new Error("Error al cargar los productos");
+        setLoading (false);
 
-      } catch (err) {
-        console.error("Error en la solicitud:", err);
+        const data = await response.json();
+
+        setArrayProductos(Array.isArray(data)? data:[])
+        setDatosFiltrados(Array.isArray(data.filteredProducts)? data.filteredProducts:[]);  // Datos de productos recibidos
+        setTotalPaginas(data.totalPages);       // Total de productos para paginación
+        
+        
+        
+      } catch (error) {
         setError("Hubo un error al cargar los productos.");
-        setDatosFiltrados([]);
       } finally {
         setLoading(false);
       }
     };
-    fetchData()
+
+    fetchData();
   }, [productoBuscado, filtro, ordenar, paginaActual, productosPorPagina]);
 
-  const handlePageChange = (selectedPage) => {
-    setPaginaActual(selectedPage.selected);
+  const handlePageChange = ({selected: selectedPage}) => {
+    setPaginaActual(selectedPage+1); // Cambia la página actual según la selección del usuario
   };
-
-
+  
+  console.log("objeto datos filtrados",datosFiltrados);
+  console.log("productos",arrayProductos);
   return (
     <div>
       <div className='botonCentrado'>
@@ -64,7 +66,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina }) => {
           onChange={e => setProductoBuscado(e.target.value)}
         />
       </div>
-
+ 
       <div className="inventario">
         {loading ? (
           <p>Cargando productos...</p>
@@ -72,7 +74,8 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina }) => {
           <p>{error}</p>
         ) : datosFiltrados.length > 0 ? (
           datosFiltrados.map(dataP => (
-            <CardPrueba
+            
+            <CardPrueba 
               key={dataP.id}
               id={dataP.id}
               imagen={dataP.image}
@@ -80,19 +83,19 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina }) => {
               intensidad={dataP.intensity}
               valoracion={dataP.score}
               precio={dataP.price}
-              soldout={dataP.stock === 0}
+              stock={dataP.stock}
             />
           ))
         ) : (
           <p>No se encontraron productos.</p>
         )}
       </div>
-      
+
       <ReactPaginate
         previousLabel={'←'}
         nextLabel={'→'}
         breakLabel={'...'}
-        pageCount={Math.ceil(totalProductos / productosPorPagina)}
+        pageCount={totalPaginas} // Cálculo del número de páginas
         marginPagesDisplayed={2}
         pageRangeDisplayed={3}
         onPageChange={handlePageChange}
@@ -108,6 +111,13 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina }) => {
         breakLinkClassName={'page-link'}
       />
     </div>
-  );a
-}
+  );
+};
+
 export default BusquedaProductos;
+
+BusquedaProductos.propTypes = {
+  filtro: PropTypes.string.isRequired, // Ahora el id es requerido como prop
+  ordenar: PropTypes.string.isRequired,
+  productosPorPagina: PropTypes.number.isRequired,
+};

@@ -25,16 +25,17 @@ function DetallesProducto() {
     };
 
     const intensidadImg = getIntensidadImg(producto.nombre);
+    console.log(producto);
 
     return (
         <div className='container-producto'>
             <Header />
             <div className='container-info-producto'>
                 <div className='imagen-producto'>
-                    <img src={producto.imagen} alt={producto.nombre} />
+                    <img src={`https://localhost:7015/${producto.imagen}`} alt={producto.nombre} />
                 </div>
 
-                <div className='detalles'>
+                <div>
                     <p className='nombreProducto titulo'>{producto.nombre}</p>
                     <p className='subtitulo intensidad'>
                         Intensidad: 

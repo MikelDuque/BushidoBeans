@@ -3,20 +3,20 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import "../styles/SobreNosotros.css";
 import Carrusel from "../components/Carrusel";
-import logo from "../../public/recursos/logo2.png";
+import logo from "/recursos/logo2.png";
 import Card from "../components/Card-Equipo";
-import kirby from "../../public/recursos/kirby.svg";
-import sonic from "../../public/recursos/sonic.svg";
-import pikachu from "../../public/recursos/pikachu.svg";
-import link from "../../public/recursos/link.svg";
-import ig from "../../public/recursos/ig.svg";
-import tw from "../../public/recursos/x.svg";
-import fc from "../../public/recursos/fc.svg";
+import kirby from "/recursos/kirby.svg";
+import sonic from "/recursos/sonic.svg";
+import pikachu from "/recursos/pikachu.svg";
+import link from "/recursos/link.svg";
+import ig from "/recursos/ig.svg";
+import tw from "/recursos/x.svg";
+import fc from "/recursos/fc.svg";
 import Maps from "../components/Maps";
-import imagen1 from "../../public/recursos/carrusel1.svg";
-import imagen2 from "../../public/recursos/carrusel2.svg";
-import imagen3 from "../../public/recursos/carrusel3.svg";
-import imagen4 from "../../public/recursos/carrusel4.svg";
+import imagen1 from "/recursos/carrusel1.svg";
+import imagen2 from "/recursos/carrusel2.svg";
+import imagen3 from "/recursos/carrusel3.svg";
+import imagen4 from "/recursos/carrusel4.svg";
 
 function SobreNosotros() {
     const imagenes = [imagen1, imagen2, imagen3, imagen4]
@@ -69,6 +69,8 @@ function SobreNosotros() {
                     <hr className='separador-secundario' />
                     <p className='subtitulo subtitulo-equipo'>Nos une la pasión por la tecnología, el aprendizaje continuo, el café y el té, con el fin de mejorar la vida de nuestros clientes</p>
                 </div>
+            <div className='padree'>
+                
                 <div className='container-componentes'>
                     <Card nombre="Ivan Montes" cargo="Marketing" imagen={kirby}></Card>
                     <Card nombre="David Andrino" cargo="Logistica" imagen={sonic}></Card>
@@ -76,8 +78,13 @@ function SobreNosotros() {
                     <Card nombre="Mikel Duque" cargo="CEO & Fundador" imagen={link}></Card>
                 </div>
             </div>
+            </div>
 
             <hr className='separador' />
+            <div className='padree'>
+
+
+            
 
             <div className='container-informacionAdicional'>
                 <div className='container-informacion'>
@@ -112,6 +119,7 @@ function SobreNosotros() {
                 <div className='container-maps'>
                     <Maps className="maps" direccion="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3792.447613777691!2d-4.558384723732234!3d36.74307277091706!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd72f1d3dde02b7b%3A0x499336c8cdfb308a!2sC.%20Charles%20Darwin%2C%203%2C%20Campanillas%2C%2029590%20M%C3%A1laga!5e1!3m2!1sen!2ses!4v1730662620262!5m2!1sen!2ses"></Maps>
                 </div>
+            </div>
             </div>
 
 

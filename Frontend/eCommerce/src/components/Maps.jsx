@@ -1,4 +1,5 @@
 import React from "react"
+import "../styles/SobreNosotros.css";
 
 function Maps(direccion){
     return (
