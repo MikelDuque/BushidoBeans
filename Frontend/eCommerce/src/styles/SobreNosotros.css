@@ -16,6 +16,7 @@
 }
 .container-descripcion p{
     color: var(--nav-footer);
+    font-size: 16px;
 }
 
 
@@ -32,6 +33,7 @@
     display: flex;
     flex: 2;
     align-items: center;
+    
 }
 
 .imagen-logo-bushido-beans{
@@ -106,6 +108,11 @@
     width: 40%;
     display: flex;
     justify-content: flex-end;
+    
+}
+
+.map-container iframe{
+    border-radius: 10px;
 }
 
 .container-dondeEstamos,
@@ -163,12 +170,14 @@
     align-items: center; 
     justify-content: center; 
     padding: 2%; /* Espacio alrededor del contenido */
+    border-radius: 20px;
 }
 
 .imagen-mision {
-    width: 100%; /* Ajusta el tamaño de la imagen aquí */
+    width: 90%; /* Ajusta el tamaño de la imagen aquí */
     height: auto;
     margin-right: 2%; /* Separación de la imagen y el texto */
+    border-radius: 10px;
 }
 .texto-mision{
     color: var(--fondo-vistas);
@@ -192,6 +201,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    
 }
 .titulo-vision{
     font-size: 100px;
@@ -206,6 +216,8 @@
     color: var(--nav-footer); /* Ajusta el color si es necesario */
     margin: 0 auto;
     font-size: 30px;
+    
+    
 
 }
 
@@ -219,6 +231,7 @@
     align-items: center;
     justify-content: center;
     padding: 2%;
+    border-radius: 20px;
 }
 
 .container-imagen-valores {
@@ -231,8 +244,9 @@
 }
 
 .imagen-valores {
-    width:80%;
+    width:90%;
     height: auto;
+    border-radius: 10px;
 }
 
 .container-valores ul {
@@ -244,9 +258,13 @@
 
 .container-valores ul li {
     margin:  -40px; /* Ajusta el espacio entre los elementos */
+    letter-spacing: 1px;
+    padding-bottom: 20px;
+    
 }
 
 .spanBeans{
     font-weight: bolder;
     font-size: 30px;
 }
+
