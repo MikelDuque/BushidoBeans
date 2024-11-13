@@ -1,8 +1,6 @@
 using eCommerce.Models.Dtos;
 using eCommerce.Services;
 using Microsoft.AspNetCore.Mvc;
-using eCommerce.Models.Dtos;
-using eCommerce.Models.Database.Entities;
 
 namespace eCommerce.Controllers;
 

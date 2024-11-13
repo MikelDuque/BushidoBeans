@@ -16,7 +16,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/sobreNosotros" element={<SobreNosotros />} />
-                <Route path="/producto" element={<DetallesProducto />} />
+                <Route path="/producto/:id" element={<DetallesProducto />} />
                 <Route path='/404' element={<NotFound/>}/>
             </Routes>
         </Router>
