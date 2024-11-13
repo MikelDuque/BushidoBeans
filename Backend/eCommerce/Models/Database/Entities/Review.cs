@@ -8,6 +8,7 @@ public class Review
     public long Id { get; set; }
     public required EScore Score { get; set; }
     public string Body { get; set; }
+    public DateTime PubliDate { get; set; }
 
 
     //---Foreign Keys---//
@@ -18,5 +19,6 @@ public class Review
 
     [ForeignKey(nameof(User))]
     public required long UserId { get; set; }
+    public string UserName { get; set; }
     public User User { get; set; }
 }

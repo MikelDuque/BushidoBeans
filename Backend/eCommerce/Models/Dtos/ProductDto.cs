@@ -1,4 +1,5 @@
-﻿using eCommerce.Models.Database.Entities;
+using eCommerce.Models.Database.Entities;
+using eCommerce.Models.Dtos;
 using eCommerce.Models.Enums;
 
 namespace eCommerce.Models.Dtos;
@@ -16,4 +17,6 @@ public class ProductDto
     public double Score { get; set; }
     public int TotalReviews {get; set; }
     public ICollection<ReviewDto> Reviews { get; set; }
+
+    
 }

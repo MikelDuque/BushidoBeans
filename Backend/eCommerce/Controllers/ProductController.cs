@@ -1,4 +1,4 @@
-using System;
+using eCommerce.Models.Dtos;
 using eCommerce.Services;
 using Microsoft.AspNetCore.Mvc;
 using eCommerce.Models.Dtos;
@@ -10,12 +10,12 @@ namespace eCommerce.Controllers;
 [Route("api/[controller]")]
 public class ProductController : ControllerBase
 {
-  private readonly ProductService _service;
+    private readonly ProductService _service;
 
-  public ProductController(ProductService service)
-  {
-    _service = service;
-  }
+    public ProductController(ProductService service)
+    {
+        _service = service;
+    }
 
   /*
   [HttpGet]
