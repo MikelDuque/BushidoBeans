@@ -86,28 +86,33 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
         ) : (
           <p>No se encontraron productos.</p>
         )}
+
+          
+
+
+        
       </div>
 
-      <ReactPaginate
-        previousLabel={'←'}
-        nextLabel={'→'}
-        breakLabel={'...'}
-        pageCount={totalPaginas} // Cálculo del número de páginas
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={3}
-        onPageChange={handlePageChange}
-        containerClassName={'pagination'}
-        activeClassName={'active'}
-        pageClassName={'page-item'}
-        pageLinkClassName={'page-link'}
-        previousClassName={'page-item'}
-        nextClassName={'page-item'}
-        previousLinkClassName={'page-link'}
-        nextLinkClassName={'page-link'}
-        breakClassName={'page-item'}
-        breakLinkClassName={'page-link'}
-      />
-    </div>
+        <ReactPaginate
+          previousLabel={'←'}
+          nextLabel={'→'}
+          breakLabel={'...'}
+          pageCount={totalPaginas} // Cálculo del número de páginas
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={3}
+          onPageChange={handlePageChange}
+          containerClassName={'pagination'}
+          activeClassName={'active'}
+          pageClassName={'page-item'}
+          pageLinkClassName={'page-link'}
+          previousClassName={'page-item'}
+          nextClassName={'page-item'}
+          previousLinkClassName={'page-link'}
+          nextLinkClassName={'page-link'}
+          breakClassName={'page-item'}
+          breakLinkClassName={'page-link'}
+        />
+        </div>
   );
 };
 

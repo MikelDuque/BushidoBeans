@@ -37,6 +37,9 @@ function DetallesProducto() {
 
                 <div>
                     <p className='nombreProducto titulo'>{producto.nombre}</p>
+                    <div className='detalles'>
+
+                    
                     <p className='subtitulo intensidad'>
                         Intensidad: 
                         <span className='texto'>
@@ -51,6 +54,7 @@ function DetallesProducto() {
                     <p className='subtitulo disponibilidad'>
                         Disponibilidad: <span className='texto'>{producto.soldout ? 'Sin stock' : 'En stock'}</span>
                     </p>
+                    </div>
                     <p className='subtitulo descripcion'>
                         <span className='texto'>{producto.descripcion}</span>
                     </p>

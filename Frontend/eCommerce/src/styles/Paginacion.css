@@ -5,13 +5,17 @@
     list-style-type: none;
     padding: 0;
     margin-top: 20px;
+
+    
 }
 
 .page-item {
+    
     margin: 0 8px;
 }
 
 .page-link {
+    
     display: flex;
     align-items: center;
     justify-content: center;
