@@ -40,9 +40,9 @@ public class Seeder
             },
             new User {
                 Mail = "david@gmail.es",
-                Name = "Mr.",
+                Name = "David",
                 Password = AuthService.HashPassword("David#1234567890") ,
-                Surname = "Andrino",
+                Surname = "Andrino Ferreira",
                 Phone = 622222222,
                 Role = "admin"
             },
@@ -990,8 +990,8 @@ public class Seeder
 
         //Añadimos el rango de usuarios a la BDD
         await _dbContext.Categories.AddRangeAsync(categories);
-        await _dbContext.Users.AddRangeAsync(users);
         await _dbContext.Products.AddRangeAsync(products);
+        await _dbContext.Users.AddRangeAsync(users);
         await _dbContext.SaveChangesAsync();
         await _dbContext.Reviews.AddRangeAsync(reviews);
     }

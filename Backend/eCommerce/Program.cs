@@ -38,16 +38,19 @@ public class Program
         builder.Services.AddScoped<CategoryRepository>();
         builder.Services.AddScoped<UserRepository>();
         builder.Services.AddScoped<ProductRepository>();
+        builder.Services.AddScoped<ReviewRepository>();
 
         //Servicios
         builder.Services.AddScoped<TextComparer>();
         builder.Services.AddScoped<AuthService>();
         builder.Services.AddScoped<UserService>();
         builder.Services.AddScoped<ProductService>();
+        builder.Services.AddScoped<ReviewService>();
 
         //Mappers
         builder.Services.AddTransient<UserMapper>();
         builder.Services.AddTransient<ProductMapper>();
+        builder.Services.AddTransient<ReviewMapper>();
 
         //Swagger/OpenApi
         builder.Services.AddEndpointsApiExplorer();

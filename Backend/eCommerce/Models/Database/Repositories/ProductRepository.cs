@@ -13,11 +13,11 @@ public class ProductRepository : Repository<Product>
     {
     }
 
-    public async Task<Product> GetByIdWithReviewsAsync(object id)
+    public new async Task<Product> GetByIdAsync(object id)
     {
         return await GetQueryable().Where(product => product.Id == (long)id)
         .Include(product => product.Category)
-        .Include(product => product.Reviews)
+        .Include(product => product.Reviews).ThenInclude(review => review.User)
         .FirstOrDefaultAsync();
     }
     

@@ -1,6 +1,8 @@
 using eCommerce.Models.Dtos;
 using eCommerce.Services;
 using Microsoft.AspNetCore.Mvc;
+using eCommerce.Models.Dtos;
+using eCommerce.Models.Database.Entities;
 
 namespace eCommerce.Controllers;
 
@@ -15,23 +17,28 @@ public class ProductController : ControllerBase
         _service = service;
     }
 
-    /*
-    [HttpGet]
-    public async Task<IEnumerable<ProductDto>> GetAllAsync()
-    {
-      return await _service.GetAllAsync();
-    }
-    */
+  /*
+  [HttpGet]
+  public async Task<IEnumerable<ProductDto>> GetAllAsync()
+  {
+    return await _service.GetAllAsync();
+  }
+  */
+  [HttpGet("{id}")]
+  public async Task<ProductDto> GetByIdAsync(long id)
+  {
+    return await _service.GetByIdAsync(id);
+  }
+  
+  [HttpGet("Filtered_Products")]
+  public async Task<Catalog> GetFilteredProducts(Filter filter)
+  {
+    return await _service.GetFilteredProducts(filter);
+  }
 
-    [HttpGet("{id}")]
-    public async Task<ProductDto> GetByIdAsync(long id)
-    {
-        return await _service.GetByIdAsync(id);
-    }
-
-    [HttpGet("Filtered_Products")]
-    public async Task<Catalog> GetFilteredProducts(Filter filter)
-    {
-        return await _service.GetFilteredProducts(filter);
-    }
+  [HttpGet("Product_Details")]
+  public async Task<ProductDto> GetProductDetailsAsync(long id)
+  {
+    return await _service.GetByIdAsync(id);
+  }
 }

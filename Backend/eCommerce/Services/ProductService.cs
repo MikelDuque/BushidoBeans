@@ -50,7 +50,8 @@ public class ProductService
   */
   public async Task<ProductDto> GetByIdAsync(long id)
   {
-    Product product = await _unitOfWork.ProductRepository.GetByIdWithReviewsAsync(id);
+    Product product = await _unitOfWork.ProductRepository.GetByIdAsync(id);
     return _mapper.ToDto(product);
   }
+
 }

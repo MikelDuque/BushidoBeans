@@ -8,17 +8,16 @@ public class Review
     public long Id { get; set; }
     public required EScore Score { get; set; }
     public string Body { get; set; }
-    public DateTime PubliDate { get; set; }
+    public required DateTime PubliDate { get; set; }
 
 
     //---Foreign Keys---//
 
-    [ForeignKey(nameof(ProductId))]
+    [ForeignKey(nameof(Product))]
     public required long ProductId { get; set; }
     public Product Product { get; set; }
 
-    [ForeignKey(nameof(UserId))]
+    [ForeignKey(nameof(User))]
     public required long UserId { get; set; }
-    public string UserName { get; set; }
     public User User { get; set; }
 }
