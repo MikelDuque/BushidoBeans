@@ -25,7 +25,8 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
         // API del backend que retorna los productos ya filtrados y paginados
 
         const Url = 'https://localhost:7015/api/Product/Filtered_Products'
-        const response = await fetch(`${Url}?Search=${productoBuscado}&Category=${filtro}&Order=${ordenar}&IncludeStockless=true&ProductsPerPage=${productosPorPagina}&CurrentPage=${paginaActual}`, {method: 'GET', headers:{'Content-Type':'aplication/json'}});
+        const response = await fetch(`${Url}?Search=${productoBuscado}&Category=${filtro}&Order=${ordenar}&IncludeStockless=true&ProductsPerPage=${productosPorPagina}&CurrentPage=${paginaActual}`
+          , {method: 'GET', headers:{'Content-Type':'aplication/json'}});
         
         if (!response.ok) throw new Error("Error al cargar los productos");
         setLoading (false);

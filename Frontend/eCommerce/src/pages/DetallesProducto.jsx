@@ -8,14 +8,33 @@ import { getIntensidadImg } from '../utils/intensidad';
 import Reviews from '../components/Reviews';
 function DetallesProducto() {
     const { id } = useParams();
-    const producto = productData.find((producto) => producto.id === parseInt(id));
-    
+
+    const [producto, setProducto] = useState(null);
+    const [loading, setLoading] = useState(true);
     const [cantidad, setCantidad] = useState(1);
 
     //FetchData para las Reviews
-    const fetchData = (() => {
+    useEffect(() => {
+        const fetchProducto = async () => {
+            try {
+                const response = await fetch(`https://localhost:7015/api/Product/Product_Details?id=${id}`, {
+                   method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }, 
+                });
+                const data = await response.json();
+                setProducto(data);
+            } catch (error) {
+                console.error('Error al cargar el producto:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    })
+        fetchProducto();
+    }, [id]);
+
     const aumentarCantidad = () => {
         if (cantidad < 10) {
             setCantidad(cantidad + 1);
@@ -42,7 +61,7 @@ function DetallesProducto() {
                 <div>
                     <p className='nombreProducto titulo'>{producto.nombre}</p>
                     <p className='subtitulo intensidad'>
-                        Intensidad: 
+                        Intensidad:
                         <span className='texto'>
                             {Array(producto.intensidad).fill(
                                 <img src={intensidadImg} alt="Intensidad" className="intensidadIcono" />
@@ -70,12 +89,16 @@ function DetallesProducto() {
                     </button>
                 </div>
             </div>
+
+
             <div className='container-reviews'>
                 <h2>Reviews</h2>
-                <Reviews></Reviews>
+                <Reviews reviews={data.Reviews}></Reviews>
             </div>
+
+
             <div className='container-recomendaciones'>
-                
+
             </div>
             <Footer />
         </div>
