@@ -8,7 +8,7 @@ export function CardPrueba({ id, imagen, nombre, intensidad, precio, stock, valo
 
     // Modificamos el manejo de la navegación para aceptar el id como argumento
     const handlePageChange = () => {
-        navigate(`/producto/${id}`);  // Ahora se navega correctamente usando el id
+        navigate(`/producto`);  // Ahora se navega correctamente usando el id
     };
 
     
@@ -57,7 +57,7 @@ export function CardPrueba({ id, imagen, nombre, intensidad, precio, stock, valo
 }
 
 CardPrueba.propTypes = {
-    id: PropTypes.string, // Ahora el id es requerido como prop
+    id: PropTypes.number, // Ahora el id es requerido como prop
     imagen: PropTypes.string,
     nombre: PropTypes.string.isRequired,
     intensidad: PropTypes.number.isRequired,
