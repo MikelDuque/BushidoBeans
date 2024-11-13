@@ -3,7 +3,7 @@ import Catalogo from "./pages/Catalogo"
 import Login from './pages/Login'
 import Register from './pages/Register'
 import SobreNosotros from './pages/SobreNosotros'
-import DetallesProducto from './components/DetallesProducto'
+import DetallesProducto from './pages/DetallesProducto'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFound from './components/NotFound';
 
