@@ -22,7 +22,7 @@ function DetallesProducto() {
 
             try {
                 const Url = 'https://localhost:7015/api/Product/Product_Details'
-                const response = await fetch(`${Url}?id=2`, {
+                const response = await fetch(`${Url}?id=${id}`, {
                     method: 'GET',
                     headers: {'Content-Type': 'application/json'}
                 });
