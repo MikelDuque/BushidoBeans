@@ -42,7 +42,7 @@ public class Seeder
                 Mail = "david@gmail.es",
                 Name = "David",
                 Password = AuthService.HashPassword("David#1234567890") ,
-                Surname = "Andrino Ferreira",
+                Surname = "Andrino Ferrera",
                 Phone = 622222222,
                 Role = "admin"
             },

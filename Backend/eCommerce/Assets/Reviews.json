@@ -1,555 +1,610 @@
 [
   {
     "Id": 1,
-    "Score": 2,
-    "Body": "Me encanta este café, muy fuerte y delicioso.",
+    "Score": 3,
+    "Body": "Un café espresso auténtico, ideal para comenzar el día.",
     "ProductId": 1,
-    "UserId": 1
+    "UserId": 3,
+    "PubliDate": "2024-09-12"
   },
   {
     "Id": 2,
     "Score": 1,
-    "Body": "Está bien, pero me esperaba algo más intenso.",
+    "Body": "No me gustó, demasiado amargo para mi gusto.",
     "ProductId": 1,
-    "UserId": 2
+    "UserId": 4,
+    "PubliDate": "2024-11-12"
   },
   {
     "Id": 3,
     "Score": 2,
-    "Body": "Un café espresso auténtico, ideal para comenzar el día.",
-    "ProductId": 2,
-    "UserId": 3
+    "Body": "Está bien, pero me gustaría que tuviera más sabor a café.",
+    "ProductId": 3,
+    "UserId": 2,
+    "PubliDate": "2024-10-12"
   },
   {
     "Id": 4,
-    "Score": 0,
-    "Body": "No me gustó, demasiado amargo para mi gusto.",
-    "ProductId": 2,
-    "UserId": 4
+    "Score": 3,
+    "Body": "La combinación de café y chocolate es perfecta, me encanta.",
+    "ProductId": 4,
+    "UserId": 3,
+    "PubliDate": "2024-08-12"
   },
   {
     "Id": 5,
     "Score": 1,
-    "Body": "Está bien, pero me gustaría que tuviera más sabor a café.",
+    "Body": "No me gustó, muy dulce para mi gusto.",
     "ProductId": 4,
-    "UserId": 2
+    "UserId": 4,
+    "PubliDate": "2024-10-12"
   },
   {
     "Id": 6,
-    "Score": 2,
-    "Body": "La combinación de café y chocolate es perfecta, me encanta.",
+    "Score": 3,
+    "Body": "Un clásico, excelente con un toque de cacao.",
     "ProductId": 5,
-    "UserId": 3
+    "UserId": 4,
+    "PubliDate": "2024-08-12"
   },
   {
     "Id": 7,
-    "Score": 0,
-    "Body": "No me gustó, muy dulce para mi gusto.",
+    "Score": 2,
+    "Body": "Está bueno, pero me gustaría que tuviera más espuma.",
     "ProductId": 5,
-    "UserId": 4
+    "UserId": 5,
+    "PubliDate": "2024-11-12"
   },
   {
     "Id": 8,
-    "Score": 2,
-    "Body": "Un clásico, excelente con un toque de cacao.",
-    "ProductId": 6,
-    "UserId": 4
+    "Score": 3,
+    "Body": "Perfecto para los días calurosos, refrescante y suave.",
+    "ProductId": 7,
+    "UserId": 2,
+    "PubliDate": "2024-07-12"
   },
   {
     "Id": 9,
-    "Score": 1,
-    "Body": "Está bueno, pero me gustaría que tuviera más espuma.",
-    "ProductId": 6,
-    "UserId": 5
+    "Score": 3,
+    "Body": "Lo mejor para el calor, muy refrescante.",
+    "ProductId": 7,
+    "UserId": 3,
+    "PubliDate": "2024-10-12"
   },
   {
     "Id": 10,
-    "Score": 2,
-    "Body": "Perfecto para los días calurosos, refrescante y suave.",
+    "Score": 3,
+    "Body": "Un café único con un toque de whisky, increíble.",
     "ProductId": 8,
-    "UserId": 2
+    "UserId": 3,
+    "PubliDate": "2024-10-12"
   },
   {
     "Id": 11,
-    "Score": 2,
-    "Body": "Lo mejor para el calor, muy refrescante.",
-    "ProductId": 8,
-    "UserId": 3
+    "Score": 3,
+    "Body": "Muy refrescante y dulce, ideal para un día caluroso.",
+    "ProductId": 9,
+    "UserId": 5,
+    "PubliDate": "2024-11-12"
   },
   {
     "Id": 12,
     "Score": 2,
-    "Body": "Un café único con un toque de whisky, increíble.",
+    "Body": "Está bien, pero me esperaba algo más cremoso.",
     "ProductId": 9,
-    "UserId": 3
+    "UserId": 1,
+    "PubliDate": "2024-10-12"
   },
   {
     "Id": 13,
-    "Score": 2,
-    "Body": "Muy refrescante y dulce, ideal para un día caluroso.",
-    "ProductId": 10,
-    "UserId": 5
+    "Score": 3,
+    "Body": "Perfecto para acompañar una tarde tranquila, me encanta su suavidad.",
+    "ProductId": 11,
+    "UserId": 4,
+    "PubliDate": "2024-08-12"
   },
   {
     "Id": 14,
     "Score": 1,
-    "Body": "Está bien, pero me esperaba algo más cremoso.",
-    "ProductId": 10,
-    "UserId": 1
+    "Body": "Demasiado dulce para mi gusto, no me convenció.",
+    "ProductId": 11,
+    "UserId": 5,
+    "PubliDate": "2024-07-12"
   },
   {
     "Id": 15,
-    "Score": 2,
-    "Body": "Perfecto para acompañar una tarde tranquila, me encanta su suavidad.",
-    "ProductId": 12,
-    "UserId": 4
+    "Score": 3,
+    "Body": "El toque de nata montada lo hace delicioso, perfecto para una tarde relajante.",
+    "ProductId": 11,
+    "UserId": 1,
+    "PubliDate": "2024-09-12"
   },
   {
     "Id": 16,
-    "Score": 0,
-    "Body": "Demasiado dulce para mi gusto, no me convenció.",
+    "Score": 2,
+    "Body": "Me gusta el sabor, pero esperaba un toque más de café en lugar de azúcar.",
     "ProductId": 12,
-    "UserId": 5
+    "UserId": 2,
+    "PubliDate": "2024-07-12"
   },
   {
     "Id": 17,
-    "Score": 2,
-    "Body": "El toque de nata montada lo hace delicioso, perfecto para una tarde relajante.",
+    "Score": 3,
+    "Body": "Un toque perfecto de caramelo, me encanta la mezcla dulce con el café.",
     "ProductId": 12,
-    "UserId": 1
+    "UserId": 3,
+    "PubliDate": "2024-11-12"
   },
   {
     "Id": 18,
     "Score": 1,
-    "Body": "Me gusta el sabor, pero esperaba un toque más de café en lugar de azúcar.",
-    "ProductId": 13,
-    "UserId": 2
+    "Body": "Demasiado dulce para mi, no volvería a pedirlo.",
+    "ProductId": 12,
+    "UserId": 4,
+    "PubliDate": "2024-08-12"
   },
   {
     "Id": 19,
     "Score": 2,
-    "Body": "Un toque perfecto de caramelo, me encanta la mezcla dulce con el café.",
-    "ProductId": 13,
-    "UserId": 3
+    "Body": "Lo esperaba más fuerte, pero tiene un sabor ligero.",
+    "ProductId": 12,
+    "UserId": 1,
+    "PubliDate": "2024-07-12"
   },
   {
     "Id": 20,
-    "Score": 0,
-    "Body": "Demasiado dulce para mi, no volvería a pedirlo.",
+    "Score": 2,
+    "Body": "El café está bien, pero no es lo suficientemente fuerte para mí.",
     "ProductId": 13,
-    "UserId": 4
+    "UserId": 5,
+    "PubliDate": "2024-09-12"
   },
   {
     "Id": 21,
-    "Score": 1,
-    "Body": "Lo esperaba más fuerte, pero tiene un sabor ligero.",
+    "Score": 3,
+    "Body": "Muy buen café, perfecto para aquellos que disfrutan un toque de leche.",
     "ProductId": 13,
-    "UserId": 1
+    "UserId": 1,
+    "PubliDate": "2024-06-12"
   },
   {
     "Id": 22,
-    "Score": 1,
-    "Body": "El café está bien, pero no es lo suficientemente fuerte para mí.",
-    "ProductId": 14,
-    "UserId": 5
+    "Score": 3,
+    "Body": "Me encanta este café, muy cremoso y con un toque dulce ideal para la tarde.",
+    "ProductId": 13,
+    "UserId": 2,
+    "PubliDate": "2024-11-12"
   },
   {
     "Id": 23,
-    "Score": 2,
-    "Body": "Muy buen café, perfecto para aquellos que disfrutan un toque de leche.",
+    "Score": 3,
+    "Body": "Un té verde muy suave y refrescante, ideal para cualquier hora del día.",
     "ProductId": 14,
-    "UserId": 1
+    "UserId": 2,
+    "PubliDate": "2024-07-12"
   },
   {
     "Id": 24,
-    "Score": 2,
-    "Body": "Me encanta este café, muy cremoso y con un toque dulce ideal para la tarde.",
+    "Score": 3,
+    "Body": "Un té verde orgánico con un sabor natural, excelente para la salud.",
     "ProductId": 14,
-    "UserId": 2
+    "UserId": 3,
+    "PubliDate": "2024-08-12"
   },
   {
     "Id": 25,
     "Score": 2,
-    "Body": "Un té verde muy suave y refrescante, ideal para cualquier hora del día.",
-    "ProductId": 15,
-    "UserId": 2
+    "Body": "Me gusta el té verde, pero este me pareció un poco soso.",
+    "ProductId": 14,
+    "UserId": 4,
+    "PubliDate": "2024-08-12"
   },
   {
     "Id": 26,
-    "Score": 2,
-    "Body": "Un té verde orgánico con un sabor natural, excelente para la salud.",
-    "ProductId": 15,
-    "UserId": 3
+    "Score": 3,
+    "Body": "Un té verde fresco y revitalizante. Me encanta como me hace sentir.",
+    "ProductId": 14,
+    "UserId": 4,
+    "PubliDate": "2024-07-12"
   },
   {
     "Id": 27,
-    "Score": 1,
-    "Body": "Me gusta el té verde, pero este me pareció un poco soso.",
-    "ProductId": 15,
-    "UserId": 4
+    "Score": 3,
+    "Body": "Un té con mucho sabor, perfecto para los que buscan algo natural y energizante.",
+    "ProductId": 14,
+    "UserId": 5,
+    "PubliDate": "2024-09-12"
   },
   {
     "Id": 28,
-    "Score": 2,
-    "Body": "Un té verde fresco y revitalizante. Me encanta como me hace sentir.",
-    "ProductId": 15,
-    "UserId": 4
+    "Score": 3,
+    "Body": "Me encanta este té, tiene un sabor muy suave y natural.",
+    "ProductId": 16,
+    "UserId": 2,
+    "PubliDate": "2024-11-12"
   },
   {
     "Id": 29,
     "Score": 2,
-    "Body": "Un té con mucho sabor, perfecto para los que buscan algo natural y energizante.",
-    "ProductId": 15,
-    "UserId": 5
+    "Body": "El sabor es muy sutil, no me convence del todo.",
+    "ProductId": 16,
+    "UserId": 3,
+    "PubliDate": "2024-07-12"
   },
   {
     "Id": 30,
-    "Score": 2,
-    "Body": "Me encanta este té, tiene un sabor muy suave y natural.",
+    "Score": 3,
+    "Body": "Un té Oolong muy bien equilibrado, excelente para quienes disfrutan de un sabor intermedio.",
     "ProductId": 17,
-    "UserId": 2
+    "UserId": 4,
+    "PubliDate": "2024-06-12"
   },
   {
     "Id": 31,
-    "Score": 1,
-    "Body": "El sabor es muy sutil, no me convence del todo.",
+    "Score": 2,
+    "Body": "Es interesante, pero esperaba un sabor más pronunciado.",
     "ProductId": 17,
-    "UserId": 3
+    "UserId": 5,
+    "PubliDate": "2024-11-12"
   },
   {
     "Id": 32,
-    "Score": 2,
-    "Body": "Un té Oolong muy bien equilibrado, excelente para quienes disfrutan de un sabor intermedio.",
+    "Score": 3,
+    "Body": "El sabor floral del té de jazmín es maravilloso, muy relajante.",
     "ProductId": 18,
-    "UserId": 4
+    "UserId": 1,
+    "PubliDate": "2024-11-12"
   },
   {
     "Id": 33,
-    "Score": 1,
-    "Body": "Es interesante, pero esperaba un sabor más pronunciado.",
+    "Score": 3,
+    "Body": "Me encanta el toque floral, perfecto para mis tardes de descanso.",
     "ProductId": 18,
-    "UserId": 5
+    "UserId": 2,
+    "PubliDate": "2024-10-12"
   },
   {
     "Id": 34,
-    "Score": 2,
-    "Body": "El sabor floral del té de jazmín es maravilloso, muy relajante.",
-    "ProductId": 19,
-    "UserId": 1
+    "Score": 1,
+    "Body": "No me gusta el sabor floral, no lo volveré a comprar.",
+    "ProductId": 18,
+    "UserId": 3,
+    "PubliDate": "2024-08-12"
   },
   {
     "Id": 35,
-    "Score": 2,
-    "Body": "Me encanta el toque floral, perfecto para mis tardes de descanso.",
+    "Score": 3,
+    "Body": "Un té matcha increíblemente refrescante, muy saludable y lleno de energía.",
     "ProductId": 19,
-    "UserId": 2
+    "UserId": 4,
+    "PubliDate": "2024-10-12"
   },
   {
     "Id": 36,
-    "Score": 0,
-    "Body": "No me gusta el sabor floral, no lo volveré a comprar.",
-    "ProductId": 19,
-    "UserId": 3
-  },
-  {
-    "Id": 37,
     "Score": 2,
-    "Body": "Un té matcha increíblemente refrescante, muy saludable y lleno de energía.",
-    "ProductId": 20,
-    "UserId": 4
-  },
-  {
-    "Id": 38,
-    "Score": 1,
     "Body": "No es malo, pero me resulta demasiado amargo para mi gusto.",
-    "ProductId": 20,
-    "UserId": 5
+    "ProductId": 19,
+    "UserId": 5,
+    "PubliDate": "2024-10-12"
   },
   {
-    "Id": 39,
-    "Score": 2,
-    "Body": "Un té suave y relajante, ideal para antes de dormir. Me gusta el toque floral.",
-    "ProductId": 21,
-    "UserId": 1
+    "id": 37,
+    "score": "Positive",
+    "body": "Un té suave y relajante, ideal para antes de dormir. Me gusta el toque floral.",
+    "productId": 21,
+    "userId": 1,
+    "publiDate": "2024-11-12"
   },
   {
-    "Id": 40,
-    "Score": 1,
-    "Body": "Demasiado suave para mí, esperaba un sabor más pronunciado.",
-    "ProductId": 21,
-    "UserId": 2
+    "id": 38,
+    "score": "Regular",
+    "body": "Demasiado suave para mí, esperaba un sabor más pronunciado.",
+    "productId": 21,
+    "userId": 2,
+    "publiDate": "2024-11-12"
   },
   {
-    "Id": 41,
-    "Score": 2,
-    "Body": "Muy buen té para relajarse, tiene un toque dulce natural.",
-    "ProductId": 21,
-    "UserId": 3
+    "id": 39,
+    "score": "Positive",
+    "body": "Muy buen té para relajarse, tiene un toque dulce natural.",
+    "productId": 21,
+    "userId": 3,
+    "publiDate": "2024-06-12"
   },
   {
-    "Id": 42,
-    "Score": 2,
-    "Body": "Me encanta este té, tiene justo el equilibrio entre sabor y suavidad.",
-    "ProductId": 22,
-    "UserId": 4
+    "id": 40,
+    "score": "Positive",
+    "body": "Me encanta este té, tiene justo el equilibrio entre sabor y suavidad.",
+    "productId": 22,
+    "userId": 4,
+    "publiDate": "2024-09-12"
   },
   {
-    "Id": 43,
-    "Score": 0,
-    "Body": "No me convenció, el sabor a bergamota es muy fuerte para mi gusto.",
-    "ProductId": 22,
-    "UserId": 5
+    "id": 41,
+    "score": "Negative",
+    "body": "No me convenció, el sabor a bergamota es muy fuerte para mi gusto.",
+    "productId": 22,
+    "userId": 5,
+    "publiDate": "2024-10-12"
   },
   {
-    "Id": 44,
-    "Score": 2,
-    "Body": "El Té Earl Grey tiene un sabor único, me encanta con un toque de leche.",
-    "ProductId": 22,
-    "UserId": 1
+    "id": 42,
+    "score": "Positive",
+    "body": "El Té Earl Grey tiene un sabor único, me encanta con un toque de leche.",
+    "productId": 22,
+    "userId": 1,
+    "publiDate": "2024-07-12"
   },
   {
-    "Id": 45,
-    "Score": 2,
-    "Body": "Especiado y cálido, perfecto para las tardes frías. El toque de canela es muy sabroso.",
-    "ProductId": 23,
-    "UserId": 2
+    "id": 43,
+    "score": "Positive",
+    "body": "Especiado y cálido, perfecto para las tardes frías. El toque de canela es muy sabroso.",
+    "productId": 23,
+    "userId": 2,
+    "publiDate": "2024-08-12"
   },
   {
-    "Id": 46,
-    "Score": 2,
-    "Body": "Un té Chai muy sabroso y con el balance perfecto de especias. Ideal para reconfortarse.",
-    "ProductId": 23,
-    "UserId": 3
+    "id": 44,
+    "score": "Positive",
+    "body": "Un té Chai muy sabroso y con el balance perfecto de especias. Ideal para reconfortarse.",
+    "productId": 23,
+    "userId": 3,
+    "publiDate": "2024-08-12"
   },
   {
-    "Id": 47,
-    "Score": 1,
-    "Body": "Demasiado especiado para mi gusto, no volvería a comprarlo.",
-    "ProductId": 23,
-    "UserId": 4
+    "id": 45,
+    "score": "Regular",
+    "body": "Demasiado especiado para mi gusto, no volvería a comprarlo.",
+    "productId": 23,
+    "userId": 4,
+    "publiDate": "2024-06-12"
   },
   {
-    "Id": 48,
-    "Score": 2,
-    "Body": "Un té muy refrescante, perfecto para el verano.",
-    "ProductId": 25,
-    "UserId": 3
+    "id": 46,
+    "score": "Positive",
+    "body": "Un té muy refrescante, perfecto para el verano.",
+    "productId": 25,
+    "userId": 3,
+    "publiDate": "2024-10-12"
   },
   {
-    "Id": 49,
-    "Score": 1,
-    "Body": "Es un poco ácido para mí, no es el té que prefiero para el verano.",
-    "ProductId": 25,
-    "UserId": 4
+    "id": 47,
+    "score": "Regular",
+    "body": "Es un poco ácido para mí, no es el té que prefiero para el verano.",
+    "productId": 25,
+    "userId": 4,
+    "publiDate": "2024-08-12"
   },
   {
-    "Id": 50,
-    "Score": 2,
-    "Body": "El Té de Hibisco tiene un sabor único y refrescante, perfecto para los días calurosos.",
-    "ProductId": 25,
-    "UserId": 5
+    "id": 48,
+    "score": "Positive",
+    "body": "El Té de Hibisco tiene un sabor único y refrescante, perfecto para los días calurosos.",
+    "productId": 25,
+    "userId": 5,
+    "publiDate": "2024-07-12"
   },
   {
-    "Id": 51,
-    "Score": 2,
-    "Body": "Es un termo de excelente calidad, mantiene las bebidas frías por mucho tiempo.",
-    "ProductId": 26,
-    "UserId": 1
+    "id": 49,
+    "score": "Positive",
+    "body": "Es un termo de excelente calidad, mantiene las bebidas frías por mucho tiempo.",
+    "productId": 26,
+    "userId": 1,
+    "publiDate": "2024-09-12"
   },
   {
-    "Id": 52,
-    "Score": 2,
-    "Body": "Muy útil, mantiene el café caliente durante horas. Es bastante resistente.",
-    "ProductId": 26,
-    "UserId": 2
+    "id": 50,
+    "score": "Positive",
+    "body": "Muy útil, mantiene el café caliente durante horas. Es bastante resistente.",
+    "productId": 26,
+    "userId": 2,
+    "publiDate": "2024-06-12"
   },
   {
-    "Id": 53,
-    "Score": 1,
-    "Body": "No me terminó de convencer, esperaba que fuera más duradero.",
-    "ProductId": 26,
-    "UserId": 3
+    "id": 51,
+    "score": "Regular",
+    "body": "No me terminó de convencer, esperaba que fuera más duradero.",
+    "productId": 26,
+    "userId": 3,
+    "publiDate": "2024-08-12"
   },
   {
-    "Id": 54,
-    "Score": 2,
-    "Body": "Me encanta la taza cerámica, tiene un diseño muy bonito y resistente.",
-    "ProductId": 27,
-    "UserId": 4
+    "id": 52,
+    "score": "Positive",
+    "body": "Me encanta la taza cerámica, tiene un diseño muy bonito y resistente.",
+    "productId": 27,
+    "userId": 4,
+    "publiDate": "2024-08-12"
   },
   {
-    "Id": 55,
-    "Score": 2,
-    "Body": "La taza tiene un diseño elegante, ideal para mi colección.",
-    "ProductId": 27,
-    "UserId": 5
+    "id": 53,
+    "score": "Positive",
+    "body": "La taza tiene un diseño elegante, ideal para mi colección.",
+    "productId": 27,
+    "userId": 5,
+    "publiDate": "2024-07-12"
   },
   {
-    "Id": 56,
-    "Score": 1,
-    "Body": "No es lo que esperaba, el diseño no es tan atractivo como pensaba.",
-    "ProductId": 27,
-    "UserId": 1
+    "id": 54,
+    "score": "Regular",
+    "body": "No es lo que esperaba, el diseño no es tan atractivo como pensaba.",
+    "productId": 27,
+    "userId": 1,
+    "publiDate": "2024-10-12"
   },
   {
-    "Id": 57,
-    "Score": 2,
-    "Body": "La botella de agua es perfecta para llevar a todas partes, mantiene el agua fresca todo el día.",
-    "ProductId": 28,
-    "UserId": 2
+    "id": 55,
+    "score": "Positive",
+    "body": "La botella de agua es perfecta para llevar a todas partes, mantiene el agua fresca todo el día.",
+    "productId": 28,
+    "userId": 2,
+    "publiDate": "2024-08-12"
   },
   {
-    "Id": 58,
-    "Score": 2,
-    "Body": "Es muy práctica y ligera, ideal para hacer ejercicio o llevar en el bolso.",
-    "ProductId": 28,
-    "UserId": 3
+    "id": 56,
+    "score": "Positive",
+    "body": "Es muy práctica y ligera, ideal para hacer ejercicio o llevar en el bolso.",
+    "productId": 28,
+    "userId": 3,
+    "publiDate": "2024-06-12"
   },
   {
-    "Id": 59,
-    "Score": 1,
-    "Body": "No la veo tan útil para el día a día, prefiero botellas más grandes.",
-    "ProductId": 28,
-    "UserId": 4
+    "id": 57,
+    "score": "Regular",
+    "body": "No la veo tan útil para el día a día, prefiero botellas más grandes.",
+    "productId": 28,
+    "userId": 4,
+    "publiDate": "2024-09-12"
   },
   {
-    "Id": 60,
-    "Score": 2,
-    "Body": "La cafetera italiana hace un café delicioso. Me encanta su diseño tradicional y su fácil uso.",
-    "ProductId": 31,
-    "UserId": 1
+    "id": 58,
+    "score": "Positive",
+    "body": "La cafetera italiana hace un café delicioso. Me encanta su diseño tradicional y su fácil uso.",
+    "productId": 30,
+    "userId": 1,
+    "publiDate": "2024-07-12"
   },
   {
-    "Id": 61,
-    "Score": 2,
-    "Body": "Es perfecta para hacer café como en Italia. El único problema es que ocupa un poco de espacio.",
-    "ProductId": 31,
-    "UserId": 2
+    "id": 59,
+    "score": "Positive",
+    "body": "Es perfecta para hacer café como en Italia. El único problema es que ocupa un poco de espacio.",
+    "productId": 30,
+    "userId": 2,
+    "publiDate": "2024-09-12"
   },
   {
-    "Id": 62,
-    "Score": 2,
-    "Body": "Muy buena cafetera, prepara el café de forma rápida y eficaz. El sabor es inigualable.",
-    "ProductId": 31,
-    "UserId": 3
+    "id": 60,
+    "score": "Positive",
+    "body": "Muy buena cafetera, prepara el café de forma rápida y eficaz. El sabor es inigualable.",
+    "productId": 30,
+    "userId": 3,
+    "publiDate": "2024-07-12"
   },
   {
-    "Id": 63,
-    "Score": 0,
-    "Body": "No me terminó de convencer, el café sale demasiado fuerte para mi gusto.",
-    "ProductId": 31,
-    "UserId": 4
+    "id": 61,
+    "score": "Negative",
+    "body": "No me terminó de convencer, el café sale demasiado fuerte para mi gusto.",
+    "productId": 30,
+    "userId": 4,
+    "publiDate": "2024-10-12"
   },
   {
-    "Id": 64,
-    "Score": 1,
-    "Body": "No es lo que esperaba, la cafetera tiene varios problemas con el goteo.",
-    "ProductId": 31,
-    "UserId": 5
+    "id": 62,
+    "score": "Regular",
+    "body": "No es lo que esperaba, la cafetera tiene varios problemas con el goteo.",
+    "productId": 30,
+    "userId": 5,
+    "publiDate": "2024-09-12"
   },
   {
-    "Id": 65,
-    "Score": 2,
-    "Body": "La taza con infusor es perfecta para tés de hojas sueltas. Me encanta el diseño.",
-    "ProductId": 32,
-    "UserId": 1
+    "id": 63,
+    "score": "Positive",
+    "body": "La taza con infusor es perfecta para tés de hojas sueltas. Me encanta el diseño.",
+    "productId": 31,
+    "userId": 1,
+    "publiDate": "2024-10-12"
   },
   {
-    "Id": 66,
-    "Score": 2,
-    "Body": "Ideal para preparar tés, el infusor es fácil de usar y el material es muy resistente.",
-    "ProductId": 32,
-    "UserId": 2
+    "id": 64,
+    "score": "Positive",
+    "body": "Ideal para preparar tés, el infusor es fácil de usar y el material es muy resistente.",
+    "productId": 31,
+    "userId": 2,
+    "publiDate": "2024-07-12"
   },
   {
-    "Id": 67,
-    "Score": 2,
-    "Body": "Muy buena opción para disfrutar tés sueltos. La taza es cómoda y el infusor funciona de maravilla.",
-    "ProductId": 32,
-    "UserId": 3
+    "id": 65,
+    "score": "Positive",
+    "body": "Muy buena opción para disfrutar tés sueltos. La taza es cómoda y el infusor funciona de maravilla.",
+    "productId": 31,
+    "userId": 3,
+    "publiDate": "2024-09-12"
   },
   {
-    "Id": 68,
-    "Score": 1,
-    "Body": "El infusor no me gusta mucho, prefiero otros métodos para preparar té.",
-    "ProductId": 32,
-    "UserId": 4
+    "id": 66,
+    "score": "Regular",
+    "body": "El infusor no me gusta mucho, prefiero otros métodos para preparar té.",
+    "productId": 31,
+    "userId": 4,
+    "publiDate": "2024-10-12"
   },
   {
-    "Id": 69,
-    "Score": 2,
-    "Body": "Me encanta la botella termal de viaje, mantiene el café caliente por horas y es muy práctica.",
-    "ProductId": 33,
-    "UserId": 5
+    "id": 67,
+    "score": "Positive",
+    "body": "Me encanta la botella termal de viaje, mantiene el café caliente por horas y es muy práctica.",
+    "productId": 32,
+    "userId": 5,
+    "publiDate": "2024-07-12"
   },
   {
-    "Id": 70,
-    "Score": 2,
-    "Body": "Perfecta para mis viajes, mantiene el café caliente todo el tiempo y no gotea.",
-    "ProductId": 33,
-    "UserId": 1
+    "id": 68,
+    "score": "Positive",
+    "body": "Perfecta para mis viajes, mantiene el café caliente todo el tiempo y no gotea.",
+    "productId": 32,
+    "userId": 1,
+    "publiDate": "2024-09-12"
   },
   {
-    "Id": 71,
-    "Score": 2,
-    "Body": "Excelente calidad, me encanta cómo mantiene la temperatura de las bebidas durante todo el día.",
-    "ProductId": 33,
-    "UserId": 2
+    "id": 69,
+    "score": "Positive",
+    "body": "Excelente calidad, me encanta cómo mantiene la temperatura de las bebidas durante todo el día.",
+    "productId": 32,
+    "userId": 2,
+    "publiDate": "2024-10-12"
   },
   {
-    "Id": 72,
-    "Score": 0,
-    "Body": "No es tan térmica como esperaba, el café se enfría más rápido de lo que pensaba.",
-    "ProductId": 33,
-    "UserId": 3
+    "id": 70,
+    "score": "Negative",
+    "body": "No es tan térmica como esperaba, el café se enfría más rápido de lo que pensaba.",
+    "productId": 32,
+    "userId": 3,
+    "publiDate": "2024-09-12"
   },
   {
-    "Id": 73,
-    "Score": 1,
-    "Body": "La botella se ve bien, pero no mantiene tanto el calor. Me decepcionó un poco.",
-    "ProductId": 33,
-    "UserId": 4
+    "id": 71,
+    "score": "Regular",
+    "body": "La botella se ve bien, pero no mantiene tanto el calor. Me decepcionó un poco.",
+    "productId": 32,
+    "userId": 4,
+    "publiDate": "2024-09-12"
   },
   {
-    "Id": 74,
-    "Score": 2,
-    "Body": "La botella térmica para café mantiene el café caliente por mucho tiempo, es muy eficiente.",
-    "ProductId": 34,
-    "UserId": 5
+    "id": 72,
+    "score": "Positive",
+    "body": "La botella térmica para café mantiene el café caliente por mucho tiempo, es muy eficiente.",
+    "productId": 33,
+    "userId": 5,
+    "publiDate": "2024-07-12"
   },
   {
-    "Id": 75,
-    "Score": 2,
-    "Body": "Ideal para llevar café al trabajo. Muy buena calidad y mantiene el calor durante varias horas.",
-    "ProductId": 34,
-    "UserId": 1
+    "id": 73,
+    "score": "Positive",
+    "body": "Ideal para llevar café al trabajo. Muy buena calidad y mantiene el calor durante varias horas.",
+    "productId": 33,
+    "userId": 1,
+    "publiDate": "2024-09-12"
   },
   {
-    "Id": 76,
-    "Score": 2,
-    "Body": "Me encanta esta botella, mantiene mi café caliente como si acabara de hacerlo.",
-    "ProductId": 34,
-    "UserId": 2
+    "id": 74,
+    "score": "Positive",
+    "body": "Me encanta esta botella, mantiene mi café caliente como si acabara de hacerlo.",
+    "productId": 33,
+    "userId": 2,
+    "publiDate": "2024-07-12"
   },
   {
-    "Id": 77,
-    "Score": 0,
-    "Body": "No es lo que esperaba, se enfría un poco más rápido de lo que me dijeron.",
-    "ProductId": 34,
-    "UserId": 3
+    "id": 75,
+    "score": "Negative",
+    "body": "No es lo que esperaba, se enfría un poco más rápido de lo que me dijeron.",
+    "productId": 33,
+    "userId": 3,
+    "publiDate": "2024-09-12"
   },
   {
-    "Id": 78,
-    "Score": 2,
-    "Body": "La botella térmica es práctica y perfecta para el café. Su diseño es bastante atractivo también.",
-    "ProductId": 34,
-    "UserId": 4
-  },
-  {
-    "Id": 79,
-    "Score": 1,
-    "Body": "La botella es buena, pero esperaba que mantuviera el café caliente durante más tiempo.",
-    "ProductId": 34,
-    "UserId": 5
+    "id": 76,
+    "score": "Positive",
+    "body": "La botella térmica es práctica y perfecta para el café. Su diseño es bastante atractivo también.",
+    "productId": 33,
+    "userId": 4,
+    "publiDate": "2024-10-12"
   }
 ]
