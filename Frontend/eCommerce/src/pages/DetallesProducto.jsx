@@ -6,7 +6,7 @@ import '../styles/DetallesProducto.css';
 import { getIntensidadImg } from '../utils/intensidad';
 import Reviews from '../components/Reviews';
 function DetallesProducto() {
-    // const { id } = useParams();
+    const { id } = useParams();
 
     const [producto, setProducto] = useState(null);
     const [loading, setLoading] = useState(true);
