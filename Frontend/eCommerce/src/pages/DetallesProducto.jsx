@@ -1,37 +1,40 @@
-// import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useState, useEffect} from 'react';
 import '../styles/DetallesProducto.css';
 import { getIntensidadImg } from '../utils/intensidad';
 import Reviews from '../components/Reviews';
+
 function DetallesProducto() {
     const { id } = useParams();
 
     const [producto, setProducto] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [cantidad, setCantidad] = useState(1);
 
     //FetchData para las Reviews
     useEffect(() => {
         const fetchProducto = async () => {
+            setLoading(true);
+            setError(null);
+
             try {
-                const response = await fetch(`https://localhost:7015/api/Product/Product_Details?id=${id}`, {
-                   method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }, 
+                const Url = 'https://localhost:7015/api/Product/Product_Details'
+                const response = await fetch(`${Url}?id=2`, {
+                    method: 'GET',
+                    headers: {'Content-Type': 'application/json'}
                 });
-                console.log('response: ',response)
-                if (!response.ok) {
-                    throw new Error('Error al cargar el producto');
-                }
+                console.log("respuesta", response)
+                if (!response.ok) throw new Error('Error al cargar la respuesta');
+                setLoading(false);
 
                 const data = await response.json();
-                console.log(data)
+                console.log("data:", data)
                 setProducto(data);
             } catch (error) {
-                console.error('Error al cargar el producto:', error);
+                setError('Error al cargar el producto (catch)');
             } finally {
                 setLoading(false);
             }
@@ -53,58 +56,65 @@ function DetallesProducto() {
         }
     };
 
-    const intensidadImg = getIntensidadImg(producto.Intensity);
+    const intensidadImg = getIntensidadImg("café");
 
     return (
         <div className='container-producto'>
             <Header />
+            {loading ? (
+                <p>Cargando producto...</p>
+            ) : error ? (
+                <p>{error}</p>
+            ) : producto != null ? (
+            <>
             <div className='container-info-producto'>
                 <div className='imagen-producto'>
-                    <img src={`https://localhost:7015/${producto.Image}`} alt={producto.Name} />
+                    <img src={`https://localhost:7015/${producto.image}`} alt={producto.name} />
                 </div>
 
                 <div>
-                    <p className='nombreProducto titulo'>{producto.Name}</p>
+                    <p className='nombreProducto titulo'>{producto.name}</p>
                     <p className='subtitulo intensidad'>
                         Intensidad:
                         <span className='texto'>
-                            {Array(producto.Intensity).fill(
+                            {Array(producto.intensity).fill(
                                 <img src={intensidadImg} alt="Intensidad" className="intensidadIcono" />
                             )}
                         </span>
                     </p>
                     <p className='subtitulo precio'>
-                        Precio: <span className='texto'>{producto.Price}</span>€
+                        Precio: <span className='texto'>{producto.price}</span>€
                     </p>
                     <p className='subtitulo disponibilidad'>
-                        Disponibilidad: <span className='texto'>{producto.soldout ? 'Sin stock' : 'En stock'}</span>
+                        Disponibilidad: <span className='texto'>{producto.stock > 0 ? 'En Stock' : 'Sin stock'}</span>
                     </p>
                     <p className='subtitulo descripcion'>
-                        <span className='texto'>{producto.Description}</span>
+                        <span className='texto'>{producto.description}</span>
                     </p>
 
                     <div className='container-boton-cantidad'>
                         <button className='boton-cantidad' onClick={disminuirCantidad} disabled={cantidad <= 1}>-</button>
                         <span>{cantidad}</span>
-                        <button className='boton-cantidad' onClick={aumentarCantidad} disabled={producto.soldout}>+</button>
+                        <button className='boton-cantidad' onClick={aumentarCantidad} disabled={producto.stock}>+</button>
                     </div>
 
-                    <button className='boton-agregar-carrito' disabled={producto.soldout}>
-                        {producto.soldout ? 'Producto sin stock' : 'Añadir al carrito'}
+                    <button className='boton-agregar-carrito' disabled={producto.stock}>
+                        {producto.stock > 0 ? 'Añadir al carrito' : 'Sin stock'}
                     </button>
-                </div>
+                </div>  
             </div>
-
-
             <div className='container-reviews'>
                 <h2>Reviews</h2>
-                <Reviews reviews={producto.Reviews}></Reviews>
+                <Reviews reviews={producto.reviews}></Reviews>
             </div>
 
 
-            <div className='container-recomendaciones'>
+            <div className='container-recomendaciones'> </div>
 
-            </div>
+            </>
+            ) : (
+                <p>No se encontraron productos.</p>
+            )};
             <Footer />
         </div>
     );
