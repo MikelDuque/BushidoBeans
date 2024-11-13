@@ -1,17 +1,21 @@
 import { useParams } from 'react-router-dom';
 import productData from '../data/dataPrueba';
-import Header from './Header';
-import Footer from './Footer';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 import { useState } from 'react';
 import '../styles/DetallesProducto.css';
 import { getIntensidadImg } from '../utils/intensidad';
-
+import Reviews from '../components/Reviews';
 function DetallesProducto() {
     const { id } = useParams();
     const producto = productData.find((producto) => producto.id === parseInt(id));
     
     const [cantidad, setCantidad] = useState(1);
 
+    //FetchData para las Reviews
+    const fetchData = (() => {
+
+    })
     const aumentarCantidad = () => {
         if (cantidad < 10) {
             setCantidad(cantidad + 1);
@@ -65,6 +69,10 @@ function DetallesProducto() {
                         {producto.soldout ? 'Producto sin stock' : 'Añadir al carrito'}
                     </button>
                 </div>
+            </div>
+            <div className='container-reviews'>
+                <h2>Reviews</h2>
+                <Reviews></Reviews>
             </div>
             <div className='container-recomendaciones'>
                 
