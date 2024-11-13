@@ -1,4 +1,5 @@
 using eCommerce.Models.Dtos;
+using eCommerce.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eCommerce.Controllers;
@@ -15,7 +16,7 @@ public class ReviewController : ControllerBase
 
 
     [HttpGet("{id}")]
-    public async Task<ProductDto> GetByIdAsync(long id)
+    public async Task<ReviewDto> GetByIdAsync(long id)
     {
         return await _service.GetByIdAsync(id);
     }

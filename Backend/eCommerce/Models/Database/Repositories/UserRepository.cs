@@ -13,16 +13,23 @@ public class UserRepository : Repository<User>
 
     }
 
-    public async Task<string> GetRoleByMailAsync(string mail)
-    {
-        User user = await GetByMailAsync(mail);
-        return user.Role;
-    }
+    public new async Task<User> GetByIdAsync(object id)
+   {
+      return await GetQueryable().Where(user => user.Id == (long)id)
+      .Include(user => user.Reviews)
+      .FirstOrDefaultAsync();
+   }
 
     public async Task<User> GetByMailAsync(string mail)
     {
         return await GetQueryable()
         .Where(user => user.Mail == mail).SingleOrDefaultAsync();
+    }
+
+    public async Task<string> GetRoleByMailAsync(string mail)
+    {
+        User user = await GetByMailAsync(mail);
+        return user.Role;
     }
 
     public async Task<bool> ExistByMailAsync(string mail)

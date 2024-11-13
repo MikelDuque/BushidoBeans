@@ -17,6 +17,4 @@ public class ProductDto
     public double Score { get; set; }
     public int TotalReviews {get; set; }
     public ICollection<ReviewDto> Reviews { get; set; }
-
-    
 }

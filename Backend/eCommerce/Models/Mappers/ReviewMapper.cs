@@ -1,3 +1,4 @@
+using eCommerce.Controllers;
 using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 
@@ -13,8 +14,11 @@ public class ReviewMapper
             Id = review.Id,
             Score = review.Score,
             Body = review.Body,
-            UserName = review.UserName,
             PubliDate = review.PubliDate,
+            
+            ProductId = review.ProductId,
+            UserId = review.UserId,
+            UserName = review.User.Name
         };
     }
     public IEnumerable<ReviewDto> ToDto(IEnumerable<Review> reviews)
@@ -27,12 +31,11 @@ public class ReviewMapper
     {
         return new Review
         {
-            Id = review.Id,
             Score = review.Score,
             Body = review.Body,
-            ProductId = review.ProductId,
-            UserId = review.UserId,
             PubliDate = review.PubliDate,
+            ProductId = review.ProductId,
+            UserId = review.UserId 
         };
     }
     public IEnumerable<Review> ToEntity(IEnumerable<ReviewDto> reviews)
