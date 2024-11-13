@@ -23,8 +23,9 @@ public class ReviewService
     return _mapper.ToDto(review);
   }
 
-  public async Task<Review> InsertAsync(Review review)
+  public async Task<Review> CreateReviewAsync(Review review)
   {
+
     Review newReview = new Review
     {
       Score = review.Score,
