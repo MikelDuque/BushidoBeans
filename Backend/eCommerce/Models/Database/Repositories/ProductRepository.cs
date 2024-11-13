@@ -59,7 +59,7 @@ public class ProductRepository : Repository<Product>
 
         if(category > 0) { query = query.Where(product => product.CategoryId == (long)category); };
 
-        return query.Include(product => product.Category).Include(product => product.Reviews);
+        return query.Include(product => product.Category).Include(product => product.Reviews).ThenInclude(review => review.User);
     }
 
     private IQueryable<Product> ApplyOrder(IQueryable<Product> query, EOrder order)
