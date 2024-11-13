@@ -6,6 +6,13 @@ namespace eCommerce.Models.Mappers;
 
 public class ProductMapper
 {
+    private readonly ReviewMapper _reviewMapper;
+
+    public ProductMapper(ReviewMapper reviewMapper)
+    {
+        _reviewMapper = reviewMapper;
+    }
+
     //TO DTO
     public ProductDto ToDto(Product product)
     {
@@ -20,7 +27,8 @@ public class ProductMapper
             Price = product.Price,
             Stock = product.Stock,
             TotalReviews = product.Reviews.Count,
-            Score = Score(product)
+            Score = Score(product),
+            Reviews = GetReviews(product).ToList()
         };
     }
     public IEnumerable<ProductDto> ToDto(IEnumerable<Product> products)
@@ -34,5 +42,13 @@ public class ProductMapper
         int TotalReviews = product.Reviews.Count;
 
         return TotalReviews > 0? product.Reviews.Select(review => (int)review.Score).Average() : score;
+    }
+
+    private IEnumerable<ReviewDto> GetReviews(Product product) {
+       IEnumerable<Review> reviews = product.Reviews;
+
+       IEnumerable<ReviewDto> reviewsDto = _reviewMapper.ToDto(reviews);
+
+       return reviewsDto;
     }
 }

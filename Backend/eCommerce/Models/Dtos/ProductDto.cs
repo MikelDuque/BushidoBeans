@@ -1,4 +1,5 @@
-﻿using eCommerce.Models.Database.Entities;
+using eCommerce.Models.Database.Entities;
+using eCommerce.Models.Dtos;
 using eCommerce.Models.Enums;
 
 namespace eCommerce.Models.Dtos;
