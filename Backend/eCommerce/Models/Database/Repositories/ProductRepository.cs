@@ -13,24 +13,12 @@ public class ProductRepository : Repository<Product>
     {
     }
 
-    public new async Task<Product> GetByIdAsync(object id)
+    public async Task<Product> GetProductDetailsByIdAsync(object id)
     {
         return await GetQueryable().Where(product => product.Id == (long)id)
         .Include(product => product.Category)
         .Include(product => product.Reviews).ThenInclude(review => review.User)
         .FirstOrDefaultAsync();
-    }
-    
-
-    public async Task<int> GetTotalReviews()
-    {
-        return await GetQueryable().Select(product => product.Reviews).CountAsync();
-    }
-
-    public async Task<float> GetAverageScore(Object id)
-    {
-        Product product = await GetByIdAsync(id);
-        return product.Reviews.Average(review => (float)review.Score);
     }
 
     //----- FILTRO -----//
@@ -71,7 +59,7 @@ public class ProductRepository : Repository<Product>
 
         if(category > 0) { query = query.Where(product => product.CategoryId == (long)category); };
 
-        return query.Include(product => product.Category).Include(product => product.Reviews);
+        return query.Include(product => product.Category).Include(product => product.Reviews).ThenInclude(review => review.User);
     }
 
     private IQueryable<Product> ApplyOrder(IQueryable<Product> query, EOrder order)
@@ -95,54 +83,4 @@ public class ProductRepository : Repository<Product>
         var paginatedQuery = query.Skip(skip).Take(productsPerPage);
         return paginatedQuery;
     }
-
-    /*
-    private IQueryable<Product> FilterByFuzzySearch(IQueryable<Product> query, string search)
-    {
-        string name = query.Select(product => product.Name).ToString();
-        return query.Where(product => product.Name
-            .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
-            .Any(word => Fuzz.Ratio(NormalizeText(search.ToLower()), NormalizeText(word.ToLower())) >= 80));
-    }
-    
-
-    private IQueryable<Product> CompareText(IQueryable<Product> query, string search)
-    {
-        if (!string.IsNullOrWhiteSpace(search)) {
-            return query.Where(product => { ClearText(product.Name).Contains(ClearText(search));
-            });
-        }
-        return query;
-    }
-
-    // Normaliza el texto quitándole las tildes y pasándolo a minúsculas
-    private List<string> ClearText(string text)
-    {
-        return GetTokens(RemoveDiacritics(text.ToLower())).ToList();
-    }
-
-    private string[] GetTokens(string query)
-    {
-        return query.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-    }
-
-    // Quita las tildes a un texto
-    private string RemoveDiacritics(string text)
-    {
-        string normalizedString = text.Normalize(NormalizationForm.FormD);
-        StringBuilder stringBuilder = new StringBuilder(normalizedString.Length);
-
-        for (int i = 0; i < normalizedString.Length; i++)
-        {
-            char c = normalizedString[i];
-            UnicodeCategory unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
-            if (unicodeCategory != UnicodeCategory.NonSpacingMark)
-            {
-                stringBuilder.Append(c);
-            }
-        }
-
-        return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
-    }
-    */
 }

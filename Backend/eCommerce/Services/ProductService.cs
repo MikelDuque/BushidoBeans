@@ -8,14 +8,28 @@ namespace eCommerce.Services;
 
 public class ProductService
 {
-    private readonly UnitOfWork _unitOfWork;
-    private readonly ProductMapper _mapper;
+  private readonly UnitOfWork _unitOfWork;
+  private readonly ProductMapper _mapper;
 
-    public ProductService(UnitOfWork unitOfWork, ProductMapper mapper)
-    {
-        _unitOfWork = unitOfWork;
-        _mapper = mapper;
-    }
+  public ProductService(UnitOfWork unitOfWork, ProductMapper mapper)
+  {
+      _unitOfWork = unitOfWork;
+      _mapper = mapper;
+  }
+
+  
+  public async Task<ProductDto> GetByIdAsync(long id)
+  {
+    Product product = await _unitOfWork.ProductRepository.GetByIdAsync(id);
+    return _mapper.ToDto(product);
+  }
+  
+
+  public async Task<ProductDto> GetProductDetailsAsync(long id)
+  {
+    Product product = await _unitOfWork.ProductRepository.GetProductDetailsByIdAsync(id);
+    return _mapper.ToDto(product);
+  }
 
   public async Task<Catalog> GetFilteredProducts(Filter filter)
   {
@@ -48,10 +62,5 @@ public class ProductService
     return _mapper.ToDto(products);
   }
   */
-  public async Task<ProductDto> GetByIdAsync(long id)
-  {
-    Product product = await _unitOfWork.ProductRepository.GetByIdAsync(id);
-    return _mapper.ToDto(product);
-  }
-
+  
 }
