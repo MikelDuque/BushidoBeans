@@ -75,6 +75,12 @@
   
 }
 
+.detalles2{
+  font-family: var(--font-family-titulos-subtitulos);
+  font-size: var(--subtitulos-size);
+  font-weight: var(--font-weight-regular);
+}
+
 
 
 .cardPrueba.sold-out {
