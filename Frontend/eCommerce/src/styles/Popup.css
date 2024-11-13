@@ -1,0 +1,88 @@
+.cardReseña{
+    display: grid;
+    grid-template-rows: auto; 
+    gap: 10px; 
+    border-radius: 10px; 
+    background-color: rgb(6, 60, 6); 
+    padding: 20px; 
+    color: white; 
+    width: 60%; 
+}
+
+
+.productoInfo {
+    display: grid;
+    grid-template-columns: 1fr 2fr; 
+    gap: 20px; 
+    align-items: center; 
+  }
+  
+  
+  .imgInfo {
+    width: 200px;
+    border-radius: 10px;
+    height: auto; 
+    object-fit: cover; 
+  }
+  
+ 
+  .infoDerecha {
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
+    height: 100%; 
+  }
+  
+ 
+  .nombreInfo {
+    font-family: var(--font-family-titulos-subtitulos);
+    font-size: var(--titulos-size);
+    font-weight: var(--font-weight-bold);
+    grid-column: span 2; 
+  }
+  
+
+  .precioValoracion {
+    font-family: var(--font-family-titulos-subtitulos);
+    font-size: var(--subtitulos-size);
+    font-weight: var(--font-weight-regular);
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px;
+  }
+  
+  .valoracionInfo {
+    text-align: left;
+    color: #f39c12; 
+  }
+  
+  .precioInfo {
+    text-align: right;
+    color: #27ae60; 
+  }
+  
+.usuario {
+    display: flex; 
+    align-items: center; 
+    width: 100%; 
+    gap: 10px; 
+  }
+  
+  .usuario img {
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+  }
+  
+  
+  .usuarioNombre {
+    font-family: var(--font-family-titulos-subtitulos);
+    font-size: var(--titulos-size);
+    font-weight: var(--font-weight-bold);
+    margin: 0; 
+    font-size: 1rem;
+    font-weight: bold; 
+   
+  }
+  
