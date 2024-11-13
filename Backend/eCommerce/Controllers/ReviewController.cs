@@ -23,7 +23,7 @@ public class ReviewController : ControllerBase
 
 
     [HttpPost("InsertReview")]
-    public async Task<ActionResult<Review>> CreateReviewAsync(Review review)
+    public async Task<ActionResult<Review>> CreateReviewAsync([FromBody] Review review)
     {
         if (review == null) return BadRequest("Datos de la reseña no válidos.");
 
