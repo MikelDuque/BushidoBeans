@@ -12,9 +12,11 @@ function PopupReseña() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    //FetchData para las Reviews
+    const valImg = "/recursos/star.svg";
+ 
     useEffect(() => {
         console.log("adios")
+        
         const fetchProducto = async () => {
             setLoading(true);
             setError(null);
@@ -31,10 +33,16 @@ function PopupReseña() {
                 setLoading(false);
 
                 const data = await response.json();
+                
+
                 console.log("data:", data)
                 setProducto(data);
+
+                
+  
             } catch (error) {
                 setError('Error al cargar el producto (catch)');
+                
             } finally {
                 setLoading(false);
             }
@@ -42,7 +50,14 @@ function PopupReseña() {
         };
 
         fetchProducto();
-    }, []);
+
+        
+        
+    }, [id]);
+
+    
+    
+
 
     return (
         <div className='cardReseña'>
@@ -68,8 +83,20 @@ function PopupReseña() {
                 <img src="/recursos/iconUser.svg" alt="imagen usuario" />
                 <h4 className='usuarioNombre'>nombre usuario</h4>
             </div>
+
             <div className='formulario'>
-                
+            
+              <textarea id="review" className="reviewText"></textarea>
+              <input
+                type="submit"
+                className="botonAgregar"
+                value="Agregar"
+              />
+              <input
+                type="reset"
+                className="botonCancelar"
+                value="Cancelar"
+              />
             </div>
         </>
         ) : (
