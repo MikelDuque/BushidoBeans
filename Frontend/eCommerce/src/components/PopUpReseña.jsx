@@ -55,9 +55,6 @@ function PopupReseña() {
         
     }, [id]);
 
-    
-    
-
 
     return (
         <div className='cardReseña'>
