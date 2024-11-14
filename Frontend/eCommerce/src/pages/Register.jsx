@@ -4,8 +4,7 @@ import '../styles/register.css';
 import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
 import * as jwt_decode from 'jwt-decode';
-//import Alert from './../components/Alerta';
-import Input from '../components/Input';
+import Alert from './../components/Alerta';
 
 function Register() {
     const emailRef = useRef(null);
@@ -58,7 +57,7 @@ function Register() {
     const registerUser = async (data) => {
         setIsLoading(true);
         try {
-            const response = await fetch("https://localhost:7015/api/User", {
+            const response = await fetch("https://localhost:7015/api/User/Registro", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),

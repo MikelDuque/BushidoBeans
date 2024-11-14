@@ -1,11 +1,9 @@
 import * as jwt_decode from 'jwt-decode';
 import "../styles/login.css";
 import { useRef, useState } from "react";
-import logo from "../../public/logo.svg";
 import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
 import Alert from './../components/Alerta';
-import Input from './../components/Input';
 
 function Login() {
     const emailRef = useRef(null);
@@ -38,7 +36,8 @@ function Login() {
                 setAlertMessage("Te has logeado correctamente!");
                 resetForm();
                 navigate('/');
-            } else {
+            }
+             else {
                 setPromesaError(await response.text());
                 setAlertMessage("Error: Credenciales incorrectas.");
             }
@@ -67,7 +66,7 @@ function Login() {
         }
         setPasswordError(null);
 
-        await fetchingData("https://localhost:7015/api/Auth", { Mail: email, Password: password });
+        await fetchingData("https://localhost:7015/api/Auth/Inicio_Sesión", { Mail: email, Password: password });
     };
 
     const resetForm = () => {
@@ -83,12 +82,6 @@ function Login() {
                     <p className="usaGmail">Usa tu email y contraseña</p>
                     <form className="formLogin" onSubmit={handleAcceder}>
                         <div className="contenedorEmail">
-                            {/* <Input type="email"
-                                name="email"
-                                id="email"
-                                inputRef={emailRef}
-                                placeholder="Email"/> */}
-
                             <input
                                 type="email"
                                 name="email"
@@ -99,12 +92,6 @@ function Login() {
                             {emailError && <p className="email-message">{emailError}</p>}
                         </div>
                         <div className="contenedorPassword">
-                            {/* <input                                 
-                                type="password"
-                                name="password"
-                                id="password"
-                                inputRef={passwordRef}
-                                placeholder="Contraseña"/> */}
                             <input
                                 type="password"
                                 name="password"
@@ -121,7 +108,7 @@ function Login() {
                     </form>
                 </div>
                 <div className="crearCuenta">
-                    <button onClick={handleLogoClick} className='logo-button'><img src={logo} alt="Bushido Beans" className="logoBushidoBeans" /></button>
+                    <button onClick={handleLogoClick} className='logo-button'><img src="" alt="Bushido Beans" className="logoBushidoBeans" /></button>
                     <p className="preguntaCuenta">¿Aún no tienes cuenta?</p>
                     <p className="crearAhora">Crea tu cuenta ahora</p>
                     <button className="btnCrearCuenta" onClick={handleCrearCuenta}>Crear cuenta</button>
