@@ -8,6 +8,7 @@ import '../styles/Popup.css';
 function PopupReseña() {
     console.log("hola")
     const { id } = useParams();
+
     const [reviewError, setReviewError] = useState(null);
     const [producto, setProducto] = useState(null);
     const reviewRef = useRef(null);
@@ -17,7 +18,6 @@ function PopupReseña() {
 
  
     useEffect(() => {
-        console.log("adios")
         
         const fetchProducto = async () => {
             setLoading(true);
@@ -52,10 +52,13 @@ function PopupReseña() {
         };
 
         fetchProducto();
+        
+        
+    },[id]);
 
-        
-        
-    }, [id]);
+
+
+
     
     const handleReview = async (event) => {
         event.preventDefault();
@@ -72,7 +75,7 @@ function PopupReseña() {
         setReviewError(null);
 
 
-        await sendReview({ id: idReview, body: review, score: score, productId: prodId, userId:  });
+        await sendReview({ id: idReview, body: review, score: score, productId: prodId, userId: null });
         
     };
 

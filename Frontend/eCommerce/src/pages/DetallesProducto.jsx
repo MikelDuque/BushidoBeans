@@ -14,6 +14,7 @@ function DetallesProducto() {
     };
     
     const { id } = useParams();
+    
 
     const [producto, setProducto] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -113,6 +114,7 @@ function DetallesProducto() {
                 <h2>Reviews</h2>
                 <Reviews reviews={producto.reviews}></Reviews>
             </div>
+            
             <button className="productName" onClick={handlePageChange}>Enviar Reseña</button>
 
             <div className='container-recomendaciones'> </div>
