@@ -1,4 +1,5 @@
 using eCommerce.Models.Dtos;
+using eCommerce.Models.Database.Entities;
 using eCommerce.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,10 +15,18 @@ public class ReviewController : ControllerBase
         _service = service;
     }
 
-
     [HttpGet("{id}")]
     public async Task<ReviewDto> GetByIdAsync(long id)
     {
         return await _service.GetByIdAsync(id);
+    }
+
+
+    [HttpPost("InsertReview")]
+    public async Task<ActionResult<Review>> CreateReviewAsync([FromBody] Review review)
+    {
+        if (review == null) return BadRequest("Datos de la reseña no válidos.");
+
+        return await _service.CreateReviewAsync(review);
     }
 }
