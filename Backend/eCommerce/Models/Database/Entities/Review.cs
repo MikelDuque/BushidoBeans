@@ -8,7 +8,7 @@ public class Review
     public long Id { get; set; }
     public required EScore Score { get; set; }
     public string Body { get; set; }
-    public required DateTime PubliDate { get; set; }
+    public DateTime PubliDate { get; set; }
 
 
     //---Foreign Keys---//

@@ -63,19 +63,18 @@ function PopupReseña() {
     const handleReview = async (event) => {
         event.preventDefault();
         const review = reviewRef.current.value;
-        const score = scoreRef.current.value;
+        const Score = parseInt(scoreRef.current.value);
         const prodId = producto.id;
-        const idReview = producto.reviews.length;
-        console.log("id:", idReview, "body:", review, "score:", score, "productId:", prodId, "userId", );
+        const idUser= 2;
+
 
         if (review == "") {
             console.log("No has introducido ninguna review");
             return;
         }
-        setReviewError(null);
 
 
-        await sendReview({ id: idReview, body: review, score: score, productId: prodId, userId: null });
+        await sendReview({score: Score, body: review, productId: prodId, userId: idUser});
         
     };
 
@@ -87,7 +86,6 @@ function PopupReseña() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),
             });
-            console.log("reviewRef:",reviewRef.current.value)
             if (response.ok) {
                 console.log("Review enviada correctamente");
                 resetReview();
