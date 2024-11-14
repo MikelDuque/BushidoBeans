@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Alert from './../components/Alerta';
 
 function Login() {
+
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const [emailError, setEmailError] = useState(null);
@@ -29,13 +30,11 @@ function Login() {
             });
 
             if (response.ok) {
-                const { accessToken } = await response.json();
+                const { accessToken } = await response.json();                
                 const { email, rol: admin } = jwt_decode.jwtDecode(accessToken);
-                console.log({ email, admin });
-                localStorage.setItem('accessToken', accessToken);
+                navigate('/')
                 setAlertMessage("Te has logeado correctamente!");
                 resetForm();
-                navigate('/');
             }
              else {
                 setPromesaError(await response.text());
@@ -108,7 +107,7 @@ function Login() {
                     </form>
                 </div>
                 <div className="crearCuenta">
-                    <button onClick={handleLogoClick} className='logo-button'><img src="" alt="Bushido Beans" className="logoBushidoBeans" /></button>
+                    <button onClick={handleLogoClick} className='logo-button'><img src="../../public/logo.svg" alt="Bushido Beans" className="logoBushidoBeans" /></button>
                     <p className="preguntaCuenta">¿Aún no tienes cuenta?</p>
                     <p className="crearAhora">Crea tu cuenta ahora</p>
                     <button className="btnCrearCuenta" onClick={handleCrearCuenta}>Crear cuenta</button>
