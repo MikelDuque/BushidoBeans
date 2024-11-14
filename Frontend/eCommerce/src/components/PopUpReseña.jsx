@@ -1,6 +1,6 @@
 import '../styles/CardPrueba.css';
 import { useParams } from 'react-router-dom';
-import { useState, useEffect} from 'react';
+import { useState, useEffect, useRef} from 'react';
 import '../styles/Popup.css';
 
 
@@ -8,11 +8,12 @@ import '../styles/Popup.css';
 function PopupReseña() {
     console.log("hola")
     const { id } = useParams();
+    const [reviewError, setReviewError] = useState(null);
     const [producto, setProducto] = useState(null);
+    const reviewRef = useRef(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const valImg = "/recursos/star.svg";
  
     useEffect(() => {
         console.log("adios")
@@ -54,7 +55,49 @@ function PopupReseña() {
         
         
     }, [id]);
+    
+    const handleReview = async (event) => {
+        event.preventDefault();
+        const review = reviewRef.current.value;
 
+        if (review == "") {
+            console.log("No has introducido ninguna review");
+            return;
+        }
+        setReviewError(null);
+
+
+        await sendReview({ Review: review });
+    };
+
+    const sendReview = async (data)=>{
+
+        try {
+            const response = await fetch("https://localhost:7015/api/Review/InsertReview", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+            console.log("reviewRef:",reviewRef.current.value)
+            if (response.ok) {
+                console.log("Review enviada correctamente");
+                resetReview();
+            } else {
+                const errorText = await response.text();
+                console.error(errorText);
+                console.log("Error al enviar la review: " + reviewError);
+            }
+        } catch (error) {
+            console.error("Error en el envio:", error.message);
+
+        } finally {
+            console.log("estas en el finally")
+        }
+    }
+
+    const resetReview = () => {
+        review.current.value = "";
+    };
 
     return (
         <div className='cardReseña'>
@@ -82,8 +125,8 @@ function PopupReseña() {
             </div>
 
             <div className='formulario'>
-            
-              <textarea id="review" className="reviewText"></textarea>
+            <form onSubmit={handleReview} onReset={resetReview}>
+            <input type="text" ref={reviewRef} className='reviewText'/>
               <input
                 type="submit"
                 className="botonAgregar"
@@ -94,7 +137,9 @@ function PopupReseña() {
                 className="botonCancelar"
                 value="Cancelar"
               />
+              </form>
             </div>
+            
         </>
         ) : (
             <p>No se encontraron productos.</p>
@@ -104,4 +149,6 @@ function PopupReseña() {
     );
 };
 
+
 export default PopupReseña;
+
