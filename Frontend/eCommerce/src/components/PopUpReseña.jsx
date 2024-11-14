@@ -71,6 +71,9 @@ function PopupReseña() {
         if (review == "") {
             console.log("No has introducido ninguna review");
             return;
+        }else if(parseInt(Score)>3||parseInt(Score)<1){
+            console.log("La valoracion tiene que ser entre 0 y 3");
+            return;
         }
 
 
