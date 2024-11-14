@@ -1,0 +1,18 @@
+.average_score {
+  position: sticky;
+  top: 20px;
+  padding: 10px;
+}
+
+.average_score h3 {
+  text-align: center;
+  font-family: var(--font-family-titulos-subtitulos);
+  font-size: var(--subtitulos-size);
+  font-weight: var(--font-weight-regular);
+}
+
+.average_score img {
+  width: 100%;
+  align-self: center;
+  object-fit: cover;
+}

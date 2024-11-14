@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import { useRef } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +7,7 @@ import { useState, useEffect} from 'react';
 import '../styles/DetallesProducto.css';
 import { getIntensidadImg } from '../utils/intensidad';
 import Reviews from '../components/Reviews';
+import Review_List from '../components/Review_List/Review_List';
 
 function DetallesProducto() {
     const navigate = useNavigate();
@@ -19,6 +21,9 @@ function DetallesProducto() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [cantidad, setCantidad] = useState(1);
+
+    const reviewsRef = useRef([]);
+    const scoreRef = useRef(0);
 
     //FetchData para las Reviews
     useEffect(() => {
@@ -39,6 +44,9 @@ function DetallesProducto() {
                 const data = await response.json();
                 console.log("data:", data)
                 setProducto(data);
+                
+                reviewsRef.current = data.reviews;
+                scoreRef.current = data.score;
             } catch (error) {
                 setError('Error al cargar el producto (catch)');
             } finally {
@@ -63,6 +71,19 @@ function DetallesProducto() {
     };
 
     const intensidadImg = getIntensidadImg("café");
+    
+
+    /*
+    function getReview() {
+        return review = {
+            id: producto.reviews[0].id,
+            score: producto.reviews[0].score,
+            body: producto.reviews[0].body,
+            userName: producto.reviews[0].userName,
+            avatar: ""
+        }
+    }
+    */
 
     return (
         <div className='container-producto'>
@@ -111,16 +132,20 @@ function DetallesProducto() {
             </div>
             <div className='container-reviews'>
                 <h2>Reviews</h2>
-                <Reviews reviews={producto.reviews}></Reviews>
+                {/*<Reviews reviews={producto.reviews}></Reviews>*/}
             </div>
             <button className="productName" onClick={handlePageChange}>Enviar Reseña</button>
 
             <div className='container-recomendaciones'> </div>
-
             </>
             ) : (
                 <p>No se encontraron productos.</p>
             )};
+
+            <Review_List
+                reviews = {reviewsRef}
+                score = {scoreRef}
+            />
             <Footer />
         </div>
     );

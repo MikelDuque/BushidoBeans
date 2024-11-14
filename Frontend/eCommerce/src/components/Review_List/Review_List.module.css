@@ -1,0 +1,23 @@
+.reviews_container {
+  border-radius: 10px;
+  width: 75%;
+  margin: auto;
+  padding: 20px;
+
+  display: grid;
+  grid-template-columns: 0.5fr 2.5fr;
+  align-items: start;
+  gap: 10px;
+  
+  background-color: var(--nav-footer);
+  color: var(--fondo-vistas);
+}
+
+.review_list {
+  height: fit-content;
+
+  display: grid;
+  gap: 20px;
+  
+  list-style-type: none;
+}
