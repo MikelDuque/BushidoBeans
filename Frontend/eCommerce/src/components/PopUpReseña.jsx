@@ -11,6 +11,7 @@ function PopupReseña() {
     const [reviewError, setReviewError] = useState(null);
     const [producto, setProducto] = useState(null);
     const reviewRef = useRef(null);
+    const scoreRef = useRef(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -59,6 +60,10 @@ function PopupReseña() {
     const handleReview = async (event) => {
         event.preventDefault();
         const review = reviewRef.current.value;
+        const score = scoreRef.current.value;
+        const prodId = producto.id;
+        const idReview = producto.reviews.length;
+        console.log("id:", idReview, "body:", review, "score:", score, "productId:", prodId, "userId", );
 
         if (review == "") {
             console.log("No has introducido ninguna review");
@@ -67,7 +72,8 @@ function PopupReseña() {
         setReviewError(null);
 
 
-        await sendReview({ Review: review });
+        await sendReview({ id: idReview, body: review, score: score, productId: prodId, userId:  });
+        
     };
 
     const sendReview = async (data)=>{
@@ -96,7 +102,7 @@ function PopupReseña() {
     }
 
     const resetReview = () => {
-        review.current.value = "";
+        reviewRef.current.value = "";
     };
 
     return (
@@ -126,6 +132,7 @@ function PopupReseña() {
 
             <div className='formulario'>
             <form onSubmit={handleReview} onReset={resetReview}>
+            <input type="number" ref={scoreRef}/>
             <input type="text" ref={reviewRef} className='reviewText'/>
               <input
                 type="submit"
