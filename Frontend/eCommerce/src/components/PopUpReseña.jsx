@@ -146,8 +146,9 @@ function PopupReseña() {
 
             <div className='formulario'>
             <form onSubmit={handleReview} onReset={resetReview}>
-            <input type="number" ref={scoreRef}/>
+            <input type="number" ref={scoreRef} className='reviewScore'/>
             <input type="text" ref={reviewRef} className='reviewText'/>
+            <div className='botones.container'>
               <input
                 type="submit"
                 className="botonAgregar"
@@ -158,6 +159,7 @@ function PopupReseña() {
                 className="botonCancelar"
                 value="Cancelar"
               />
+              </div>
               </form>
             </div>
             

@@ -115,14 +115,14 @@ function DetallesProducto() {
                 <Reviews reviews={producto.reviews}></Reviews>
             </div>
             
-            <button className="productName" onClick={handlePageChange}>Enviar Reseña</button>
+            <button className="boton-agregar-carrito" onClick={handlePageChange}>Enviar Reseña</button>
 
             <div className='container-recomendaciones'> </div>
 
             </>
             ) : (
                 <p>No se encontraron productos.</p>
-            )};
+            )}
             <Footer />
         </div>
     );
