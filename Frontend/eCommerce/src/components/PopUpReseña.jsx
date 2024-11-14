@@ -15,8 +15,15 @@ function PopupReseña() {
     const scoreRef = useRef(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+    useEffect(() => {
+        const token = localStorage.getItem('accessToken');
+        setIsAuthenticated(!!token); 
+    }, []); 
  
+    console.log("booleano",isAuthenticated);
+    
     useEffect(() => {
         
         const fetchProducto = async () => {
@@ -73,6 +80,9 @@ function PopupReseña() {
             return;
         }else if(parseInt(Score)>3||parseInt(Score)<1){
             console.log("La valoracion tiene que ser entre 0 y 3");
+            return;
+        }else if(isAuthenticated == false){
+            console.log("Necesitas logearte");
             return;
         }
 
