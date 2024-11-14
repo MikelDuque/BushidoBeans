@@ -1,0 +1,178 @@
+
+.cardReseña {
+  display: grid;
+  grid-template-rows: auto;
+  gap: 20px;
+  border-radius: 10px;
+  background-color: rgb(6, 60, 6);
+  padding: 20px;
+  color: white;
+  width: 40%; 
+  max-width: 900px; 
+  margin: 0 auto; 
+  box-sizing: border-box; 
+}
+
+
+.productoInfo {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+  width: 100%; 
+}
+
+
+.imgInfo {
+  width: 100%;
+  max-width: 200px; 
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+
+.infoDerecha {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+}
+
+
+.nombreInfo {
+  font-family: var(--font-family-titulos-subtitulos);
+  font-size: var(--titulos-size);
+  font-weight: var(--font-weight-bold);
+  margin: 0;
+}
+
+
+.precioValoracion {
+  font-family: var(--font-family-titulos-subtitulos);
+  font-size: var(--subtitulos-size);
+  font-weight: var(--font-weight-regular);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%; 
+}
+
+
+.valoracionInfo {
+  text-align: left;
+  color: #f39c12;
+}
+
+
+.precioInfo {
+  text-align: right;
+  color: #27ae60;
+}
+
+
+.usuario {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+
+
+.usuario img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
+.usuarioNombre {
+  font-family: var(--font-family-titulos-subtitulos);
+  font-size: var(--titulos-size);
+  font-weight: var(--font-weight-bold);
+  margin: 0;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+
+.formulario {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  width: 100%; 
+}
+
+
+.reviewText {
+  grid-column: span 2;
+  width: 100%; 
+  height: 80px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box; 
+}
+
+
+.botonAgregar, .botonCancelar {
+  padding: 10px 20px;
+  font-family: var(--font-family-titulos-subtitulos);
+  font-size: var(--subtitulos-size);
+  font-weight: var(--font-weight-regular);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.botonAgregar {
+  background-color: #27ae60;
+  color: white;
+}
+
+.botonAgregar:hover {
+  background-color: #2ecc71;
+}
+
+.botonCancelar {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.botonCancelar:hover {
+  background-color: #c0392b;
+}
+
+
+@media (max-width: 600px) {
+  .cardReseña {
+      width: 90%; 
+  }
+
+  .productoInfo {
+      grid-template-columns: 1fr; 
+  }
+
+  .imgInfo {
+      max-width: 100%; 
+  }
+
+  .nombreInfo {
+      font-size: 1.2rem; 
+  }
+
+  .precioValoracion {
+      grid-template-columns: 1fr; 
+  }
+
+  .reviewText {
+      width: 100%; 
+      height: 100px; 
+  }
+
+  .botonAgregar, .botonCancelar {
+      width: 100%; 
+  }
+}

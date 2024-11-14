@@ -14,12 +14,12 @@
   justify-items: center;
   display: grid;
   grid-template-columns: auto-fit(2, 1fr);
-  padding: 15px;
+  padding: 10px;
   border-radius: 12px;
   box-shadow: 0px 0px 10px hsla(96, 65%, 49%, 0.333);
   text-align: center;
   background-color: var(--nav-footer);  
-  gap: 5px;
+  gap: 12px;
   font-family: var(--font-family-texto);
   font-size: var(--texto-size);
   font-weight: var(--font-weight-regular);
@@ -71,6 +71,13 @@
   font-size: var(--subtitulos-size);
   font-weight: var(--font-weight-regular);
   text-align: right;
+  
+}
+
+.detalles2{
+  font-family: var(--font-family-titulos-subtitulos);
+  font-size: var(--subtitulos-size);
+  font-weight: var(--font-weight-regular);
 }
 
 

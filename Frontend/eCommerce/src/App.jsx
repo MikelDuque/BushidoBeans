@@ -6,6 +6,7 @@ import SobreNosotros from './pages/SobreNosotros'
 import DetallesProducto from './pages/DetallesProducto'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFound from './components/NotFound';
+import PopupReseña from "./components/PopUpReseña";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/sobreNosotros" element={<SobreNosotros />} />
                 <Route path="/producto/:id" element={<DetallesProducto />} />
+                <Route path="/producto/:id/reseña" element={<PopupReseña />} />
                 <Route path='/404' element={<NotFound/>}/>
             </Routes>
         </Router>

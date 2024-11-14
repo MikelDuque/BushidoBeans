@@ -1,12 +1,18 @@
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect} from 'react';
 import '../styles/DetallesProducto.css';
 import { getIntensidadImg } from '../utils/intensidad';
 import Reviews from '../components/Reviews';
 
 function DetallesProducto() {
+    const navigate = useNavigate();
+    const handlePageChange = () => {
+        navigate(`/producto/${id}/reseña`);  // Ahora se navega correctamente usando el id
+    };
+    
     const { id } = useParams();
 
     const [producto, setProducto] = useState(null);
@@ -107,7 +113,7 @@ function DetallesProducto() {
                 <h2>Reviews</h2>
                 <Reviews reviews={producto.reviews}></Reviews>
             </div>
-
+            <button className="productName" onClick={handlePageChange}>Enviar Reseña</button>
 
             <div className='container-recomendaciones'> </div>
 

@@ -18,7 +18,7 @@ export function CardPrueba({ id, imagen, nombre, intensidad, precio, stock, valo
 
     const valImg = "/recursos/star.svg";
 
-    // Verifica que intensidad sea un número antes de pasarlo a getIntensidadImg
+    
     const intensidadEmojis = Array(intensidad).fill(
         <img src={getIntensidadImg(intensidad.toString())} alt="Intensidad" className="intensidadIcono" />
     );
@@ -27,11 +27,11 @@ export function CardPrueba({ id, imagen, nombre, intensidad, precio, stock, valo
     const tieneMediaEstrella = valoracion % 1 >= 0.5;
 
     const valoracionEstrellas = [
-        // Añadir las estrellas completas
+        
         Array(estrellasCompletas).fill(
             <img src={valImg} alt="valoracion" className="intensidadIcono" />
         ),
-        // Si tiene una media estrella, añadir la imagen de media estrella
+        
         (tieneMediaEstrella ? [
             <img key={`star`} src={valImg} alt="media valoración" className="intensidadIcono" style={{ clipPath: "inset(0 50% 0 0)" }} />
         ] : [])
@@ -44,11 +44,11 @@ export function CardPrueba({ id, imagen, nombre, intensidad, precio, stock, valo
 	    <div className="iconos">
                 {valoracionEstrellas}
             </div>
-	    <div className="detalles">Stock {checksoldout}</div>
+	    <div className="detalles2">Stock {checksoldout}</div>
 	    <div className="iconos">
                 {intensidadEmojis}
             </div>
-	    <div className="detalles">{precioFormateado} €</div>
+	    <div className="detalles2">{precioFormateado} €</div>
                 <button className="botonPrueba" aria-label={`Añadir ${nombre} a la cesta`}>
                     Añadir a la cesta
                 </button>
