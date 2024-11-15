@@ -18,7 +18,7 @@ function Review({reviewData}) {
 
   return (
     <li className={classes.review}>
-      <img className={classes.review__avatar} src={avatar} alt="" />
+      <img className={classes.review__avatar} src={reviewData.avatar} alt="" />
       <div className={classes.review__textualData}>
         <div className={classes.review__basicInfo}>
           <h3>{reviewData.userName}</h3>

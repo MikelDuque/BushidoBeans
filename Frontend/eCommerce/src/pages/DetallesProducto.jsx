@@ -21,11 +21,6 @@ function DetallesProducto() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [cantidad, setCantidad] = useState(1);
-    
-    const productRef = useRef({
-        reviews: [],
-        score: 0.0
-    });
 
     //FetchData para las Reviews
     useEffect(() => {
@@ -44,14 +39,9 @@ function DetallesProducto() {
                 setLoading(false);
 
                 const data = await response.json();
-                console.log("data:", data)
+
                 setProducto(data);
                 
-                productRef.current = {
-                    reviews: data.reviews,
-                    score: data.score
-                }
-
             } catch (error) {
                 setError('Error al cargar el producto (catch)');
             } finally {
@@ -76,19 +66,6 @@ function DetallesProducto() {
     };
 
     const intensidadImg = getIntensidadImg("café");
-    
-
-    /*
-    function getReview() {
-        return review = {
-            id: producto.reviews[0].id,
-            score: producto.reviews[0].score,
-            body: producto.reviews[0].body,
-            userName: producto.reviews[0].userName,
-            avatar: ""
-        }
-    }
-    */  
 
     return (
         <div className='container-producto'>
@@ -143,15 +120,14 @@ function DetallesProducto() {
             <button className="productName" onClick={handlePageChange}>Enviar Reseña</button>
             */}
 
+            <Review_List data={{reviews: producto.reviews, score: producto.score}}/>
+
             <div className='container-recomendaciones'> </div>
             </>
             ) : (
                 <p>No se encontraron productos.</p>
             )};
 
-            <Review_List
-                data={productRef.current}
-            />
             <Footer />
         </div>
     );
