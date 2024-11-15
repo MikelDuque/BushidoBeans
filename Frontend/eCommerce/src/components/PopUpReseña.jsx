@@ -2,6 +2,9 @@ import '../styles/CardPrueba.css';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect, useRef} from 'react';
 import '../styles/Popup.css';
+import * as jwt_decode from 'jwt-decode';
+
+
 
 
 //obtener producto
@@ -11,6 +14,7 @@ function PopupReseña() {
 
     const [reviewError, setReviewError] = useState(null);
     const [producto, setProducto] = useState(null);
+    const [user, setUser] = useState(null);
     const reviewRef = useRef(null);
     const scoreRef = useRef(null);
     const [loading, setLoading] = useState(true);
@@ -18,11 +22,27 @@ function PopupReseña() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
+        console.log("he entrado")
         const token = localStorage.getItem('accessToken');
-        setIsAuthenticated(!!token); 
+        if (token) {
+            try {
+                console.log("volvi a entrar")
+                const decodedToken = jwt_decode(token);
+                console.log(decodedToken)
+                setUser(decodedToken);  
+                setIsAuthenticated(true); 
+                console.error("user si", user);
+            } catch (error) {
+                console.error("Error al decodificar el token", error);
+                setIsAuthenticated(false);
+            }
+        } else {
+            setIsAuthenticated(false);  
+            console.error("user no", user);
+        }
     }, []); 
- 
-    console.log("booleano",isAuthenticated);
+
+    
     
     useEffect(() => {
         
