@@ -107,7 +107,7 @@ function DetallesProducto() {
                 <p>{error}</p>
             ) : producto != null ? (
             <>
-            <div className='container-info-producto'>
+                <div className='container-info-producto'>
                 <div className='imagen-producto'>
                     <img src={`https://localhost:7015/${producto.image}`} alt={producto.name} />
                 </div>

@@ -3,22 +3,20 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect, useRef} from 'react';
 import '../styles/Popup.css';
 import * as jwt_decode from 'jwt-decode';
-
-
+import Modal from './Pop-Up.jsx';
 
 
 //obtener producto
 function PopupReseña() {
     const { id } = useParams();
 
-    const [reviewError, setReviewError] = useState(null);
     const [producto, setProducto] = useState(null);
     const [user, setUser] = useState(null);
     const reviewRef = useRef(null);
     const scoreRef = useRef(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const [isModalOpen, setIsModalOpen] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
@@ -27,19 +25,17 @@ function PopupReseña() {
                 const decodedToken = jwt_decode.jwtDecode(token);
                 console.log(decodedToken)
                 setUser(decodedToken.unique_name);  
-                                
+                
                 
             } catch (error) {
                 console.error("Error al decodificar el token", error);
-              
             }
         } else {
             console.error("Error al decodificar el token");
- 
-            
         }
     }, []); 
-
+ 
+    
     useEffect(() => {
         
         const fetchProducto = async () => {
@@ -58,8 +54,6 @@ function PopupReseña() {
                 const data = await response.json();
                 setProducto(data);
 
-                
-  
             } catch (error) {
                 setError('Error al cargar el producto (catch)');
                 
@@ -82,7 +76,6 @@ function PopupReseña() {
         const UserId= 4;
 
 
-
         if (review == "") {
             console.log("No has introducido ninguna review");
             return;
@@ -96,13 +89,13 @@ function PopupReseña() {
 
 
         await sendReview({score: Score, body: review, productId: prodId, userId: UserId});
-        console.log("score:", Score, "body:", review, "productId:", prodId, "userId:", UserId)
+        
     };
 
     const sendReview = async (data)=>{
 
         try {
-            const response = await fetch("https://localhost:7015/api/Review/InsertReview", {
+            const response = await fetch("https://localhost:7015/InsertReview", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),
@@ -113,7 +106,7 @@ function PopupReseña() {
             } else {
                 const errorText = await response.text();
                 console.error(errorText);
-                console.log("Error al enviar la review: " + reviewError);
+                console.log("Error al enviar la review: ");
             }
         } catch (error) {
             console.error("Error en el envio:", error.message);
@@ -124,8 +117,12 @@ function PopupReseña() {
     const resetReview = () => {
         reviewRef.current.value = "";
     };
+    const closeModal = () => {
+        setIsModalOpen(false);  // Cerrar el modal
+      };
 
     return (
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
         <div className='cardReseña'>
         {loading ? (
             <p>Cargando producto...</p>
@@ -175,6 +172,7 @@ function PopupReseña() {
         )}
         
     </div>
+    </Modal>
     );
 };
 

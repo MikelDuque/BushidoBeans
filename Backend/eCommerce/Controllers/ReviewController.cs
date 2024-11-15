@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace eCommerce.Controllers;
 
-[Route("api/[controller]")]
+//[Route("api/[controller]")]
 public class ReviewController : ControllerBase
 {
     private readonly ReviewService _service;
@@ -25,7 +25,7 @@ public class ReviewController : ControllerBase
     [HttpPost("InsertReview")]
     public async Task<ActionResult<Review>> CreateReviewAsync([FromBody] Review review)
     {
-        if (review == null) return BadRequest("Datos de la reseña no válidos.");
+        if (review == null) return BadRequest("Datos de la reseï¿½a no vï¿½lidos.");
 
         return await _service.CreateReviewAsync(review);
     }
