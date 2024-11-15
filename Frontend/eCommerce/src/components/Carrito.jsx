@@ -5,6 +5,12 @@ function Carrito(){
 
     const [carrito, setCarrito] = useState([]);
 
+    const handleReset = async(event)=>{
+        event.preventDefault();
+        localStorage.removeItem('carrito');
+        window.location.reload();
+    }
+
     useEffect(() => {
         const carritoGuardado = JSON.parse(localStorage.getItem('carrito'));
         if (carritoGuardado) {
@@ -34,6 +40,17 @@ function Carrito(){
                 </li>
             ))}
         </ul>
+        <input
+            type="submit"
+            className="botonAgregar"
+            value="Proceder a la compra"
+              />
+        <input
+            onClick={handleReset}
+            type="reset"
+            className="botonCancelar"
+            value="Cancelar"
+              />
     </div>
     </>
 
