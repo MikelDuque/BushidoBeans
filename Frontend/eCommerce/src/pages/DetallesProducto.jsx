@@ -1,11 +1,13 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useState, useEffect, useRef} from 'react';
+
+import '../styles/DetallesProducto.css';
+
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { useNavigate } from 'react-router-dom';
-import { useState, useEffect} from 'react';
-import '../styles/DetallesProducto.css';
+import Review_List from '../components/Review_List/Review_List';
+
 import { getIntensidadImg } from '../utils/intensidad';
-import Reviews from '../components/Reviews';
 
 function DetallesProducto() {
     const navigate = useNavigate();
@@ -23,6 +25,11 @@ function DetallesProducto() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [cantidad, setCantidad] = useState(1);
+    
+    const productRef = useRef({
+        reviews: [],
+        score: 0.0
+    });
 
     //FetchData para las Reviews
     useEffect(() => {
@@ -43,6 +50,12 @@ function DetallesProducto() {
                 const data = await response.json();
                 console.log("data:", data)
                 setProducto(data);
+                
+                productRef.current = {
+                    reviews: data.reviews,
+                    score: data.score
+                }
+
             } catch (error) {
                 setError('Error al cargar el producto (catch)');
             } finally {
@@ -97,6 +110,19 @@ function DetallesProducto() {
     };
 
     const intensidadImg = getIntensidadImg("café");
+    
+
+    /*
+    function getReview() {
+        return review = {
+            id: producto.reviews[0].id,
+            score: producto.reviews[0].score,
+            body: producto.reviews[0].body,
+            userName: producto.reviews[0].userName,
+            avatar: ""
+        }
+    }
+    */  
 
     return (
         <div className='container-producto'>
@@ -143,19 +169,23 @@ function DetallesProducto() {
                     </button>
                 </div>  
             </div>
+            {/*
             <div className='container-reviews'>
                 <h2>Reviews</h2>
                 <Reviews reviews={producto.reviews}></Reviews>
             </div>
-            
-            <button className="boton-agregar-carrito" onClick={handlePageChange}>Enviar Reseña</button>
+            <button className="productName" onClick={handlePageChange}>Enviar Reseña</button>
+            */}
 
             <div className='container-recomendaciones'> </div>
-
             </>
             ) : (
                 <p>No se encontraron productos.</p>
-            )}
+            )};
+
+            <Review_List
+                data={productRef.current}
+            />
             <Footer />
         </div>
     );
