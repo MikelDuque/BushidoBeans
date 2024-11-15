@@ -14,7 +14,6 @@ function PopupReseña() {
     const [reviewError, setReviewError] = useState(null);
     const [producto, setProducto] = useState(null);
     const [user, setUser] = useState(null);
-    const [idUser, setIdUser] = useState(null);
     const reviewRef = useRef(null);
     const scoreRef = useRef(null);
     const [loading, setLoading] = useState(true);
@@ -28,10 +27,7 @@ function PopupReseña() {
                 const decodedToken = jwt_decode.jwtDecode(token);
                 console.log(decodedToken)
                 setUser(decodedToken.unique_name);  
-                const idUserDecoded = jwt_decode.jwtDecode(decodedToken.id);
-                setIdUser(idUserDecoded);
-                
-                
+                                
                 
             } catch (error) {
                 console.error("Error al decodificar el token", error);
@@ -82,9 +78,9 @@ function PopupReseña() {
         event.preventDefault();
         const review = reviewRef.current.value;
         const Score = parseInt(scoreRef.current.value);
-        const prodId = producto.id;
+        const prodId = parseInt(producto.id);
         const UserId= 4;
-        const User = user;
+
 
 
         if (review == "") {
@@ -99,8 +95,8 @@ function PopupReseña() {
         }
 
 
-        await sendReview({score: Score, body: review, productId: prodId, userId: UserId, userName: User});
-        
+        await sendReview({score: Score, body: review, productId: prodId, userId: UserId});
+        console.log("score:", Score, "body:", review, "productId:", prodId, "userId:", UserId)
     };
 
     const sendReview = async (data)=>{

@@ -52,7 +52,7 @@ function DetallesProducto() {
         };
 
         fetchProducto();
-    }, []);
+    }, [id]);
 
 
     useEffect(() => {
@@ -143,6 +143,7 @@ function DetallesProducto() {
                     </button>
                 </div>  
             </div>
+            
             <div className='container-reviews'>
                 <h2>Reviews</h2>
                 <Reviews reviews={producto.reviews}></Reviews>
