@@ -1,20 +1,20 @@
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { useNavigate } from 'react-router-dom';
 import { useState, useEffect} from 'react';
 import '../styles/DetallesProducto.css';
 import { getIntensidadImg } from '../utils/intensidad';
 import Reviews from '../components/Reviews';
+import Modal from '../components/Pop-Up';
+import PopupReseña from '../components/PopUpReseña.jsx';
+
+
 
 function DetallesProducto() {
-    const navigate = useNavigate();
+
 
     const [carrito, setCarrito] = useState([]);
 
-    const handlePageChange = () => {
-        navigate(`/producto/${id}/reseña`);  // Ahora se navega correctamente usando el id
-    };
     
     const { id } = useParams();
     
@@ -23,6 +23,7 @@ function DetallesProducto() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [cantidad, setCantidad] = useState(1);
+    const [open, setOpen] = useState(false);
 
     //FetchData para las Reviews
     useEffect(() => {
@@ -76,6 +77,13 @@ function DetallesProducto() {
         await sendCarrito(nuevoProducto);
     }
 
+    const handleOpen = () => {
+        setOpen(true);
+    }
+
+    const handleClose = () => {
+        setOpen(false);
+    }
     const sendCarrito = async (producto)=>{
 
         const carritoActualizado = [...carrito, producto];
@@ -149,7 +157,7 @@ function DetallesProducto() {
                 <Reviews reviews={producto.reviews}></Reviews>
             </div>
             
-            <button className="boton-agregar-carrito" onClick={handlePageChange}>Enviar Reseña</button>
+            <button className="boton-agregar-carrito" onClick={handleOpen}>Enviar Reseña</button>
 
             <div className='container-recomendaciones'> </div>
 
@@ -158,6 +166,9 @@ function DetallesProducto() {
                 <p>No se encontraron productos.</p>
             )}
             <Footer />
+            <Modal isOpen={open} onClose={handleClose}>
+                <PopupReseña/>
+            </Modal>
         </div>
     );
 }
