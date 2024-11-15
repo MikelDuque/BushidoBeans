@@ -9,7 +9,6 @@ import * as jwt_decode from 'jwt-decode';
 
 //obtener producto
 function PopupReseña() {
-    console.log("hola")
     const { id } = useParams();
 
     const [reviewError, setReviewError] = useState(null);
@@ -20,38 +19,31 @@ function PopupReseña() {
     const scoreRef = useRef(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
 
     useEffect(() => {
-        console.log("he entrado")
         const token = localStorage.getItem('accessToken');
         if (token) {
             try {
-                console.log("volvi a entrar")
                 const decodedToken = jwt_decode.jwtDecode(token);
                 console.log(decodedToken)
                 setUser(decodedToken.unique_name);  
-                
-                setIsAuthenticated(true); 
                 const idUserDecoded = jwt_decode.jwtDecode(decodedToken.id);
-                console.log("logeado dentro token?", isAuthenticated)
                 setIdUser(idUserDecoded);
                 
                 
                 
             } catch (error) {
                 console.error("Error al decodificar el token", error);
-                setIsAuthenticated(false);
+              
             }
         } else {
-            setIsAuthenticated(false);  
-            console.error("user no", user);
+            console.error("Error al decodificar el token");
+ 
             
         }
     }, []); 
 
-    console.log("id", idUser);
-    console.log("user",user);
     useEffect(() => {
         
         const fetchProducto = async () => {
@@ -59,21 +51,15 @@ function PopupReseña() {
             setError(null);
 
             try {
-                console.log("hola")
                 const Url = 'https://localhost:7015/api/Product/Product_Details'
                 const response = await fetch(`${Url}?id=${id}`, {
                     method: 'GET',
                     headers: {'Content-Type': 'application/json'}
                 });
-                console.log("respuesta", response)
                 if (!response.ok) throw new Error('Error al cargar la respuesta');
                 setLoading(false);
 
                 const data = await response.json();
-                
-
-                console.log("logeado aqui?", isAuthenticated)
-                console.log("data:", data)
                 setProducto(data);
 
                 
@@ -92,12 +78,6 @@ function PopupReseña() {
         
     },[id]);
 
-
-
-    console.log("userID?", idUser)
-    console.log("name?", user)
-
-    
     const handleReview = async (event) => {
         event.preventDefault();
         const review = reviewRef.current.value;
@@ -142,8 +122,6 @@ function PopupReseña() {
         } catch (error) {
             console.error("Error en el envio:", error.message);
 
-        } finally {
-            console.log("estas en el finally")
         }
     }
 
