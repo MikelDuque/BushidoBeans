@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect, useRef} from 'react';
 import '../styles/Popup.css';
 import * as jwt_decode from 'jwt-decode';
-
+import Modal from './Pop-Up';
 
 
 
@@ -19,7 +19,7 @@ function PopupReseña() {
     const scoreRef = useRef(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const [isModalOpen, setIsModalOpen] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
@@ -128,8 +128,12 @@ function PopupReseña() {
     const resetReview = () => {
         reviewRef.current.value = "";
     };
+    const closeModal = () => {
+        setIsModalOpen(false);  // Cerrar el modal
+      };
 
     return (
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
         <div className='cardReseña'>
         {loading ? (
             <p>Cargando producto...</p>
@@ -179,6 +183,7 @@ function PopupReseña() {
         )}
         
     </div>
+    </Modal>
     );
 };
 
