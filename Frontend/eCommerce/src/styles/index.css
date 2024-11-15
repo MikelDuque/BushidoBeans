@@ -15,11 +15,12 @@
     --texto-claro: #EFF7EE;
 
     /* Estilos de texto */
-    --titulos-size: 20px;
-    --subtitulos-size: 16px;
-    --texto-size: 13px;
+    --titulos-size: 25px;
+    --subtitulos-size: 20px;
+    --texto-size: 16px;
     --font-weight-bold: 600;
     --font-weight-regular: 400;
+    --font-weight-thin: 200;
     --font-family-titulos-subtitulos : 'Poppins', sans-serif;
     --font-family-texto : 'Vollkorn', sans-serif;
 
