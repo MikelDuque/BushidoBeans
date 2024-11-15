@@ -1,6 +1,6 @@
 .inventario{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 1%;
   justify-items: center;
   padding: 10px;
@@ -9,7 +9,7 @@
 }
 
 .cardPrueba{
-  height: auto;
+  width: fit-content;
   align-items: center;
   justify-items: center;
   display: grid;
@@ -57,11 +57,7 @@
 
 .iconos{
   display: flex;
-  height: 30%;
-  width: 100%;
-  text-align: left;
-  justify-content: center;
-  align-items: center;
+  gap: 5px;
 }
 
 .detalles{
