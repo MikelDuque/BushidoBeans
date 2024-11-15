@@ -2,28 +2,48 @@ import '../styles/CardPrueba.css';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect, useRef} from 'react';
 import '../styles/Popup.css';
+import * as jwt_decode from 'jwt-decode';
+
+
 
 
 //obtener producto
 function PopupReseña() {
-    console.log("hola")
     const { id } = useParams();
 
     const [reviewError, setReviewError] = useState(null);
     const [producto, setProducto] = useState(null);
+    const [user, setUser] = useState(null);
+    const [idUser, setIdUser] = useState(null);
     const reviewRef = useRef(null);
     const scoreRef = useRef(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
 
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
-        setIsAuthenticated(!!token); 
-    }, []); 
+        if (token) {
+            try {
+                const decodedToken = jwt_decode.jwtDecode(token);
+                console.log(decodedToken)
+                setUser(decodedToken.unique_name);  
+                const idUserDecoded = jwt_decode.jwtDecode(decodedToken.id);
+                setIdUser(idUserDecoded);
+                
+                
+                
+            } catch (error) {
+                console.error("Error al decodificar el token", error);
+              
+            }
+        } else {
+            console.error("Error al decodificar el token");
  
-    console.log("booleano",isAuthenticated);
-    
+            
+        }
+    }, []); 
+
     useEffect(() => {
         
         const fetchProducto = async () => {
@@ -31,20 +51,15 @@ function PopupReseña() {
             setError(null);
 
             try {
-                console.log("hola")
                 const Url = 'https://localhost:7015/api/Product/Product_Details'
                 const response = await fetch(`${Url}?id=${id}`, {
                     method: 'GET',
                     headers: {'Content-Type': 'application/json'}
                 });
-                console.log("respuesta", response)
                 if (!response.ok) throw new Error('Error al cargar la respuesta');
                 setLoading(false);
 
                 const data = await response.json();
-                
-
-                console.log("data:", data)
                 setProducto(data);
 
                 
@@ -63,16 +78,13 @@ function PopupReseña() {
         
     },[id]);
 
-
-
-
-    
     const handleReview = async (event) => {
         event.preventDefault();
         const review = reviewRef.current.value;
         const Score = parseInt(scoreRef.current.value);
         const prodId = producto.id;
-        const idUser= 2;
+        const UserId= 4;
+        const User = user;
 
 
         if (review == "") {
@@ -81,13 +93,13 @@ function PopupReseña() {
         }else if(parseInt(Score)>3||parseInt(Score)<1){
             console.log("La valoracion tiene que ser entre 0 y 3");
             return;
-        }else if(isAuthenticated == false){
+        }else if(user == null){
             console.log("Necesitas logearte");
             return;
         }
 
 
-        await sendReview({score: Score, body: review, productId: prodId, userId: idUser});
+        await sendReview({score: Score, body: review, productId: prodId, userId: UserId, userName: User});
         
     };
 
@@ -110,8 +122,6 @@ function PopupReseña() {
         } catch (error) {
             console.error("Error en el envio:", error.message);
 
-        } finally {
-            console.log("estas en el finally")
         }
     }
 
@@ -141,7 +151,7 @@ function PopupReseña() {
 
             <div className='usuario'>
                 <img src="/recursos/iconUser.svg" alt="imagen usuario" />
-                <h4 className='usuarioNombre'>nombre usuario</h4>
+                <h4 className='usuarioNombre'>{user}</h4>
             </div>
 
             <div className='formulario'>
