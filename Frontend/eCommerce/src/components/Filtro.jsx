@@ -12,8 +12,8 @@ const Filtro = ({ options, label, onChange }) => {
 
     return (
         <div className='botonFiltroG'>
-            <label>{label}</label>
-            <select value={selectedOption} onChange={handleChange}>
+            <label className='titulo'>{label}</label>
+            <select className="titulo" value={selectedOption} onChange={handleChange}>
                 {options.map(option => (
                     <option key={option.value} value={option.value}>
                         {option.label}

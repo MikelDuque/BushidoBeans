@@ -1,14 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-height: 100%;
-
-}
-
 :root {
     /* Colores principales */
     --fondo-pagina: #1E1E1E;
@@ -36,6 +25,19 @@ height: 100%;
     --font-family-texto : 'Vollkorn', sans-serif;
 
 }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+height: 100%;
+
+}
+
+
 .texto{
     font-family: var(--font-family-texto);
     font-size: var(--texto-size);

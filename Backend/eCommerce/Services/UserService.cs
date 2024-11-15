@@ -38,6 +38,7 @@ public class UserService
       Mail = user.Mail,
       Password = user.Password,
       Name = user.Name,
+      Image = user.Image,
       Surname = user.Surname,
       Phone = user.Phone,
       Role = user.Role
@@ -51,6 +52,11 @@ public class UserService
 
   public async Task<UserDto> InsertByMailAsync(RegisterRequest userRequest)
   {
+        User existingUser = await _unitOfWork.UserRepository.GetByMailAsync(userRequest.Mail);
+        if (existingUser != null)
+        {
+            throw new Exception("El correo electronico ya esta registrado.");
+        }
     User user = new User {
       Mail = userRequest.Mail,
       Password = AuthService.HashPassword(userRequest.Password),

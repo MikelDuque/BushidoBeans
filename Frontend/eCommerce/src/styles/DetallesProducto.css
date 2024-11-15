@@ -55,6 +55,11 @@
 }
 
 
+.añadirReseña{
+    width: 200px;
+    border-radius: 10px;
+    background-color: aqua;
+}
 
 /* Precio */
 .precio {

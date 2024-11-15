@@ -1,8 +1,9 @@
 /* -----GENERAL----- */
 main{
-  background-color: #1a1a1a;
   color: var(--letras-nav);
   font-family: "Vollkorn", sans-serif;
+  background-color: var(--fondo-pagina);
+
 }
 
 
