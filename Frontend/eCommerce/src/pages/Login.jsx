@@ -4,9 +4,9 @@ import { useRef, useState } from "react";
 import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
 import Alert from './../components/Alerta';
-
+import { useAuth } from '../context/AuthContext';
 function Login() {
-
+    const {login} = useAuth();
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const [emailError, setEmailError] = useState(null);
@@ -30,11 +30,13 @@ function Login() {
             });
 
             if (response.ok) {
-                const { accessToken } = await response.json();                
+                const { accessToken } = await response.json();
                 const { email, rol: admin } = jwt_decode.jwtDecode(accessToken);
-                navigate('/')
+                console.log({ email, admin });
                 setAlertMessage("Te has logeado correctamente!");
+                login(accessToken);
                 resetForm();
+                navigate('/');
             }
              else {
                 setPromesaError(await response.text());
