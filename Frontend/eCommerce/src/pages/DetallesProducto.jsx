@@ -1,13 +1,11 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { useState, useEffect, useRef} from 'react';
-
-import '../styles/DetallesProducto.css';
-
+import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Review_List from '../components/Review_List/Review_List';
-
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect} from 'react';
+import '../styles/DetallesProducto.css';
 import { getIntensidadImg } from '../utils/intensidad';
+import Reviews from '../components/Reviews';
 
 function DetallesProducto() {
     const navigate = useNavigate();
@@ -25,11 +23,6 @@ function DetallesProducto() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [cantidad, setCantidad] = useState(1);
-    
-    const productRef = useRef({
-        reviews: [],
-        score: 0.0
-    });
 
     //FetchData para las Reviews
     useEffect(() => {
@@ -50,12 +43,6 @@ function DetallesProducto() {
                 const data = await response.json();
                 console.log("data:", data)
                 setProducto(data);
-                
-                productRef.current = {
-                    reviews: data.reviews,
-                    score: data.score
-                }
-
             } catch (error) {
                 setError('Error al cargar el producto (catch)');
             } finally {
@@ -65,7 +52,7 @@ function DetallesProducto() {
         };
 
         fetchProducto();
-    }, []);
+    }, [id]);
 
 
     useEffect(() => {
@@ -98,7 +85,7 @@ function DetallesProducto() {
     }
 
     const aumentarCantidad = () => {
-        if (cantidad < producto.stock) {
+        if (cantidad < 10) {
             setCantidad(cantidad + 1);
         }
     };
@@ -110,7 +97,6 @@ function DetallesProducto() {
     };
 
     const intensidadImg = getIntensidadImg("café");
-    
 
     return (
         <div className='container-producto'>
@@ -121,7 +107,7 @@ function DetallesProducto() {
                 <p>{error}</p>
             ) : producto != null ? (
             <>
-            <div className='container-info-producto'>
+                <div className='container-info-producto'>
                 <div className='imagen-producto'>
                     <img src={`https://localhost:7015/${producto.image}`} alt={producto.name} />
                 </div>
@@ -149,7 +135,7 @@ function DetallesProducto() {
                     <div className='container-boton-cantidad'>
                         <button className='boton-cantidad' onClick={disminuirCantidad} disabled={cantidad <= 1}>-</button>
                         <span>{cantidad}</span>
-                        <button className='boton-cantidad' onClick={aumentarCantidad} disabled={cantidad >= producto.stock}>+</button>
+                        <button className='boton-cantidad' onClick={aumentarCantidad} disabled={producto.stock}>+</button>
                     </div>
 
                     <button onClick={handleCarrito} className='boton-agregar-carrito' disabled={producto.stock}>
@@ -157,25 +143,20 @@ function DetallesProducto() {
                     </button>
                 </div>  
             </div>
-
-            <button className="productName" onClick={handlePageChange}>Enviar Reseña</button>
-            {/*
+            
             <div className='container-reviews'>
                 <h2>Reviews</h2>
                 <Reviews reviews={producto.reviews}></Reviews>
             </div>
             
-            */}
+            <button className="boton-agregar-carrito" onClick={handlePageChange}>Enviar Reseña</button>
 
             <div className='container-recomendaciones'> </div>
+
             </>
             ) : (
                 <p>No se encontraron productos.</p>
-            )};
-
-            <Review_List
-                data={productRef.current}
-            />
+            )}
             <Footer />
         </div>
     );

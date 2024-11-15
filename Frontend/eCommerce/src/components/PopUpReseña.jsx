@@ -3,20 +3,15 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect, useRef} from 'react';
 import '../styles/Popup.css';
 import * as jwt_decode from 'jwt-decode';
-
-
-import Modal from './Pop-Up';
+import Modal from './Pop-Up.jsx';
 
 
 //obtener producto
 function PopupReseña() {
-    console.log("hola")
     const { id } = useParams();
 
-    const [reviewError, setReviewError] = useState(null);
     const [producto, setProducto] = useState(null);
     const [user, setUser] = useState(null);
-    const [idUser, setIdUser] = useState(null);
     const reviewRef = useRef(null);
     const scoreRef = useRef(null);
     const [loading, setLoading] = useState(true);
@@ -30,8 +25,7 @@ function PopupReseña() {
                 const decodedToken = jwt_decode.jwtDecode(token);
                 console.log(decodedToken)
                 setUser(decodedToken.unique_name);  
-                const idUserDecoded = jwt_decode.jwtDecode(decodedToken.id);
-                setIdUser(idUserDecoded);
+                
                 
             } catch (error) {
                 console.error("Error al decodificar el token", error);
@@ -101,7 +95,7 @@ function PopupReseña() {
     const sendReview = async (data)=>{
 
         try {
-            const response = await fetch("https://localhost:7015/api/Review/InsertReview", {
+            const response = await fetch("https://localhost:7015/InsertReview", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),
@@ -112,7 +106,7 @@ function PopupReseña() {
             } else {
                 const errorText = await response.text();
                 console.error(errorText);
-                console.log("Error al enviar la review: " + reviewError);
+                console.log("Error al enviar la review: ");
             }
         } catch (error) {
             console.error("Error en el envio:", error.message);
