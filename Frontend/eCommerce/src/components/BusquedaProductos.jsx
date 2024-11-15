@@ -52,7 +52,6 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
     setPaginaActual(selectedPage+1); // Cambia la página actual según la selección del usuario
   };
   
-  console.log("objeto datos filtrados",datosFiltrados);
   return (
     <div>
       <div className='botonCentrado'>

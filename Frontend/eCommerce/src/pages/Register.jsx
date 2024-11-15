@@ -1,10 +1,10 @@
-import logo from '../../public/logo-secundario.svg';
 import React, { useRef, useState } from 'react';
 import '../styles/register.css';
 import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
 import * as jwt_decode from 'jwt-decode';
 import Alert from './../components/Alerta';
+import Input from '../components/Input';
 
 function Register() {
     const emailRef = useRef(null);
@@ -16,6 +16,8 @@ function Register() {
     const [nameError, setNameError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [alertMessage, setAlertMessage] = useState(null);
+    const [password, setPassword] = useState('');
+    const [showPasswordRequirements, setShowPasswordRequirements] = useState(false); // Estado para mostrar los requisitos
     const navigate = useNavigate();
 
     const handleAcceder = () => navigate('/login');
@@ -65,6 +67,7 @@ function Register() {
 
             if (response.ok) {
                 const accessToken = await response.json();
+                localStorage.setItem('accessToken', accessToken)
                 const decoded = jwt_decode.jwtDecode(accessToken);
                 console.log({ email: decoded.email, name: decoded.name });
                 setAlertMessage("Te has registrado correctamente!");
@@ -90,11 +93,40 @@ function Register() {
         nameRef.current.value = "";
     };
 
+    // Manejador para mostrar los requisitos
+    const handleShowPasswordRequirements = () => {
+        setShowPasswordRequirements(true);
+    };
+
+    // Manejador para ocultar los requisitos
+    const handleHidePasswordRequirements = () => {
+        setShowPasswordRequirements(false);
+    };
+    
+    // Verificar requisitos de la contraseña
+    const checkPasswordRequirements = (password) => {
+        const minLength = password.length >= 8;
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasLowerCase = /[a-z]/.test(password);
+        const hasNumber = /\d/.test(password);
+        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+        return {
+            minLength,
+            hasUpperCase,
+            hasLowerCase,
+            hasNumber,
+            hasSpecialChar,
+        };
+    };
+
+    const passwordRequirements = checkPasswordRequirements(password);
+
     return (
         <div className="container-supremo">
             <div className="container-secundario">
                 <div className="login login-secundario">
-                    <button onClick={handleLogoClick} className='logo-button-secundario'><img src={logo} alt="Logo" className="logoBushidoBeans-secundario" /></button>
+                    <button onClick={handleLogoClick} className='logo-button-secundario'><img src="../../public/logo-secundario.svg" alt="Logo" className="logoBushidoBeans-secundario" /></button>
                     <p className="preguntaCuenta-secundario accede">¿Ya tienes cuenta?</p>
                     <button className="Acceder Acceder-secundario" onClick={handleAcceder}>Acceder</button>
                 </div>
@@ -103,19 +135,48 @@ function Register() {
                     <p className="preguntaCuenta-terciario">Añade tus datos personales</p>
                     <form className="formRegister" onSubmit={handleRegister}>
                         <div className="contenedorNombre contenedorEmail contenedorEmail-secundario">
-                            <input type="text" name="name" id="name" ref={nameRef} placeholder="Nombre" className="nombre" />
+                            <Input type="text" name="name" id="name" ref={nameRef} placeholder="Nombre" className="nombre" />
                             {nameError && <p className="name-message email-message email-message-secundario ">{nameError}</p>}
                         </div>
                         <div className="contenedorEmail contenedorEmail-secundario">
-                            <input type="email" id="email" name="email" ref={emailRef} placeholder="Email" />
+                            <Input type="email" id="email" name="email" ref={emailRef} placeholder="Email" />
                             {emailError && <p className="email-message email-message-secundario">{emailError}</p>}
                         </div>
                         <div className="contenedorPassword contenedorPassword-secundario">
-                            <input type="password" id="password" name="password" ref={passwordRef} placeholder="Contraseña" />
+                            <Input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                ref={passwordRef} 
+                                placeholder="Contraseña" 
+                                onFocus={handleShowPasswordRequirements} 
+                                onBlur={handleHidePasswordRequirements} 
+                                value={password} 
+                                onChange={(e) => setPassword(e.target.value)} // Actualiza el estado de la contraseña
+                            />
                             {passwordError && <p className="password-message password-message-secundario">{passwordError}</p>}
+                            {showPasswordRequirements && (
+                                <ul className="password-requirements">
+                                    <li style={{ color: passwordRequirements.hasUpperCase ? 'var(--fondo-vistas)' : 'red' }}>
+                                        {passwordRequirements.hasUpperCase ? '✅' : '❌'} Al menos una mayúscula
+                                    </li>
+                                    <li style={{ color: passwordRequirements.hasLowerCase ? 'var(--fondo-vistas)' : 'red' }}>
+                                        {passwordRequirements.hasLowerCase ? '✅' : '❌'} Al menos una minúscula
+                                    </li>
+                                    <li style={{ color: passwordRequirements.hasNumber ? 'var(--fondo-vistas)' : 'red' }}>
+                                        {passwordRequirements.hasNumber ? '✅' : '❌'} Al menos un número
+                                    </li>
+                                    <li style={{ color: passwordRequirements.minLength ? 'var(--fondo-vistas)' : 'red' }}>
+                                        {passwordRequirements.minLength ? '✅' : '❌'} Mínimo 8 caracteres
+                                    </li>
+                                    <li style={{ color: passwordRequirements.hasSpecialChar ? 'var(--fondo-vistas)' : 'red' }}>
+                                        {passwordRequirements.hasSpecialChar ? '✅' : '❌'} Al menos un carácter especial
+                                    </li>
+                                </ul>
+                            )}
                         </div>
                         <div className="contenedorPassword contenedorPassword-secundario">
-                            <input type="password" id="confirmPassword" name="confirmPassword" ref={confirmPasswordRef} placeholder="Repetir Contraseña" />
+                            <Input type="password" id="confirmPassword" name="confirmPassword" ref={confirmPasswordRef} placeholder="Repetir Contraseña" />
                         </div>
                         <button type="submit" disabled={isLoading} className="btnCrearCuenta btnCrearCuenta-secundario">
                             {isLoading ? 'Cargando...' : 'Crear Cuenta'}

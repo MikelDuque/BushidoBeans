@@ -1,14 +1,16 @@
 import { NavLink } from "react-router-dom";
 import React, { useState, useRef, useEffect } from 'react';
 import '../styles/header.css';
-
+import { useAuth } from '../context/AuthContext';
 
 // -----HEADER----- //
 
 function Header() {
-  const [isLogged, setIsLogged] = useState(false);
-  const handleLogin = () => { setIsLogged(true); };
-  const handleLogout = () => { setIsLogged(false); };
+
+  const { isAuthenticated, logout } = useAuth();
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <header>
@@ -19,7 +21,7 @@ function Header() {
         <NavLink className="nl btn" to="/catalogo"> Tienda </NavLink>
         <NavLink className="nl btn" to="/sobreNosotros"> Nosotros </NavLink>
 
-        {isLogged ? (
+        {isAuthenticated ? (
           <Desplegable handleLogout={handleLogout} />
         ) : (
           <NavLink className="nl btnc" to="/login"> Login </NavLink>

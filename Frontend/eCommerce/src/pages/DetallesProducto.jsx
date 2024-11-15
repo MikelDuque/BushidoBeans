@@ -51,7 +51,7 @@ function DetallesProducto() {
     }, []);
 
     const aumentarCantidad = () => {
-        if (cantidad < 10) {
+        if (cantidad < producto.stock) {
             setCantidad(cantidad + 1);
         }
     };
@@ -101,7 +101,7 @@ function DetallesProducto() {
                     <div className='container-boton-cantidad'>
                         <button className='boton-cantidad' onClick={disminuirCantidad} disabled={cantidad <= 1}>-</button>
                         <span>{cantidad}</span>
-                        <button className='boton-cantidad' onClick={aumentarCantidad} disabled={producto.stock}>+</button>
+                        <button className='boton-cantidad' onClick={aumentarCantidad} disabled={cantidad >= producto.stock}>+</button>
                     </div>
 
                     <button className='boton-agregar-carrito' disabled={producto.stock}>

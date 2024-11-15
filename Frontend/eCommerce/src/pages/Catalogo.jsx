@@ -8,15 +8,15 @@ import BusquedaProductos from "../components/BusquedaProductos.jsx";
 
 function Catalogo() {
   const imagenes = [
-    "/recursos/imgCarrusel1.png",
-    "/recursos/imgCarrusel2.jpg",
-    "/recursos/imgCarrusel3.jpg",
-    "/recursos/imgCarrusel4.jpg",
+    "../../public/recursos/imgCarrusel1.png",
+    "../../public/recursos/imgCarrusel2.jpg",
+    "../../public/recursos/imgCarrusel3.jpg",
+    "../../public/recursos/imgCarrusel4.jpg",
   ];
 
   const [filtro, setFiltro] = useState('0');
   const [ordenar, setOrdenar] = useState('0');
-  let [productosPorPagina, setProductosPorPagina] = useState(5); // Estado para controlar productos por página
+  let [productosPorPagina, setProductosPorPagina] = useState(5); 
 
   const productosPorPaginaChange = (value) => {
     setProductosPorPagina(value);
@@ -44,7 +44,6 @@ function Catalogo() {
     { value: '30', label: '30 productos' },
   ];
 
-  // Función para manejar el cambio en la cantidad de productos por página
 
 
   return (
