@@ -2,12 +2,11 @@ import '../styles/CardPrueba.css';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect, useRef} from 'react';
 import '../styles/Popup.css';
+import Modal from './Pop-Up';
 
 
 //obtener producto
 function PopupReseña() {
-    console.log("hola")
-    const { id } = useParams();
 
     const [reviewError, setReviewError] = useState(null);
     const [producto, setProducto] = useState(null);
@@ -16,13 +15,13 @@ function PopupReseña() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
         setIsAuthenticated(!!token); 
     }, []); 
  
-    console.log("booleano",isAuthenticated);
     
     useEffect(() => {
         
@@ -118,8 +117,12 @@ function PopupReseña() {
     const resetReview = () => {
         reviewRef.current.value = "";
     };
+    const closeModal = () => {
+        setIsModalOpen(false);  // Cerrar el modal
+      };
 
     return (
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
         <div className='cardReseña'>
         {loading ? (
             <p>Cargando producto...</p>
@@ -169,6 +172,7 @@ function PopupReseña() {
         )}
         
     </div>
+    </Modal>
     );
 };
 
