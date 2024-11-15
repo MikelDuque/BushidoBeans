@@ -3,12 +3,14 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect, useRef} from 'react';
 import '../styles/Popup.css';
 import * as jwt_decode from 'jwt-decode';
-import Modal from './Pop-Up';
 
+
+import Modal from './Pop-Up';
 
 
 //obtener producto
 function PopupReseña() {
+    console.log("hola")
     const { id } = useParams();
 
     const [reviewError, setReviewError] = useState(null);
@@ -19,6 +21,7 @@ function PopupReseña() {
     const scoreRef = useRef(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(true);
 
     useEffect(() => {
@@ -43,7 +46,8 @@ function PopupReseña() {
             
         }
     }, []); 
-
+ 
+    
     useEffect(() => {
         
         const fetchProducto = async () => {
