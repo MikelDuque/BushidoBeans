@@ -25,6 +25,7 @@ export function CardPrueba({ id, imagen, nombre, intensidad, precio, stock, valo
         event.preventDefault();
 
         const nuevoProducto = {
+            img: {imagen},
             nombreP : {nombre},
             precioP : {precio},
             cantidadP: 1,

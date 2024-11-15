@@ -1,4 +1,5 @@
 import { useState, useEffect} from 'react';
+import "../styles/Carrito.css";
 
 function Carrito(){
 
@@ -14,20 +15,27 @@ function Carrito(){
     console.log("carrito",carrito)
 
     return(
-
-        <div>
-        <h2>Carrito</h2>
-        <ul>
+        <>
+        
+        <div className='Carrito'>
+        <h2 className='CarritoHead'>Carrito</h2>
+        <ul className='ProductosGrid'>
             {carrito.map((producto, index) => (
-                <li key={index}>
-                    <h3>{producto.nombreP.nombre}</h3>
-                    <p>Cantidad: {producto.cantidadP}</p>
-                    <p>Precio: {producto.precioP.precio}€</p>
-                    <p>ID Producto: {producto.idProductoP.id}</p>
+                <li className='producto' key={index}>
+                    <h3 className='productoName'>{producto.nombreP.nombre}</h3>
+                    <img  className='productoImg' src={`https://localhost:7015/${producto.img.imagen}`} alt="nada" />
+                    
+                    <div className='productoDetalles'>
+                        <p>Cantidad: {producto.cantidadP}</p>
+                        <p>Precio: {producto.precioP.precio}€</p>
+                        <p>ID Producto: {producto.idProductoP.id}</p>
+                    </div>
+                    
                 </li>
             ))}
         </ul>
     </div>
+    </>
 
     );
     
