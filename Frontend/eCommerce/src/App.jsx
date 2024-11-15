@@ -7,6 +7,7 @@ import DetallesProducto from './pages/DetallesProducto'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFound from './components/NotFound';
 import PopupReseña from "./components/PopUpReseña";
+import Carrito from "./components/Carrito";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                 <Route path="/sobreNosotros" element={<SobreNosotros />} />
                 <Route path="/producto/:id" element={<DetallesProducto />} />
                 <Route path="/producto/:id/reseña" element={<PopupReseña />} />
+                <Route path="/carrito" element={<Carrito />} />
                 <Route path='/404' element={<NotFound/>}/>
             </Routes>
         </Router>

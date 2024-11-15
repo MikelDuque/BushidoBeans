@@ -132,8 +132,8 @@ function PopupReseña() {
                 <div className="infoDerecha">
                     <h4 className="nombreInfo">{producto.name}</h4>
                     <div className="precioValoracion">
-                        <div className="valoracionInfo">{producto.score}</div>
-                        <div className="precioInfo">{producto.price} €</div>
+                        <div className="valoracionInfo">Valoracion: {producto.score}</div>
+                        <div className="precioInfo">Precio: {producto.price} €</div>
                     </div>
                 </div>
             </div>

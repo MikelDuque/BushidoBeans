@@ -25,7 +25,7 @@ function Header() {
           <NavLink className="nl btnc" to="/login"> Login </NavLink>
         )}
 
-        <NavLink className="nl cesta" to="" />
+        <NavLink className="nl cesta" to="/carrito" />
       </nav>
     </header>
   );
