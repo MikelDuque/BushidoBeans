@@ -47,6 +47,11 @@ img {
         width: 20px;
       }
 
+      .review__individualImgZero {
+        filter: grayscale();
+      }
+
+      
     .review__body {
       width: 95%;
       margin-top: 15px;

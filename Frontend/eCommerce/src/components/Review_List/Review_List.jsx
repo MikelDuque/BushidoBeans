@@ -50,33 +50,33 @@ const sendReview = async () => {
 };
 
 function reviewMapper(reviews) {
-  //setTimeout(() => {
-    console.log("jajano", reviews);
-    return (reviews.length > 0 ? (
-      reviews.map((review) => (
-        <Review 
-          reviewData = {{
-            id: review.id,
-            publicationDate: review.publiDate,
-            score: review.score,
-            body: review.body,
-            userName: review.userName,
-            avatar: review.avatar
-          }}/>
-    ))) : (<p>"No existen reviews de este producto"</p>))
-  //}, 1000);
-  
+  return (reviews.length > 0 ? (
+    reviews.map((review) => (
+      <Review 
+        reviewData = {{
+          id: review.id,
+          publicationDate: review.publiDate,
+          score: review.score,
+          body: review.body,
+          userName: review.userName,
+          avatar: review.avatar
+        }}/>
+    ))) : (<p>"No existen reviews de este producto"</p>)
+  ); 
 };
 
-function Review_List({reviews, score}) {
+function Review_List({data}) {
 
   return(
     <div className={classes.reviews_container}>
-      <Average_Score
-        score={score}
-      />
+      <div className={classes.leftSide}>
+        <button>Nueva Review</button>
+        <Average_Score
+          averageScore={data.score}
+        />
+      </div>
       <ul className={classes.review_list}>
-        {reviewMapper(reviews)}
+        {reviewMapper(data.reviews)}
       </ul>
     </div>
   );

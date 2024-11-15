@@ -1,17 +1,39 @@
 .reviews_container {
   border-radius: 10px;
-  width: 75%;
+  width: 90%;
   margin: auto;
-  padding: 20px;
+  padding: 30px;
 
   display: grid;
   grid-template-columns: 0.5fr 2.5fr;
-  align-items: start;
   gap: 10px;
   
   background-color: var(--nav-footer);
   color: var(--fondo-vistas);
 }
+
+.leftSide {
+  width: 100%;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+  .leftSide button {
+    padding: 10px;
+
+    background-color: var(--fondo-vistas);
+    color: var(--nav-footer);
+    border: none;
+    border-radius: 5px;
+
+    font-family: var(--font-family-titulos-subtitulos);
+    font-size: var(--subtitulos-size);
+    font-weight: var(--font-weight-regular);
+  }
 
 .review_list {
   height: fit-content;
