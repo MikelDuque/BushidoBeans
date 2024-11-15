@@ -80,7 +80,6 @@ function PopupReseña() {
         const Score = parseInt(scoreRef.current.value);
         const prodId = producto.id;
         const UserId= 4;
-        const User = user;
 
 
         if (review == "") {
@@ -95,7 +94,7 @@ function PopupReseña() {
         }
 
 
-        await sendReview({score: Score, body: review, productId: prodId, userId: UserId, userName: User});
+        await sendReview({score: Score, body: review, productId: prodId, userId: UserId});
         
     };
 
