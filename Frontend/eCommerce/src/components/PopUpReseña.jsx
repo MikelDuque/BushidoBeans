@@ -15,6 +15,7 @@ function PopupReseña() {
     const [reviewError, setReviewError] = useState(null);
     const [producto, setProducto] = useState(null);
     const [user, setUser] = useState(null);
+    const [idUser, setIdUser] = useState(null);
     const reviewRef = useRef(null);
     const scoreRef = useRef(null);
     const [loading, setLoading] = useState(true);
@@ -27,11 +28,17 @@ function PopupReseña() {
         if (token) {
             try {
                 console.log("volvi a entrar")
-                const decodedToken = jwt_decode(token);
+                const decodedToken = jwt_decode.jwtDecode(token);
                 console.log(decodedToken)
-                setUser(decodedToken);  
+                setUser(decodedToken.unique_name);  
+                
                 setIsAuthenticated(true); 
-                console.error("user si", user);
+                const idUserDecoded = jwt_decode.jwtDecode(decodedToken.id);
+                console.log("logeado dentro token?", isAuthenticated)
+                setIdUser(idUserDecoded);
+                
+                
+                
             } catch (error) {
                 console.error("Error al decodificar el token", error);
                 setIsAuthenticated(false);
@@ -39,11 +46,12 @@ function PopupReseña() {
         } else {
             setIsAuthenticated(false);  
             console.error("user no", user);
+            
         }
     }, []); 
 
-    
-    
+    console.log("id", idUser);
+    console.log("user",user);
     useEffect(() => {
         
         const fetchProducto = async () => {
@@ -64,6 +72,7 @@ function PopupReseña() {
                 const data = await response.json();
                 
 
+                console.log("logeado aqui?", isAuthenticated)
                 console.log("data:", data)
                 setProducto(data);
 
@@ -85,6 +94,8 @@ function PopupReseña() {
 
 
 
+    console.log("userID?", idUser)
+    console.log("name?", user)
 
     
     const handleReview = async (event) => {
@@ -92,7 +103,8 @@ function PopupReseña() {
         const review = reviewRef.current.value;
         const Score = parseInt(scoreRef.current.value);
         const prodId = producto.id;
-        const idUser= 2;
+        const UserId= 4;
+        const User = user;
 
 
         if (review == "") {
@@ -101,13 +113,13 @@ function PopupReseña() {
         }else if(parseInt(Score)>3||parseInt(Score)<1){
             console.log("La valoracion tiene que ser entre 0 y 3");
             return;
-        }else if(isAuthenticated == false){
+        }else if(user == null){
             console.log("Necesitas logearte");
             return;
         }
 
 
-        await sendReview({score: Score, body: review, productId: prodId, userId: idUser});
+        await sendReview({score: Score, body: review, productId: prodId, userId: UserId, userName: User});
         
     };
 
@@ -161,7 +173,7 @@ function PopupReseña() {
 
             <div className='usuario'>
                 <img src="/recursos/iconUser.svg" alt="imagen usuario" />
-                <h4 className='usuarioNombre'>nombre usuario</h4>
+                <h4 className='usuarioNombre'>{user}</h4>
             </div>
 
             <div className='formulario'>
