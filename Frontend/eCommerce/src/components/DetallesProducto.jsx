@@ -24,6 +24,8 @@ function DetallesProducto() {
         }
     };
 
+
+    
     const intensidadImg = getIntensidadImg(producto.nombre);
     console.log(producto);
 
