@@ -21,7 +21,6 @@ function PopupReseña() {
     const scoreRef = useRef(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(true);
 
     useEffect(() => {
@@ -34,16 +33,11 @@ function PopupReseña() {
                 const idUserDecoded = jwt_decode.jwtDecode(decodedToken.id);
                 setIdUser(idUserDecoded);
                 
-                
-                
             } catch (error) {
                 console.error("Error al decodificar el token", error);
-              
             }
         } else {
             console.error("Error al decodificar el token");
- 
-            
         }
     }, []); 
  
@@ -66,8 +60,6 @@ function PopupReseña() {
                 const data = await response.json();
                 setProducto(data);
 
-                
-  
             } catch (error) {
                 setError('Error al cargar el producto (catch)');
                 

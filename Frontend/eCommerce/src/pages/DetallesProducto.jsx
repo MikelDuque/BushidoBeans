@@ -112,18 +112,6 @@ function DetallesProducto() {
     const intensidadImg = getIntensidadImg("café");
     
 
-    /*
-    function getReview() {
-        return review = {
-            id: producto.reviews[0].id,
-            score: producto.reviews[0].score,
-            body: producto.reviews[0].body,
-            userName: producto.reviews[0].userName,
-            avatar: ""
-        }
-    }
-    */  
-
     return (
         <div className='container-producto'>
             <Header />
@@ -169,12 +157,14 @@ function DetallesProducto() {
                     </button>
                 </div>  
             </div>
+
+            <button className="productName" onClick={handlePageChange}>Enviar Reseña</button>
             {/*
             <div className='container-reviews'>
                 <h2>Reviews</h2>
                 <Reviews reviews={producto.reviews}></Reviews>
             </div>
-            <button className="productName" onClick={handlePageChange}>Enviar Reseña</button>
+            
             */}
 
             <div className='container-recomendaciones'> </div>
