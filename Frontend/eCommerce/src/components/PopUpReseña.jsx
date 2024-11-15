@@ -1,6 +1,6 @@
 import '../styles/CardPrueba.css';
 import { useParams } from 'react-router-dom';
-import { useState, useEffect} from 'react';
+import { useState, useEffect, useRef} from 'react';
 import '../styles/Popup.css';
 
 
@@ -8,14 +8,23 @@ import '../styles/Popup.css';
 function PopupReseña() {
     console.log("hola")
     const { id } = useParams();
+
+    const [reviewError, setReviewError] = useState(null);
     const [producto, setProducto] = useState(null);
+    const reviewRef = useRef(null);
+    const scoreRef = useRef(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    const valImg = "/recursos/star.svg";
- 
     useEffect(() => {
-        console.log("adios")
+        const token = localStorage.getItem('accessToken');
+        setIsAuthenticated(!!token); 
+    }, []); 
+ 
+    console.log("booleano",isAuthenticated);
+    
+    useEffect(() => {
         
         const fetchProducto = async () => {
             setLoading(true);
@@ -50,11 +59,65 @@ function PopupReseña() {
         };
 
         fetchProducto();
-
         
         
-    }, [id]);
+    },[id]);
 
+
+
+
+    
+    const handleReview = async (event) => {
+        event.preventDefault();
+        const review = reviewRef.current.value;
+        const Score = parseInt(scoreRef.current.value);
+        const prodId = producto.id;
+        const idUser= 2;
+
+
+        if (review == "") {
+            console.log("No has introducido ninguna review");
+            return;
+        }else if(parseInt(Score)>3||parseInt(Score)<1){
+            console.log("La valoracion tiene que ser entre 0 y 3");
+            return;
+        }else if(isAuthenticated == false){
+            console.log("Necesitas logearte");
+            return;
+        }
+
+
+        await sendReview({score: Score, body: review, productId: prodId, userId: idUser});
+        
+    };
+
+    const sendReview = async (data)=>{
+
+        try {
+            const response = await fetch("https://localhost:7015/api/Review/InsertReview", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+            if (response.ok) {
+                console.log("Review enviada correctamente");
+                resetReview();
+            } else {
+                const errorText = await response.text();
+                console.error(errorText);
+                console.log("Error al enviar la review: " + reviewError);
+            }
+        } catch (error) {
+            console.error("Error en el envio:", error.message);
+
+        } finally {
+            console.log("estas en el finally")
+        }
+    }
+
+    const resetReview = () => {
+        reviewRef.current.value = "";
+    };
 
     return (
         <div className='cardReseña'>
@@ -69,8 +132,8 @@ function PopupReseña() {
                 <div className="infoDerecha">
                     <h4 className="nombreInfo">{producto.name}</h4>
                     <div className="precioValoracion">
-                        <div className="valoracionInfo">{producto.score}</div>
-                        <div className="precioInfo">{producto.price} €</div>
+                        <div className="valoracionInfo">Valoracion: {producto.score}</div>
+                        <div className="precioInfo">Precio: {producto.price} €</div>
                     </div>
                 </div>
             </div>
@@ -82,8 +145,10 @@ function PopupReseña() {
             </div>
 
             <div className='formulario'>
-            
-              <textarea id="review" className="reviewText"></textarea>
+            <form onSubmit={handleReview} onReset={resetReview}>
+            <input type="number" ref={scoreRef} className='reviewScore'/>
+            <input type="text" ref={reviewRef} className='reviewText'/>
+            <div className='botones.container'>
               <input
                 type="submit"
                 className="botonAgregar"
@@ -94,7 +159,10 @@ function PopupReseña() {
                 className="botonCancelar"
                 value="Cancelar"
               />
+              </div>
+              </form>
             </div>
+            
         </>
         ) : (
             <p>No se encontraron productos.</p>
@@ -104,4 +172,6 @@ function PopupReseña() {
     );
 };
 
+
 export default PopupReseña;
+

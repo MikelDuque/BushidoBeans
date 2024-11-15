@@ -9,11 +9,15 @@ import Reviews from '../components/Reviews';
 
 function DetallesProducto() {
     const navigate = useNavigate();
+
+    const [carrito, setCarrito] = useState([]);
+
     const handlePageChange = () => {
         navigate(`/producto/${id}/reseña`);  // Ahora se navega correctamente usando el id
     };
     
     const { id } = useParams();
+    
 
     const [producto, setProducto] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -49,6 +53,36 @@ function DetallesProducto() {
 
         fetchProducto();
     }, []);
+
+
+    useEffect(() => {
+        const carritoGuardado = JSON.parse(localStorage.getItem('carrito'));
+        if (carritoGuardado) {
+            setCarrito(carritoGuardado);
+        }
+    }, []);
+
+    const handleCarrito = async (event) => {
+        event.preventDefault();
+
+        const nuevoProducto = {
+            nombreP : producto.name,
+            precioP : producto.price,
+            cantidadP: {cantidad},
+            idProductoP: producto.id
+          };
+    
+        console.log("producto: ", nuevoProducto);
+        await sendCarrito(nuevoProducto);
+    }
+
+    const sendCarrito = async (producto)=>{
+
+        const carritoActualizado = [...carrito, producto];
+        setCarrito(carritoActualizado);
+        
+        localStorage.setItem('carrito', JSON.stringify(carritoActualizado));
+    }
 
     const aumentarCantidad = () => {
         if (cantidad < producto.stock) {
@@ -104,7 +138,7 @@ function DetallesProducto() {
                         <button className='boton-cantidad' onClick={aumentarCantidad} disabled={cantidad >= producto.stock}>+</button>
                     </div>
 
-                    <button className='boton-agregar-carrito' disabled={producto.stock}>
+                    <button onClick={handleCarrito} className='boton-agregar-carrito' disabled={producto.stock}>
                         {producto.stock > 0 ? 'Añadir al carrito' : 'Sin stock'}
                     </button>
                 </div>  
@@ -113,14 +147,15 @@ function DetallesProducto() {
                 <h2>Reviews</h2>
                 <Reviews reviews={producto.reviews}></Reviews>
             </div>
-            <button className="productName" onClick={handlePageChange}>Enviar Reseña</button>
+            
+            <button className="boton-agregar-carrito" onClick={handlePageChange}>Enviar Reseña</button>
 
             <div className='container-recomendaciones'> </div>
 
             </>
             ) : (
                 <p>No se encontraron productos.</p>
-            )};
+            )}
             <Footer />
         </div>
     );
