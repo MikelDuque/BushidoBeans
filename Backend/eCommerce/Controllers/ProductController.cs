@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace eCommerce.Controllers;
 
-//[ApiController]
+[ApiController]
 [Route("api/[controller]")]
 public class ProductController : ControllerBase
 {
@@ -36,7 +36,7 @@ public class ProductController : ControllerBase
   }
 
   [HttpGet("Filtered_Products")]
-  public async Task<Catalog> GetFilteredProducts(Filter filter)
+  public async Task<Catalog> GetFilteredProducts([FromQuery]Filter filter)
   {
     return await _service.GetFilteredProducts(filter);
   }

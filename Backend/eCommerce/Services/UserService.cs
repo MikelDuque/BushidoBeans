@@ -38,6 +38,7 @@ public class UserService
       Mail = user.Mail,
       Password = user.Password,
       Name = user.Name,
+      Image = user.Image,
       Surname = user.Surname,
       Phone = user.Phone,
       Role = user.Role

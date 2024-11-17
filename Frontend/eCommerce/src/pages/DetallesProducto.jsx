@@ -42,8 +42,9 @@ function DetallesProducto() {
                 setLoading(false);
 
                 const data = await response.json();
-                console.log("data:", data)
+
                 setProducto(data);
+                
             } catch (error) {
                 setError('Error al cargar el producto (catch)');
             } finally {
@@ -158,6 +159,8 @@ function DetallesProducto() {
             </div>
             
             <button className="boton-agregar-carrito" onClick={handleOpen}>Enviar Reseña</button>
+
+            <Review_List data={{reviews: producto.reviews, score: producto.score}}/>
 
             <div className='container-recomendaciones'> </div>
 
