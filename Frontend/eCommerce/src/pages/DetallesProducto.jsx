@@ -6,15 +6,14 @@ import { useState, useEffect} from 'react';
 import '../styles/DetallesProducto.css';
 import { getIntensidadImg } from '../utils/intensidad';
 import Reviews from '../components/Reviews';
+import Modal  from '../components/Pop-Up';
+import PopupReseña from '../components/PopUpReseña';
 
 function DetallesProducto() {
     const navigate = useNavigate();
 
     const [carrito, setCarrito] = useState([]);
 
-    const handlePageChange = () => {
-        navigate(`/producto/${id}/reseña`);  // Ahora se navega correctamente usando el id
-    };
     
     const { id } = useParams();
     
@@ -23,7 +22,15 @@ function DetallesProducto() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [cantidad, setCantidad] = useState(1);
+    const [isModalOpen, setIsModalOpen] = useState(false); 
 
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
     //FetchData para las Reviews
     useEffect(() => {
         const fetchProducto = async () => {
@@ -148,7 +155,8 @@ function DetallesProducto() {
                 <Reviews reviews={producto.reviews}></Reviews>
             </div>
             
-            <button className="boton-agregar-carrito" onClick={handlePageChange}>Enviar Reseña</button>
+            <button className="boton-agregar-carrito" onClick={handleOpenModal}>Enviar Reseña</button>
+            
 
             <div className='container-recomendaciones'> </div>
 
@@ -157,6 +165,11 @@ function DetallesProducto() {
                 <p>No se encontraron productos.</p>
             )}
             <Footer />
+            
+            <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+                <h1>Mikel</h1>
+                <button onClick={handleCloseModal}>Cerrar</button>
+            </Modal>
         </div>
     );
 }

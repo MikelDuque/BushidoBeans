@@ -122,7 +122,6 @@ function PopupReseña() {
       };
 
     return (
-        <Modal isOpen={isModalOpen} onClose={closeModal}>
         <div className='cardReseña'>
         {loading ? (
             <p>Cargando producto...</p>
@@ -172,7 +171,6 @@ function PopupReseña() {
         )}
         
     </div>
-    </Modal>
     );
 };
 

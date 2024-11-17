@@ -21,7 +21,7 @@ function App() {
             <Route path="/carrito" element={<Carrito />} />
 
             {/* Ruta para página no encontrada */}
-            <Route path="*" element={<NotFound />} />
+            <Route path="400" element={<NotFound />} />
         </Routes>
     );
 }

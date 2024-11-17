@@ -8,7 +8,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Asegura que el modal esté encima de otros elementos */
+    margin: 0 auto;
+    transform: translate(-50% -50%);
   }
   
   .modal-content {
