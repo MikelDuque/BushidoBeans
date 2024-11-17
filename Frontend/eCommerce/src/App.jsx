@@ -6,6 +6,7 @@ import SobreNosotros from './pages/SobreNosotros';
 import DetallesProducto from './pages/DetallesProducto';
 import { Routes, Route } from "react-router-dom";
 import NotFound from './components/NotFound';
+import PopupReseña from "./components/PopUpReseña";
 import Carrito from "./components/Carrito";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path="/producto/:id" element={<DetallesProducto />} />
             <Route path="/" element={<Inicio />} />
             <Route path="/catalogo" element={<Catalogo />} />
+            <Route path="/producto/:id/reseña" element={<PopupReseña />} />
             <Route path="/carrito" element={<Carrito />} />
 
             {/* Ruta para página no encontrada */}

@@ -2,24 +2,37 @@ import '../styles/CardPrueba.css';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect, useRef} from 'react';
 import '../styles/Popup.css';
-import Modal from './Pop-Up';
+import * as jwt_decode from 'jwt-decode';
+import Modal from './Pop-Up.jsx';
 
 
 //obtener producto
 function PopupReseña() {
+    const { id } = useParams();
 
-    const [reviewError, setReviewError] = useState(null);
     const [producto, setProducto] = useState(null);
+    const [user, setUser] = useState(null);
     const reviewRef = useRef(null);
     const scoreRef = useRef(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
-        setIsAuthenticated(!!token); 
+        if (token) {
+            try {
+                const decodedToken = jwt_decode.jwtDecode(token);
+                console.log(decodedToken)
+                setUser(decodedToken.unique_name);  
+                
+                
+            } catch (error) {
+                console.error("Error al decodificar el token", error);
+            }
+        } else {
+            console.error("Error al decodificar el token");
+        }
     }, []); 
  
     
@@ -30,24 +43,17 @@ function PopupReseña() {
             setError(null);
 
             try {
-                console.log("hola")
                 const Url = 'https://localhost:7015/api/Product/Product_Details'
                 const response = await fetch(`${Url}?id=${id}`, {
                     method: 'GET',
                     headers: {'Content-Type': 'application/json'}
                 });
-                console.log("respuesta", response)
                 if (!response.ok) throw new Error('Error al cargar la respuesta');
                 setLoading(false);
 
                 const data = await response.json();
-                
-
-                console.log("data:", data)
                 setProducto(data);
 
-                
-  
             } catch (error) {
                 setError('Error al cargar el producto (catch)');
                 
@@ -62,16 +68,12 @@ function PopupReseña() {
         
     },[id]);
 
-
-
-
-    
     const handleReview = async (event) => {
         event.preventDefault();
         const review = reviewRef.current.value;
         const Score = parseInt(scoreRef.current.value);
-        const prodId = producto.id;
-        const idUser= 2;
+        const prodId = parseInt(producto.id);
+        const UserId= 4;
 
 
         if (review == "") {
@@ -80,20 +82,20 @@ function PopupReseña() {
         }else if(parseInt(Score)>3||parseInt(Score)<1){
             console.log("La valoracion tiene que ser entre 0 y 3");
             return;
-        }else if(isAuthenticated == false){
+        }else if(user == null){
             console.log("Necesitas logearte");
             return;
         }
 
 
-        await sendReview({score: Score, body: review, productId: prodId, userId: idUser});
+        await sendReview({score: Score, body: review, productId: prodId, userId: UserId});
         
     };
 
     const sendReview = async (data)=>{
 
         try {
-            const response = await fetch("https://localhost:7015/api/Review/InsertReview", {
+            const response = await fetch("https://localhost:7015/InsertReview", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),
@@ -104,13 +106,11 @@ function PopupReseña() {
             } else {
                 const errorText = await response.text();
                 console.error(errorText);
-                console.log("Error al enviar la review: " + reviewError);
+                console.log("Error al enviar la review: ");
             }
         } catch (error) {
             console.error("Error en el envio:", error.message);
 
-        } finally {
-            console.log("estas en el finally")
         }
     }
 
@@ -122,6 +122,7 @@ function PopupReseña() {
       };
 
     return (
+       
         <div className='cardReseña'>
         {loading ? (
             <p>Cargando producto...</p>
@@ -143,7 +144,7 @@ function PopupReseña() {
 
             <div className='usuario'>
                 <img src="/recursos/iconUser.svg" alt="imagen usuario" />
-                <h4 className='usuarioNombre'>nombre usuario</h4>
+                <h4 className='usuarioNombre'>{user}</h4>
             </div>
 
             <div className='formulario'>
@@ -171,6 +172,7 @@ function PopupReseña() {
         )}
         
     </div>
+
     );
 };
 

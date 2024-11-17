@@ -1,16 +1,17 @@
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { useNavigate } from 'react-router-dom';
 import { useState, useEffect} from 'react';
 import '../styles/DetallesProducto.css';
 import { getIntensidadImg } from '../utils/intensidad';
 import Reviews from '../components/Reviews';
-import Modal  from '../components/Pop-Up';
-import PopupReseña from '../components/PopUpReseña';
+import Modal from '../components/Pop-Up';
+import PopupReseña from '../components/PopUpReseña.jsx';
+
+
 
 function DetallesProducto() {
-    const navigate = useNavigate();
+
 
     const [carrito, setCarrito] = useState([]);
 
@@ -22,15 +23,8 @@ function DetallesProducto() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [cantidad, setCantidad] = useState(1);
-    const [isModalOpen, setIsModalOpen] = useState(false); 
+    const [open, setOpen] = useState(false);
 
-    const handleOpenModal = () => {
-        setIsModalOpen(true);
-    };
-
-    const handleCloseModal = () => {
-        setIsModalOpen(false);
-    };
     //FetchData para las Reviews
     useEffect(() => {
         const fetchProducto = async () => {
@@ -48,8 +42,9 @@ function DetallesProducto() {
                 setLoading(false);
 
                 const data = await response.json();
-                console.log("data:", data)
+
                 setProducto(data);
+                
             } catch (error) {
                 setError('Error al cargar el producto (catch)');
             } finally {
@@ -59,7 +54,7 @@ function DetallesProducto() {
         };
 
         fetchProducto();
-    }, []);
+    }, [id]);
 
 
     useEffect(() => {
@@ -83,6 +78,13 @@ function DetallesProducto() {
         await sendCarrito(nuevoProducto);
     }
 
+    const handleOpen = () => {
+        setOpen(true);
+    }
+
+    const handleClose = () => {
+        setOpen(false);
+    }
     const sendCarrito = async (producto)=>{
 
         const carritoActualizado = [...carrito, producto];
@@ -92,7 +94,7 @@ function DetallesProducto() {
     }
 
     const aumentarCantidad = () => {
-        if (cantidad < producto.stock) {
+        if (cantidad < 10) {
             setCantidad(cantidad + 1);
         }
     };
@@ -114,7 +116,7 @@ function DetallesProducto() {
                 <p>{error}</p>
             ) : producto != null ? (
             <>
-            <div className='container-info-producto'>
+                <div className='container-info-producto'>
                 <div className='imagen-producto'>
                     <img src={`https://localhost:7015/${producto.image}`} alt={producto.name} />
                 </div>
@@ -142,7 +144,7 @@ function DetallesProducto() {
                     <div className='container-boton-cantidad'>
                         <button className='boton-cantidad' onClick={disminuirCantidad} disabled={cantidad <= 1}>-</button>
                         <span>{cantidad}</span>
-                        <button className='boton-cantidad' onClick={aumentarCantidad} disabled={cantidad >= producto.stock}>+</button>
+                        <button className='boton-cantidad' onClick={aumentarCantidad} disabled={producto.stock}>+</button>
                     </div>
 
                     <button onClick={handleCarrito} className='boton-agregar-carrito' disabled={producto.stock}>
@@ -150,13 +152,15 @@ function DetallesProducto() {
                     </button>
                 </div>  
             </div>
+            
             <div className='container-reviews'>
                 <h2>Reviews</h2>
                 <Reviews reviews={producto.reviews}></Reviews>
             </div>
             
-            <button className="boton-agregar-carrito" onClick={handleOpenModal}>Enviar Reseña</button>
-            
+            <button className="boton-agregar-carrito" onClick={handleOpen}>Enviar Reseña</button>
+
+            <Review_List data={{reviews: producto.reviews, score: producto.score}}/>
 
             <div className='container-recomendaciones'> </div>
 
@@ -165,10 +169,8 @@ function DetallesProducto() {
                 <p>No se encontraron productos.</p>
             )}
             <Footer />
-            
-            <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-                <h1>Mikel</h1>
-                <button onClick={handleCloseModal}>Cerrar</button>
+            <Modal isOpen={open} onClose={handleClose}>
+                <PopupReseña/>
             </Modal>
         </div>
     );
