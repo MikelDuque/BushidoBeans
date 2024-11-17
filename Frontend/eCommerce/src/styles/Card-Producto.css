@@ -6,12 +6,11 @@ html, body {padding:0; margin:0; height:100%;}
   gap: 20px;
   justify-items: center;
   padding: 10px;
-  
 
 }
 
 .cardPrueba{
-  height: auto;
+  width: 1000px;
 
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -26,8 +25,6 @@ html, body {padding:0; margin:0; height:100%;}
   font-weight: var(--font-weight-regular);
   color: white;
 
-  
-
 }
 
 .productName{
@@ -38,7 +35,6 @@ html, body {padding:0; margin:0; height:100%;}
   color: white;
   grid-column: span 2;
 }
-
 
 
 .imgPrueba{
@@ -77,8 +73,6 @@ html, body {padding:0; margin:0; height:100%;}
   opacity: 0.8;
 }
 
-
-
 .cardPrueba.sold-out button {
   display: none;
 }
@@ -94,10 +88,11 @@ html, body {padding:0; margin:0; height:100%;}
   font-family: var(--font-family-titulos-subtitulos);
 }
 
-
+/*
 @media (max-width: 500px){
   .imgPrueba{
     height: auto;
     width: 100%;
   }
 }
+  */
