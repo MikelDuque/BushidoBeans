@@ -15,6 +15,7 @@ public class UserMapper
             Name = user.Name,
             Surname = user.Surname,
             Phone = user.Phone,
+            Image = user.Image,
             Role = user.Role
         };
     }

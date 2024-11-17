@@ -65,15 +65,13 @@ function reviewMapper(reviews) {
   ); 
 };
 
-function Review_List({data}) {
+function Review_List({data = {reviews, score}}) {
 
   return(
     <div className={classes.reviews_container}>
       <div className={classes.leftSide}>
         <button>Nueva Review</button>
-        <Average_Score
-          averageScore={data.score}
-        />
+        <Average_Score averageScore={data.score}/>
       </div>
       <ul className={classes.review_list}>
         {reviewMapper(data.reviews)}
