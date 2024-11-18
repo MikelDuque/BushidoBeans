@@ -9,7 +9,7 @@ function Footer() {
   return (
     <footer>
 
-        <div className="fLogo" src="recursos/FootLogoD.png" onClick={handleInicio}/>
+      <div className="fLogo" src="recursos/FootLogoD.png" onClick={handleInicio}/>
 
       <div className="redes">
         <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">

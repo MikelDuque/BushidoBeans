@@ -101,8 +101,9 @@ function DetallesProducto() {
     const intensidadImg = getIntensidadImg("café");
 
     return (
+        <>
+        <Header />
         <div className='container-producto'>
-            <Header />
             {loading ? (
                 <p>Cargando producto...</p>
             ) : error ? (
@@ -148,21 +149,17 @@ function DetallesProducto() {
             
             <div className='container-reviews'>
             <Review_List data={{reviews: producto.reviews, score: producto.score}}/>
-
             </div>
-            
 
-
-
-            <div className='container-recomendaciones'> </div>
+            {/*<div className='container-recomendaciones'> </div>*/}
 
             </>
             ) : (
                 <p>No se encontraron productos.</p>
-            )}
-            <Footer />
-
+            )}  
         </div>
+        <Footer />
+        </>
     );
 }
 

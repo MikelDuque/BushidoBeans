@@ -1,7 +1,6 @@
 import classes from './Review.module.css';
 
 function printScore(score) {
-
   return Array(score).fill(
     <img className={classes.review__individualImg} src="https://cdn.pixabay.com/photo/2023/08/28/01/23/star-8218104_1280.png" alt="review star" />
   )
