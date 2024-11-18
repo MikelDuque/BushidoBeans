@@ -3,8 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect, useRef} from 'react';
 import '../styles/Popup.css';
 import * as jwt_decode from 'jwt-decode';
-import Modal from './Pop-Up.jsx';
-
+import StarRating from './Review_List/StarRating/StarRating';
 
 //obtener producto
 function PopupReseña() {
@@ -13,7 +12,7 @@ function PopupReseña() {
     const [producto, setProducto] = useState(null);
     const [user, setUser] = useState(null);
     const reviewRef = useRef(null);
-    const scoreRef = useRef(null);
+    const [selectedScore, setSelectedScore] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(true);
@@ -68,51 +67,53 @@ function PopupReseña() {
         
     },[id]);
 
-    const handleReview = async (event) => {
-        event.preventDefault();
-        const review = reviewRef.current.value;
-        const Score = parseInt(scoreRef.current.value);
-        const prodId = parseInt(producto.id);
-        const UserId= 4;
+const handleReview = async (event) => {
+    event.preventDefault();
 
+    const review = reviewRef.current.value.trim();
+    const score = selectedScore;
+    const prodId = producto?.id;
+    const userId = 4; 
 
-        if (review == "") {
-            console.log("No has introducido ninguna review");
-            return;
-        }else if(parseInt(Score)>3||parseInt(Score)<1){
-            console.log("La valoracion tiene que ser entre 0 y 3");
-            return;
-        }else if(user == null){
-            console.log("Necesitas logearte");
-            return;
-        }
-
-
-        await sendReview({score: Score, body: review, productId: prodId, userId: UserId});
-        
-    };
-
-    const sendReview = async (data)=>{
-
-        try {
-            const response = await fetch("https://localhost:7015/InsertReview", {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
-            });
-            if (response.ok) {
-                console.log("Review enviada correctamente");
-                resetReview();
-            } else {
-                const errorText = await response.text();
-                console.error(errorText);
-                console.log("Error al enviar la review: ");
-            }
-        } catch (error) {
-            console.error("Error en el envio:", error.message);
-
-        }
+    if (!review) {
+        console.log("No has introducido ninguna review");
+        return;
     }
+
+    if (score < 1 || score > 3) {
+        console.log("La valoración tiene que ser entre 1 y 3");
+        return;
+    }
+
+    if (!user) {
+        console.log("Necesitas logearte");
+        return;
+    }
+
+    await sendReview({ score, body: review, productId: prodId, userId });
+};
+
+
+const sendReview = async (data) => {
+    try {
+        const response = await fetch("https://localhost:7015/InsertReview", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+            console.log("Review enviada correctamente");
+            resetReview();
+        } else {
+            const errorText = await response.text();
+            console.error("Error al enviar la review:", errorText);
+        }
+    } catch (error) {
+        console.error("Error en el envío:", error.message);
+    }
+};
+
 
     const resetReview = () => {
         reviewRef.current.value = "";
@@ -122,58 +123,60 @@ function PopupReseña() {
       };
 
     return (
-       
-        <div className='cardReseña'>
-        {loading ? (
-            <p>Cargando producto...</p>
-        ) : error ? (
-            <p>{error}</p>
-        ) : producto != null ? (
-        <>
-            <div className='productoInfo'>
-                <img className='imgInfo' src={`https://localhost:7015/${producto.image}`} alt={producto.name} />
-                <div className="infoDerecha">
-                    <h4 className="nombreInfo">{producto.name}</h4>
-                    <div className="precioValoracion">
-                        <div className="valoracionInfo">Valoracion: {producto.score}</div>
-                        <div className="precioInfo">Precio: {producto.price} €</div>
-                    </div>
+    isModalOpen && (
+        <div className="modal">
+            <div className="modalContent">
+                <button className="closeButton" onClick={closeModal}>
+                    &times;
+                </button>
+                <div className="cardReseña">
+                    {loading ? (
+                        <p>Cargando producto...</p>
+                    ) : error ? (
+                        <p>{error}</p>
+                    ) : producto != null ? (
+                        <>
+                            <div className="productoInfo">
+                                <img
+                                    className="imgInfo"
+                                    src={`https://localhost:7015/${producto.image}`}
+                                    alt={producto.name}
+                                />
+                                <div className="infoDerecha">
+                                    <h4 className="nombreInfo">{producto.name}</h4>
+                                    <div className="precioValoracion">
+                                        <div className="valoracionInfo">Valoración: {producto.score}</div>
+                                        <div className="precioInfo">Precio: {producto.price} €</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="usuario">
+                                <img src="/recursos/iconUser.svg" alt="imagen usuario" />
+                                <h4 className="usuarioNombre">{user}</h4>
+                            </div>
+
+                            <div className="formulario">
+                                <form onSubmit={handleReview} onReset={resetReview}>
+                                    <StarRating maxStars={3} onRatingChange={(rating) =>{setSelectedScore(rating)}
+                                    }/>
+                                    <input type="text" ref={reviewRef} className="reviewText" />
+                                    <div className="botonesContainer">
+                                        <input type="submit" className="botonAgregar" value="Agregar" />
+                                        <input type="reset" className="botonCancelar" value="Cancelar" />
+                                    </div>
+                                </form>
+                            </div>
+                        </>
+                    ) : (
+                        <p>No se encontraron productos.</p>
+                    )}
                 </div>
             </div>
+        </div>
+    )
+);
 
-
-            <div className='usuario'>
-                <img src="/recursos/iconUser.svg" alt="imagen usuario" />
-                <h4 className='usuarioNombre'>{user}</h4>
-            </div>
-
-            <div className='formulario'>
-            <form onSubmit={handleReview} onReset={resetReview}>
-            <input type="number" ref={scoreRef} className='reviewScore'/>
-            <input type="text" ref={reviewRef} className='reviewText'/>
-            <div className='botones.container'>
-              <input
-                type="submit"
-                className="botonAgregar"
-                value="Agregar"
-              />
-              <input
-                type="reset"
-                className="botonCancelar"
-                value="Cancelar"
-              />
-              </div>
-              </form>
-            </div>
-            
-        </>
-        ) : (
-            <p>No se encontraron productos.</p>
-        )}
-        
-    </div>
-
-    );
 };
 
 

@@ -1,6 +1,9 @@
 import classes from './Review_List.module.css';
 import Review from './Review/Review';
 import Average_Score from './Average_Score/Average_Score';
+import Modal from './../Pop-Up.jsx';
+import PopupReseña from './../PopUpReseña.jsx';
+import { useState } from 'react';
 
 //----- CONSTRUCTOR -----//
 function ReviewObj(productId, userId, score, body) {
@@ -17,6 +20,7 @@ function ReviewObj(productId, userId, score, body) {
 }
 
 
+
 //----- OBJETO DE PRUEBA -----//
 const productId = 1;
 const userId = 2;
@@ -30,7 +34,7 @@ const newReview = ReviewObj(productId, userId, score, body);
 
 const sendReview = async () => {
   try {
-    const response = await fetch("https://localhost:7015/api/Review", {
+    const response = await fetch("https://localhost:7015/api/InsertReview", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -41,6 +45,7 @@ const sendReview = async () => {
     if (response.ok) {
       const data = await response.json();
       console.log("Review enviada exitosamente:", data);
+      
     } else {
       console.error("Error al enviar la review:", response.statusText);
     }
@@ -53,6 +58,7 @@ function reviewMapper(reviews) {
   return (reviews.length > 0 ? (
     reviews.map((review) => (
       <Review 
+        key={review.id}
         reviewData = {{
           id: review.id,
           publicationDate: review.publiDate,
@@ -65,19 +71,27 @@ function reviewMapper(reviews) {
   ); 
 };
 
-function Review_List({data = {reviews, score}}) {
+function Review_List({ data }) {
+  const [open, setOpen] = useState(false);  
 
-  return(
+  const openModal = () => setOpen(true);
+  const closeModal = () => setOpen(false);
+
+  return (
     <div className={classes.reviews_container}>
       <div className={classes.leftSide}>
-        <button>Nueva Review</button>
-        <Average_Score averageScore={data.score}/>
+        <button onClick={openModal}>Añadir Reseña</button>
+        <Average_Score averageScore={data.score} />
       </div>
       <ul className={classes.review_list}>
         {reviewMapper(data.reviews)}
       </ul>
+      <Modal isOpen={open} onClose={closeModal}>
+                <PopupReseña/>
+            </Modal>
     </div>
   );
+  
 };
 
 export default Review_List;

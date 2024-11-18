@@ -5,9 +5,8 @@ import { useState, useEffect} from 'react';
 import '../styles/DetallesProducto.css';
 import { getIntensidadImg } from '../utils/intensidad';
 import Reviews from '../components/Reviews';
-import Modal from '../components/Pop-Up';
-import PopupReseña from '../components/PopUpReseña.jsx';
 
+import Review_List from '../components/Review_List/Review_List';
 
 
 function DetallesProducto() {
@@ -78,13 +77,7 @@ function DetallesProducto() {
         await sendCarrito(nuevoProducto);
     }
 
-    const handleOpen = () => {
-        setOpen(true);
-    }
 
-    const handleClose = () => {
-        setOpen(false);
-    }
     const sendCarrito = async (producto)=>{
 
         const carritoActualizado = [...carrito, producto];
@@ -154,13 +147,12 @@ function DetallesProducto() {
             </div>
             
             <div className='container-reviews'>
-                <h2>Reviews</h2>
-                <Reviews reviews={producto.reviews}></Reviews>
+            <Review_List data={{reviews: producto.reviews, score: producto.score}}/>
+
             </div>
             
-            <button className="boton-agregar-carrito" onClick={handleOpen}>Enviar Reseña</button>
 
-            <Review_List data={{reviews: producto.reviews, score: producto.score}}/>
+
 
             <div className='container-recomendaciones'> </div>
 
@@ -169,9 +161,7 @@ function DetallesProducto() {
                 <p>No se encontraron productos.</p>
             )}
             <Footer />
-            <Modal isOpen={open} onClose={handleClose}>
-                <PopupReseña/>
-            </Modal>
+
         </div>
     );
 }

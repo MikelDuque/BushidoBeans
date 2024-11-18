@@ -9,8 +9,6 @@ public class ReviewMapper
     //TO DTO
     public ReviewDto ToDto(Review review)
     {
-        return new ReviewDto
-        {
             Id = review.Id,
             Score = review.Score,
             Body = review.Body,
