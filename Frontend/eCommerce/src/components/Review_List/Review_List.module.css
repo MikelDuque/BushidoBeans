@@ -37,7 +37,7 @@
 
 .review_list {
   height: fit-content;
-  max-height: 50vh;
+  max-height: 75vh;
   overflow:scroll;
 
   display: grid;

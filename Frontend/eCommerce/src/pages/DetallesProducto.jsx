@@ -43,6 +43,8 @@ function DetallesProducto() {
                 const data = await response.json();
 
                 setProducto(data);
+                console.log("hola",data);
+                
                 
             } catch (error) {
                 setError('Error al cargar el producto (catch)');
