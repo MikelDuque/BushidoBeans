@@ -4,6 +4,7 @@ import { useState, useEffect, useRef} from 'react';
 import '../styles/Popup.css';
 import * as jwt_decode from 'jwt-decode';
 import StarRating from './Review_List/StarRating/StarRating';
+import Alerta from './Alerta';
 
 //obtener producto
 function PopupReseña() {
@@ -16,6 +17,7 @@ function PopupReseña() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(true);
+    const [alertMessage, setAlertMessage] = useState(null);
 
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
@@ -24,7 +26,6 @@ function PopupReseña() {
                 const decodedToken = jwt_decode.jwtDecode(token);
                 console.log(decodedToken)
                 setUser(decodedToken.unique_name);  
-                
                 
             } catch (error) {
                 console.error("Error al decodificar el token", error);
@@ -55,7 +56,7 @@ function PopupReseña() {
                 setProducto(data);
 
             } catch (error) {
-                setError('Error al cargar el producto (catch)');
+                setError('Error al cargar el producto');
                 
             } finally {
                 setLoading(false);
@@ -77,17 +78,12 @@ const handleReview = async (event) => {
     const userId = 4; 
 
     if (!review) {
-        console.log("No has introducido ninguna review");
-        return;
-    }
-
-    if (score < 1 || score > 3) {
-        console.log("La valoración tiene que ser entre 1 y 3");
+        setAlertMessage("No has introducido ninguna review");
         return;
     }
 
     if (!user) {
-        console.log("Necesitas logearte");
+        setAlertMessage("¡Inicia sesion para poder dejar una reseña!")
         return;
     }
 
@@ -104,14 +100,14 @@ const sendReview = async (data) => {
         });
 
         if (response.ok) {
-            console.log("Review enviada correctamente");
+            setAlertMessage("Review enviada correctamente");
             resetReview();
         } else {
             const errorText = await response.text();
-            console.error("Error al enviar la review:", errorText);
+            setError("Error al enviar la review:");
         }
     } catch (error) {
-        console.error("Error en el envío:", error.message);
+        setAlertMessage("Error en el envío:");
     }
 };
 
@@ -163,6 +159,7 @@ const sendReview = async (data) => {
                                     <input type="text" ref={reviewRef} className="reviewText" />
                                     <div className="botonesContainer">
                                         <input type="submit" className="botonAgregar" value="Agregar" />
+                                        {alertMessage && <Alerta message={alertMessage} onClose={() => setAlertMessage(null)} />}
                                         <input type="reset" className="botonCancelar" value="Cancelar" onClick={closeModal} />
                                     </div>
                                 </form>
