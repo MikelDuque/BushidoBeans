@@ -1,8 +1,9 @@
 import { useState, useEffect} from 'react';
 import "../styles/Carrito.css";
+import { useParams } from 'react-router-dom';
 
 function Carrito(){
-
+    useParams
     const [carrito, setCarrito] = useState([]);
 
     const handleReset = async(event)=>{

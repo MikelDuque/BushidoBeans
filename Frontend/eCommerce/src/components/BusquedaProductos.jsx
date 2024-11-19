@@ -4,8 +4,7 @@ import { CardPrueba } from "../components/Card-Producto.jsx";
 import ReactPaginate from 'react-paginate';
 import "../styles/Catalogo.css";
 import "../styles/Paginacion.css";
-
-
+import { CircleLoader } from 'react-spinners';
 const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   const [productoBuscado, setProductoBuscado] = useState('');
   const [datosFiltrados, setDatosFiltrados] = useState([]);
@@ -66,7 +65,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
  
       <div className="inventario">
         {loading ? (
-          <p>Cargando productos...</p>
+          <CircleLoader color='#295026' size={100}  />
         ) : error ? (
           <p>{error}</p>
         ) : datosFiltrados.length > 0 ? (

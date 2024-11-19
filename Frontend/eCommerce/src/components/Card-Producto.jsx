@@ -103,3 +103,4 @@ CardPrueba.defaultProps = {
     soldout: false,
     valoracion: 3,
 };
+export default CardPrueba;
