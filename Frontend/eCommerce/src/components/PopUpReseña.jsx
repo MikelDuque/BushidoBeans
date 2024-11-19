@@ -18,7 +18,6 @@ function PopupReseña() {
     const [error, setError] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(true);
 
-    console.log(boolReset)
 
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
@@ -108,6 +107,7 @@ const sendReview = async (data) => {
         if (response.ok) {
             console.log("Review enviada correctamente");
             resetReview();
+            
         } else {
             const errorText = await response.text();
             console.error("Error al enviar la review:", errorText);

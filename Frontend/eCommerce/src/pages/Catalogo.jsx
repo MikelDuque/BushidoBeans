@@ -20,6 +20,7 @@ function Catalogo() {
 
   const productosPorPaginaChange = (value) => {
     setProductosPorPagina(value);
+    
   };
 
 
