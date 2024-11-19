@@ -9,7 +9,9 @@ function printAverageScore(score) {
 
   return (
     <>
-      <img src={valorationImg} className={classes.starImg} style={{clipPath: `inset(0 ${porcentageScore}% 0 0`}} />
+      <div className={classes.starImg}>
+        <img src={valorationImg} style={{clipPath: `inset(0 ${porcentageScore}% 0 0`}} />
+      </div>
       <h3>{scoreString}</h3>
     </>
   );
