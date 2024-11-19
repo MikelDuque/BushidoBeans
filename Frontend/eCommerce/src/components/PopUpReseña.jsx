@@ -42,6 +42,7 @@ function PopupReseña() {
             setError(null);
 
             try {
+                //Usar los props de los detalles de producto
                 const Url = 'https://localhost:7015/api/Product/Product_Details'
                 const response = await fetch(`${Url}?id=${id}`, {
                     method: 'GET',
@@ -120,15 +121,14 @@ const sendReview = async (data) => {
     };
     const closeModal = () => {
         setIsModalOpen(false);  // Cerrar el modal
+        resetReview();
+        onClose();
       };
 
     return (
     isModalOpen && (
         <div className="modal">
             <div className="modalContent">
-                <button className="closeButton" onClick={closeModal}>
-                    &times;
-                </button>
                 <div className="cardReseña">
                     {loading ? (
                         <p>Cargando producto...</p>
@@ -163,7 +163,7 @@ const sendReview = async (data) => {
                                     <input type="text" ref={reviewRef} className="reviewText" />
                                     <div className="botonesContainer">
                                         <input type="submit" className="botonAgregar" value="Agregar" />
-                                        <input type="reset" className="botonCancelar" value="Cancelar" />
+                                        <input type="reset" className="botonCancelar" value="Cancelar" onClick={closeModal} />
                                     </div>
                                 </form>
                             </div>
