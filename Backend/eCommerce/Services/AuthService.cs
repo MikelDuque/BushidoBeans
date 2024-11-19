@@ -49,6 +49,7 @@ public class AuthService
                 { "id", Guid.NewGuid().ToString() },
                 { ClaimTypes.Email, model.Mail },
                 { ClaimTypes.Role, user.Role },
+                { ClaimTypes.Actor, user.Id },
                 { ClaimTypes.Name, user.Name },
                 { ClaimTypes.Surname, user.Surname }
             },
