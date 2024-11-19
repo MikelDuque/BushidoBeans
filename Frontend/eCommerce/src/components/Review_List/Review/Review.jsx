@@ -23,7 +23,7 @@ function Review({reviewData}) {
       return (
         <>
           <p className={classes.review__body}>{`${subBody}...`}</p>
-          <a onClick={showFullBody}>(Ver review completa)</a>
+          <a className={classes.review__body__seeMore} onClick={showFullBody}>(Ver review completa)</a>
         </>
       );
     };

@@ -57,6 +57,11 @@ img {
       text-align: justify;
     }
 
+    .review__body__seeMore {
+      color: var(--nav-hover);
+      text-decoration: underline;
+    }
+
     
 
   
