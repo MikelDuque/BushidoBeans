@@ -14,8 +14,11 @@ function PopupReseña() {
     const reviewRef = useRef(null);
     const [selectedScore, setSelectedScore] = useState(0);
     const [loading, setLoading] = useState(true);
+    const [boolReset, setBoolReset] = useState(false);
     const [error, setError] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(true);
+
+    console.log(boolReset)
 
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
@@ -116,7 +119,16 @@ const sendReview = async (data) => {
 
 
     const resetReview = () => {
+        
         reviewRef.current.value = "";
+        setBoolReset(true);
+        setTimeout(() => {
+            setBoolReset(false);
+        }, 100);
+        
+        
+        
+
     };
     const closeModal = () => {
         setIsModalOpen(false);  // Cerrar el modal
@@ -158,8 +170,12 @@ const sendReview = async (data) => {
 
                             <div className="formulario">
                                 <form onSubmit={handleReview} onReset={resetReview}>
-                                    <StarRating maxStars={3} onRatingChange={(rating) =>{setSelectedScore(rating)}
-                                    }/>
+                                    <StarRating resetVal={boolReset} maxStars={3} onRatingChange={(rating) =>{
+                                        setSelectedScore(rating);
+                                        
+                                    }}
+                                    
+                                    />
                                     <input type="text" ref={reviewRef} className="reviewText" />
                                     <div className="botonesContainer">
                                         <input type="submit" className="botonAgregar" value="Agregar" />
