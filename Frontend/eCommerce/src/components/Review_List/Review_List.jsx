@@ -88,7 +88,7 @@ function Review_List({ data }) {
       </ul>
       <Modal isOpen={open} onClose={closeModal}>
                 <PopupReseña/>
-            </Modal>
+      </Modal>
     </div>
   );
   

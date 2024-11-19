@@ -7,12 +7,7 @@ import { getIntensidadImg } from '../utils/intensidad';
 import Review_List from '../components/Review_List/Review_List';
 import { CircleLoader } from 'react-spinners';
 
-
 function DetallesProducto() {
-
-
-    const [carrito, setCarrito] = useState([]);
-
 
     const { id } = useParams();
 
@@ -54,36 +49,21 @@ function DetallesProducto() {
         fetchProducto();
     }, [id]);
 
-
-    useEffect(() => {
-        const carritoGuardado = JSON.parse(localStorage.getItem('carrito'));
-        if (carritoGuardado) {
-            setCarrito(carritoGuardado);
-        }
-    }, []);
-
     const handleCarrito = async (event) => {
         event.preventDefault();
-
+    
         const nuevoProducto = {
             nombreP: producto.name,
             precioP: producto.price,
-            cantidadP: cantidad,
-            idProductoP: producto.id
+            cantidadP: cantidad,  
+            idProductoP: producto.id,
+            img: producto.image, 
         };
-
-        console.log("producto: ", nuevoProducto);
-        await sendCarrito(nuevoProducto);
+    
+        agregarAlCarrito(nuevoProducto);  
     }
+    
 
-
-    const sendCarrito = async (producto) => {
-
-        const carritoActualizado = [...carrito, producto];
-        setCarrito(carritoActualizado);
-
-        localStorage.setItem('carrito', JSON.stringify(carritoActualizado));
-    }
 
     const aumentarCantidad = () => {
         if (cantidad < producto.stock) {
@@ -140,7 +120,7 @@ function DetallesProducto() {
                                 <button className='boton-cantidad' onClick={aumentarCantidad} disabled={cantidad >= producto.stock}>+</button>
                             </div>
 
-                            <button onClick={handleCarrito} className='boton-agregar-carrito' disabled={producto.stock}>
+                            <button onClick={handleCarrito} className='boton-agregar-carrito' disabled={producto.stock <= 0 || cantidad > producto.stock}>
                                 {producto.stock > 0 ? 'Añadir al carrito' : 'Sin stock'}
                             </button>
                         </div>
