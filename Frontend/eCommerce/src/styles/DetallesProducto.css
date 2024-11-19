@@ -122,3 +122,7 @@
     width: 100%;
     box-sizing: border-box;
 }
+
+.circulo-loading{
+    margin: 0 auto;
+}

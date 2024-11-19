@@ -1,7 +1,7 @@
 import { useState } from "react";
 import classes from "./StarRating.module.css";
 
-const StarRating = ({ maxStars = 5, onRatingChange }) => {
+const StarRating = ({ maxStars = 3, onRatingChange }) => {
   const [rating, setRating] = useState(0);
 
   const handleStarClick = (index) => {

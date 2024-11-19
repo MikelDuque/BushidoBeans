@@ -1,63 +1,68 @@
-import { useState, useEffect} from 'react';
 import "../styles/Carrito.css";
+import  useCarrito  from "./../context/CarritoContext"; 
 
-function Carrito(){
+function Carrito() {
+    const { carrito, vaciarCarrito, eliminarDelCarrito, completarCompra } = useCarrito();
 
-    const [carrito, setCarrito] = useState([]);
-
-    const handleReset = async(event)=>{
+    const handleReset = (event) => {
         event.preventDefault();
-        localStorage.removeItem('carrito');
-        window.location.reload();
-    }
+        vaciarCarrito();  
+    };
 
-    useEffect(() => {
-        const carritoGuardado = JSON.parse(localStorage.getItem('carrito'));
-        if (carritoGuardado) {
-            setCarrito(carritoGuardado);
-        }
-    }, []);
+    const handleEliminar = (productoId) => {
+        eliminarDelCarrito(productoId);  
+    };
 
-    console.log("carrito",carrito)
+    const handleCompletarCompra = () => {
+        completarCompra(); 
+    };
 
-    return(
-        <>
-        
-        <div className='Carrito'>
-        <h2 className='CarritoHead'>Carrito</h2>
-        <ul className='ProductosGrid'>
-            {carrito.map((producto, index) => (
-                <li className='producto' key={index}>
-                    <h3 className='productoName'>{producto.nombreP.nombre}</h3>
-                    <img  className='productoImg' src={`https://localhost:7015/${producto.img.imagen}`} alt="nada" />
-                    
-                    <div className='productoDetalles'>
-                        <p>Cantidad: {producto.cantidadP}</p>
-                        <p>Precio: {producto.precioP.precio}€</p>
-                        <p>ID Producto: {producto.idProductoP.id}</p>
-                    </div>
-                    
-                </li>
-            ))}
-        </ul>
-        <input
-            type="submit"
-            className="botonAgregar"
-            value="Proceder a la compra"
-              />
-        <input
-            onClick={handleReset}
-            type="reset"
-            className="botonCancelar"
-            value="Cancelar"
-              />
-    </div>
-    </>
+    return (
+        <div className="Carrito">
+            <h2 className="CarritoHead">Carrito</h2>
+            {carrito.length === 0 ? (
+                <p>Tu carrito está vacío.</p>  // Mensaje cuando el carrito está vacío
+            ) : (
+                <ul className="ProductosGrid">
+                    {carrito.map((producto, index) => (
+                        <li className="producto" key={index}>
+                            <h3 className="productoName">{producto.nombreP}</h3>
+                            {producto.img ? (  // Verificar si el producto tiene una imagen
+                                <img
+                                    className="productoImg"
+                                    src={`https://localhost:7015/${producto.img}`}
+                                    alt={producto.nombreP}
+                                />
+                            ) : (
+                                <p>Imagen no disponible</p>  // Mensaje si la imagen no existe
+                            )}
+                            <div className="productoDetalles">
+                                <p>Cantidad: {producto.cantidadP}</p>
+                                <p>Precio: {producto.precioP}€</p>
+                                <button onClick={() => handleEliminar(producto.idProductoP)}>
+                                    Eliminar
+                                </button>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            )}
 
+            <button
+                onClick={handleCompletarCompra}
+                className="botonAgregar"
+                disabled={carrito.length === 0} 
+            >
+                Proceder a la compra
+            </button>
+
+            <button
+                onClick={handleReset}
+                className="botonCancelar"
+            >
+                Vaciar carrito
+            </button>
+        </div>
     );
-    
-
-    
 }
-
 export default Carrito;

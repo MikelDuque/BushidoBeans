@@ -4,6 +4,8 @@ import { CardPrueba } from "../components/Card-Producto.jsx";
 import ReactPaginate from 'react-paginate';
 import "../styles/Catalogo.css";
 import "../styles/Paginacion.css";
+import { CircleLoader } from 'react-spinners';
+
 
 
 const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
@@ -12,7 +14,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   const [paginaActual, setPaginaActual] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [totalPaginas, setTotalPaginas] = useState(1); // Total que se actualiza al recibir respuesta del backend
+  const [totalPaginas, setTotalPaginas] = useState(1); 
 
   
   useEffect(() => {
@@ -22,7 +24,6 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
       setError(null);
 
       try {
-        // API del backend que retorna los productos ya filtrados y paginados
 
         const Url = 'https://localhost:7015/api/Product/Filtered_Products'
         const response = await fetch(`${Url}?Search=${productoBuscado}&Category=${filtro}&Order=${ordenar}&IncludeStockless=true&ProductsPerPage=${productosPorPagina}&CurrentPage=${paginaActual}`
@@ -33,8 +34,8 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
 
         const data = await response.json();
 
-        setDatosFiltrados(Array.isArray(data.filteredProducts)? data.filteredProducts:[]);  // Datos de productos recibidos
-        setTotalPaginas(data.totalPages);       // Total de productos para paginación
+        setDatosFiltrados(Array.isArray(data.filteredProducts)? data.filteredProducts:[]);  
+        setTotalPaginas(data.totalPages); 
         
         
         
@@ -66,7 +67,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
  
       <div className="inventario">
         {loading ? (
-          <p>Cargando productos...</p>
+          <CircleLoader color='#295026' size={100}  />
         ) : error ? (
           <p>{error}</p>
         ) : datosFiltrados.length > 0 ? (
