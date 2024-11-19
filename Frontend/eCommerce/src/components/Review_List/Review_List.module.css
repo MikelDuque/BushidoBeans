@@ -44,8 +44,6 @@
   gap: 20px;
   
   list-style-type: none;
+  scrollbar-width: none;
 }
 
-.review_list::-webkit-scrollbar{
-  display: none;
-}
