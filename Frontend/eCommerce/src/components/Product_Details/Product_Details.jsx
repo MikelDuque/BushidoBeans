@@ -37,7 +37,7 @@ export default function Product_Details({product}) {
     }
 
     const aumentarCantidad = () => {
-        if (cantidad < 10) {
+        if (cantidad < product.stock) {
             setCantidad(cantidad + 1);
         }
     };
@@ -79,10 +79,10 @@ export default function Product_Details({product}) {
                 <div className={classes.container_boton_cantidad}>
                     <button className={classes.boton_cantidad} onClick={disminuirCantidad} disabled={cantidad <= 1}>-</button>
                     <span>{cantidad}</span>
-                    <button className={classes.boton_cantidad} onClick={aumentarCantidad} disabled={product.stock}>+</button>
+                    <button className={classes.boton_cantidad} onClick={aumentarCantidad} disabled={cantidad >= product.stock}>+</button>
                 </div>
 
-                <button onClick={handleCarrito} className={classes.boton_agregar_carrito} disabled={product.stock}>
+                <button onClick={handleCarrito} className={classes.boton_agregar_carrito} disabled={product.stock <= 0 || cantidad > product.stock}>
                     {product.stock > 0 ? 'Añadir al carrito' : 'Sin stock'}
                 </button>
             </div>  
