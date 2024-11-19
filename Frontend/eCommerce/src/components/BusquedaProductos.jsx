@@ -12,11 +12,12 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   const [productoBuscado, setProductoBuscado] = useState('');
   const [datosFiltrados, setDatosFiltrados] = useState([]);
   const [paginaActual, setPaginaActual] = useState(0);
+  const [paginaSeleccionada, setPaginaSeleccionada] = useState(0); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [totalPaginas, setTotalPaginas] = useState(1); 
 
-  
+
   useEffect(() => {
     // Llamada a la API cuando cambian el filtro, orden, o búsqueda
     const fetchData = async () => {
@@ -51,8 +52,18 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
 
   const handlePageChange = ({selected: selectedPage}) => {
     setPaginaActual(selectedPage+1); // Cambia la página actual según la selección del usuario
+    setPaginaSeleccionada(selectedPage);
+    
   };
   
+  useEffect(() => {
+    setPaginaActual(0);
+    setPaginaSeleccionada(0);
+    
+    
+
+  }, [filtro, ordenar, productosPorPagina]);
+
   return (
     <div>
       <div className='botonCentrado'>
@@ -61,7 +72,9 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
           type="text"
           placeholder="Buscar..."
           value={productoBuscado}
-          onChange={e => setProductoBuscado(e.target.value)}
+          onChange={e => {
+            setProductoBuscado(e.target.value);
+          }}
         />
       </div>
  
@@ -112,6 +125,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
           nextLinkClassName={'page-link'}
           breakClassName={'page-item'}
           breakLinkClassName={'page-link'}
+          forcePage={paginaSeleccionada}
         />
         </div>
   );

@@ -1,13 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import classes from "./StarRating.module.css";
 
-const StarRating = ({ maxStars = 3, onRatingChange }) => {
+const StarRating = ({ maxStars = 3, onRatingChange, resetVal }) => {
   const [rating, setRating] = useState(0);
+
+  useEffect(() => {
+    if (resetVal) {
+      setRating(0);
+      if (onRatingChange) {
+        onRatingChange(0);
+      }
+    }
+  }, [resetVal, onRatingChange]);
 
   const handleStarClick = (index) => {
     setRating(index + 1);
     if (onRatingChange) onRatingChange(index + 1);
+    
   };
+  
 
   return (
     <div className={classes.starContainer}>
@@ -16,6 +27,7 @@ const StarRating = ({ maxStars = 3, onRatingChange }) => {
           key={index}
           className={`${classes.star} ${index < rating ? classes.filled : ""}`}
           onClick={() => handleStarClick(index)}
+
         >
           ★
         </span>
