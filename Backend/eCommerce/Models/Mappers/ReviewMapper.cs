@@ -18,7 +18,7 @@ public class ReviewMapper
             
             ProductId = review.ProductId,
             UserId = review.UserId,
-            UserName = review.User.Name
+            UserName = $"{review.User.Name} {review.User.Surname}"
         };
     }
     public IEnumerable<ReviewDto> ToDto(IEnumerable<Review> reviews)

@@ -33,9 +33,9 @@ public class Seeder
             new User {
                 Mail = "mikel@gmail.es",
                 Name = "Mikel",
-                Password = AuthService.HashPassword("Mikel#1234567890") ,
+                Password = AuthService.HashPassword("Mikel#123456789") ,
                 Surname = "Platero Duque",
-                Phone = 611111111,
+                Phone = 639573559,
                 Image = "/images/iconMikel.jpg",
                 Role = "admin",
             },

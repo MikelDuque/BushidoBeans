@@ -1,4 +1,5 @@
 ﻿using eCommerce.Controllers;
+using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
@@ -37,7 +38,7 @@ public class AuthService
     */
 
     public async Task<string> LoginResult (LoginRequest model) {
-        string modelRole = await _unitOfWork.UserRepository.GetRoleByMailAsync(model.Mail);
+        User user = await _unitOfWork.UserRepository.GetByMailAsync(model.Mail);
 
         SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
         {
@@ -46,8 +47,10 @@ public class AuthService
             {
                 //Para definir el id, se usa el "ClaimTypes.NameIdentifier"
                 { "id", Guid.NewGuid().ToString() },
-                { ClaimTypes.Name, model.Mail },
-                { ClaimTypes.Role, modelRole}
+                { ClaimTypes.Email, model.Mail },
+                { ClaimTypes.Role, user.Role },
+                { ClaimTypes.Name, user.Name },
+                { ClaimTypes.Surname, user.Surname }
             },
             //Caducidad del token
             Expires = DateTime.UtcNow.AddDays(5),
