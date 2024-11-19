@@ -1,12 +1,12 @@
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { useState, useEffect } from 'react';
+import { useState, useEffect} from 'react';
 import '../styles/DetallesProducto.css';
 
 import Product_Details from '../components/Product_Details/Product_Details';
 import Review_List from '../components/Review_List/Review_List';
-import { CircleLoader } from 'react-spinners';
+
 
 function DetallesProducto() {    
     const { id } = useParams();
@@ -18,14 +18,13 @@ function DetallesProducto() {
     useEffect(() => {
         const fetchProducto = async () => {
             setLoading(true);
-
             setError(null);
 
             try {
                 const Url = 'https://localhost:7015/api/Product/Product_Details'
                 const response = await fetch(`${Url}?id=${id}`, {
                     method: 'GET',
-                    headers: { 'Content-Type': 'application/json' }
+                    headers: {'Content-Type': 'application/json'}
                 });
                 console.log("respuesta", response)
                 if (!response.ok) throw new Error('Error al cargar la respuesta');
@@ -51,7 +50,7 @@ function DetallesProducto() {
         <Header />
         <div className='container-producto'>
             {loading ? (
-                <CircleLoader color='#295026' size={300} className='circulo-loading' />
+                <p>Cargando producto...</p>
             ) : error ? (
                 <p>{error}</p>
             ) : producto != null ? (
