@@ -45,3 +45,7 @@
   
   list-style-type: none;
 }
+
+.review_list::-webkit-scrollbar{
+  display: none;
+}

@@ -10,7 +10,7 @@ function Average_Score({averageScore}) {
   return (
     <div className={classes.average_score}>
         <h3>Puntuación Media</h3>
-        <img src={valImg} alt="score star" />
+        <img src={valImg} alt="score star"/>
         <h3>{printAverageScore(averageScore)}</h3>
     </div>
   );
