@@ -87,7 +87,7 @@ function Review_List({ data }) {
         {reviewMapper(data.reviews)}
       </ul>
       <Modal isOpen={open} onClose={closeModal}>
-                <PopupReseña/>
+        <PopupReseña/>
       </Modal>
     </div>
   );

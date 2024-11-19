@@ -37,6 +37,8 @@
 
 .review_list {
   height: fit-content;
+  max-height: 75vh;
+  overflow:scroll;
 
   display: grid;
   gap: 20px;

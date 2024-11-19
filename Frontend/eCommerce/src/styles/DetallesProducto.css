@@ -1,10 +1,17 @@
 /* Contenedor de la información del producto */
+.container-producto {
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: var(--fondo-vistas);
+}
+
 .container-info-producto {
     display: flex;
     width: 70%;
     margin: 0 auto;
-    margin-top: 5%;
-    margin-bottom: 5%;
     align-items: center;
     justify-content: center;
     background-color: var(--nav-footer);
