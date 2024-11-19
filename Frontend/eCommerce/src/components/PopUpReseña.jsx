@@ -12,6 +12,7 @@ function PopupReseña() {
 
     const [producto, setProducto] = useState(null);
     const [user, setUser] = useState(null);
+    const [userId, setUserId] = useState(null);
     const reviewRef = useRef(null);
     const [selectedScore, setSelectedScore] = useState(0);
     const [loading, setLoading] = useState(true);
@@ -26,7 +27,7 @@ function PopupReseña() {
                 const decodedToken = jwt_decode.jwtDecode(token);
                 console.log(decodedToken)
                 setUser(decodedToken.unique_name);  
-                
+                setUserId(decodedToken.userId);
             } catch (error) {
                 console.error("Error al decodificar el token", error);
             }
@@ -75,7 +76,7 @@ const handleReview = async (event) => {
     const review = reviewRef.current.value.trim();
     const score = selectedScore;
     const prodId = producto?.id;
-    const userId = 4; 
+    const UserId = userId; 
 
     if (!review) {
         setAlertMessage("No has introducido ninguna review");
@@ -87,7 +88,7 @@ const handleReview = async (event) => {
         return;
     }
 
-    await sendReview({ score, body: review, productId: prodId, userId });
+    await sendReview({ score, body: review, productId: prodId, UserId });
 };
 
 
@@ -103,7 +104,6 @@ const sendReview = async (data) => {
             setAlertMessage("Review enviada correctamente");
             resetReview();
         } else {
-            const errorText = await response.text();
             setError("Error al enviar la review:");
         }
     } catch (error) {
