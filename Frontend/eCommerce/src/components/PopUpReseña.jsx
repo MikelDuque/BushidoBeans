@@ -27,7 +27,7 @@ function PopupReseña() {
                 const decodedToken = jwt_decode.jwtDecode(token);
                 console.log(decodedToken)
                 setUser(decodedToken.unique_name);  
-                setUserId(decodedToken.userId);
+                setUserId(decodedToken.actort);
             } catch (error) {
                 console.error("Error al decodificar el token", error);
             }
