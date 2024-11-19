@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { getIntensidadImg } from '../../utils/intensidad';
 
 export default function Product_Details({product}) {
+    
     const [cantidad, setCantidad] = useState(1);
     const [carrito, setCarrito] = useState([]);
 

@@ -17,13 +17,13 @@ function Review({reviewData}) {
   function showFullBody() { setDisplayFullBody(true);};
 
   function bodyConstructor() {
-    if (reviewData.body.length < 300 || displayFullBody == false) {
+    if (reviewData.body.length > 300 && displayFullBody == false) {
       const subBody = reviewData.body.substring(0, 149);
 
       return (
         <>
           <p className={classes.review__body}>{`${subBody}...`}</p>
-          <a onClick={showFullBody}>Ver review completa...</a>
+          <a onClick={showFullBody}>(Ver review completa)</a>
         </>
       );
     };
