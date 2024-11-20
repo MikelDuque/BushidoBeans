@@ -5,7 +5,6 @@ namespace eCommerce.Controllers;
 public class UnitOfWork
 {
     private readonly DataContext _dataContext;
-    internal readonly object CartRepository;
     private UserRepository _userRepository = null!;
     private ProductRepository _productRepository = null!;
     private ReviewRepository _reviewRepository = null!;
