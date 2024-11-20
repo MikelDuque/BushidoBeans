@@ -82,7 +82,7 @@ public class Seeder
 
         Cart[] carts =
         [
-            new Cart()
+            new Cart {Id = 1}
         ];
 
         CartProduct[] cartProducts =
@@ -116,6 +116,9 @@ public class Seeder
 
         await _dbContext.Products.AddRangeAsync(products);
         await _dbContext.SaveChangesAsync();
+
+        await _dbContext.Carts.AddRangeAsync(carts);
+        await _dbContext.CartProducts.AddRangeAsync(cartProducts);
 
         await _dbContext.Reviews.AddRangeAsync(reviews);
         await _dbContext.SaveChangesAsync();
