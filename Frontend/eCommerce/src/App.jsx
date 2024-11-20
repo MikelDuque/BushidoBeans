@@ -1,4 +1,4 @@
-import Inicio from "./pages/Inicio";
+import Inicio from "./pages/Inicio/Inicio";
 import Catalogo from "./pages/Catalogo";
 import Login from './pages/Login';
 import Register from './pages/Register';

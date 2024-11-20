@@ -1,6 +1,6 @@
 import React from 'react';
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+import Footer from "../components/Footer/Footer";
+import Header from "../components/Header/Header";
 import "../styles/SobreNosotros.css";
 import Carrusel from "../components/Carrusel";
 import logo from "/recursos/logo2.png";

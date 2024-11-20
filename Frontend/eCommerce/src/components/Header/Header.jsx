@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
 import React, { useState, useRef, useEffect } from 'react';
-import '../styles/header.css';
-import { useAuth } from '../context/AuthContext';
-import CartCounter from "./CartCounter";
+import classes from './Header.module.css';
+import { useAuth } from '../../context/AuthContext';
+import CartCounter from "../CartCounter";
 
 
 function Header() {
@@ -16,19 +16,19 @@ function Header() {
   return (
     <header>
       <nav>
-        <NavLink className="nl hLogo" to="/" end />
-        <NavLink className="nl btn" to="/catalogo"> Café </NavLink>
-        <NavLink className="nl btn" to="/catalogo"> Té </NavLink>
-        <NavLink className="nl btn" to="/catalogo"> Tienda </NavLink>
-        <NavLink className="nl btn" to="/sobreNosotros"> Nosotros </NavLink>
+        <NavLink className={`${classes.nl} ${classes.hLogo}`} to="/" end />
+        <NavLink className={`${classes.nl} ${classes.btn}`} to="/catalogo"> Café </NavLink>
+        <NavLink className={`${classes.nl} ${classes.btn}`} to="/catalogo"> Té </NavLink>
+        <NavLink className={`${classes.nl} ${classes.btn}`} to="/catalogo"> Tienda </NavLink>
+        <NavLink className={`${classes.nl} ${classes.btn}`} to="/sobreNosotros"> Nosotros </NavLink>
 
         {isAuthenticated ? (
           <Desplegable handleLogout={handleLogout} />
         ) : (
-          <NavLink className="nl btnc" to="/login"> Login </NavLink>
+          <NavLink className={`${classes.nl} ${classes.btnc}`} to="/login"> Login </NavLink>
         )}
 
-        <NavLink className="nl cesta" to="" data-count={totalProducts} />
+        <NavLink className={`${classes.nl} ${classes.cesta}`} to="" data-count={totalProducts} />
         <CartCounter setTotalProducts={setTotalProducts} />
       </nav>
     </header>
@@ -60,13 +60,13 @@ const Desplegable = ({ handleLogout }) => {
   }, []);
 
   return (
-    <div className="despl" ref={desplegableRef}>
+    <div className={despl} ref={desplegableRef}>
       <div className={`desplToggle ${abierto ? 'active' : ''}`} onClick={abrirDesplegable} />
       {abierto && (
-        <div className="desplMenu">
-          <NavLink className="dnl desplOpcion" to="">Ver Perfil</NavLink>
-          <NavLink className="dnl desplOpcion" to="">Administración</NavLink>
-          <div className="desplOpcion" onClick={handleLogout}>Cerrar Sesión</div>
+        <div className={desplMenu}>
+          <NavLink className={`${classes.dnl} ${classes.desplOpcion}`} to="">Ver Perfil</NavLink>
+          <NavLink className={`${classes.dnl} ${classes.desplOpcion}`} to="">Administración</NavLink>
+          <div className={classes.desplOpcion} onClick={handleLogout}>Cerrar Sesión</div>
         </div>
       )}
     </div>
