@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import '../styles/Filtro.css';
+import classes from './Filtro.module.css';
+
 
 
 const Filtro = ({ options, label, onChange }) => {
@@ -11,9 +12,9 @@ const Filtro = ({ options, label, onChange }) => {
     };
 
     return (
-        <div className='botonFiltroG'>
-            <label className='titulo'>{label}</label>
-            <select className="titulo" value={selectedOption} onChange={handleChange}>
+        <div className={classes.botonFiltroG}>
+            <label className={classes.titulo}>{label}</label>
+            <select className={classes.titulo} value={selectedOption} onChange={handleChange}>
                 {options.map(option => (
                     <option key={option.value} value={option.value}>
                         {option.label}

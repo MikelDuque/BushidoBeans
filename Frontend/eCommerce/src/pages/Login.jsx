@@ -3,7 +3,7 @@ import "../styles/login.css";
 import { useRef, useState } from "react";
 import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
-import Alert from './../components/Alerta';
+import Alert from './../components/Alerta/Alerta';
 import { useAuth } from '../context/AuthContext';
 function Login() {
     const {login} = useAuth();
