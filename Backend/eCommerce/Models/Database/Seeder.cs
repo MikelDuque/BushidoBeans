@@ -72,14 +72,40 @@ public class Seeder
             }
         ];
 
-
-        var products = JsonSerializer.Deserialize<Product[]>(
+        Product[] products = JsonSerializer.Deserialize<Product[]>(
             File.ReadAllText("Assets/Products.json")
         );
 
-        var reviews = JsonSerializer.Deserialize<Review[]>(
+        Review[] reviews = JsonSerializer.Deserialize<Review[]>(
             File.ReadAllText("Assets/Reviews.json")
         );
+
+        Cart[] carts =
+        [
+            new Cart {Id = 1}
+        ];
+
+        CartProduct[] cartProducts =
+        [
+            new CartProduct
+            {
+                CartId = 1,
+                ProductId = 1,
+                Quantity = 2
+            },
+            new CartProduct
+            {
+                CartId = 1,
+                ProductId = 32,
+                Quantity = 8
+            },
+            new CartProduct
+            {
+                CartId = 1,
+                ProductId = 8,
+                Quantity = 1
+            },
+        ];
 
         //Añadimos el rango de usuarios a la BDD
         await _dbContext.Categories.AddRangeAsync(categories);
@@ -90,6 +116,11 @@ public class Seeder
 
         await _dbContext.Products.AddRangeAsync(products);
         await _dbContext.SaveChangesAsync();
+
+        await _dbContext.Carts.AddRangeAsync(carts);
+        await _dbContext.SaveChangesAsync();
+        
+        await _dbContext.CartProducts.AddRangeAsync(cartProducts);
 
         await _dbContext.Reviews.AddRangeAsync(reviews);
         await _dbContext.SaveChangesAsync();
