@@ -27,7 +27,7 @@ public class ReviewController : ControllerBase
 
     [Authorize]
     [HttpPost("Insert_Review")]
-    public async Task<ActionResult<Review>> CreateReviewAsync([FromBody] Review review)
+    public async Task<ActionResult<Review>> CreateReviewAsync([FromQuery] Review review)
     {
         Claim userClaimId = User.FindFirst("id");
 

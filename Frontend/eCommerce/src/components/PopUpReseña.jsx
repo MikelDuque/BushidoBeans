@@ -78,7 +78,7 @@ const handleReview = async (event) => {
     const review = reviewRef.current.value.trim();
     const score = selectedScore;
     const prodId = producto?.id;
-    const userId = userId; 
+    const UserId = userId; 
 
     if (!review) {
         setAlertMessage("No has introducido ninguna review");
@@ -90,17 +90,18 @@ const handleReview = async (event) => {
         return;
     }
 
-    await sendReview({ score, body: review, productId: prodId, userId: userId });
+    await sendReview({ score, body: review, productId: prodId, userId: UserId });
 };
 
 
 const sendReview = async (data) => {
     try {
-        const response = await fetch("https://localhost:7015/InsertReview", {
+        const token = localStorage.getItem('accessToken');
+        const response = await fetch("https://localhost:7015/Review/Insert_Review", {
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json',
-                'Authorization' : `Bearer ${METERRTOKEN}`
+                'Authorization' : `Bearer ${token}`
             },
             body: JSON.stringify(data),
         });
@@ -114,6 +115,8 @@ const sendReview = async (data) => {
         }
     } catch (error) {
         setAlertMessage("Error en el envío:");
+        console.log(error);
+        
     }
 };
 
