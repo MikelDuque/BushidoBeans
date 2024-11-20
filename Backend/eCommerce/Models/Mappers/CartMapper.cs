@@ -19,7 +19,7 @@ public class CartMapper
     return new CartDto()
     {
       Id = cart.Id,
-      CartProducts = GetCartProductsDto(cart.CartProducts).ToList(),
+      CartProducts = GetCartProductsDto(cart.CartProducts).ToList()
     };
   }
 

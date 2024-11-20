@@ -42,4 +42,6 @@
   gap: 20px;
   
   list-style-type: none;
+  scrollbar-width: none;
 }
+

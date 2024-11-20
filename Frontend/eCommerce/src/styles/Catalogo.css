@@ -14,7 +14,9 @@
     float: left;
     display: grid;
 }
-
+.sectionFloat{
+    margin-bottom: 5%;
+}
 .carrusel-catalogo{
     width: 100%;
     height: 40vh;

@@ -1,5 +1,7 @@
+﻿using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 using eCommerce.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,40 +13,37 @@ namespace eCommerce.Controllers
     {
         private readonly CartService _cartService;
 
-        public CartController(CartService cartService) { 
+        public CartController(CartService cartService)
+        {
             _cartService = cartService;
         }
-        [HttpGet("{userId}")]
-        public async Task<IActionResult> GetCart(long userId) { 
-            var cart = await _cartService.GetCartAsync(userId);
-            if (cart == null) { return NotFound(); }
-            return Ok(cart);
+
+        [Authorize]
+        [HttpGet("{id}")]
+        public async Task<CartDto> GetCartByIdAsync(long id)
+        {
+            return await _cartService.GetCartByIdAsync(id);
         }
 
+        [Authorize]
         [HttpPost("{userId}/add")]
-        public async Task<IActionResult> AddToCart(long userId, long ProductId, int Quantity)
+        public async Task<ActionResult<CartProduct>> InsertCartProduct([FromQuery] CartProduct cartProduct, long userId)
         {
-            try
-            {
-                var cart = await _cartService.AddToCartAsync(userId,ProductId,Quantity);
-                return Ok(cart);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+
+            if (cartProduct == null) return BadRequest("Datos del producto no válidos.");
+
+            return await _cartService.InsertCartProductAsync(cartProduct);
         }
 
+        [Authorize]
         [HttpPut("{userId}/update")]
-        public async Task<IActionResult> UpdateCart(long userId, [FromBody] CartProductDto cartProductDto)
+        public async Task<ActionResult<CartProduct>> UpdateCartProduct([FromQuery] CartProduct cartProduct, long userId)
         {
-            var cart = await _cartService.UpdateCartItemsAsync(userId, cartProductDto.ProductId, cartProductDto.Quantity);
-            if (cart == null)
-            {
-                return NotFound();
-            }
 
-            return Ok(cart);
+            if (cartProduct == null) return BadRequest("Datos del producto no válidos.");
+
+            return await _cartService.UpdateCartProductAsync(cartProduct);
         }
+
     }
 }
