@@ -11,7 +11,6 @@ public class User
     public required string Name { get; set; }
     public string Surname { get; set; }
     public int Phone { get; set; }
-    public string Image { get; set; }
     public required string Role { get; set; }
 
     public ICollection<Review> Reviews { get; } = new List<Review>();
