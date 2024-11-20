@@ -22,17 +22,10 @@ namespace eCommerce.Controllers
         }
 
         [HttpPost("{userId}/add")]
-        public async Task<IActionResult> AddToCart(long userId, long ProductId, int Quantity)
+        public async Task<IActionResult> AddToCart([FromBody] CartProductDto cartProductDto)
         {
-            try
-            {
-                var cart = await _cartService.AddToCartAsync(userId,ProductId,Quantity);
-                return Ok(cart);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            var cart = await _cartService.AddToCartAsync(cartProductDto);
+            return Ok(cart);
         }
 
         [HttpPut("{userId}/update")]
