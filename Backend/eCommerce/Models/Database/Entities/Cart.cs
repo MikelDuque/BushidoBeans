@@ -4,9 +4,9 @@ namespace eCommerce.Models.Database.Entities;
 
 public class Cart
 {
+   [ForeignKey(nameof(User))]
    public long Id { get; set; }
-   [ForeignKey(nameof(Id))]
-   public User User { get; set; } = null!;
+   public User User { get; set; }
 
    public List<Product> Products { get; } = [];
    public List<CartProduct> CartProducts { get; } = [];
