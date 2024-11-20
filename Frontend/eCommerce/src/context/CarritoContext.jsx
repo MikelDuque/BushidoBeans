@@ -8,16 +8,13 @@ export const useCarrito = () => {
 
 export const CarritoProvider = ({ children }) => {
     const [carrito, setCarrito] = useState([]);
-    const [compras, setCompras] = useState([]);
 
     useEffect(() => {
         const carritoGuardado = JSON.parse(localStorage.getItem('carrito'));
-        const comprasGuardadas = JSON.parse(localStorage.getItem('compras'));
 
         if (carritoGuardado) setCarrito(carritoGuardado);
-        if (comprasGuardadas) setCompras(comprasGuardadas);
     }, []);
-
+// 
     useEffect(() => {
         if (carrito.length > 0) {
             localStorage.setItem('carrito', JSON.stringify(carrito));
