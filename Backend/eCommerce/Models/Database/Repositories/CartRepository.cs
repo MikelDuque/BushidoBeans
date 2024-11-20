@@ -13,6 +13,7 @@ public class CartRepository : Repository<Cart>
    {
       return await GetQueryable().Where(cart => cart.Id == (long)id)
       .Include(cart => cart.CartProducts)
+      .ThenInclude(cartProduct => cartProduct.Product)
       .FirstOrDefaultAsync();
    }
 }

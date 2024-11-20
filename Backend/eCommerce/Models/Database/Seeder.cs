@@ -118,6 +118,8 @@ public class Seeder
         await _dbContext.SaveChangesAsync();
 
         await _dbContext.Carts.AddRangeAsync(carts);
+        await _dbContext.SaveChangesAsync();
+        
         await _dbContext.CartProducts.AddRangeAsync(cartProducts);
 
         await _dbContext.Reviews.AddRangeAsync(reviews);
