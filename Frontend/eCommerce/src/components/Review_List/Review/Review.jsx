@@ -17,7 +17,7 @@ function Review({reviewData}) {
   function showFullBody() { setDisplayFullBody(true);};
 
   function bodyConstructor() {
-    if (reviewData.body.length > 300 && displayFullBody == false) {
+    if (reviewData.body !== null && (reviewData.body.length > 300 && displayFullBody == false)) {
       const subBody = reviewData.body.substring(0, 149);
 
       return (
