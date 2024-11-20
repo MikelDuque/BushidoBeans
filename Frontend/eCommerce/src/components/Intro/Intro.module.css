@@ -1,0 +1,25 @@
+/* -----FONDO----- */
+.introDiv {
+  display: flex;
+  height: 99vh;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    to bottom, var(--nav-footer) 0%,#1a1a1a 10%, #1a1a1a 90%, var(--nav-footer) 100%
+    );
+}
+
+
+/* -----IMAGEN + ANIMACIÓN----- */
+.introImg {
+  width: 45%;
+  opacity: 0;
+  animation: aparecerImagen 2s forwards;
+  animation-delay: 1s;
+}
+@keyframes aparecerImagen {
+  to {
+      opacity: 1;
+  }
+}

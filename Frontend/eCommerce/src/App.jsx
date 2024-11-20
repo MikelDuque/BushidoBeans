@@ -1,4 +1,4 @@
-import Inicio from "./pages/Inicio";
+import Inicio from "./pages/Inicio/Inicio";
 import Catalogo from "./pages/Catalogo";
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -7,7 +7,7 @@ import DetallesProducto from './pages/DetallesProducto';
 import { Routes, Route } from "react-router-dom";
 import NotFound from './components/NotFound';
 import PopupReseña from "./components/PopUpReseña";
-import Carrito from "./components/Carrito";
+import Carrito from "./components/Carrito/Carrito";
 
 function App() {
     return (
