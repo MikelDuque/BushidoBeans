@@ -8,6 +8,7 @@ public class Cart
    [ForeignKey(nameof(Id))]
    public User User { get; set; } = null!;
 
+  //Relaciones
    public List<Product> Products { get; } = [];
    public List<CartProduct> CartProducts { get; } = [];
 }
