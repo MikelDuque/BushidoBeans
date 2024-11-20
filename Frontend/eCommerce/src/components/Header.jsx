@@ -2,15 +2,16 @@ import { NavLink } from "react-router-dom";
 import React, { useState, useRef, useEffect } from 'react';
 import '../styles/header.css';
 import { useAuth } from '../context/AuthContext';
+import CartCounter from "./CartCounter";
 
-// -----HEADER----- //
 
 function Header() {
-
   const { isAuthenticated, logout } = useAuth();
   const handleLogout = () => {
     logout();
   };
+
+  const [totalProducts,setTotalProducts] = useState(0);
 
   return (
     <header>
@@ -27,7 +28,8 @@ function Header() {
           <NavLink className="nl btnc" to="/login"> Login </NavLink>
         )}
 
-        <NavLink className="nl cesta" to="/carrito" />
+        <NavLink className="nl cesta" to="" data-count={totalProducts} />
+        <CartCounter setTotalProducts={setTotalProducts} />
       </nav>
     </header>
   );
