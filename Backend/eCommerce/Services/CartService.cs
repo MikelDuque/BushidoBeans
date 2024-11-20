@@ -1,27 +1,23 @@
 using eCommerce.Controllers;
 using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Database.Repositories;
-using eCommerce.Models.Mappers;
 
 namespace eCommerce.Services;
 
 public class CartService
 {
     private readonly UnitOfWork _unitOfWork;
-    private readonly CartMapper _cartMapper;
-    private readonly CartProductMapper _cartProductMapper;
+    private readonly CartRepository _cartRepository;
+    private readonly ProductService _productService;
 
-    public CartService(UnitOfWork unitOfWork, CartMapper cartMapper, CartProductMapper cartProductMapper)
+    public CartService(UnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
-        _cartMapper = cartMapper;
-        _cartProductMapper = cartProductMapper;
     }
 
-    public async Task<Cart> GetCartAsync(long userId)
+    public async Task<Cart?> GetCartAsync(long userId)
     {
-        return await _unitOfWork.CartRepository.GetByIdAsync(userId);
-        
+        return await _cartRepository.GetCartByUserIdAsync(userId);
     }
 
     public async Task<Cart> AddToCartAsync(long userId, long productId, int quantity)
@@ -35,14 +31,10 @@ public class CartService
                 UserId = userId,
                 CartProducts = new List<CartProduct>()
             };
-            
-            await _unitOfWork.CartRepository.InsertAsync(cart);
-            await _unitOfWork.SaveAsync();
-            
-
+           _cartRepository.AddCart(cart);
         }
 
-        var product = await _unitOfWork.ProductRepository.GetByIdAsync(productId);
+        var product = await _productService.GetByIdAsync(productId);
         if (product == null)
         {
             throw new Exception("Producto no encontrado");
@@ -68,7 +60,7 @@ public class CartService
         return cart;
     }
 
-    public async Task<Cart> UpdateCartItemsAsync(long userId, long productId, int quantity)
+    public async Task<Cart?> UpdateCartItemsAsync(long userId, long productId, int quantity)
     {
         var cart = await GetCartAsync(userId);
 
@@ -82,12 +74,10 @@ public class CartService
         if (item != null)
         {
             item.Quantity = quantity;
-            
+
             await _unitOfWork.SaveAsync();
         }
 
-        
-        
         return cart;
     }
 
