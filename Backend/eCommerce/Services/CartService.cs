@@ -63,35 +63,44 @@ public class CartService
     //    return cart;
     //}
 
-    public async Task<CartProduct> UpdateCartItemsAsync(CartProduct cartProduct)
+    public async Task<CartProduct> UpdateCartProductAsync(CartProduct cartProduct)
     {
-        CartProduct newCartProduct = cartProduct;
+        CartProduct cartProductBD = await _unitOfWork.CartProductRepository.GetByIdAsync(cartProduct.CartId, cartProduct.ProductId);
 
-        bool existe = await _unitOfWork.CartProductRepository.ExistAsync(cartProduct.CartId, cartProduct.ProductId);
-
-        if (!existe)
+        if (cartProductBD != null)
         {
-            newCartProduct = await _unitOfWork.CartProductRepository.InsertAsync(cartProduct);
-            await _unitOfWork.SaveAsync();
+            cartProduct.Quantity += cartProductBD.Quantity;
+
+            _unitOfWork.CartProductRepository.Update(cartProduct);
+        }
+        else
+        {
+            await _unitOfWork.CartProductRepository.InsertAsync(cartProduct);
         }
 
-        _unitOfWork.CartProductRepository.Update(cartProduct);
         await _unitOfWork.SaveAsync();
-
-        return newCartProduct;
+        return cartProduct;
     }
 
-    public async void DeleteCartProduct(CartProduct cartProduct)
+    public async Task<bool> DeleteCartProduct(CartProduct cartProduct)
+    {
+      _unitOfWork.CartProductRepository.Delete(cartProduct);
+      
+      return await _unitOfWork.SaveAsync();
+
+    }
+
+    public async Task<List<CartProduct>> UpdateCartProductsAsync(List<CartProduct> cartProducts)
     {
 
-        if (await _unitOfWork.CartProductRepository.ExistAsync(cartProduct.CartId, cartProduct.ProductId))
+        cartProducts.ForEach(async (cartProduct) =>
         {
-            _unitOfWork.CartProductRepository.Delete(cartProduct);
-            //_unitOfWork.CartProductRepository.Delete(new CartProduct { CartId = 2, ProductId = 9});
-        }
-        throw new Exception("Producto no encontrado");
+            await UpdateCartProductAsync(cartProduct);
+        });
 
+        return await Task.FromResult(cartProducts);
     }
+    
 }
 
 

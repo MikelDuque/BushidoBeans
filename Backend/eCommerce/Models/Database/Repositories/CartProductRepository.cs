@@ -10,7 +10,7 @@ public class CartProductRepository : Repository<CartProduct>
   {
   }
 
-  public new async Task<CartProduct> GetByIdAsync(object idCart, object idProduct)
+  public async Task<CartProduct> GetByIdAsync(object idCart, object idProduct)
   {
     return await GetQueryable().Where(cartProduct => cartProduct.CartId == (long)idCart && cartProduct.ProductId == (long)idProduct)
     .Include(cartProduct => cartProduct.Cart)
@@ -18,7 +18,7 @@ public class CartProductRepository : Repository<CartProduct>
     .FirstOrDefaultAsync();
   }
 
-    public new async Task<bool> ExistAsync(object idCart, object idProduct)
+    public async Task<bool> ExistAsync(object idCart, object idProduct)
     {
         return await GetByIdAsync(idCart, idProduct) != null;
     }

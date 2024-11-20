@@ -2,6 +2,7 @@
 using eCommerce.Models.Dtos;
 using eCommerce.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace eCommerce.Controllers
 {
@@ -25,20 +26,37 @@ namespace eCommerce.Controllers
 
 
         //[Authorize]
-        [HttpPost("Add_CartProduct")]
-        public async Task<ActionResult<CartProduct>> UpdateCart([FromQuery] CartProduct cartProduct)
+        [HttpPut("Update_CartProduct")]
+        public ActionResult<CartProduct> UpdateCart([FromQuery] CartProduct cartProduct)
         {
 
             if (cartProduct == null) return BadRequest("Datos del producto no válidos.");
 
-            return await _cartService.UpdateCartItemsAsync(cartProduct);
+            return  Ok (_cartService.UpdateCartProductAsync(cartProduct));
         }
 
         [HttpDelete("Delete_CartProduct")]
-        public async void DeleteCartProduct([FromQuery] CartProduct cartProduct)
+        public async Task<ActionResult> DeleteCartProduct([FromQuery] CartProduct cartProduct)
         {
+            try
+            {
+                await _cartService.DeleteCartProduct(cartProduct); 
+            }
+            catch (Exception)
+            {
+                return BadRequest("El item ha eliminar no existe en la base de datos");
+            }
             
-            _cartService.DeleteCartProduct(cartProduct); 
+            return NoContent();
+        }
+
+        [HttpGet("Update_GlobalCart")]
+        public async Task<List<CartProduct>> GetCartAsync([FromQuery]List<CartProduct> cartProduct)
+        {
+       
+            await _cartService.UpdateCartProductsAsync(cartProduct);
+            return cartProduct;
+            
         }
     }
 }
