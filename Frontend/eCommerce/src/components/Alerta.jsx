@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import classes from './Alerta.module.css';
-
+import '../styles/alerta.css';
 
 const Alert = ({ message, onClose }) => {
     useEffect(() => {
@@ -9,7 +8,7 @@ const Alert = ({ message, onClose }) => {
     }, [onClose]);
 
     return (
-        <div className={classes.alert}>
+        <div className="alert">
             <p>{message}</p>
         </div>
     );

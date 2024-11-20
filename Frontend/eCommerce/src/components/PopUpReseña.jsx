@@ -4,7 +4,7 @@ import { useState, useEffect, useRef} from 'react';
 import '../styles/Popup.css';
 import * as jwt_decode from 'jwt-decode';
 import StarRating from './Review_List/StarRating/StarRating';
-import Alerta from './Alerta/Alerta';
+import Alerta from './Alerta';
 
 //obtener producto
 function PopupReseña() {

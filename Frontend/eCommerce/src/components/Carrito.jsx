@@ -1,5 +1,5 @@
-import classes from './Carrito.module.css';
-import  useCarrito  from "../../context/CarritoContext"; 
+import "../styles/Carrito.css";
+import  useCarrito  from "./../context/CarritoContext"; 
 
 function Carrito() {
     const { carrito, vaciarCarrito, eliminarDelCarrito, completarCompra } = useCarrito();
@@ -18,25 +18,25 @@ function Carrito() {
     };
 
     return (
-        <div className={classes.Carrito}>
-            <h2 className={classes.CarritoHead}>Carrito</h2>
+        <div className="Carrito">
+            <h2 className="CarritoHead">Carrito</h2>
             {carrito.length === 0 ? (
                 <p>Tu carrito está vacío.</p>  // Mensaje cuando el carrito está vacío
             ) : (
-                <ul className={classes.ProductosGrid}>
+                <ul className="ProductosGrid">
                     {carrito.map((producto, index) => (
-                        <li className={classes.producto} key={index}>
-                            <h3 className={classes.productoName}>{producto.nombreP}</h3>
+                        <li className="producto" key={index}>
+                            <h3 className="productoName">{producto.nombreP}</h3>
                             {producto.img ? (  // Verificar si el producto tiene una imagen
                                 <img
-                                    className={classes.productoImg}
+                                    className="productoImg"
                                     src={`https://localhost:7015/${producto.img}`}
                                     alt={producto.nombreP}
                                 />
                             ) : (
                                 <p>Imagen no disponible</p>  // Mensaje si la imagen no existe
                             )}
-                            <div className={classes.productoDetalles}>
+                            <div className="productoDetalles">
                                 <p>Cantidad: {producto.cantidadP}</p>
                                 <p>Precio: {producto.precioP}€</p>
                                 <button onClick={() => handleEliminar(producto.idProductoP)}>
@@ -50,7 +50,7 @@ function Carrito() {
 
             <button
                 onClick={handleCompletarCompra}
-                className={classes.botonAgregar}
+                className="botonAgregar"
                 disabled={carrito.length === 0} 
             >
                 Proceder a la compra
@@ -58,7 +58,7 @@ function Carrito() {
 
             <button
                 onClick={handleReset}
-                className={classes.botonCancelar}
+                className="botonCancelar"
             >
                 Vaciar carrito
             </button>
