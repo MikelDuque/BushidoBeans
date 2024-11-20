@@ -18,31 +18,22 @@ namespace eCommerce.Controllers
             _cartService = cartService;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("{id}")]
         public async Task<CartDto> GetCartByIdAsync(long id)
         {
-            return await _cartService.GetCartByIdAsync(id);
+            return await _cartService.GetCartAsync(id);
         }
 
-        [Authorize]
-        [HttpPost("{userId}/add")]
-        public async Task<ActionResult<CartProduct>> InsertCartProduct([FromQuery] CartProduct cartProduct, long userId)
+
+        //[Authorize]
+        [HttpPut("/update")]
+        public async Task<ActionResult<CartDto>> UpdateCart([FromQuery] CartProduct cartProduct)
         {
 
             if (cartProduct == null) return BadRequest("Datos del producto no válidos.");
 
-            return await _cartService.InsertCartProductAsync(cartProduct);
-        }
-
-        [Authorize]
-        [HttpPut("{userId}/update")]
-        public async Task<ActionResult<CartProduct>> UpdateCartProduct([FromQuery] CartProduct cartProduct, long userId)
-        {
-
-            if (cartProduct == null) return BadRequest("Datos del producto no válidos.");
-
-            return await _cartService.UpdateCartProductAsync(cartProduct);
+            return await _cartService.UpdateCartItemsAsync(cartProduct);
         }
 
     }
