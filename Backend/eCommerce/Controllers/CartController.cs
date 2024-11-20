@@ -26,8 +26,8 @@ namespace eCommerce.Controllers
         }
 
         [Authorize]
-        [HttpPost("Insert_CartProduct")]
-        public async Task<ActionResult<CartProduct>> InsertCartProduct([FromQuery] CartProduct cartProduct)
+        [HttpPost("{userId}/add")]
+        public async Task<ActionResult<CartProduct>> InsertCartProduct([FromQuery] CartProduct cartProduct, long userId)
         {
 
             if (cartProduct == null) return BadRequest("Datos del producto no válidos.");
@@ -36,8 +36,8 @@ namespace eCommerce.Controllers
         }
 
         [Authorize]
-        [HttpPut("Update-Cart")]
-        public async Task<ActionResult<CartProduct>> UpdateCartProduct([FromQuery] CartProduct cartProduct)
+        [HttpPut("{userId}/update")]
+        public async Task<ActionResult<CartProduct>> UpdateCartProduct([FromQuery] CartProduct cartProduct, long userId)
         {
 
             if (cartProduct == null) return BadRequest("Datos del producto no válidos.");
