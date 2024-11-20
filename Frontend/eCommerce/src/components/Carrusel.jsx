@@ -1,7 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
-import classes from './Carrusel.module.css';
-
+import '../styles/Carrusel.css'
 const Carrusel = ({ images }) => {
   const settings = {
     dots: false,
@@ -15,7 +14,7 @@ const Carrusel = ({ images }) => {
     
       <Slider {...settings}>
         {images.map((image, index) => (
-          <div className={classes.divCarrusel} key={index}>
+          <div className='divCarrusel' key={index}>
             <img src={image} alt={`Imagen ${index + 1}`} className='imgCarrusel' />
           </div>
         ))}

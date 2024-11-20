@@ -2,7 +2,7 @@ import React from 'react';
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 import "../styles/SobreNosotros.css";
-import Carrusel from "../components/Carrusel/Carrusel";
+import Carrusel from "../components/Carrusel";
 import logo from "/recursos/logo2.png";
 import Card from "../components/Card-Equipo";
 import kirby from "/recursos/kirby.svg";

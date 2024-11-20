@@ -1,7 +1,7 @@
 import Header from "../components/Header/Header.jsx";
 import Footer from "../components/Footer/Footer.jsx";
-import Carrusel from "../components/Carrusel/Carrusel.jsx";
-import Filtro from "../components/Filtro/Filtro.jsx";
+import Carrusel from "../components/Carrusel.jsx";
+import Filtro from "../components/Filtro.jsx";
 import "../styles/Catalogo.css";
 import { useState } from "react";
 import BusquedaProductos from "../components/BusquedaProductos.jsx";
