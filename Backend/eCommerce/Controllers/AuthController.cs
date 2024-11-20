@@ -43,9 +43,4 @@ public class AuthController : ControllerBase
             return Unauthorized("Email o contraseña incorrectos");
         }
     }
-
-    /*
-    [Authorize(Roles = "admin")]
-    [HttpGet]
-    */
 }

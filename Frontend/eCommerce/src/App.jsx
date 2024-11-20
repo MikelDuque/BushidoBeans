@@ -19,7 +19,6 @@ function App() {
             <Route path="/producto/:id" element={<DetallesProducto />} />
             <Route path="/" element={<Inicio />} />
             <Route path="/catalogo" element={<Catalogo />} />
-            <Route path="/producto/:id/reseña" element={<PopupReseña />} />
             <Route path="/carrito" element={<Carrito />} />
 
             {/* Ruta para página no encontrada */}

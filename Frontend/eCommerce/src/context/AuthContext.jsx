@@ -4,7 +4,6 @@ import { useState } from 'react';
 
 //COMO CREAR UN CONTEXTO
 
-
 const AuthContext = createContext();    //Creamos el contexto. Es como un contenedor para compartir estados
 
 
