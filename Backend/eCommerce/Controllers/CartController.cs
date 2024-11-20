@@ -1,8 +1,6 @@
 ﻿using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 using eCommerce.Services;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eCommerce.Controllers
@@ -19,7 +17,7 @@ namespace eCommerce.Controllers
         }
 
         //[Authorize]
-        [HttpGet("{id}")]
+        [HttpGet("Get_Cart")]
         public async Task<CartDto> GetCartByIdAsync(long id)
         {
             return await _cartService.GetCartAsync(id);
@@ -27,8 +25,8 @@ namespace eCommerce.Controllers
 
 
         //[Authorize]
-        [HttpPut("/update")]
-        public async Task<ActionResult<CartDto>> UpdateCart([FromQuery] CartProduct cartProduct)
+        [HttpPost("Add_CartProduct")]
+        public async Task<ActionResult<CartProduct>> UpdateCart([FromQuery] CartProduct cartProduct)
         {
 
             if (cartProduct == null) return BadRequest("Datos del producto no válidos.");
@@ -36,5 +34,11 @@ namespace eCommerce.Controllers
             return await _cartService.UpdateCartItemsAsync(cartProduct);
         }
 
+        [HttpDelete("Delete_CartProduct")]
+        public async void DeleteCartProduct([FromQuery] CartProduct cartProduct)
+        {
+            
+            _cartService.DeleteCartProduct(cartProduct); 
+        }
     }
 }

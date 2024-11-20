@@ -1,6 +1,5 @@
 using eCommerce.Controllers;
 using eCommerce.Models.Database.Entities;
-using eCommerce.Models.Database.Repositories;
 using eCommerce.Models.Dtos;
 using eCommerce.Models.Mappers;
 
@@ -19,7 +18,7 @@ public class CartService
 
     public async Task<CartDto> GetCartAsync(long cartId)
     {
-        Cart cart =  await _unitOfWork.CartRepository.GetByIdAsync(cartId);
+        Cart cart = await _unitOfWork.CartRepository.GetByIdAsync(cartId);
         return _cartMapper.ToDto(cart);
     }
 
@@ -38,7 +37,7 @@ public class CartService
     //    }
 
     //    var product = await _unitOfWork.ProductRepository.GetByIdAsync(productId);
-        
+
     //    if (product == null)
     //    {
     //        throw new Exception("Producto no encontrado");
@@ -64,27 +63,35 @@ public class CartService
     //    return cart;
     //}
 
-    public async Task<CartDto> UpdateCartItemsAsync(CartProduct cartProduct)
+    public async Task<CartProduct> UpdateCartItemsAsync(CartProduct cartProduct)
     {
-        var cart = await GetCartAsync(cartProduct.CartId);
+        CartProduct newCartProduct = cartProduct;
 
-        if (cart == null)
+        bool existe = await _unitOfWork.CartProductRepository.ExistAsync(cartProduct.CartId, cartProduct.ProductId);
+
+        if (!existe)
         {
-            return null;
-        }
-
-        var item = cart.CartProducts.FirstOrDefault(cartProductC => cartProductC.ProductId == cartProduct.ProductId && cartProductC.CartId == cartProduct.CartId);
-
-        if (item != null)
-        {
-            item.Quantity = cartProduct.Quantity;
-
+            newCartProduct = await _unitOfWork.CartProductRepository.InsertAsync(cartProduct);
             await _unitOfWork.SaveAsync();
         }
 
-        return cart;
+        _unitOfWork.CartProductRepository.Update(cartProduct);
+        await _unitOfWork.SaveAsync();
+
+        return newCartProduct;
     }
 
+    public async void DeleteCartProduct(CartProduct cartProduct)
+    {
+
+        if (await _unitOfWork.CartProductRepository.ExistAsync(cartProduct.CartId, cartProduct.ProductId))
+        {
+            _unitOfWork.CartProductRepository.Delete(cartProduct);
+            //_unitOfWork.CartProductRepository.Delete(new CartProduct { CartId = 2, ProductId = 9});
+        }
+        throw new Exception("Producto no encontrado");
+
+    }
 }
 
 
