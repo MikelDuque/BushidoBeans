@@ -7,6 +7,5 @@ public class CartProductRepository : Repository<CartProduct>
 {
  public CartProductRepository(DataContext dbContext) : base(dbContext)
    {
-        //Puede necesitar producto
    }
 }
