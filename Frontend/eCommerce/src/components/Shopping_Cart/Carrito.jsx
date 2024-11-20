@@ -1,5 +1,5 @@
-import "../styles/Carrito.css";
-import  useCarrito  from "./../context/CarritoContext"; 
+import classes from "./Cart.module";
+import  useCarrito  from "../../context/CarritoContext";
 
 function Carrito() {
     const { carrito, vaciarCarrito, eliminarDelCarrito, completarCompra } = useCarrito();
