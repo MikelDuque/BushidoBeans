@@ -67,7 +67,7 @@ function Login() {
         }
         setPasswordError(null);
 
-        await fetchingData("https://localhost:7015/api/Auth/Inicio_Sesión", { Mail: email, Password: password });
+        await fetchingData("https://localhost:7015/api/Auth/Inicio_Sesion", { Mail: email, Password: password });
     };
 
     const resetForm = () => {
