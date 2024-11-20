@@ -2,10 +2,13 @@ using eCommerce.Models.Dtos;
 using eCommerce.Models.Database.Entities;
 using eCommerce.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace eCommerce.Controllers;
 
-//[Route("api/[controller]")]
+[ApiController]
+[Route("api/[controller]")]
 public class ReviewController : ControllerBase
 {
     private readonly ReviewService _service;
@@ -22,10 +25,15 @@ public class ReviewController : ControllerBase
     }
 
 
-    [HttpPost("InsertReview")]
+    [Authorize]
+    [HttpPost("Insert_Review")]
     public async Task<ActionResult<Review>> CreateReviewAsync([FromBody] Review review)
     {
-        if (review == null) return BadRequest("Datos de la rese�a no v�lidos.");
+        Claim userClaimId = User.FindFirst("id");
+
+        if (userClaimId == null) return Unauthorized("Usuario no autorizado");
+
+        if (review == null) return BadRequest("Datos de la reseña no válidos.");
 
         return await _service.CreateReviewAsync(review);
     }
