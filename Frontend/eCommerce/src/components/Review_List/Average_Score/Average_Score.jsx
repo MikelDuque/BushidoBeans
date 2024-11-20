@@ -1,17 +1,31 @@
 import classes from './Average_Score.module.css'
 
 function printAverageScore(score) {
-  return score <= 0 ? "–" : `${Number(score).toFixed(2)} / 3`;
-}
+  const valorationImg = "/recursos/star.svg";
+  const realScore = Number(score).toFixed(2);
+  const porcentageScore = 100-((realScore/3)*100);
 
-const valImg = "/recursos/star.svg";
+  const scoreString = score <= 0 ? "–" : `${realScore} / 3`;
+
+  return (
+    <>
+      <div className={classes.starImg}>
+        <img src={valorationImg} style={{clipPath: `inset(0 ${porcentageScore}% 0 0`}} />
+      </div>
+      <h3>{scoreString}</h3>
+    </>
+  );
+}
 
 function Average_Score({averageScore}) {
   return (
     <div className={classes.average_score}>
         <h3>Puntuación Media</h3>
-        <img src={valImg} alt="score star"/>
+        {printAverageScore(averageScore)}
+        {/*
+        <img src={valImg} alt="score star" />
         <h3>{printAverageScore(averageScore)}</h3>
+        */}
     </div>
   );
 };

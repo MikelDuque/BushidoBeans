@@ -15,7 +15,7 @@
     --texto-claro: #EFF7EE;
 
     /* Estilos de texto */
-    --titulos-size: 25px;
+    --titulos-size: 2.5rem;
     --subtitulos-size: 20px;
     --texto-size: 16px;
     --font-weight-bold: 600;
@@ -32,10 +32,13 @@
     box-sizing: border-box;
 }
 
-body {
-width: 100%;
+html {
+    font-size: 62.5%;
 }
 
+body {
+    width: 100%;
+}
 
 .texto{
     font-family: var(--font-family-texto);

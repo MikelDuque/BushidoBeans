@@ -16,9 +16,30 @@
   font-weight: var(--font-weight-regular);
 }
 
-.average_score img {
-
-  display: flex;
+.starImg {
+  
+  position: relative;
   width: 80%;
+}
+
+.starImg img {
+  width: 100%;
   object-fit: cover;
+}
+
+.starImg::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+
+  background-image: url("/recursos/star.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  filter: contrast(0%);
 }

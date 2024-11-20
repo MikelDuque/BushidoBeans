@@ -28,7 +28,7 @@ public class AuthController : ControllerBase
         _authService = authService;
     }
 
-    [HttpPost("Inicio_Sesión")]
+    [HttpPost("Inicio_Sesion")]
     public async Task<ActionResult<LoginResult>> Login([FromBody] LoginRequest model)
     {
         bool userExists = await _userService.ThisUserExists(model.Mail, model.Password);
@@ -43,9 +43,4 @@ public class AuthController : ControllerBase
             return Unauthorized("Email o contraseña incorrectos");
         }
     }
-
-    /*
-    [Authorize(Roles = "admin")]
-    [HttpGet]
-    */
 }

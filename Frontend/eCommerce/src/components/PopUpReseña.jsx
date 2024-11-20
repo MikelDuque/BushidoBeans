@@ -29,7 +29,7 @@ function PopupReseña() {
                 const decodedToken = jwt_decode.jwtDecode(token);
                 console.log(decodedToken)
                 setUser(decodedToken.unique_name);  
-                setUserId(decodedToken.actort);
+                setUserId(decodedToken.id);
             } catch (error) {
                 console.error("Error al decodificar el token", error);
             }
@@ -90,15 +90,19 @@ const handleReview = async (event) => {
         return;
     }
 
-    await sendReview({ score, body: review, productId: prodId, UserId });
+    await sendReview({ score, body: review, productId: prodId, userId: UserId });
 };
 
 
 const sendReview = async (data) => {
     try {
-        const response = await fetch("https://localhost:7015/InsertReview", {
+        const token = localStorage.getItem('accessToken');
+        const response = await fetch("https://localhost:7015/Review/Insert_Review", {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type' : 'application/json',
+                'Authorization' : `Bearer ${token}`
+            },
             body: JSON.stringify(data),
         });
 
@@ -111,6 +115,8 @@ const sendReview = async (data) => {
         }
     } catch (error) {
         setAlertMessage("Error en el envío:");
+        console.log(error);
+        
     }
 };
 

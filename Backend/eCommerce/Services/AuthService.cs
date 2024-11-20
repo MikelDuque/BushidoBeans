@@ -29,14 +29,6 @@ public class AuthService
         return Encoding.UTF8.GetString(inputHash);
     }
 
-    /*
-    //Compara las contraseñas hasheadas
-    public static bool ComparaPasswords(string hashedPassword, string incomingPassword)
-    {
-        return hashedPassword == HashPassword(incomingPassword);
-    }
-    */
-
     public async Task<string> LoginResult (LoginRequest model) {
         User user = await _unitOfWork.UserRepository.GetByMailAsync(model.Mail);
 
@@ -45,16 +37,16 @@ public class AuthService
             //Se añaden los datos necesarios para autorizar al usuario
             Claims = new Dictionary<string, object>
             {
-                //Para definir el id, se usa el "ClaimTypes.NameIdentifier"
-                { "id", Guid.NewGuid().ToString() },
+                { "id", user.Id },
                 { ClaimTypes.Email, model.Mail },
                 { ClaimTypes.Role, user.Role },
-                { ClaimTypes.Actor, user.Id },
                 { ClaimTypes.Name, user.Name },
                 { ClaimTypes.Surname, user.Surname }
             },
+
             //Caducidad del token
             Expires = DateTime.UtcNow.AddDays(5),
+
             //Especificación de la clave y el algoritmo de firmado
             SigningCredentials = new SigningCredentials(
             _tokenParameters.IssuerSigningKey,

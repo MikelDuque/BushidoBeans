@@ -14,6 +14,18 @@ public class ProductController : ControllerBase
     {
         _service = service;
     }
+  
+  [HttpGet("Product_Details")]
+  public async Task<ProductDto> GetProductDetailsAsync(long id)
+  {
+    return await _service.GetProductDetailsAsync(id);
+  }
+
+  [HttpGet("Filtered_Products")]
+  public async Task<Catalog> GetFilteredProducts([FromQuery]Filter filter)
+  {
+    return await _service.GetFilteredProducts(filter);
+  }
 
   /*
   [HttpGet]
@@ -28,16 +40,4 @@ public class ProductController : ControllerBase
     return await _service.GetByIdAsync(id);
   }
   */
-  
-  [HttpGet("Product_Details")]
-  public async Task<ProductDto> GetProductDetailsAsync(long id)
-  {
-    return await _service.GetProductDetailsAsync(id);
-  }
-
-  [HttpGet("Filtered_Products")]
-  public async Task<Catalog> GetFilteredProducts([FromQuery]Filter filter)
-  {
-    return await _service.GetFilteredProducts(filter);
-  }
 }
