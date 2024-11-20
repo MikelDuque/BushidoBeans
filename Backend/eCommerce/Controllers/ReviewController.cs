@@ -3,6 +3,7 @@ using eCommerce.Models.Database.Entities;
 using eCommerce.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace eCommerce.Controllers;
 
@@ -25,13 +26,14 @@ public class ReviewController : ControllerBase
 
 
     [Authorize]
-    [HttpPost("InsertReview")]
+    [HttpPost("Insert_Review")]
     public async Task<ActionResult<Review>> CreateReviewAsync([FromBody] Review review)
     {
+        Claim userClaimId = User.FindFirst("id");
 
-        
+        if (userClaimId == null) return Unauthorized("Usuario no autorizado");
 
-        if (review == null) return BadRequest("Datos de la rese�a no v�lidos.");
+        if (review == null) return BadRequest("Datos de la reseña no válidos.");
 
         return await _service.CreateReviewAsync(review);
     }

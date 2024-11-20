@@ -15,17 +15,16 @@ public class UserController : ControllerBase
         _service = service;
     }
 
-    
-    [HttpGet]
-    public async Task<IEnumerable<UserDto>> GetAllAsync()
-    {
-        return await _service.GetAllAsync();
-    }
-    
     [HttpGet("{id}")]
     public async Task<UserDto> GetByIdAsync(long id)
     {
         return await _service.GetByIdAsync(id);
+    }
+
+    [HttpGet]
+    public async Task<IEnumerable<UserDto>> GetAllAsync()
+    {
+        return await _service.GetAllAsync();
     }
 
     /*
@@ -47,7 +46,6 @@ public class UserController : ControllerBase
         catch(Exception ex) {
             return BadRequest(ex.Message);
         }
-        return await _service.InsertByMailAsync(userRequest);
     }
 
     /*
