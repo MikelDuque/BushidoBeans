@@ -7,11 +7,7 @@ namespace eCommerce.Services;
 public class CartService
 {
     private readonly UnitOfWork _unitOfWork;
-    private readonly CartRepository _cartRepository;
-    private readonly ProductService _productService;
-    private readonly UnitOfWork _unitOfWork;
-    private readonly CartRepository _cartRepository;
-    private readonly ProductService _productService;
+
 
     public CartService(UnitOfWork unitOfWork)
     {
@@ -20,7 +16,7 @@ public class CartService
 
     public async Task<Cart?> GetCartAsync(long userId)
     {
-        return await _cartRepository.GetCartByUserIdAsync(userId);
+        return await _unitOfWork.CartRepository.GetByIdAsync(userId);
     }
 
     public async Task<Cart> AddToCartAsync(long userId, long productId, int quantity)
@@ -31,13 +27,14 @@ public class CartService
         {
             cart = new Cart
             {
-                UserId = userId,
+                Id = userId,
                 CartProducts = new List<CartProduct>()
             };
-           _cartRepository.AddCart(cart);
+           //_unitOfWork.CartRepository.Add(cart);
         }
 
-        var product = await _productService.GetByIdAsync(productId);
+        var product = await _unitOfWork.ProductRepository.GetByIdAsync(productId);
+        
         if (product == null)
         {
             throw new Exception("Producto no encontrado");

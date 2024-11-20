@@ -9,6 +9,6 @@ public class Cart
    public User User { get; set; }
 
   //Relaciones
-   public List<Product> Products { get; } = [];
-   public List<CartProduct> CartProducts { get; } = [];
+   public List<Product> Products { get; set; } = [];
+   public List<CartProduct> CartProducts { get; set; } = [];
 }
