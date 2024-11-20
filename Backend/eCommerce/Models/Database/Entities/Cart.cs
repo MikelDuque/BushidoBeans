@@ -5,7 +5,7 @@ namespace eCommerce.Models.Database.Entities;
 public class Cart
 {
    [ForeignKey(nameof(User))]
-   public required long Id { get; set; }
+   public long Id { get; set; }
    public User User { get; set; }
 
    public List<Product> Products { get; } = [];
