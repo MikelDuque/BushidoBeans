@@ -33,6 +33,19 @@ namespace eCommerce.Controllers
 
         }
 
+        [Authorize]
+        [HttpDelete("Delete_Cart")]
+        public async Task<ActionResult> DeleteCartByIdAsync(long id)
+        {
+            Claim userClaimId = User.FindFirst("id");
+
+            if (userClaimId == null) return Unauthorized("Usuario no autorizado");
+
+            await _cartService.DeleteCartAsync(id);
+
+            return NoContent();
+        }
+
 
         [Authorize]
         [HttpPut("Update_CartProduct")]
@@ -68,7 +81,10 @@ namespace eCommerce.Controllers
             return NoContent();
         }
 
-        
+
+
+
+        [Authorize]
         [HttpGet("Update_GlobalCart")]
         public async Task<List<CartProduct>> GetCartAsync([FromQuery]List<CartProduct> cartProduct)
         {
