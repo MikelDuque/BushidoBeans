@@ -87,11 +87,14 @@ public class CartService
         if (await _unitOfWork.CartProductRepository.ExistAsync(cartProduct.CartId, cartProduct.ProductId))
         {
             _unitOfWork.CartProductRepository.Delete(cartProduct);
-            //_unitOfWork.CartProductRepository.Delete(new CartProduct { CartId = 2, ProductId = 9});
         }
-        throw new Exception("Producto no encontrado");
+        else
+        {
+            throw new Exception("Producto no encontrado");
+        }
 
     }
+
 }
 
 

@@ -1,6 +1,7 @@
 ﻿using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 using eCommerce.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eCommerce.Controllers
@@ -16,7 +17,7 @@ namespace eCommerce.Controllers
             _cartService = cartService;
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet("Get_Cart")]
         public async Task<CartDto> GetCartByIdAsync(long id)
         {
@@ -24,7 +25,7 @@ namespace eCommerce.Controllers
         }
 
 
-        //[Authorize]
+        [Authorize]
         [HttpPost("Add_CartProduct")]
         public async Task<ActionResult<CartProduct>> UpdateCart([FromQuery] CartProduct cartProduct)
         {
@@ -33,7 +34,8 @@ namespace eCommerce.Controllers
 
             return await _cartService.UpdateCartItemsAsync(cartProduct);
         }
-
+        
+        [Authorize]
         [HttpDelete("Delete_CartProduct")]
         public async void DeleteCartProduct([FromQuery] CartProduct cartProduct)
         {

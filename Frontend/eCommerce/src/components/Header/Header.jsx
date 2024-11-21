@@ -60,10 +60,10 @@ const Desplegable = ({ handleLogout }) => {
   }, []);
 
   return (
-    <div className={despl} ref={desplegableRef}>
-      <div className={`desplToggle ${abierto ? 'active' : ''}`} onClick={abrirDesplegable} />
+    <div className={classes.despl} ref={desplegableRef}>
+      <div className={`${classes.desplToggle} ${abierto ? 'active' : ''}`} onClick={abrirDesplegable} />
       {abierto && (
-        <div className={desplMenu}>
+        <div className={classes.desplMenu}>
           <NavLink className={`${classes.dnl} ${classes.desplOpcion}`} to="">Ver Perfil</NavLink>
           <NavLink className={`${classes.dnl} ${classes.desplOpcion}`} to="">Administración</NavLink>
           <div className={classes.desplOpcion} onClick={handleLogout}>Cerrar Sesión</div>
