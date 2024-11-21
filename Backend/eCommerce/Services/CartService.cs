@@ -22,6 +22,23 @@ public class CartService
         return _cartMapper.ToDto(cart);
     }
 
+    public async Task<Cart> DeleteCartAsync(long id)
+    {
+        Cart cart = await _unitOfWork.CartRepository.GetByIdAsync(id);
+
+        if (cart == null)
+        {
+            throw new Exception("Producto no encontrado");
+        }
+
+
+        _unitOfWork.CartRepository.Delete(cart);
+        await _unitOfWork.SaveAsync();
+
+
+        return cart;
+    }
+
     //public async Task<Cart> AddToCartAsync(long userId, long productId, int quantity)
     //{
     //    var cart = await GetCartAsync(userId);
