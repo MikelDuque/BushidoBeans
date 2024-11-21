@@ -2,6 +2,8 @@ using eCommerce.Controllers;
 using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 using eCommerce.Models.Mappers;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 
 namespace eCommerce.Services;
 
@@ -22,19 +24,15 @@ public class CartService
         return _cartMapper.ToDto(cart);
     }
 
-    public async Task<Cart> DeleteCartAsync(long id)
+    public async Task<Cart> DeleteCartAsync(object id)
     {
         Cart cart = await _unitOfWork.CartRepository.GetByIdAsync(id);
 
-        if (cart == null)
+        foreach (var cartProduct in cart.CartProducts.ToList())
         {
-            throw new Exception("Producto no encontrado");
+            _unitOfWork.CartProductRepository.Delete(cartProduct);
         }
-
-
-        _unitOfWork.CartRepository.Delete(cart);
         await _unitOfWork.SaveAsync();
-
 
         return cart;
     }

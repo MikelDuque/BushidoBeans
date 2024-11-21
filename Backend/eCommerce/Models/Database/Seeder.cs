@@ -83,7 +83,9 @@ public class Seeder
         Cart[] carts =
         [
             new Cart {Id = 1},
-            new Cart {Id = 2}
+            new Cart {Id = 2},
+            new Cart {Id = 3},
+            new Cart {Id = 4}
         ];
 
         CartProduct[] cartProducts =
@@ -109,8 +111,20 @@ public class Seeder
             new CartProduct
             {
                 CartId = 2,
+                ProductId = 6,
+                Quantity = 1
+            },
+            new CartProduct
+            {
+                CartId = 2,
                 ProductId = 5,
                 Quantity = 1
+            },
+            new CartProduct
+            {
+                CartId = 2,
+                ProductId = 8,
+                Quantity = 3
             }
         ];
 

@@ -34,16 +34,26 @@ namespace eCommerce.Controllers
         }
 
         [Authorize]
-        [HttpDelete("Delete_Cart")]
-        public async Task<ActionResult> DeleteCartByIdAsync(long id)
+        [HttpDelete("Delete_CartContent")]
+        public async Task<ActionResult> DeleteCartByIdAsync([FromQuery] long id)
         {
             Claim userClaimId = User.FindFirst("id");
+            
 
             if (userClaimId == null) return Unauthorized("Usuario no autorizado");
 
-            await _cartService.DeleteCartAsync(id);
+            try
+            {
+                await _cartService.DeleteCartAsync(id);
+                
+                return NoContent();
 
-            return NoContent();
+            }
+            catch (Exception)
+            {
+                return BadRequest("El item ha eliminar no existe en la base de datos");
+            }
+
         }
 
 
@@ -60,6 +70,8 @@ namespace eCommerce.Controllers
 
             return  Ok (_cartService.UpdateCartProductAsync(cartProduct));
         }
+
+
 
         [Authorize]
         [HttpDelete("Delete_CartProduct")]
