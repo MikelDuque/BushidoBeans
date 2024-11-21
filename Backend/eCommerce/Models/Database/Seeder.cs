@@ -82,7 +82,8 @@ public class Seeder
 
         Cart[] carts =
         [
-            new Cart {Id = 1}
+            new Cart {Id = 1},
+            new Cart {Id = 2}
         ];
 
         CartProduct[] cartProducts =
@@ -105,6 +106,12 @@ public class Seeder
                 ProductId = 8,
                 Quantity = 1
             },
+            new CartProduct
+            {
+                CartId = 2,
+                ProductId = 5,
+                Quantity = 1
+            }
         ];
 
         //Añadimos el rango de usuarios a la BDD
