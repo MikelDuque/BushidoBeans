@@ -26,7 +26,8 @@ namespace eCommerce.Controllers
         {
             Claim userClaimId = User.FindFirst("id");
 
-            if (userClaimId == null) Unauthorized("Usuario no autorizado");
+            if (userClaimId == null) Unauthorized("Usuario no autorizado"); 
+            
 
             return await _cartService.GetCartAsync(id);
 
@@ -53,7 +54,7 @@ namespace eCommerce.Controllers
         {
             Claim userClaimId = User.FindFirst("id");
 
-            if (userClaimId == null) Unauthorized("Usuario no autorizado");
+            if (userClaimId == null) return Unauthorized("Usuario no autorizado");
 
             try
             {
@@ -67,7 +68,7 @@ namespace eCommerce.Controllers
             return NoContent();
         }
 
-        [Authorize]
+        
         [HttpGet("Update_GlobalCart")]
         public async Task<List<CartProduct>> GetCartAsync([FromQuery]List<CartProduct> cartProduct)
         {
