@@ -105,14 +105,14 @@ public class CartService
 
     }
 
-    public async Task<List<CartProduct>> UpdateCartProductsAsync(List<CartProduct> cartProducts)
+    public async Task<Cart> UpdateCartProductsAsync(Cart cart)
     {
 
-        foreach (var cartProduct in cartProducts) {
+        foreach (var cartProduct in cart.CartProducts) {
             await UpdateCartProductAsync(cartProduct); 
         }
 
-        return cartProducts;
+        return cart;
     }
     
 }

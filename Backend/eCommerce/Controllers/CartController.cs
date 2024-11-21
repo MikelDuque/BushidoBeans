@@ -98,14 +98,14 @@ namespace eCommerce.Controllers
 
         [Authorize]
         [HttpGet("Update_GlobalCart")]
-        public async Task<ActionResult> GetCartAsync([FromQuery]List<CartProduct> cartProduct)
+        public async Task<ActionResult> GetCartAsync([FromQuery]Cart cart)
         {
             Claim userClaimId = User.FindFirst("id");
 
             if (userClaimId == null)return Unauthorized("Usuario no autorizado");
 
-            await _cartService.UpdateCartProductsAsync(cartProduct);
-            return Ok(cartProduct);
+            await _cartService.UpdateCartProductsAsync(cart);
+            return Ok(cart);
             
         }
     }
