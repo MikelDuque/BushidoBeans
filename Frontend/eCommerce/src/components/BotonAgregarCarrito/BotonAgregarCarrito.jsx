@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useCarrito } from '../../context/CarritoContext'; 
-import './BotonAgregarCarrito'; //
+import './BotonAgregarCarrito';
 
 const AgregarCarrito = ({ producto }) => {
     const { agregarAlCarrito } = useCarrito(); 
