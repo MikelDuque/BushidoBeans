@@ -109,7 +109,7 @@ public class CartService
             await UpdateCartProductAsync(cartProduct); 
         }
 
-        await _unitOfWork.SaveAsync();
+        
         return cart;
     }
     
