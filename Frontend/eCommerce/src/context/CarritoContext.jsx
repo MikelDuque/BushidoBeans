@@ -80,7 +80,7 @@ export const CarritoProvider = ({ children }) => {
                     image: product.image,
                     name: product.name,
                     price: product.price,
-                    cantidadP: product.quantity,
+                    quantity: product.quantity,
                 }))
             );
         } catch (error) {
@@ -101,7 +101,7 @@ export const CarritoProvider = ({ children }) => {
                     body: JSON.stringify({
                         CartId: cartId,
                         ProductId: producto.id,
-                        Quantity: producto.cantidadP,
+                        Quantity: producto.quantity,
                     }),
                 });
 
@@ -117,7 +117,7 @@ export const CarritoProvider = ({ children }) => {
                     if (productoExistente) {
                         return prevCarrito.map((item) =>
                             item.id === data.productId
-                                ? { ...item, cantidadP: data.quantity }
+                                ? { ...item, quantity: data.quantity }
                                 : item
                         );
                     } else {
@@ -125,7 +125,7 @@ export const CarritoProvider = ({ children }) => {
                             ...prevCarrito,
                             {
                                 id: data.productId,
-                                cantidadP: data.quantity,
+                                quantity: data.quantity,
                             },
                         ];
                     }
@@ -137,7 +137,7 @@ export const CarritoProvider = ({ children }) => {
             const productoExistente = carrito.find((item) => item.id === producto.id);
             if (productoExistente) {
                 const nuevoCarrito = carrito.map((item) =>
-                    item.id === producto.id ? { ...item, cantidadP: item.cantidadP + producto.cantidadP } : item
+                    item.id === producto.id ? { ...item, quantity: item.quantity + producto.quantity } : item
                 );
                 setCarrito(nuevoCarrito);
             } else {
@@ -155,7 +155,7 @@ export const CarritoProvider = ({ children }) => {
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json',
-                            Authorization: `Bearer ${token}`,
+                            'Authorization': `Bearer ${token}`,
                         },
                     }
                 );

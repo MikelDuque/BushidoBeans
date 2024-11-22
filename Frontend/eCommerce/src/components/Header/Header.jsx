@@ -1,6 +1,7 @@
 import classes from './Header.module.css';
 import { useContext, useState, useRef, useEffect } from 'react';
 import { ModalContext } from "../../context/ModalContext";
+import { useCarrito } from '../../context/CarritoContext';
 import { useAuth } from '../../context/AuthContext';
 import { NavLink } from "react-router-dom";
 import CartCounter from "../CartCounter";
