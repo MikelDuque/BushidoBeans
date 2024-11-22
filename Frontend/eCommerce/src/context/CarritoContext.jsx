@@ -97,7 +97,7 @@ export const CarritoProvider = ({ children }) => {
         if (isAuthenticated) {
             try {
                 const response = await fetch(API_URL_ADD_CART_PRODUCT, {
-                    method: 'PUT',
+                    method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`,

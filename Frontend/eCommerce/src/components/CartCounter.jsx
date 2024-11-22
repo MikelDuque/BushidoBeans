@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useCarrito } from "../context/CarritoContext";
 
 // Productos iniciales en el carrito 
 const initialCartProducts = [
@@ -14,7 +15,11 @@ function getTotalProducts(products) {
 }
 
 const CartCounter = ({ setTotalProducts }) => {
-  const [cartProducts, setCartProducts] = useState(initialCartProducts);
+  const { carrito } = useCarrito();
+  
+  console.log(carrito);
+  
+  const [cartProducts, setCartProducts] = useState(carrito);
 
   // Actualizar el total de productos
   useEffect(() => {

@@ -7,7 +7,6 @@ using System.Security.Claims;
 
 namespace eCommerce.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CartController : ControllerBase
@@ -57,7 +56,7 @@ namespace eCommerce.Controllers
 
 
         [Authorize]
-        [HttpPut("Update_CartProduct")]
+        [HttpPost("Update_CartProduct")]
         public ActionResult<CartProduct> UpdateCart([FromQuery] CartProduct cartProduct)
         {
 
