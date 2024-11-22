@@ -1,6 +1,7 @@
 import classes from './Product_Details.module.css';
 import { useState, useEffect } from 'react';
 import { getIntensidadImg } from '../../utils/intensidad';
+import Quantity_Counter from '../Quantity_Counter/Counter';
 
 export default function Product_Details({product}) {
     
@@ -37,18 +38,6 @@ export default function Product_Details({product}) {
         localStorage.setItem('carrito', JSON.stringify(carritoActualizado));
     }
 
-    const aumentarCantidad = () => {
-        if (cantidad < product.stock) {
-            setCantidad(cantidad + 1);
-        }
-    };
-
-    const disminuirCantidad = () => {
-        if (cantidad > 1) {
-            setCantidad(cantidad - 1);
-        }
-    };
-
     const intensidadImg = getIntensidadImg("café");
 
     return (   
@@ -77,11 +66,7 @@ export default function Product_Details({product}) {
                     <span className={classes.texto}>{product.description}</span>
                 </p>
 
-                <div className={classes.container_boton_cantidad}>
-                    <button className={classes.boton_cantidad} onClick={disminuirCantidad} disabled={cantidad <= 1}>-</button>
-                    <span>{cantidad}</span>
-                    <button className={classes.boton_cantidad} onClick={aumentarCantidad} disabled={cantidad >= product.stock}>+</button>
-                </div>
+                <Quantity_Counter quantity={cantidad} setQuantity={setCantidad} stock={product.stock}/>
 
                 <button onClick={handleCarrito} className={classes.boton_agregar_carrito} disabled={product.stock <= 0 || cantidad > product.stock}>
                     {product.stock > 0 ? 'Añadir al carrito' : 'Sin stock'}

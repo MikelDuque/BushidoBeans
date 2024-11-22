@@ -16,14 +16,13 @@
 
     /* Estilos de texto */
     --titulos-size: 2.5rem;
-    --subtitulos-size: 20px;
-    --texto-size: 16px;
+    --subtitulos-size: 2rem;
+    --texto-size: 1.6rem;
     --font-weight-bold: 600;
     --font-weight-regular: 400;
     --font-weight-thin: 200;
     --font-family-titulos-subtitulos : 'Poppins', sans-serif;
     --font-family-texto : 'Vollkorn', sans-serif;
-
 }
 
 * {
@@ -38,6 +37,7 @@ html {
 
 body {
     width: 100%;
+    height: 100%;
 }
 
 .texto{

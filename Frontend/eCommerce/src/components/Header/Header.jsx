@@ -1,13 +1,20 @@
-import { NavLink } from "react-router-dom";
-import React, { useState, useRef, useEffect } from 'react';
 import classes from './Header.module.css';
+import { useContext, useState, useRef, useEffect } from 'react';
+import { ModalContext } from "../../context/ModalContext";
 import { useAuth } from '../../context/AuthContext';
+import { NavLink } from "react-router-dom";
 import CartCounter from "../CartCounter";
-import Cart from "../Shopping_Cart/Cart";
-import Modal from "../Pop-Up";
-
+import Modal from '../Modals/Modal';
+import Cart from "../Modals/Shopping_Cart/Cart";
 
 function Header() {
+  //MODAL
+  const {
+    isOpen,
+    openModal,
+    closeModal
+  } = useContext(ModalContext);
+
   const { isAuthenticated, logout } = useAuth();
   const handleLogout = () => {
     logout();
@@ -29,11 +36,17 @@ function Header() {
         ) : (
           <NavLink className={`${classes.nl} ${classes.btnc}`} to="/login"> Login </NavLink>
         )}
-
-        <NavLink className={`${classes.nl} ${classes.cesta}`} to="" data-count={totalProducts} />
-          <Cart/>
-        <CartCounter setTotalProducts={setTotalProducts} />
+      
+        <a onClick={openModal} className={`${classes.nl} ${classes.cesta}`} data-count={totalProducts}/>
       </nav>
+
+        {isOpen && (
+          <Modal modalEvent={closeModal} type="cart">
+            <Cart closeCart={closeModal}/>
+          </Modal>
+        )}
+        
+        <CartCounter setTotalProducts={setTotalProducts} />
     </header>
   );
 }
