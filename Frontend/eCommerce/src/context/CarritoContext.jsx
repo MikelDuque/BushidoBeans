@@ -90,7 +90,8 @@ export const CarritoProvider = ({ children }) => {
                         image: product.image,
                         name: product.name,
                         price: product.price,
-                        quantity: product.quantity,
+                        stock: product.stock,
+                        quantity: product.quantity
                     }))
                 );
             } else {
