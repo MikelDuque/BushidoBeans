@@ -12,7 +12,7 @@ export const CarritoProvider = ({ children }) => {
     const [carrito, setCarrito] = useState([]);
     const [cartId, setCartId] = useState(null);
     const { isAuthenticated } = useAuth();
-    
+
     const API_URL_GET_CART = import.meta.env.VITE_API_GET_CART_URL;
     const API_URL_ADD_CART_PRODUCT = import.meta.env.VITE_API_ADD_CART_PRODUCT_URL;
     const API_URL_DELETE_CART_PRODUCT = import.meta.env.VITE_API_DELETE_CART_PRODUCT_URL;
@@ -85,6 +85,32 @@ export const CarritoProvider = ({ children }) => {
         }
     };
 
+    const eliminarCarritoLista = async (productoId) => {
+        if (isAuthenticated) {
+            try {
+                const response = await fetch(`${API_URL_DELETE_CART_PRODUCT}?cartId=${cartId}&productId=${productoId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error('Error al eliminar el producto del carrito');
+                }
+
+                const data = await response.json();
+                console.log('Producto eliminado del carrito:', data);
+
+                setCarrito((prevCarrito) => prevCarrito.filter((item) => item.id !== productoId));
+            } catch (error) {
+                console.error('Error al eliminar el producto del carrito:', error);
+            }
+        } else {
+            setCarrito((prevCarrito) => prevCarrito.filter((item) => item.id !== productoId));
+        }
+    };    
     const agregarAlCarrito = async (producto) => {
         if (isAuthenticated) {
             try {
