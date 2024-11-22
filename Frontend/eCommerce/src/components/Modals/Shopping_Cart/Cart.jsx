@@ -1,7 +1,7 @@
 import classes from "./Cart.module.css";
 import { useState } from "react";
 import Quantity_Counter from "../../Quantity_Counter/Counter";
-
+import { useCarrito } from "../../../context/CarritoContext";
 //DEFINIR CARTITEMS
 function cartMapper() {
   return (cartItems.length > 0 ? (
@@ -22,7 +22,7 @@ function cartMapper() {
 };
 
 export default function Cart({}) {
-  const [cantidad, setCantidad] = useState(1);
+  const [cantidad, setCantidad] = useStatae(1);
 
   return (
     <>

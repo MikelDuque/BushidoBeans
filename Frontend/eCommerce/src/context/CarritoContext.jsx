@@ -16,6 +16,9 @@ export const CarritoProvider = ({ children }) => {
     const API_URL_GET_CART = import.meta.env.VITE_API_GET_CART_URL;
     const API_URL_ADD_CART_PRODUCT = import.meta.env.VITE_API_ADD_CART_PRODUCT_URL;
     const API_URL_DELETE_CART_PRODUCT = import.meta.env.VITE_API_DELETE_CART_PRODUCT_URL;
+    const API_URL_DELETE_CART = import.meta.env.VITE_API_DELETE_CART_URL;
+    const API_URL_UPDATE_CART = import.meta.env.VITE_API_UPDATE_CART_URL;
+
 
     const token = localStorage.getItem('accessToken');
 
@@ -142,21 +145,7 @@ export const CarritoProvider = ({ children }) => {
             }
         }
     };
-    const syncCarritoBackend = async () => {
-        const carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
-        if (carritoGuardado.length > 0) {
-            try {
-                carritoGuardado.forEach(async (producto) => {
-                    await agregarAlCarrito(producto);
-                });
-                localStorage.removeItem('carrito');
-                setCarrito([])
 
-            } catch (error) {
-                console.error('Error al sincronizar el carrito con el backend:', error);
-            }
-        };
-    }
     const eliminarDelCarrito = async (productoId) => {
         if (isAuthenticated) {
             try {
@@ -186,6 +175,31 @@ export const CarritoProvider = ({ children }) => {
             setCarrito(nuevoCarrito);
         }
     };
+
+    const eliminarContenidoCarrito = async () => {
+        if (isAuthenticated) {
+            try {
+                const response = await fetch(`${API_URL_DELETE_CART}?id=${cartId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error('Error al eliminar el contenido del carrito');
+                }
+
+                setCarrito([]);
+            } catch (error) {
+                console.error('Error al eliminar el contenido del carrito:', error);
+            }
+        } else {
+            setCarrito([]);
+        }
+    };
+    }
 
     return (
         <CarritoContext.Provider
