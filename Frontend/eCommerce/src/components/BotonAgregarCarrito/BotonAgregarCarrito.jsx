@@ -13,7 +13,7 @@ const AgregarCarrito = ({ producto }) => {
             image: producto.imagen,
             name: producto.nombre,
             price: producto.precio,
-            quantity: producto.cantidadP,
+            quantity: 1,
         });
     };
 
