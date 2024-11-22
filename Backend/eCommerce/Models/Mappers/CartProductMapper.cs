@@ -15,7 +15,8 @@ public class CartProductMapper
            Image = cartProduct.Product.Image,
            Name = cartProduct.Product.Name,
            Price = cartProduct.Product.Price,
-           Quantity = cartProduct.Quantity
+           Quantity = cartProduct.Quantity,
+           Stock = cartProduct.Stock
        };
    }
    public IEnumerable<CartProductDto> ToDto(IEnumerable<CartProduct> cartProducts)
