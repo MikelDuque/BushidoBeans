@@ -2,6 +2,8 @@ using eCommerce.Controllers;
 using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 using eCommerce.Models.Mappers;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 
 namespace eCommerce.Services;
 
@@ -20,6 +22,19 @@ public class CartService
     {
         Cart cart = await _unitOfWork.CartRepository.GetByIdAsync(cartId);
         return _cartMapper.ToDto(cart);
+    }
+
+    public async Task<Cart> DeleteCartAsync(object id)
+    {
+        Cart cart = await _unitOfWork.CartRepository.GetByIdAsync(id);
+
+        foreach (var cartProduct in cart.CartProducts.ToList())
+        {
+            _unitOfWork.CartProductRepository.Delete(cartProduct);
+        }
+        await _unitOfWork.SaveAsync();
+
+        return cart;
     }
 
     //public async Task<Cart> AddToCartAsync(long userId, long productId, int quantity)
@@ -63,44 +78,43 @@ public class CartService
     //    return cart;
     //}
 
-    public async Task<CartProduct> UpdateCartItemsAsync(CartProduct cartProduct)
+    public async Task<CartProduct> UpdateCartProductAsync(CartProduct cartProduct)
     {
-        var cart = await _unitOfWork.CartRepository.GetByIdAsync(cartProduct.CartId);
-        if (cart == null)
-        {
-            throw new Exception("Carrito no encontrado.");
-        }
+        CartProduct cartProductBD = await _unitOfWork.CartProductRepository.GetByIdAsync(cartProduct.CartId, cartProduct.ProductId);
 
-        bool existe = await _unitOfWork.CartProductRepository.ExistAsync(cartProduct.CartId, cartProduct.ProductId);
-
-        if (!existe)
+        if (cartProductBD != null)
         {
-            await _unitOfWork.CartProductRepository.InsertAsync(cartProduct);
+            cartProduct.Quantity += cartProductBD.Quantity;
+
+            _unitOfWork.CartProductRepository.Update(cartProduct);
         }
         else
         {
-            _unitOfWork.CartProductRepository.Update(cartProduct);
+            await _unitOfWork.CartProductRepository.InsertAsync(cartProduct);
         }
 
         await _unitOfWork.SaveAsync();
         return cartProduct;
     }
 
-
-    public async void DeleteCartProduct(CartProduct cartProduct)
+    public async Task<bool> DeleteCartProduct(CartProduct cartProduct)
     {
-
-        if (await _unitOfWork.CartProductRepository.ExistAsync(cartProduct.CartId, cartProduct.ProductId))
-        {
-            _unitOfWork.CartProductRepository.Delete(cartProduct);
-        }
-        else
-        {
-            throw new Exception("Producto no encontrado");
-        }
+      _unitOfWork.CartProductRepository.Delete(cartProduct);
+      
+      return await _unitOfWork.SaveAsync();
 
     }
 
+    public async Task<Cart> UpdateCartProductsAsync(Cart cart)
+    {
+
+        foreach (var cartProduct in cart.CartProducts) {
+            await UpdateCartProductAsync(cartProduct); 
+        }
+
+        return cart;
+    }
+    
 }
 
 
