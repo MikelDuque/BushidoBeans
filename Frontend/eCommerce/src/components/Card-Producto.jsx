@@ -46,7 +46,7 @@ export function CardPrueba({ id, imagen, nombre, intensidad, precio, stock, valo
                 {intensidadEmojis}
             </div>
 	    <div className="detalles2">{precioFormateado} €</div>
-            <AgregarCarrito className="botonPrueba" productId={id}/>
+            <AgregarCarrito className="botonPrueba" product={{id, image:imagen, name:nombre, price:precio, stock}}/>
         </div>
     );
 }

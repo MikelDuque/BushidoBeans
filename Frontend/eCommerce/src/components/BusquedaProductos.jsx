@@ -6,8 +6,6 @@ import "../styles/Catalogo.css";
 import "../styles/Paginacion.css";
 import { CircleLoader } from 'react-spinners';
 
-
-
 const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   const [productoBuscado, setProductoBuscado] = useState('');
   const [datosFiltrados, setDatosFiltrados] = useState([]);
@@ -25,7 +23,6 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
       setError(null);
 
       try {
-
         const Url = 'https://localhost:7015/api/Product/Filtered_Products'
         const response = await fetch(`${Url}?Search=${productoBuscado}&Category=${filtro}&Order=${ordenar}&IncludeStockless=true&ProductsPerPage=${productosPorPagina}&CurrentPage=${paginaActual}`
           , {method: 'GET', headers:{'Content-Type':'aplication/json'}});

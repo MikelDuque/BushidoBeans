@@ -44,6 +44,7 @@ export const CarritoProvider = ({ children }) => {
 
     useEffect(() => {
         if (isAuthenticated) {
+            actualizarProductosCarrito();
             obtenerCarritoBackend();
         } else {
             const carritoGuardado = JSON.parse(localStorage.getItem('carrito'));
@@ -58,6 +59,7 @@ export const CarritoProvider = ({ children }) => {
             localStorage.setItem('carrito', JSON.stringify(carrito));
         }
     }, [carrito, isAuthenticated]);
+
     useEffect(() => {
         console.log("Carrito inicial:", carrito);
     }, [carrito]);
@@ -149,7 +151,7 @@ export const CarritoProvider = ({ children }) => {
             }
         } else {
             const productoExistente = carrito.find((item) => item.id === producto.id);
-            if (productoExistente) {
+             if (productoExistente) {
                 const nuevoCarrito = carrito.map((item) =>
                     item.id === producto.id ? { ...item, quantity: item.quantity + producto.quantity } : item
                 );
@@ -159,6 +161,27 @@ export const CarritoProvider = ({ children }) => {
             }
         }
     };
+
+    function establecerCarrito(carritoNuevo) {
+        setCarrito((prevCarrito) => {
+            const productoExistente = prevCarrito.find((item) => item.id === carritoNuevo.productId);
+            if (productoExistente) {
+                return prevCarrito.map((item) =>
+                    item.id === carritoNuevo.productId
+                        ? { ...item, quantity: carritoNuevo.quantity }
+                        : item
+                );
+            } else {
+                return [
+                    ...prevCarrito,
+                    {
+                        id: carritoNuevo.productId,
+                        quantity: carritoNuevo.quantity,
+                    },
+                ];
+            }
+        });
+    }
 
     const eliminarDelCarrito = async (productoId) => {
         if (isAuthenticated) {
@@ -197,7 +220,7 @@ export const CarritoProvider = ({ children }) => {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`,
+                        'Authorization': `Bearer ${token}`,
                     },
                 });
 
@@ -234,11 +257,11 @@ export const CarritoProvider = ({ children }) => {
                 };
     
                 
-                const response = await fetch(`${API_URL_UPDATE_CART}`, {
+                const response = await fetch(`${API_URL_UPDATE_CART}?id=${cartId}&cartProducts=${carrito}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`,
+                        'Authorization': `Bearer ${token}`,
                     },
                     body: JSON.stringify(carritoBackend),
                 });

@@ -2,13 +2,17 @@ import React from 'react';
 import { useCarrito } from '../../context/CarritoContext'; 
 import './BotonAgregarCarrito';
 
-const AgregarCarrito = ({productId }) => {
+const AgregarCarrito = ({product}) => {
     const { agregarAlCarrito } = useCarrito(); 
 
     const handleAgregar = (event) => {
         event.preventDefault();
         agregarAlCarrito({
-            id: productId,
+            id: product.id,
+            image: product.image,
+            name: product.name,
+            price: product.price,
+            stock: product.stock,
             quantity: 1
         });
     };
