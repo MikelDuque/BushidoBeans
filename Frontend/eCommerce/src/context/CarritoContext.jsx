@@ -85,32 +85,7 @@ export const CarritoProvider = ({ children }) => {
         }
     };
 
-    const eliminarCarritoLista = async (productoId) => {
-        if (isAuthenticated) {
-            try {
-                const response = await fetch(`${API_URL_DELETE_CART_PRODUCT}?cartId=${cartId}&productId=${productoId}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`,
-                    },
-                });
 
-                if (!response.ok) {
-                    throw new Error('Error al eliminar el producto del carrito');
-                }
-
-                const data = await response.json();
-                console.log('Producto eliminado del carrito:', data);
-
-                setCarrito((prevCarrito) => prevCarrito.filter((item) => item.id !== productoId));
-            } catch (error) {
-                console.error('Error al eliminar el producto del carrito:', error);
-            }
-        } else {
-            setCarrito((prevCarrito) => prevCarrito.filter((item) => item.id !== productoId));
-        }
-    };    
     const agregarAlCarrito = async (producto) => {
         if (isAuthenticated) {
             try {
