@@ -65,21 +65,27 @@ public class CartService
 
     public async Task<CartProduct> UpdateCartItemsAsync(CartProduct cartProduct)
     {
-        CartProduct newCartProduct = cartProduct;
+        var cart = await _unitOfWork.CartRepository.GetByIdAsync(cartProduct.CartId);
+        if (cart == null)
+        {
+            throw new Exception("Carrito no encontrado.");
+        }
 
         bool existe = await _unitOfWork.CartProductRepository.ExistAsync(cartProduct.CartId, cartProduct.ProductId);
 
         if (!existe)
         {
-            newCartProduct = await _unitOfWork.CartProductRepository.InsertAsync(cartProduct);
-            await _unitOfWork.SaveAsync();
+            await _unitOfWork.CartProductRepository.InsertAsync(cartProduct);
+        }
+        else
+        {
+            _unitOfWork.CartProductRepository.Update(cartProduct);
         }
 
-        _unitOfWork.CartProductRepository.Update(cartProduct);
         await _unitOfWork.SaveAsync();
-
-        return newCartProduct;
+        return cartProduct;
     }
+
 
     public async void DeleteCartProduct(CartProduct cartProduct)
     {

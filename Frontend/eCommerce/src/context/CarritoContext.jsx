@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
+import * as jwt_decode from 'jwt-decode';
 
 const CarritoContext = createContext();
 
@@ -9,15 +10,31 @@ export const useCarrito = () => {
 
 export const CarritoProvider = ({ children }) => {
     const [carrito, setCarrito] = useState([]);
-    const [cartId, setCartId] = useState(null); 
+    const [cartId, setCartId] = useState(null);
     const { isAuthenticated } = useAuth();
-    const API_URL_GET_CART = process.env.REACT_APP_API_GET_CART_URL;
-    const API_URL_ADD_CART_PRODUCT = process.env.REACT_APP_API_ADD_CART_PRODUCT_URL;
-    const API_URL_DELETE_CART_PRODUCT = process.env.REACT_APP_API_DELETE_CART_PRODUCT_URL;
+    
+    const API_URL_GET_CART = import.meta.env.VITE_API_GET_CART_URL;
+    const API_URL_ADD_CART_PRODUCT = import.meta.env.VITE_API_ADD_CART_PRODUCT_URL;
+    const API_URL_DELETE_CART_PRODUCT = import.meta.env.VITE_API_DELETE_CART_PRODUCT_URL;
 
-    const token = localStorage.getItem('accessToken'); 
+    const token = localStorage.getItem('accessToken');
 
-    // Obtener el carrito al cargar la aplicación
+    // Función para manejar el token y obtener el cartId
+    const handleToken = () => {
+        if (!token) {
+            throw new Error('No hay token de autenticación');
+        }
+
+        const decodedToken = jwt_decode.jwtDecode(token);
+        const cartId = decodedToken.id; // CAMBIAR POR ID!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+        if (!cartId) {
+            throw new Error('No se encontró el cartId en el token');
+        }
+
+        return cartId;
+    };
+
     useEffect(() => {
         if (isAuthenticated) {
             obtenerCarritoBackend();
@@ -27,7 +44,6 @@ export const CarritoProvider = ({ children }) => {
         }
     }, [isAuthenticated]);
 
-    // Guardar el carrito en localStorage si no está autenticado
     useEffect(() => {
         if (!isAuthenticated) {
             localStorage.setItem('carrito', JSON.stringify(carrito));
@@ -36,11 +52,13 @@ export const CarritoProvider = ({ children }) => {
 
     const obtenerCarritoBackend = async () => {
         try {
-            const response = await fetch(`${API_URL_GET_CART}`, {
+            const cartId = handleToken();
+
+            const response = await fetch(`${API_URL_GET_CART}?id=${cartId}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
+                    'Authorization': `Bearer ${token}`,
                 },
             });
 
@@ -49,7 +67,10 @@ export const CarritoProvider = ({ children }) => {
             }
 
             const data = await response.json();
-            setCartId(data.id); // Guardar el ID del carrito
+            console.log('Respuesta de la API:', data);
+
+            setCartId(data.id);
+
             setCarrito(
                 data.cartProducts.map((product) => ({
                     id: product.productId,
@@ -67,22 +88,26 @@ export const CarritoProvider = ({ children }) => {
     const agregarAlCarrito = async (producto) => {
         if (isAuthenticated) {
             try {
-                const response = await fetch(
-                    `${API_URL_ADD_CART_PRODUCT}?CartId=${cartId}&ProductId=${producto.id}&Quantity=${producto.cantidadP}`,
-                    {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                );
+                const response = await fetch(API_URL_ADD_CART_PRODUCT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                    body: JSON.stringify({
+                        CartId: cartId,
+                        ProductId: producto.id,
+                        Quantity: producto.cantidadP,
+                    }),
+                });
 
                 if (!response.ok) {
                     throw new Error('Error al agregar el producto al carrito');
                 }
 
                 const data = await response.json();
+                console.log('Producto agregado al carrito:', data);
+
                 setCarrito((prevCarrito) => {
                     const productoExistente = prevCarrito.find((item) => item.id === data.productId);
                     if (productoExistente) {
@@ -116,12 +141,26 @@ export const CarritoProvider = ({ children }) => {
             }
         }
     };
+    const syncCarritoBackend = async () => {
+        const carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
+        if (carritoGuardado.length > 0) {
+            try {
+                carritoGuardado.forEach(async (producto) => {
+                    await agregarAlCarrito(producto);
+                });
+                localStorage.removeItem('carrito');
+                setCarrito([])
 
-    const eliminarDelCarrito = async (productoId, cantidadP) => {
+            } catch (error) {
+                console.error('Error al sincronizar el carrito con el backend:', error);
+            }
+        };
+    }
+    const eliminarDelCarrito = async (productoId) => {
         if (isAuthenticated) {
             try {
                 const response = await fetch(
-                    `${API_URL_DELETE_CART_PRODUCT}?CartId=${cartId}&ProductId=${productoId}&Quantity=${cantidadP}`,
+                    `${API_URL_DELETE_CART_PRODUCT}?CartId=${cartId}&ProductId=${productoId}`,
                     {
                         method: 'DELETE',
                         headers: {

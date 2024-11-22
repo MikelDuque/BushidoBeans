@@ -2,47 +2,16 @@ import PropTypes from "prop-types";
 import { useNavigate } from 'react-router-dom';
 import '../styles/CardPrueba.css';
 import { getIntensidadImg } from '../utils/intensidad';
-import { useState, useEffect} from 'react';
-
+import AgregarCarrito from "./BotonAgregarCarrito/BotonAgregarCarrito";
 export function CardPrueba({ id, imagen, nombre, intensidad, precio, stock, valoracion }) {
     const navigate = useNavigate();
 
-    const [carrito, setCarrito] = useState([]);
 
-    // Modificamos el manejo de la navegación para aceptar el id como argumento
     const handlePageChange = () => {
         navigate(`/producto/${id}`);  // Ahora se navega correctamente usando el id
     };
 
-    useEffect(() => {
-        const carritoGuardado = JSON.parse(localStorage.getItem('carrito'));
-        if (carritoGuardado) {
-            setCarrito(carritoGuardado);
-        }
-    }, []);
 
-    const handleCarrito = async (event) => {
-        event.preventDefault();
-
-        const nuevoProducto = {
-            img: {imagen},
-            nombreP : {nombre},
-            precioP : {precio},
-            cantidadP: 1,
-            idProductoP: {id}
-          };
-    
-        console.log("producto: ", nuevoProducto);
-        await sendCarrito(nuevoProducto);
-    }
-
-    const sendCarrito = async (producto)=>{
-
-        const carritoActualizado = [...carrito, producto];
-        setCarrito(carritoActualizado);
-        
-        localStorage.setItem('carrito', JSON.stringify(carritoActualizado));
-    }
 
     
     const checksoldout = stock > 0 ? "✅" : "❌";
@@ -82,9 +51,14 @@ export function CardPrueba({ id, imagen, nombre, intensidad, precio, stock, valo
                 {intensidadEmojis}
             </div>
 	    <div className="detalles2">{precioFormateado} €</div>
-                <button onClick={handleCarrito} className="botonPrueba" aria-label={`Añadir ${nombre} a la cesta`}>
-                    Añadir a la cesta
-                </button>
+
+                <AgregarCarrito className="botonPrueba" aria-label={`Añadir ${nombre} a la cesta`} producto={{
+                    id,
+                    imagen,
+                    nombre,
+                    precio,
+                }}
+            />
             </div>
     );
 }
