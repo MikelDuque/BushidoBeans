@@ -1,5 +1,6 @@
 
 import '../styles/Pop-Up.css';
+
 const Modal = ({isOpen, onClose, children}) => {
     if(!isOpen) return null
 

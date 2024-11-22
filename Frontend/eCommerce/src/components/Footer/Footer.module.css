@@ -21,7 +21,6 @@ footer{
   position: relative;
   top: 25px;
   left: 50px;
-  z-index: 1000;
 }
 .fLogo:hover{
   transform: scale(1.05);

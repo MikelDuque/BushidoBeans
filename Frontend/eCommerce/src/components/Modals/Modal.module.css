@@ -1,0 +1,68 @@
+.overlay {
+  position:fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.25);
+  z-index: 100;
+}
+
+.modal {
+  position: fixed;
+  background-color: var(--fondo-vistas);
+  z-index: 101;
+  padding: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.modal--cart {
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 30vw;
+}
+
+.modal--postReview {
+
+}
+
+.text {
+  font-family: var(--font-family-titulos-subtitulos);
+  font-size: var(--subtitulos-size);
+  color: var(--texto-principal);
+}
+
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.closeButton {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.content {
+  height: 100%;
+}
+
+.buttonContainer {
+  height: 5rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.buttonContainer button {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--nav-footer);
+  color: var(--letras-nav);
+}

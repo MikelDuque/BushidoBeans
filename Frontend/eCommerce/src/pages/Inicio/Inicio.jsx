@@ -27,7 +27,7 @@ function Inicio() {
     <>
       {!hasScrolledIntro && <ScrollIntro />}
       <Header />
-      <main>
+      <main id="main">
         <div className={classes.content}>
           <div className={classes.texto}>
             <h2>Nueva forma de disfrutar tu café</h2>
