@@ -13,9 +13,13 @@ export const CarritoProvider = ({ children }) => {
     const [cartId, setCartId] = useState(null);
     const { isAuthenticated } = useAuth();
 
+    // URLs de la API
     const API_URL_GET_CART = import.meta.env.VITE_API_GET_CART_URL;
     const API_URL_ADD_CART_PRODUCT = import.meta.env.VITE_API_ADD_CART_PRODUCT_URL;
     const API_URL_DELETE_CART_PRODUCT = import.meta.env.VITE_API_DELETE_CART_PRODUCT_URL;
+    const API_URL_DELETE_CART = import.meta.env.VITE_API_DELETE_CART_URL;
+    const API_URL_UPDATE_CART = import.meta.env.VITE_API_UPDATE_CART_URL;
+
 
     const token = localStorage.getItem('accessToken');
 
@@ -86,37 +90,12 @@ export const CarritoProvider = ({ children }) => {
         }
     };
 
-    const eliminarCarritoLista = async (productoId) => {
-        if (isAuthenticated) {
-            try {
-                const response = await fetch(`${API_URL_DELETE_CART_PRODUCT}?cartId=${cartId}&productId=${productoId}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`,
-                    },
-                });
 
-                if (!response.ok) {
-                    throw new Error('Error al eliminar el producto del carrito');
-                }
-
-                const data = await response.json();
-                console.log('Producto eliminado del carrito:', data);
-
-                setCarrito((prevCarrito) => prevCarrito.filter((item) => item.id !== productoId));
-            } catch (error) {
-                console.error('Error al eliminar el producto del carrito:', error);
-            }
-        } else {
-            setCarrito((prevCarrito) => prevCarrito.filter((item) => item.id !== productoId));
-        }
-    };    
     const agregarAlCarrito = async (producto) => {
         if (isAuthenticated) {
             try {
                 const response = await fetch(API_URL_ADD_CART_PRODUCT, {
-                    method: 'POST',
+                    method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`,
@@ -168,21 +147,7 @@ export const CarritoProvider = ({ children }) => {
             }
         }
     };
-    const syncCarritoBackend = async () => {
-        const carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
-        if (carritoGuardado.length > 0) {
-            try {
-                carritoGuardado.forEach(async (producto) => {
-                    await agregarAlCarrito(producto);
-                });
-                localStorage.removeItem('carrito');
-                setCarrito([])
 
-            } catch (error) {
-                console.error('Error al sincronizar el carrito con el backend:', error);
-            }
-        };
-    }
     const eliminarDelCarrito = async (productoId) => {
         if (isAuthenticated) {
             try {
@@ -213,17 +178,100 @@ export const CarritoProvider = ({ children }) => {
         }
     };
 
+    const eliminarContenidoCarrito = async () => {
+        if (isAuthenticated) {
+            try {
+                const response = await fetch(`${API_URL_DELETE_CART}?id=${cartId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error('Error al eliminar el contenido del carrito');
+                }
+
+                setCarrito([]);
+            } catch (error) {
+                console.error('Error al eliminar el contenido del carrito:', error);
+            }
+        } else {
+            setCarrito([]);
+        }
+    };
+    const actualizarProductosCarrito = async () => {
+        
+        if (isAuthenticated) {
+            try {
+                const carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
+    
+                if (carritoGuardado.length === 0) {
+                    console.warn("No hay productos en el carrito para actualizar");
+                    return;
+                }
+                    const carritoBackend = {
+                    id: cartId,
+                    cartProducts: carritoGuardado.map((product) => ({
+                        productId: product.id,
+                        quantity: product.quantity
+                       
+                    })),
+                };
+    
+                
+                const response = await fetch(`${API_URL_UPDATE_CART}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify(carritoBackend),
+                });
+    
+                if (!response.ok) {
+                    throw new Error("Error al actualizar el carrito en el backend");
+                }
+    
+                // Obtener la respuesta y actualizar el estado
+                const data = await response.json();
+                console.log("Carrito actualizado en el backend:", data);
+    
+                // Actualizar el estado del carrito en el contexto
+                setCarrito(
+                    data.cartProducts.map((product) => ({
+                        id: product.productId,
+                        image: product.image, 
+                        name: product.name, 
+                        price: product.price, 
+                        quantity: product.quantity,
+                        stock: product.stock
+                    }))
+                );
+    
+                localStorage.removeItem('carrito');
+            } catch (error) {
+                console.error("Error al actualizar el carrito en el backend:", error);
+            }
+        } else {
+            console.warn("El usuario no está autenticado, no se puede sincronizar el carrito con el backend");
+        }
+    };
+
+    
     return (
         <CarritoContext.Provider
             value={{
                 carrito,
                 agregarAlCarrito,
                 eliminarDelCarrito,
+                actualizarProductosCarrito,
+                eliminarContenidoCarrito,
             }}
         >
             {children}
         </CarritoContext.Provider>
     );
 };
-
 export default CarritoProvider;
