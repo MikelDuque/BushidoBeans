@@ -1,5 +1,5 @@
-import Header from "../components/Header.jsx";
-import Footer from "../components/Footer.jsx";
+import Header from "../components/Header/Header.jsx";
+import Footer from "../components/Footer/Footer.jsx";
 import Carrusel from "../components/Carrusel.jsx";
 import Filtro from "../components/Filtro.jsx";
 import "../styles/Catalogo.css";

@@ -107,7 +107,7 @@
 }
 
 /* Estilos para el botón del carrito */
-.botonPrueba {
+.boton {
   grid-column: span 2;
   justify-self: center;
   border-radius: 10px;
@@ -120,7 +120,7 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.botonPrueba:hover {
+.boton:hover {
   background-color: yellow; /* Cambia el fondo a amarillo en hover */
   color: green; /* Cambia el texto a verde en hover */
 }

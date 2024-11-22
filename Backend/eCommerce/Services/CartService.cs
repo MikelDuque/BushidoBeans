@@ -95,6 +95,7 @@ public class CartService
 
         await _unitOfWork.SaveAsync();
         return cartProduct;
+        return cartProduct;
     }
 
     public async Task<bool> DeleteCartProduct(CartProduct cartProduct)

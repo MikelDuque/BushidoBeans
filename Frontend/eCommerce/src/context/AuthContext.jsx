@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 
+
 //COMO CREAR UN CONTEXTO
 
 const AuthContext = createContext();    //Creamos el contexto. Es como un contenedor para compartir estados

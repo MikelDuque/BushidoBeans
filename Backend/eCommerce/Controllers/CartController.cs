@@ -1,9 +1,8 @@
 ﻿using eCommerce.Models.Database.Entities;
-using eCommerce.Models.Dtos;
 using eCommerce.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
 
 
 namespace eCommerce.Controllers
@@ -20,6 +19,7 @@ namespace eCommerce.Controllers
             _cartService = cartService;
         }
 
+        [Authorize]
         [Authorize]
         [HttpGet("Get_Cart")]
         public async Task<ActionResult> GetCartByIdAsync(long id)
