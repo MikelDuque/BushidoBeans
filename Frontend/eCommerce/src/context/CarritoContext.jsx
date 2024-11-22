@@ -78,6 +78,7 @@ export const CarritoProvider = ({ children }) => {
                     name: product.name,
                     price: product.price,
                     quantity: product.quantity,
+                    stock: product.stock
                 }))
             );
         } catch (error) {

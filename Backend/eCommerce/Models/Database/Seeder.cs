@@ -92,19 +92,19 @@ public class Seeder
         [
             new CartProduct
             {
-                CartId = 3,
+                CartId = 1,
                 ProductId = 1,
                 Quantity = 2
             },
             new CartProduct
             {
-                CartId = 3,
+                CartId = 1,
                 ProductId = 32,
                 Quantity = 8
             },
             new CartProduct
             {
-                CartId = 3,
+                CartId = 1,
                 ProductId = 8,
                 Quantity = 1
             },
@@ -125,6 +125,24 @@ public class Seeder
                 CartId = 2,
                 ProductId = 8,
                 Quantity = 3
+            },
+            new CartProduct
+            {
+                CartId = 3,
+                ProductId = 1,
+                Quantity = 2
+            },
+            new CartProduct
+            {
+                CartId = 3,
+                ProductId = 32,
+                Quantity = 8
+            },
+            new CartProduct
+            {
+                CartId = 3,
+                ProductId = 8,
+                Quantity = 1
             }
         ];
 

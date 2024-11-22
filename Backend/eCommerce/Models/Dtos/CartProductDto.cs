@@ -9,6 +9,6 @@ public class CartProductDto
  public string Image { get; set; }
  public string Name { get; set; }
  public decimal Price { get; set; }
- public required int Quantity {  get; set; } 
  public int Stock { get; set; }
+ public required int Quantity {  get; set; } 
 }

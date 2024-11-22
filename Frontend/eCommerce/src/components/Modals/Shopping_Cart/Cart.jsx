@@ -11,6 +11,8 @@ export default function Cart({}) {
   function cartMapper(cartItems) {
     return (cartItems.length > 0 ? ( 
       cartItems.map((item) => (
+        console.log(item),
+        
         <li id={item.productId} className={classes.cart_item}>
           <img src={`https://localhost:7015/${item.image}`} alt="img Producto" />
           <div className={classes.data_container}>
