@@ -5,56 +5,31 @@ import { useCarrito } from '../../context/CarritoContext';
 export default function Quantity_Counter({productId, oldQuantity, stock}) {
   const { agregarAlCarrito } = useCarrito();
   const [quantity, setQuantity] = useState(oldQuantity)
-  const [cartItem, setCartItem] = useState({
-    id: productId,
-    quantity: oldQuantity
-  });
+  console.log("stock", stock);
 
   function handleQuantity(newQuantity) {
-    setQuantity(quantity)
-    /* switch (option) {
-      case "+": {
-        setCartItem(cartItem.quantity = 1);
-      };
-      break;
-      case "-": {
-        setCartItem(cartItem.quantity = -1);
-      }
-    }; */
+    setQuantity(newQuantity)
   };
 
   const incrementCounter = () => {
-    quantity < stock ? handleQuantity(quantity++) : handleQuantity(stock);
-    /* if (cartItem.quantity < stock) {
-      handleQuantity("+");
-      agregarAlCarrito(cartItem);
-    } */
-   agregarAlCarrito({id: productId, quantity: quantity})
+    if(quantity < stock) {
+      agregarAlCarrito({id: productId, quantity: +1})
+      handleQuantity(quantity+1)
+    }
   };
 
   const decrementCounter = () => {
-    quantity > 1 ? handleQuantity(quantity--) : handleQuantity(0);
-    /* if (cartItem.quantity > 1) {
-      handleQuantity("-");
-      agregarAlCarrito(cartItem);
-    } */
-    agregarAlCarrito({id: productId, quantity: quantity})
+    if(quantity > 0) {
+      agregarAlCarrito({id: productId, quantity: -1})
+      handleQuantity(quantity-1)
+    }
   };
-
-  /* function decrementCounter() {
-    quantity > 1 ? setQuantity(quantity--) : setQuantity(0);
-  }
-
-  function incrementCounter() {
-    quantity < stock ? setQuantity(quantity++) : setQuantity(stock);
-  } */
-
 
   return (
     <div className={classes.counter_container}>
-        <button className={classes.quantity_button} onClick={decrementCounter} disabled={cartItem.quantity <= 0}>-</button>
+        <button className={classes.quantity_button} onClick={decrementCounter} disabled={quantity <= 0}>-</button>
         <p>{quantity}</p>
-        <button className={classes.quantity_button} onClick={incrementCounter} disabled={cartItem.quantity >= stock}>+</button>
+        <button className={classes.quantity_button} onClick={incrementCounter} disabled={quantity >= stock}>+</button>
     </div>
   );
 }

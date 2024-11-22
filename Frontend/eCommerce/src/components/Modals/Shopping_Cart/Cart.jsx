@@ -16,7 +16,7 @@ export default function Cart({}) {
             <h3 className={classes.importantText}>{item.name}</h3>
             <div className={classes.complementary_data}>
               <p>{item.price} €</p>
-              <Quantity_Counter productId={item.id} prevQuantity={item.quantity} stock={item.stock}/>
+              <Quantity_Counter productId={item.id} oldQuantity={item.quantity} stock={item.stock}/>
             </div>
           </div>
           <a className={classes.importantText} onClick={(e) => {e.preventDefault(), eliminarDelCarrito(item.id)}}>X</a>

@@ -83,7 +83,7 @@ export const CarritoProvider = ({ children }) => {
             console.log('Respuesta de la API:', data);
 
             setCartId(data.id);
-            if(data.cartProdcts && data.cartProdcts.lenght>0){
+
                 setCarrito(
                     data.cartProducts.map((product) => ({
                         id: product.productId,
@@ -94,9 +94,6 @@ export const CarritoProvider = ({ children }) => {
                         quantity: product.quantity
                     }))
                 );
-            } else {
-                console.warn('El carrito del backend está vacío, no se sincronizará.');
-            }
 
         } catch (error) {
             console.error('Error al obtener el carrito:', error);
