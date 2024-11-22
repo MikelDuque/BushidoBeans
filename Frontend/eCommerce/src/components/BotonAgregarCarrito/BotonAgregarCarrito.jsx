@@ -3,17 +3,14 @@ import PropTypes from 'prop-types';
 import { useCarrito } from '../../context/CarritoContext'; 
 import './BotonAgregarCarrito';
 
-const AgregarCarrito = ({ producto }) => {
+export default function AddButton ({ product }) {
     const { agregarAlCarrito } = useCarrito(); 
 
     const handleAgregar = (event) => {
         event.preventDefault();
         agregarAlCarrito({
-            id: producto.id,
-            image: producto.imagen,
-            name: producto.nombre,
-            price: producto.precio,
-            quantity: producto.cantidadP,
+            id: product.id,
+            quantity: product.quantity,
         });
     };
 
@@ -28,13 +25,11 @@ const AgregarCarrito = ({ producto }) => {
     );
 };
 
-AgregarCarrito.propTypes = {
+/* AgregarCarrito.propTypes = {
     producto: PropTypes.shape({
         id: PropTypes.string.isRequired,
         imagen: PropTypes.string.isRequired,
         nombre: PropTypes.string.isRequired,
         precio: PropTypes.number.isRequired,
     }).isRequired,
-};
-
-export default AgregarCarrito;
+}; */

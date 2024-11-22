@@ -77,8 +77,8 @@ export const CarritoProvider = ({ children }) => {
                     image: product.image,
                     name: product.name,
                     price: product.price,
-                    quantity: product.quantity,
-                    stock: product.stock
+                    stock: product.stock,
+                    quantity: product.quantity
                 }))
             );
         } catch (error) {
@@ -113,10 +113,12 @@ export const CarritoProvider = ({ children }) => {
         }
     };    
     const agregarAlCarrito = async (producto) => {
+        console.log("hola producto",producto.id);
+        
         if (isAuthenticated) {
             try {
                 const response = await fetch(API_URL_ADD_CART_PRODUCT, {
-                    method: 'POST',
+                    method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`,
@@ -124,7 +126,7 @@ export const CarritoProvider = ({ children }) => {
                     body: JSON.stringify({
                         CartId: cartId,
                         ProductId: producto.id,
-                        Quantity: producto.quantity,
+                        Quantity: producto.quantity
                     }),
                 });
 

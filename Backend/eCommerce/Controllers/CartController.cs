@@ -20,7 +20,6 @@ namespace eCommerce.Controllers
         }
 
         [Authorize]
-        [Authorize]
         [HttpGet("Get_Cart")]
         public async Task<ActionResult> GetCartByIdAsync(long id)
         {
