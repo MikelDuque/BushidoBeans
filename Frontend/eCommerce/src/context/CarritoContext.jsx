@@ -9,7 +9,10 @@ export const useCarrito = () => {
 };
 
 export const CarritoProvider = ({ children }) => {
-    const [carrito, setCarrito] = useState([]);
+    const [carrito, setCarrito] = useState(() => {
+        const carritoGuardado = localStorage.getItem('carrito');
+        return carritoGuardado ? JSON.parse(carritoGuardado) : [];
+    });
     const [cartId, setCartId] = useState(null);
     const { isAuthenticated } = useAuth();
 
@@ -43,8 +46,10 @@ export const CarritoProvider = ({ children }) => {
         if (isAuthenticated) {
             obtenerCarritoBackend();
         } else {
-            const carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
-            setCarrito(carritoGuardado);
+            const carritoGuardado = JSON.parse(localStorage.getItem('carrito'));
+            if (carritoGuardado) {
+                setCarrito(carritoGuardado);
+            }
         }
     }, [isAuthenticated]);
 
@@ -53,6 +58,10 @@ export const CarritoProvider = ({ children }) => {
             localStorage.setItem('carrito', JSON.stringify(carrito));
         }
     }, [carrito, isAuthenticated]);
+    useEffect(() => {
+        console.log("Carrito inicial:", carrito);
+    }, [carrito]);
+    
 
     const obtenerCarritoBackend = async () => {
         try {
@@ -74,17 +83,20 @@ export const CarritoProvider = ({ children }) => {
             console.log('Respuesta de la API:', data);
 
             setCartId(data.id);
+            if(data.cartProdcts && data.cartProdcts.lenght>0){
+                setCarrito(
+                    data.cartProducts.map((product) => ({
+                        id: product.productId,
+                        image: product.image,
+                        name: product.name,
+                        price: product.price,
+                        quantity: product.quantity,
+                    }))
+                );
+            } else {
+                console.warn('El carrito del backend está vacío, no se sincronizará.');
+            }
 
-            setCarrito(
-                data.cartProducts.map((product) => ({
-                    id: product.productId,
-                    image: product.image,
-                    name: product.name,
-                    price: product.price,
-                    stock: product.stock,
-                    quantity: product.quantity
-                }))
-            );
         } catch (error) {
             console.error('Error al obtener el carrito:', error);
         }
