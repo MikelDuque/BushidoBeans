@@ -97,7 +97,7 @@ namespace eCommerce.Controllers
 
 
         [Authorize]
-        [HttpGet("Update_GlobalCart")]
+        [HttpPut("Update_GlobalCart")]
         public async Task<ActionResult> GetCartAsync([FromQuery]Cart cart)
         {
             Claim userClaimId = User.FindFirst("id");
