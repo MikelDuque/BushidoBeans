@@ -203,6 +203,7 @@ export const CarritoProvider = ({ children }) => {
             setCarrito([]);
         }
     };
+    
     const actualizarProductosCarrito = async () => {
         
         if (isAuthenticated) {
