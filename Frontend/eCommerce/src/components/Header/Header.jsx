@@ -9,12 +9,14 @@ import Modal from '../Modals/Modal';
 import Cart from "../Modals/Shopping_Cart/Cart";
 
 function Header() {
-  //MODAL
+  //MODALES
   const {
     isOpen,
     openModal,
     closeModal
   } = useContext(ModalContext);
+
+  const { eliminarContenidoCarrito } = useCarrito();
 
   const { isAuthenticated, logout } = useAuth();
   const handleLogout = () => {
@@ -42,7 +44,7 @@ function Header() {
       </nav>
 
         {isOpen && (
-          <Modal modalEvent={closeModal} type="cart">
+          <Modal closeModal={closeModal} type="cart" titulo={"Tu Carro"} cancelFnc={eliminarContenidoCarrito} continueFnc="" buttonValues={{continueVal:"Procesar compra", cancelVal:"Vaciar carro"}}>
             <Cart closeCart={closeModal}/>
           </Modal>
         )}

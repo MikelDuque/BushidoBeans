@@ -6,17 +6,17 @@ export default function Quantity_Counter({productId, prevQuantity, stock}) {
   const { agregarAlCarrito } = useCarrito();
   const [cartItem, setCartItem] = useState({
     id: productId,
-    quantity: prevQuantity
+    quantity: 0
   });
 
   function handleQuantity(option) {
     switch (option) {
       case "+": {
-        setCartItem(cartItem.quantity ++);
+        setCartItem(cartItem.quantity = 1);
       };
       break;
       case "-": {
-        setCartItem(cartItem.quantity --);
+        setCartItem(cartItem.quantity = -1);
       }
     };
   };

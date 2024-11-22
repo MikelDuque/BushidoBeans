@@ -92,21 +92,21 @@ export const CarritoProvider = ({ children }) => {
 
 
     const agregarAlCarrito = async (producto) => {
-        console.log("hola producto",producto.id);
+        console.log("hola producto",producto);
         
         if (isAuthenticated) {
             try {
-                const response = await fetch(API_URL_ADD_CART_PRODUCT, {
+                const response = await fetch(`${API_URL_ADD_CART_PRODUCT}?CartId=${cartId}&ProductId=${producto.id}&Quantity=${producto.quantity}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`,
                     },
-                    body: JSON.stringify({
+                    /* query: JSON.stringify({
                         CartId: cartId,
                         ProductId: producto.id,
                         Quantity: producto.quantity
-                    }),
+                    }), */
                 });
 
                 if (!response.ok) {

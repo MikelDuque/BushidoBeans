@@ -11,16 +11,11 @@ export function CardPrueba({ id, imagen, nombre, intensidad, precio, stock, valo
         navigate(`/producto/${id}`);  // Ahora se navega correctamente usando el id
     };
 
-
-
-    
     const checksoldout = stock > 0 ? "✅" : "❌";
     const precioFormateado = precio.toFixed(2).replace('.', ',');
     
-
     const valImg = "/recursos/star.svg";
 
-    
     const intensidadEmojis = Array(intensidad).fill(
         <img src={getIntensidadImg(intensidad.toString())} alt="Intensidad" className="intensidadIcono" />
     );
@@ -51,15 +46,8 @@ export function CardPrueba({ id, imagen, nombre, intensidad, precio, stock, valo
                 {intensidadEmojis}
             </div>
 	    <div className="detalles2">{precioFormateado} €</div>
-
-                <AgregarCarrito className="botonPrueba" aria-label={`Añadir ${nombre} a la cesta`} producto={{
-                    id,
-                    imagen,
-                    nombre,
-                    precio,
-                }}
-            />
-            </div>
+            <AgregarCarrito className="botonPrueba" productId={id}/>
+        </div>
     );
 }
 
