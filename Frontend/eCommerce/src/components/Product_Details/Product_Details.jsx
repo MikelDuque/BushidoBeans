@@ -66,7 +66,7 @@ export default function Product_Details({product}) {
                     <span className={classes.texto}>{product.description}</span>
                 </p>
 
-                <Quantity_Counter productId={product.id} prevQuantity={cantidad} stock={product.stock}/>
+                <Quantity_Counter productId={product.id} oldQuantity={cantidad} stock={product.stock}/>
 
                 <button onClick={handleCarrito} className={classes.boton_agregar_carrito} disabled={product.stock <= 0 || cantidad > product.stock}>
                     {product.stock > 0 ? 'Añadir al carrito' : 'Sin stock'}
