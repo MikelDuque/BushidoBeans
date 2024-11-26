@@ -29,9 +29,9 @@ const API_CART_URL = `${API_BASE_URL}/Cart`;
 
   export function GET_CART_BY_ID(id) {return `${API_CART_URL}/${id}`};
   export const PUT_CART = `${API_CART_URL}/Update_Cart`;
-  export const PUT_CART_PRODUCT = `${API_CART_URL}/Update_Cart_Poduct`;
+  export const PUT_CART_PRODUCT = `${API_CART_URL}/Update_CartPoduct`;
   export function DELETE_CART_BY_ID(id) {return `${API_CART_URL}/Delete_Cart/${id}`};
-  export const DELETE_CART_PRODUCT = `${API_CART_URL}/Delete_Cart_Product`;
+  export const DELETE_CART_PRODUCT = `${API_CART_URL}/Delete_CartProduct`;
 
 
 /* --- USER CONTROLLER --- */
