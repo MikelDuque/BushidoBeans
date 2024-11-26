@@ -2,7 +2,7 @@
 
 namespace eCommerce.Services;
 
-public class AdressService
+public class AddressService
 {
     private readonly UnitOfWork _unitOfWork;
     private readonly AddressMapper _mapper;
