@@ -6,6 +6,7 @@ public class Order
 {
   public long Id { get; set; }
   public decimal TotalPrice { get; set; }
+  public int TotalProducts { get; set; }
   public DateTime PurchaseDate { get; set; }
 
 
