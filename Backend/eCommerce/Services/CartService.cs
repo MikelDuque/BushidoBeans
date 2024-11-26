@@ -36,7 +36,7 @@ public class CartService
         return user.CartProducts.ToList();
     }
 
-    public async Task<CartProductDto> UpdateCartProductAsync(CartProduct cartProduct)
+    public async Task<bool> UpdateCartProductAsync(CartProduct cartProduct)
     {
         CartProduct cartProductBD = await _unitOfWork.CartProductRepository.GetByIdAsync(cartProduct.UserId, cartProduct.ProductId);
 
@@ -51,8 +51,8 @@ public class CartService
             await _unitOfWork.CartProductRepository.InsertAsync(cartProduct);
         }
 
-        await _unitOfWork.SaveAsync();
-        return _cartProductMapper.ToDto(cartProduct);
+        return await _unitOfWork.SaveAsync();
+        
     }
 
     public async Task<bool> DeleteCartProduct(CartProduct cartProduct)
