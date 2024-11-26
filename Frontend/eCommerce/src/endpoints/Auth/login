@@ -1,6 +1,7 @@
+/*
 import { LOGIN_URL } from "../config";
 import { useState } from "react";
-import { jwt_decode } from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 async function login(params) {
   const [isLoading, setIsLoading] = useState(false);
@@ -18,7 +19,7 @@ async function login(params) {
     if (response.ok) {
       const promiseData = await response.json();
       const token = promiseData.token;
-      const decodedToken = jwt_decode(token);
+      const decodedToken = jwtDecode(token);
 
       if (decodedToken) {
         const userData = {
@@ -40,3 +41,4 @@ async function login(params) {
 };
 
 export default login;
+*/

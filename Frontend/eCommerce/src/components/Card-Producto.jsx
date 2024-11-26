@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useNavigate } from 'react-router-dom';
 import '../styles/CardPrueba.css';
 import { getIntensidadImg } from '../utils/intensidad';
-import AgregarCarrito from "./BotonAgregarCarrito/BotonAgregarCarrito";
+import AddToCartButton from "./AddToCartButton/AddToCart";
 export function CardPrueba({ id, imagen, nombre, intensidad, precio, stock, valoracion }) {
     const navigate = useNavigate();
 
@@ -46,7 +46,7 @@ export function CardPrueba({ id, imagen, nombre, intensidad, precio, stock, valo
                 {intensidadEmojis}
             </div>
 	    <div className="detalles2">{precioFormateado} €</div>
-            <AgregarCarrito className="botonPrueba" product={{id, image:imagen, name:nombre, price:precio, stock}}/>
+            <AddToCartButton className="botonPrueba" product={{id, image:imagen, name:nombre, price:precio, stock}} quantity={+1}></AddToCartButton>
         </div>
     );
 }

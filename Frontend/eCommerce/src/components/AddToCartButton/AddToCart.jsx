@@ -1,11 +1,11 @@
 import React from 'react';
+import classes from './AddToCart.module.css';
 import { useCarrito } from '../../context/CarritoContext'; 
-import './BotonAgregarCarrito';
 
-const AgregarCarrito = ({product}) => {
+const AddToCartButton = ({product, quantity}) => {
     const { agregarAlCarrito } = useCarrito(); 
 
-    const handleAgregar = (event) => {
+    const handleAddToCart = (event) => {
         event.preventDefault();
         agregarAlCarrito({
             id: product.id,
@@ -13,13 +13,13 @@ const AgregarCarrito = ({product}) => {
             name: product.name,
             price: product.price,
             stock: product.stock,
-            quantity: 1
+            quantity: quantity
         });
     };
 
     return (
-        <button onClick={handleAgregar} className="boton"> Añadir al carrito </button>
+        <button onClick={handleAddToCart} className={classes.button} disabled={quantity <= 0 || quantity >= product.stock}> Añadir al carrito </button>
     );
 };
 
-export default AgregarCarrito;
+export default AddToCartButton;

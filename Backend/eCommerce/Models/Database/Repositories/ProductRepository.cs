@@ -17,7 +17,7 @@ public class ProductRepository : Repository<Product>
     {
         return await GetQueryable().Where(product => product.Id == (long)id)
         .Include(product => product.Category)
-        .Include(product => product.Reviews).ThenInclude(review => review.User)
+        .Include(product => product.Reviews!).ThenInclude(review => review.User)
         .FirstOrDefaultAsync();
     }
 

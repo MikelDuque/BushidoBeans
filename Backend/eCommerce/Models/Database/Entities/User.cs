@@ -13,7 +13,9 @@ public class User
     public int Phone { get; set; }
     public required string Role { get; set; }
 
-    public Cart Cart { get; set; }
+    //public Cart Cart { get; set; }
     public ICollection<Review> Reviews { get; } = [];
-
+    public List<Product> Products { get; } = [];
+    public List<CartProduct> CartProducts { get; } = [];
+    public List<Order> Orders { get; } = [];
 }

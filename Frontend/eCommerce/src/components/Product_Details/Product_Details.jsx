@@ -1,64 +1,13 @@
 import classes from './Product_Details.module.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { getIntensidadImg } from '../../utils/intensidad';
-import { useCarrito } from '../../context/CarritoContext';
+import Quantity_Counter from '../Quantity_Counter/Counter';
+import AddToCartButton from '../AddToCartButton/AddToCart';
 
 export default function Product_Details({product}) {
-    const { agregarAlCarrito } = useCarrito();
     const [cantidad, setCantidad] = useState(1);
-    const [carrito, setCarrito] = useState([]);
-
-    useEffect(() => {
-        const carritoGuardado = JSON.parse(localStorage.getItem('carrito'));
-        if (carritoGuardado) {
-            setCarrito(carritoGuardado);
-        }
-    }, []);
-
-    const handleCarrito = async (event) => {
-        event.preventDefault();
-
-        const nuevoProducto = {
-            id: product.id,
-            image: product.image,
-            name : product.name,
-            price : product.price,
-            stock: product.stock,
-            quantity: {cantidad}
-        };
-    
-        console.log("producto: ", nuevoProducto);
-        await sendCarrito(nuevoProducto);
-
-        agregarAlCarrito(nuevoProducto)
-    }
-
-
-    const sendCarrito = async (producto)=>{
-
-        const carritoActualizado = [...carrito, producto];
-        setCarrito(carritoActualizado);
-        
-        localStorage.setItem('carrito', JSON.stringify(carritoActualizado));
-    }
 
     const intensidadImg = getIntensidadImg("café");
-
-    function handleQuantity(newQuantity) {
-        setCantidad(newQuantity)
-    };
-
-    const incrementCounter = () => {
-        if(cantidad < product.stock) {
-          handleQuantity(cantidad+1)
-        }
-      };
-    
-      const decrementCounter = () => {
-        if(cantidad > 0) {
-          handleQuantity(cantidad-1)
-        }
-      };
 
     return (   
         <div className={classes.container_info_producto}>
@@ -86,6 +35,11 @@ export default function Product_Details({product}) {
                     <span className={classes.texto}>{product.description}</span>
                 </p>
                 
+                <Quantity_Counter quantity={cantidad} setQuantity={setCantidad} stock={product.stock}/>
+
+                <AddToCartButton product={product} quantity={cantidad}/>
+
+                {/*
                 <div className={classes.counter_container}>
                     <button className={classes.quantity_button} onClick={decrementCounter} disabled={cantidad <= 0}>-</button>
                     <p>{cantidad}</p>
@@ -95,6 +49,7 @@ export default function Product_Details({product}) {
                 <button onClick={handleCarrito} className={classes.boton_agregar_carrito} disabled={product.stock <= 0 || cantidad > product.stock}>
                     {product.stock > 0 ? 'Añadir al carrito' : 'Sin stock'}
                 </button>
+                */}
             </div>  
         </div>
     ); 

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
-import * as jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 const CarritoContext = createContext();
 
@@ -17,11 +17,11 @@ export const CarritoProvider = ({ children }) => {
     const { isAuthenticated } = useAuth();
 
     // URLs de la API
-    const API_URL_GET_CART = import.meta.env.VITE_API_GET_CART_URL;
-    const API_URL_ADD_CART_PRODUCT = import.meta.env.VITE_API_ADD_CART_PRODUCT_URL;
-    const API_URL_DELETE_CART_PRODUCT = import.meta.env.VITE_API_DELETE_CART_PRODUCT_URL;
-    const API_URL_DELETE_CART = import.meta.env.VITE_API_DELETE_CART_URL;
-    const API_URL_UPDATE_CART = import.meta.env.VITE_API_UPDATE_CART_URL;
+    const API_URL_GET_CART = "https://localhost:7015/api/Cart/Get_Cart";
+    const API_URL_ADD_CART_PRODUCT = "https://localhost:7015/api/Cart/Update_CartProduct";
+    const API_URL_DELETE_CART_PRODUCT = "https://localhost:7015/api/Cart/Delete_CartProduct";
+    const API_URL_DELETE_CART = "https://localhost:7015/api/Cart/Delete_CartContent";
+    const API_URL_UPDATE_CART = "https://localhost:7015/api/Cart/Update_GlobalCart";
 
 
     const token = localStorage.getItem('accessToken');
@@ -32,7 +32,7 @@ export const CarritoProvider = ({ children }) => {
             throw new Error('No hay token de autenticación');
         }
 
-        const decodedToken = jwt_decode.jwtDecode(token);
+        const decodedToken = jwtDecode(token);
         const cartId = decodedToken.id; // CAMBIAR POR ID!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         if (!cartId) {
