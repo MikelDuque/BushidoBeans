@@ -19,8 +19,9 @@ public class OrderMapper
     {
       Id = order.Id,
       TotalPrice = TotalPrice(order.User.CartProducts),
+      TotalProducts = TotalProducts(order.User.CartProducts),
       PurchaseDate = order.PurchaseDate,
-      CartProducts = GetCartProductsDto(order.User.CartProducts).ToList()
+      CartProducts = GetCartProductsDto(order.User.CartProducts)
     };
   }
   public IEnumerable<OrderDto> ToDto(IEnumerable<Order> orders)
@@ -35,6 +36,7 @@ public class OrderMapper
     {
       Id = orderDto.Id,
       TotalPrice = orderDto.TotalPrice,
+      TotalProducts = orderDto.TotalProducts,
       PurchaseDate = DateTime.Now,
       UserId = orderDto.UserId
     };
@@ -45,18 +47,28 @@ public class OrderMapper
   }
 
   //OTRAS FUNCIONES
-  private IEnumerable<CartProductDto> GetCartProductsDto(IEnumerable<CartProduct> cartProducts)
+  private List<CartProductDto> GetCartProductsDto(IEnumerable<CartProduct> cartProducts)
   {
-    return _cartProductMapper.ToDto(cartProducts);
+    return _cartProductMapper.ToDto(cartProducts).ToList();
   }
   
   private decimal TotalPrice(IEnumerable<CartProduct> cartProducts) {
     
-    List<CartProductDto> productList = GetCartProductsDto(cartProducts).ToList();
+    List<CartProductDto> productList = GetCartProductsDto(cartProducts);
     decimal totalPrice = 0;
 
     productList.ForEach((product) => totalPrice += product.Price);
 
     return totalPrice;
+  }
+
+  private int TotalProducts(IEnumerable<CartProduct> cartProducts) {
+    
+    List<CartProductDto> productList = GetCartProductsDto(cartProducts);
+    int totalProducts = 0;
+
+    productList.ForEach((product) => totalProducts += product.Quantity);
+
+    return totalProducts;
   }
 }
