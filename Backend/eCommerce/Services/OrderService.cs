@@ -22,21 +22,26 @@ namespace eCommerce.Services
             return _orderMapper.ToDto(user.Orders).ToList();
         }
 
-        public async Task<OrderDto> CreateOrderAsync(Order order)
+        public async Task<bool> CreateOrderAsync(Order order)
         {
 
             List<CartProduct> cartProducts = await GetCartProducts(order.UserId);
-
-            OrderDto newOrderDto = new OrderDto
+            Order newOrder = new Order
             {
                 Id = order.Id,
-                UserId = order.UserId
+                UserId = order.UserId,
+                TotalPrice = await TotalPrice(order.UserId),
+                TotalProducts = await TotalProducts(order.UserId),
+                PurchaseDate = DateTime.Now
+
+                
             };
 
-            await _unitOfWork.OrderRepository.InsertAsync(_orderMapper.ToEntity(newOrderDto));
-            await _unitOfWork.SaveAsync();
+            await _unitOfWork.OrderRepository.InsertAsync(newOrder);
 
-            return newOrderDto;
+            return await _unitOfWork.SaveAsync();
+
+            
         }
 
         private async Task<List<CartProduct>> GetCartProducts(long userId)
@@ -44,8 +49,28 @@ namespace eCommerce.Services
             User user =  await _unitOfWork.UserRepository.GetByIdAsync(userId);
             return user.CartProducts;
         }
-        
 
+        private async Task<decimal> TotalPrice(long userId)
+        {
+
+            List<CartProduct> productList = await GetCartProducts(userId);
+            decimal totalPrice = 0;
+
+            productList.ForEach((cartProduct) => totalPrice += cartProduct.Product.Price);
+
+            return totalPrice;
+        }
+
+        private async Task<int> TotalProducts(long userId)
+        {
+
+            List<CartProduct> productList = await GetCartProducts(userId);
+            int totalProducts = 0;
+
+            productList.ForEach((cartProduct) => totalProducts += cartProduct.Quantity);
+
+            return totalProducts;
+        }
     }
 
 
