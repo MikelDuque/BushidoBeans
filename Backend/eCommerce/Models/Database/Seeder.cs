@@ -96,6 +96,7 @@ public class Seeder
             new Order
             {
                 UserId = 1
+
             }
         ];
 
