@@ -26,15 +26,14 @@ namespace eCommerce.Services
         {
 
             List<CartProduct> cartProducts = await GetCartProducts(order.UserId);
+
             Order newOrder = new Order
             {
-                Id = order.Id,
                 UserId = order.UserId,
                 TotalPrice = await TotalPrice(order.UserId),
                 TotalProducts = await TotalProducts(order.UserId),
                 PurchaseDate = DateTime.Now
 
-                
             };
 
             await _unitOfWork.OrderRepository.InsertAsync(newOrder);
