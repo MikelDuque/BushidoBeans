@@ -1,42 +1,11 @@
 import classes from './Product_Details.module.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { getIntensidadImg } from '../../utils/intensidad';
 import Quantity_Counter from '../Quantity_Counter/Counter';
+import AddToCartButton from '../AddToCartButton/AddToCart';
 
 export default function Product_Details({product}) {
-    
     const [cantidad, setCantidad] = useState(1);
-    const [carrito, setCarrito] = useState([]);
-
-    useEffect(() => {
-        const carritoGuardado = JSON.parse(localStorage.getItem('carrito'));
-        if (carritoGuardado) {
-            setCarrito(carritoGuardado);
-        }
-    }, []);
-
-    const handleCarrito = async (event) => {
-        event.preventDefault();
-
-        const nuevoProducto = {
-            nombreP : product.name,
-            precioP : product.price,
-            cantidadP: {cantidad},
-            idProductoP: product.id
-          };
-    
-        console.log("producto: ", nuevoProducto);
-        await sendCarrito(nuevoProducto);
-    }
-
-
-    const sendCarrito = async (producto)=>{
-
-        const carritoActualizado = [...carrito, producto];
-        setCarrito(carritoActualizado);
-        
-        localStorage.setItem('carrito', JSON.stringify(carritoActualizado));
-    }
 
     const intensidadImg = getIntensidadImg("café");
 
@@ -65,12 +34,22 @@ export default function Product_Details({product}) {
                 <p className={`${classes.subtitulo} ${classes.descripcion}`}>
                     <span className={classes.texto}>{product.description}</span>
                 </p>
+                
+                <Quantity_Counter quantity={cantidad} setQuantity={setCantidad} stock={product.stock}/>
 
-                <Quantity_Counter productId={product.id} oldQuantity={cantidad} stock={product.stock}/>
+                <AddToCartButton product={product} quantity={cantidad}/>
+
+                {/*
+                <div className={classes.counter_container}>
+                    <button className={classes.quantity_button} onClick={decrementCounter} disabled={cantidad <= 0}>-</button>
+                    <p>{cantidad}</p>
+                    <button className={classes.quantity_button} onClick={incrementCounter} disabled={cantidad >= product.stock}>+</button>
+                </div>
 
                 <button onClick={handleCarrito} className={classes.boton_agregar_carrito} disabled={product.stock <= 0 || cantidad > product.stock}>
                     {product.stock > 0 ? 'Añadir al carrito' : 'Sin stock'}
                 </button>
+                */}
             </div>  
         </div>
     ); 

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
-import * as jwt_decode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 const CarritoContext = createContext();
 
@@ -17,11 +17,11 @@ export const CarritoProvider = ({ children }) => {
     const { isAuthenticated } = useAuth();
 
     // URLs de la API
-    const API_URL_GET_CART = import.meta.env.VITE_API_GET_CART_URL;
-    const API_URL_ADD_CART_PRODUCT = import.meta.env.VITE_API_ADD_CART_PRODUCT_URL;
-    const API_URL_DELETE_CART_PRODUCT = import.meta.env.VITE_API_DELETE_CART_PRODUCT_URL;
-    const API_URL_DELETE_CART = import.meta.env.VITE_API_DELETE_CART_URL;
-    const API_URL_UPDATE_CART = import.meta.env.VITE_API_UPDATE_CART_URL;
+    const API_URL_GET_CART = "https://localhost:7015/api/Cart/Get_Cart";
+    const API_URL_ADD_CART_PRODUCT = "https://localhost:7015/api/Cart/Update_CartProduct";
+    const API_URL_DELETE_CART_PRODUCT = "https://localhost:7015/api/Cart/Delete_CartProduct";
+    const API_URL_DELETE_CART = "https://localhost:7015/api/Cart/Delete_CartContent";
+    const API_URL_UPDATE_CART = "https://localhost:7015/api/Cart/Update_GlobalCart";
 
 
     const token = localStorage.getItem('accessToken');
@@ -32,7 +32,7 @@ export const CarritoProvider = ({ children }) => {
             throw new Error('No hay token de autenticación');
         }
 
-        const decodedToken = jwt_decode.jwtDecode(token);
+        const decodedToken = jwtDecode(token);
         const cartId = decodedToken.id; // CAMBIAR POR ID!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         if (!cartId) {
@@ -44,6 +44,7 @@ export const CarritoProvider = ({ children }) => {
 
     useEffect(() => {
         if (isAuthenticated) {
+            actualizarProductosCarrito();
             obtenerCarritoBackend();
         } else {
             const carritoGuardado = JSON.parse(localStorage.getItem('carrito'));
@@ -58,6 +59,7 @@ export const CarritoProvider = ({ children }) => {
             localStorage.setItem('carrito', JSON.stringify(carrito));
         }
     }, [carrito, isAuthenticated]);
+
     useEffect(() => {
         console.log("Carrito inicial:", carrito);
     }, [carrito]);
@@ -149,7 +151,7 @@ export const CarritoProvider = ({ children }) => {
             }
         } else {
             const productoExistente = carrito.find((item) => item.id === producto.id);
-            if (productoExistente) {
+             if (productoExistente) {
                 const nuevoCarrito = carrito.map((item) =>
                     item.id === producto.id ? { ...item, quantity: item.quantity + producto.quantity } : item
                 );
@@ -159,6 +161,27 @@ export const CarritoProvider = ({ children }) => {
             }
         }
     };
+
+    function establecerCarrito(carritoNuevo) {
+        setCarrito((prevCarrito) => {
+            const productoExistente = prevCarrito.find((item) => item.id === carritoNuevo.productId);
+            if (productoExistente) {
+                return prevCarrito.map((item) =>
+                    item.id === carritoNuevo.productId
+                        ? { ...item, quantity: carritoNuevo.quantity }
+                        : item
+                );
+            } else {
+                return [
+                    ...prevCarrito,
+                    {
+                        id: carritoNuevo.productId,
+                        quantity: carritoNuevo.quantity,
+                    },
+                ];
+            }
+        });
+    }
 
     const eliminarDelCarrito = async (productoId) => {
         if (isAuthenticated) {
@@ -197,7 +220,7 @@ export const CarritoProvider = ({ children }) => {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`,
+                        'Authorization': `Bearer ${token}`,
                     },
                 });
 
@@ -238,11 +261,11 @@ export const CarritoProvider = ({ children }) => {
                 };
     
                 
-                const response = await fetch(`${API_URL_UPDATE_CART}`, {
+                const response = await fetch(`${API_URL_UPDATE_CART}?id=${cartId}&cartProducts=${carrito}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`,
+                        'Authorization': `Bearer ${token}`,
                     },
                     body: JSON.stringify(carritoBackend),
                 });

@@ -10,12 +10,14 @@ public class UnitOfWork
     private ReviewRepository _reviewRepository = null!;
     private CartRepository _cartRepository = null!;
     private CartProductRepository _cartProductRepository = null!;
+    private OrderRepository _orderRepository = null!;
 
     public UserRepository UserRepository => _userRepository ??= new UserRepository(_dataContext);
     public ProductRepository ProductRepository => _productRepository ??= new ProductRepository(_dataContext);
     public ReviewRepository ReviewRepository => _reviewRepository ??= new ReviewRepository(_dataContext);
     public CartRepository CartRepository => _cartRepository ??= new CartRepository(_dataContext);
     public CartProductRepository CartProductRepository => _cartProductRepository ??= new CartProductRepository(_dataContext);
+    public OrderRepository OrderRepository => _orderRepository ??= new OrderRepository(_dataContext);
 
     public UnitOfWork(DataContext dataContext)
     {

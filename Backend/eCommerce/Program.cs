@@ -41,6 +41,7 @@ public class Program
         builder.Services.AddScoped<ReviewRepository>();
         builder.Services.AddScoped<CartRepository>();
         builder.Services.AddScoped<CartProductRepository>();
+        builder.Services.AddScoped<OrderRepository>();
 
         //Servicios
         builder.Services.AddScoped<TextComparer>();

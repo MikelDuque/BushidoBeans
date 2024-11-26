@@ -8,6 +8,6 @@ public class Cart
    public long Id { get; set; }
    public User User { get; set; }
 
-   public List<Product> Products { get; set; } = [];
-   public List<CartProduct> CartProducts { get; set; } = [];
+   public List<Product> Products { get; } = [];
+   public List<CartProduct> CartProducts { get; } = [];
 }

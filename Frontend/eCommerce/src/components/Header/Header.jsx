@@ -44,7 +44,7 @@ function Header() {
       </nav>
 
         {isOpen && (
-          <Modal closeModal={closeModal} type="cart" titulo={"Tu Carro"} cancelFnc="" continueFnc="" buttonValues={{continueVal:"Procesar compra", cancelVal:"Vaciar carro"}}>
+          <Modal closeModal={closeModal} type="cart" titulo={"Tu Carro"} cancelFnc={eliminarContenidoCarrito} continueFnc="" buttonValues={{continueVal:"Procesar compra", cancelVal:"Vaciar carro"}}>
             <Cart closeCart={closeModal}/>
           </Modal>
         )}

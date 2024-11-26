@@ -80,6 +80,7 @@ public class Seeder
             File.ReadAllText("Assets/Reviews.json")
         );
 
+        /*
         Cart[] carts =
         [
             new Cart {Id = 1},
@@ -87,15 +88,26 @@ public class Seeder
             new Cart {Id = 3},
             new Cart {Id = 4}
         ];
+        */
+        
+
+        Order[] orders =
+        [
+            new Order
+            {
+                UserId = 1
+            }
+        ];
 
         CartProduct[] cartProducts =
         [
             new CartProduct
             {
-                CartId = 1,
+                UserId = 1,
                 ProductId = 1,
                 Quantity = 2
             },
+            /*
             new CartProduct
             {
                 CartId = 1,
@@ -144,6 +156,7 @@ public class Seeder
                 ProductId = 8,
                 Quantity = 1
             }
+            */
         ];
 
         //Añadimos el rango de usuarios a la BDD
@@ -156,10 +169,10 @@ public class Seeder
         await _dbContext.Products.AddRangeAsync(products);
         await _dbContext.SaveChangesAsync();
 
-        await _dbContext.Carts.AddRangeAsync(carts);
-        await _dbContext.SaveChangesAsync();
+        //await _dbContext.Carts.AddRangeAsync(carts);
         
         await _dbContext.CartProducts.AddRangeAsync(cartProducts);
+        await _dbContext.SaveChangesAsync();
 
         await _dbContext.Reviews.AddRangeAsync(reviews);
         await _dbContext.SaveChangesAsync();

@@ -21,7 +21,9 @@ public class Product
     public required long CategoryId { get; set; }
     public Category Category { get; set; }
 
-    public List<Cart> Carts { get; set; } = [];
-   public List<CartProduct> CartProducts { get; set; } = [];
-    public ICollection<Review> Reviews { get; } = new List<Review>();
+    public ICollection<Review> Reviews { get; } = []; 
+    //public List<Cart> Carts { get; } = [];
+    public List<User> Users { get; } = [];
+    public List<CartProduct> CartProducts { get; } = [];
+    public List<Order> Orders { get; } = [];
 }

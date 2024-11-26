@@ -1,26 +1,30 @@
 import classes from "./Cart.module.css";
-import Quantity_Counter from "../../Quantity_Counter/Counter";
+import CartItem from "./Cart_Item/CartItem";
 import { useCarrito } from "../../../context/CarritoContext";
+import { API_BASE_URL } from "../../../endpoints/config";
 
 export default function Cart({}) {
-  const {carrito, eliminarDelCarrito} = useCarrito();
+  const {carrito} = useCarrito();
 
   //DEFINIR CARTITEMS
   function cartMapper(cartItems) {
-    return (cartItems.length > 0 ? ( 
-      cartItems.map((item) => (
-        console.log(item),
-        <li id={item.productId} className={classes.cart_item}>
-          <img src={`https://localhost:7015/${item.image}`} alt="img Producto" />
-          <div className={classes.data_container}>
-            <h3 className={classes.importantText}>{item.name}</h3>
-            <div className={classes.complementary_data}>
-              <p>{item.price} €</p>
-              <Quantity_Counter productId={item.id} oldQuantity={item.quantity} stock={item.stock}/>
-            </div>
-          </div>
-          <a className={classes.importantText} onClick={(e) => {e.preventDefault(), eliminarDelCarrito(item.id)}}>X</a>
-        </li>
+    console.log("Cart length", cartItems.length);
+    
+
+    return (cartItems.length > 0 ? (
+      cartItems.map((cartItem) => (
+        console.log("Cart Item", cartItem),
+        
+        <CartItem 
+          key={cartItem.id}
+          productData = {{
+            id: cartItem.id,
+            image: `${API_BASE_URL}${cartItem.image}`,
+            name: cartItem.name,
+            price: cartItem.price,
+            stock: cartItem.stock,
+            quantity: cartItem.quantity
+          }}/>
       ))) : (<p>"Tu carrito está vacío"</p>)
     ); 
   };

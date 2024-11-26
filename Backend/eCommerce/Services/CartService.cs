@@ -7,14 +7,23 @@ namespace eCommerce.Services;
 public class CartService
 {
     private readonly UnitOfWork _unitOfWork;
-    private readonly CartMapper _cartMapper;
+    //private readonly CartMapper _cartMapper;
+    private readonly CartProductMapper _cartProductMapper;
 
-    public CartService(UnitOfWork unitOfWork, CartMapper cartMapper)
+    public CartService(UnitOfWork unitOfWork, CartProductMapper cartProductMapper)
     {
         _unitOfWork = unitOfWork;
-        _cartMapper = cartMapper;
+        //_cartMapper = cartMapper;
+        _cartProductMapper = cartProductMapper;
     }
 
+    public async Task<List<CartProductDto>> GetCartAsync(long userId)
+    {
+        User user = await _unitOfWork.UserRepository.GetByIdAsync(userId);
+        return await Task.FromResult(_cartProductMapper.ToDto(user.CartProducts).ToList());
+    }
+
+    /*
     public async Task<CartDto> GetCartAsync(long cartId)
     {
         Cart cart = await _unitOfWork.CartRepository.GetByIdAsync(cartId);
@@ -33,6 +42,8 @@ public class CartService
 
         return cart;
     }
+    */
+    
 
     //public async Task<Cart> AddToCartAsync(long userId, long productId, int quantity)
     //{
@@ -75,13 +86,14 @@ public class CartService
     //    return cart;
     //}
 
+    /*
     public async Task<CartProduct> UpdateCartProductAsync(CartProduct cartProduct)
     {
         CartProduct cartProductBD = await _unitOfWork.CartProductRepository.GetByIdAsync(cartProduct.CartId, cartProduct.ProductId);
 
         if (cartProductBD != null)
         {
-            cartProduct.Quantity += cartProductBD.Quantity;
+            //cartProduct.Quantity += cartProductBD.Quantity;
 
             _unitOfWork.CartProductRepository.Update(cartProduct);
         }
@@ -109,10 +121,9 @@ public class CartService
             await UpdateCartProductAsync(cartProduct); 
         }
 
-        
         return cart;
     }
-    
+    */
 }
 
 

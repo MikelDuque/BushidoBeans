@@ -8,10 +8,10 @@ public class CartMapper
 
   private readonly CartProductMapper _cartProductMapper;
 
-    public CartMapper(CartProductMapper cartProductMapper)
-    {
-        _cartProductMapper = cartProductMapper;
-    }
+  public CartMapper(CartProductMapper cartProductMapper)
+  {
+      _cartProductMapper = cartProductMapper;
+  }
 
   //TO DTO
   public CartDto ToDto(Cart cart)
