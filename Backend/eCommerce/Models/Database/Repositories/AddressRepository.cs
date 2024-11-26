@@ -1,4 +1,5 @@
-﻿using eCommerce.Models.Database.Entities;
+﻿using eCommerce.Controllers;
+using eCommerce.Models.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace eCommerce.Models.Database.Repositories;
