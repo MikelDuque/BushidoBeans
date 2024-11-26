@@ -2,7 +2,7 @@ import React from 'react';
 import { useCarrito } from '../../context/CarritoContext'; 
 import './BotonAgregarCarrito';
 
-const AgregarCarrito = ({productId }) => {
+const AgregarCarrito = ({productId}) => {
     const { agregarAlCarrito } = useCarrito(); 
 
     const handleAgregar = (event) => {

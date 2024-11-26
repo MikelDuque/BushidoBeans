@@ -13,6 +13,8 @@ export const CarritoProvider = ({ children }) => {
         const carritoGuardado = localStorage.getItem('carrito');
         return carritoGuardado ? JSON.parse(carritoGuardado) : [];
     });
+    console.log("Mono", carrito);
+    
     const [cartId, setCartId] = useState(null);
     const { isAuthenticated } = useAuth();
 
@@ -125,39 +127,33 @@ export const CarritoProvider = ({ children }) => {
 
                 const data = await response.json();
                 console.log('Producto agregado al carrito:', data);
+            }
+         catch (error) {
+            console.error('Error al agregar el producto al carrito:', error);
+        }
+    }
 
                 setCarrito((prevCarrito) => {
-                    const productoExistente = prevCarrito.find((item) => item.id === data.productId);
+                    const productoExistente = prevCarrito.find((item) => item.id === producto.id);
+                  
                     if (productoExistente) {
                         return prevCarrito.map((item) =>
-                            item.id === data.productId
-                                ? { ...item, quantity: data.quantity }
+                            item.id === producto.id
+                                ? { ...item, quantity: item.quantity + producto.quantity }
                                 : item
                         );
                     } else {
                         return [
                             ...prevCarrito,
                             {
-                                id: data.productId,
-                                quantity: data.quantity,
+                                id: producto.id,
+                                quantity: producto.quantity,
                             },
                         ];
                     }
                 });
-            } catch (error) {
-                console.error('Error al agregar el producto al carrito:', error);
-            }
-        } else {
-            const productoExistente = carrito.find((item) => item.id === producto.id);
-            if (productoExistente) {
-                const nuevoCarrito = carrito.map((item) =>
-                    item.id === producto.id ? { ...item, quantity: item.quantity + producto.quantity } : item
-                );
-                setCarrito(nuevoCarrito);
-            } else {
-                setCarrito([...carrito, { ...producto }]);
-            }
-        }
+           
+        
     };
 
     const eliminarDelCarrito = async (productoId) => {
