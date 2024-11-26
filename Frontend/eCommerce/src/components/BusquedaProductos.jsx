@@ -21,7 +21,6 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   useEffect(() => {
     // Llamada a la API cuando cambian el filtro, orden, o búsqueda
     const fetchData = async () => {
-      setLoading(true);
       setError(null);
 
       try {

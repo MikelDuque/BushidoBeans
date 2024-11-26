@@ -201,11 +201,15 @@ export const CarritoProvider = ({ children }) => {
                     },
                 });
 
+                
+
                 if (!response.ok) {
                     throw new Error('Error al eliminar el contenido del carrito');
                 }
 
                 setCarrito([]);
+                
+                
             } catch (error) {
                 console.error('Error al eliminar el contenido del carrito:', error);
             }

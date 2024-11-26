@@ -97,7 +97,7 @@ const handleReview = async (event) => {
 const sendReview = async (data) => {
     try {
         const token = localStorage.getItem('accessToken');
-        const response = await fetch("https://localhost:7015/Review/Insert_Review", {
+        const response = await fetch("https://localhost:7015/api/Review/Insert_Review", {
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json',
