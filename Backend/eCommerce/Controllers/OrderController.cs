@@ -22,6 +22,12 @@ namespace eCommerce.Controllers
             return Ok(await _orderService.GetOrderAsync(id));
         }
 
+        [HttpPost]
+        public async Task<ActionResult> PostOrder([FromBody]Order order)
+        {
+            await _orderService.CreateOrderAsync(order);
+            return Ok();
+        }
         /*
 
         [HttpPost("Update_Cart")]
@@ -37,5 +43,7 @@ namespace eCommerce.Controllers
 
         }
         */
+    
+    
     }
 }

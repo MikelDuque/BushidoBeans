@@ -22,6 +22,30 @@ namespace eCommerce.Services
             return _orderMapper.ToDto(user.Orders).ToList();
         }
 
+        public async Task<OrderDto> CreateOrderAsync(Order order)
+        {
+
+            List<CartProduct> cartProducts = await GetCartProducts(order.UserId);
+
+            OrderDto newOrderDto = new OrderDto
+            {
+                Id = order.Id,
+                UserId = order.UserId
+            };
+
+            await _unitOfWork.OrderRepository.InsertAsync(_orderMapper.ToEntity(newOrderDto));
+            await _unitOfWork.SaveAsync();
+
+            return newOrderDto;
+        }
+
+        private async Task<List<CartProduct>> GetCartProducts(long userId)
+        {
+            User user =  await _unitOfWork.UserRepository.GetByIdAsync(userId);
+            return user.CartProducts;
+        }
+        
+
     }
 
 
