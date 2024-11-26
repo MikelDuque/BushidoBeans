@@ -80,7 +80,7 @@ public class Seeder
             File.ReadAllText("Assets/Reviews.json")
         );
 
-        /*
+        
         Cart[] carts =
         [
             new Cart {Id = 1},
@@ -88,7 +88,7 @@ public class Seeder
             new Cart {Id = 3},
             new Cart {Id = 4}
         ];
-        */
+        
         
 
         Order[] orders =
@@ -107,56 +107,56 @@ public class Seeder
                 ProductId = 1,
                 Quantity = 2
             },
-            /*
+            
             new CartProduct
             {
-                CartId = 1,
+                UserId = 1,
                 ProductId = 32,
                 Quantity = 8
             },
             new CartProduct
             {
-                CartId = 1,
+                UserId = 1,
                 ProductId = 8,
                 Quantity = 1
             },
             new CartProduct
             {
-                CartId = 2,
+                UserId = 2,
                 ProductId = 6,
                 Quantity = 1
             },
             new CartProduct
             {
-                CartId = 2,
+                UserId = 2,
                 ProductId = 5,
                 Quantity = 1
             },
             new CartProduct
             {
-                CartId = 2,
+                UserId = 2,
                 ProductId = 8,
                 Quantity = 3
             },
             new CartProduct
             {
-                CartId = 3,
+                UserId = 3,
                 ProductId = 1,
                 Quantity = 2
             },
             new CartProduct
             {
-                CartId = 3,
+                UserId = 3,
                 ProductId = 32,
                 Quantity = 8
             },
             new CartProduct
             {
-                CartId = 3,
+                UserId = 3,
                 ProductId = 8,
                 Quantity = 1
             }
-            */
+            
         ];
 
         //Añadimos el rango de usuarios a la BDD
