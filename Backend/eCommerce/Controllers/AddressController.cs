@@ -27,7 +27,7 @@ public class AddressController : Controller
 
     [Authorize]
     [HttpPost("Insert_Address")]
-    public async Task<ActionResult<Review>> CreateAddressAsync([FromBody] Address address)
+    public async Task<ActionResult<Address>> CreateAddressAsync([FromBody] Address address)
     {
         Claim userClaimId = User.FindFirst("id");
 

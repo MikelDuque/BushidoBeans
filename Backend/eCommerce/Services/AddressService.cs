@@ -1,4 +1,5 @@
 ﻿using eCommerce.Controllers;
+using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 using eCommerce.Models.Mappers;
 
