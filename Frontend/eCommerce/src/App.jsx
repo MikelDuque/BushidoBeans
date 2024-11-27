@@ -6,6 +6,8 @@ import SobreNosotros from './pages/SobreNosotros';
 import DetallesProducto from './pages/DetallesProducto';
 import { Routes, Route } from "react-router-dom";
 import NotFound from './components/NotFound';
+import Checkout from "./pages/Checkout/Checkout";
+import { ReviewProvider } from "./context/ReviewContext";
 
 function App() {
     return (
@@ -14,9 +16,12 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/sobreNosotros" element={<SobreNosotros />} />
-            <Route path="/producto/:id" element={<DetallesProducto />} />
+            <ReviewProvider>
+                <Route path="/producto/:id" element={<DetallesProducto />} />
+            </ReviewProvider>
             <Route path="/" element={<Inicio />} />
             <Route path="/catalogo" element={<Catalogo />} />
+            <Route path="/checkout" element={<Checkout />} />
 
             {/* Ruta para página no encontrada */}
             <Route path="400" element={<NotFound />} />

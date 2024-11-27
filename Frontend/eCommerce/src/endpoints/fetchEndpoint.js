@@ -1,8 +1,8 @@
 import { error } from "console";
 
-export default async function fetchEndpoint(URL, type, token, params) {
+export default async function fetchEndpoint(Url, type, token, params) {
   try {
-    const response = await fetch(URL, {
+    const response = await fetch(Url, {
       method: type,
       headers: existToken(token),
       body: JSON.stringify(params)
