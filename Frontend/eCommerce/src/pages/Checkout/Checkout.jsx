@@ -1,14 +1,21 @@
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import classes from './Checkout.module.css';
-import Checkout_Cart from "../../components/Checkout/Checkout_Cart";
+import Cart from "../../components/Modals/Shopping_Cart/Cart";
+
 
 function Checkout() {
 
   return (
     <>
       <Header />
-        <Checkout_Cart/>
+        <div className={classes.cart_container}>
+          <div className={classes.cart_header}>
+            <h4 className={classes.text}>Tu Carro</h4>
+            <button className={classes.text}>Vaciar carro</button>
+          </div>
+          <Cart/>
+        </div>
       <Footer />
     </>
   )
