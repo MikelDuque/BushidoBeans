@@ -65,6 +65,60 @@ export const CarritoProvider = ({ children }) => {
     }, [carrito]);
     
 
+    //Intento de funcion para sincronicar los productos del localestorage con el backend una vez iniciado sesion
+
+    useEffect(() => {
+        const sincronizarCarritoBackend = async () => {
+            const carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
+
+            if(carritoGuardado.length > 0){
+                try{
+                    // Crear objeto backend
+                    const carritoBackend = {
+                        id: handleToken(), 
+                        cartProducts: carritoGuardado.map((producto) => ({
+                            productId: producto.id,
+                            quantity: producto.quantity,
+                        })),
+                    }
+
+                    //Enviar productos al backend
+                    const response = await fetch(`${API_URL_UPDATE_CART}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`,
+                        },
+                        body: JSON.stringify(carritoBackend),
+                    });
+                    if(!response.ok){
+                        throw new Error('Error al sincronizar el carrito con el backend');
+                    }
+                    
+                    const data = await response.json();
+                    console.log('Carrito sincronizado con el backend:', data);
+
+                    setCarrito(data.cartProducts.map((product) => ({
+                        id: product.productId,
+                        image: product.image,
+                        name: product.name,
+                        price: product.price,
+                        stock: product.stock,
+                        quantity: product.quantity
+                    })))
+                    //Borramos el carrito local
+                    localStorage.removeItem('carrito');
+                }catch (error) {
+                    console.error('Error al sincronizar el carrito con el backend:', error);
+                }
+            }
+        }
+        
+        if (isAuthenticated) {
+            sincronizarCarritoBackend();
+        }
+    }, [isAuthenticated, token])
+
     const obtenerCarritoBackend = async () => {
         try {
             const cartId = handleToken();
