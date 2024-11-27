@@ -2,13 +2,21 @@ import { createContext, useEffect, useRef, useState } from "react";
 import { GET_REVIEW_BY_ID, POST_REVIEW } from "../endpoints/config";
 import useFetch from "../endpoints/useFetch";
 
+/*Yasir*/ 
+
+  export const useReview = () => {
+    return useContext(ReviewContext);
+  };
+
+
+/**/
 const ReviewContext = createContext({
   reviewList: [],
   setProductId: () => {},
   addReview: () => {}
 });
 
-function ReviewProvider({children}) {
+export function ReviewProvider({children}) {
   const [reviewList, setReviewList] = useState([]);
   const productId = useRef(0);  //¿Esto debe ser un ref o una constante normal?
   const token = localStorage.getItem('accessToken');
@@ -46,3 +54,4 @@ function ReviewProvider({children}) {
   return <TripContext.Provider value={ctxValue}>{children}</TripContext.Provider>
 }
 
+// export default ReviewProvider; 

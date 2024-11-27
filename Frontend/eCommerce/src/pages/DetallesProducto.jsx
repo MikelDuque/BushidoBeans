@@ -1,12 +1,12 @@
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 
-import { useContext, useState, useEffect} from 'react';
+import { useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 
 import { GET_PRODUCT_BY_ID } from '../endpoints/config';
 import useFetch from '../endpoints/useFetch';
-import { ReviewContext } from '../context/ReviewContext'
+import { useReview } from '../context/ReviewContext'
 import Product_Details from '../components/Product_Details/Product_Details';
 import Review_List from '../components/Review_List/Review_List';
 
@@ -20,7 +20,7 @@ function DetallesProducto() {
         reviewList,
         setProductId,
         addReview
-    } = useContext(ReviewContext);
+    } = useReview();
     
     useEffect(() => {
         const {isLoading, error, fetchData} = useFetch({Url:GET_PRODUCT_BY_ID(id), type:'GET', params:id});

@@ -6,9 +6,11 @@ export default function useFetch({Url, type, token, params}) {
   const [error, setError] = useState(null);
   const [fetchData, setFetchData] = useState(null);
 
+  /*
   useEffect(() => {
     fetchingData();
   }),[fetchEndpoint];
+  */
 
   async function fetchingData() {
     setIsLoading(true);
@@ -24,9 +26,9 @@ export default function useFetch({Url, type, token, params}) {
     finally {setIsLoading(false);}
   }
 
-  return {
+  return ({
     isLoading,
     error,
     fetchData
-  };
+  });
 };

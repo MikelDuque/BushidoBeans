@@ -1,5 +1,3 @@
-import { error } from "console";
-
 export default async function fetchEndpoint(Url, type, token, params) {
   try {
     const response = await fetch(Url, {

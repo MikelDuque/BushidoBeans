@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
 import { jwtDecode } from 'jwt-decode';
 import useFetch from "../endpoints/useFetch";
-import {GET_CART_BY_ID} from "../endpoints/config";
+import { GET_CART_BY_ID, PUT_CART } from "../endpoints/config";
 
 const CarritoContext = createContext();
 
@@ -15,38 +15,43 @@ export const CarritoProvider = ({ children }) => {
         const carritoGuardado = localStorage.getItem('carrito');
         return carritoGuardado ? JSON.parse(carritoGuardado) : [];
     });
-    const [cartId, setCartId] = useState(null);
     const { isAuthenticated } = useAuth();
     const token = localStorage.getItem('accessToken');
-    const { fetchData, loading, error } = useFetch({});
+    const userId = token.id;
+
+
+    const handleCart = (newCart) => {
+        setCarrito(newCart);
+    };
 
     // URLs de la API
 
 
     // Función para manejar el token y obtener el cartId
-    const handleToken = () => {
-        if (!token) {
-            throw new Error('No hay token de autenticación');
-        }
+    // const handleToken = () => {
+    //     if (!token) {
+    //         throw new Error('No hay token de autenticación');
+    //     }
 
-        const decodedToken = jwtDecode(token);
-        const cartId = decodedToken.id; // CAMBIAR POR ID!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //     const decodedToken = jwtDecode(token);
+    //     const cartId = decodedToken.id; 
 
-        if (!cartId) {
-            throw new Error('No se encontró el cartId en el token');
-        }
+    //     if (!cartId) {
+    //         throw new Error('No se encontró el cartId en el token');
+    //     }
 
-        return cartId;
-    };
+    //     return cartId;
+    // };
+
 
     useEffect(() => {
         if (isAuthenticated) {
-            actualizarProductosCarrito();
-            obtenerCarritoBackend();
+            // sincronizarCarritoBackend();
+            // obtenerCarritoBackend();
         } else {
             const carritoGuardado = JSON.parse(localStorage.getItem('carrito'));
             if (carritoGuardado) {
-                setCarrito(carritoGuardado);
+                handleCart(carritoGuardado);
             }
         }
     }, [isAuthenticated]);
@@ -64,96 +69,23 @@ export const CarritoProvider = ({ children }) => {
 
     //Intento de funcion para sincronicar los productos del localestorage con el backend una vez iniciado sesion
 
-    useEffect(() => {
-        const sincronizarCarritoBackend = async () => {
-            const carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
+    /*LLAMADAS A LOS ENDPOINT*/
 
-            if (carritoGuardado.length > 0) {
-                try {
-                    // Crear objeto backend
-                    const carritoBackend = {
-                        id: handleToken(),
-                        cartProducts: carritoGuardado.map((producto) => ({
-                            productId: producto.id,
-                            quantity: producto.quantity,
-                        })),
-                    }
+    const obtenerCarritoBackend =  () => {
+        const { fetchData, error } =  useFetch({ Url: GET_CART_BY_ID(userId), type: 'GET', token: token, params: userId });
+        handleCart(fetchData);
+        console.log("Carrito obtenido:", fetchData);
 
-                    //Enviar productos al backend
-                    const response = await fetch(`${API_URL_UPDATE_CART}`, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`,
-                        },
-                        body: JSON.stringify(carritoBackend),
-                    });
-                    if (!response.ok) {
-                        throw new Error('Error al sincronizar el carrito con el backend');
-                    }
-
-                    const data = await response.json();
-                    console.log('Carrito sincronizado con el backend:', data);
-
-                    setCarrito(data.cartProducts.map((product) => ({
-                        id: product.productId,
-                        image: product.image,
-                        name: product.name,
-                        price: product.price,
-                        stock: product.stock,
-                        quantity: product.quantity
-                    })))
-                    //Borramos el carrito local
-                    localStorage.removeItem('carrito');
-                } catch (error) {
-                    console.error('Error al sincronizar el carrito con el backend:', error);
-                }
-            }
-        }
-
-        if (isAuthenticated) {
-            sincronizarCarritoBackend();
-        }
-    }, [isAuthenticated, token])
-
-    const obtenerCarritoBackend = async () => {
-        try {
-            const cartId = handleToken();
-
-            const response = await fetch(`${API_URLS_GET_CART}?id=${cartId}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-            });
-
-            if (!response.ok) {
-                throw new Error('Error al obtener el carrito');
-            }
-
-            const data = await response.json();
-            console.log('Respuesta de la API:', data);
-
-            setCartId(data.id);
-
-            setCarrito(
-                data.cartProducts.map((product) => ({
-                    id: product.productId,
-                    image: product.image,
-                    name: product.name,
-                    price: product.price,
-                    stock: product.stock,
-                    quantity: product.quantity
-                }))
-            );
-
-        } catch (error) {
-            console.error('Error al obtener el carrito:', error);
-        }
     };
 
-
+    const sincronizarCarritoBackend = async () => {
+        const carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
+        const { isLoading, error, fetchData } = await useFetch({ Url: PUT_CART, type: 'PUT', token: token, params: carritoGuardado }); //CAMBIARR
+        handleCart(carritoGuardado)
+        //Borramos el carrito local
+        localStorage.removeItem('carrito');
+    }
+    
     const agregarAlCarrito = async (producto) => {
         console.log("hola producto", producto);
 
@@ -282,8 +214,6 @@ export const CarritoProvider = ({ children }) => {
                     },
                 });
 
-
-
                 if (!response.ok) {
                     throw new Error('Error al eliminar el contenido del carrito');
                 }
@@ -299,64 +229,6 @@ export const CarritoProvider = ({ children }) => {
         }
     };
 
-    const actualizarProductosCarrito = async () => {
-
-        if (isAuthenticated) {
-            try {
-                const carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
-
-                if (carritoGuardado.length === 0) {
-                    console.warn("No hay productos en el carrito para actualizar");
-                    return;
-                }
-                const carritoBackend = {
-                    id: cartId,
-                    cartProducts: carritoGuardado.map((product) => ({
-                        productId: product.id,
-                        quantity: product.quantity
-
-                    })),
-                };
-
-
-                const response = await fetch(`${API_URL_UPDATE_CART}?id=${cartId}&cartProducts=${carrito}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`,
-                    },
-                    body: JSON.stringify(carritoBackend),
-                });
-
-                if (!response.ok) {
-                    throw new Error("Error al actualizar el carrito en el backend");
-                }
-
-                // Obtener la respuesta y actualizar el estado
-                const data = await response.json();
-                console.log("Carrito actualizado en el backend:", data);
-
-                // Actualizar el estado del carrito en el contexto
-                setCarrito(
-                    data.cartProducts.map((product) => ({
-                        id: product.productId,
-                        image: product.image,
-                        name: product.name,
-                        price: product.price,
-                        quantity: product.quantity,
-                        stock: product.stock
-                    }))
-                );
-
-                localStorage.removeItem('carrito');
-            } catch (error) {
-                console.error("Error al actualizar el carrito en el backend:", error);
-            }
-        } else {
-            console.warn("El usuario no está autenticado, no se puede sincronizar el carrito con el backend");
-        }
-    };
-
 
     return (
         <CarritoContext.Provider
@@ -364,7 +236,6 @@ export const CarritoProvider = ({ children }) => {
                 carrito,
                 agregarAlCarrito,
                 eliminarDelCarrito,
-                actualizarProductosCarrito,
                 eliminarContenidoCarrito,
             }}
         >
