@@ -1,5 +1,6 @@
 import classes from './Header.module.css';
-import { useContext, useState, useRef, useEffect, useNavigate } from 'react';
+import { useContext, useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ModalContext } from "../../context/ModalContext";
 import { useCarrito } from '../../context/CarritoContext';
 import { useAuth } from '../../context/AuthContext';
