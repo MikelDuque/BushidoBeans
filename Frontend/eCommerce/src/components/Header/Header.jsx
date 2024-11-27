@@ -1,5 +1,5 @@
 import classes from './Header.module.css';
-import { useContext, useState, useRef, useEffect } from 'react';
+import { useContext, useState, useRef, useEffect, useNavigate } from 'react';
 import { ModalContext } from "../../context/ModalContext";
 import { useCarrito } from '../../context/CarritoContext';
 import { useAuth } from '../../context/AuthContext';
@@ -9,14 +9,20 @@ import Modal from '../Modals/Modal';
 import Cart from "../Modals/Shopping_Cart/Cart";
 
 function Header() {
-  //MODALES
+  //HOOKS
   const {
     isOpen,
     openModal,
     closeModal
   } = useContext(ModalContext);
 
+  const navigate = useNavigate();
+
   const { eliminarContenidoCarrito } = useCarrito();
+
+  function handleNavigateToCheckout() {
+    navigate('/checkout')
+  }
 
   const { isAuthenticated, logout } = useAuth();
   const handleLogout = () => {
@@ -44,7 +50,7 @@ function Header() {
       </nav>
 
         {isOpen && (
-          <Modal closeModal={closeModal} type="cart" titulo={"Tu Carro"} cancelFnc={eliminarContenidoCarrito} continueFnc="" buttonValues={{continueVal:"Procesar compra", cancelVal:"Vaciar carro"}}>
+          <Modal closeModal={closeModal} type="cart" titulo={"Tu Carro"} cancelFnc={eliminarContenidoCarrito} continueFnc={handleNavigateToCheckout} buttonValues={{continueVal:"Procesar compra", cancelVal:"Vaciar carro"}}>
             <Cart closeCart={closeModal}/>
           </Modal>
         )}

@@ -57,7 +57,7 @@ public class OrderMapper
     List<CartProductDto> productList = GetCartProductsDto(cartProducts);
     decimal totalPrice = 0;
 
-    productList.ForEach((product) => totalPrice += product.Price);
+    productList.ForEach((cartProduct) => totalPrice += cartProduct.Price);
 
     return totalPrice;
   }
