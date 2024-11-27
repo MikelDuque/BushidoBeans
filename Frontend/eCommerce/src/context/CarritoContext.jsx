@@ -46,8 +46,8 @@ export const CarritoProvider = ({ children }) => {
 
     useEffect(() => {
         if (isAuthenticated) {
-            // sincronizarCarritoBackend();
-            // obtenerCarritoBackend();
+             sincronizarCarritoBackend();
+             obtenerCarritoBackend();
         } else {
             const carritoGuardado = JSON.parse(localStorage.getItem('carrito'));
             if (carritoGuardado) {
@@ -72,7 +72,12 @@ export const CarritoProvider = ({ children }) => {
     /*LLAMADAS A LOS ENDPOINT*/
 
     const obtenerCarritoBackend =  () => {
-        const { fetchData, error } =  useFetch({ Url: GET_CART_BY_ID(userId), type: 'GET', token: token, params: userId });
+        const { fetchData: carritoBackend, error: fetchError } = useFetch({
+            Url: GET_CART_BY_ID(userId),
+            type: "GET",
+            token,
+            params: userId,
+        });
         handleCart(fetchData);
         console.log("Carrito obtenido:", fetchData);
 
@@ -80,7 +85,12 @@ export const CarritoProvider = ({ children }) => {
 
     const sincronizarCarritoBackend = async () => {
         const carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
-        const { isLoading, error, fetchData } = await useFetch({ Url: PUT_CART, type: 'PUT', token: token, params: carritoGuardado }); //CAMBIARR
+        const { fetchData: carritoBackend, error: fetchError } = useFetch({
+            Url: PUT_CART(userId),
+            type: "PUT",
+            token,
+            params: carritoGuardado,
+        });
         handleCart(carritoGuardado)
         //Borramos el carrito local
         localStorage.removeItem('carrito');
