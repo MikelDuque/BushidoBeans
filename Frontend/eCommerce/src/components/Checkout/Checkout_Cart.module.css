@@ -1,0 +1,12 @@
+.cart_container {
+  border-radius: 10px;
+  width: 80%;
+  padding: 30px;
+
+  display: grid;
+  grid-template-columns: 0.5fr 2.5fr;
+  gap: 10px;
+  
+  background-color: var(--nav-footer);
+  color: var(--fondo-vistas);
+}
