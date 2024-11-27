@@ -150,15 +150,22 @@ export const CarritoProvider = ({ children }) => {
                 console.error('Error al agregar el producto al carrito:', error);
             }
         } else {
-            const productoExistente = carrito.find((item) => item.id === producto.id);
-             if (productoExistente) {
-                const nuevoCarrito = carrito.map((item) =>
-                    item.id === producto.id ? { ...item, quantity: item.quantity + producto.quantity } : item
-                );
-                setCarrito(nuevoCarrito);
-            } else {
-                setCarrito([...carrito, { ...producto }]);
-            }
+            setCarrito((prevCarrito) => {
+                const productoExistente = prevCarrito.find((item) => item.id === producto.id);
+                if (productoExistente) {
+                    const nuevoCarrito = prevCarrito.map((item) =>
+                        item.id === producto.id
+                            ? { ...item, quantity: item.quantity + producto.quantity }
+                            : item
+                    );
+                    localStorage.setItem('carrito', JSON.stringify(nuevoCarrito));
+                    return nuevoCarrito;
+                } else {
+                    const nuevoCarrito = [...prevCarrito, { ...producto }];
+                    localStorage.setItem('carrito', JSON.stringify(nuevoCarrito));
+                    return nuevoCarrito;
+                }
+            });
         }
     };
 

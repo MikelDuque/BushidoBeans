@@ -1,4 +1,6 @@
 ﻿using eCommerce.Models.Database.Entities;
+using eCommerce.Models.Dtos;
+using eCommerce.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -25,7 +27,7 @@ public class AddressController : Controller
 
     [Authorize]
     [HttpPost("Insert_Address")]
-    public async Task<ActionResult<Review>> CreateAddressAsync([FromBody] Address address)
+    public async Task<ActionResult<Address>> CreateAddressAsync([FromBody] Address address)
     {
         Claim userClaimId = User.FindFirst("id");
 
