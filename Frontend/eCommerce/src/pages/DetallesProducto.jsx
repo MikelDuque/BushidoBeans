@@ -1,17 +1,37 @@
-import { useParams } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
-import { useState, useEffect} from 'react';
-import '../styles/DetallesProducto.css';
 
+import { useContext, useState, useEffect} from 'react';
+import { useParams } from 'react-router-dom';
+
+import { GET_PRODUCT_BY_ID } from '../endpoints/config';
+import useFetch from '../endpoints/useFetch';
+import { ReviewContext } from '../context/ReviewContext'
 import Product_Details from '../components/Product_Details/Product_Details';
 import Review_List from '../components/Review_List/Review_List';
 
+import '../styles/DetallesProducto.css';
 
-function DetallesProducto() {    
+function DetallesProducto() { 
     const { id } = useParams();
-    const [producto, setProducto] = useState(null);
+    const [product, setProduct] = useState(null);
 
+    const {
+        reviewList,
+        setProductId,
+        addReview
+    } = useContext(ReviewContext);
+    
+    useEffect(() => {
+        const {isLoading, error, fetchData} = useFetch({Url:GET_PRODUCT_BY_ID(id), type:'GET', params:id});
+
+        if(error == null) {
+            setProduct(fetchData);
+            setProductId(id);
+        }
+    }, [id]);   //¿Hace falta poner el id ahí?
+    
+    /*
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -44,19 +64,20 @@ function DetallesProducto() {
 
         fetchProducto();
     }, [id]);
+    */
 
     return (
         <>
         <Header />
         <div className='container-producto'>
-            {loading ? (
+            {isLoading ? (
                 <p>Cargando producto...</p>
             ) : error ? (
                 <p>{error}</p>
             ) : producto != null ? (
             <>
-                <Product_Details product={producto}/>
-                <Review_List data={{reviews: producto.reviews, score: producto.score}}/>
+                <Product_Details product={product}/>
+                <Review_List data={{reviews: reviewList, score: product.score}}/>
             </>
             ) : (
                 <p>No se encontraron productos.</p>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import fetchEndpoint from "./fetchEndpoint";
 
-export default function useFetch(URL, type, token, params) {
+export default function useFetch({Url, type, token, params}) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [fetchData, setFetchData] = useState(null);
@@ -14,7 +14,7 @@ export default function useFetch(URL, type, token, params) {
     setIsLoading(true);
 
     try {
-      const data = await fetchEndpoint({URL, type, token, params});
+      const data = await fetchEndpoint(Url, type, token, params);
 
       setFetchData(data);
       setError(null);
