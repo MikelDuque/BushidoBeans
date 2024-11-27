@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
 import { jwtDecode } from 'jwt-decode';
-import useFetch from "./useFetch";
+import useFetch from "../endpoints/useFetch";
+import {GET_CART_BY_ID} from "../endpoints/config";
 
 const CarritoContext = createContext();
 
@@ -17,16 +18,10 @@ export const CarritoProvider = ({ children }) => {
     const [cartId, setCartId] = useState(null);
     const { isAuthenticated } = useAuth();
     const token = localStorage.getItem('accessToken');
-    const { fetchData, loading, error } = useFetch();
+    const { fetchData, loading, error } = useFetch({});
 
     // URLs de la API
-    const API_URLS = {
-        GET_CART: "https://localhost:7015/api/Cart/Get_Cart",
-        ADD_CART_PRODUCT: "https://localhost:7015/api/Cart/Update_CartProduct",
-        DELETE_CART_PRODUCT: "https://localhost:7015/api/Cart/Delete_CartProduct",
-        DELETE_CART: "https://localhost:7015/api/Cart/Delete_CartContent",
-        UPDATE_CART: "https://localhost:7015/api/Cart/Update_GlobalCart"
-    }
+
 
     // Función para manejar el token y obtener el cartId
     const handleToken = () => {
