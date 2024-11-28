@@ -15,8 +15,9 @@ export const CarritoProvider = ({ children }) => {
     /* ----- Constantes Iniciales ----- */
 
     const { isAuthenticated } = useAuth();
-    const token = localStorage.getItem('accessToken');
+    const token = localStorage.getItem('accessToken') || null;
     const userId = jwtDecode(token).id;
+    const localCart = localStorage.getItem('carrito' || [])
 
     const [carrito, setCarrito] = useState([]);
     //const [totalProducts, setTotalProducts] = useState(0);
@@ -34,7 +35,7 @@ export const CarritoProvider = ({ children }) => {
     /* ----- UseEffect Inicial ----- */
 
     useEffect(() => {
-        if (!isAuthenticated) handleCart(localStorage.getItem('carrito') || [])
+        if (!isAuthenticated) handleCart(localCart)
             
             else if (!isLoading && !error) {
                 handleCart(backendCart)
@@ -58,7 +59,7 @@ export const CarritoProvider = ({ children }) => {
             Url: PUT_CART,
             type: "PUT",
             token: token,
-            params: localStorage.getItem('carrito'),
+            params: localCart,
             condition: true
         });
 
