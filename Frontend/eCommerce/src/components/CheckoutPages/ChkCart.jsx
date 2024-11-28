@@ -1,7 +1,10 @@
+import Checkout from "../../pages/Checkout/Checkout";
+import Checkout_Cart from "../Checkout/Checkout_Cart";
+
 function ChkCart(){
   return(
     <>
-    CART
+    <Checkout_Cart />
     </>
   )
 }

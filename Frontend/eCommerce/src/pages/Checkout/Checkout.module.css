@@ -1,8 +1,9 @@
 .checkoutContainer {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 20px;
+  padding: 2rem 10rem;
+  width: 100%;
+  background-color: var(--fondo-vistas);
 }
 
 .buttonGroup {
@@ -10,6 +11,7 @@
   align-items: center;
   gap: 10px;
   margin-bottom: 20px;
+  align-self: center;
 }
 
 .buttonGroup button {
@@ -35,22 +37,20 @@
 
 .line {
   width: 30px;
-  height: 2px;
+  height: 4px;
   background-color: #ccc;
+  border-radius: 4px;
   transition: background-color 0.3s ease;
 }
 
 .lineActive {
-  background-color: #007bff;
+  background-color: var(--nav-footer);
 }
 
 .content {
   width: 100%;
-  max-width: 900px;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+  background-color: var(--fondo-vistas);
 }
 
 .buttonGroup button:disabled {
