@@ -25,7 +25,7 @@ const API_REVIEW_URL = `${API_BASE_URL}/api/Review`;
 
 
 /* --- CART CONTROLLER --- */
-const API_CART_URL = `${API_BASE_URL}/Cart`;
+const API_CART_URL = `${API_BASE_URL}/api/Cart`;
 
   export function GET_CART_BY_ID(id) {return `${API_CART_URL}/${id}`};
   export const PUT_CART = `${API_CART_URL}/Update_Cart`;

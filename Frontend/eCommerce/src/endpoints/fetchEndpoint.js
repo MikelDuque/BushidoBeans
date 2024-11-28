@@ -1,21 +1,27 @@
-import { error } from "console";
-
-export default async function fetchEndpoint(URL, type, token, params) {
+export default async function fetchEndpoint(Url, type, token, params) {
   try {
-    const response = await fetch(URL, {
-      method: type,
-      headers: existToken(token),
-      body: JSON.stringify(params)
-    });
+    const response = await defineFetch(Url, type, token, params);
 
     if (response.ok) return await response.json();
 
-    throw new error("Solicitud a la API fallida");
+    throw new Error("Solicitud a la API fallida");
 
-  } catch (error) {throw new error(error)};
+  } catch (error) {throw new Error(error)};
 };
 
 /* ------------------------- */
+
+async function defineFetch(Url, type, token, params) {
+  
+  if(type !== 'GET' && params) return (
+    await fetch(Url, {
+    method: type,
+    headers: existToken(token),
+    body: params
+  }));
+
+  return await fetch(Url, {headers: existToken(token)});
+}
 
 function existToken(token) {
   if(token == null) return ({'Content-Type': 'application/json'});

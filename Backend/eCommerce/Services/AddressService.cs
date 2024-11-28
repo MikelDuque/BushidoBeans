@@ -1,4 +1,5 @@
 ﻿using eCommerce.Controllers;
+using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 using eCommerce.Models.Mappers;
 
@@ -21,7 +22,7 @@ public class AddressService
         return _mapper.ToDto(address);
     }
 
-    public async Task<Address> CreateAddressAsync(Address address)
+    public async Task<bool> CreateAddressAsync(Address address)
     {
         await _unitOfWork.AddressRepository.InsertAsync(address);
 

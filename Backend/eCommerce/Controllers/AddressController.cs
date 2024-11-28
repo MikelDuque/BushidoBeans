@@ -27,7 +27,7 @@ public class AddressController : Controller
 
     [Authorize]
     [HttpPost("Insert_Address")]
-    public async Task<ActionResult<Review>> CreateAddressAsync([FromBody] Address address)
+    public async Task<ActionResult<bool>> CreateAddressAsync([FromBody] Address address)
     {
         Claim userClaimId = User.FindFirst("id");
 
@@ -35,6 +35,6 @@ public class AddressController : Controller
 
         if (address == null) return BadRequest("Datos de la reseña no válidos.");
 
-        return await _service.CreateAddressAsync(address);
+        return Ok(await _service.CreateAddressAsync(address));
     }
 }

@@ -1,15 +1,17 @@
-import { createContext, useContext, useEffect } from "react";
+/*
+import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useState } from 'react';
+import { LOGIN_URL, REGISTER_URL } from "../endpoints/config";
+import useFetch from "../endpoints/useFetch";
 
-const AuthContext = createContext();    //Creamos el contexto. Es como un contenedor para compartir estados
+const AuthContext = createContext();
 
-
-
-export const AuthProvider = ({ children }) => { // Exportamos el authprovider. Este provee los datos y funciones a todos los componentes hijos que lo necesiten.
-
-    const [isAuthenticated, setIsAuthenticated] = useState(false);  //Estado interno. Indica si el usuario esta autenticado.
+export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
+    const [token, setToken] = useState(null);
+    const [user, setUser] = {eMail: null, password: null};
+    
+    const { fetchData } = useFetch({Url:LOGIN_URL, type:'POST', params:user});
 
     useEffect(() => {
         //Detectamos el token de autentificacion. useEffect se carga una vez ejecutado el componente.
@@ -18,6 +20,7 @@ export const AuthProvider = ({ children }) => { // Exportamos el authprovider. E
             setIsAuthenticated(true);   //Si el token existe = autentificacion = true.
         }
     }, []);
+
     const login = (token) => {  // Funcion para guardar el token en el localstorage.
         localStorage.setItem('accessToken', token);
         setIsAuthenticated(true);
@@ -37,3 +40,4 @@ export const AuthProvider = ({ children }) => { // Exportamos el authprovider. E
 };
 export const useAuth = () => useContext(AuthContext);   //Este hook facilita al contexto el acceso desde cualquier componente. En vez de escribir siempre useContext(AuthContext) basta con usar useAuth() para obtener: 
                                                         // isAuthenticated, login, logout.
+*/
