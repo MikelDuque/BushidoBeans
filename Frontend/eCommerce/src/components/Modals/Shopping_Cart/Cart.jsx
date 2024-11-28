@@ -9,9 +9,12 @@ export default function Cart() {
   //DEFINIR CARTITEMS
   function cartMapper(cartItems) {
     console.log("Cart length", cartItems.length);
+    console.log("carrito", cartItems);
     
 
     return (cartItems.length > 0 ? (
+      console.log("cartItems", carrito),
+      
       cartItems.map((cartItem) => (
         console.log("Cart Item", cartItem),
         
