@@ -51,6 +51,9 @@
   width: 100%;
   padding: 20px;
   background-color: var(--fondo-vistas);
+  display: flex;
+  gap: 7rem;
+  justify-content: space-between;
 }
 
 .buttonGroup button:disabled {

@@ -4,6 +4,7 @@ import { createPortal } from "react-dom"
 export default function Modal({closeModal, continueFnc, cancelFnc, type, titulo, buttonValues, children}) {
   return createPortal(
     <>
+    <div className={classes.screen_container}>
     <div className={`${classes.modal} ${classes[`modal--${type}`]}`}>
       <div className={`${classes.headerContainer} ${classes.text}`}>
         <h4>{titulo}</h4>
@@ -16,6 +17,7 @@ export default function Modal({closeModal, continueFnc, cancelFnc, type, titulo,
       </div>
     </div>
     <div className={classes.overlay} onClick={closeModal}/>
+    </div>
     </>,
     document.getElementById("root")
   );
