@@ -43,7 +43,7 @@ export default function Cart() {
             stock: 20,
             quantity: 2
           }}/>
-        {cartMapper(carrito)}
+        {/*{cartMapper(carrito)}*/}
       </ul>
     </>
 )};

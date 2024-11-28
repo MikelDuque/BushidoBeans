@@ -1,12 +1,10 @@
-import classes from './Header.module.css';
+import classes from '../Header.module.css';
 import { useState, useRef, useEffect } from 'react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../../context/AuthContext';
 import { NavLink } from "react-router-dom";
 
 
 function HeaderChk() {
-
-  console.log("totalProducts", totalProducts);
 
   const { isAuthenticated, logout } = useAuth();
   const handleLogout = () => {
