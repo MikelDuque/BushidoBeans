@@ -37,7 +37,7 @@ function Checkout() {
       <HeaderChk />
       <div className={classes.checkoutContainer}>
         <div className={classes.buttonGroup}>
-          
+
           <button
             className={currentView === 'cart' ? classes.activeButton : ''} onClick={() => handleButtonClick('cart')} disabled={isButtonDisabled('cart')}>
             Productos
@@ -56,6 +56,7 @@ function Checkout() {
             className={currentView === 'confirm' ? classes.activeButton : ''} onClick={() => handleButtonClick('confirm')} disabled={isButtonDisabled('confirm')}>
             Confirmación
           </button>
+
         </div>
 
         <div className={classes.content}>
