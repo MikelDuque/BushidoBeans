@@ -7,6 +7,7 @@ import DetallesProducto from './pages/DetallesProducto';
 import { Routes, Route } from "react-router-dom";
 import NotFound from './components/NotFound';
 import Checkout from "./pages/Checkout/Checkout";
+import ConfirmarPedido from "./pages/Checkout/ConfirmarPedido";
 
 function App() {
     return (
@@ -19,7 +20,7 @@ function App() {
             <Route path="/" element={<Inicio />} />
             <Route path="/catalogo" element={<Catalogo />} />
             <Route path="/checkout" element={<Checkout />} />
-
+            <Route path="/confirmarPedido" element={<ConfirmarPedido />} />
             {/* Ruta para página no encontrada */}
             <Route path="400" element={<NotFound />} />
         </Routes>
