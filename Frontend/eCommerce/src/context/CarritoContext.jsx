@@ -15,8 +15,9 @@ export const CarritoProvider = ({ children }) => {
     /* ----- Constantes Iniciales ----- */
 
     const { isAuthenticated } = useAuth();
-    const token = localStorage.getItem('accessToken');
-    const userId = jwtDecode(token).id;
+    const token = localStorage.getItem('accessToken') || null;
+    const userId = isAuthenticated ? jwtDecode(token).id : 0;
+    const localCart = JSON.parse(localStorage.getItem('carrito' || []))
 
     const [carrito, setCarrito] = useState([]);
     //const [totalProducts, setTotalProducts] = useState(0);
@@ -25,7 +26,7 @@ export const CarritoProvider = ({ children }) => {
     const { fetchData:backendCart, isLoading, error } = useFetch({
         Url: GET_CART_BY_ID(userId),
         type: "GET",
-        token: token,
+        token,
         params: userId,
         condition: true
     });
@@ -34,13 +35,13 @@ export const CarritoProvider = ({ children }) => {
     /* ----- UseEffect Inicial ----- */
 
     useEffect(() => {
-        if (!isAuthenticated) handleCart(localStorage.getItem('carrito') || [])
+        if (!isAuthenticated) handleCart(localCart)
             
             else if (!isLoading && !error) {
                 handleCart(backendCart)
                 //handleTotalProducts()
             };
-    }, [isAuthenticated, backendCart]);
+    }, [isAuthenticated]);
     
     /* ----- Métodos ----- */
 
@@ -58,7 +59,7 @@ export const CarritoProvider = ({ children }) => {
             Url: PUT_CART,
             type: "PUT",
             token: token,
-            params: localStorage.getItem('carrito'),
+            params: localCart,
             condition: true
         });
 
