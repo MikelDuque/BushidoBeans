@@ -5,7 +5,6 @@ import { ModalContext } from "../../context/ModalContext";
 import { useCarrito } from '../../context/CarritoContext';
 import { useAuth } from '../../context/AuthContext';
 import { NavLink } from "react-router-dom";
-import CartCounter from "../CartCounter";
 import Modal from '../Modals/Modal';
 import Cart from "../Modals/Shopping_Cart/Cart";
 
@@ -19,7 +18,10 @@ function Header() {
 
   const navigate = useNavigate();
 
-  const { eliminarContenidoCarrito } = useCarrito();
+  const { eliminarContenidoCarrito, totalProducts } = useCarrito();
+
+  console.log("totalProducts", totalProducts);
+  
 
   function handleNavigateToCheckout() {
     navigate('/checkout')
@@ -29,8 +31,6 @@ function Header() {
   const handleLogout = () => {
     logout();
   };
-
-  const [totalProducts,setTotalProducts] = useState(0);
 
   return (
     <header>
@@ -55,8 +55,6 @@ function Header() {
             <Cart closeCart={closeModal}/>
           </Modal>
         )}
-        
-        <CartCounter setTotalProducts={setTotalProducts} />
     </header>
   );
 }
