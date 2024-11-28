@@ -1,19 +1,17 @@
 .container-subtotal {
     width: 30%;
-    height: auto;
-    position: sticky;
+    min-height: 20rem;
     top: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-self: right;
     align-items: center;
     background-color: var(--fondo-vistas);
     border: 2px solid var(--nav-footer);
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin: 10px 0;
-    float: right;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 

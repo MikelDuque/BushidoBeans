@@ -8,6 +8,7 @@
 
   overflow-y: scroll;
   color: black;
+  scrollbar-width: none
 }
 
 .clearMessage {
