@@ -61,6 +61,7 @@ export function ReviewProvider({children}) {
     setProductId: handleProductId,
     addReview: postNewReview,
   };
+  // return <TripContext.Provider value={ctxValue}> {children} </TripContext.Provider>
 
-  return <TripContext.Provider value={ctxValue}> {children} </TripContext.Provider>
+  return <ReviewContext.Provider value={ctxValue}> {children} </ReviewContext.Provider>
 }

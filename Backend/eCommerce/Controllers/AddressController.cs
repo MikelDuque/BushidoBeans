@@ -27,14 +27,21 @@ public class AddressController : Controller
 
     [Authorize]
     [HttpPost("Insert_Address")]
-    public async Task<ActionResult<bool>> CreateAddressAsync([FromBody] Address address)
+    public async Task<IActionResult> InsertAddress([FromBody] AddressDto addressDto)
     {
-        Claim userClaimId = User.FindFirst("id");
+        if (addressDto == null)
+        {
+            return BadRequest("Se requiere la dirección.");
+        }
 
-        if (userClaimId == null) return Unauthorized("Usuario no autorizado");
+        bool success = await _service.CreateAddressAsync(addressDto);
 
-        if (address == null) return BadRequest("Datos de la reseña no válidos.");
+        if (success)
+        {
+            return Ok("Dirección creada correctamente.");
+        }
 
-        return Ok(await _service.CreateAddressAsync(address));
+        return StatusCode(500, "Hubo un error al crear la dirección.");
     }
+
 }

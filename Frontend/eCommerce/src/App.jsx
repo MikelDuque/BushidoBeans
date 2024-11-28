@@ -8,7 +8,8 @@ import { Routes, Route } from "react-router-dom";
 import NotFound from './components/NotFound';
 import Checkout from "./pages/Checkout/Checkout";
 import { ReviewProvider } from "./context/ReviewContext";
-
+import DireccionEnvio from "./components/DireccionEnvio/DireccionEnvio";
+import { DireccionProvider } from "./context/DireccionContext";
 function App() {
     return (
         <Routes>
@@ -24,6 +25,12 @@ function App() {
             <Route path="/" element={<Inicio />} />
             <Route path="/catalogo" element={<Catalogo />} />
             <Route path="/checkout" element={<Checkout />} />
+
+            <Route path="/direccion" element={
+                <DireccionProvider>
+                    <DireccionEnvio />
+                </DireccionProvider>
+            } />
 
             {/* Ruta para página no encontrada */}
             <Route path="400" element={<NotFound />} />
