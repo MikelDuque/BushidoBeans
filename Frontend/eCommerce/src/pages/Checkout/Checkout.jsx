@@ -18,7 +18,7 @@ function Checkout() {
         <>
             <Header />
             <Checkout_Cart />
-            <Subtotal carrito={carrito} view={Checkout}/> {/* Pasar el carrito */}
+            <Subtotal carrito={carrito} view={Checkout}/>
             <Footer />
         </>
     );

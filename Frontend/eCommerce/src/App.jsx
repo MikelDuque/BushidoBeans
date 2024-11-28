@@ -9,7 +9,7 @@ import NotFound from './components/NotFound';
 import Checkout from "./pages/Checkout/Checkout";
 import { ReviewProvider } from "./context/ReviewContext";
 import DireccionEnvio from "./components/DireccionEnvio/DireccionEnvio";
-import { DireccionProvider } from "./context/DireccionContext";
+// import { DireccionProvider } from "./context/DireccionContext";
 function App() {
     return (
         <Routes>
@@ -27,9 +27,9 @@ function App() {
             <Route path="/checkout" element={<Checkout />} />
 
             <Route path="/direccion" element={
-                <DireccionProvider>
+                // <DireccionProvider>
                     <DireccionEnvio />
-                </DireccionProvider>
+                // </DireccionProvider>
             } />
 
             {/* Ruta para página no encontrada */}
