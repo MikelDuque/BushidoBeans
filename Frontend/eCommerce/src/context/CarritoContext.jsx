@@ -41,7 +41,7 @@ export const CarritoProvider = ({ children }) => {
                 handleCart(backendCart)
                 //handleTotalProducts()
             };
-    }, [isAuthenticated]);
+    }, [isAuthenticated, isLoading, error]);
     
     /* ----- Métodos ----- */
 
