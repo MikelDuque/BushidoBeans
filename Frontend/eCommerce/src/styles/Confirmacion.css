@@ -6,6 +6,21 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     width: 100%;
+
+    
+  }
+
+  .order-confirmation2 {
+    background-color: var(--fondo-vistas);
+    padding: 2rem 10rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 100%;
+    font-family: var(--font-family-titulos-subtitulos);
+    font-size: var(--titulos-size);
+    font-weight: var(--font-weight-bold);
+    color: var(--nav-footer);
+
     
   }
   

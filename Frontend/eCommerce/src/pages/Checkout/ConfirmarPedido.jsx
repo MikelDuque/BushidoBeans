@@ -58,6 +58,7 @@ function ConfirmarPedido() {
 
   return (
     <>
+    {datos.totalProducts > 0 ? (
       <div className="order-confirmation">
         <h1>Confirmación de Pedido</h1>
         <div><strong>Usuario:</strong> {user}</div>
@@ -72,9 +73,13 @@ function ConfirmarPedido() {
             <strong>Dirección:</strong>
             {/* Dirección */}
         </div>
-    </div>
+      </div>
+    ) : (
+      <div className='order-confirmation2'>No hay ningún pedido aún</div>
+    )}
     </>
   ) 
+  
 }
 
 export default ConfirmarPedido;
