@@ -3,9 +3,10 @@
 .order-confirmation {
     background-color: var(--fondo-vistas);
     padding: 2rem 10rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(8, 46, 8, 0.466);
     border-radius: 8px;
     width: 100%;
+    border: 3px, solid, green;
 
     
   }

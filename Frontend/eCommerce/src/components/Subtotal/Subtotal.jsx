@@ -20,6 +20,7 @@ function Subtotal({ view }) {
                                
             } else {
                 setError("Error al enviar la review:");
+                
             }
       
     };

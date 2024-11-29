@@ -11,7 +11,7 @@ function ConfirmarPedido() {
   const [userId, setUserId] = useState(null);
 
   function dateFormatting(date) {
-    return new Date(date).toLocaleDateString('es-es', {year:"numeric", month:"long", day:"numeric"});
+    return new Date(date).toLocaleDateString('es-es', {year:"numeric", month:"long", day:"numeric", hour:"numeric", minute:"numeric"});
   }
 
   useEffect(() => {
@@ -66,16 +66,16 @@ function ConfirmarPedido() {
       <div className="order-confirmation">
         <h1>Confirmación de Pedido</h1>
         <div><strong>Usuario:</strong> {user}</div>
-        <div><strong>Precio total:</strong> {datos.totalPrice}€</div>
-        <div><strong>Productos Totales:</strong> {datos.totalProducts}</div>
         <div><strong>Fecha de compra:</strong> {dateFormatting(datos.purchaseDate)}</div>
+        <div><strong>Precio total:</strong> {datos.totalPrice} €</div>
+        <div><strong>Productos Totales:</strong> {datos.totalProducts} productos</div>
         <div><strong>Productos:</strong></div>
         <ul>
             <li>{datos.orderProducts}</li>
         </ul>
         <div>
             <strong>Dirección:</strong>
-            {/* Dirección */}
+            {/* <div><strong>Direccion: {datos}</strong></div> */}
         </div>
       </div>
     ) : (
