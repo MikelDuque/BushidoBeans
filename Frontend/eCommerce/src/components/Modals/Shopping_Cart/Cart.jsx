@@ -8,10 +8,6 @@ export default function Cart() {
 
   //DEFINIR CARTITEMS
   function cartMapper(cartItems) {
-    console.log("Cart length", cartItems.length);
-    console.log("carrito", cartItems);
-    
-
     return (cartItems.length > 0 ? (
       console.log("cartItems", carrito),
       
@@ -22,8 +18,7 @@ export default function Cart() {
           key={cartItem.id}
           productData = {{
             id: cartItem.id,
-            image: cartItem.image,
-            //image: `${API_BASE_URL}${cartItem.image}`,
+            image: `${API_BASE_URL}${cartItem.image}`,
             name: cartItem.name,
             price: cartItem.price,
             stock: cartItem.stock,

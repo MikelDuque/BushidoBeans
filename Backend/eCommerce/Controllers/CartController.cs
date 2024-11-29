@@ -1,7 +1,9 @@
 ﻿using eCommerce.Models.Database.Entities;
+using eCommerce.Models.Dtos;
 using eCommerce.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 
 
@@ -25,24 +27,26 @@ namespace eCommerce.Controllers
         {
             Claim userClaimId = User.FindFirst("id");
 
-            if (userClaimId == null) return Unauthorized("Usuario no autorizado"); 
+            if (userClaimId == null) return Unauthorized("Usuario no autorizado");
 
-            return Ok(await _cartService.GetCartAsync(id));
+            List<CartProductDto> cartList = await _cartService.GetCartAsync(id);
 
+            if (cartList.IsNullOrEmpty()) return BadRequest("El carrito está vacío");
+
+            return Ok(cartList);
         }
 
         [Authorize]
         [HttpPut("Update_Cart")]
-        public async Task<ActionResult> UpdateCartAsync([FromBody] List<CartProduct> cartProducts)
+        public async Task<ActionResult> UpdateCartAsync([FromBody] CartDto cart)
         {
             Claim userClaimId = User.FindFirst("id");
 
             if (userClaimId == null) return Unauthorized("Usuario no autorizado");
 
-            await _cartService.UpdateCartProductsAsync(cartProducts);
+            List<CartProductDto> cartProducts = await _cartService.UpdateCartAsync(cart);
 
             return Ok(cartProducts);
-
         }
 
         [Authorize]

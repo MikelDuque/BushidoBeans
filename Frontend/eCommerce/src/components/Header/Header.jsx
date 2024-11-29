@@ -20,9 +20,6 @@ function Header() {
 
   const { eliminarContenidoCarrito, totalProducts } = useCarrito();
 
-  console.log("totalProducts", totalProducts);
-  
-
   function handleNavigateToCheckout() {
     navigate('/checkout')
   }
