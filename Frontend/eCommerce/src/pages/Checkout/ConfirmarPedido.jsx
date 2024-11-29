@@ -3,6 +3,10 @@ import Footer from "../../components/Footer/Footer";
 import React, { useState, useEffect } from 'react';
 import * as jwt_decode from 'jwt-decode';
 import { CardConfirmacion } from "../../components/CardConfirmacion";
+import { GET_ORDER_BY_ID } from "../../endpoints/config";
+
+
+
 
 function ConfirmarPedido() {
 
@@ -18,6 +22,7 @@ function ConfirmarPedido() {
                 console.log(decodedToken)
                 setUser (decodedToken.unique_name);  
                 setUserId (decodedToken.id);
+                
                 console.log("id: ",decodedToken.id);
             } catch (error) {
                 console.error("Error al decodificar el token", error);
@@ -27,49 +32,38 @@ function ConfirmarPedido() {
         }
     }, [userId]); 
 
-    console.log(userId)
 
-    useEffect(() => {
+    useEffect(() => { const fetchData = async () => {
+      try {
+         const url = GET_ORDER_BY_ID(userId); 
+         const response = await fetch(url, { method: 'GET', headers: { 'Content-Type': 'application/json' } }); 
+         const data = await response.json(); 
+         console.log("respuesta api", data);
+         
+         setDatos(data); 
 
-    const fetchData = async () => {
-        console.log(userId)
-        try {
-          const Url = `'https://localhost:7015/api/Order'`
-          const response = await fetch(`${Url}/${userId}`
-            , {method: 'GET', headers: { 'Content-Type': 'application/json' }});
-          
-          if (!response.ok) { throw new Error('Error al obtener los datos'); } const data = await response.json(); setDatos(data);
-  
+        }catch (error) { 
+          alert("Hubo un error al cargar los productos."); } 
         
-          console.log("response",response);
-          console.log("data",data);
-          setDatos(data);  
+      }; 
+      fetchData(); 
+    }, [userId]);    
 
-
-        } catch (error) {
-          alert("Hubo un error al cargar los productos.");
-          
-        } 
-
-      };
-      
-      fetchData();
-      console.log("datos",datos);
-    },[userId]);
     
-
+    console.log("data", datos);
+    
 
   return (
     <>
       <Header />
-      <div className="inventario">
+      <div>
        {datos.length > 0 ? (
           datos.map(dataPedido => (
             
             <CardConfirmacion 
               key={dataPedido.id}
               userId={user}
-              totalprice={dataPedido.totalprice}
+              totalprice={dataPedido.totalprice +"€"}
               totalProducts={dataPedido.totalProducts}
               date= {dataPedido.purchaseDate}
             />

@@ -16,24 +16,22 @@ namespace eCommerce.Services
             _orderMapper = orderMapper;
         }
 
-        public async Task<List<OrderDto>> GetOrderAsync(long userId)
+        public async Task<Order> GetOrderAsync(long userId)
         {
             User user = await _unitOfWork.UserRepository.GetByIdAsync(userId);
-            return _orderMapper.ToDto(user.Orders).ToList();
+            return user.Orders.FirstOrDefault();
         }
 
         public async Task<bool> CreateOrderAsync(Order order)
         {
-
-            List<CartProduct> cartProducts = await GetCartProducts(order.UserId);
 
             Order newOrder = new Order
             {
                 UserId = order.UserId,
                 TotalPrice = await TotalPrice(order.UserId),
                 TotalProducts = await TotalProducts(order.UserId),
-                PurchaseDate = DateTime.Now
-
+                PurchaseDate = DateTime.Now,
+                CartProducts = await GetCartProducts(order.UserId),
             };
 
             await _unitOfWork.OrderRepository.InsertAsync(newOrder);

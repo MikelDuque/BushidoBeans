@@ -1,4 +1,5 @@
 ﻿using eCommerce.Models.Database.Entities;
+using eCommerce.Models.Dtos;
 using eCommerce.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,7 @@ namespace eCommerce.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult> GetOrderByIdAsync(long id)
         {
+            Console.WriteLine(await _orderService.GetOrderAsync(id));
             return Ok(await _orderService.GetOrderAsync(id));
         }
 
