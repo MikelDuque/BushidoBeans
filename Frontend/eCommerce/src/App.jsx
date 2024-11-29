@@ -9,7 +9,6 @@ import NotFound from './components/NotFound';
 import Checkout from "./pages/Checkout/Checkout";
 import { ReviewProvider } from "./context/ReviewContext";
 import DireccionEnvio from "./components/DireccionEnvio/DireccionEnvio";
-import { CheckoutProvider } from './context/CheckoutContext';
 // import { DireccionProvider } from "./context/DireccionContext";
 function App() {
     return (
@@ -25,11 +24,7 @@ function App() {
             } />
             <Route path="/" element={<Inicio />} />
             <Route path="/catalogo" element={<Catalogo />} />
-            <Route path="/checkout" element={
-                <CheckoutProvider>
-                    <Checkout />
-                </CheckoutProvider>
-            } />
+            <Route path="/checkout" element={<Checkout />} />
 
             <Route path="/direccion" element={
                 // <DireccionProvider>
