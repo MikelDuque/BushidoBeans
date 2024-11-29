@@ -1,8 +1,10 @@
 import "./Subtotal.css";
-import { useNavigate } from "react-router-dom"; // Importa useNavigate
+import { useCheckout } from "../../context/CheckoutContext"; // Importa el contexto
 
 function Subtotal({ carrito, view }) {
-    const navigate = useNavigate(); 
+
+    // Usa el contexto Checkout para cambiar el `currentView`
+    const {handleButtonClick} = useCheckout();
 
     const handleSubtotal = () => {
         if (!carrito || carrito.length === 0) return 0;
@@ -13,11 +15,6 @@ function Subtotal({ carrito, view }) {
     const calculateShipping = () => {
         const subtotal = handleSubtotal();
         return subtotal > 35 ? 0 : 2.99;
-    };
-
-    // Redirige al componente de dirección
-    const handleRedirect = () => {
-        navigate('/direccion'); 
     };
 
     // Renderiza según la vista
@@ -34,8 +31,8 @@ function Subtotal({ carrito, view }) {
                 </p>
             )}
 
-            <button className="btn-direccion" onClick={handleRedirect}>
-            {view === "checkout" ? "Continuar" : "Pago"}            
+            <button className="btn-direccion" onClick={() => handleButtonClick('address')}>
+                {view === "checkout" ? "Continuar" : "Pago"}            
             </button>
         </div>
     );
