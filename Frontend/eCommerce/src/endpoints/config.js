@@ -41,3 +41,4 @@ const API_USER_URL = `${API_BASE_URL}/api/User`;
 const API_ORDER_URL = `${API_BASE_URL}/api/Order`;
 
   export function GET_ORDER_BY_ID(id) {return `${API_ORDER_URL}/${id}`};
+  export const POST_ORDER = `${API_ORDER_URL}/Insert_Order`;

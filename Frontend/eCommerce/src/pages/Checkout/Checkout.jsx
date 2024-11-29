@@ -37,7 +37,7 @@ function Checkout() {
           <div className={`${classes.line} ${currentView !== 'cart' ? classes.lineActive : ''}`} />
           <button
             className={currentView === 'address' ? classes.activeButton : ''} onClick={() => handleButtonClick('address')} disabled={isButtonDisabled('address')}>
-            Dirección
+            Direcciones
           </button>
           <div className={`${classes.line} ${currentView === 'confirm' ? classes.lineActive : ''}`} />
           <button

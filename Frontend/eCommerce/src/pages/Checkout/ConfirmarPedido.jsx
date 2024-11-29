@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import * as jwt_decode from 'jwt-decode';
 import { GET_ORDER_BY_ID } from "../../endpoints/config";
 import '../../styles/Confirmacion.css';
-
-
+import { useCheckout } from '../../context/CheckoutContext';
 
 function ConfirmarPedido() {
+  const { address } = useCheckout();
+
   const [datos, setDatos] = useState([]);
   const [user, setUser] = useState(null);
   const [userId, setUserId] = useState(null);
@@ -19,10 +20,8 @@ function ConfirmarPedido() {
       if (token) {
           try {
               const decodedToken = jwt_decode.jwtDecode(token);
-              console.log(decodedToken)
               setUser(decodedToken.unique_name);  
               setUserId(decodedToken.id);
-              console.log("id: ", decodedToken.id);
           } catch (error) {
               console.error("Error al decodificar el token", error);
           }
@@ -51,13 +50,6 @@ function ConfirmarPedido() {
       };
       fetchData();
   }, [userId]);
-
-    
-    console.log("data", datos);
-    console.log("userId", datos.userId);
-    console.log("totalPrice", datos.totalPrice);
-    console.log("totalProducts", datos.totalProducts);
-    console.log("purchaseDate", datos.purchaseDate);
     
 
   return (
@@ -75,7 +67,7 @@ function ConfirmarPedido() {
         </ul>
         <div>
             <strong>Dirección:</strong>
-            {/* Dirección */}
+            <p>{address}</p>
         </div>
       </div>
     ) : (

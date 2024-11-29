@@ -1,8 +1,13 @@
+import { useEffect } from "react";
 import { useCheckout } from "../../../context/CheckoutContext";
 import "./ListaDirecciones.css";
 
 function ListaDirecciones({ direcciones }) {
-  const { handleButtonClick } = useCheckout();
+  const { handleButtonClick, hanldleAddress } = useCheckout();
+
+  useEffect(() => {
+    hanldleAddress("C/ Frederick Terman, 3, Campanillas, 29590, Málaga");
+  }, []);
 
   return (
     <div className="container-lista-direcciones">
