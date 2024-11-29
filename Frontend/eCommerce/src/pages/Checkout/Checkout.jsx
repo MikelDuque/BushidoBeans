@@ -7,9 +7,10 @@ import ChkAddress from "../../components/CheckoutPages/ChkAddress";
 import ChkConfirm from "../../components/CheckoutPages/Chkconfirm";
 import ConfirmarPedido from "./ConfirmarPedido.jsx";
 import Cart from "../../components/Modals/Shopping_Cart/Cart.jsx";
+import { useEffect } from "react";
 
 function Checkout() {
-  const { currentView, handleButtonClick, goToNextStep } = useCheckout('cart');
+  const { currentView, handleButtonClick, goToNextStep, handleOrderProducts, handleTotalPrice } = useCheckout('cart');
 
   const isButtonDisabled = (button) => {
     if (currentView === 'cart' && button !== 'cart') return true;
@@ -18,7 +19,10 @@ function Checkout() {
     return false;
   };
 
-  
+  useEffect(() => {
+    handleOrderProducts();
+    handleTotalPrice();
+  }, []);
   
 
   return (
