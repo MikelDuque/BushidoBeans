@@ -11,6 +11,10 @@ export default function Cart() {
     console.log("Cart length", cartItems.length);
     console.log("carrito", cartItems);
     
+    const [order, setOrder] = useState([]);
+
+    
+    
 
     return (cartItems.length > 0 ? (
       console.log("cartItems", carrito),
@@ -27,11 +31,13 @@ export default function Cart() {
             price: cartItem.price,
             stock: cartItem.stock,
             quantity: cartItem.quantity
+            
           }}/>
       ))) : (<h4 className={classes.clearMessage}>Tu carrito está vacío</h4>)
     ); 
   };
 
+  
   return (
     <>
       <ul className={classes.cart_list}>
