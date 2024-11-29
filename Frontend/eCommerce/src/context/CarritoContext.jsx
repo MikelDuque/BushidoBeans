@@ -22,7 +22,7 @@ export const CarritoProvider = ({ children }) => {
     function setCarritoPrueba() {
         const carritoPrueba = [];
         
-        for (let i = 0; i < 5; i++) {
+        if (!isAuthenticated) for (let i = 0; i < 5; i++) {
             carritoPrueba.push({
                 id: i,
                 image: "https://pbs.twimg.com/profile_images/1859044378662027264/Km09QDjK_400x400.jpg",
@@ -42,15 +42,17 @@ export const CarritoProvider = ({ children }) => {
     const handleToken = () => {
         const tokenLS = localStorage.getItem('accessToken');
         if (!tokenLS) {
-            throw new Error('No hay token de autenticación');
-        }
-        setToken(tokenLS);
+            console.log('No hay token de autenticación');
+             
+        } else {
+            setToken(tokenLS);
+            const decodedToken = jwtDecode(tokenLS);
+            
+            if (!decodedToken.id) {
+            console.log('No se encontró el userId en el token');
 
-        const decodedToken = jwtDecode(tokenLS);
-        if (!decodedToken.id) {
-            throw new Error('No se encontró el userId en el token');
-        }
-        setUserId(decodedToken.id) 
+            } else setUserId(decodedToken.id) 
+        }; 
     };
 
     function handleCart(newCart) {
@@ -62,8 +64,9 @@ export const CarritoProvider = ({ children }) => {
         setCarritoPrueba();
 
         if (isAuthenticated) {
-           // actualizarCarritoBackend();
-            obtenerCarritoBackend();
+           //actualizarCarritoBackend();
+           obtenerCarritoBackend();
+
         } else {
             const carritoGuardado = JSON.parse(localStorage.getItem('carrito'));
             if (carritoGuardado) {
@@ -98,7 +101,6 @@ export const CarritoProvider = ({ children }) => {
             setIsLoading(false);
         }
     };
-    console.log("carritoLocalStorage", localStorage.getItem("carrito"));
     
 
     const actualizarCarritoBackend = async () => {
@@ -118,8 +120,6 @@ export const CarritoProvider = ({ children }) => {
                 },
                 body: JSON.stringify(backendCart)
             });
-
-            console.log("respuesta", response);
             
 
             if (response.ok) {

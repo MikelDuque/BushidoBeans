@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => { // Exportamos el authprovider. E
             decodeToken(accessToken)
         }
         
-    }, []);
+    }, [token]);
 
     function handleToken(newToken) {
         setToken(newToken);

@@ -9,11 +9,7 @@ export default function Cart() {
   //DEFINIR CARTITEMS
   function cartMapper(cartItems) {
     return (cartItems.length > 0 ? (
-      console.log("cartItems", carrito),
-      
       cartItems.map((cartItem) => (
-        console.log("Cart Item", cartItem),
-        
         <CartItem 
           key={cartItem.id}
           productData = {{

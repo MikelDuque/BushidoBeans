@@ -1,19 +1,31 @@
-import React, { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import { useCarrito } from './CarritoContext';
+import { useAuth } from './AuthContext';
+import { POST_ORDER } from '../endpoints/config';
 
 const CheckoutContext = createContext();
 
 export const CheckoutProvider = ({ children }) => {
+  const { token } = useAuth();
   const { carrito } = useCarrito(); 
+
   const [currentView, setCurrentView] = useState('cart');
   const [order, setOrder] = useState({
     id: 0,
     totalPrice: 0.0,
     totalProducts: 0,
     purchaseDate: null,
-    adress: null,
     orderProducts: []
   });
+  const [address, setAddress] = useState(null);
+
+  useEffect(() => {
+    handleOrderProducts();
+    handleTotalPrice();
+    handleAddress("C/ Frederick Terman, 3, Campanillas, 29590, Málaga");
+  }, []);
+
+
   
   // Función para cambiar el estado de la vista
   const handleButtonClick = (view) => {
@@ -24,16 +36,30 @@ export const CheckoutProvider = ({ children }) => {
     setOrder(newOrder)
   }
 
+  function handleAddress(actualAddress) {
+    setAddress(actualAddress)
+  }
+
   function handleOrderProducts() {
+    console.log("carrito", carrito);
+    console.log("carrito checkout", order.orderProducts);
+    
+    
+
     setOrder(estadoPrevio => ({
       ...estadoPrevio,
-      orderProducts: orderProducts.fill(carrito)
+      orderProducts: JSON.parse(JSON.stringify(carrito))
     }))
   }
 
   function handleTotalPrice() {
-    const subtotal = (!carrito || carrito == []) ? 0 : carrito.reduce((total, item) => total + item.price * item.quantity, 0);
-
+    console.log("CARRO", carrito);
+    
+    const subtotal = (!carrito || carrito.length === 0) ? 0 : carrito.reduce((total, item) => total + item.price * item.quantity, 0);
+    console.log("subtotal", subtotal);
+    console.log("productos", order.orderProducts);
+    
+    
     setOrder(estadoPrevio => ({
       ...estadoPrevio,
       totalPrice: subtotal
@@ -45,15 +71,34 @@ export const CheckoutProvider = ({ children }) => {
     return shippingPrice.toFixed(2);
   };
 
+
+  //FETCHING
+  const sendOrder = async () => {
+    try {
+      const response = await fetch(POST_ORDER, {
+        method: 'POST',
+        headers: {
+          'Content-Type' : 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(order),
+      });
+    
+      if (response.ok) console.log("Order almacenado correctamente");
+      else throw new Error("Solicitud a la API fallida");
+
+    } catch (error) {console.log(error);}
+  };
+
+
   /* ----- FINAL CONTEXTO ----- */
 
   const ctxValue = {
     currentView,
     order,
+    address,
     handleButtonClick,
     calculateShipping,
-    handleOrderProducts,
-    handleTotalPrice
   };
 
   return (<CheckoutContext.Provider value={ctxValue}> {children} </CheckoutContext.Provider>);

@@ -41,12 +41,12 @@ function Subtotal({ view }) {
     return (
         <div className="container-subtotal">
             <p className="texto-subtotal titulo">SUBTOTAL</p>
-            <p className="subtitulo">{order.Subtotal} €</p>
+            <p className="subtitulo">{order.totalPrice} €</p>
             {/*<p className="subtitulo">{handleSubtotal().toFixed(2)} €</p>*/}
 
             {view === "direccion" && (
                 <p className="envio">
-                    {order.Subtotal > 35
+                    {order.totalPrice > 35
                         ? "Envío gratis"
                         : `Gastos de envío: ${calculateShipping()} €`}
                 </p>
