@@ -49,7 +49,6 @@ function Catalogo() {
 
   return (
     <>
-      <Header />
       <div className="contenedor-catalogo">
         <section>
           <div className='carrusel-catalogo'>
@@ -67,7 +66,6 @@ function Catalogo() {
           <BusquedaProductos filtro={filtro} ordenar={ordenar} productosPorPagina={productosPorPagina} />
         </section>
       </div>
-      <Footer />
     </>
   );
 }

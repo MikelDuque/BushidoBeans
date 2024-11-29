@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useEffect, useRef } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import useFetch from "../endpoints/useFetch";
 import { useAuth } from './AuthContext';
-import { GET_CART_BY_ID, PUT_CART } from "../endpoints/config";
+import { GET_CART_BY_ID, PUT_CART, DELETE_CART_PRODUCT , DELETE_CART_BY_ID} from "../endpoints/config";
 
 
 /* ----- Preparación Contexto ----- */
@@ -60,7 +60,7 @@ export const CarritoProvider = ({ children }) => {
             type: "PUT",
             token: token,
             params: localCart,
-            condition: true
+            condition: newCart
         });
 
         handleCart(newCart);
@@ -152,26 +152,14 @@ export const CarritoProvider = ({ children }) => {
         console.log("hola producto", producto);
 
         if (isAuthenticated) {
+            useFetch({
+                Url: PUT_CART,
+                type: "PUT",
+                token: token,
+                params: producto,
+                condition: true
+            });
             try {
-                const response = await fetch(`${API_URL_ADD_CART_PRODUCT}?CartId=${cartId}&ProductId=${producto.id}&Quantity=${producto.quantity}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`,
-                    },
-                        // query: JSON.stringify({
-                        // CartId: cartId,
-                        // ProductId: producto.id,
-                        // Quantity: producto.quantity
-                    // }),
-                });
-
-                if (!response.ok) {
-                    throw new Error('Error al agregar el producto al carrito');
-                }
-
-                const data = await response.json();
-                console.log('Producto agregado al carrito:', data);
 
                 setCarrito((prevCarrito) => {
                     const productoExistente = prevCarrito.find((item) => item.id === data.productId);
@@ -236,23 +224,18 @@ export const CarritoProvider = ({ children }) => {
         });
     }
 */
+
+
     const eliminarDelCarrito = async (productoId) => {
         if (isAuthenticated) {
+            useFetch({
+                Url: DELETE_CART_PRODUCT,
+                type: "DELETE",
+                token: token,
+                params: productoId,
+                condition: true
+            });
             try {
-                const response = await fetch(
-                    `${API_URL_DELETE_CART_PRODUCT}?CartId=${cartId}&ProductId=${productoId}`,
-                    {
-                        method: 'DELETE',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`,
-                        },
-                    }
-                );
-
-                if (!response.ok) {
-                    throw new Error('Error al eliminar el producto del carrito');
-                }
 
                 setCarrito((prevCarrito) =>
                     prevCarrito.filter((item) => item.id !== productoId)
@@ -268,18 +251,15 @@ export const CarritoProvider = ({ children }) => {
 
     const eliminarContenidoCarrito = async () => {
         if (isAuthenticated) {
+            useFetch({
+                Url: DELETE_CART_BY_ID,
+                type: "DELETE",
+                token: token,
+                params: userId,
+                condition: true
+            });
             try {
-                const response = await fetch(`${API_URL_DELETE_CART}?id=${cartId}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`,
-                    },
-                });
 
-                if (!response.ok) {
-                    throw new Error('Error al eliminar el contenido del carrito');
-                }
 
                 setCarrito([]);
 
