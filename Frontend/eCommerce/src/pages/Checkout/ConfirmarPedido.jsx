@@ -10,6 +10,10 @@ function ConfirmarPedido() {
   const [user, setUser] = useState(null);
   const [userId, setUserId] = useState(null);
 
+  function dateFormatting(date) {
+    return new Date(date).toLocaleDateString('es-es', {year:"numeric", month:"long", day:"numeric"});
+  }
+
   useEffect(() => {
       const token = localStorage.getItem('accessToken');
       if (token) {
@@ -62,9 +66,9 @@ function ConfirmarPedido() {
       <div className="order-confirmation">
         <h1>Confirmación de Pedido</h1>
         <div><strong>Usuario:</strong> {user}</div>
-        <div><strong>Precio total:</strong> {datos.totalPrice}</div>
+        <div><strong>Precio total:</strong> {datos.totalPrice}€</div>
         <div><strong>Productos Totales:</strong> {datos.totalProducts}</div>
-        <div><strong>Fecha de compra:</strong> {datos.purchaseDate}</div>
+        <div><strong>Fecha de compra:</strong> {dateFormatting(datos.purchaseDate)}</div>
         <div><strong>Productos:</strong></div>
         <ul>
             <li>{datos.orderProducts}</li>
