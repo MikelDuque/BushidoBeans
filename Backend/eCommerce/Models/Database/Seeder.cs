@@ -80,24 +80,13 @@ public class Seeder
             File.ReadAllText("Assets/Reviews.json")
         );
 
-        
+        /* BORRAR */
         Cart[] carts =
         [
             new Cart {Id = 1},
             new Cart {Id = 2},
             new Cart {Id = 3},
             new Cart {Id = 4}
-        ];
-        
-        
-
-        Order[] orders =
-        [
-            new Order
-            {
-                UserId = 1
-
-            }
         ];
 
         CartProduct[] cartProducts =
@@ -160,6 +149,51 @@ public class Seeder
             
         ];
 
+        Address[] addresses =
+        [
+            new Address {
+                Id = 1,
+                Addressee = "Antuan",
+                PhoneNumber = 738573958,
+                AddressInfo = "C/ de la Mariantonieta, 58, Málaga (España)",
+                UserId = 1
+            }
+        ];
+
+        Order[] orders =
+        [
+            new Order {
+                Id = 1,
+                UserId = 1
+            }
+        ];
+
+        OrderProduct[] orderProducts =
+        [
+            new OrderProduct
+            {
+                OrderId = 1,
+                ProductId = 1,
+                Quantity = 2,
+                PurchasePrice = 2.5M,
+            },
+            
+            new OrderProduct
+            {
+                OrderId = 1,
+                ProductId = 32,
+                Quantity = 8,
+                PurchasePrice = 1M
+            },
+            new OrderProduct
+            {
+                OrderId = 1,
+                ProductId = 8,
+                Quantity = 1,
+                PurchasePrice = 1.75M
+            },
+        ];
+
         //Añadimos el rango de usuarios a la BDD
         await _dbContext.Categories.AddRangeAsync(categories);
         await _dbContext.SaveChangesAsync();
@@ -170,12 +204,21 @@ public class Seeder
         await _dbContext.Products.AddRangeAsync(products);
         await _dbContext.SaveChangesAsync();
 
+        await _dbContext.Reviews.AddRangeAsync(reviews);
+        await _dbContext.SaveChangesAsync();
+
         //await _dbContext.Carts.AddRangeAsync(carts);
         
         await _dbContext.CartProducts.AddRangeAsync(cartProducts);
         await _dbContext.SaveChangesAsync();
 
-        await _dbContext.Reviews.AddRangeAsync(reviews);
-        await _dbContext.SaveChangesAsync();
+//        await _dbContext.Addresses.AddRangeAsync(addresses);
+//        await _dbContext.SaveChangesAsync();
+
+//        await _dbContext.Orders.AddRangeAsync(orders);
+//        await _dbContext.SaveChangesAsync();
+
+//        await _dbContext.OrderProducts.AddRangeAsync(orderProducts);
+//        await _dbContext.SaveChangesAsync();
     }
 }
