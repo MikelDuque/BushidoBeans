@@ -4,8 +4,8 @@ import { useCheckout } from "../../context/CheckoutContext"; // Importa el conte
 function Subtotal({ view }) {
     const {handleButtonClick, calculateShipping, order} = useCheckout();
 
-    /*
-    const sendReview = async (data) => {
+    
+    const sendOrder = async (data) => {
             const response = await fetch("https://localhost:7015/api/Order", {
                 method: 'POST',
                 headers: {
@@ -23,7 +23,7 @@ function Subtotal({ view }) {
             }
       
     };
-
+/*
     const handleSubtotal = () => {
         if (!carrito || carrito.length === 0) return 0;
         return carrito.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -51,7 +51,7 @@ function Subtotal({ view }) {
                 </p>
             )}
 
-            <button className="btn-direccion" onSubmit={sendReview} onClick={() => handleButtonClick('address')}>
+            <button className="btn-direccion" onSubmit={sendOrder} onClick={() => handleButtonClick('address')}>
                 {view === "checkout" ? "Continuar" : "Pago"}    
                   
             </button>
