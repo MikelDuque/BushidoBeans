@@ -29,7 +29,9 @@ export const CarritoProvider = ({ children }) => {
                 name: "Nombre de Prueba",
                 price: 2.55,
                 stock: 20,
-                quantity: 1
+                quantity: 1,
+                userId: userId,
+                productId: 1
             })
         }
         
@@ -59,10 +61,9 @@ export const CarritoProvider = ({ children }) => {
         handleToken();
         setCarritoPrueba();
 
-
         if (isAuthenticated) {
-             actualizarCarritoBackend();
-             obtenerCarritoBackend();
+            actualizarCarritoBackend();
+            //obtenerCarritoBackend();
         } else {
             const carritoGuardado = JSON.parse(localStorage.getItem('carrito'));
             if (carritoGuardado) {
@@ -77,41 +78,52 @@ export const CarritoProvider = ({ children }) => {
         setIsLoading(true);
         try {
             const response = await fetch(GET_CART_BY_ID(userId), {
-                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
-                },
-                body: userId
+                }
             });
 
             if (response.ok) {
-                data = await response.json();
+                const data = await response.json();
                 handleCart(data);
             } else {
                 setError(await response.text());
             }
         } catch (error) {
             setError(error.message);
+            console.log("error", error.message);
+            
         } finally {
             setIsLoading(false);
         }
     };
+    console.log("carritoLocalStorage", localStorage.getItem("carrito"));
+    
 
     const actualizarCarritoBackend = async () => {
+
+        const backendCart = {
+            id: userId,
+            cartProducts: localStorage.getItem(carrito)
+        }
+
         setIsLoading(true);
         try {
             const response = await fetch(PUT_CART, {
-                method: 'POST',
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: localStorage.getItem('carrito')
+                body: JSON.stringify(backendCart)
             });
 
+            console.log("respuesta", response);
+            
+
             if (response.ok) {
-                data = await response.json();
+                const data = await response.json();
                 handleCart(data);
                 localStorage.removeItem('carrito');
             } else {
@@ -119,6 +131,7 @@ export const CarritoProvider = ({ children }) => {
             }
         } catch (error) {
             setError(error.message);
+            console.log("error", error);
         } finally {
             setIsLoading(false);
         }
