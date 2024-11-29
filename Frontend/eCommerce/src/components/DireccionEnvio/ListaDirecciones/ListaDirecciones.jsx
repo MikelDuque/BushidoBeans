@@ -3,11 +3,7 @@ import { useCheckout } from "../../../context/CheckoutContext";
 import "./ListaDirecciones.css";
 
 function ListaDirecciones({ direcciones }) {
-  const { handleButtonClick, hanldleAddress } = useCheckout();
-
-  useEffect(() => {
-    hanldleAddress("C/ Frederick Terman, 3, Campanillas, 29590, Málaga");
-  }, []);
+  const { handleButtonClick } = useCheckout();
 
   return (
     <div className="container-lista-direcciones">

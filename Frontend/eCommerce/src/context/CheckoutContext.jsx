@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import { useCarrito } from './CarritoContext';
 import { useAuth } from './AuthContext';
 import { POST_ORDER } from '../endpoints/config';
@@ -17,7 +17,15 @@ export const CheckoutProvider = ({ children }) => {
     purchaseDate: null,
     orderProducts: []
   });
-  const [address, setAddress] = useState
+  const [address, setAddress] = useState(null);
+
+  useEffect(() => {
+    handleOrderProducts();
+    handleTotalPrice();
+    handleAddress("C/ Frederick Terman, 3, Campanillas, 29590, Málaga");
+  }, []);
+
+
   
   // Función para cambiar el estado de la vista
   const handleButtonClick = (view) => {
@@ -28,20 +36,30 @@ export const CheckoutProvider = ({ children }) => {
     setOrder(newOrder)
   }
 
-  function handleAdress(actualAddress) {
+  function handleAddress(actualAddress) {
     setAddress(actualAddress)
   }
 
   function handleOrderProducts() {
+    console.log("carrito", carrito);
+    console.log("carrito checkout", order.orderProducts);
+    
+    
+
     setOrder(estadoPrevio => ({
       ...estadoPrevio,
-      orderProducts: orderProducts.fill(carrito)
+      orderProducts: JSON.parse(JSON.stringify(carrito))
     }))
   }
 
   function handleTotalPrice() {
-    const subtotal = (!carrito || carrito == []) ? 0 : carrito.reduce((total, item) => total + item.price * item.quantity, 0);
-
+    console.log("CARRO", carrito);
+    
+    const subtotal = (!carrito || carrito.length === 0) ? 0 : carrito.reduce((total, item) => total + item.price * item.quantity, 0);
+    console.log("subtotal", subtotal);
+    console.log("productos", order.orderProducts);
+    
+    
     setOrder(estadoPrevio => ({
       ...estadoPrevio,
       totalPrice: subtotal
@@ -81,9 +99,6 @@ export const CheckoutProvider = ({ children }) => {
     address,
     handleButtonClick,
     calculateShipping,
-    handleOrderProducts,
-    handleTotalPrice,
-    handleAdress
   };
 
   return (<CheckoutContext.Provider value={ctxValue}> {children} </CheckoutContext.Provider>);
