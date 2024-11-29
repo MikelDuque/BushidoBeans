@@ -22,8 +22,8 @@ namespace eCommerce.Controllers
         {
             return await _orderService.GetOrderAsync(id);
         }
-
-        [HttpPost]
+        
+        [HttpPost("Insert_Order")]
         public async Task<ActionResult> PostOrder([FromBody]Order order)
         {
             await _orderService.CreateOrderAsync(order);
