@@ -2,6 +2,8 @@ using eCommerce.Controllers;
 using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 using eCommerce.Models.Mappers;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.IdentityModel.Tokens;
 
 namespace eCommerce.Services;
 public class CartService
@@ -20,6 +22,7 @@ public class CartService
     public async Task<List<CartProductDto>> GetCartAsync(long userId)
     {
         User user = await _unitOfWork.UserRepository.GetByIdAsync(userId);
+
         return await Task.FromResult(_cartProductMapper.ToDto(user.CartProducts).ToList());
     }
 
@@ -65,6 +68,18 @@ public class CartService
 
     public async Task<List<CartProductDto>> UpdateCartProductsAsync(List<CartProduct> cartProducts)
     {
+
+        foreach (var cartProduct in cartProducts)
+        {
+            await UpdateCartProductAsync(cartProduct);
+        }
+
+        return _cartProductMapper.ToDto(cartProducts).ToList();
+    }
+
+    public async Task<List<CartProductDto>> UpdateCartAsync(CartDto cart)
+    {
+        List<CartProduct> cartProducts = _cartProductMapper.ToEntity(cart.CartProducts).ToList();
 
         foreach (var cartProduct in cartProducts)
         {
