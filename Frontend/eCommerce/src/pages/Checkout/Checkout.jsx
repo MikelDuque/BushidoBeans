@@ -54,7 +54,7 @@ function Checkout() {
 
           <button
             className={currentView === 'confirm' ? classes.activeButton : ''} onClick={() => handleButtonClick('confirm')} disabled={isButtonDisabled('confirm')}>
-            Resumen
+            Confirmación
           </button>
 
         </div>
