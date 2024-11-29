@@ -1,0 +1,46 @@
+.container-lista-direcciones{
+    width: 60%;
+}
+
+.titulo-direcciones {
+    font-family: var(--font-family-titulos-subtitulos);
+    font-size: var(--subtitulos-size);
+    font-weight: var(--font-weight-bold);
+    color: var(--texto-principal);
+    padding: 0 0 3rem;
+}
+
+.lista-direcciones {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    gap: 30px;
+}
+
+.item-direccion {
+    cursor: pointer;
+    padding: 20px 30px;
+    background-color: var(--nav-footer);
+    border: 1px solid var(--nav-footer);
+    border-radius: 8px;
+    font-family: var(--font-family-texto);
+    font-size: var(--texto-size);
+    font-weight: var(--font-weight-regular);
+    color: var(--letras-nav);
+    transition: 0.2s ease;
+}
+
+.item-direccion:hover {
+    transform: scale(1.05);
+    color: var(--nav-hover);
+}
+
+.item-direccion:active {
+    transform: scale(1.05);
+    color: var(--nav-click);
+}
+
+.lista-vacia {
+    text-align: center;
+    margin-top: 20px;
+}

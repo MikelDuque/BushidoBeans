@@ -13,7 +13,14 @@ public class User
     public int Phone { get; set; }
     public required string Role { get; set; }
 
-    public Cart Cart { get; set; }
+    /* RELACIONES 1-M */
     public ICollection<Review> Reviews { get; } = [];
+    public ICollection<Order> Orders { get; } = [];
+    public ICollection<Address> Addresses { get; } = [];
 
+    /* RELACIONES M-N */
+    public List<Product> Products { get; } = [];
+    public List<CartProduct> CartProducts { get; } = [];
+    
+    //public Cart Cart { get; set; }
 }

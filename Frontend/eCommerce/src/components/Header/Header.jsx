@@ -1,29 +1,36 @@
 import classes from './Header.module.css';
 import { useContext, useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ModalContext } from "../../context/ModalContext";
 import { useCarrito } from '../../context/CarritoContext';
 import { useAuth } from '../../context/AuthContext';
 import { NavLink } from "react-router-dom";
-import CartCounter from "../CartCounter";
 import Modal from '../Modals/Modal';
 import Cart from "../Modals/Shopping_Cart/Cart";
 
 function Header() {
-  //MODALES
+  //HOOKS
   const {
     isOpen,
     openModal,
     closeModal
   } = useContext(ModalContext);
 
-  const { eliminarContenidoCarrito } = useCarrito();
+  const navigate = useNavigate();
+
+  const { eliminarContenidoCarrito, totalProducts } = useCarrito();
+
+  console.log("totalProducts", totalProducts);
+  
+
+  function handleNavigateToCheckout() {
+    navigate('/checkout')
+  }
 
   const { isAuthenticated, logout } = useAuth();
   const handleLogout = () => {
     logout();
   };
-
-  const [totalProducts,setTotalProducts] = useState(0);
 
   return (
     <header>
@@ -44,12 +51,10 @@ function Header() {
       </nav>
 
         {isOpen && (
-          <Modal closeModal={closeModal} type="cart" titulo={"Tu Carro"} cancelFnc="" continueFnc="" buttonValues={{continueVal:"Procesar compra", cancelVal:"Vaciar carro"}}>
+          <Modal closeModal={closeModal} type="cart" titulo={"Tu Carro"} cancelFnc={eliminarContenidoCarrito} continueFnc={handleNavigateToCheckout} buttonValues={{continueVal:"Procesar compra", cancelVal:"Vaciar carro"}}>
             <Cart closeCart={closeModal}/>
           </Modal>
         )}
-        
-        <CartCounter setTotalProducts={setTotalProducts} />
     </header>
   );
 }

@@ -1,34 +1,82 @@
 import classes from "./Cart.module.css";
-import Quantity_Counter from "../../Quantity_Counter/Counter";
+import CartItem from "./Cart_Item/CartItem";
 import { useCarrito } from "../../../context/CarritoContext";
+import { API_BASE_URL } from "../../../endpoints/config";
 
-export default function Cart({}) {
-  const {carrito, eliminarDelCarrito} = useCarrito();
+export default function Cart() {
+  const {carrito} = useCarrito();
 
   //DEFINIR CARTITEMS
   function cartMapper(cartItems) {
-    return (cartItems.length > 0 ? ( 
-      cartItems.map((item) => (
-        console.log(item),
-        <li id={item.productId} className={classes.cart_item}>
-          <img src={`https://localhost:7015/${item.image}`} alt="img Producto" />
-          <div className={classes.data_container}>
-            <h3 className={classes.importantText}>{item.name}</h3>
-            <div className={classes.complementary_data}>
-              <p>{item.price} €</p>
-              <Quantity_Counter productId={item.id} oldQuantity={item.quantity} stock={item.stock}/>
-            </div>
-          </div>
-          <a className={classes.importantText} onClick={(e) => {e.preventDefault(), eliminarDelCarrito(item.id)}}>X</a>
-        </li>
-      ))) : (<p>"Tu carrito está vacío"</p>)
+    console.log("Cart length", cartItems.length);
+    console.log("carrito", cartItems);
+    
+
+    return (cartItems.length > 0 ? (
+      console.log("cartItems", carrito),
+      
+      cartItems.map((cartItem) => (
+        console.log("Cart Item", cartItem),
+        
+        <CartItem 
+          key={cartItem.id}
+          productData = {{
+            id: cartItem.id,
+            image: `${API_BASE_URL}${cartItem.image}`,
+            name: cartItem.name,
+            price: cartItem.price,
+            stock: cartItem.stock,
+            quantity: cartItem.quantity
+          }}/>
+      ))) : (<h4 className={classes.clearMessage}>Tu carrito está vacío</h4>)
     ); 
   };
 
   return (
     <>
       <ul className={classes.cart_list}>
-        {cartMapper(carrito)}
+        <CartItem productData = {{
+            id: 1,
+            image: `https://pbs.twimg.com/profile_images/1859044378662027264/Km09QDjK_400x400.jpg`,
+            name: "Este es un nombre provisional que hay que borrar",
+            price: 25.67,
+            stock: 20,
+            quantity: 2
+          }}/>
+          <CartItem productData = {{
+            id: 1,
+            image: `https://pbs.twimg.com/profile_images/1859044378662027264/Km09QDjK_400x400.jpg`,
+            name: "Este es un nombre provisional que hay que borrar",
+            price: 25.67,
+            stock: 20,
+            quantity: 2
+          }}/>
+          <CartItem productData = {{
+            id: 1,
+            image: `https://pbs.twimg.com/profile_images/1859044378662027264/Km09QDjK_400x400.jpg`,
+            name: "Este es un nombre provisional que hay que borrar",
+            price: 25.67,
+            stock: 20,
+            quantity: 2
+          }}/>
+          <CartItem productData = {{
+            id: 1,
+            image: `https://pbs.twimg.com/profile_images/1859044378662027264/Km09QDjK_400x400.jpg`,
+            name: "Este es un nombre provisional que hay que borrar",
+            price: 25.67,
+            stock: 20,
+            quantity: 2
+          }}/>
+          <CartItem productData = {{
+            id: 1,
+            image: `https://pbs.twimg.com/profile_images/1859044378662027264/Km09QDjK_400x400.jpg`,
+            name: "Este es un nombre provisional que hay que borrar",
+            price: 25.67,
+            stock: 20,
+            quantity: 2
+          }}/>
+          
+        {/*{cartMapper(carrito)}*/}
       </ul>
     </>
 )};

@@ -1,6 +1,6 @@
 /* -----GENERAL----- */
 
-main{
+.container{
   color: var(--letras-nav);
   font-family: "Vollkorn", sans-serif;
   background-color: var(--fondo-pagina);

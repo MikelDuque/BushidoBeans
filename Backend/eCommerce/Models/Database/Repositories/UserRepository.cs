@@ -16,8 +16,10 @@ public class UserRepository : Repository<User>
     public new async Task<User> GetByIdAsync(object id)
    {
       return await GetQueryable().Where(user => user.Id == (long)id)
-      .Include(user => user.Cart)
-      .Include(user => user.Reviews)
+      //.Include(user => user.Cart)
+      .Include(user => user.Reviews!)
+      .Include(user => user.CartProducts).ThenInclude(cartProduct => cartProduct.Product)
+      .Include(user => user.Orders!)
       .FirstOrDefaultAsync();
    }
 

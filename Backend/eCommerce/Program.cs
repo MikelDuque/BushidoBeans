@@ -25,6 +25,9 @@ public class Program
         //Añadir la configuración guardada en appsettings
         builder.Services.Configure<Settings>(builder.Configuration.GetSection(Settings.SECTION_NAME));
 
+        builder.Services.AddControllers(
+        options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
+
         //Controladores
         builder.Services.AddControllers();
 
@@ -41,6 +44,9 @@ public class Program
         builder.Services.AddScoped<ReviewRepository>();
         builder.Services.AddScoped<CartRepository>();
         builder.Services.AddScoped<CartProductRepository>();
+        builder.Services.AddScoped<OrderRepository>();
+        builder.Services.AddScoped<OrderProductRepository>();
+        builder.Services.AddScoped<AddressRepository>();
 
         //Servicios
         builder.Services.AddScoped<TextComparer>();
@@ -49,6 +55,8 @@ public class Program
         builder.Services.AddScoped<ProductService>();
         builder.Services.AddScoped<ReviewService>();
         builder.Services.AddScoped<CartService>();
+        builder.Services.AddScoped<OrderService>();
+        builder.Services.AddScoped<AddressService>();
 
         //Mappers
         builder.Services.AddTransient<UserMapper>();
@@ -56,6 +64,9 @@ public class Program
         builder.Services.AddTransient<ReviewMapper>();
         builder.Services.AddTransient<CartMapper>();
         builder.Services.AddTransient<CartProductMapper>();
+        builder.Services.AddTransient<OrderMapper>();
+        builder.Services.AddTransient<OrderProductMapper>();
+        builder.Services.AddTransient<AddressMapper>();
 
         //Swagger/OpenApi
         builder.Services.AddEndpointsApiExplorer();
@@ -116,6 +127,7 @@ public class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+
 
         app.UseHttpsRedirection();
 

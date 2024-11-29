@@ -10,16 +10,17 @@ public class CartProductRepository : Repository<CartProduct>
   {
   }
 
-  public async Task<CartProduct> GetByIdAsync(object idCart, object idProduct)
+  public async Task<CartProduct> GetByIdAsync(object idUser, object idProduct)
   {
-    return await GetQueryable().Where(cartProduct => cartProduct.CartId == (long)idCart && cartProduct.ProductId == (long)idProduct)
-    .Include(cartProduct => cartProduct.Cart)
+    return await GetQueryable().Where(cartProduct => cartProduct.UserId == (long)idUser && cartProduct.ProductId == (long)idProduct)
+    .Include(cartProduct => cartProduct.User)
     .Include(cartProduct => cartProduct.Product)
+    //.Include(cartProduct => cartProduct.Cart)
     .FirstOrDefaultAsync();
   }
 
-    public async Task<bool> ExistAsync(object idCart, object idProduct)
+    public async Task<bool> ExistAsync(object idUser, object idProduct)
     {
-        return await GetByIdAsync(idCart, idProduct) != null;
+        return await GetByIdAsync(idUser, idProduct) != null;
     }
 }

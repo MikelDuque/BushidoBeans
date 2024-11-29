@@ -18,33 +18,60 @@ namespace eCommerce.Controllers
             _cartService = cartService;
         }
 
+
         [Authorize]
-        [HttpGet("Get_Cart")]
+        [HttpGet("{id}")]
         public async Task<ActionResult> GetCartByIdAsync(long id)
         {
             Claim userClaimId = User.FindFirst("id");
 
             if (userClaimId == null) return Unauthorized("Usuario no autorizado"); 
-            
 
             return Ok(await _cartService.GetCartAsync(id));
 
         }
 
         [Authorize]
-        [HttpDelete("Delete_CartContent")]
-        public async Task<ActionResult> DeleteCartByIdAsync([FromQuery] long id)
+        [HttpPut("Update_Cart")]
+        public async Task<ActionResult> UpdateCartAsync([FromBody] List<CartProduct> cartProducts)
         {
             Claim userClaimId = User.FindFirst("id");
-            
+
+            if (userClaimId == null) return Unauthorized("Usuario no autorizado");
+
+            await _cartService.UpdateCartProductsAsync(cartProducts);
+
+            return Ok(cartProducts);
+
+        }
+
+        [Authorize]
+        [HttpPut("Update_CartProduct")]
+        public ActionResult<bool> UpdateCart([FromBody] CartProduct cartProduct)
+        {
+
+            Claim userClaimId = User.FindFirst("id");
+
+            if (cartProduct == null) return BadRequest("Datos del producto no válidos.");
+
+            if (userClaimId == null) return Unauthorized("Usuario no autorizado");
+
+            return Ok(_cartService.UpdateCartProductAsync(cartProduct));
+        }
+
+        [Authorize]
+        [HttpDelete("Delete_Cart/{id}")]
+        public async Task<ActionResult> DeleteCartByIdAsync([FromBody] long id)
+        {
+            Claim userClaimId = User.FindFirst("id");
+
 
             if (userClaimId == null) return Unauthorized("Usuario no autorizado");
 
             try
             {
-                await _cartService.DeleteCartAsync(id);
-                
-                return NoContent();
+
+                return Ok(await _cartService.DeleteCartAsync(id));
 
             }
             catch (Exception)
@@ -54,26 +81,9 @@ namespace eCommerce.Controllers
 
         }
 
-
-        [Authorize]
-        [HttpPost("Update_CartProduct")]
-        public ActionResult<CartProduct> UpdateCart([FromQuery] CartProduct cartProduct)
-        {
-
-            Claim userClaimId = User.FindFirst("id");
-
-            if (userClaimId == null)return Unauthorized("Usuario no autorizado");
-
-            if (cartProduct == null) return BadRequest("Datos del producto no válidos.");
-
-            return  Ok (_cartService.UpdateCartProductAsync(cartProduct));
-        }
-
-
-
         [Authorize]
         [HttpDelete("Delete_CartProduct")]
-        public async Task<ActionResult> DeleteCartProduct([FromQuery] CartProduct cartProduct)
+        public async Task<ActionResult> DeleteCartProduct([FromBody] CartProduct cartProduct)
         {
             Claim userClaimId = User.FindFirst("id");
 
@@ -91,20 +101,5 @@ namespace eCommerce.Controllers
             return NoContent();
         }
 
-
-
-
-        [Authorize]
-        [HttpPut("Update_GlobalCart")]
-        public async Task<ActionResult> GetCartAsync([FromBody]Cart cart)
-        {
-            Claim userClaimId = User.FindFirst("id");
-
-            if (userClaimId == null)return Unauthorized("Usuario no autorizado");
-
-            await _cartService.UpdateCartProductsAsync(cart);
-            return Ok(cart);
-            
-        }
     }
 }

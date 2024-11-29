@@ -15,13 +15,17 @@ public class Product
     public float Discount { get; set; }
     public int Stock { get; set; }
 
-    //---Foreign Keys---//
+    /* RELACIONES 1-M */
 
     [ForeignKey(nameof(Category))]
     public required long CategoryId { get; set; }
     public Category Category { get; set; }
 
-    public List<Cart> Carts { get; set; } = [];
-   public List<CartProduct> CartProducts { get; set; } = [];
-    public ICollection<Review> Reviews { get; } = new List<Review>();
+    /* RELACIONES M-N */
+    public ICollection<Review> Reviews { get; } = []; 
+    public List<User> Users { get; } = [];
+    public List<OrderProduct> OrderProducts { get; } = [];
+    public List<Order> Orders { get; } = [];
+
+    //public List<Cart> Carts { get; } = [];
 }

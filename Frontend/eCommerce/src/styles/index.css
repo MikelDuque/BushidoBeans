@@ -40,6 +40,11 @@ body {
     height: 100%;
 }
 
+main {
+    height: 100%;
+    background-color: var(--fondo-vistas);
+}
+
 .texto{
     font-family: var(--font-family-texto);
     font-size: var(--texto-size);

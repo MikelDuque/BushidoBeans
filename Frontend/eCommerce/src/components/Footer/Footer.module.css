@@ -1,7 +1,7 @@
 /* -----GENERAL----- */
 footer{
   background: var(--nav-footer);
-  height: 150px;
+  height: 22vh;
   font-family: 'Vollkorn', sans-serif;
   font-size: var(--texto-size);
   font-weight: var(--font-weight-regular);
