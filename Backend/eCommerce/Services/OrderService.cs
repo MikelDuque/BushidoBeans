@@ -19,7 +19,7 @@ namespace eCommerce.Services
         public async Task<Order> GetOrderAsync(long userId)
         {
             User user = await _unitOfWork.UserRepository.GetByIdAsync(userId);
-            return user.Orders.FirstOrDefault();
+            return user.Orders.LastOrDefault();
         }
 
         public async Task<bool> CreateOrderAsync(Order order)
