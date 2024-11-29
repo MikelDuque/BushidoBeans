@@ -1,3 +1,7 @@
+.container-lista-direcciones{
+    width: 60%;
+}
+
 .titulo-direcciones {
     font-family: var(--font-family-titulos-subtitulos);
     font-size: var(--subtitulos-size);
@@ -7,17 +11,14 @@
 }
 
 .lista-direcciones {
-    width: 60%;
     display: flex;
     flex-direction: column;
     list-style: none;
-    padding: 0;
     gap: 30px;
 }
 
 .item-direccion {
     cursor: pointer;
-    width: 80vh;
     padding: 20px 30px;
     background-color: var(--nav-footer);
     border: 1px solid var(--nav-footer);
