@@ -5,6 +5,8 @@ import classes from './Checkout.module.css';
 import ChkCart from "../../components/CheckoutPages/ChkCart";
 import ChkAddress from "../../components/CheckoutPages/ChkAddress";
 import ChkConfirm from "../../components/CheckoutPages/Chkconfirm";
+import ConfirmarPedido from "./ConfirmarPedido.jsx";
+import Cart from "../../components/Modals/Shopping_Cart/Cart.jsx";
 
 function Checkout() {
   const { currentView, handleButtonClick, goToNextStep } = useCheckout('cart');
@@ -15,6 +17,9 @@ function Checkout() {
     if (currentView === 'confirm') return false;
     return false;
   };
+
+  
+  
 
   return (
     <>
@@ -40,7 +45,7 @@ function Checkout() {
         <div className={classes.content}>
           {currentView === 'cart' && <ChkCart />}
           {currentView === 'address' && <ChkAddress />}
-          {currentView === 'confirm' && <ChkConfirm />}
+          {currentView === 'confirm' && <ConfirmarPedido />}
         </div>
       </div>
       <Footer />

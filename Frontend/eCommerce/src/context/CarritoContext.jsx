@@ -13,10 +13,14 @@ export const useCarrito = () => {return useContext(CarritoContext)};
 export const CarritoProvider = ({ children }) => {
 
     /* ----- Constantes Iniciales ----- */
-
+    
     const { isAuthenticated } = useAuth();
     const token = localStorage.getItem('accessToken') || null;
+    
     const userId = isAuthenticated ? jwtDecode(token).id : 0;
+    console.log("token:",token)
+    console.log("userID", userId);
+    
     const localCart = JSON.parse(localStorage.getItem('carrito' || []))
 
     const [carrito, setCarrito] = useState([]);

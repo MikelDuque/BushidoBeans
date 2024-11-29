@@ -18,10 +18,9 @@ namespace eCommerce.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetOrderByIdAsync(long id)
+        public async Task<Order> GetOrderByIdAsync(long id)
         {
-            Console.WriteLine(await _orderService.GetOrderAsync(id));
-            return Ok(await _orderService.GetOrderAsync(id));
+            return await _orderService.GetOrderAsync(id);
         }
 
         [HttpPost]

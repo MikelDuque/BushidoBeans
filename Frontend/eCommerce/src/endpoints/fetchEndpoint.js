@@ -10,7 +10,7 @@ export default async function fetchEndpoint(Url, type, token, params) {
 };
 
 /* ------------------------- */
-
+/*
 async function defineFetch(Url, type, token, params) {
   
   if(type !== 'GET' && params) return (
@@ -30,4 +30,4 @@ function existToken(token) {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
   }); 
-}
+}*/

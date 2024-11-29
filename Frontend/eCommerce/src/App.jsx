@@ -58,6 +58,11 @@ function App() { return (
                     <Checkout />
                 </CheckoutProvider>}/>
         </Route>
+
+        <Route path="/ConfirmarPedido" element={
+            <ConfirmarPedido />
+
+        } />
     </Routes>
 );};
 

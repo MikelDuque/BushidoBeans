@@ -30,8 +30,8 @@ namespace eCommerce.Services
                 UserId = order.UserId,
                 TotalPrice = await TotalPrice(order.UserId),
                 TotalProducts = await TotalProducts(order.UserId),
-                PurchaseDate = DateTime.Now,
-                CartProducts = await GetCartProducts(order.UserId),
+                PurchaseDate = DateTime.Now
+                
             };
 
             await _unitOfWork.OrderRepository.InsertAsync(newOrder);
