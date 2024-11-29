@@ -22,9 +22,6 @@ function SobreNosotros() {
     const imagenes = [imagen1, imagen2, imagen3, imagen4]
     return (
         <div className='container-sobre-nosotros'>
-
-            <Header />
-
             <div className="carrusel"><Carrusel images={imagenes} /></div>
             <div className='container-descripcion'>
                 <div className='imagen-logo-bushido-beans'><img src={logo} alt="" /></div>
@@ -121,11 +118,6 @@ function SobreNosotros() {
                 </div>
             </div>
             </div>
-
-
-
-            <Footer />
-
         </div>
     );
 
