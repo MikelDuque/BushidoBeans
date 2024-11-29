@@ -33,7 +33,7 @@ function Checkout() {
           <div className={`${classes.line} ${currentView === 'confirm' ? classes.lineActive : ''}`} />
           <button
             className={currentView === 'confirm' ? classes.activeButton : ''} onClick={() => handleButtonClick('confirm')} disabled={isButtonDisabled('confirm')}>
-            Confirmación
+            Resumen
           </button>
         </div>
 
