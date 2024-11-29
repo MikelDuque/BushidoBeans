@@ -25,9 +25,8 @@ function Inicio() {
 
   return (
     <>
-      {!hasScrolledIntro && <ScrollIntro />}
-      <Header />
-      <main id="main">
+      {/*!hasScrolledIntro && <ScrollIntro />*/}
+      <div className={classes.container}>
         <div className={classes.content}>
           <div className={classes.texto}>
             <h2>Nueva forma de disfrutar tu café</h2>
@@ -47,8 +46,7 @@ function Inicio() {
             </p>
           </div>
         </div>
-      </main>
-      <Footer />
+      </div>
     </>
   );
 }
