@@ -6,6 +6,25 @@ function Subtotal({ carrito, view }) {
     // Usa el contexto Checkout para cambiar el `currentView`
     const {handleButtonClick} = useCheckout();
 
+    const sendReview = async (data) => {
+            const response = await fetch("https://localhost:7015/api/Order", {
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json'
+                    
+                },
+                body: JSON.stringify(data),
+            });
+    
+            if (response.ok) {
+                alert("Order enviada correctamente");
+                               
+            } else {
+                setError("Error al enviar la review:");
+            }
+      
+    };
+
     const handleSubtotal = () => {
         if (!carrito || carrito.length === 0) return 0;
         return carrito.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -31,8 +50,9 @@ function Subtotal({ carrito, view }) {
                 </p>
             )}
 
-            <button className="btn-direccion" onClick={() => handleButtonClick('address')}>
-                {view === "checkout" ? "Continuar" : "Pago"}            
+            <button className="btn-direccion" onSubmit={sendReview} onClick={() => handleButtonClick('address')}>
+                {view === "checkout" ? "Continuar" : "Pago"}    
+                  
             </button>
         </div>
     );
