@@ -62,8 +62,8 @@ export const CarritoProvider = ({ children }) => {
         setCarritoPrueba();
 
         if (isAuthenticated) {
-            actualizarCarritoBackend();
-            //obtenerCarritoBackend();
+           // actualizarCarritoBackend();
+            obtenerCarritoBackend();
         } else {
             const carritoGuardado = JSON.parse(localStorage.getItem('carrito'));
             if (carritoGuardado) {
