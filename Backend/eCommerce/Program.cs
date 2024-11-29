@@ -42,7 +42,8 @@ public class Program
         builder.Services.AddScoped<CartRepository>();
         builder.Services.AddScoped<CartProductRepository>();
         builder.Services.AddScoped<OrderRepository>();
-        
+        builder.Services.AddScoped<OrderProductRepository>();
+        builder.Services.AddScoped<AddressRepository>();
 
         //Servicios
         builder.Services.AddScoped<TextComparer>();
@@ -52,6 +53,7 @@ public class Program
         builder.Services.AddScoped<ReviewService>();
         builder.Services.AddScoped<CartService>();
         builder.Services.AddScoped<OrderService>();
+        builder.Services.AddScoped<AddressService>();
 
         //Mappers
         builder.Services.AddTransient<UserMapper>();
@@ -60,6 +62,8 @@ public class Program
         builder.Services.AddTransient<CartMapper>();
         builder.Services.AddTransient<CartProductMapper>();
         builder.Services.AddTransient<OrderMapper>();
+        builder.Services.AddTransient<OrderProductMapper>();
+        builder.Services.AddTransient<AddressMapper>();
 
         //Swagger/OpenApi
         builder.Services.AddEndpointsApiExplorer();

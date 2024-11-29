@@ -36,7 +36,7 @@ namespace eCommerce.Services
             {
                 Addressee = addressDto.Addressee,
                 PhoneNumber = addressDto.PhoneNumber,
-                NameAddress = addressDto.NameAddress,
+                AddressInfo = addressDto.AddressInfo,
                 UserId = addressDto.UserId,
                 User = user 
             };

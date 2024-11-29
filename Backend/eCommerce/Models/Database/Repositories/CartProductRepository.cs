@@ -14,14 +14,13 @@ public class CartProductRepository : Repository<CartProduct>
   {
     return await GetQueryable().Where(cartProduct => cartProduct.UserId == (long)idUser && cartProduct.ProductId == (long)idProduct)
     .Include(cartProduct => cartProduct.User)
-    //.Include(cartProduct => cartProduct.Cart)
     .Include(cartProduct => cartProduct.Product)
-    .Include(CartProduct => CartProduct.Orders!)
+    //.Include(cartProduct => cartProduct.Cart)
     .FirstOrDefaultAsync();
   }
 
-    public async Task<bool> ExistAsync(object idCart, object idProduct)
+    public async Task<bool> ExistAsync(object idUser, object idProduct)
     {
-        return await GetByIdAsync(idCart, idProduct) != null;
+        return await GetByIdAsync(idUser, idProduct) != null;
     }
 }
