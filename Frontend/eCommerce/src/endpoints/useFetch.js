@@ -6,6 +6,8 @@ export default function useFetch({Url, type, token, params, condition}) {
   const [error, setError] = useState(null);
   const [fetchData, setFetchData] = useState(null);
 
+  console.log("token en useFetch", token);
+  
   useEffect(() => {
     if(!condition) return;
     

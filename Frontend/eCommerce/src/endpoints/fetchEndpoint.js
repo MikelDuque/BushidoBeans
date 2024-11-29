@@ -1,5 +1,7 @@
 export default async function fetchEndpoint(Url, type, token, params) {
   try {
+    console.log(`URL: ${Url}, tipo: ${type}, token: ${token}, params: ${params}`);
+    
     const response = await defineFetch(Url, type, token, params);
 
     if (response.ok) return await response.json();

@@ -22,7 +22,8 @@ export default function Cart() {
           key={cartItem.id}
           productData = {{
             id: cartItem.id,
-            image: `${API_BASE_URL}${cartItem.image}`,
+            image: cartItem.image,
+            //image: `${API_BASE_URL}${cartItem.image}`,
             name: cartItem.name,
             price: cartItem.price,
             stock: cartItem.stock,
@@ -34,49 +35,8 @@ export default function Cart() {
 
   return (
     <>
-      <ul className={classes.cart_list}>
-        <CartItem productData = {{
-            id: 1,
-            image: `https://pbs.twimg.com/profile_images/1859044378662027264/Km09QDjK_400x400.jpg`,
-            name: "Este es un nombre provisional que hay que borrar",
-            price: 25.67,
-            stock: 20,
-            quantity: 2
-          }}/>
-          <CartItem productData = {{
-            id: 1,
-            image: `https://pbs.twimg.com/profile_images/1859044378662027264/Km09QDjK_400x400.jpg`,
-            name: "Este es un nombre provisional que hay que borrar",
-            price: 25.67,
-            stock: 20,
-            quantity: 2
-          }}/>
-          <CartItem productData = {{
-            id: 1,
-            image: `https://pbs.twimg.com/profile_images/1859044378662027264/Km09QDjK_400x400.jpg`,
-            name: "Este es un nombre provisional que hay que borrar",
-            price: 25.67,
-            stock: 20,
-            quantity: 2
-          }}/>
-          <CartItem productData = {{
-            id: 1,
-            image: `https://pbs.twimg.com/profile_images/1859044378662027264/Km09QDjK_400x400.jpg`,
-            name: "Este es un nombre provisional que hay que borrar",
-            price: 25.67,
-            stock: 20,
-            quantity: 2
-          }}/>
-          <CartItem productData = {{
-            id: 1,
-            image: `https://pbs.twimg.com/profile_images/1859044378662027264/Km09QDjK_400x400.jpg`,
-            name: "Este es un nombre provisional que hay que borrar",
-            price: 25.67,
-            stock: 20,
-            quantity: 2
-          }}/>
-          
-        {/*{cartMapper(carrito)}*/}
+      <ul className={classes.cart_list}>   
+        {cartMapper(carrito)}
       </ul>
     </>
 )};
