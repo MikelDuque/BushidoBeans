@@ -5,11 +5,11 @@ namespace eCommerce.Models.Mappers;
 
 public class OrderMapper
 {
-  private readonly CartProductMapper _cartProductMapper;
+  private readonly OrderProductMapper _orderProductMapper;
 
-  public OrderMapper(CartProductMapper cartProductMapper)
+  public OrderMapper(OrderProductMapper orderProductMapper)
   {
-    _cartProductMapper = cartProductMapper;
+    _orderProductMapper = orderProductMapper;
   }
 
   //TO DTO
@@ -18,10 +18,10 @@ public class OrderMapper
     return new OrderDto
     {
       Id = order.Id,
-      TotalPrice = TotalPrice(order.User.CartProducts),
-      TotalProducts = TotalProducts(order.User.CartProducts),
+      TotalPrice = TotalPrice(order.OrderProducts),
+      TotalProducts = TotalProducts(order.OrderProducts),
       PurchaseDate = order.PurchaseDate,
-      CartProducts = GetCartProductsDto(order.User.CartProducts)
+      UserId = order.UserId
     };
   }
   public IEnumerable<OrderDto> ToDto(IEnumerable<Order> orders)
@@ -46,28 +46,22 @@ public class OrderMapper
     return ordersDto.Select(ToEntity);
   }
 
-  //OTRAS FUNCIONES
-  private List<CartProductDto> GetCartProductsDto(IEnumerable<CartProduct> cartProducts)
-  {
-    return _cartProductMapper.ToDto(cartProducts).ToList();
-  }
-  
-  private decimal TotalPrice(IEnumerable<CartProduct> cartProducts) {
-    
-    List<CartProductDto> productList = GetCartProductsDto(cartProducts);
+
+  /* FUNCIONES PRIVADAS */
+
+  private decimal TotalPrice(IEnumerable<OrderProduct> orderProducts) {
     decimal totalPrice = 0;
 
-    productList.ForEach((cartProduct) => totalPrice += cartProduct.Price);
+    orderProducts.ToList().ForEach((orderProduct) => totalPrice += orderProduct.PurchasePrice);
 
     return totalPrice;
   }
 
-  private int TotalProducts(IEnumerable<CartProduct> cartProducts) {
+  private int TotalProducts(IEnumerable<OrderProduct> orderProducts) {
     
-    List<CartProductDto> productList = GetCartProductsDto(cartProducts);
     int totalProducts = 0;
 
-    productList.ForEach((product) => totalProducts += product.Quantity);
+    orderProducts.ToList().ForEach((product) => totalProducts += product.Quantity);
 
     return totalProducts;
   }

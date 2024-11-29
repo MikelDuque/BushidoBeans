@@ -10,25 +10,17 @@ public class Order
   public DateTime PurchaseDate { get; set; }
 
 
-  //---Foreign Keys---//
-
-  
+  /* RELACIONES 1-M */
   [ForeignKey(nameof(User))]
   public long UserId { get; set; }
   public User User { get; set; }
-  public List<CartProduct> CartProducts { get; } = [];
   
-  /*
-  [ForeignKey(nameof(Cart))]
-  public long CartId { get; set; }
-  public Cart Cart { get; set; }
-  */
+  [ForeignKey(nameof(Address))]
+  public long AddressId { get; set; }
+  public Address Address { get; set; }
 
+
+  /* RELACIONES M-N */
+  public List<OrderProduct> OrderProducts { get; } = [];
   public List<Product> Products { get; } = [];
-  
-  /*
-  [ForeignKey(nameof(Adress))]
-  public long AdressId { get; set; }
-  public User Adress { get; set; }
-  */
 }

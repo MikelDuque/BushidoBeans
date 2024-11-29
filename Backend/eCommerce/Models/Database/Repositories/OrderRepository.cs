@@ -13,7 +13,8 @@ public class OrderRepository : Repository<Order>
   {
     return await GetQueryable().Where(order => order.Id == (long)id)
     .Include(order => order.User)
-    .Include(order => order.CartProducts).ThenInclude(cartProduct => cartProduct.Product)
+    .Include(order => order.OrderProducts).ThenInclude(orderProduct => orderProduct.Product)
+    .Include(order => order.Address)
     .FirstOrDefaultAsync();
   }
 }
