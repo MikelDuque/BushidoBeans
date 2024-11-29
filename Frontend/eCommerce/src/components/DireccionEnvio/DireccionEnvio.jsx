@@ -1,33 +1,39 @@
 import ListaDirecciones from "./ListaDirecciones/ListaDirecciones";
 import AnadirDireccion from "./AñadirDireccion/AñadirDireccion";
+
 function DireccionEnvio() {
     const direcciones = [
         {
-            nombre: "David Andrino",
-            calle: "Calle Jaen",
+            nombre: "David Andrino Ferrera",
+            calle: "Calle Jaen N1 2ºB",
             ciudad: "Pueblo Tomate",
-            telefono: "123456789",
+            provincia: "Málaga",
+            codigopostal: 29700,
+            telefono: "623456789"
         },
         {
             nombre: "Alonso Onsurbe Lopez",
-            calle: "Avenida Torrox",
+            calle: "Avenida Torrox N25",
             ciudad: "Ciudad del Mal",
-            telefono: "987654321",
+            provincia: "Málaga",
+            codigopostal: 29700,
+            telefono: "687654321",
         },
         {
             nombre: "Elias Robles Ruiz",
-            calle: "Pasaje de Barcelona",
+            calle: "Pasaje de Barcelona N8 5ºC",
             ciudad: "Gotham",
-            telefono: "555555555",
+            provincia: "Málaga",
+            codigopostal: 29700,
+            telefono: "655555555",
         },
     ];
 
     return (
-        <div>
-            <h1>Dirección de Envío</h1>
+        <>
             <ListaDirecciones direcciones={direcciones} />
             <AnadirDireccion />
-        </div>
+        </>
     );
 }
 
