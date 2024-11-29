@@ -1,11 +1,13 @@
 
 
 .order-confirmation {
-    background-color: #fff;
-    padding: 20px;
+    background-color: var(--fondo-vistas);
+    padding: 2rem 10rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    width: 300px;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    font-size: var(--subtitulos-size);
   }
   
   .order-confirmation div {
