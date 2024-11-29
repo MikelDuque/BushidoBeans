@@ -12,7 +12,7 @@ import NotFound from './components/NotFound';
 import Checkout from "./pages/Checkout/Checkout";
 import { ReviewProvider } from "./context/ReviewContext";
 import DireccionEnvio from "./components/DireccionEnvio/DireccionEnvio";
-import { DireccionProvider } from "./context/DireccionContext";
+//import { DireccionProvider } from "./context/DireccionContext";
 import { CheckoutProvider } from './context/CheckoutContext';
 
 function App() { return (
@@ -43,9 +43,9 @@ function App() { return (
 
             {/* QUITAR ESTA RUTA; VIENE INCORPORADA EN EL CHEKOUT */}
             <Route path="/direccion" element={
-                <DireccionProvider>
+//                <DireccionProvider>
                     <DireccionEnvio />
-                </DireccionProvider>
+//                </DireccionProvider>
             } />
 
         </Route>
