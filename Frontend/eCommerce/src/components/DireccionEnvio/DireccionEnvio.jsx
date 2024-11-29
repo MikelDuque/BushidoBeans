@@ -1,32 +1,24 @@
-import ListaDirecciones from "./ListaDirecciones/ListaDirecciones";
-import AnadirDireccion from "./AñadirDireccion/AñadirDireccion";
+import { useDirecciones } from "../../context/DireccionContext";
+
 function DireccionEnvio() {
-    const direcciones = [
-        {
-            nombre: "David Andrino",
-            calle: "Calle Jaen",
-            ciudad: "Pueblo Tomate",
-            telefono: "123456789",
-        },
-        {
-            nombre: "Alonso Onsurbe Lopez",
-            calle: "Avenida Torrox",
-            ciudad: "Ciudad del Mal",
-            telefono: "987654321",
-        },
-        {
-            nombre: "Elias Robles Ruiz",
-            calle: "Pasaje de Barcelona",
-            ciudad: "Gotham",
-            telefono: "555555555",
-        },
-    ];
+    const { direcciones, loading } = useDirecciones();
+
+    if (loading) return <p>Cargando direcciones...</p>;
 
     return (
         <div>
             <h1>Dirección de Envío</h1>
-            <ListaDirecciones direcciones={direcciones} />
-            <AnadirDireccion />
+            {direcciones.length > 0 ? (
+                <ul>
+                    {direcciones.map((direccion) => (
+                        <li key={direccion.id}>
+                            {direccion.nombre}, {direccion.calle}, {direccion.ciudad}
+                        </li>
+                    ))}
+                </ul>
+            ) : (
+                <p>No tienes direcciones guardadas.</p>
+            )}
         </div>
     );
 }
