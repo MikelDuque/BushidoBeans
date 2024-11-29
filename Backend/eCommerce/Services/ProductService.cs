@@ -13,8 +13,8 @@ public class ProductService
 
   public ProductService(UnitOfWork unitOfWork, ProductMapper mapper)
   {
-      _unitOfWork = unitOfWork;
-      _mapper = mapper;
+    _unitOfWork = unitOfWork;
+    _mapper = mapper;
   }
 
   
