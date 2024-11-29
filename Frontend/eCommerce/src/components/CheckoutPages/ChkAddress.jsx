@@ -1,7 +1,9 @@
+import DireccionEnvio from "../DireccionEnvio/DireccionEnvio"
+
 function ChkAddress(){
   return(
     <>
-    ADDRESS
+    <DireccionEnvio />
     </>
   )
 }
