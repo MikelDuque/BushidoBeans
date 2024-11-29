@@ -57,7 +57,7 @@ export const CarritoProvider = ({ children }) => {
         
         totalProducts.current = totalProducts2;
     }
-
+/*
     function updateCart() {
         const {fetchData: newCart} = useFetch({
             Url: PUT_CART,
@@ -69,7 +69,7 @@ export const CarritoProvider = ({ children }) => {
 
         handleCart(newCart);
     }
-
+*/
     
     //function getTotalProducts() { console.log("carrito", carrito); return carrito != []? carrito.reduce((total, product) => total + product.quantity, 0) : 0};
     //console.log("totalProducts", getTotalProducts());
