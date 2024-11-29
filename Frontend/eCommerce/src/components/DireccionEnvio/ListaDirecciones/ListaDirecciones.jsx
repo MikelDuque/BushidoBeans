@@ -3,14 +3,16 @@ import "./ListaDirecciones.css";
 function ListaDirecciones({ direcciones }) {
     return (
         <div className="container-lista-direcciones">
-            <h4 className="titulo-direcciones">Lista de Direcciones</h4>
+            <h2 className="titulo-direcciones">Lista de Direcciones</h2>
             {direcciones.length > 0 ? (
                 <ul className="lista-direcciones">
                     {direcciones.map((direccion, index) => (
                         <li className="item-direccion" key={index}>
-                            <p>{direccion.nombre}</p>
-                            <p>{direccion.calle}, {direccion.ciudad} ({direccion.provincia}), {direccion.codigopostal}</p>
-                            <p>{direccion.telefono}</p>
+                            <p className="texto nombre-direccion">{direccion.nombre}</p>
+                            <p className="texto calle-direccion">{direccion.calle}</p>
+                            <p className="texto ciudad-direccion"> {direccion.ciudad}</p>
+                            <p className="texto ciudad-direccion"> {direccion.telefono}</p>
+
                         </li>
                     ))}
                 </ul>

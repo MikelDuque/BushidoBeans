@@ -75,7 +75,30 @@ export default function Cart() {
             stock: 20,
             quantity: 2
           }}/>
-          
+          <CartItem productData = {{
+            id: 1,
+            image: `https://pbs.twimg.com/profile_images/1859044378662027264/Km09QDjK_400x400.jpg`,
+            name: "Este es un nombre provisional que hay que borrar",
+            price: 25.67,
+            stock: 20,
+            quantity: 2
+          }}/>
+          <CartItem productData = {{
+            id: 1,
+            image: `https://pbs.twimg.com/profile_images/1859044378662027264/Km09QDjK_400x400.jpg`,
+            name: "Este es un nombre provisional que hay que borrar",
+            price: 25.67,
+            stock: 20,
+            quantity: 2
+          }}/>
+          <CartItem productData = {{
+            id: 1,
+            image: `https://pbs.twimg.com/profile_images/1859044378662027264/Km09QDjK_400x400.jpg`,
+            name: "Este es un nombre provisional que hay que borrar",
+            price: 25.67,
+            stock: 20,
+            quantity: 2
+          }}/>
         {/*{cartMapper(carrito)}*/}
       </ul>
     </>

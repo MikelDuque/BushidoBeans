@@ -34,7 +34,7 @@
 
 .activeButton {
   background-color: var(--nav-footer);
-  color: var(--letras-nav);
+  color: white;
   font-weight: bold;
 }
 
