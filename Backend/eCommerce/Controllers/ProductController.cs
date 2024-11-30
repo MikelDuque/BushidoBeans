@@ -1,3 +1,4 @@
+using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 using eCommerce.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,14 @@ public class ProductController : ControllerBase
   {
     return await _service.GetFilteredProducts(filter);
   }
+
+    [HttpPut("Update_Product")]
+    public async Task<ProductDto> UpdateProductAsync([FromQuery]Product product)
+    {
+        return await _service.UpdateProductDetailsAsync(product);
+    }
+    
+    
 
   /*
   [HttpGet]
