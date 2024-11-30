@@ -40,4 +40,24 @@ public class ReviewService
 
     return newReview;
   }
+
+  public async Task<bool> DeleteReviewAsync(Review review)
+  {
+    _unitOfWork.ReviewRepository.Delete(review);
+
+    return await _unitOfWork.SaveAsync();
+  }
+
+  public async Task<bool> DeleteReviewsAsync(object id)
+  {
+    User user = await _unitOfWork.UserRepository.GetByIdAsync(id);
+    bool isDeleted = false;
+
+    foreach (Review review in user.Reviews.ToList())
+    {
+      await DeleteReviewAsync(review);
+    }
+
+    return isDeleted;
+  }
 }

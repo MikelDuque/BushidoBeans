@@ -1,6 +1,7 @@
 ﻿using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 using eCommerce.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -17,6 +18,7 @@ namespace eCommerce.Controllers
             _orderService = orderService;
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<Order> GetOrderByIdAsync(long id)
         {
@@ -44,7 +46,5 @@ namespace eCommerce.Controllers
 
         }
         */
-    
-    
     }
 }

@@ -73,7 +73,7 @@ namespace eCommerce.Controllers
             Claim userClaimId = User.FindFirst("id");
             if (userClaimId == null) return Unauthorized("Usuario no autorizado");
 
-            try {return Ok( await _cartService.DeleteCartProduct(cartProduct));}
+            try {return Ok( await _cartService.DeleteCartProductAsync(cartProduct));}
             catch (Exception) { return BadRequest("El item ha eliminar no existe en la base de datos");}
         }
 

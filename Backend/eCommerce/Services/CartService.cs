@@ -57,23 +57,24 @@ public class CartService
         return _cartProductMapper.ToDto(cartProducts).ToList();
     }
 
-    public async Task<bool> DeleteCartProduct(CartProduct cartProduct)
+    public async Task<bool> DeleteCartProductAsync(CartProduct cartProduct)
     {
         _unitOfWork.CartProductRepository.Delete(cartProduct);
 
         return await _unitOfWork.SaveAsync();
     }
 
-    public async Task<List<CartProductDto>> DeleteCartAsync(object id)
+    public async Task<bool> DeleteCartAsync(object id)
     {
         User user = await _unitOfWork.UserRepository.GetByIdAsync(id);
+        bool isDeleted = false;
 
-        foreach (var cartProduct in user.CartProducts.ToList())
+        foreach (CartProduct cartProduct in user.CartProducts.ToList())
         {
-            await DeleteCartProduct(cartProduct);
+            isDeleted = await DeleteCartProductAsync(cartProduct);
         }
 
-        return _cartProductMapper.ToDto(user.CartProducts).ToList();
+        return isDeleted;
     }
 
 
