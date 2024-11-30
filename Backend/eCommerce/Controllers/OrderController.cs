@@ -22,7 +22,7 @@ namespace eCommerce.Controllers
         {
             return await _orderService.GetOrderAsync(id);
         }
-        
+        /*
         [HttpPost("Insert_Order")]
         public async Task<ActionResult> PostOrder([FromBody]OrderDto order)
         {

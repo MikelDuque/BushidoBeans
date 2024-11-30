@@ -1,4 +1,5 @@
-﻿using eCommerce.Models.Dtos;
+﻿using eCommerce.Models.Database.Entities;
+using eCommerce.Models.Dtos;
 using eCommerce.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,13 +28,12 @@ public class UserController : ControllerBase
         return await _service.GetAllAsync();
     }
 
-    /*
+
     [HttpPut("{id}")]
     public async Task<ActionResult<UserDto>> UpdateAsync(long id, User user)
     {
         return Ok(await _service.UpdateAsync(id, user));
     }
-    */
 
     [HttpPost("Registro")]
     public async Task<ActionResult<UserDto>> InsertAsyncByMail(RegisterRequest userRequest)
@@ -48,13 +48,13 @@ public class UserController : ControllerBase
         }
     }
 
-    /*
+    
     [HttpDelete("{id}")]
-    public async Task<ActionResult<UserDto>> DeleteAsync(long id)
+    public async Task<ActionResult<UserDto>> DeleteAsyncUser(long id)
     {
-        await _service.DeleteAsync(id);
+        await _service.DeleteAsyncUserById(id);
 
         return NoContent();
     }
-    */
+    
 }
