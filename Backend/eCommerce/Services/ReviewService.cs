@@ -17,6 +17,12 @@ public class ReviewService
       _mapper = mapper;
   }
 
+  public async Task<IEnumerable<Review>> GetAllAsync()
+  {
+    IEnumerable<Review> reviews = await _unitOfWork.ReviewRepository.GetAllAsync();
+    return reviews;
+  }
+
   public async Task<ReviewDto> GetByIdAsync(long id)
   {
     Review review = await _unitOfWork.ReviewRepository.GetByIdAsync(id);

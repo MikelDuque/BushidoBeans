@@ -42,7 +42,7 @@ public class UserController : ControllerBase
         }
     }
 
-    [Authorize]
+    [Authorize(Roles = "admin")]
     [HttpDelete("Delete/{id}")]
     public async Task<ActionResult<UserDto>> DeleteAsyncUser(long id)
     {

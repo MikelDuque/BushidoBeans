@@ -18,12 +18,17 @@ public class ReviewController : ControllerBase
         _service = service;
     }
 
+    [HttpGet]   //PARA PRUEBAS (BORRAR)
+    public async Task<IEnumerable<Review>> GetAllAsync()
+    {
+        return await _service.GetAllAsync();
+    }
+
     [HttpGet("{id}")]
     public async Task<ReviewDto> GetByIdAsync(long id)
     {
         return await _service.GetByIdAsync(id);
     }
-
 
     [Authorize]
     [HttpPost("Insert_Review")]

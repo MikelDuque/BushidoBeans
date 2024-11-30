@@ -111,14 +111,14 @@ public class UserService
     User user = await _unitOfWork.UserRepository.GetByIdAsync(id);
     _unitOfWork.UserRepository.Delete(user);
 
-    await _cartService.DeleteCartAsync(id);
-    await _reviewService.DeleteReviewsAsync(id);
-
+    //await _cartService.DeleteCartAsync(id);
+    //await _reviewService.DeleteReviewsAsync(id);
+/*
     foreach (Order order in user.Orders.ToList())
     {
       await _orderService.DeleteAsyncOrderById(order.Id);
     }
-
+*/
     return await _unitOfWork.SaveAsync();
   }
 
