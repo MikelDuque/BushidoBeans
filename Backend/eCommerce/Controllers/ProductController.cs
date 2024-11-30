@@ -33,7 +33,13 @@ public class ProductController : ControllerBase
     {
         return await _service.UpdateProductDetailsAsync(product);
     }
-    
+
+    [HttpPost("Create_Product")]
+    public async Task<bool> CreateProductAsync([FromQuery]Product product)
+    {
+        
+        return await _service.CreateProductAsync(product);
+    }
     
 
   /*

@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Net;
 using eCommerce.Controllers;
 using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
@@ -56,9 +57,19 @@ public class ProductService
     return catalog;
   }
 
-    public async Task<Product> CreateProductAsync(Product product)
+    public async Task<bool> CreateProductAsync(Product product)
     {
-        return await;
+        var ProductDb = await _unitOfWork.ProductRepository.GetByIdAsync(product.Id);
+
+        if (ProductDb != null)
+        {
+            throw new ArgumentException($"Product with ID {product.Id} is already created.");
+        }
+
+        await _unitOfWork.ProductRepository.InsertAsync(product);
+
+        return await _unitOfWork.SaveAsync();
+
     }
 
     public async Task<ProductDto> UpdateProductDetailsAsync(Product product)
@@ -82,7 +93,6 @@ public class ProductService
         return _mapper.ToDto(ProductEntity);
 
     }
-
 
 
     /*
