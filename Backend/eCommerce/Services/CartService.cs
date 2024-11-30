@@ -45,9 +45,9 @@ public class CartService
 
         if (cartProductBD != null)
         {
-            //cartProduct.Quantity += cartProductBD.Quantity;
+            cartProductBD.Quantity = cartProduct.Quantity;
 
-            _unitOfWork.CartProductRepository.Update(cartProduct);
+            _unitOfWork.CartProductRepository.Update(cartProductBD);
         }
         else
         {
