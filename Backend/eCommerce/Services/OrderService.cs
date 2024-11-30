@@ -16,13 +16,12 @@ namespace eCommerce.Services
             _orderMapper = orderMapper;
         }
 
-        public async Task<Order> GetOrderAsync(long userId)
+        public async Task<Order> GetOrderAsync(long orderId)
         {
-            User user = await _unitOfWork.UserRepository.GetByIdAsync(userId);
-            return user.Orders.LastOrDefault();
+            return await _unitOfWork.OrderRepository.GetByIdAsync(orderId);
         }
 
-        public async Task<bool> CreateOrderAsync(Order order)
+        public async Task<bool> CreateOrderAsync(OrderDto order)
         {
 
             Order newOrder = new Order
@@ -41,30 +40,30 @@ namespace eCommerce.Services
             
         }
 
-        private async Task<List<CartProduct>> GetCartProducts(long userId)
+        private async Task<List<CartProduct>> GetCartProducts(long orderId)
         {
-            User user =  await _unitOfWork.UserRepository.GetByIdAsync(userId);
+            User user =  await _unitOfWork.UserRepository.GetByIdAsync(orderId);
             return user.CartProducts;
         }
 
-        private async Task<decimal> TotalPrice(long userId)
+        private async Task<decimal> TotalPrice(long orderId)
         {
 
-            List<CartProduct> productList = await GetCartProducts(userId);
+            List<CartProduct> productList = await GetCartProducts(orderId);
             decimal totalPrice = 0;
 
-            productList.ForEach((cartProduct) => totalPrice += cartProduct.Product.Price);
+            productList.ForEach((orderProduct) => totalPrice += orderProduct.Product.Price);
 
             return totalPrice;
         }
 
-        private async Task<int> TotalProducts(long userId)
+        private async Task<int> TotalProducts(long orderId)
         {
 
-            List<CartProduct> productList = await GetCartProducts(userId);
+            List<CartProduct> productList = await GetCartProducts(orderId);
             int totalProducts = 0;
 
-            productList.ForEach((cartProduct) => totalProducts += cartProduct.Quantity);
+            productList.ForEach((orderProduct) => totalProducts += orderProduct.Quantity);
 
             return totalProducts;
         }
