@@ -15,6 +15,7 @@ namespace eCommerce.Models.Mappers
                 AddressInfo = address.AddressInfo,
                 UserId = address.UserId
             };
+
         }
     }
 }

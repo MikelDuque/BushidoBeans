@@ -25,13 +25,14 @@ public class UserMapper
         return users.Select(ToDto);
     }
 
-    /*
+    
     //Mapea los datos de un DTO de usuario a la entidad Usuario
     public User ToEntity(UserDto user)
     {
-        return new User()
+        return new User
         {
             Id = user.Id,
+            Password = "",
             Mail = user.Mail,
             Name = user.Name,
             Surname = user.Surname,
@@ -45,5 +46,5 @@ public class UserMapper
     {
         return users.Select(ToEntity);
     }
-    */
+    
 }

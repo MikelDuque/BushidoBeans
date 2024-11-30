@@ -11,6 +11,8 @@ public class UserService
   private readonly UnitOfWork _unitOfWork;
   private readonly UserMapper _mapper;
 
+
+
   public UserService(UnitOfWork unitOfWork, UserMapper mapper)
   {
     _unitOfWork = unitOfWork;
@@ -69,9 +71,32 @@ public class UserService
     return _mapper.ToDto(newUser);
   }
 
-  //Actualización
-  public async Task<UserDto> UpdateAsync(long id, User user) {
+    //Actualización
+    public async Task<UserDto> UpdateAsync(long id, User user)
+    {
+        
+        var userEntity = await _unitOfWork.UserRepository.GetByIdAsync(id);
+
+        if (userEntity == null)
+        {
+            throw new ArgumentException($"User with ID {id} not found.");
+        }
+        
+        userEntity.Mail = user.Mail;
+        userEntity.Name = user.Name;
+        userEntity.Surname = user.Surname;
+        userEntity.Phone = user.Phone;
+        userEntity.Role = user.Role; 
+        _unitOfWork.UserRepository.Update(userEntity);
+
+        await _unitOfWork.UserRepository.SaveAsync();
+
+        return _mapper.ToDto(userEntity);
+    }
+    /*
+    public async Task<UserDto> UpdateAsync(long id, User user) {
     User userEntity = await _unitOfWork.UserRepository.GetByIdAsync(id);
+
     userEntity.Mail = user.Mail;
     userEntity.Name = user.Name;
     userEntity.Surname = user.Surname;
@@ -80,11 +105,11 @@ public class UserService
 
     return _mapper.ToDto(userEntity);
   }
-
+    */
   //Eliminación
-  public async Task DeleteAsync(long id) {
+  public async Task DeleteAsyncUserById(long id) {
     User user = await _unitOfWork.UserRepository.GetByIdAsync(id);
-    await _unitOfWork.UserRepository.DeleteAsync(user);
+     _unitOfWork.UserRepository.Delete(user);
     await _unitOfWork.SaveAsync();
   }
 

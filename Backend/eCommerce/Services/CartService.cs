@@ -69,9 +69,16 @@ public class CartService
     public async Task<List<CartProductDto>> UpdateCartProductsAsync(List<CartProduct> cartProducts)
     {
 
-        foreach (var cartProduct in cartProducts)
+        try
         {
-            await UpdateCartProductAsync(cartProduct);
+            foreach (var cartProduct in cartProducts)
+            {
+                await UpdateCartProductAsync(cartProduct);
+            }
+        }
+        catch (AggregateException e)
+        {
+            Console.WriteLine("Porque entra aqui");
         }
 
         return _cartProductMapper.ToDto(cartProducts).ToList();
