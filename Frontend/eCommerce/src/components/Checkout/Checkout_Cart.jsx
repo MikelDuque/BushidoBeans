@@ -13,6 +13,6 @@ export default function Checkout_Cart() {
         <button className={classes.text}>Vaciar carro</button>
       </div>
       <Cart/>
-      </div>
+    </div>
   );
 }

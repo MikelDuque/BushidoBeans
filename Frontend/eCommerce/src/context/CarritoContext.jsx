@@ -63,6 +63,9 @@ export const CarritoProvider = ({ children }) => {
         handleToken();
         setCarritoPrueba();
 
+        console.log("autenticado", isAuthenticated);
+        
+
         if (isAuthenticated) {
            //actualizarCarritoBackend();
            obtenerCarritoBackend();
