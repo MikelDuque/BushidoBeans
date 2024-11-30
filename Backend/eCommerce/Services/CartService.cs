@@ -26,19 +26,6 @@ public class CartService
         return await Task.FromResult(_cartProductMapper.ToDto(user.CartProducts).ToList());
     }
 
-    public async Task<List<CartProduct>> DeleteCartAsync(long id)
-    {
-        User user = await _unitOfWork.UserRepository.GetByIdAsync(id);
-
-        foreach (var cartProduct in user.CartProducts.ToList())
-        {
-            _unitOfWork.CartProductRepository.Delete(cartProduct);
-        }
-        await _unitOfWork.SaveAsync();
-
-        return user.CartProducts.ToList();
-    }
-
     public async Task<bool> UpdateCartProductAsync(CartProduct cartProduct)
     {
         CartProduct cartProductBD = await _unitOfWork.CartProductRepository.GetByIdAsync(cartProduct.UserId, cartProduct.ProductId);
@@ -58,25 +45,6 @@ public class CartService
         
     }
 
-    public async Task<bool> DeleteCartProduct(CartProduct cartProduct)
-    {
-        _unitOfWork.CartProductRepository.Delete(cartProduct);
-
-        return await _unitOfWork.SaveAsync();
-
-    }
-
-    public async Task<List<CartProductDto>> UpdateCartProductsAsync(List<CartProduct> cartProducts)
-    {
-
-        foreach (var cartProduct in cartProducts)
-        {
-            await UpdateCartProductAsync(cartProduct);
-        }
-
-        return _cartProductMapper.ToDto(cartProducts).ToList();
-    }
-
     public async Task<List<CartProductDto>> UpdateCartAsync(CartDto cart)
     {
         List<CartProduct> cartProducts = _cartProductMapper.ToEntity(cart.CartProducts).ToList();
@@ -89,6 +57,38 @@ public class CartService
         return _cartProductMapper.ToDto(cartProducts).ToList();
     }
 
+    public async Task<bool> DeleteCartProduct(CartProduct cartProduct)
+    {
+        _unitOfWork.CartProductRepository.Delete(cartProduct);
+
+        return await _unitOfWork.SaveAsync();
+    }
+
+    public async Task<List<CartProductDto>> DeleteCartAsync(object id)
+    {
+        User user = await _unitOfWork.UserRepository.GetByIdAsync(id);
+
+        foreach (var cartProduct in user.CartProducts.ToList())
+        {
+            await DeleteCartProduct(cartProduct);
+        }
+
+        return _cartProductMapper.ToDto(user.CartProducts).ToList();
+    }
+
+
+    /*
+    public async Task<List<CartProductDto>> UpdateCartProductsAsync(List<CartProduct> cartProducts)
+    {
+
+        foreach (var cartProduct in cartProducts)
+        {
+            await UpdateCartProductAsync(cartProduct);
+        }
+
+        return _cartProductMapper.ToDto(cartProducts).ToList();
+    }
+    */
 
     /*
     public async Task<CartDto> GetCartAsync(long cartId)

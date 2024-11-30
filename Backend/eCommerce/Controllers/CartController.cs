@@ -26,13 +26,10 @@ namespace eCommerce.Controllers
         public async Task<ActionResult> GetCartByIdAsync(long id)
         {
             Claim userClaimId = User.FindFirst("id");
-
             if (userClaimId == null) return Unauthorized("Usuario no autorizado");
 
             List<CartProductDto> cartList = await _cartService.GetCartAsync(id);
-
             if (cartList.IsNullOrEmpty()) return BadRequest("El carrito está vacío");
-
             return Ok(cartList);
         }
 
@@ -41,11 +38,9 @@ namespace eCommerce.Controllers
         public async Task<ActionResult> UpdateCartAsync([FromBody] CartDto cart)
         {
             Claim userClaimId = User.FindFirst("id");
-
             if (userClaimId == null) return Unauthorized("Usuario no autorizado");
 
             List<CartProductDto> cartProducts = await _cartService.UpdateCartAsync(cart);
-
             return Ok(cartProducts);
         }
 
@@ -53,13 +48,10 @@ namespace eCommerce.Controllers
         [HttpPut("Update_CartProduct")]
         public ActionResult<bool> UpdateCart([FromBody] CartProduct cartProduct)
         {
-
             Claim userClaimId = User.FindFirst("id");
-
             if (cartProduct == null) return BadRequest("Datos del producto no válidos.");
 
             if (userClaimId == null) return Unauthorized("Usuario no autorizado");
-
             return Ok(_cartService.UpdateCartProductAsync(cartProduct));
         }
 
@@ -68,21 +60,10 @@ namespace eCommerce.Controllers
         public async Task<ActionResult> DeleteCartByIdAsync([FromBody] long id)
         {
             Claim userClaimId = User.FindFirst("id");
-
-
             if (userClaimId == null) return Unauthorized("Usuario no autorizado");
 
-            try
-            {
-
-                return Ok(await _cartService.DeleteCartAsync(id));
-
-            }
-            catch (Exception)
-            {
-                return BadRequest("El item ha eliminar no existe en la base de datos");
-            }
-
+            try { return Ok(await _cartService.DeleteCartAsync(id));}
+            catch (Exception) {return BadRequest("El item ha eliminar no existe en la base de datos");}
         }
 
         [Authorize]
@@ -90,19 +71,10 @@ namespace eCommerce.Controllers
         public async Task<ActionResult> DeleteCartProduct([FromBody] CartProduct cartProduct)
         {
             Claim userClaimId = User.FindFirst("id");
-
             if (userClaimId == null) return Unauthorized("Usuario no autorizado");
 
-            try
-            {
-                await _cartService.DeleteCartProduct(cartProduct); 
-            }
-            catch (Exception)
-            {
-                return BadRequest("El item ha eliminar no existe en la base de datos");
-            }
-            
-            return NoContent();
+            try {return Ok( await _cartService.DeleteCartProduct(cartProduct));}
+            catch (Exception) { return BadRequest("El item ha eliminar no existe en la base de datos");}
         }
 
     }
