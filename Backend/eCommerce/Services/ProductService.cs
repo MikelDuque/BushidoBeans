@@ -56,6 +56,11 @@ public class ProductService
     return catalog;
   }
 
+    public async Task<Product> CreateProductAsync(Product product)
+    {
+        return await;
+    }
+
     public async Task<ProductDto> UpdateProductDetailsAsync(Product product)
     {
         var ProductEntity = await _unitOfWork.ProductRepository.GetByIdAsync(product.Id);
@@ -77,6 +82,8 @@ public class ProductService
         return _mapper.ToDto(ProductEntity);
 
     }
+
+
 
     /*
     public async Task<IEnumerable<ProductDto>> GetAllAsync()
