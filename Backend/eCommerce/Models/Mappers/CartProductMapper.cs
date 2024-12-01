@@ -24,7 +24,6 @@ public class CartProductMapper
        return cartProducts.Select(ToDto);
    }
 
-
    //TO ENTITY
    public CartProduct ToEntity(CartProductDto cartProductDto)
    {
