@@ -66,7 +66,18 @@ public class ProductService
             throw new ArgumentException($"Product with ID {product.Id} is already created.");
         }
 
-        await _unitOfWork.ProductRepository.InsertAsync(product);
+        Product newProduct = new Product
+        {
+            Name = product.Name,
+            Price = product.Price,
+            CategoryId = product.CategoryId,
+            Description = product.Description,
+            Image = product.Image,
+            Stock = product.Stock
+
+        }; 
+
+        await _unitOfWork.ProductRepository.InsertAsync(newProduct);
 
         return await _unitOfWork.SaveAsync();
 
@@ -83,7 +94,8 @@ public class ProductService
 
         //ProductEntity.Id = product.Id;
         ProductEntity.Name = product.Name;
-        //ProductEntity.Description = product.Description;
+        ProductEntity.Description = product.Description;
+        ProductEntity.Image = product.Image;
         //ProductEntity.NutritionalInfo = product.NutritionalInfo;
         ProductEntity.Price = product.Price;
         ProductEntity.Stock = product.Stock;
