@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { GET_USERS, UPDATE_USER } from "../endpoints/config";
+import { GET_USERS, UPDATE_USER } from "../../../endpoints/config.js";
 import { useAuth } from '../../../context/AuthContext.jsx';
 
 const UserAdmin = () => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { GET_PRODUCTS, UPDATE_PRODUCT } from "../endpoints/config";
+import {UPDATE_PRODUCT, GET_PRODUCTS } from "../../../endpoints/config";
 
 const ProductAdmin = () => {
     const [products, setProducts] = useState([]);
@@ -36,6 +36,8 @@ const ProductAdmin = () => {
             setError(error.message);
         }
     };
+
+    
 
     return (
         <div>

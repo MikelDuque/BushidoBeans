@@ -83,6 +83,12 @@ public class ProductService
 
     }
 
+    public async Task<IEnumerable<Product>> GetAllAsync()
+    {
+        IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetAllAsync();
+        return products;
+    }
+
     public async Task<ProductDto> UpdateProductDetailsAsync(Product product)
     {
         var ProductEntity = await _unitOfWork.ProductRepository.GetByIdAsync(product.Id);

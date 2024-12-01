@@ -22,7 +22,7 @@ public class UserController : ControllerBase
         return await _service.GetByIdAsync(id);
     }
 
-    [HttpGet]
+    [HttpGet("Get_Users")]
     public async Task<IEnumerable<UserDto>> GetAllAsync()
     {
         return await _service.GetAllAsync();
