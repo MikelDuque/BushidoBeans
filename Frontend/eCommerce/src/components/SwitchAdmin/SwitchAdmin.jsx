@@ -7,6 +7,7 @@ const SwitchAdmin = () => {
 
     return (
         <div>
+            <h1>Vista Admin</h1>
             <div>
                 <button onClick={() => setView('products')}>Ver Productos</button>
                 <button onClick={() => setView('users')}>Ver Usuarios</button>

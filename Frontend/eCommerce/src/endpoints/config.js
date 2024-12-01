@@ -39,7 +39,7 @@ const API_CART_URL = `${API_BASE_URL}/api/Cart`;
 
 /* --- USER CONTROLLER --- */
 const API_USER_URL = `${API_BASE_URL}/api/User`;
-export function GET_USERS() {return `${API_USER_URL}/api/Get_Users`};
+export const GET_USERS = `${API_USER_URL}/Get_Users`;
 export function UPDATE_USER() {return `${API_USER_URL}/api/Get_Users`};
 
 /* --- ORDER CONTROLLER --- */
