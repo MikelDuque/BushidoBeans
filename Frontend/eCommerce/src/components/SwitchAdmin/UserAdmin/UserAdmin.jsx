@@ -1,27 +1,56 @@
 import React, { useState, useEffect } from 'react';
 import { GET_USERS } from "../../../endpoints/config";
-import { useAuth } from '../../../context/AuthContext';
+import * as jwt_decode from 'jwt-decode';
 
 const UserAdmin = () => {
-    const { user: currentUser } = useAuth(); // Obtén el usuario logueado
+    const [currentUser, setCurrentUser] = useState(null);
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState(null);
     const [error, setError] = useState(null);
+    const [token, setToken] = useState(null);
+
+    
+    useEffect(() => {
+        const storedToken = localStorage.getItem('accessToken');
+        if (storedToken) {
+            try {
+                const decodedToken = jwt_decode.jwtDecode(storedToken);
+                setCurrentUser(decodedToken);
+                setToken(storedToken);
+            } catch (error) {
+                console.error("Error al decodificar el token", error);
+                // Opcional: limpiar el token inválido
+                localStorage.removeItem('accessToken');
+            }
+        }
+    }, []); 
 
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await fetch(GET_USERS);
+                const response = await fetch(GET_USERS, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
                 const data = await response.json();
                 setUsers(data);
             } catch (error) {
                 setError(error.message);
             }
         };
-        fetchUsers();
-    }, []);
+
+        if (token) {
+            fetchUsers();
+        }
+    }, [token]);
 
     const handleUserSelect = (user) => {
+        if (!currentUser) {
+            alert("Por favor, inicie sesión");
+            return;
+        }
+
         if (user.id !== currentUser.id) {
             setSelectedUser(user);
         } else {
@@ -38,8 +67,13 @@ const UserAdmin = () => {
     };
 
     const handleUpdate = async () => {
+        if (!selectedUser) {
+            alert("No hay usuario seleccionado");
+            return;
+        }
+
         const userToUpdate = {
-            id: selectedUser.id,
+            role: selectedUser.role,
             name: selectedUser.name,
         };
 
@@ -55,12 +89,12 @@ const UserAdmin = () => {
             if (!response.ok) {
                 throw new Error('Error al actualizar el usuario');
             } else {
-                // Actualiza la lista de usuarios localmente después de la actualización
                 setUsers((prevUsers) =>
                     prevUsers.map((user) =>
                         user.id === selectedUser.id ? selectedUser : user
                     )
                 );
+                setSelectedUser(null);
             }
         } catch (error) {
             setError(error.message);
@@ -68,40 +102,62 @@ const UserAdmin = () => {
     };
 
     return (
-        <div>
-            <h2>Lista de Usuarios</h2>
-            {error && <p>Error: {error}</p>}
-            <ul>
-                {users.map((user) => (
-                    <li key={user.id} onClick={() => handleUserSelect(user)}>
-                        {user.name} - {user.role}
-                    </li>
-                ))}
-            </ul>
+        <div className="container mx-auto p-4">
+            {!currentUser && (
+                <p className="text-red-500">Por favor, inicie sesión para ver esta página</p>
+            )}
+            
+            {currentUser && (
+                <>
+                    <h2 className="text-2xl font-bold mb-4">Lista de Usuarios</h2>
+                    {error && <p className="text-red-500 mb-4">Error: {error}</p>}
+                    
+                    <ul className="space-y-2">
+                        {users.map((user) => (
+                            <li 
+                                key={user.id} 
+                                onClick={() => handleUserSelect(user)}
+                                className="cursor-pointer hover:bg-gray-100 p-2 rounded"
+                            >
+                                {user.name} - {user.role}
+                            </li>
+                        ))}
+                    </ul>
 
-            {selectedUser && (
-                <div>
-                    <h3>Editar Usuario</h3>
-                    <label>
-                        ID:
-                        <input
-                            type="text"
-                            name="id"
-                            value={selectedUser.id}
-                            onChange={handleInputChange}
-                        />
-                    </label>
-                    <label>
-                        Nombre:
-                        <input
-                            type="text"
-                            name="name"
-                            value={selectedUser.name}
-                            onChange={handleInputChange}
-                        />
-                    </label>
-                    <button onClick={handleUpdate}>Actualizar</button>
-                </div>
+                    {selectedUser && (
+                        <div className="mt-6 p-4 border rounded">
+                            <h3 className="text-xl font-semibold mb-4">Editar Usuario</h3>
+                            <div className="space-y-4">
+                                <label className="block">
+                                    <span className="text-gray-700">Rol: </span>
+                                    <input
+                                        type="text"
+                                        name="id"
+                                        value={selectedUser.role}
+                                        onChange={handleInputChange}
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                                        readOnly 
+                                    />
+                                </label>
+                                <label className="block">
+                                    <span className="text-gray-700">Nombre:</span>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        value={selectedUser.name}
+                                        onChange={handleInputChange}
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                                    />
+                                </label>
+                                <button 
+                                    onClick={handleUpdate}
+                                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                                
+                                </button>
+                            </div>
+                        </div>
+                    )}
+                </>
             )}
         </div>
     );

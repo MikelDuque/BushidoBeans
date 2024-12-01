@@ -54,7 +54,7 @@ const ProductAdmin = () => {
             if (!response.ok) {
                 throw new Error('Error al actualizar el producto');
             } else {
-                // Actualiza la lista de productos localmente después de la actualización
+                
                 setProducts((prevProducts) =>
                     prevProducts.map((product) =>
                         product.id === selectedProduct.id ? selectedProduct : product
