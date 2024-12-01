@@ -25,6 +25,12 @@ public class UserController : ControllerBase
         return Ok(await _service.GetByIdAsync(id));
     }
 
+    [HttpGet("Get_Users")]
+    public async Task<IEnumerable<UserDto>> GetAllAsync()
+    {
+        return await _service.GetAllAsync();
+    }
+
     [Authorize]
     [HttpPut("Update")]
     public async Task<ActionResult<UserDto>> UpdateAsync(User user)

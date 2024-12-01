@@ -29,6 +29,12 @@ public class ProductController : ControllerBase
     return await _service.GetFilteredProducts(filter);
   }
 
+    [HttpGet("Get_All_Products")]
+    public async Task<IEnumerable<Product>> GetAllAsync()
+    {
+        return await _service.GetAllAsync();
+    }
+
   [Authorize(Roles = "admin")]
   [HttpPut("Update_Product")]
   public async Task<ProductDto> UpdateProductAsync([FromBody]ProductDto product)

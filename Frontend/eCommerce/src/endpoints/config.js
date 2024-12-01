@@ -13,6 +13,7 @@ const API_PRODUCT_URL = `${API_BASE_URL}/api/Product`;
 
   export const GET_FILTERED_PRODUCTS = `${API_PRODUCT_URL}/Filtered_Products`;
   export function GET_PRODUCT_BY_ID(id) {return `${API_PRODUCT_URL}/${id}`};
+  export const GET_PRODUCTS = `${API_PRODUCT_URL}/Get_All_Products`;
   export const POST_PRODUCT = `${API_PRODUCT_URL}/Create_Product`
   export const PUT_PRODUCT = `${API_PRODUCT_URL}/Update_Product`
 
@@ -40,6 +41,7 @@ const API_CART_URL = `${API_BASE_URL}/api/Cart`;
 const API_USER_URL = `${API_BASE_URL}/api/User`;
 
   export function GET_USER_BY_ID(id) {return `${API_USER_URL}/${id}`};
+  export const GET_USERS = `${API_USER_URL}/Get_Users`;
   export const PUT_USER = `${API_USER_URL}/Update_User`;
   export function DELETE_USER_BY_ID(id) {return `${API_USER_URL}/Delete_User/${id}`};
 
@@ -49,3 +51,4 @@ const API_ORDER_URL = `${API_BASE_URL}/api/Order`;
 
   export function GET_ORDER_BY_ID(id) {return `${API_ORDER_URL}/${id}`};
   export const POST_ORDER = `${API_ORDER_URL}/Insert_Order`;
+

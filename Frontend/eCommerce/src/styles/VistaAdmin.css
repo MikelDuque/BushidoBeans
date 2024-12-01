@@ -1,0 +1,57 @@
+
+.ContainerVistaAdmin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+    justify-content: flex-start; 
+    height: 100vh;  
+    padding: 20px;
+    background-color: rgb(40, 117, 51);  
+    border-radius: 10px;  
+    
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+
+.VistaAdminText {
+    color: var(--nav-footer);  
+    text-align: center;
+    font-family: var(--font-family-titulos-subtitulos);  
+    font-size: var(--titulos-size);  
+    font-weight: var(--font-weight-bold);  
+}
+
+.ContainerBotones {
+    display: flex;
+    justify-content: center;  
+    gap: 20px;  
+    margin-bottom: 20px;  
+    border-radius: 10px;
+    font-family: var(--font-family-titulos-subtitulos);
+    background-color: green;  
+    color: white;  
+}
+
+
+.ProductsButton, .UsersButton {
+    padding: 10px 20px; 
+    font-family: var(--font-family-titulos-subtitulos);  
+    font-size: var(--subtitulos-size); 
+    font-weight: var(--font-weight-regular); 
+    border: none;
+    margin-top: 5px;
+    margin-right: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;  
+}
+
+
+.ContainerVistas {
+    flex-grow: 1;  
+    width: 100%;  
+    justify-content: center; 
+    align-items: center; 
+    padding: 20px;
+}

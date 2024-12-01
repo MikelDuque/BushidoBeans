@@ -26,6 +26,14 @@ public class ProductService
     return _mapper.ToDto(product);
   }
 
+
+  public async Task<IEnumerable<ProductDto>> GetAllAsync()
+  {
+    IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetAllAsync();
+    return _mapper.ToDto(products);
+  }
+
+
   public async Task<Catalog> GetFilteredProducts(Filter filter)
   {
     Catalog catalog = new Catalog()
