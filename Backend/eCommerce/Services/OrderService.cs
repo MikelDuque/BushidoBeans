@@ -16,16 +16,13 @@ namespace eCommerce.Services
             _orderMapper = orderMapper;
         }
 
-        public async Task<List<OrderDto>> GetOrderAsync(long userId)
+        public async Task<Order> GetOrderAsync(long orderId)
         {
-            User user = await _unitOfWork.UserRepository.GetByIdAsync(userId);
-            return _orderMapper.ToDto(user.Orders).ToList();
+            return await _unitOfWork.OrderRepository.GetByIdAsync(orderId);
         }
 
-        public async Task<bool> CreateOrderAsync(Order order)
+        public async Task<bool> CreateOrderAsync(OrderDto order)
         {
-
-            List<CartProduct> cartProducts = await GetCartProducts(order.UserId);
 
             Order newOrder = new Order
             {
@@ -33,40 +30,61 @@ namespace eCommerce.Services
                 TotalPrice = await TotalPrice(order.UserId),
                 TotalProducts = await TotalProducts(order.UserId),
                 PurchaseDate = DateTime.Now
-
+                
             };
 
             await _unitOfWork.OrderRepository.InsertAsync(newOrder);
 
             return await _unitOfWork.SaveAsync();
+        }
 
+        public async Task<bool> DeleteAsyncOrderById(long id) {
+            Order order = await _unitOfWork.OrderRepository.GetByIdAsync(id);
             
+            _unitOfWork.OrderRepository.Delete(order);
+
+            foreach (OrderProduct orderProduct in order.OrderProducts.ToList())
+            {
+                await DeleteOrderProductAsync(orderProduct);
+            }
+
+            return await _unitOfWork.SaveAsync();
+        } 
+
+        public async Task<bool> DeleteOrderProductAsync(OrderProduct orderProduct)
+        {
+            _unitOfWork.OrderProductRepository.Delete(orderProduct);
+
+            return await _unitOfWork.SaveAsync();
         }
 
-        private async Task<List<CartProduct>> GetCartProducts(long userId)
+        
+        /* OTROS MÉTODOS */
+
+        private async Task<List<OrderProduct>> GetOrderProducts(long orderId)
         {
-            User user =  await _unitOfWork.UserRepository.GetByIdAsync(userId);
-            return user.CartProducts;
+            Order order =  await _unitOfWork.OrderRepository.GetByIdAsync(orderId);
+            return order.OrderProducts.ToList();
         }
 
-        private async Task<decimal> TotalPrice(long userId)
+        private async Task<decimal> TotalPrice(long orderId)
         {
 
-            List<CartProduct> productList = await GetCartProducts(userId);
+            List<OrderProduct> orderProductList = await GetOrderProducts(orderId);
             decimal totalPrice = 0;
 
-            productList.ForEach((cartProduct) => totalPrice += cartProduct.Product.Price);
+            orderProductList.ForEach((orderProduct) => totalPrice += orderProduct.Product.Price * orderProduct.Quantity);
 
             return totalPrice;
         }
 
-        private async Task<int> TotalProducts(long userId)
+        private async Task<int> TotalProducts(long orderId)
         {
 
-            List<CartProduct> productList = await GetCartProducts(userId);
+            List<OrderProduct> orderProductList = await GetOrderProducts(orderId);
             int totalProducts = 0;
 
-            productList.ForEach((cartProduct) => totalProducts += cartProduct.Quantity);
+            orderProductList.ForEach((orderProduct) => totalProducts += orderProduct.Quantity);
 
             return totalProducts;
         }

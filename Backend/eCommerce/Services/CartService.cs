@@ -2,6 +2,8 @@ using eCommerce.Controllers;
 using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 using eCommerce.Models.Mappers;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.IdentityModel.Tokens;
 
 namespace eCommerce.Services;
 public class CartService
@@ -20,20 +22,8 @@ public class CartService
     public async Task<List<CartProductDto>> GetCartAsync(long userId)
     {
         User user = await _unitOfWork.UserRepository.GetByIdAsync(userId);
+
         return await Task.FromResult(_cartProductMapper.ToDto(user.CartProducts).ToList());
-    }
-
-    public async Task<List<CartProduct>> DeleteCartAsync(long id)
-    {
-        User user = await _unitOfWork.UserRepository.GetByIdAsync(id);
-
-        foreach (var cartProduct in user.CartProducts.ToList())
-        {
-            _unitOfWork.CartProductRepository.Delete(cartProduct);
-        }
-        await _unitOfWork.SaveAsync();
-
-        return user.CartProducts.ToList();
     }
 
     public async Task<bool> UpdateCartProductAsync(CartProduct cartProduct)
@@ -42,9 +32,9 @@ public class CartService
 
         if (cartProductBD != null)
         {
-            //cartProduct.Quantity += cartProductBD.Quantity;
+            cartProductBD.Quantity = cartProduct.Quantity;
 
-            _unitOfWork.CartProductRepository.Update(cartProduct);
+            _unitOfWork.CartProductRepository.Update(cartProductBD);
         }
         else
         {
@@ -55,14 +45,40 @@ public class CartService
         
     }
 
-    public async Task<bool> DeleteCartProduct(CartProduct cartProduct)
+    public async Task<List<CartProductDto>> UpdateCartAsync(CartDto cart)
+    {
+        List<CartProduct> cartProducts = _cartProductMapper.ToEntity(cart.CartProducts).ToList();
+
+        foreach (var cartProduct in cartProducts)
+        {
+            await UpdateCartProductAsync(cartProduct);
+        }
+
+        return _cartProductMapper.ToDto(cartProducts).ToList();
+    }
+
+    public async Task<bool> DeleteCartProductAsync(CartProduct cartProduct)
     {
         _unitOfWork.CartProductRepository.Delete(cartProduct);
 
         return await _unitOfWork.SaveAsync();
-
     }
 
+    public async Task<bool> DeleteCartAsync(object id)
+    {
+        User user = await _unitOfWork.UserRepository.GetByIdAsync(id);
+        bool isDeleted = false;
+
+        foreach (CartProduct cartProduct in user.CartProducts.ToList())
+        {
+            isDeleted = await DeleteCartProductAsync(cartProduct);
+        }
+
+        return isDeleted;
+    }
+
+
+    /*
     public async Task<List<CartProductDto>> UpdateCartProductsAsync(List<CartProduct> cartProducts)
     {
 
@@ -73,7 +89,7 @@ public class CartService
 
         return _cartProductMapper.ToDto(cartProducts).ToList();
     }
-
+    */
 
     /*
     public async Task<CartDto> GetCartAsync(long cartId)

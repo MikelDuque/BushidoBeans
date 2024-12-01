@@ -24,8 +24,9 @@ public class Product
     /* RELACIONES M-N */
     public ICollection<Review> Reviews { get; } = []; 
     public List<User> Users { get; } = [];
-    public List<OrderProduct> OrderProducts { get; } = [];
+    public List<CartProduct> CartProducts { get; } = [];
     public List<Order> Orders { get; } = [];
+    public List<OrderProduct> OrderProducts { get; } = [];
 
     //public List<Cart> Carts { get; } = [];
 }

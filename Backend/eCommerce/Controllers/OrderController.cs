@@ -1,5 +1,7 @@
 ﻿using eCommerce.Models.Database.Entities;
+using eCommerce.Models.Dtos;
 using eCommerce.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -16,14 +18,15 @@ namespace eCommerce.Controllers
             _orderService = orderService;
         }
 
+        [Authorize]
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetOrderByIdAsync(long id)
+        public async Task<Order> GetOrderByIdAsync(long id)
         {
-            return Ok(await _orderService.GetOrderAsync(id));
+            return await _orderService.GetOrderAsync(id);
         }
-
-        [HttpPost]
-        public async Task<ActionResult> PostOrder([FromBody]Order order)
+        /*
+        [HttpPost("Insert_Order")]
+        public async Task<ActionResult> PostOrder([FromBody]OrderDto order)
         {
             await _orderService.CreateOrderAsync(order);
             return Ok();
@@ -43,7 +46,5 @@ namespace eCommerce.Controllers
 
         }
         */
-    
-    
     }
 }

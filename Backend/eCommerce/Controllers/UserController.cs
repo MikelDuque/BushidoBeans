@@ -1,5 +1,7 @@
-﻿using eCommerce.Models.Dtos;
+﻿using eCommerce.Models.Database.Entities;
+using eCommerce.Models.Dtos;
 using eCommerce.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eCommerce.Controllers;
@@ -21,21 +23,13 @@ public class UserController : ControllerBase
         return await _service.GetByIdAsync(id);
     }
 
-    [HttpGet]
-    public async Task<IEnumerable<UserDto>> GetAllAsync()
+    [HttpPut("Update")]
+    public async Task<ActionResult<UserDto>> UpdateAsync(User user)
     {
-        return await _service.GetAllAsync();
+        return Ok(await _service.UpdateAsync(user));
     }
 
-    /*
-    [HttpPut("{id}")]
-    public async Task<ActionResult<UserDto>> UpdateAsync(long id, User user)
-    {
-        return Ok(await _service.UpdateAsync(id, user));
-    }
-    */
-
-    [HttpPost("Registro")]
+    [HttpPost("Register")]
     public async Task<ActionResult<UserDto>> InsertAsyncByMail(RegisterRequest userRequest)
     {
         try
@@ -48,13 +42,13 @@ public class UserController : ControllerBase
         }
     }
 
-    /*
-    [HttpDelete("{id}")]
-    public async Task<ActionResult<UserDto>> DeleteAsync(long id)
+    [Authorize(Roles = "admin")]
+    [HttpDelete("Delete/{id}")]
+    public async Task<ActionResult<UserDto>> DeleteAsyncUser(long id)
     {
-        await _service.DeleteAsync(id);
+        await _service.DeleteAsyncUserById(id);
 
         return NoContent();
     }
-    */
+    
 }

@@ -23,4 +23,20 @@ public class CartProductMapper
    {
        return cartProducts.Select(ToDto);
    }
+
+
+   //TO ENTITY
+   public CartProduct ToEntity(CartProductDto cartProductDto)
+   {
+    return new CartProduct
+    {
+        UserId = cartProductDto.UserId,
+        ProductId = cartProductDto.ProductId,
+        Quantity = cartProductDto.Quantity
+    };
+   }
+    public IEnumerable<CartProduct> ToEntity(IEnumerable<CartProductDto> cartProductsDto)
+   {
+       return cartProductsDto.Select(ToEntity);
+   }
 }

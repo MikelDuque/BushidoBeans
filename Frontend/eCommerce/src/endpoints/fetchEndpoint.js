@@ -1,6 +1,8 @@
 export default async function fetchEndpoint(Url, type, token, params) {
   try {
-    const response = await defineFetch(Url, type, token, params);
+    console.log(`PETICION: URL: ${Url}, tipo: ${type}, token: ${token}, params: ${params}`);
+    
+    const response = defineFetch(Url, type, token, params); //¿Aquí debo poner un Await?
 
     if (response.ok) return await response.json();
 
@@ -15,19 +17,19 @@ async function defineFetch(Url, type, token, params) {
   
   if(type !== 'GET' && params) return (
     await fetch(Url, {
-    method: type,
-    headers: existToken(token),
-    body: params
+      method: type,
+      headers: printHeaders(token),
+      body: JSON.stringify(params)
   }));
 
-  return await fetch(Url, {headers: existToken(token)});
+  return await fetch(Url, {headers: printHeaders(token)});
 }
 
-function existToken(token) {
-  if(token == null) return ({'Content-Type': 'application/json'});
+function printHeaders(token) {
+  if(token  === null) return ({'Content-Type': 'application/json'});
 
   return ({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
   }); 
 }

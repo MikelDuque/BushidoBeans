@@ -25,6 +25,9 @@ public class Program
         //Añadir la configuración guardada en appsettings
         builder.Services.Configure<Settings>(builder.Configuration.GetSection(Settings.SECTION_NAME));
 
+        builder.Services.AddControllers(
+        options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
+
         //Controladores
         builder.Services.AddControllers();
 
@@ -124,6 +127,7 @@ public class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+
 
         app.UseHttpsRedirection();
 

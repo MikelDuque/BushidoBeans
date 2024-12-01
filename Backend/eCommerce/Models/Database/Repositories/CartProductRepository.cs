@@ -19,8 +19,8 @@ public class CartProductRepository : Repository<CartProduct>
     .FirstOrDefaultAsync();
   }
 
-    public async Task<bool> ExistAsync(object idUser, object idProduct)
-    {
-        return await GetByIdAsync(idUser, idProduct) != null;
-    }
+  public async Task<bool> ExistAsync(object idUser, object idProduct)
+  {
+    return await GetByIdAsync(idUser, idProduct) != null;
+  }
 }

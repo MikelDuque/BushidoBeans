@@ -1,5 +1,7 @@
+using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 using eCommerce.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eCommerce.Controllers;
@@ -26,6 +28,22 @@ public class ProductController : ControllerBase
   {
     return await _service.GetFilteredProducts(filter);
   }
+
+  [Authorize(Roles = "admin")]
+  [HttpPut("Update_Product")]
+  public async Task<ProductDto> UpdateProductAsync([FromQuery]Product product)
+  {
+      return await _service.UpdateProductDetailsAsync(product);
+  }
+
+  [Authorize(Roles = "admin")]
+  [HttpPost("Create_Product")]
+  public async Task<bool> CreateProductAsync([FromQuery]Product product)
+  {
+      
+      return await _service.CreateProductAsync(product);
+  }
+    
 
   /*
   [HttpGet]

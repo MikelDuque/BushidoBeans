@@ -1,7 +1,9 @@
 using System.Diagnostics;
+using System.Net;
 using eCommerce.Controllers;
 using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
+using eCommerce.Models.Enums;
 using eCommerce.Models.Mappers;
 
 namespace eCommerce.Services;
@@ -55,12 +57,62 @@ public class ProductService
     return catalog;
   }
 
-  /*
-  public async Task<IEnumerable<ProductDto>> GetAllAsync()
-  {
-    IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetAllAsync();
-    return _mapper.ToDto(products);
-  }
-  */
-  
+    public async Task<bool> CreateProductAsync(Product product)
+    {
+        var ProductDb = await _unitOfWork.ProductRepository.GetByIdAsync(product.Id);
+
+        if (ProductDb != null)
+        {
+            throw new ArgumentException($"Product with ID {product.Id} is already created.");
+        }
+
+        Product newProduct = new Product
+        {
+            Name = product.Name,
+            Price = product.Price,
+            CategoryId = product.CategoryId,
+            Description = product.Description,
+            Image = product.Image,
+            Stock = product.Stock
+
+        }; 
+
+        await _unitOfWork.ProductRepository.InsertAsync(newProduct);
+
+        return await _unitOfWork.SaveAsync();
+
+    }
+
+    public async Task<ProductDto> UpdateProductDetailsAsync(Product product)
+    {
+        var ProductEntity = await _unitOfWork.ProductRepository.GetByIdAsync(product.Id);
+
+        if (ProductEntity == null)
+        {
+            throw new ArgumentException($"Product with ID {product.Id} not found.");
+        }
+
+        //ProductEntity.Id = product.Id;
+        ProductEntity.Name = product.Name;
+        ProductEntity.Description = product.Description;
+        ProductEntity.Image = product.Image;
+        //ProductEntity.NutritionalInfo = product.NutritionalInfo;
+        ProductEntity.Price = product.Price;
+        ProductEntity.Stock = product.Stock;
+
+        await _unitOfWork.ProductRepository.SaveAsync();
+
+        return _mapper.ToDto(ProductEntity);
+
+    }
+
+
+    /*
+    public async Task<IEnumerable<ProductDto>> GetAllAsync()
+    {
+      IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetAllAsync();
+      return _mapper.ToDto(products);
+    }
+    */
+
 }

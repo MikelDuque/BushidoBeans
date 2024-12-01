@@ -10,11 +10,17 @@ public class UserService
 {
   private readonly UnitOfWork _unitOfWork;
   private readonly UserMapper _mapper;
+  private readonly CartService _cartService;
+  private readonly ReviewService _reviewService;
+  private readonly OrderService _orderService;
 
-  public UserService(UnitOfWork unitOfWork, UserMapper mapper)
+  public UserService(UnitOfWork unitOfWork, UserMapper mapper, CartService cartService, ReviewService reviewService, OrderService orderService)
   {
     _unitOfWork = unitOfWork;
     _mapper = mapper;
+    _cartService = cartService;
+    _reviewService = reviewService;
+    _orderService = orderService;
   }
 
   //Obtención
@@ -69,9 +75,28 @@ public class UserService
     return _mapper.ToDto(newUser);
   }
 
-  //Actualización
-  public async Task<UserDto> UpdateAsync(long id, User user) {
+    //Actualización
+    public async Task<UserDto> UpdateAsync(User user)
+    {
+        
+      var userEntity = await _unitOfWork.UserRepository.GetByIdAsync(user.Id) ?? throw new ArgumentException($"User with ID {user.Id} not found.");
+
+      userEntity.Mail = user.Mail;
+      userEntity.Name = user.Name;
+      userEntity.Surname = user.Surname;
+      userEntity.Phone = user.Phone;
+      userEntity.Role = user.Role; 
+
+      _unitOfWork.UserRepository.Update(userEntity);
+
+      await _unitOfWork.UserRepository.SaveAsync();
+
+      return _mapper.ToDto(userEntity);
+    }
+    /*
+    public async Task<UserDto> UpdateAsync(long id, User user) {
     User userEntity = await _unitOfWork.UserRepository.GetByIdAsync(id);
+
     userEntity.Mail = user.Mail;
     userEntity.Name = user.Name;
     userEntity.Surname = user.Surname;
@@ -80,12 +105,21 @@ public class UserService
 
     return _mapper.ToDto(userEntity);
   }
-
+    */
   //Eliminación
-  public async Task DeleteAsync(long id) {
+  public async Task<bool> DeleteAsyncUserById(long id) {
     User user = await _unitOfWork.UserRepository.GetByIdAsync(id);
-    await _unitOfWork.UserRepository.DeleteAsync(user);
-    await _unitOfWork.SaveAsync();
+    _unitOfWork.UserRepository.Delete(user);
+
+    //await _cartService.DeleteCartAsync(id);
+    //await _reviewService.DeleteReviewsAsync(id);
+/*
+    foreach (Order order in user.Orders.ToList())
+    {
+      await _orderService.DeleteAsyncOrderById(order.Id);
+    }
+*/
+    return await _unitOfWork.SaveAsync();
   }
 
   //Otras Funcionalidades
