@@ -19,7 +19,6 @@ const UserAdmin = () => {
                 setToken(storedToken);
             } catch (error) {
                 console.error("Error al decodificar el token", error);
-                // Opcional: limpiar el token inválido
                 localStorage.removeItem('accessToken');
             }
         }
