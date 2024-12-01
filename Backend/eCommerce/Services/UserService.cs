@@ -23,12 +23,8 @@ public class UserService
     _orderService = orderService;
   }
 
-  //Obtención
-  public async Task<IEnumerable<UserDto>> GetAllAsync()
-  {
-    IEnumerable<User> users = await _unitOfWork.UserRepository.GetAllAsync();
-    return _mapper.ToDto(users);
-  }
+
+  /* ----- GET ----- */
 
   public async Task<UserDto> GetByIdAsync(long id)
   {
@@ -36,7 +32,15 @@ public class UserService
     return _mapper.ToDto(user);
   }
 
-  //Inserción
+  public async Task<IEnumerable<UserDto>> GetAllAsync()
+  {
+    IEnumerable<User> users = await _unitOfWork.UserRepository.GetAllAsync();
+    return _mapper.ToDto(users);
+  }
+
+
+  /* ----- INSERT ----- */
+
   public async Task<User> InsertAsync(User user)
   {
     await _unitOfWork.UserRepository.InsertAsync(user);
@@ -60,7 +64,9 @@ public class UserService
     return _mapper.ToDto(newUser);
   }
 
+
     /* ----- UPDATE ----- */
+
     public async Task<UserDto> UpdateAsync(User user)
     {
       User userEntity = await _unitOfWork.UserRepository.GetByIdAsync(user.Id) ?? throw new Exception("El usuario especificado no existe");
@@ -74,7 +80,9 @@ public class UserService
       return _mapper.ToDto(userEntity);
     }
 
+
   /* ----- DELETE ----- */
+
   public async Task<bool> DeleteAsyncUserById(long id) {
     User user = await _unitOfWork.UserRepository.GetByIdAsync(id);
     _unitOfWork.UserRepository.Delete(user);
@@ -88,7 +96,9 @@ public class UserService
     return await _unitOfWork.SaveAsync();
   }
 
+
   /* ----- FUNCIONES PRIVADAS ----- */
+  
   public Task<bool> ThisUserExists(string mail, string password)
   {
     string hashedPassword = AuthService.HashPassword(password);

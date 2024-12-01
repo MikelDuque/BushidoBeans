@@ -20,19 +20,18 @@ public class ProductService
   }
 
 
+  /* ----- GET ----- */
   public async Task<ProductDto> GetProductByIdAsync(long id)
   {
     Product product = await _unitOfWork.ProductRepository.GetProductDetailsByIdAsync(id);
     return _mapper.ToDto(product);
   }
 
-
   public async Task<IEnumerable<ProductDto>> GetAllAsync()
   {
     IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetAllAsync();
     return _mapper.ToDto(products);
   }
-
 
   public async Task<Catalog> GetFilteredProducts(Filter filter)
   {
@@ -58,6 +57,9 @@ public class ProductService
     return catalog;
   }
 
+
+  /* ----- INSERT ----- */
+
   public async Task<ProductDto> CreateProductAsync(ProductDto product)
   {
     Product newProduct = await _unitOfWork.ProductRepository.InsertAsync(_mapper.ToEntity(product));
@@ -65,6 +67,9 @@ public class ProductService
 
     return _mapper.ToDto(newProduct);
   }
+
+
+  /* ----- UPDATE ----- */
 
   public async Task<ProductDto> UpdateProductDetailsAsync(ProductDto product)
   {

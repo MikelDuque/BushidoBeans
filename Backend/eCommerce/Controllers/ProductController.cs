@@ -29,11 +29,11 @@ public class ProductController : ControllerBase
     return await _service.GetFilteredProducts(filter);
   }
 
-    [HttpGet("Get_All_Products")]
-    public async Task<IEnumerable<Product>> GetAllAsync()
-    {
-        return await _service.GetAllAsync();
-    }
+  [HttpGet("Get_All_Products")]
+  public async Task<IEnumerable<ProductDto>> GetAllAsync()
+  {
+    return await _service.GetAllAsync();
+  }
 
   [Authorize(Roles = "admin")]
   [HttpPut("Update_Product")]

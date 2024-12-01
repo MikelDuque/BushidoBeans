@@ -13,7 +13,7 @@ const API_PRODUCT_URL = `${API_BASE_URL}/api/Product`;
 
   export const GET_FILTERED_PRODUCTS = `${API_PRODUCT_URL}/Filtered_Products`;
   export function GET_PRODUCT_BY_ID(id) {return `${API_PRODUCT_URL}/${id}`};
-  export const GET_PRODUCTS = `${API_PRODUCT_URL}/Get_All_Products`;
+  export const GET_PRODUCTS = `${API_PRODUCT_URL}/Get_Products`;
   export const POST_PRODUCT = `${API_PRODUCT_URL}/Create_Product`
   export const PUT_PRODUCT = `${API_PRODUCT_URL}/Update_Product`
 
@@ -32,9 +32,9 @@ const API_CART_URL = `${API_BASE_URL}/api/Cart`;
 
   export function GET_CART_BY_ID(id) {return `${API_CART_URL}/${id}`};
   export const PUT_CART = `${API_CART_URL}/Update_Cart`;
-  export const PUT_CART_PRODUCT = `${API_CART_URL}/Update_CartPoduct`;
+  export const PUT_CARTPRODUCT = `${API_CART_URL}/Update_CartPoduct`;
   export function DELETE_CART_BY_ID(id) {return `${API_CART_URL}/Delete_Cart/${id}`};
-  export const DELETE_CART_PRODUCT = `${API_CART_URL}/Delete_CartProduct`;
+  export const DELETE_CARTPRODUCT = `${API_CART_URL}/Delete_CartProduct`;
 
 
 /* --- USER CONTROLLER --- */
