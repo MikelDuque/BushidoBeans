@@ -15,6 +15,7 @@ import { ReviewProvider } from "./context/ReviewContext";
 import DireccionEnvio from "./components/DireccionEnvio/DireccionEnvio";
 //import { DireccionProvider } from "./context/DireccionContext";
 import { CheckoutProvider } from './context/CheckoutContext';
+import SwitchAdmin from "./components/SwitchAdmin/SwitchAdmin";
 
 function App() { return (
     <Routes>
@@ -27,7 +28,7 @@ function App() { return (
 
         {/* ----- GENERAL LAYOUT ----- */}
         <Route path="/" element={<BigLayout/>}>
-            
+            <Route path="/vistaAdmin" element={<SwitchAdmin />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 
