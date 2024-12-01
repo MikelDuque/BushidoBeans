@@ -22,4 +22,20 @@ public class OrderProductMapper
    {
       return orderProducts.Select(ToDto);
    }
+
+   //TO ENTITY
+   public OrderProduct ToEntity(OrderProductDto orderProduct)
+   {
+       return new OrderProduct
+       {
+           OrderId = orderProduct.OrderId,
+           ProductId = orderProduct.ProductId,
+           PurchasePrice = orderProduct.PurchasePrice,
+           Quantity = orderProduct.Quantity
+       };
+   }
+   public IEnumerable<OrderProduct> ToEntity(IEnumerable<OrderProductDto> orderProducts)
+   {
+      return orderProducts.Select(ToEntity);
+   }
 }

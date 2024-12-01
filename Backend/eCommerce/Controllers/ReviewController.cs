@@ -36,7 +36,7 @@ public class ReviewController : ControllerBase
     {
         Claim userClaimId = User.FindFirst("id");
 
-        if (userClaimId == null) return Unauthorized("Usuario no autorizado");
+        if (userClaimId == null) return Unauthorized("Debes iniciar sesión para llevar a cabo esta acción");
 
         if (review == null) return BadRequest("Datos de la reseña no válidos.");
 

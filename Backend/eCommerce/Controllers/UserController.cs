@@ -1,4 +1,5 @@
-﻿using eCommerce.Models.Database.Entities;
+﻿using System.Security.Claims;
+using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 using eCommerce.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -17,35 +18,31 @@ public class UserController : ControllerBase
         _service = service;
     }
 
+
     [HttpGet("{id}")]
-    public async Task<UserDto> GetByIdAsync(long id)
+    public async Task<ActionResult> GetByIdAsync(long id)
     {
-        return await _service.GetByIdAsync(id);
+        return Ok(await _service.GetByIdAsync(id));
     }
 
+    [Authorize]
     [HttpPut("Update")]
     public async Task<ActionResult<UserDto>> UpdateAsync(User user)
     {
+        Claim userClaimId = User.FindFirst("id");
+        if (userClaimId == null) return Unauthorized("Debes iniciar sesión para llevar a cabo esta acción");
+
         return Ok(await _service.UpdateAsync(user));
     }
 
-    [HttpPost("Register")]
-    public async Task<ActionResult<UserDto>> InsertAsyncByMail(RegisterRequest userRequest)
-    {
-        try
-        {
-            UserDto userDto = await _service.InsertByMailAsync(userRequest);
-            return Ok(userDto);
-        }
-        catch(Exception ex) {
-            return BadRequest(ex.Message);
-        }
-    }
 
     [Authorize(Roles = "admin")]
     [HttpDelete("Delete/{id}")]
     public async Task<ActionResult<UserDto>> DeleteAsyncUser(long id)
     {
+        Claim userClaimRole = User.FindFirst("role");
+        if (userClaimRole == null) return Unauthorized("Usuario no autorizado");
+
         await _service.DeleteAsyncUserById(id);
 
         return NoContent();

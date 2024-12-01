@@ -17,45 +17,29 @@ public class ProductController : ControllerBase
         _service = service;
     }
   
-  [HttpGet("Product_Details")]
-  public async Task<ProductDto> GetProductDetailsAsync(long id)
+  [HttpGet("{id}")]
+  public async Task<ProductDto> GetProductByIdAsync(long id)
   {
-    return await _service.GetProductDetailsAsync(id);
+    return await _service.GetProductByIdAsync(id);
   }
 
   [HttpGet("Filtered_Products")]
-  public async Task<Catalog> GetFilteredProducts([FromQuery]Filter filter)
+  public async Task<Catalog> GetFilteredProducts([FromBody]Filter filter)
   {
     return await _service.GetFilteredProducts(filter);
   }
 
   [Authorize(Roles = "admin")]
   [HttpPut("Update_Product")]
-  public async Task<ProductDto> UpdateProductAsync([FromQuery]Product product)
+  public async Task<ProductDto> UpdateProductAsync([FromBody]ProductDto product)
   {
-      return await _service.UpdateProductDetailsAsync(product);
+    return await _service.UpdateProductDetailsAsync(product);
   }
 
   [Authorize(Roles = "admin")]
   [HttpPost("Create_Product")]
-  public async Task<bool> CreateProductAsync([FromQuery]Product product)
+  public async Task<ProductDto> CreateProductAsync([FromBody]ProductDto product)
   {
-      
-      return await _service.CreateProductAsync(product);
+    return await _service.CreateProductAsync(product);
   }
-    
-
-  /*
-  [HttpGet]
-  public async Task<IEnumerable<ProductDto>> GetAllAsync()
-  {
-    return await _service.GetAllAsync();
-  }
-  
-  [HttpGet("{id}")]
-  public async Task<ProductDto> GetByIdAsync(long id)
-  {
-    return await _service.GetByIdAsync(id);
-  }
-  */
 }

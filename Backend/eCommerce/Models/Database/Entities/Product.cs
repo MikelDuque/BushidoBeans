@@ -15,8 +15,8 @@ public class Product
     public float Discount { get; set; }
     public int Stock { get; set; }
 
-    /* RELACIONES 1-M */
 
+    /* RELACIONES 1-M */
     [ForeignKey(nameof(Category))]
     public required long CategoryId { get; set; }
     public Category Category { get; set; }
@@ -27,6 +27,4 @@ public class Product
     public List<CartProduct> CartProducts { get; } = [];
     public List<Order> Orders { get; } = [];
     public List<OrderProduct> OrderProducts { get; } = [];
-
-    //public List<Cart> Carts { get; } = [];
 }

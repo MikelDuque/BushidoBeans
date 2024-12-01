@@ -36,6 +36,27 @@ public class ProductMapper
         return products.Select(ToDto);
     }
 
+    //TO ENTITY
+    public Product ToEntity(ProductDto product)
+    {
+        return new Product()
+        {
+            Image = product.Image,
+            Name = product.Name,
+            Description = product.Description,
+            CategoryId = (long)product.Category,
+            Intensity = product.Intensity,
+            Price = product.Price,
+            Stock = product.Stock
+        };
+    }
+    public IEnumerable<Product> ToEntity(IEnumerable<ProductDto> products)
+    {
+        return products.Select(ToEntity);
+    }
+
+
+    /* ----- FUNCIONES PRIVADAS ----- */
     private double Score(Product product) {
         double score = 0;
 
