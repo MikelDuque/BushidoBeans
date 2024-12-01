@@ -35,7 +35,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpPut("Update_Product")]
-    public async Task<ProductDto> UpdateProductAsync([FromQuery]Product product)
+    public async Task<ProductDto> UpdateProductAsync([FromBody]Product product)
     {
         return await _service.UpdateProductDetailsAsync(product);
     }
