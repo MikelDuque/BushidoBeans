@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { GET_USERS } from "../../../endpoints/config";
 import * as jwt_decode from 'jwt-decode';
 
-
-const UserAdmin = () => {
+export default function UserList() {
     const [currentUser, setCurrentUser] = useState(null);
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState(null);
@@ -162,5 +161,3 @@ const UserAdmin = () => {
         </div>
     );
 };
-
-export default UserAdmin;

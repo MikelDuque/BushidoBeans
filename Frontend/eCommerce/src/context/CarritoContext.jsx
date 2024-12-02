@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, useRef } from 'react';
 import useFetch from "../endpoints/useFetch";
 import { useAuth } from './AuthContext';
-import { GET_CART_BY_ID, PUT_CART, DELETE_CART_PRODUCT , DELETE_CART_BY_ID, PUT_CART_PRODUCT} from "../endpoints/config";
+import { GET_CART_BY_ID, PUT_CART, DELETE_CARTPRODUCT , DELETE_CART_BY_ID, PUT_CARTPRODUCT} from "../endpoints/config";
 import { jwtDecode } from 'jwt-decode';
 
 
@@ -146,7 +146,7 @@ export const CarritoProvider = ({ children }) => {
         if (isAuthenticated) {
             setIsLoading(true);
             try {
-                const response = await fetch(PUT_CART_PRODUCT, {
+                const response = await fetch(PUT_CARTPRODUCT, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -234,7 +234,7 @@ export const CarritoProvider = ({ children }) => {
         if (isAuthenticated) {
             setIsLoading(true);
             try {
-                const response = await fetch(DELETE_CART_PRODUCT, {
+                const response = await fetch(DELETE_CARTPRODUCT, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',

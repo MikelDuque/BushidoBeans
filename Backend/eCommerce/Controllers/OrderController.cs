@@ -1,6 +1,7 @@
 ﻿using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 using eCommerce.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -17,34 +18,18 @@ namespace eCommerce.Controllers
             _orderService = orderService;
         }
 
+
+        [Authorize]
         [HttpGet("{id}")]
-        public async Task<Order> GetOrderByIdAsync(long id)
+        public async Task<ActionResult> GetOrderByIdAsync(long id)
         {
-            return await _orderService.GetOrderAsync(id);
+            return Ok(await _orderService.GetOrderByIdAsync(id));
         }
-        /*
+        
         [HttpPost("Insert_Order")]
-        public async Task<ActionResult> PostOrder([FromBody]Order order)
+        public async Task<ActionResult> PostOrder([FromBody]OrderDto order)
         {
-            await _orderService.CreateOrderAsync(order);
-            return Ok();
+            return Ok(await _orderService.InsertOrderAsync(order));
         }
-        /*
-
-        [HttpPost("Update_Cart")]
-        public async Task<ActionResult> UpdateCartAsync([FromBody] List<CartProduct> cartProducts)
-        {
-            Claim userClaimId = User.FindFirst("id");
-
-            if (userClaimId == null) return Unauthorized("Usuario no autorizado");
-
-            await _cartService.UpdateCartProductsAsync(cartProducts);
-
-            return Ok(cartProducts);
-
-        }
-        */
-    
-    
     }
 }

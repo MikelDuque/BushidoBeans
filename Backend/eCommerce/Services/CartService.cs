@@ -19,104 +19,83 @@ public class CartService
         _cartProductMapper = cartProductMapper;
     }
 
-    public async Task<List<CartProductDto>> GetCartAsync(long userId)
+
+    /* ----- GET ----- */
+
+    public async Task<List<CartProductDto>> GetCartByIdAsync(long userId)
     {
         User user = await _unitOfWork.UserRepository.GetByIdAsync(userId);
 
-        return await Task.FromResult(_cartProductMapper.ToDto(user.CartProducts).ToList());
+        return _cartProductMapper.ToDto(user.CartProducts).ToList();
     }
 
-    public async Task<List<CartProduct>> DeleteCartAsync(long id)
-    {
-        User user = await _unitOfWork.UserRepository.GetByIdAsync(id);
 
-        foreach (var cartProduct in user.CartProducts.ToList())
-        {
-            _unitOfWork.CartProductRepository.Delete(cartProduct);
-        }
-        await _unitOfWork.SaveAsync();
-
-        return user.CartProducts.ToList();
-    }
-
-    public async Task<bool> UpdateCartProductAsync(CartProduct cartProduct)
-    {
-        CartProduct cartProductBD = await _unitOfWork.CartProductRepository.GetByIdAsync(cartProduct.UserId, cartProduct.ProductId);
-
-        if (cartProductBD != null)
-        {
-            //cartProduct.Quantity += cartProductBD.Quantity;
-
-            _unitOfWork.CartProductRepository.Update(cartProduct);
-        }
-        else
-        {
-            await _unitOfWork.CartProductRepository.InsertAsync(cartProduct);
-        }
-
-        return await _unitOfWork.SaveAsync();
-        
-    }
-
-    public async Task<bool> DeleteCartProduct(CartProduct cartProduct)
-    {
-        _unitOfWork.CartProductRepository.Delete(cartProduct);
-
-        return await _unitOfWork.SaveAsync();
-
-    }
-
-    public async Task<List<CartProductDto>> UpdateCartProductsAsync(List<CartProduct> cartProducts)
-    {
-
-        try
-        {
-            foreach (var cartProduct in cartProducts)
-            {
-                await UpdateCartProductAsync(cartProduct);
-            }
-        }
-        catch (AggregateException e)
-        {
-            Console.WriteLine("Porque entra aqui");
-        }
-
-        return _cartProductMapper.ToDto(cartProducts).ToList();
-    }
+    /* ----- UPDATE ----- */
 
     public async Task<List<CartProductDto>> UpdateCartAsync(CartDto cart)
     {
-        List<CartProduct> cartProducts = _cartProductMapper.ToEntity(cart.CartProducts).ToList();
-
-        foreach (var cartProduct in cartProducts)
+        foreach (CartProductDto cartProduct in cart.CartProducts)
         {
-            await UpdateCartProductAsync(cartProduct);
+            await UpdateOrInsertCartProductAsync(cartProduct);
         }
 
-        return _cartProductMapper.ToDto(cartProducts).ToList();
+        await _unitOfWork.SaveAsync();
+
+        return await GetCartByIdAsync(cart.Id);
+    }
+
+    public async Task<CartProductDto> UpdateCartProductAsync(CartProductDto newCartProduct)
+    {
+        await UpdateOrInsertCartProductAsync(newCartProduct);
+
+        await _unitOfWork.SaveAsync();
+
+        return newCartProduct;
     }
 
 
-    /*
-    public async Task<CartDto> GetCartAsync(long cartId)
-    {
-        Cart cart = await _unitOfWork.CartRepository.GetByIdAsync(cartId);
-        return _cartMapper.ToDto(cart);
-    }
+    /* ----- DELETE ----- */
 
-    public async Task<Cart> DeleteCartAsync(object id)
+    public async Task<bool> DeleteCartAsync(long id)
     {
-        Cart cart = await _unitOfWork.CartRepository.GetByIdAsync(id);
+        User user = await _unitOfWork.UserRepository.GetByIdAsync(id);
 
-        foreach (var cartProduct in cart.CartProducts.ToList())
+        foreach (CartProduct cartProduct in user.CartProducts.ToList())
         {
             _unitOfWork.CartProductRepository.Delete(cartProduct);
         }
-        await _unitOfWork.SaveAsync();
 
-        return cart;
+        return await _unitOfWork.SaveAsync();
     }
-    */
+
+    public async Task<bool> DeleteCartProductAsync(CartProduct cartProduct)
+    {
+        CartProduct cartProductBD = await _unitOfWork.CartProductRepository.GetByIdAsync(cartProduct.UserId, cartProduct.ProductId);
+        
+        _unitOfWork.CartProductRepository.Delete(cartProductBD);
+
+        return await _unitOfWork.SaveAsync();
+    }
+
+
+    /* ----- FUNCIONES PRIVADAS ----- */
+    private async Task<CartProduct> UpdateOrInsertCartProductAsync(CartProductDto newCartProduct)
+    {
+        CartProduct cartProductBD = await _unitOfWork.CartProductRepository.GetByIdAsync(newCartProduct.UserId, newCartProduct.ProductId);
+
+        if (cartProductBD != null)
+        {
+            cartProductBD.Quantity = newCartProduct.Quantity;
+            _unitOfWork.CartProductRepository.Update(cartProductBD);
+        }
+        else
+        {
+            CartProduct cartProduct = _cartProductMapper.ToEntity(newCartProduct);
+            cartProductBD = await _unitOfWork.CartProductRepository.InsertAsync(cartProduct);
+        }
+
+        return cartProductBD;
+    }
 
 
     //public async Task<Cart> AddToCartAsync(long userId, long productId, int quantity)
