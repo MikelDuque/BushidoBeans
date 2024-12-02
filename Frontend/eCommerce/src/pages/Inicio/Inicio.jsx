@@ -25,7 +25,6 @@ function Inicio() {
 
   return (
     <>
-      {/*!hasScrolledIntro && <ScrollIntro />*/}
       <div className={classes.container}>
         <div className={classes.content}>
           <div className={classes.texto}>
