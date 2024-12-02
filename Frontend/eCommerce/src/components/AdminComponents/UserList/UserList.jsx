@@ -135,6 +135,7 @@ export default function UserList() {
                                 <label htmlFor='Role' className="text-gray-700">Rol de: {selectedUser.name}</label>
                                     <select
                                         id='role'
+                                        name='role'
                                         defaultValue={selectedUser.role}
                                         onChange={handleInputChange}
                                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm" 
