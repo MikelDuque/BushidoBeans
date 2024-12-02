@@ -58,10 +58,10 @@ export default function UserList() {
     };
 
     const handleInputChange = (e) => {
-        const { role, value } = e.target;
+        const { name, value } = e.target;
         setSelectedUser((prevUser) => ({
             ...prevUser,
-            [role]: value,
+            [name]: value,
         }));
     };
 
