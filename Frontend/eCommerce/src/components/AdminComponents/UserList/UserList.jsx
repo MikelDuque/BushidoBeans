@@ -58,10 +58,10 @@ export default function UserList() {
     };
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
+        const { role, value } = e.target;
         setSelectedUser((prevUser) => ({
             ...prevUser,
-            [name]: value,
+            [role]: value,
         }));
     };
 
@@ -73,7 +73,7 @@ export default function UserList() {
 
         const userToUpdate = {
             role: selectedUser.role,
-            id: selectedUser.id
+            userId: selectedUser.id
         };
 
         console.log(userToUpdate);
@@ -131,17 +131,21 @@ export default function UserList() {
                         <div className="mt-6 p-4 border rounded">
                             <h3 className="text-xl font-semibold mb-4">Editar Usuario</h3>
                             <div className="space-y-4">
-                                <label className="block">
-                                    <span className="text-gray-700">Rol: </span>
-                                    <input
-                                        type="text"
-                                        name="id"
-                                        value={selectedUser.role}
+                                <div className='block'>
+                                <label htmlFor='Role' className="text-gray-700">Rol de: {selectedUser.name}</label>
+                                    <select
+                                        id='role'
+                                        defaultValue={selectedUser.role}
                                         onChange={handleInputChange}
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-                                        readOnly 
-                                    />
-                                </label>
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm" 
+                                    >
+                                        <option value="string">Sin rol</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+
+                                </div>
+                                
+                                
                                 <button 
                                     onClick={handleUpdate}
                                     className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
