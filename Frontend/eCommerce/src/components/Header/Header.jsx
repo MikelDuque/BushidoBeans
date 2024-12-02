@@ -85,7 +85,7 @@ const Desplegable = ({ handleLogout }) => {
       <div className={`${classes.desplToggle} ${abierto ? 'active' : ''}`} onClick={abrirDesplegable} />
       {abierto && (
         <div className={classes.desplMenu}>
-          <NavLink className={`${classes.dnl} ${classes.desplOpcion}`} to="">Ver Perfil</NavLink>
+          <NavLink className={`${classes.dnl} ${classes.desplOpcion}`} to="/user">Ver Perfil</NavLink>
           <NavLink className={`${classes.dnl} ${classes.desplOpcion}`} to="">Administración</NavLink>
           <div className={classes.desplOpcion} onClick={handleLogout}>Cerrar Sesión</div>
         </div>
