@@ -8,6 +8,7 @@ export default function AccordionElement({listElement}) {
       <div className={classes.data_container}>
         <h2>Producto: {listElement.id}</h2>
         <fieldset className={classes.form_container}>
+          {/*
           <div>
             <label htmlFor="name">Nombre</label>
             <input id="name" type="text" defaultValue={listElement.name} />
@@ -27,6 +28,9 @@ export default function AccordionElement({listElement}) {
             <label htmlFor="description">Descripción</label>
             <input id="description" type="text" defaultValue={listElement.description}/>
           </div>
+
+          */}
+          {getAllAttributes(listElement)}
         </fieldset>
       </div>
 
@@ -36,4 +40,22 @@ export default function AccordionElement({listElement}) {
       </div>
     </div>
   );
+}
+
+function getAllAttributes(object) {
+
+  const itemProperties = Object.entries(object);
+
+  return (itemProperties.forEach(([key, value]) => (
+    <div>
+      <p>Hola</p>
+      {console.log(`key: ${key}, value: ${value}`)}
+      {/*
+      <label htmlFor={key}>{key}</label>
+      <input id={key}
+        type={value === "string" ? "text" : key}
+        defaultValue={value} />
+      */}
+    </div>
+  )));
 }
