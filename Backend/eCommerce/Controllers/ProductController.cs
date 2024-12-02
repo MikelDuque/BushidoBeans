@@ -35,9 +35,9 @@ public class ProductController : ControllerBase
     return await _service.GetAllAsync();
   }
 
-  [Authorize(Roles = "admin")]
+  //[Authorize(Roles = "admin")]
   [HttpPut("Update_Product")]
-  public async Task<ProductDto> UpdateProductAsync([FromBody]ProductDto product)
+  public async Task<ProductDto> UpdateProductAsync([FromBody]Product product)
   {
     return await _service.UpdateProductDetailsAsync(product);
   }
