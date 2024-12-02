@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GET_USERS } from "../../../endpoints/config";
 import * as jwt_decode from 'jwt-decode';
 
+
 const UserAdmin = () => {
     const [currentUser, setCurrentUser] = useState(null);
     const [users, setUsers] = useState([]);
@@ -101,7 +102,7 @@ const UserAdmin = () => {
     };
 
     return (
-        <div className="container mx-auto p-4">
+        <div className="">
             {!currentUser && (
                 <p className="text-red-500">Por favor, inicie sesión para ver esta página</p>
             )}
