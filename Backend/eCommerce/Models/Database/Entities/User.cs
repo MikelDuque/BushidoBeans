@@ -21,6 +21,4 @@ public class User
     /* RELACIONES M-N */
     public List<Product> Products { get; } = [];
     public List<CartProduct> CartProducts { get; } = [];
-    
-    //public Cart Cart { get; set; }
 }

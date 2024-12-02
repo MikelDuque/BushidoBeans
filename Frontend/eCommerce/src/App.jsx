@@ -18,6 +18,7 @@ import User from "./components/Dashboard/UserData/User";
 import UserProfile from './components/Dashboard/UserProfile/UserProfile';
 import UserAddress from './components/Dashboard/UserAddress/UserAddress';
 import UserOrders from './components/Dashboard/UserOrders/UserOrders';
+import AdminView from "./pages/AdminView/AdminView";
 
 function App() { 
     return (
@@ -61,5 +62,31 @@ function App() {
         </Routes>
     );
 };
+        {/* ----- GENERAL LAYOUT ----- */}
+        <Route path="/" element={<BigLayout/>}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+
+            <Route path="/sobreNosotros" element={<SobreNosotros />} />
+
+            <Route path="/catalogo" element={<Catalogo />} />
+            <Route path="/producto/:id" element={
+                <ReviewProvider>
+                    <DetallesProducto />
+                </ReviewProvider>
+            } />
+
+            <Route path="/vistaAdmin" element={<AdminView />} />
+
+            <Route path="400" element={<NotFound />} />
+
+            {/* QUITAR ESTA RUTA; VIENE INCORPORADA EN EL CHEKOUT */}
+            <Route path="/direccion" element={
+//                <DireccionProvider>
+                    <DireccionEnvio />
+//                </DireccionProvider>
+            } />
+
+        </Route>
 
 export default App;

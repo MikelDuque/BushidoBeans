@@ -23,12 +23,8 @@ public class UserService
     _orderService = orderService;
   }
 
-  //Obtención
-  public async Task<IEnumerable<UserDto>> GetAllAsync()
-  {
-    IEnumerable<User> users = await _unitOfWork.UserRepository.GetAllAsync();
-    return _mapper.ToDto(users);
-  }
+
+  /* ----- GET ----- */
 
   public async Task<UserDto> GetByIdAsync(long id)
   {
@@ -36,37 +32,30 @@ public class UserService
     return _mapper.ToDto(user);
   }
 
-  //Inserción
+  public async Task<IEnumerable<UserDto>> GetAllAsync()
+  {
+    IEnumerable<User> users = await _unitOfWork.UserRepository.GetAllAsync();
+    return _mapper.ToDto(users);
+  }
+
+
+  /* ----- INSERT ----- */
+
   public async Task<User> InsertAsync(User user)
   {
-    User newUser = new User
-    {
-      Mail = user.Mail,
-      Password = user.Password,
-      Name = user.Name,
-      Surname = user.Surname,
-      Phone = user.Phone,
-      Role = user.Role
-    };
-
-    await _unitOfWork.UserRepository.InsertAsync(newUser);
+    await _unitOfWork.UserRepository.InsertAsync(user);
     await _unitOfWork.SaveAsync();
 
-    return newUser;
+    return user;
   }
 
   public async Task<UserDto> InsertByMailAsync(RegisterRequest userRequest)
   {
-        User existingUser = await _unitOfWork.UserRepository.GetByMailAsync(userRequest.Mail);
-        if (existingUser != null)
-        {
-            throw new Exception("El correo electronico ya esta registrado.");
-        }
     User user = new User {
       Mail = userRequest.Mail,
       Password = AuthService.HashPassword(userRequest.Password),
       Name = userRequest.Name,
-      Surname = "",
+      Surname = userRequest.Surname,
       Phone = 0,
       Role = null
     };
@@ -75,17 +64,14 @@ public class UserService
     return _mapper.ToDto(newUser);
   }
 
-    //Actualización
+
+    /* ----- UPDATE ----- */
+
     public async Task<UserDto> UpdateAsync(User user)
     {
-        
-      var userEntity = await _unitOfWork.UserRepository.GetByIdAsync(user.Id) ?? throw new ArgumentException($"User with ID {user.Id} not found.");
+      User userEntity = await _unitOfWork.UserRepository.GetByIdAsync(user.Id) ?? throw new Exception("El usuario especificado no existe");
 
-      userEntity.Mail = user.Mail;
-      userEntity.Name = user.Name;
-      userEntity.Surname = user.Surname;
-      userEntity.Phone = user.Phone;
-      userEntity.Role = user.Role; 
+      userEntity = user;
 
       _unitOfWork.UserRepository.Update(userEntity);
 
@@ -93,36 +79,26 @@ public class UserService
 
       return _mapper.ToDto(userEntity);
     }
-    /*
-    public async Task<UserDto> UpdateAsync(long id, User user) {
-    User userEntity = await _unitOfWork.UserRepository.GetByIdAsync(id);
 
-    userEntity.Mail = user.Mail;
-    userEntity.Name = user.Name;
-    userEntity.Surname = user.Surname;
-    userEntity.Phone = user.Phone;
-    userEntity.Role = user.Role;
 
-    return _mapper.ToDto(userEntity);
-  }
-    */
-  //Eliminación
+  /* ----- DELETE ----- */
+
   public async Task<bool> DeleteAsyncUserById(long id) {
     User user = await _unitOfWork.UserRepository.GetByIdAsync(id);
     _unitOfWork.UserRepository.Delete(user);
 
-    //await _cartService.DeleteCartAsync(id);
-    //await _reviewService.DeleteReviewsAsync(id);
 /*
     foreach (Order order in user.Orders.ToList())
     {
-      await _orderService.DeleteAsyncOrderById(order.Id);
+      await _orderService.DeleteOrderByIdAsync(order.Id);
     }
 */
     return await _unitOfWork.SaveAsync();
   }
 
-  //Otras Funcionalidades
+
+  /* ----- FUNCIONES PRIVADAS ----- */
+  
   public Task<bool> ThisUserExists(string mail, string password)
   {
     string hashedPassword = AuthService.HashPassword(password);

@@ -13,9 +13,7 @@ public class CartProductRepository : Repository<CartProduct>
   public async Task<CartProduct> GetByIdAsync(object idUser, object idProduct)
   {
     return await GetQueryable().Where(cartProduct => cartProduct.UserId == (long)idUser && cartProduct.ProductId == (long)idProduct)
-    .Include(cartProduct => cartProduct.User)
     .Include(cartProduct => cartProduct.Product)
-    //.Include(cartProduct => cartProduct.Cart)
     .FirstOrDefaultAsync();
   }
 

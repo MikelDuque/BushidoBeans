@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, useRef } from 'react';
 import useFetch from "../endpoints/useFetch";
-import { useAuth } from './AuthContext';
-import { GET_CART_BY_ID, PUT_CART, DELETE_CART_PRODUCT , DELETE_CART_BY_ID} from "../endpoints/config";
+import { useAuth } from './AuthContext_Refactored';
+import { GET_CART_BY_ID, PUT_CART, DELETE_CARTPRODUCT , DELETE_CART_BY_ID} from "../endpoints/config";
 
 
 /* ----- Preparación Contexto ----- */
@@ -13,7 +13,8 @@ export const CartProvider = ({ children }) => {
 
     /* ----- Constantes Iniciales ----- */
 
-    const { isAuthenticated, token } = useAuth();
+    const { token, decodedToken } = useAuth();
+    const userId
 
     const localCart = JSON.parse(localStorage.getItem('carrito' || []))
 
@@ -21,8 +22,8 @@ export const CartProvider = ({ children }) => {
     //const [totalProducts, setTotalProducts] = useState(0);
     const totalProducts = useRef(0)
     
-    const { fetchData:backendCart, isLoading, error } = useFetch({
-        Url: GET_CART_BY_ID(1),
+    const { fetchData:backendCart} = useFetch({
+        url: GET_CART_BY_ID(1),
         type: "GET",
         token: token,
         params: 1,

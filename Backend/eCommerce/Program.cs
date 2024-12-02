@@ -42,7 +42,6 @@ public class Program
         builder.Services.AddScoped<UserRepository>();
         builder.Services.AddScoped<ProductRepository>();
         builder.Services.AddScoped<ReviewRepository>();
-        builder.Services.AddScoped<CartRepository>();
         builder.Services.AddScoped<CartProductRepository>();
         builder.Services.AddScoped<OrderRepository>();
         builder.Services.AddScoped<OrderProductRepository>();
@@ -62,7 +61,6 @@ public class Program
         builder.Services.AddTransient<UserMapper>();
         builder.Services.AddTransient<ProductMapper>();
         builder.Services.AddTransient<ReviewMapper>();
-        builder.Services.AddTransient<CartMapper>();
         builder.Services.AddTransient<CartProductMapper>();
         builder.Services.AddTransient<OrderMapper>();
         builder.Services.AddTransient<OrderProductMapper>();
