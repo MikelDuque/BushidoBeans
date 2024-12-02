@@ -1,12 +1,15 @@
-import classes from './Header.module.css';
 import { useContext, useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+
 import { ModalContext } from "../../context/ModalContext";
 import { useCarrito } from '../../context/CarritoContext';
 import { useAuth } from '../../context/AuthContext';
-import { NavLink } from "react-router-dom";
+
 import Modal from '../Modals/Modal';
 import Cart from "../Modals/Shopping_Cart/Cart";
+
+import classes from './Header.module.css';
+import { jwtDecode } from 'jwt-decode';
 
 function Header() {
   //HOOKS
@@ -24,7 +27,7 @@ function Header() {
     navigate('/checkout')
   }
 
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout, token } = useAuth();
   const handleLogout = () => {
     logout();
   };
@@ -39,7 +42,7 @@ function Header() {
         <NavLink className={`${classes.nl} ${classes.btn}`} to="/sobreNosotros"> Nosotros </NavLink>
 
         {isAuthenticated ? (
-          <Desplegable handleLogout={handleLogout} />
+          <Desplegable handleLogout={handleLogout} token={token} />
         ) : (
           <NavLink className={`${classes.nl} ${classes.btnc}`} to="/login"> Login </NavLink>
         )}
@@ -59,9 +62,16 @@ function Header() {
 
 // -----DESPLEGABLE----- //
 
-const Desplegable = ({ handleLogout }) => {
+const Desplegable = ({ handleLogout, token }) => {
   const [abierto, setAbierto] = useState(false);
   const desplegableRef = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener('mousedown', clickFuera);
+    return () => {
+      document.removeEventListener('mousedown', clickFuera);
+    };
+  }, []);
 
   const abrirDesplegable = () => {
     setAbierto((prev) => !prev);
@@ -73,12 +83,15 @@ const Desplegable = ({ handleLogout }) => {
     }
   };
 
-  useEffect(() => {
-    document.addEventListener('mousedown', clickFuera);
-    return () => {
-      document.removeEventListener('mousedown', clickFuera);
-    };
-  }, []);
+  function adminView() {
+    const decodedToken = jwtDecode(token);
+    console.log(decodedToken);
+    
+  
+    if (decodedToken.role === "admin") {
+      return (<NavLink className={`${classes.dnl} ${classes.desplOpcion}`} to="/vistaAdmin">Administración</NavLink>);
+    }
+  }
 
   return (
     <div className={classes.despl} ref={desplegableRef}>
@@ -86,12 +99,14 @@ const Desplegable = ({ handleLogout }) => {
       {abierto && (
         <div className={classes.desplMenu}>
           <NavLink className={`${classes.dnl} ${classes.desplOpcion}`} to="">Ver Perfil</NavLink>
-          <NavLink className={`${classes.dnl} ${classes.desplOpcion}`} to="">Administración</NavLink>
+          {adminView()}
           <div className={classes.desplOpcion} onClick={handleLogout}>Cerrar Sesión</div>
         </div>
       )}
     </div>
   );
 };
+
+
 
 export default Header;

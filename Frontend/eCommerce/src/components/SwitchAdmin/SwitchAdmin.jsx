@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ProductAdmin from './ProductAdmin/ProductAdmin.jsx';
 import UserAdmin from './UserAdmin/UserAdmin.jsx';
 import '../../styles/VistaAdmin.css';

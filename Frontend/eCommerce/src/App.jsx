@@ -28,7 +28,6 @@ function App() { return (
 
         {/* ----- GENERAL LAYOUT ----- */}
         <Route path="/" element={<BigLayout/>}>
-            <Route path="/vistaAdmin" element={<SwitchAdmin />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 
@@ -40,6 +39,9 @@ function App() { return (
                     <DetallesProducto />
                 </ReviewProvider>
             } />
+
+            <Route path="/vistaAdmin" element={<SwitchAdmin />} />
+
             <Route path="400" element={<NotFound />} />
 
             {/* QUITAR ESTA RUTA; VIENE INCORPORADA EN EL CHEKOUT */}

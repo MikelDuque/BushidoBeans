@@ -5,6 +5,8 @@ import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
 import Alert from './../components/Alerta';
 import { useAuth } from '../context/AuthContext';
+import { LOGIN_URL } from '../endpoints/config';
+
 function Login() {
     const {login} = useAuth();
     const emailRef = useRef(null);
@@ -67,7 +69,7 @@ function Login() {
         }
         setPasswordError(null);
 
-        await fetchingData("https://localhost:7015/api/Auth/Inicio_Sesion", { Mail: email, Password: password });
+        await fetchingData(LOGIN_URL, { Mail: email, Password: password });
     };
 
     const resetForm = () => {
