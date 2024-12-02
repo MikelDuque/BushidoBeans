@@ -15,7 +15,7 @@ import { ReviewProvider } from "./context/ReviewContext";
 import DireccionEnvio from "./components/DireccionEnvio/DireccionEnvio";
 //import { DireccionProvider } from "./context/DireccionContext";
 import { CheckoutProvider } from './context/CheckoutContext';
-import SwitchAdmin from "./components/SwitchAdmin/SwitchAdmin";
+import AdminView from "./pages/AdminView/AdminView";
 
 function App() { return (
     <Routes>
@@ -40,7 +40,7 @@ function App() { return (
                 </ReviewProvider>
             } />
 
-            <Route path="/vistaAdmin" element={<SwitchAdmin />} />
+            <Route path="/vistaAdmin" element={<AdminView />} />
 
             <Route path="400" element={<NotFound />} />
 

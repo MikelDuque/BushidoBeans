@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import {GET_PRODUCTS } from "../../../endpoints/config";
 
-const ProductAdmin = () => {
+export default function ProductList() {
     const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [error, setError] = useState(null);
@@ -141,5 +141,3 @@ const ProductAdmin = () => {
         </div>
     );
 };
-
-export default ProductAdmin;
