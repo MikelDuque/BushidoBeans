@@ -80,6 +80,18 @@ public class UserService
       return _mapper.ToDto(userEntity);
     }
 
+    public async Task<UserDto> UpdateRole(HandleRole handleRole)
+    {
+        User userEntity = await _unitOfWork.UserRepository.GetByIdAsync(handleRole.UserId) ?? throw new Exception("El usuario no existe");
+        userEntity.Role = handleRole.Role;
+
+        _unitOfWork.UserRepository.Update(userEntity);
+
+        await _unitOfWork.UserRepository.SaveAsync();
+
+        return _mapper.ToDto(userEntity);
+    }
+
 
   /* ----- DELETE ----- */
 

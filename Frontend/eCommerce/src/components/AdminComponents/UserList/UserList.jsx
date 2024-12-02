@@ -73,14 +73,18 @@ export default function UserList() {
 
         const userToUpdate = {
             role: selectedUser.role,
-            name: selectedUser.name,
+            id: selectedUser.id
         };
 
+        console.log(userToUpdate);
+        
+
         try {
-            const response = await fetch('https://localhost:7015/api/User/Update_User', {
+            const response = await fetch('https://localhost:7015/api/User/Update_UserRole', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(userToUpdate),
             });
@@ -138,21 +142,12 @@ export default function UserList() {
                                         readOnly 
                                     />
                                 </label>
-                                <label className="block">
-                                    <span className="text-gray-700">Nombre:</span>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        value={selectedUser.name}
-                                        onChange={handleInputChange}
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-                                    />
-                                </label>
                                 <button 
                                     onClick={handleUpdate}
                                     className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                                
+                                    Actualizar
                                 </button>
+                                
                             </div>
                         </div>
                     )}

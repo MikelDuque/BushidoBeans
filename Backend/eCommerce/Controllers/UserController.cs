@@ -32,13 +32,23 @@ public class UserController : ControllerBase
     }
 
     [Authorize]
-    [HttpPut("Update")]
-    public async Task<ActionResult<UserDto>> UpdateAsync(User user)
+    [HttpPut("Update_User")]
+    public async Task<ActionResult<UserDto>> UpdateAsync([FromBody]User user)
     {
         Claim userClaimId = User.FindFirst("id");
         if (userClaimId == null) return Unauthorized("Debes iniciar sesión para llevar a cabo esta acción");
 
         return Ok(await _service.UpdateAsync(user));
+    }
+
+    [Authorize]
+    [HttpPut("Update_UserRole")]
+    public async Task<ActionResult<UserDto>> UpdateUserRole([FromBody] HandleRole userRole)
+    {
+        Claim userClaimId = User.FindFirst("id");
+        if (userClaimId == null) return Unauthorized("Debes iniciar sesión para llevar a cabo esta acción");
+
+        return Ok(await _service.UpdateRole(userRole));
     }
 
 

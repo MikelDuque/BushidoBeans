@@ -89,7 +89,7 @@ export const CarritoProvider = ({ children }) => {
                     'Authorization': `Bearer ${token}`
                 }
             });
-
+            console.log("carrito url", response);
             if (response.ok) {
                 const data = await response.json();
                 handleCart(data);
