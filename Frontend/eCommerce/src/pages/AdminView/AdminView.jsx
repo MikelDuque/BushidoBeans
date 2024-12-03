@@ -33,7 +33,6 @@ export default function AdminView() {
         <div className={classes.container}>
             <SwitchButton setView={handleView}/>
             <div className={classes.view_container}>
-                <Accordion list={carritoPrueba}/>
                 {view ? <UserList /> : <ProductList />}
             </div>
         </div>

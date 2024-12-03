@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import {GET_PRODUCTS } from "../../../endpoints/config";
 
 import classes from "./ProductList.module.css"
+import Accordion from '../../../utils/GenericAccordion/Accordion';
 
 export default function ProductList() {
     const [products, setProducts] = useState([]);
@@ -71,6 +72,8 @@ export default function ProductList() {
     return (
         <div>
             {error && <p>Error: {error}</p>}
+            <Accordion list={products}/>
+            {/*
             <ul className={classes.list_container}>
                 {products.map((product) => (
                     <li className={classes.list_element} key={product.id} onClick={() => handleProductSelect(product)}>
@@ -139,6 +142,7 @@ export default function ProductList() {
                     <button onClick={handleUpdate}>Actualizar</button>
                 </div>
             )}
+            */}
         </div>
     );
 };
