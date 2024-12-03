@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { GET_USERS } from "../../../endpoints/config";
-import * as jwt_decode from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
+
+import classes from "./UserList.module.css"
 
 export default function UserList() {
     const [currentUser, setCurrentUser] = useState(null);
@@ -14,7 +16,7 @@ export default function UserList() {
         const storedToken = localStorage.getItem('accessToken');
         if (storedToken) {
             try {
-                const decodedToken = jwt_decode.jwtDecode(storedToken);
+                const decodedToken = jwtDecode(storedToken);
                 setCurrentUser(decodedToken);
                 setToken(storedToken);
             } catch (error) {

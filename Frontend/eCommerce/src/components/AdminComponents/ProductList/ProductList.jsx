@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
 import {GET_PRODUCTS } from "../../../endpoints/config";
 
+import classes from "./ProductList.module.css"
+
 export default function ProductList() {
     const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchProducts = async () => {
+        async function fetchProducts() {
             try {
                 const response = await fetch(GET_PRODUCTS);
                 const data = await response.json();
@@ -68,11 +70,10 @@ export default function ProductList() {
 
     return (
         <div>
-            <h2>Lista de Productos</h2>
             {error && <p>Error: {error}</p>}
-            <ul>
+            <ul className={classes.list_container}>
                 {products.map((product) => (
-                    <li key={product.id} onClick={() => handleProductSelect(product)}>
+                    <li className={classes.list_element} key={product.id} onClick={() => handleProductSelect(product)}>
                         {product.id} - {product.name} - {product.price} €
                     </li>
                 ))}
