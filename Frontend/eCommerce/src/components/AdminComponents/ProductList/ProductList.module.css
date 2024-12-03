@@ -1,0 +1,8 @@
+.list_container{
+  padding: 10px;
+  gap: 10px;
+}
+
+.list_element{
+  list-style: none;
+}

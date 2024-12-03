@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace eCommerce.Models.Database.Entities;
 
@@ -14,12 +15,11 @@ public class Order
   [ForeignKey(nameof(User))]
   public long UserId { get; set; }
   public User User { get; set; }
-  
+/*
   [ForeignKey(nameof(Address))]
   public long AddressId { get; set; }
   public Address Address { get; set; }
-
-
+*/
   /* RELACIONES M-N */
   public List<OrderProduct> OrderProducts { get; } = [];
   public List<Product> Products { get; } = [];

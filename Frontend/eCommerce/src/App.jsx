@@ -10,10 +10,12 @@ import DetallesProducto from './pages/DetallesProducto';
 import { Routes, Route } from "react-router-dom";
 import NotFound from './components/NotFound';
 import Checkout from "./pages/Checkout/Checkout";
+import ConfirmarPedido from "./pages/Checkout/ConfirmarPedido";
 import { ReviewProvider } from "./context/ReviewContext";
 import DireccionEnvio from "./components/DireccionEnvio/DireccionEnvio";
 //import { DireccionProvider } from "./context/DireccionContext";
 import { CheckoutProvider } from './context/CheckoutContext';
+import AdminView from "./pages/AdminView/AdminView";
 
 function App() { return (
     <Routes>
@@ -26,7 +28,6 @@ function App() { return (
 
         {/* ----- GENERAL LAYOUT ----- */}
         <Route path="/" element={<BigLayout/>}>
-            
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 
@@ -38,6 +39,8 @@ function App() { return (
                     <DetallesProducto />
                 </ReviewProvider>
             } />
+
+            <Route path="/vistaAdmin" element={<AdminView />} />
 
             <Route path="400" element={<NotFound />} />
 
@@ -58,6 +61,11 @@ function App() { return (
                     <Checkout />
                 </CheckoutProvider>}/>
         </Route>
+
+        <Route path="/ConfirmarPedido" element={
+            <ConfirmarPedido />
+
+        } />
     </Routes>
 );};
 

@@ -7,10 +7,6 @@ export default function CartItem({productData}) {
   const {eliminarDelCarrito, agregarAlCarrito} = useCarrito();
   const [quantity, setQuantity] = useState(productData.quantity);
 
-  console.log("cantidad", quantity);
-  
-  
-
   return (
     <li id={productData.id} className={classes.cart_item}>
         <img src={productData.image} alt="img Producto" />

@@ -1,7 +1,3 @@
-img {
-  object-fit: cover;
-}
-
 .review {
   height: fit-content;
   padding: 10px;
@@ -17,7 +13,12 @@ img {
   letter-spacing: 1px;
 }
 
+  .review img {
+    object-fit: cover;
+  }
+
   .review__avatar {
+    object-fit: cover;
     width: 50px;
     border-radius: 2px;
   }

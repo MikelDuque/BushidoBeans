@@ -18,12 +18,17 @@ public class ReviewController : ControllerBase
         _service = service;
     }
 
+    [HttpGet]   //PARA PRUEBAS (BORRAR)
+    public async Task<IEnumerable<Review>> GetAllAsync()
+    {
+        return await _service.GetAllAsync();
+    }
+
     [HttpGet("{id}")]
     public async Task<ReviewDto> GetByIdAsync(long id)
     {
         return await _service.GetByIdAsync(id);
     }
-
 
     [Authorize]
     [HttpPost("Insert_Review")]
@@ -31,7 +36,7 @@ public class ReviewController : ControllerBase
     {
         Claim userClaimId = User.FindFirst("id");
 
-        if (userClaimId == null) return Unauthorized("Usuario no autorizado");
+        if (userClaimId == null) return Unauthorized("Debes iniciar sesión para llevar a cabo esta acción");
 
         if (review == null) return BadRequest("Datos de la reseña no válidos.");
 

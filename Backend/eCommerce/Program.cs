@@ -25,6 +25,9 @@ public class Program
         //Añadir la configuración guardada en appsettings
         builder.Services.Configure<Settings>(builder.Configuration.GetSection(Settings.SECTION_NAME));
 
+        builder.Services.AddControllers(
+        options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
+
         //Controladores
         builder.Services.AddControllers();
 
@@ -39,7 +42,6 @@ public class Program
         builder.Services.AddScoped<UserRepository>();
         builder.Services.AddScoped<ProductRepository>();
         builder.Services.AddScoped<ReviewRepository>();
-        builder.Services.AddScoped<CartRepository>();
         builder.Services.AddScoped<CartProductRepository>();
         builder.Services.AddScoped<OrderRepository>();
         builder.Services.AddScoped<OrderProductRepository>();
@@ -59,7 +61,6 @@ public class Program
         builder.Services.AddTransient<UserMapper>();
         builder.Services.AddTransient<ProductMapper>();
         builder.Services.AddTransient<ReviewMapper>();
-        builder.Services.AddTransient<CartMapper>();
         builder.Services.AddTransient<CartProductMapper>();
         builder.Services.AddTransient<OrderMapper>();
         builder.Services.AddTransient<OrderProductMapper>();
@@ -124,6 +125,7 @@ public class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+
 
         app.UseHttpsRedirection();
 

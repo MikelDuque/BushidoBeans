@@ -28,19 +28,37 @@ public class AuthController : ControllerBase
         _authService = authService;
     }
 
-    [HttpPost("Inicio_Sesion")]
+
+    [HttpPost("Login")]
     public async Task<ActionResult<LoginResult>> Login([FromBody] LoginRequest model)
     {
         bool userExists = await _userService.ThisUserExists(model.Mail, model.Password);
         
         if (userExists)
         {
-            string stringToken = await _authService.LoginResult(model);
+            string stringToken = await _authService.Login(model);
             return Ok(new LoginResult { AccessToken = stringToken });
         }
         else
         {
             return Unauthorized("Email o contraseña incorrectos");
+        }
+    }
+
+    [HttpPost("Register")]
+    public async Task<ActionResult<LoginResult>> Register([FromBody] RegisterRequest userRequest)
+    {
+
+        bool userExists = await _userService.ThisUserExists(userRequest.Mail, userRequest.Password);
+        
+        if (!userExists)
+        {
+            string stringToken = await _authService.Register(userRequest);
+            return Ok(new LoginResult { AccessToken = stringToken });
+        }
+        else
+        {
+            return Unauthorized("El usuario ya exite");
         }
     }
 }
