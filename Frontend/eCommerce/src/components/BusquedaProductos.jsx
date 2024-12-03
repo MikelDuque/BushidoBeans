@@ -5,6 +5,7 @@ import ReactPaginate from 'react-paginate';
 import "../styles/Catalogo.css";
 import "../styles/Paginacion.css";
 import { CircleLoader } from 'react-spinners';
+import { GET_FILTERED_PRODUCTS } from '../endpoints/config.js';
 
 const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   const [productoBuscado, setProductoBuscado] = useState('');
@@ -22,7 +23,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
       setError(null);
 
       try {
-        const Url = 'https://localhost:7015/api/Product/Filtered_Products'
+        const Url = GET_FILTERED_PRODUCTS
         const response = await fetch(`${Url}?Search=${productoBuscado}&Category=${filtro}&Order=${ordenar}&IncludeStockless=true&ProductsPerPage=${productosPorPagina}&CurrentPage=${paginaActual}`
           , {method: 'GET', headers:{'Content-Type':'aplication/json'}});
         

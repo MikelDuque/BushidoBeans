@@ -1,5 +1,6 @@
 import { useState } from "react";
 import classes from "./AccordionElement.module.css"
+import { API_BASE_URL } from "../../../endpoints/config";
 
 export default function OpenedProduct({listElement, closeFullElement}) {
   const [isFocused, setIsFocused] = useState(false);
@@ -9,7 +10,7 @@ export default function OpenedProduct({listElement, closeFullElement}) {
   return(
     <form className={`${classes.element_container} ${classes.form_container}`} onSubmit={closeFullElement} onReset={closeFullElement}>
       <div className={`${classes.image_container} ${classes.formImage_container}`} onClick={handleOnFocus} onMouseLeave={handleOnBlur}>
-        <img src={listElement.image} style={{display: isFocused ? "none" : "block"}}/>
+        <img src={`${API_BASE_URL}${listElement.image}`} style={{display: isFocused ? "none" : "block"}}/>
         <textarea id="image" defaultValue={listElement.image} style={{visibility: isFocused ? "visible" : "hidden"}}/>
       </div>
 

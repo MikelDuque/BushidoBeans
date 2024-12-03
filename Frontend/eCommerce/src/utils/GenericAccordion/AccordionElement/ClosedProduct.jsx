@@ -1,10 +1,11 @@
+import { API_BASE_URL } from "../../../endpoints/config";
 import classes from "./AccordionElement.module.css"
 
 export default function ClosedProduct({listElement, openFullElement}) {
   return(
     <div className={`${classes.element_container} ${classes.list_container}`} onClick={openFullElement}>
       <div className={`${classes.image_container} ${classes.listImage_container}`}>
-        <img src={listElement.image}/>
+        <img src={`${API_BASE_URL}${listElement.image}`}/>
       </div>
 
       <div className={`${classes.data_container} ${classes.listData_container}`}>
@@ -22,19 +23,3 @@ export default function ClosedProduct({listElement, openFullElement}) {
   )
 }
 
-function bodyConstructor(name) {
-  
-  return (name.length < 100 ? name : `${name.substring(0, 99)}...`);
-  
-  if (name.length > 100 ) {
-    const subName = name.substring(0, 99);
-
-    return (
-      <>
-        <span className={classes.name}>{`${subName}...`}</span>
-      </>
-    );
-  };
-
-  return <span className={classes.name}>{name}</span>
-};
