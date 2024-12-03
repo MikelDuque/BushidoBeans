@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import * as jwt_decode from 'jwt-decode';
 import Alert from './../components/Alerta';
 import Input from '../components/Input';
+import { REGISTER_URL } from '../endpoints/config';
 
 function Register() {
     const emailRef = useRef(null);
@@ -59,7 +60,7 @@ function Register() {
     const registerUser = async (data) => {
         setIsLoading(true);
         try {
-            const response = await fetch("https://localhost:7015/api/User/Registro", {
+            const response = await fetch(REGISTER_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),

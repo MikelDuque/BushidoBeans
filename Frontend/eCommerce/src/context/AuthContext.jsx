@@ -21,7 +21,6 @@ export const AuthProvider = ({ children }) => { // Exportamos el authprovider. E
     useEffect(() => {
         //Detectamos el token de autentificacion. useEffect se carga una vez ejecutado el componente.
         const accessToken = localStorage.getItem('accessToken');
-        console.log("accessToken", accessToken);
         
         if (accessToken) {
             setIsAuthenticated(true);   //Si el token existe = autentificacion = true.
@@ -29,10 +28,7 @@ export const AuthProvider = ({ children }) => { // Exportamos el authprovider. E
             decodeToken(accessToken)
         }
         
-    }, []);
-
-    console.log("token", token);
-    
+    }, [token]);
 
     function handleToken(newToken) {
         setToken(newToken);

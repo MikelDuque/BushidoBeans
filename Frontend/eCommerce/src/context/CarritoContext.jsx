@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, useRef } from 'react';
 import useFetch from "../endpoints/useFetch";
 import { useAuth } from './AuthContext';
-import { GET_CART_BY_ID, PUT_CART, DELETE_CART_PRODUCT , DELETE_CART_BY_ID, PUT_CART_PRODUCT} from "../endpoints/config";
+import { GET_CART_BY_ID, PUT_CART, DELETE_CARTPRODUCT , DELETE_CART_BY_ID, PUT_CARTPRODUCT} from "../endpoints/config";
 import { jwtDecode } from 'jwt-decode';
 
 
@@ -22,14 +22,16 @@ export const CarritoProvider = ({ children }) => {
     function setCarritoPrueba() {
         const carritoPrueba = [];
         
-        for (let i = 0; i < 5; i++) {
+        if (!isAuthenticated) for (let i = 0; i < 5; i++) {
             carritoPrueba.push({
                 id: i,
                 image: "https://pbs.twimg.com/profile_images/1859044378662027264/Km09QDjK_400x400.jpg",
                 name: "Nombre de Prueba",
                 price: 2.55,
                 stock: 20,
-                quantity: 1
+                quantity: 1,
+                userId: userId,
+                productId: 1
             })
         }
         
@@ -40,15 +42,17 @@ export const CarritoProvider = ({ children }) => {
     const handleToken = () => {
         const tokenLS = localStorage.getItem('accessToken');
         if (!tokenLS) {
-            throw new Error('No hay token de autenticación');
-        }
-        setToken(tokenLS);
+            console.log('No hay token de autenticación');
+             
+        } else {
+            setToken(tokenLS);
+            const decodedToken = jwtDecode(tokenLS);
+            
+            if (!decodedToken.id) {
+            console.log('No se encontró el userId en el token');
 
-        const decodedToken = jwtDecode(tokenLS);
-        if (!decodedToken.id) {
-            throw new Error('No se encontró el userId en el token');
-        }
-        setUserId(decodedToken.id) 
+            } else setUserId(decodedToken.id) 
+        }; 
     };
 
     function handleCart(newCart) {
@@ -59,10 +63,13 @@ export const CarritoProvider = ({ children }) => {
         handleToken();
         setCarritoPrueba();
 
+        console.log("autenticado", isAuthenticated);
+        
 
         if (isAuthenticated) {
-             actualizarCarritoBackend();
-             obtenerCarritoBackend();
+           //actualizarCarritoBackend();
+           obtenerCarritoBackend();
+
         } else {
             const carritoGuardado = JSON.parse(localStorage.getItem('carrito'));
             if (carritoGuardado) {
@@ -77,41 +84,49 @@ export const CarritoProvider = ({ children }) => {
         setIsLoading(true);
         try {
             const response = await fetch(GET_CART_BY_ID(userId), {
-                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
-                },
-                body: userId
+                }
             });
-
+            console.log("carrito url", response);
             if (response.ok) {
-                data = await response.json();
+                const data = await response.json();
                 handleCart(data);
             } else {
                 setError(await response.text());
             }
         } catch (error) {
             setError(error.message);
+            console.log("error", error.message);
+            
         } finally {
             setIsLoading(false);
         }
     };
+    
 
     const actualizarCarritoBackend = async () => {
+
+        const backendCart = {
+            id: userId,
+            cartProducts: localStorage.getItem(carrito)
+        }
+
         setIsLoading(true);
         try {
             const response = await fetch(PUT_CART, {
-                method: 'POST',
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: localStorage.getItem('carrito')
+                body: JSON.stringify(backendCart)
             });
+            
 
             if (response.ok) {
-                data = await response.json();
+                const data = await response.json();
                 handleCart(data);
                 localStorage.removeItem('carrito');
             } else {
@@ -119,6 +134,7 @@ export const CarritoProvider = ({ children }) => {
             }
         } catch (error) {
             setError(error.message);
+            console.log("error", error);
         } finally {
             setIsLoading(false);
         }
@@ -130,7 +146,7 @@ export const CarritoProvider = ({ children }) => {
         if (isAuthenticated) {
             setIsLoading(true);
             try {
-                const response = await fetch(PUT_CART_PRODUCT, {
+                const response = await fetch(PUT_CARTPRODUCT, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -218,7 +234,7 @@ export const CarritoProvider = ({ children }) => {
         if (isAuthenticated) {
             setIsLoading(true);
             try {
-                const response = await fetch(DELETE_CART_PRODUCT, {
+                const response = await fetch(DELETE_CARTPRODUCT, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',

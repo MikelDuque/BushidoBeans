@@ -4,12 +4,11 @@ import Footer from "../../components/Footer/Footer";
 import classes from './Checkout.module.css';
 import ChkCart from "../../components/CheckoutPages/ChkCart";
 import ChkAddress from "../../components/CheckoutPages/ChkAddress";
-import ChkConfirm from "../../components/CheckoutPages/Chkconfirm";
 import ConfirmarPedido from "./ConfirmarPedido.jsx";
 import Cart from "../../components/Modals/Shopping_Cart/Cart.jsx";
 
 function Checkout() {
-  const { currentView, handleButtonClick, goToNextStep } = useCheckout('cart');
+  const { currentView, handleButtonClick } = useCheckout('cart');
 
   const isButtonDisabled = (button) => {
     if (currentView === 'cart' && button !== 'cart') return true;
@@ -17,9 +16,6 @@ function Checkout() {
     if (currentView === 'confirm') return false;
     return false;
   };
-
-  
-  
 
   return (
     <>
@@ -33,7 +29,7 @@ function Checkout() {
           <div className={`${classes.line} ${currentView !== 'cart' ? classes.lineActive : ''}`} />
           <button
             className={currentView === 'address' ? classes.activeButton : ''} onClick={() => handleButtonClick('address')} disabled={isButtonDisabled('address')}>
-            Dirección
+            Direcciones
           </button>
           <div className={`${classes.line} ${currentView === 'confirm' ? classes.lineActive : ''}`} />
           <button

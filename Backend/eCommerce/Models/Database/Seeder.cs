@@ -80,15 +80,6 @@ public class Seeder
             File.ReadAllText("Assets/Reviews.json")
         );
 
-        /* BORRAR */
-        Cart[] carts =
-        [
-            new Cart {Id = 1},
-            new Cart {Id = 2},
-            new Cart {Id = 3},
-            new Cart {Id = 4}
-        ];
-
         CartProduct[] cartProducts =
         [
             new CartProduct
@@ -206,8 +197,6 @@ public class Seeder
 
         await _dbContext.Reviews.AddRangeAsync(reviews);
         await _dbContext.SaveChangesAsync();
-
-        //await _dbContext.Carts.AddRangeAsync(carts);
         
         await _dbContext.CartProducts.AddRangeAsync(cartProducts);
         await _dbContext.SaveChangesAsync();

@@ -1,7 +1,9 @@
 using System.Diagnostics;
+using System.Net;
 using eCommerce.Controllers;
 using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
+using eCommerce.Models.Enums;
 using eCommerce.Models.Mappers;
 
 namespace eCommerce.Services;
@@ -17,18 +19,18 @@ public class ProductService
     _mapper = mapper;
   }
 
-  
-  public async Task<ProductDto> GetByIdAsync(long id)
-  {
-    Product product = await _unitOfWork.ProductRepository.GetByIdAsync(id);
-    return _mapper.ToDto(product);
-  }
-  
 
-  public async Task<ProductDto> GetProductDetailsAsync(long id)
+  /* ----- GET ----- */
+  public async Task<ProductDto> GetProductByIdAsync(long id)
   {
     Product product = await _unitOfWork.ProductRepository.GetProductDetailsByIdAsync(id);
     return _mapper.ToDto(product);
+  }
+
+  public async Task<IEnumerable<ProductDto>> GetAllAsync()
+  {
+    IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetAllAsync();
+    return _mapper.ToDto(products);
   }
 
   public async Task<Catalog> GetFilteredProducts(Filter filter)
@@ -55,12 +57,52 @@ public class ProductService
     return catalog;
   }
 
-  /*
-  public async Task<IEnumerable<ProductDto>> GetAllAsync()
+
+  /* ----- INSERT ----- */
+
+  public async Task<ProductDto> CreateProductAsync(ProductDto product)
   {
-    IEnumerable<Product> products = await _unitOfWork.ProductRepository.GetAllAsync();
-    return _mapper.ToDto(products);
+    Product newProduct = await _unitOfWork.ProductRepository.InsertAsync(_mapper.ToEntity(product));
+    await _unitOfWork.SaveAsync();
+
+    return _mapper.ToDto(newProduct);
   }
-  */
-  
+
+
+  /* ----- UPDATE ----- */
+  /*
+  public async Task<ProductDto> UpdateProductDetailsAsync(ProductDto product)
+  {
+    Product productEntity = await _unitOfWork.ProductRepository.GetByIdAsync(product.Id) ?? throw new ArgumentException($"Product with ID {product.Id} not found.");
+
+    productEntity = _mapper.ToEntity(product);
+       productEntity.Id = product.Id;
+    _unitOfWork.ProductRepository.Update(productEntity);
+    await _unitOfWork.ProductRepository.SaveAsync();
+
+    return _mapper.ToDto(productEntity);
+  }*/
+    
+    public async Task<ProductDto> UpdateProductDetailsAsync(Product product)
+    {
+        var ProductEntity = await _unitOfWork.ProductRepository.GetByIdAsync(product.Id);
+
+        if (ProductEntity == null)
+        {
+            throw new ArgumentException($"Product with ID {product.Id} not found.");
+        }
+
+        //ProductEntity.Id = product.Id;
+        ProductEntity.Name = product.Name;
+        ProductEntity.Description = product.Description;
+        //ProductEntity.NutritionalInfo = product.NutritionalInfo;
+        ProductEntity.Image = product.Image;
+        ProductEntity.Price = product.Price;
+        ProductEntity.Stock = product.Stock;
+
+        await _unitOfWork.ProductRepository.SaveAsync();
+
+        return _mapper.ToDto(ProductEntity);
+
+    }
 }

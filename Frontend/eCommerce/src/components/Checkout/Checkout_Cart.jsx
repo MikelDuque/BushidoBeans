@@ -2,6 +2,10 @@ import classes from "./Checkout_Cart.module.css"
 import Cart from "../Modals/Shopping_Cart/Cart";
 
 export default function Checkout_Cart() {
+
+
+
+  
   return(
     <div className={classes.cart_container}>
       <div className={classes.cart_header}>
@@ -9,6 +13,6 @@ export default function Checkout_Cart() {
         <button className={classes.text}>Vaciar carro</button>
       </div>
       <Cart/>
-      </div>
+    </div>
   );
 }

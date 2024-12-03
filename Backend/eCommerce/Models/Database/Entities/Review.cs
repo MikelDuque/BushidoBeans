@@ -11,8 +11,7 @@ public class Review
     public DateTime PubliDate { get; set; }
 
 
-    //---Foreign Keys---//
-
+    /* RELACIONES 1-M */
     [ForeignKey(nameof(Product))]
     public required long ProductId { get; set; }
     public Product Product { get; set; }
