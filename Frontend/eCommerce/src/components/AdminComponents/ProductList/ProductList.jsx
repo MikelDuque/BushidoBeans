@@ -90,6 +90,7 @@ export default function ProductList() {
         <div>
             {error && <p>Error: {error}</p>}
             <Accordion list={products}/>
+            
             {/*
             <ul className={classes.list_container}>
                 {products.map((product) => (

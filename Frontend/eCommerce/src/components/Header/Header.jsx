@@ -1,7 +1,7 @@
-import { useContext, useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-import { ModalContext } from "../../context/ModalContext";
+import { useModal } from "../../context/ModalContext";
 import { useCarrito } from '../../context/CarritoContext';
 import { useAuth } from '../../context/AuthContext';
 
@@ -17,7 +17,7 @@ function Header() {
     isOpen,
     openModal,
     closeModal
-  } = useContext(ModalContext);
+  } = useModal();
 
   const navigate = useNavigate();
 
@@ -51,7 +51,7 @@ function Header() {
       </nav>
 
         {isOpen && (
-          <Modal closeModal={closeModal} type="cart" titulo={"Tu Carro"} cancelFnc={eliminarContenidoCarrito} continueFnc={handleNavigateToCheckout} buttonValues={{continueVal:"Procesar compra", cancelVal:"Vaciar carro"}}>
+          <Modal type="cart" titulo={"Tu Carro"} cancelFnc={eliminarContenidoCarrito} continueFnc={handleNavigateToCheckout} buttonValues={{continueVal:"Procesar compra", cancelVal:"Vaciar carro"}}>
             <Cart closeCart={closeModal}/>
           </Modal>
         )}

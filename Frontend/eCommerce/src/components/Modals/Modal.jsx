@@ -1,7 +1,10 @@
+import { useModal } from "../../context/ModalContext";
 import classes from "./Modal.module.css"
 import { createPortal } from "react-dom"
 
-export default function Modal({closeModal, continueFnc, cancelFnc, type, titulo, buttonValues, children}) {
+export default function Modal({continueFnc, cancelFnc, type, titulo, buttonValues, children}) {
+const {closeModal} = useModal();
+
   return createPortal(
     <>
     <div className={classes.screen_container}>
@@ -19,6 +22,6 @@ export default function Modal({closeModal, continueFnc, cancelFnc, type, titulo,
     <div className={classes.overlay} onClick={closeModal}/>
     </div>
     </>,
-    document.getElementById("root")
+    document.getElementById("modal")
   );
 };
