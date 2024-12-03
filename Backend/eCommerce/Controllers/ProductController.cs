@@ -3,6 +3,7 @@ using eCommerce.Models.Dtos;
 using eCommerce.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace eCommerce.Controllers;
 
@@ -35,17 +36,21 @@ public class ProductController : ControllerBase
     return await _service.GetAllAsync();
   }
 
-  //[Authorize(Roles = "admin")]
+  [Authorize(Roles = "admin")]
   [HttpPut("Update_Product")]
-  public async Task<ProductDto> UpdateProductAsync([FromBody]Product product)
+  public async Task<ActionResult<ProductDto>> UpdateProductAsync([FromBody]Product product)
   {
-    return await _service.UpdateProductDetailsAsync(product);
+        Claim userClaimId = User.FindFirst("id");
+        if (userClaimId == null) return Unauthorized("Debes iniciar sesión para llevar a cabo esta acción");
+        return Ok(await _service.UpdateProductDetailsAsync(product));
   }
 
   [Authorize(Roles = "admin")]
   [HttpPost("Create_Product")]
-  public async Task<ProductDto> CreateProductAsync([FromBody]ProductDto product)
+  public async Task<ActionResult<ProductDto>> CreateProductAsync([FromBody]ProductDto product)
   {
-    return await _service.CreateProductAsync(product);
+        Claim userClaimId = User.FindFirst("id");
+        if (userClaimId == null) return Unauthorized("Debes iniciar sesión para llevar a cabo esta acción");
+        return Ok(await _service.CreateProductAsync(product));
   }
 }

@@ -31,7 +31,7 @@ public class UserController : ControllerBase
         return await _service.GetAllAsync();
     }
 
-    [Authorize]
+    [Authorize(Roles = "admin")]
     [HttpPut("Update_User")]
     public async Task<ActionResult<UserDto>> UpdateAsync([FromBody]User user)
     {
@@ -41,7 +41,7 @@ public class UserController : ControllerBase
         return Ok(await _service.UpdateAsync(user));
     }
 
-    [Authorize]
+    [Authorize(Roles = "admin")]
     [HttpPut("Update_UserRole")]
     public async Task<ActionResult<UserDto>> UpdateUserRole([FromBody] HandleRole userRole)
     {

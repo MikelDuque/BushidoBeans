@@ -1,10 +1,24 @@
 import { useState, useEffect } from 'react';
 import {GET_PRODUCTS } from "../../../endpoints/config";
 
+
 export default function ProductList() {
     const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [error, setError] = useState(null);
+    const [token, setToken] = useState(null);
+
+    useEffect(() => {
+        const storedToken = localStorage.getItem('accessToken');
+        if (storedToken) {
+            try {
+                setToken(storedToken);
+            } catch (error) {
+                console.error("Error al decodificar el token", error);
+                localStorage.removeItem('accessToken');
+            }
+        }
+    }, []); 
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -42,15 +56,19 @@ export default function ProductList() {
             categoryId: selectedProduct.categoryId
         };
 
+        console.log(token);
+        
         try {
             const response = await fetch('https://localhost:7015/api/Product/Update_Product', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(productToUpdate),
             });
-
+            console.log("token", token);
+            
             if (!response.ok) {
                 throw new Error('Error al actualizar el producto');
             } else {
