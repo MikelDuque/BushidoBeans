@@ -24,7 +24,7 @@ function DireccionEnvio() {
         }
 
         try {
-            const response = await fetch(`http://localhost:7015/api/Address/user/${userId}`);
+            const response = await fetch(`http://localhost:7015/api/Address/${userId}`);
             if (response.ok) {
                 const data = await response.json();
                 setDirecciones(data);
