@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import * as jwtDecode from "jwt-decode";
 import "./UserAddress.css";
 import Sidebar from "../UserSidebar/Sidebar";
+import AñadirDireccion from "../../DireccionEnvio/AñadirDireccion/AñadirDireccion"
 function UserAddress() {
     // const [addresses, setAddresses] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [showAddAddress, setShowAddAddress] = useState(false); 
+
     const addresses = [
         { id: 1, name: "Casa", address: "Calle Principal 123, Ciudad X", phone: "123456789" },
         { id: 2, name: "Oficina", address: "Avenida Central 456, Ciudad Y", phone: "987654321" },
@@ -45,9 +48,13 @@ function UserAddress() {
     // if (loading) return <div>Loading...</div>;
     // if (error) return <div>Error: {error}</div>;
 
+    const handleAddAddressClick = () => {
+        setShowAddAddress(true); 
+    };
+
     return (
         <div className="user-wrapper">
-            <Sidebar/>
+            <Sidebar />
             <div className="user-container">
                 <h2 className="titulo">Direcciones de Envío</h2>
                 <div className="addresses-list">
@@ -61,7 +68,10 @@ function UserAddress() {
                         </div>
                     ))}
                 </div>
-                <button className="add-address-btn">Añadir Nueva Dirección</button>
+                <button className="add-address-btn" onClick={handleAddAddressClick}>
+                    Añadir Nueva Dirección
+                </button>
+                {showAddAddress && <AñadirDireccion />}
             </div>
         </div>
     );

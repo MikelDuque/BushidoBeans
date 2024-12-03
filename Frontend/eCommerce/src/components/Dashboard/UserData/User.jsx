@@ -4,6 +4,7 @@ import "./User.css";
 import { GET_USER_BY_ID } from "../../../endpoints/config.js";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../UserSidebar/Sidebar";
+
 function User() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);

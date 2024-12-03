@@ -52,3 +52,8 @@ const API_ORDER_URL = `${API_BASE_URL}/api/Order`;
   export function GET_ORDER_BY_ID(id) {return `${API_ORDER_URL}/${id}`};
   export const POST_ORDER = `${API_ORDER_URL}/Insert_Order`;
 
+/* --- ORDER CONTROLLER --- */
+
+const API_ADDRESS_URL = `${API_BASE_URL}/api/Address`;
+  export function GET_ADDRESS_BY_ID(id) {return `${API_ADDRESS_URL}/${id}`};
+  export const POST_ADDRESS = `${API_ADDRESS_URL}/Insert_Address`;
