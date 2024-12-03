@@ -1,4 +1,6 @@
 .container {
   border: 1px solid black;
   list-style-type: none;
+  background-color: rgb(220, 180, 150);
+  border-radius: 10px;
 }
