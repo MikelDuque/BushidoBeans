@@ -33,8 +33,6 @@ export default function PostProductModal(){
         };
         console.log("esto se envia", productToPost);
         
-        // Puedes pasar formData como el cuerpo de la consulta directamente:
-        //fetch('/some-api', { method: form.method, body: formData });
         
     try{
         const formJson = Object.fromEntries(formData.entries());
