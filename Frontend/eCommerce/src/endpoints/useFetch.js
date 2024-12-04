@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import fetchEndpoint from "./fetchEndpoint";
 
 export default function useFetch({url, type, token, params, condition}) {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [fetchData, setFetchData] = useState(null);
 
@@ -12,10 +12,11 @@ export default function useFetch({url, type, token, params, condition}) {
     if(!condition) return;
     fetchingData();
 
-  }, [condition]);
+  }, [condition, url]);
 
   async function fetchingData() {
     try {
+      setIsLoading(true);
       const data = await fetchEndpoint(url, type, token, params);
       
       setFetchData(data);
@@ -25,9 +26,11 @@ export default function useFetch({url, type, token, params, condition}) {
       setError(error);
       setFetchData(fetchData);
       console.log("Error: ", error);
-      
 
-    } finally {setIsLoading(false);}
+    } finally {
+      setIsLoading(false);
+      setFetchData(null);
+    }
   }
 
   return ({

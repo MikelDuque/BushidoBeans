@@ -1,39 +1,93 @@
+/* ----- GENERAL CONTAINER ----- */
+
 .element_container {
-  height: 12.5rem;
   padding: 10px;
   display: flex;
   gap: 20px;
+
   border-bottom: 1px solid black;
 
   align-items: center;
   justify-content: space-between;
+}
 
+.list_container {
+  height: 7rem;
+}
+
+.form_container {
+  height: 12.5rem;
+}
+
+/* ----- IMAGE ----- */
+
+.image_container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  
   img {
+    width: 100%;
     height: 100%;
-    max-height: 20rem;
-    object-fit: cover;
-    border-radius: 10px;
+    object-fit:scale-down;
   }
 }
 
+.listImage_container {
+  max-width: 5rem;
+  border-radius: 5px;
+
+  img {border-radius: 5px;}
+}
+
+.formImage_container {
+  max-width: 12.5rem;
+  border-radius: 20px;
+
+  img {border-radius: 20px;}
+}
+
+/* ----- DATA CONTAINER ----- */
+
 .data_container {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  
   height: 100%;
   width: 100%;
 
   h2 {
     font-family: var(--font-family-titulos-subtitulos);
-    font-size: var(--subtitulos-size);
     font-weight: var(--font-weight-regular);
   }
 }
 
-.form_container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr) 3fr;
+.listData_container {
+  align-items: center;
   gap: 20px;
+  font-size: var(--texto-size);
+
+  h2 {
+    width: 15rem;
+    font-size: (--texto-size);
+  }
+}
+
+.formData_container {
+  flex-direction: column;
+  justify-content: space-between;
+
+  h2 {font-size: var(--subtitulos-size);}
+}
+
+/* ----- DATA ----- */
+
+.data {
+  display: flex;
+}
+
+.fieldsetData {
+  gap: 20px;
+  width: 100%;
   border: none;
 
   div {
@@ -42,8 +96,29 @@
     flex-direction: column;
     gap: 5px;
   }
+}
 
+.listData {
+  gap: 30px;
+  align-items: center;
+  justify-items: center;
+
+  span {
+    padding-left: 30px;
+    border-left: 1px solid rgba(0, 0, 0, 0.50);
+
+    &.name {
+      width: 30rem;
+    }
+  }
+}
+
+/* ----- FORM ELEMENTS ----- */
+
+.form_container {
+  
   label {
+    width: fit-content;
     font-family: var(--font-family-titulos-subtitulos);
     font-size: var(--texto-size);
   }
@@ -51,23 +126,38 @@
   input {
     width: 20rem;
     height: 30px;
+
+    &[type="number"] {
+      width: 7rem;
+    }
+  }
+    
+  select {
+    height: 30px;
+    background-color: var(--fondo-vistas);
+    border: 1px solid black;
+    border-radius: 10px;
+    padding-left: 15px;
   }
 
-  input[type="number"] {
-    width: 7rem;
-  }
-}
+  textarea {
+    width: 100%;
+    height: 100%;
+    background-color: var(--fondo-vistas);
 
-.description {
-  gap: 5px;
-  width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+    resize: none;
+  }
 }
 
 .button_container {
   display: flex;
   gap: 5px;
 
-  a {
+  input {
+    all: unset;
+    text-align: center;
     font-size: 1.5rem;
     width: 30px;
     cursor: pointer;

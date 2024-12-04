@@ -20,9 +20,12 @@ export default function AdminView() {
         carritoPrueba.push({
             id: i,
             image: "https://i.pinimg.com/1200x/fb/8a/e7/fb8ae7c303d6e25bdc91f85c16be2704.jpg",
-            name: "Nombre de Prueba",
+            name: "Este es un nombre de prueba",
+            category: 2,
             price: 2.55,
-            stock: 20
+            stock: 20,
+            intensity: 0,
+            description: "owihngfowiknofknwef"
         });
     };
 
@@ -30,7 +33,6 @@ export default function AdminView() {
         <div className={classes.container}>
             <SwitchButton setView={handleView}/>
             <div className={classes.view_container}>
-                <Accordion list={carritoPrueba}/>
                 {view ? <UserList /> : <ProductList />}
             </div>
         </div>
