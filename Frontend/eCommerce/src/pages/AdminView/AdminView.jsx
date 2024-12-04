@@ -6,25 +6,18 @@ import SwitchButton from '../../components/AdminComponents/SwitchButton/SwitchBu
 import { useModal } from '../../context/ModalContext.jsx';
 import Modal from '../../components/Modals/Modal.jsx';
 import PostProductModal from '../../components/AdminComponents/ProductList/PostProductModal/PostProductModal.jsx';
+import { POST_PRODUCT } from '../../endpoints/config.js';
+import { useAuth } from '../../context/AuthContext.jsx';
 
 export default function AdminView() {
     const [view, setView] = useState(false);   
     const { isOpen, openModal, closeModal } = useModal(); 
-    const [token, setToken] = useState(null);
-
-   
-    useState(() => {
-        const storedToken = localStorage.getItem('accessToken');
-        if (storedToken) {
-            setToken(storedToken);
-        }
-    }, []); 
+    const {token} = useAuth();
 
     function handleView(view) {
         setView(view);
     }
 
-    
     const continueSubmit = async () => {
         
         const form = document.getElementById("productForm");  
@@ -40,11 +33,15 @@ export default function AdminView() {
             description: formData2.description,
             category: parseInt(formData2.category)
         };
-
+        console.log("token", token);
+        console.log();
+        
         console.log("esto se envia", productToPost);
 
         try {
-            const response = await fetch('https://localhost:7015/api/Product/Create_Product', {
+            console.log("token prueba", token);
+            
+            const response = await fetch(POST_PRODUCT, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

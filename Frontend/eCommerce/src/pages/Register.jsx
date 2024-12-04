@@ -21,11 +21,22 @@ function Register() {
     const [showPasswordRequirements, setShowPasswordRequirements] = useState(false); // Estado para mostrar los requisitos
     const navigate = useNavigate();
 
+    
+    
     const handleAcceder = () => navigate('/login');
     const handleLogoClick = () => navigate('/'); 
 
     const handleRegister = async (event) => {
         event.preventDefault();
+        const RegisterRef = ([{
+            mail: emailRef.current.value,
+            name: nameRef.current.value,
+            surname: nameRef.current.value,
+            password: passwordRef.current.value,  
+          }]);
+      
+          console.log("hola", RegisterRef);
+        
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
         const confirmPassword = confirmPasswordRef.current.value;
@@ -54,7 +65,10 @@ function Register() {
             return;
         }
 
+
         await registerUser({ Name: name, Mail: email, Password: password });
+        console.log("usuario rergister", registerUser);
+        
     };
 
     const registerUser = async (data) => {

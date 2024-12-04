@@ -1,6 +1,3 @@
-import React from 'react';
-import Footer from "../components/Footer/Footer";
-import Header from "../components/Header/Header";
 import "../styles/SobreNosotros.css";
 import Carrusel from "../components/Carrusel";
 import logo from "/recursos/logo2.png";
@@ -36,7 +33,9 @@ function SobreNosotros() {
                 <div className='container-imagen-mision'><img src="/recursos/mision.jpg" alt="" className='imagen-mision' /></div>
                 <div className='container-texto-mision'>
                     <p className='titulo titulo-mision'>Mision</p><br />
-                    <i><p className='titulo texto-mision'>"Ofrecer una experiencia de café excepcional que inspire y conecte, respetando los principios de calidad, sostenibilidad y pasión por el arte del café."</p></i></div>
+                    <i>
+                        <p className='titulo texto-mision'>Ofrecer una experiencia de café excepcional que inspire y conecte, respetando los principios de calidad, sostenibilidad y pasión por el arte del café.</p></i>
+                    </div>
             </div>
 
             <div className='container-vision'>

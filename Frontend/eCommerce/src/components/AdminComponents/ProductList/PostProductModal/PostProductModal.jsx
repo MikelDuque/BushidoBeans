@@ -18,11 +18,11 @@ export default function PostProductModal({ cancelFnc }) {
             </div>
             <div>
                 <label>Precio: </label>
-                <input type="number" name="price" id="price" />
+                <input type="number" name="price" id="price" min={0} step="any" />
             </div>
             <div>
                 <label>Stock: </label>
-                <input type="number" name="stock" id="stock" />
+                <input type="number" name="stock" id="stock" min={0} step="any" />
             </div>
             <div>
             <label htmlFor="category">Categoría</label>
