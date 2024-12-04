@@ -5,7 +5,6 @@ import { createPortal } from "react-dom"
 export default function Modal({continueFnc, cancelFnc, type, titulo, buttonValues, children}) {
 const {closeModal} = useModal();
 
-
   return createPortal(
     <>
     <div className={classes.screen_container}>
