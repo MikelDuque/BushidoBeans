@@ -1,6 +1,6 @@
 import { useState } from "react";
-import OpenedProduct from "./OpenedProduct";
-import ClosedProduct from "./ClosedProduct";
+import OpenedProduct from "./ProductElement/OpenedProduct";
+import ClosedProduct from "./ProductElement/ClosedProduct";
 
 import classes from "./ProductAccordion.module.css"
 

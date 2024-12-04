@@ -1,10 +1,10 @@
-using System.Diagnostics;
-using System.Net;
+using System.ComponentModel;
 using eCommerce.Controllers;
 using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 using eCommerce.Models.Enums;
 using eCommerce.Models.Mappers;
+using Microsoft.OpenApi.Extensions;
 
 namespace eCommerce.Services;
 
@@ -83,26 +83,23 @@ public class ProductService
     return _mapper.ToDto(productEntity);
   }*/
     
-    public async Task<ProductDto> UpdateProductDetailsAsync(Product product)
-    {
-        var ProductEntity = await _unitOfWork.ProductRepository.GetByIdAsync(product.Id);
+  public async Task<ProductDto> UpdateProductDetailsAsync(ProductDto product)
+  {
+    Product productEntity = await _unitOfWork.ProductRepository.GetByIdAsync(product.Id) ?? throw new ArgumentException("El producto no ha sido encontrado");
 
-        if (ProductEntity == null)
-        {
-            throw new ArgumentException($"Product with ID {product.Id} not found.");
-        }
+    productEntity.Name = product.Name;
+    productEntity.Description = product.Description;
+    productEntity.Image = product.Image;
+    productEntity.Price = product.Price;
+    productEntity.Stock = product.Stock;
+    productEntity.CategoryId = product.Category;
+    productEntity.Intensity = (EIntensity)product.Intensity;
+    //productEntity.NutritionalInfo = product.NutritionalInfo;
 
-        //ProductEntity.Id = product.Id;
-        ProductEntity.Name = product.Name;
-        ProductEntity.Description = product.Description;
-        //ProductEntity.NutritionalInfo = product.NutritionalInfo;
-        ProductEntity.Image = product.Image;
-        ProductEntity.Price = product.Price;
-        ProductEntity.Stock = product.Stock;
+    _unitOfWork.ProductRepository.Update(productEntity);
+    await _unitOfWork.ProductRepository.SaveAsync();
 
-        await _unitOfWork.ProductRepository.SaveAsync();
+    return _mapper.ToDto(productEntity);
 
-        return _mapper.ToDto(ProductEntity);
-
-    }
+  }
 }
