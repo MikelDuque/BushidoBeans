@@ -46,7 +46,7 @@ public class OrderService
 
         await _unitOfWork.OrderRepository.InsertAsync(newOrder);
 
-        await InsertOrderProductsAsync(order.OrderProducts);
+        //await InsertOrderProductsAsync(order.OrderProducts);
 
         await _unitOfWork.SaveAsync();
 

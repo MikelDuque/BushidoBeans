@@ -1,13 +1,29 @@
 import { useState, useEffect } from 'react';
 import {GET_PRODUCTS } from "../../../endpoints/config";
 
+import classes from "./ProductList.module.css"
+import Accordion from '../../../utils/GenericAccordion/Accordion';
+
 export default function ProductList() {
     const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [error, setError] = useState(null);
+    const [token, setToken] = useState(null);
 
     useEffect(() => {
-        const fetchProducts = async () => {
+        const storedToken = localStorage.getItem('accessToken');
+        if (storedToken) {
+            try {
+                setToken(storedToken);
+            } catch (error) {
+                console.error("Error al decodificar el token", error);
+                localStorage.removeItem('accessToken');
+            }
+        }
+    }, []); 
+
+    useEffect(() => {
+        async function fetchProducts() {
             try {
                 const response = await fetch(GET_PRODUCTS);
                 const data = await response.json();
@@ -42,15 +58,19 @@ export default function ProductList() {
             categoryId: selectedProduct.categoryId
         };
 
+        console.log(token);
+        
         try {
             const response = await fetch('https://localhost:7015/api/Product/Update_Product', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(productToUpdate),
             });
-
+            console.log("token", token);
+            
             if (!response.ok) {
                 throw new Error('Error al actualizar el producto');
             } else {
@@ -68,11 +88,13 @@ export default function ProductList() {
 
     return (
         <div>
-            <h2>Lista de Productos</h2>
             {error && <p>Error: {error}</p>}
-            <ul>
+            <Accordion list={products}/>
+            
+            {/*
+            <ul className={classes.list_container}>
                 {products.map((product) => (
-                    <li key={product.id} onClick={() => handleProductSelect(product)}>
+                    <li className={classes.list_element} key={product.id} onClick={() => handleProductSelect(product)}>
                         {product.id} - {product.name} - {product.price} €
                     </li>
                 ))}
@@ -138,6 +160,7 @@ export default function ProductList() {
                     <button onClick={handleUpdate}>Actualizar</button>
                 </div>
             )}
+            */}
         </div>
     );
 };

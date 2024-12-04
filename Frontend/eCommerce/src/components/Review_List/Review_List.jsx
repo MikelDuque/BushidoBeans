@@ -18,7 +18,7 @@ function reviewMapper(reviews) {
           userName: review.userName,
           avatar: review.avatar
         }}/>
-    ))) : (<p>"No existen reviews de este producto"</p>)
+    ))) : (<p>No existen reviews de este producto</p>)
   ); 
 };
 
