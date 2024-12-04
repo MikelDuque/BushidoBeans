@@ -17,14 +17,6 @@ export default function PostProductModal({ cancelFnc }) {
                 <input type="text" name="description" id="description" />
             </div>
             <div>
-                <label>Categoría: </label>
-                <input type="number" name="category" id="category" />
-            </div>
-            <div>
-                <label>Intensidad: </label>
-                <input type="number" name="intensity" id="intensity" />
-            </div>
-            <div>
                 <label>Precio: </label>
                 <input type="number" name="price" id="price" />
             </div>
@@ -32,6 +24,25 @@ export default function PostProductModal({ cancelFnc }) {
                 <label>Stock: </label>
                 <input type="number" name="stock" id="stock" />
             </div>
+            <div>
+            <label htmlFor="category">Categoría</label>
+            
+            <select id="category" name="category" >
+              <option value={1}>Café</option>
+              <option value={2}>Té</option>
+              <option value={3}>Otros</option>
+            </select>
+          </div>
+
+          <div>
+            <label htmlFor="intensity">Intensidad</label>
+            <select id="intensity" name="intensity" >
+              <option value={0}>No</option>
+              <option value={1}>Suave</option>
+              <option value={2}>Medio</option>
+              <option value={3}>Fuerte</option>
+            </select>
+          </div>
         </form>
     );
 }

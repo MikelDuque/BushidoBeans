@@ -75,7 +75,7 @@ export default function AdminView() {
         <div className={classes.container}>
             <SwitchButton setView={handleView} />
             {!view && (
-                <button onClick={openModal}>Añadir producto</button>
+                <button className={classes.buttonAñadirProducto} onClick={openModal}>Añadir producto</button>
             )}
             {isOpen && (
                 <Modal

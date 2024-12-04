@@ -6,8 +6,18 @@
     flex-direction: column;
     align-items: center;
     gap: 20px;
+
+    
 }
 
 .view_container {
     width: 100%;
 }
+
+.buttonAñadirProducto{
+    border-radius: 5px;
+    font-family: var(--font-family-titulos-subtitulos);  
+    
+}
+
+
