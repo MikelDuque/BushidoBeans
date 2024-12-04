@@ -1,20 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {GET_PRODUCTS } from "../../../endpoints/config";
+import {useAuth} from "../../../context/AuthContext";
 
 import classes from "./ProductList.module.css"
-import Accordion from '../../../utils/GenericAccordion/Accordion';
+import ProductAccordion from '../../../utils/GenericAccordion/AccordionElement/ProductAccordion';
 
 export default function ProductList() {
     const [products, setProducts] = useState([]);
-    const [selectedProduct, setSelectedProduct] = useState(null);
     const [error, setError] = useState(null);
+    const selectedProduct = useRef(null);
+
+    const {token} = useAuth();
 
     useEffect(() => {
         async function fetchProducts() {
             try {
                 const response = await fetch(GET_PRODUCTS);
                 const data = await response.json();
-                setProducts(data);
+                setProducts(data || []);
             } catch (error) {
                 setError(error.message);
             }
@@ -34,30 +37,35 @@ export default function ProductList() {
         }));
     };
 
-    const handleUpdate = async () => {
+    const handleUpdate = async (event) => {
+        event.preventDefault();
+        const thisElement = event.target;   
+        
         const productToUpdate = {
-            id: selectedProduct.id,
-            name: selectedProduct.name,
-            price: selectedProduct.price,
-            stock: selectedProduct.stock,
-            Image: selectedProduct.image,
-            description: selectedProduct.description,
-            categoryId: selectedProduct.categoryId
+            Id: thisElement.id,
+            Name: thisElement.name.value,
+            Price: thisElement.price.value,
+            Stock: thisElement.stock.value,
+            Image: thisElement.image.value,
+            Description: thisElement.description.value,
+            Category: thisElement.category.value
         };
+
+        console.log(productToUpdate);
+        
 
         try {
             const response = await fetch('https://localhost:7015/api/Product/Update_Product', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(productToUpdate),
             });
-
             if (!response.ok) {
                 throw new Error('Error al actualizar el producto');
             } else {
-                
                 setProducts((prevProducts) =>
                     prevProducts.map((product) =>
                         product.id === selectedProduct.id ? selectedProduct : product
@@ -66,13 +74,15 @@ export default function ProductList() {
             }
         } catch (error) {
             setError(error.message);
+            console.log("Error: ", error.message);
+            
         }
     };
 
     return (
         <div>
             {error && <p>Error: {error}</p>}
-            <Accordion list={products}/>
+            <ProductAccordion list={products} submit={handleUpdate}/>
             {/*
             <ul className={classes.list_container}>
                 {products.map((product) => (

@@ -16,6 +16,7 @@ import DireccionEnvio from "./components/DireccionEnvio/DireccionEnvio";
 //import { DireccionProvider } from "./context/DireccionContext";
 import { CheckoutProvider } from './context/CheckoutContext';
 import AdminView from "./pages/AdminView/AdminView";
+import { AdminPrivateRoute } from "./utils/RestrictedRoute";
 
 function App() { return (
     <Routes>
@@ -40,7 +41,12 @@ function App() { return (
                 </ReviewProvider>
             } />
 
-            <Route path="/vistaAdmin" element={<AdminView />} />
+            
+            <Route path="/vistaAdmin" element={
+                <AdminPrivateRoute>
+                    <AdminView />
+                </AdminPrivateRoute>
+            }/>
 
             <Route path="400" element={<NotFound />} />
 

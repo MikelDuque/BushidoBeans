@@ -12,11 +12,16 @@ const AuthContext = createContext();    //Creamos el contexto. Es como un conten
 
 export const AuthProvider = ({ children }) => { // Exportamos el authprovider. Este provee los datos y funciones a todos los componentes hijos que lo necesiten.
 
-    const [token, setToken] = useState(null);
+    const accessToken = localStorage.getItem('accessToken');
+
+    const [token, setToken] = useState(accessToken ? accessToken : null);
     const decodedTokenRef = useRef(null);
     const userIdRef = useRef(0);
     const [isAuthenticated, setIsAuthenticated] = useState(false);  //Estado interno. Indica si el usuario esta autenticado.
     const navigate = useNavigate();
+
+    console.log("token en contexto", token);
+    
 
     useEffect(() => {
         //Detectamos el token de autentificacion. useEffect se carga una vez ejecutado el componente.

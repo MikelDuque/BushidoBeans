@@ -4,12 +4,12 @@ import { useCarrito } from "../../../context/CarritoContext";
 import { API_BASE_URL } from "../../../endpoints/config";
 
 export default function Cart() {
-  const {carrito} = useCarrito();
+  const carrito = useCarrito();
 
   //DEFINIR CARTITEMS
-  function cartMapper(cartItems) {
-    return (cartItems.length > 0 ? (
-      cartItems.map((cartItem) => (
+  function cartMapper() {
+    return (carrito.length > 0 ? (
+      carrito.map((cartItem) => (
         <CartItem 
           key={cartItem.id}
           productData = {{
@@ -29,7 +29,7 @@ export default function Cart() {
   return (
     <>
       <ul className={classes.cart_list}>   
-        {cartMapper(carrito)}
+        {cartMapper}
       </ul>
     </>
 )};

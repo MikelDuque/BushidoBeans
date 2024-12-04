@@ -85,9 +85,7 @@ const Desplegable = ({ handleLogout, token }) => {
 
   function adminView() {
     const decodedToken = jwtDecode(token);
-    console.log(decodedToken);
     
-  
     if (decodedToken.role === "admin") {
       return (<NavLink className={`${classes.dnl} ${classes.desplOpcion}`} to="/vistaAdmin">Administración</NavLink>);
     }

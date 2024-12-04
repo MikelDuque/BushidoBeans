@@ -73,7 +73,7 @@ public class ProductService
 
   public async Task<ProductDto> UpdateProductDetailsAsync(ProductDto product)
   {
-    Product productEntity = await _unitOfWork.ProductRepository.GetByIdAsync(product.Id) ?? throw new ArgumentException($"Product with ID {product.Id} not found.");
+    Product productEntity = await _unitOfWork.ProductRepository.GetByIdAsync(product.Id) ?? throw new ArgumentException("El producto no ha sido encontrado");
 
     productEntity = _mapper.ToEntity(product);
     _unitOfWork.ProductRepository.Update(productEntity);

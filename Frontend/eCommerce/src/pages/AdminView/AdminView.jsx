@@ -5,7 +5,6 @@ import UserList from '../../components/AdminComponents/UserList/UserList.jsx';
 
 import classes from './AdminView.module.css';
 import SwitchButton from '../../components/AdminComponents/SwitchButton/SwitchButton.jsx';
-import Accordion from '../../utils/GenericAccordion/Accordion.jsx';
 
 export default function AdminView() {
     const [view, setView] = useState(false);    // False: "productList", True: "userList"

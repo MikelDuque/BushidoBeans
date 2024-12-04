@@ -16,6 +16,7 @@
 }
 
 .form_container {
+  background-color: rgb(220, 180, 150);
   height: 12.5rem;
 }
 
@@ -34,7 +35,7 @@
 }
 
 .listImage_container {
-  max-width: 5rem;
+  width: 5rem;
   border-radius: 5px;
 
   img {border-radius: 5px;}

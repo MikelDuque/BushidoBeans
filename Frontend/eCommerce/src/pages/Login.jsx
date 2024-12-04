@@ -2,7 +2,7 @@ import * as jwt_decode from 'jwt-decode';
 import "../styles/login.css";
 import { useRef, useState } from "react";
 import { validation } from '../utils/validationForm';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Alert from './../components/Alerta';
 import { useAuth } from '../context/AuthContext';
 import { LOGIN_URL } from '../endpoints/config';
@@ -16,6 +16,7 @@ function Login() {
     const [promesaError, setPromesaError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [alertMessage, setAlertMessage] = useState(null);
+    const {location} = useLocation();
 
     const navigate = useNavigate();
 
@@ -38,7 +39,9 @@ function Login() {
                 setAlertMessage("Te has logeado correctamente!");
                 login(accessToken);
                 resetForm();
-                navigate('/');
+
+                const previousPath = location.state?.page || "/";
+                navigate(previousPath);
             }
              else {
                 setPromesaError(await response.text());
