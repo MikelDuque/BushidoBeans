@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import {GET_PRODUCTS } from "../../../endpoints/config";
+import { GET_PRODUCTS, PUT_PRODUCT } from "../../../endpoints/config";
 import {useAuth} from "../../../context/AuthContext";
 
 import classes from "./ProductList.module.css"
-import ProductAccordion from '../../../utils/GenericAccordion/AccordionElement/ProductAccordion';
+import ProductAccordion from './ProductAccordion/ProductAccordion';
 
 export default function ProductList() {
     const [products, setProducts] = useState([]);
@@ -13,17 +13,18 @@ export default function ProductList() {
     const {token} = useAuth();
 
     useEffect(() => {
-        async function fetchProducts() {
-            try {
-                const response = await fetch(GET_PRODUCTS);
-                const data = await response.json();
-                setProducts(data || []);
-            } catch (error) {
-                setError(error.message);
-            }
-        };
         fetchProducts();
     }, []);
+
+    async function fetchProducts() {
+        try {
+            const response = await fetch(GET_PRODUCTS);
+            const data = await response.json();
+            setProducts(data || []);
+        } catch (error) {
+            setError(error.message);
+        }
+    };
 
     const handleProductSelect = (product) => {
         setSelectedProduct(product);
@@ -48,24 +49,22 @@ export default function ProductList() {
             Stock: thisElement.stock.value,
             Image: thisElement.image.value,
             Description: thisElement.description.value,
-            Category: thisElement.category.value
-        };
-
-        console.log(productToUpdate);
-        
+            Category: thisElement.category.value,
+            Intensity: thisElement.intensity.value
+        };    
 
         try {
-            const response = await fetch('https://localhost:7015/api/Product/Update_Product', {
+            const response = await fetch(PUT_PRODUCT, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
-                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(productToUpdate),
             });
+            
             if (!response.ok) {
-                throw new Error('Error al actualizar el producto');
+                throw new Error(response.status);
             } else {
                 setProducts((prevProducts) =>
                     prevProducts.map((product) =>
@@ -73,6 +72,8 @@ export default function ProductList() {
                     )
                 );
             }
+
+            fetchProducts();
         } catch (error) {
             setError(error.message);
             console.log("Error: ", error.message);

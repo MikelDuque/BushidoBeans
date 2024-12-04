@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../../../endpoints/config";
+import { API_BASE_URL } from "../../../../../endpoints/config";
 import classes from "./AccordionElement.module.css"
 
 export default function ClosedProduct({listElement, openFullElement}) {

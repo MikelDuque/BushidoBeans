@@ -22,8 +22,8 @@ public class ProductMapper
             Image = product.Image,
             Name = product.Name,
             Description = product.Description,
-            Category = (ECategory)product.CategoryId,
-            Intensity = product.Intensity,
+            Category = product.CategoryId,
+            Intensity = (int)product.Intensity,
             Price = product.Price,
             Stock = product.Stock,
             TotalReviews = product.Reviews.Count,
@@ -44,8 +44,8 @@ public class ProductMapper
             Image = product.Image,
             Name = product.Name,
             Description = product.Description,
-            CategoryId = (long)product.Category,
-            Intensity = product.Intensity,
+            CategoryId = product.Category,
+            Intensity = (EIntensity)product.Intensity,
             Price = product.Price,
             Stock = product.Stock
         };
