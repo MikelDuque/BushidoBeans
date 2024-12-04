@@ -47,6 +47,8 @@ export const CarritoProvider = ({ children }) => {
         } else {
             setToken(tokenLS);
             const decodedToken = jwtDecode(tokenLS);
+            console.log("hola",token);
+            
             
             if (!decodedToken.id) {
             console.log('No se encontró el userId en el token');
@@ -87,9 +89,13 @@ export const CarritoProvider = ({ children }) => {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
-                }
+                    
+                },
+                
             });
-
+            console.log(userId);
+            
+            console.log("carrito url", response);
             if (response.ok) {
                 const data = await response.json();
                 handleCart(data);

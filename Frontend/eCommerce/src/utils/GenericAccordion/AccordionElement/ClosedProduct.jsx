@@ -23,19 +23,3 @@ export default function ClosedProduct({listElement, openFullElement}) {
   )
 }
 
-function bodyConstructor(name) {
-  
-  return (name.length < 100 ? name : `${name.substring(0, 99)}...`);
-  
-  if (name.length > 100 ) {
-    const subName = name.substring(0, 99);
-
-    return (
-      <>
-        <span className={classes.name}>{`${subName}...`}</span>
-      </>
-    );
-  };
-
-  return <span className={classes.name}>{name}</span>
-};

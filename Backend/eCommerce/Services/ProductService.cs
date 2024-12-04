@@ -70,15 +70,39 @@ public class ProductService
 
 
   /* ----- UPDATE ----- */
-
+  /*
   public async Task<ProductDto> UpdateProductDetailsAsync(ProductDto product)
   {
     Product productEntity = await _unitOfWork.ProductRepository.GetByIdAsync(product.Id) ?? throw new ArgumentException("El producto no ha sido encontrado");
 
     productEntity = _mapper.ToEntity(product);
+       productEntity.Id = product.Id;
     _unitOfWork.ProductRepository.Update(productEntity);
     await _unitOfWork.ProductRepository.SaveAsync();
 
     return _mapper.ToDto(productEntity);
-  }
+  }*/
+    
+    public async Task<ProductDto> UpdateProductDetailsAsync(Product product)
+    {
+        var ProductEntity = await _unitOfWork.ProductRepository.GetByIdAsync(product.Id);
+
+        if (ProductEntity == null)
+        {
+            throw new ArgumentException($"Product with ID {product.Id} not found.");
+        }
+
+        //ProductEntity.Id = product.Id;
+        ProductEntity.Name = product.Name;
+        ProductEntity.Description = product.Description;
+        //ProductEntity.NutritionalInfo = product.NutritionalInfo;
+        ProductEntity.Image = product.Image;
+        ProductEntity.Price = product.Price;
+        ProductEntity.Stock = product.Stock;
+
+        await _unitOfWork.ProductRepository.SaveAsync();
+
+        return _mapper.ToDto(ProductEntity);
+
+    }
 }

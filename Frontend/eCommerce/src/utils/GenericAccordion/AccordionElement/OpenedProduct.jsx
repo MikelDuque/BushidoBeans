@@ -1,6 +1,7 @@
 import { useState } from "react";
 import classes from "./AccordionElement.module.css"
 import { API_BASE_URL } from "../../../endpoints/config";
+import { API_BASE_URL } from "../../../endpoints/config";
 
 export default function OpenedProduct({listElement, submit}) {
   const [isFocused, setIsFocused] = useState(false);

@@ -75,14 +75,18 @@ export default function UserList() {
 
         const userToUpdate = {
             role: selectedUser.role,
-            name: selectedUser.name,
+            userId: selectedUser.id
         };
 
+        console.log(userToUpdate);
+        
+
         try {
-            const response = await fetch('https://localhost:7015/api/User/Update_User', {
+            const response = await fetch('https://localhost:7015/api/User/Update_UserRole', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(userToUpdate),
             });
@@ -103,7 +107,7 @@ export default function UserList() {
     };
 
     return (
-        <div className="container mx-auto p-4">
+        <div className="">
             {!currentUser && (
                 <p className="text-red-500">Por favor, inicie sesión para ver esta página</p>
             )}
@@ -129,32 +133,28 @@ export default function UserList() {
                         <div className="mt-6 p-4 border rounded">
                             <h3 className="text-xl font-semibold mb-4">Editar Usuario</h3>
                             <div className="space-y-4">
-                                <label className="block">
-                                    <span className="text-gray-700">Rol: </span>
-                                    <input
-                                        type="text"
-                                        name="id"
-                                        value={selectedUser.role}
+                                <div className='block'>
+                                <label htmlFor='Role' className="text-gray-700">Rol de: {selectedUser.name}</label>
+                                    <select
+                                        id='role'
+                                        name='role'
+                                        defaultValue={selectedUser.role}
                                         onChange={handleInputChange}
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-                                        readOnly 
-                                    />
-                                </label>
-                                <label className="block">
-                                    <span className="text-gray-700">Nombre:</span>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        value={selectedUser.name}
-                                        onChange={handleInputChange}
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-                                    />
-                                </label>
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm" 
+                                    >
+                                        <option value="string">Sin rol</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+
+                                </div>
+                                
+                                
                                 <button 
                                     onClick={handleUpdate}
                                     className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                                
+                                    Actualizar
                                 </button>
+                                
                             </div>
                         </div>
                     )}

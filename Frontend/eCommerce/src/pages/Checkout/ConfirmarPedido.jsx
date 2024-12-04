@@ -6,7 +6,7 @@ import { useCheckout } from '../../context/CheckoutContext';
 
 function ConfirmarPedido() {
   const { address } = useCheckout();
-
+  const [token, setToken]= useState(null);
   const [datos, setDatos] = useState([]);
   const [user, setUser] = useState(null);
   const [userId, setUserId] = useState(null);
@@ -20,6 +20,7 @@ function ConfirmarPedido() {
       if (token) {
           try {
               const decodedToken = jwt_decode.jwtDecode(token);
+              setToken(token);
               setUser(decodedToken.unique_name);  
               setUserId(decodedToken.id);
           } catch (error) {
@@ -37,7 +38,10 @@ function ConfirmarPedido() {
                   const url = GET_ORDER_BY_ID(userId);
                   const response = await fetch(url, { 
                       method: 'GET', 
-                      headers: { 'Content-Type': 'application/json' } 
+                      headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
                   });
                   const data = await response.json();
                   console.log("url", url);
