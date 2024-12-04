@@ -105,6 +105,7 @@
   justify-items: center;
 
   span {
+    width: 13.5rem;
     padding-left: 30px;
     border-left: 1px solid rgba(0, 0, 0, 0.50);
 

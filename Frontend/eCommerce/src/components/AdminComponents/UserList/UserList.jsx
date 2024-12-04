@@ -1,85 +1,41 @@
 import { useState, useEffect } from 'react';
-import { GET_USERS } from "../../../endpoints/config";
-import {jwtDecode} from 'jwt-decode';
+import { DELETE_USER_BY_ID, GET_USERS } from "../../../endpoints/config";
 
 import classes from "./UserList.module.css"
+import UserListElement from './UserListElement/UserListElement';
+import { useAuth } from '../../../context/AuthContext';
 
 export default function UserList() {
-    const [currentUser, setCurrentUser] = useState(null);
     const [users, setUsers] = useState([]);
-    const [selectedUser, setSelectedUser] = useState(null);
     const [error, setError] = useState(null);
-    const [token, setToken] = useState(null);
 
-    
-    useEffect(() => {
-        const storedToken = localStorage.getItem('accessToken');
-        if (storedToken) {
-            try {
-                const decodedToken = jwtDecode(storedToken);
-                setCurrentUser(decodedToken);
-                setToken(storedToken);
-            } catch (error) {
-                console.error("Error al decodificar el token", error);
-                localStorage.removeItem('accessToken');
-            }
-        }
-    }, []); 
+    const { token } = useAuth();
 
     useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const response = await fetch(GET_USERS, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                const data = await response.json();
-                setUsers(data);
-            } catch (error) {
-                setError(error.message);
-            }
-        };
-
-        if (token) {
-            fetchUsers();
-        }
+        if (token) getUsers();
     }, [token]);
 
-    const handleUserSelect = (user) => {
-        if (!currentUser) {
-            alert("Por favor, inicie sesión");
-            return;
-        }
-
-        if (user.id !== currentUser.id) {
-            setSelectedUser(user);
-        } else {
-            alert("No puedes editar tu propio usuario.");
+    async function getUsers(){
+        try {
+            const response = await fetch(GET_USERS, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            const data = await response.json();
+            setUsers(data || []);
+        } catch (error) {
+            setError(error.message);
         }
     };
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setSelectedUser((prevUser) => ({
-            ...prevUser,
-            [name]: value,
-        }));
-    };
-
-    const handleUpdate = async () => {
-        if (!selectedUser) {
-            alert("No hay usuario seleccionado");
-            return;
-        }
+    const handleUpdate = async (event) => {
+        const thisElement = event.target;
 
         const userToUpdate = {
-            role: selectedUser.role,
-            userId: selectedUser.id
+            UserId: thisElement.id,
+            Role: thisElement.value === "usuario" ? null : thisElement.value
         };
-
-        console.log(userToUpdate);
-        
 
         try {
             const response = await fetch('https://localhost:7015/api/User/Update_UserRole', {
@@ -91,23 +47,46 @@ export default function UserList() {
                 body: JSON.stringify(userToUpdate),
             });
 
-            if (!response.ok) {
-                throw new Error('Error al actualizar el usuario');
-            } else {
-                setUsers((prevUsers) =>
-                    prevUsers.map((user) =>
-                        user.id === selectedUser.id ? selectedUser : user
-                    )
-                );
-                setSelectedUser(null);
-            }
+            if (!response.ok) {throw new Error('Error al actualizar el usuario');}
+            else {getUsers()}
         } catch (error) {
             setError(error.message);
+            console.log();
+            console.log("Error: ", error.message);  
         }
     };
 
+    const handleDelete = async (event) => {
+        const thisElement = event.target;  
+
+        try {
+            const response = await fetch(DELETE_USER_BY_ID(thisElement.id), {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {throw new Error('Error al eliminar el usuario');}
+            else {getUsers()}
+        } catch (error) {
+            setError(error.message);
+            console.log();
+            console.log("Error: ", error.message);
+        }
+    }
+
     return (
-        <div className="">
+        <div>
+            {error ? <p>Error: {error}</p> : 
+                <ul className={classes.container}>
+                    {users.length > 0 ? (users.map((listElement, i) => (
+                        <li key={i}> <UserListElement listElement={listElement} changeRol={handleUpdate} deleteUser={handleDelete}/> </li>
+                    ))) : <p>No existen elementos que listar</p>}
+                </ul>
+            }
+
+            {/*
             {!currentUser && (
                 <p className="text-red-500">Por favor, inicie sesión para ver esta página</p>
             )}
@@ -160,6 +139,9 @@ export default function UserList() {
                     )}
                 </>
             )}
+            */}
+
         </div>
     );
 };
+

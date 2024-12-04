@@ -46,18 +46,18 @@ public class UserController : ControllerBase
     public async Task<ActionResult<UserDto>> UpdateUserRole([FromBody] HandleRole userRole)
     {
         Claim userClaimId = User.FindFirst("id");
-        if (userClaimId == null) return Unauthorized("Debes iniciar sesión para llevar a cabo esta acción");
+        if (userClaimId == null) return Unauthorized("Debe iniciar sesión para llevar a cabo esta acción");
 
         return Ok(await _service.UpdateRole(userRole));
     }
 
 
     [Authorize(Roles = "admin")]
-    [HttpDelete("Delete/{id}")]
+    [HttpDelete("Delete_User/{id}")]
     public async Task<ActionResult<UserDto>> DeleteAsyncUser(long id)
     {
-        Claim userClaimRole = User.FindFirst("role");
-        if (userClaimRole == null) return Unauthorized("Usuario no autorizado");
+        Claim userClaimId = User.FindFirst("id");
+        if (userClaimId == null) return Unauthorized("Debe iniciar sesión para llevar a cabo esta acción");
 
         await _service.DeleteAsyncUserById(id);
 
