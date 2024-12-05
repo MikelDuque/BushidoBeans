@@ -9,4 +9,5 @@ public class OrderDto
   public List<OrderProductDto> OrderProducts { get; set; }
 
   public long UserId { get; set; }
+  public long AddressId { get; set; }
 }

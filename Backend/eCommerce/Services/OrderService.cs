@@ -38,15 +38,19 @@ public class OrderService
 
         Order newOrder = new Order
         {
+        
             UserId = order.UserId,
             TotalPrice = order.OrderProducts.Aggregate<OrderProductDto, decimal>(0, (total, orderProduct) => total += orderProduct.Quantity * orderProduct.PurchasePrice),
             TotalProducts = order.OrderProducts.Sum((orderProduct) => orderProduct.Quantity),
-            PurchaseDate = DateTime.Now 
+            PurchaseDate = DateTime.Now,
+            AddressId = order.AddressId
         };
 
         await _unitOfWork.OrderRepository.InsertAsync(newOrder);
+        
+        await _unitOfWork.SaveAsync();
 
-        await InsertOrderProductsAsync(order.OrderProducts);
+        //await InsertOrderProductsAsync(order.OrderProducts);
 
         await _unitOfWork.SaveAsync();
 
