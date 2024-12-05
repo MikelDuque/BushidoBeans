@@ -55,8 +55,9 @@ public class UserService
       Mail = userRequest.Mail,
       Password = AuthService.HashPassword(userRequest.Password),
       Name = userRequest.Name,
+      Address = userRequest.Address,
       Surname = userRequest.Surname,
-      Phone = 0,
+      Phone = userRequest.Phone,
       Role = null
     };
 

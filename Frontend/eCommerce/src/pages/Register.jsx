@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import '../styles/register.css';
 import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
@@ -6,43 +6,41 @@ import * as jwt_decode from 'jwt-decode';
 import Alert from './../components/Alerta';
 import Input from '../components/Input';
 import { REGISTER_URL } from '../endpoints/config';
+import { useAuth } from '../context/AuthContext';
 
 function Register() {
-    const emailRef = useRef(null);
-    const passwordRef = useRef(null);
-    const confirmPasswordRef = useRef(null);
-    const nameRef = useRef(null);
+    const {login} = useAuth();
+    
     const [emailError, setEmailError] = useState(null);
     const [passwordError, setPasswordError] = useState(null);
     const [nameError, setNameError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [alertMessage, setAlertMessage] = useState(null);
     const [password, setPassword] = useState('');
-    const [showPasswordRequirements, setShowPasswordRequirements] = useState(false); // Estado para mostrar los requisitos
+    const [showPasswordRequirements, setShowPasswordRequirements] = useState(false);
+    const [userRegister, setUserRegister] = useState({
+        mail: '',
+        password: '',
+        confirmPassword: '',
+        name: '',
+        surname: '',
+        address: '',
+        phone: '',
+    });
+    
+
+
     const navigate = useNavigate();
 
-    
-    
     const handleAcceder = () => navigate('/login');
-    const handleLogoClick = () => navigate('/'); 
+    const handleLogoClick = () => navigate('/');
 
     const handleRegister = async (event) => {
         event.preventDefault();
-        const RegisterRef = ([{
-            mail: emailRef.current.value,
-            name: nameRef.current.value,
-            surname: nameRef.current.value,
-            password: passwordRef.current.value,  
-          }]);
-      
-          console.log("hola", RegisterRef);
-        
-        const email = emailRef.current.value;
-        const password = passwordRef.current.value;
-        const confirmPassword = confirmPasswordRef.current.value;
-        const name = nameRef.current.value;
 
-        if (!validation.isValidEmail(email)) {
+        const { mail, password, confirmPassword, name } = userRegister;
+
+        if (!validation.isValidEmail(mail)) {
             setEmailError("Por favor, introduce un formato de email válido.");
             return;
         }
@@ -65,29 +63,34 @@ function Register() {
             return;
         }
 
-
-        await registerUser({ Name: name, Mail: email, Password: password });
-        console.log("usuario rergister", registerUser);
-        
+        await registerUser(userRegister);
     };
+    
 
-    const registerUser = async (data) => {
+    const registerUser = async () => {
+        const { confirmPassword, ...userDataToSend } = userRegister;
+        console.log("user:", userDataToSend);
+        
         setIsLoading(true);
         try {
             const response = await fetch(REGISTER_URL, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
+                headers: { 
+                    'Content-Type': 'application/json' 
+                },
+                body: JSON.stringify(userDataToSend),
             });
 
             if (response.ok) {
-                const accessToken = await response.json();
+                const { accessToken } = await response.json();
                 localStorage.setItem('accessToken', accessToken)
-                const decoded = jwt_decode.jwtDecode(accessToken);
-                console.log({ email: decoded.email, name: decoded.name });
+                const { email, rol: admin } = jwt_decode.jwtDecode(accessToken);
+                login(accessToken);
+                console.log({ email, admin });
                 setAlertMessage("Te has registrado correctamente!");
-                resetForm();
-                navigate('/');
+
+                const previousPath = location.state?.page || "/";
+                navigate(previousPath);
             } else {
                 const errorText = await response.text();
                 console.error(errorText);
@@ -102,23 +105,25 @@ function Register() {
     };
 
     const resetForm = () => {
-        emailRef.current.value = "";
-        passwordRef.current.value = "";
-        confirmPasswordRef.current.value = "";
-        nameRef.current.value = "";
+        setUserRegister({
+            mail: '',
+            password: '',
+            confirmPassword: '',
+            name: '',
+            surname: '',
+            address: '',
+            phone: '',
+        });
     };
 
-    // Manejador para mostrar los requisitos
     const handleShowPasswordRequirements = () => {
         setShowPasswordRequirements(true);
     };
 
-    // Manejador para ocultar los requisitos
     const handleHidePasswordRequirements = () => {
         setShowPasswordRequirements(false);
     };
-    
-    // Verificar requisitos de la contraseña
+
     const checkPasswordRequirements = (password) => {
         const minLength = password.length >= 8;
         const hasUpperCase = /[A-Z]/.test(password);
@@ -137,11 +142,21 @@ function Register() {
 
     const passwordRequirements = checkPasswordRequirements(password);
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUserRegister((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
+
     return (
         <div className="container-supremo">
             <div className="container-secundario">
                 <div className="login login-secundario">
-                    <button onClick={handleLogoClick} className='logo-button-secundario'><img src="../../public/logo-secundario.svg" alt="Logo" className="logoBushidoBeans-secundario" /></button>
+                    <button onClick={handleLogoClick} className='logo-button-secundario'>
+                        <img src="../../public/logo-secundario.svg" alt="Logo" className="logoBushidoBeans-secundario" />
+                    </button>
                     <p className="preguntaCuenta-secundario accede">¿Ya tienes cuenta?</p>
                     <button className="Acceder Acceder-secundario" onClick={handleAcceder}>Acceder</button>
                 </div>
@@ -150,24 +165,37 @@ function Register() {
                     <p className="preguntaCuenta-terciario">Añade tus datos personales</p>
                     <form className="formRegister" onSubmit={handleRegister}>
                         <div className="contenedorNombre contenedorEmail contenedorEmail-secundario">
-                            <Input type="text" name="name" id="name" ref={nameRef} placeholder="Nombre" className="nombre" />
+                            <Input
+                                type="text"
+                                name="name"
+                                id="name"
+                                placeholder="Nombre"
+                                value={userRegister.name}
+                                onChange={handleChange}
+                            />
                             {nameError && <p className="name-message email-message email-message-secundario ">{nameError}</p>}
                         </div>
                         <div className="contenedorEmail contenedorEmail-secundario">
-                            <Input type="email" id="email" name="email" ref={emailRef} placeholder="Email" />
+                            <Input
+                                type="email"
+                                id="mail"
+                                name="mail"
+                                placeholder="Email"
+                                value={userRegister.mail}
+                                onChange={handleChange}
+                            />
                             {emailError && <p className="email-message email-message-secundario">{emailError}</p>}
                         </div>
                         <div className="contenedorPassword contenedorPassword-secundario">
-                            <Input 
-                                type="password" 
-                                id="password" 
-                                name="password" 
-                                ref={passwordRef} 
-                                placeholder="Contraseña" 
-                                onFocus={handleShowPasswordRequirements} 
-                                onBlur={handleHidePasswordRequirements} 
-                                value={password} 
-                                onChange={(e) => setPassword(e.target.value)} // Actualiza el estado de la contraseña
+                            <Input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Contraseña"
+                                onFocus={handleShowPasswordRequirements}
+                                onBlur={handleHidePasswordRequirements}
+                                value={userRegister.password}
+                                onChange={handleChange}
                             />
                             {passwordError && <p className="password-message password-message-secundario">{passwordError}</p>}
                             {showPasswordRequirements && (
@@ -191,7 +219,44 @@ function Register() {
                             )}
                         </div>
                         <div className="contenedorPassword contenedorPassword-secundario">
-                            <Input type="password" id="confirmPassword" name="confirmPassword" ref={confirmPasswordRef} placeholder="Repetir Contraseña" />
+                            <Input
+                                type="password"
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                placeholder="Repetir Contraseña"
+                                value={userRegister.confirmPassword}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className="contenedorPassword contenedorPassword-secundario">
+                            <Input
+                                type="text"
+                                id="surname"
+                                name="surname"
+                                placeholder="Introduce tu apellido"
+                                value={userRegister.surname}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className="contenedorPassword contenedorPassword-secundario">
+                            <Input
+                                type="text"
+                                id="address"
+                                name="address"
+                                placeholder="Introduce tu dirección"
+                                value={userRegister.address}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className="contenedorPassword contenedorPassword-secundario">
+                            <Input
+                                type="number"
+                                id="phone"
+                                name="phone"
+                                placeholder="Introduce tu número de teléfono"
+                                value={userRegister.phone}
+                                onChange={handleChange}
+                            />
                         </div>
                         <button type="submit" disabled={isLoading} className="btnCrearCuenta btnCrearCuenta-secundario">
                             {isLoading ? 'Cargando...' : 'Crear Cuenta'}

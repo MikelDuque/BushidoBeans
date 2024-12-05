@@ -14,6 +14,7 @@ public class UserMapper
             Mail = user.Mail,
             Name = user.Name,
             Surname = user.Surname,
+            Address = user.Address,
             Phone = user.Phone,
             Role = user.Role
         };

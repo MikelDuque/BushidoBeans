@@ -58,12 +58,12 @@ public class AuthService
 
     public async Task<string> Register(RegisterRequest userRequest)
     {
-        await _userService.InsertByMailAsync(userRequest);
         
         LoginRequest model = new LoginRequest {
             Mail = userRequest.Mail,
-            Password = userRequest.Password
+            Password = userRequest.Password,
         };
+        await _userService.InsertByMailAsync(userRequest);
 
         return await Login(model);
     }

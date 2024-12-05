@@ -58,7 +58,7 @@ public class AuthController : ControllerBase
         }
         else
         {
-            return Unauthorized("El usuario ya exite");
+            return Unauthorized("El usuario ya existe");
         }
     }
 }
