@@ -21,16 +21,25 @@ function Header() {
 
   const navigate = useNavigate();
 
+  const {token, decodedToken} = useAuth;
+
   const { eliminarContenidoCarrito, totalProducts } = useCarrito();
 
   function handleNavigateToCheckout() {
     navigate('/checkout')
   }
 
-  const { isAuthenticated, logout, token } = useAuth();
+  
+
+  const isAuthenticated = false;
+
+  
   const handleLogout = () => {
-    logout();
+    console.log("hola");
+    
+    //logout();
   };
+  
 
   return (
     <header>
@@ -42,7 +51,7 @@ function Header() {
         <NavLink className={`${classes.nl} ${classes.btn}`} to="/sobreNosotros"> Nosotros </NavLink>
 
         {isAuthenticated ? (
-          <Desplegable handleLogout={handleLogout} token={token} />
+          <Desplegable handleLogout={handleLogout} decodedToken={decodedToken} />
         ) : (
           <NavLink className={`${classes.nl} ${classes.btnc}`} to="/login"> Login </NavLink>
         )}
@@ -62,7 +71,7 @@ function Header() {
 
 // -----DESPLEGABLE----- //
 
-const Desplegable = ({ handleLogout, token }) => {
+const Desplegable = ({ handleLogout, decodedToken }) => {
   const [abierto, setAbierto] = useState(false);
   const desplegableRef = useRef(null);
 
@@ -84,9 +93,9 @@ const Desplegable = ({ handleLogout, token }) => {
   };
 
   function adminView() {
-    const decodedToken = jwtDecode(token);
+    //const decodedToken = jwtDecode(token);
     
-    if (decodedToken.role === "admin") {
+    if (decodedToken?.role === "admin") {
       return (<NavLink className={`${classes.dnl} ${classes.desplOpcion}`} to="/vistaAdmin">Administración</NavLink>);
     }
   }

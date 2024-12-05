@@ -8,7 +8,7 @@ import { useAuth } from '../context/AuthContext';
 import { LOGIN_URL } from '../endpoints/config';
 
 function Login() {
-    const {login} = useAuth();
+    const {login} = useAuth;
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const [emailError, setEmailError] = useState(null);

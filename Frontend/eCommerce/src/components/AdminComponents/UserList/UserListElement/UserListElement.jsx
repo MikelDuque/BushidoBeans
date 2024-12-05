@@ -1,6 +1,8 @@
+import { useAuth } from "../../../../context/AuthContext";
 import classes from "./UserListElement.module.css"
 
 export default function UserListElement({listElement, changeRol, deleteUser}) {
+  const {decodedTokenRef} = useAuth(); 
   const fullName = `${listElement.name} ${listElement.surname}`;
   const role = listElement.role != null ? listElement.role : "usuario";
 
@@ -17,7 +19,7 @@ export default function UserListElement({listElement, changeRol, deleteUser}) {
       </div>
 
       <form className={classes.button_container}>
-        <select id={listElement.id} name='role' defaultValue={role} onChange={changeRol}>
+        <select id={listElement.id} name='role' defaultValue={role} onChange={changeRol} disabled={decodedTokenRef.current.id == listElement.id}>
           <option value={null}>usuario</option>
           <option value="admin">admin</option>
         </select>

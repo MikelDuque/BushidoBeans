@@ -4,12 +4,15 @@ import { DELETE_USER_BY_ID, GET_USERS } from "../../../endpoints/config";
 import classes from "./UserList.module.css"
 import UserListElement from './UserListElement/UserListElement';
 import { useAuth } from '../../../context/AuthContext';
+import Modal from '../../../components/Modals/Modal.jsx';
+import { useModal } from '../../../context/ModalContext.jsx';
 
 export default function UserList() {
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
 
-    const { token } = useAuth();
+    const {closeModal, openModal, isOpen} = useModal();
+    const { token, decodedTokenRef } = useAuth();
 
     useEffect(() => {
         if (token) getUsers();
@@ -29,14 +32,22 @@ export default function UserList() {
         }
     };
 
-    const handleUpdate = async (event) => {
+    const handleUpdate = (event) => {
+        const loggedUser = decodedTokenRef.current.id;
+        console.log("usuario", loggedUser);
+        
         const thisElement = event.target;
 
         const userToUpdate = {
             UserId: thisElement.id,
             Role: thisElement.value === "usuario" ? null : thisElement.value
         };
+        
+        if(loggedUser != thisElement.id) {updateUser(userToUpdate)}
+        else {alert("No puedes modificar tu propio usuario")}
+    };
 
+    const updateUser = async (userToUpdate) => {
         try {
             const response = await fetch('https://localhost:7015/api/User/Update_UserRole', {
                 method: 'PUT',
@@ -85,6 +96,19 @@ export default function UserList() {
                     ))) : <p>No existen elementos que listar</p>}
                 </ul>
             }
+
+            {isOpen && (
+                <Modal
+                buttonValues={{ continueVal: "Eliminar", cancelVal: "Cancelar" }}
+                type="confirmDelete"
+                titulo="¿Eliminar usuario?"
+                continueFnc={handleDelete}  
+                cancelFnc={closeModal}>
+                    <div>
+                        Hola
+                    </div>
+                </Modal>
+            )}
 
             {/*
             {!currentUser && (

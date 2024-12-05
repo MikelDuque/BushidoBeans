@@ -43,6 +43,7 @@ function CartContextProvider({ children }) {
     };
   }, []);
 
+  /*
   const { fetchData, isLoading } = useFetch({
     Url: "http://localhost:3000/cart",
     type: "GET",
@@ -56,6 +57,7 @@ function CartContextProvider({ children }) {
       setCartData(fetchData);
     }
   }, [isLoading, fetchData]);
+  */
 
   useEffect(() => {
     if (isAuthenticated && cartData) {
@@ -88,6 +90,7 @@ function CartContextProvider({ children }) {
     }
   }, [isAuthenticated, cartData, setIsAuthenticated]);
 
+  /*
   const { fetchData: cartUpdateResponse } = useFetch({
     Url: "http://localhost:3000/cart/update",
     type: "POST",
@@ -101,6 +104,7 @@ function CartContextProvider({ children }) {
       console.log("Carrito actualizado en el backend", cartUpdateResponse);
     }
   }, [cartUpdateResponse]);
+*/
 
   const addItem = (item) => {
     setItems((prevItems) => {
