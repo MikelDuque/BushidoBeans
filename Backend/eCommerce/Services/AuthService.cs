@@ -63,8 +63,8 @@ public class AuthService
             Mail = userRequest.Mail,
             Password = userRequest.Password,
         };
+
         await _userService.InsertByMailAsync(userRequest);
-        
 
         return await Login(model);
     }

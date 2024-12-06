@@ -2,7 +2,6 @@ using System;
 using eCommerce.Controllers;
 using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
-using eCommerce.Models.Enums;
 using eCommerce.Models.Mappers;
 
 namespace eCommerce.Services;
@@ -52,23 +51,23 @@ public class UserService
 
   public async Task<UserDto> InsertByMailAsync(RegisterRequest userRequest)
   {
-        
+    List<Address> newAddresses = [new Address {
+      Addressee = $"{userRequest.Name} {userRequest.Surname}",
+      PhoneNumber = userRequest.Phone,
+      AddressInfo = userRequest.Address
+    }];
 
-       User user = new User {
+    User newUser = new User {
       Mail = userRequest.Mail,
       Password = AuthService.HashPassword(userRequest.Password),
       Name = userRequest.Name,
-      Addresses = _unitOfWork.UserRepository.GetByMailAsync(userRequest.Mail).Result.Addresses,
-      //Address = userRequest.Address,
       Surname = userRequest.Surname,
       Phone = userRequest.Phone,
-      Role = null
+      Role = null,
+      Addresses = newAddresses
     };
 
-
-    User newUser = await InsertAsync(user);
-     
-    return _mapper.ToDto(newUser);
+    return _mapper.ToDto(await InsertAsync(newUser));
   }
 
 
@@ -106,22 +105,16 @@ public class UserService
     User user = await _unitOfWork.UserRepository.GetByIdAsync(id);
     _unitOfWork.UserRepository.Delete(user);
 
-/*
-    foreach (Order order in user.Orders.ToList())
-    {
-      await _orderService.DeleteOrderByIdAsync(order.Id);
-    }
-*/
     return await _unitOfWork.SaveAsync();
   }
 
 
   /* ----- FUNCIONES PRIVADAS ----- */
   
-  public Task<bool> ThisUserExists(string mail, string password)
+  public Task<bool> IsLoginCorrect(string mail, string password)
   {
     string hashedPassword = AuthService.HashPassword(password);
-    return _unitOfWork.UserRepository.ThisUserExists(mail, hashedPassword);
+    return _unitOfWork.UserRepository.IsLoginCorrect(mail, hashedPassword);
   }
 
   public Task<User> GetByMailAsync(string mail)

@@ -32,18 +32,11 @@ public class UserRepository : Repository<User>
         return user.Role;
     }
 
-    public async Task<bool> ExistByMailAsync(string mail)
+    public async Task<bool> IsLoginCorrect(string mail, string password)
     {
-        return await GetByMailAsync(mail) != null;
-    }
-
-    public async Task<bool> ThisUserExists(string mail, string password)
-    {
-        if (await ExistByMailAsync(mail))
-        {
-            User user = await GetByMailAsync(mail);
-            return user.Password == password;
-        }
-        return false;
+        if (await GetByMailAsync(mail) == null) return false;
+        
+        User user = await GetByMailAsync(mail);
+        return user.Password == password;
     }
 }
