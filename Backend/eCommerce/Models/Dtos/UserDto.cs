@@ -1,5 +1,3 @@
-using System;
-
 namespace eCommerce.Models.Dtos;
 
 public class UserDto
@@ -8,9 +6,9 @@ public class UserDto
   public required string Mail {get; set;}
   public required string Name {get; set;}
   public string Surname {get; set;}
+  public required string Role {get;set;}
   public int Phone {get; set;}
 
-  public string Address { get; set; }
-  public required string Role {get;set;}
-  
+  public List<OrderDto> Orders { get; set; } = [];
+  public List<AddressDto> Addresses { get; set; } = [];
 }
