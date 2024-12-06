@@ -33,8 +33,9 @@ namespace eCommerce.Services
                 return false;  
             }
 
-            var address = new Address
+            Address newAdress = new Address
             {
+
                 Addressee = addressDto.Addressee,
                 PhoneNumber = addressDto.PhoneNumber,
                 AddressInfo = addressDto.AddressInfo,
@@ -42,7 +43,7 @@ namespace eCommerce.Services
                 
             };
 
-            await _unitOfWork.AddressRepository.InsertAsync(address);
+            await _unitOfWork.AddressRepository.InsertAsync(newAdress);
 
             return await _unitOfWork.SaveAsync();
         }

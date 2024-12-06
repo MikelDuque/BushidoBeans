@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as jwt_decode from "jwt-decode";
 import Input from "../../Input";
 import { POST_ADDRESS } from "../../../endpoints/config";
 import Alert from "../../Alerta"; 
-import "./AñadirDireccion.css"
+import "./AñadirDireccion.css";
+import { useAuth } from '../../../context/AuthContext';
 function AñadirDireccion() {
+    const { token } = useAuth();
     const [formData, setFormData] = useState({
         nombre: "",
         apellido: "",
@@ -15,8 +17,24 @@ function AñadirDireccion() {
         telefono: "",
     });
 
+    useEffect(() => {
+        const token = localStorage.getItem('accessToken');
+        if (token) {
+            try {
+                const decodedToken = jwt_decode.jwtDecode(token);
+                console.log(decodedToken) 
+                setUserId(decodedToken.id);
+            } catch (error) {
+                console.error("Error al decodificar el token", error);
+            }
+        } else {
+            console.error("Error al decodificar el token");
+        }
+    }, []); 
+
     const [alertMessage, setAlertMessage] = useState(""); 
     const [showAlert, setShowAlert] = useState(false); 
+    const [userId, setUserId]= useState(null);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -26,26 +44,28 @@ function AñadirDireccion() {
         }));
     };
 
+    
     const handleAñadirDireccion = async (e) => {
         e.preventDefault();
 
         try {
-            const token = localStorage.getItem("token");
-            if (!token) throw new Error("Token no encontrado");
-
-            const userId = jwt_decode(token).id;
+            //const tokenUser = localStorage.getItem("token");
 
             const nuevaDireccion = {
-                userId,
+                userId: userId,
                 addressee: `${formData.nombre} ${formData.apellido}`,
                 nameAddress: `${formData.direccion}, ${formData.ciudad}, ${formData.codigoPostal}, ${formData.pais}`,
                 phoneNumber: formData.telefono,
             };
 
+            console.log("direccion a mandar",nuevaDireccion);
+            
             const response = await fetch(POST_ADDRESS, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`
+                    
                 },
                 body: JSON.stringify(nuevaDireccion),
             });
