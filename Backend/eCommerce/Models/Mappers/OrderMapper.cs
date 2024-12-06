@@ -6,10 +6,12 @@ namespace eCommerce.Models.Mappers;
 public class OrderMapper
 {
   private readonly OrderProductMapper _orderProductMapper;
+  private readonly AddressMapper _addressMapper;
 
-  public OrderMapper(OrderProductMapper orderProductMapper)
+  public OrderMapper(OrderProductMapper orderProductMapper, AddressMapper addressMapper)
   {
     _orderProductMapper = orderProductMapper;
+    _addressMapper = addressMapper;
   }
 
   //TO DTO
@@ -22,6 +24,7 @@ public class OrderMapper
       TotalProducts = order.TotalProducts,
       PurchaseDate = order.PurchaseDate,
       UserId = order.UserId,
+      Address = _addressMapper.ToDto(order.Address),
       OrderProducts = _orderProductMapper.ToDto(order.OrderProducts).ToList()
     };
   }
@@ -38,7 +41,8 @@ public class OrderMapper
       TotalPrice = orderDto.TotalPrice,
       TotalProducts = orderDto.TotalProducts,
       PurchaseDate = orderDto.PurchaseDate,
-      UserId = orderDto.UserId
+      UserId = orderDto.UserId,
+      AddressId = orderDto.AddressId
     };
   }
   public IEnumerable<Order> ToEntity(IEnumerable<OrderDto> ordersDto)

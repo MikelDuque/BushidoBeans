@@ -16,9 +16,9 @@ public class Order
   public long UserId { get; set; }
   public User User { get; set; }
 
-    [ForeignKey(nameof(Address))]
-    public long AddressId { get; set; }
-    public Address Address { get; set; }
+  [ForeignKey(nameof(Address))]
+  public long AddressId { get; set; }
+  public Address Address { get; set; }
 
     /* RELACIONES M-N */
     public List<OrderProduct> OrderProducts { get; set; } = [];

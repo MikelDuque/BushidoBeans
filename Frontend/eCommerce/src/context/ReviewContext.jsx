@@ -22,12 +22,13 @@ export function ReviewProvider({children}) {
   const productId = useRef(0);  //¿Esto debe ser un ref o una constante normal?
   const token = localStorage.getItem('accessToken');
 
+  /*
   const {isLoading, error, fetchData} = useFetch({
     Url:GET_REVIEW_BY_ID(productId),
     type:'GET',
     params:productId
   });
-
+*/
 
   /* ----- UseEffect ----- */
 

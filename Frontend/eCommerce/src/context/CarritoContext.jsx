@@ -1,318 +1,80 @@
-import { createContext, useContext, useState, useEffect, useRef } from 'react';
+import { createContext, useContext, useState, useEffect} from 'react';
 import useFetch from "../endpoints/useFetch";
 import { useAuth } from './AuthContext';
-import { GET_CART_BY_ID, PUT_CART, DELETE_CARTPRODUCT , DELETE_CART_BY_ID, PUT_CARTPRODUCT} from "../endpoints/config";
-import { jwtDecode } from 'jwt-decode';
+import { GET_CART_BY_ID, PUT_CART, DELETE_CARTPRODUCT , DELETE_CART_BY_ID} from "../endpoints/config";
 
 
 /* ----- Preparación Contexto ----- */
 
-const CarritoContext = createContext();
-export const useCarrito = () => {return useContext(CarritoContext)};
+const CartContext = createContext();
+export const useCarrito = () => {return useContext(CartContext)};
 
 export const CarritoProvider = ({ children }) => {
-    const { isAuthenticated} = useAuth();
-    const [carrito, setCarrito] = useState([]);
-    const [token, setToken] = useState(null);
-    const [userId, setUserId] = useState(0);
 
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
+    /* ----- Constantes Iniciales ----- */
 
-    function setCarritoPrueba() {
-        const carritoPrueba = [];
-        
-        if (!isAuthenticated) for (let i = 0; i < 5; i++) {
-            carritoPrueba.push({
-                id: i,
-                image: "https://pbs.twimg.com/profile_images/1859044378662027264/Km09QDjK_400x400.jpg",
-                name: "Nombre de Prueba",
-                price: 2.55,
-                stock: 20,
-                quantity: 1,
-                userId: userId,
-                productId: 1
-            })
-        }
-        
-        localStorage.setItem('carrito', JSON.stringify(carritoPrueba));
-    };
+    const token  = useAuth();
 
-    // Función para manejar el token y obtener el userId
-    const handleToken = () => {
-        const tokenLS = localStorage.getItem('accessToken');
-        if (!tokenLS) {
-            console.log('No hay token de autenticación');
-             
-        } else {
-            setToken(tokenLS);
-            const decodedToken = jwtDecode(tokenLS);
-            console.log("hola",token);
-            
-            
-            if (!decodedToken.id) {
-            console.log('No se encontró el userId en el token');
+    const localCart = localStorage.getItem('carrito') ? JSON.parse(localStorage.getItem("carrito")) : [];
 
-            } else setUserId(decodedToken.id) 
-        }; 
-    };
+    const [cart, setCart] = useState(localCart);
+    //const [totalProducts, setTotalProducts] = useState(0);
+    //const totalProducts = useRef(0)
+   
+    /*
+    const { fetchData:backendCart} = useFetch({
+        url: GET_CART_BY_ID(1),
+        type: "GET",
+        token: token,
+        params: 1,
+        condition: true
+    });
+    */
 
-    function handleCart(newCart) {
-        setCarrito(newCart);
-    }
- 
+    /* ----- UseEffect Inicial ----- */
+
+    /*
     useEffect(() => {
-        handleToken();
-        setCarritoPrueba();
+        if(backendCart) setCart(backendCart);
+    }, [backendCart])
+    */
+    
+    /* ----- Métodos ----- */
 
-        console.log("autenticado", isAuthenticated);
+    function handleCart(newCart) {setCart(newCart)};
+
+    //TERMINAR (surge error, no toma el carrito)
+    /*
+    function handleTotalProducts() { 
+        const totalProducts2 = carrito != [] ? Array.from(carrito).reduce((total, product) => total + product.quantity, 0) : 0;
         
-
-        if (isAuthenticated) {
-           //actualizarCarritoBackend();
-           obtenerCarritoBackend();
-
-        } else {
-            const carritoGuardado = JSON.parse(localStorage.getItem('carrito'));
-            if (carritoGuardado) {
-                handleCart(carritoGuardado);
-            }
-        }
-    }, [isAuthenticated]);
-
-    /*LLAMADAS A LOS ENDPOINT*/
-
-    const obtenerCarritoBackend = async () => {
-        setIsLoading(true);
-        try {
-            const response = await fetch(GET_CART_BY_ID(userId), {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                    
-                },
-                
-            });
-            console.log(userId);
-            
-            console.log("carrito url", response);
-            if (response.ok) {
-                const data = await response.json();
-                handleCart(data);
-            } else {
-                setError(await response.text());
-            }
-        } catch (error) {
-            setError(error.message);
-            console.log("error", error.message);
-            
-        } finally {
-            setIsLoading(false);
-        }
-    };
-    
-
-    const actualizarCarritoBackend = async () => {
-
-        const backendCart = {
-            id: userId,
-            cartProducts: localStorage.getItem(carrito)
-        }
-
-        setIsLoading(true);
-        try {
-            const response = await fetch(PUT_CART, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify(backendCart)
-            });
-            
-
-            if (response.ok) {
-                const data = await response.json();
-                handleCart(data);
-                localStorage.removeItem('carrito');
-            } else {
-                setError(await response.text());
-            }
-        } catch (error) {
-            setError(error.message);
-            console.log("error", error);
-        } finally {
-            setIsLoading(false);
-        }
+        totalProducts.current = totalProducts2;
     }
 
-    
-
-    const agregarAlCarrito = async (producto) => {
-        if (isAuthenticated) {
-            setIsLoading(true);
-            try {
-                const response = await fetch(PUT_CARTPRODUCT, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: producto
-                });
-
-                if (!response.ok) {
-                    setError(await response.text());
-                }
-            } catch (error) {
-                setError(error.message);
-            } finally {
-                setIsLoading(false);
-            }
-
-            try {
-                setCarrito((prevCarrito) => {
-                    const productoExistente = prevCarrito.find((item) => item.id === data.productId);
-                    if (productoExistente) {
-                        return prevCarrito.map((item) =>
-                            item.id === data.productId
-                                ? { ...item, quantity: data.quantity }
-                                : item
-                        );
-                    } else {
-                        return [
-                            ...prevCarrito,
-                            {
-                                id: data.productId,
-                                quantity: data.quantity,
-                            },
-                        ];
-                    }
-                });
-            } catch (error) {
-                console.error('Error al agregar el producto al carrito:', error);
-            }
-        } else {
-            setCarrito((prevCarrito) => {
-                const productoExistente = prevCarrito.find((item) => item.id === producto.id);
-                if (productoExistente) {
-                    const nuevoCarrito = prevCarrito.map((item) =>
-                        item.id === producto.id
-                            ? { ...item, quantity: item.quantity + producto.quantity }
-                            : item
-                    );
-                    localStorage.setItem('carrito', JSON.stringify(nuevoCarrito));
-                    return nuevoCarrito;
-                } else {
-                    const nuevoCarrito = [...prevCarrito, { ...producto }];
-                    localStorage.setItem('carrito', JSON.stringify(nuevoCarrito));
-                    return nuevoCarrito;
-                }
-            });
-        }
-    };
-
-
-    function establecerCarrito(carritoNuevo) {
-        setCarrito((prevCarrito) => {
-            const productoExistente = prevCarrito.find((item) => item.id === carritoNuevo.productId);
-            if (productoExistente) {
-                return prevCarrito.map((item) =>
-                    item.id === carritoNuevo.productId
-                        ? { ...item, quantity: carritoNuevo.quantity }
-                        : item
-                );
-            } else {
-                return [
-                    ...prevCarrito,
-                    {
-                        id: carritoNuevo.productId,
-                        quantity: carritoNuevo.quantity,
-                    },
-                ];
-            }
+    function updateCart() {
+        const {fetchData: newCart} = useFetch({
+            Url: PUT_CART,
+            type: "PUT",
+            token: token,
+            params: localCart,
+            condition: newCart
         });
+
+        handleCart(newCart);
     }
+    */
 
-
-
-    const eliminarDelCarrito = async (producto) => {
-        if (isAuthenticated) {
-            setIsLoading(true);
-            try {
-                const response = await fetch(DELETE_CARTPRODUCT, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: producto
-                });
-
-                if (!response.ok) {
-                    setError(await response.text());
-                }
-            } catch (error) {
-                setError(error.message);
-            } finally {
-                setIsLoading(false);
-            }
-
-            try {
-
-                setCarrito((prevCarrito) =>
-                    prevCarrito.filter((item) => item.id !== producto.id)
-                );
-            } catch (error) {
-                console.error('Error al eliminar el producto del carrito:', error);
-            }
-        } else {
-            const nuevoCarrito = carrito.filter((item) => item.id !== producto.id);
-            setCarrito(nuevoCarrito);
-        }
-    };
-
-    const eliminarContenidoCarrito = async () => {
-        if (isAuthenticated) {
-            setIsLoading(true);
-            try {
-                const response = await fetch(DELETE_CART_BY_ID(userId), {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: userId
-                });
-
-                if (!response.ok) {
-                    setError(await response.text());
-                }
-            } catch (error) {
-                setError(error.message);
-            } finally {
-                setIsLoading(false);
-            }
-
-            try {
-                setCarrito([]);
-            } catch (error) {
-                console.error('Error al eliminar el contenido del carrito:', error);
-            }
-        } else {
-            setCarrito([]);
-        }
-    };
+    
+    //function getTotalProducts() { console.log("carrito", carrito); return carrito != []? carrito.reduce((total, product) => total + product.quantity, 0) : 0};
+    //console.log("totalProducts", getTotalProducts());
 
 
     /* ----- Fin Context ----- */
 
     const ctxValue = {
-        carrito,
-        agregarAlCarrito,
-        eliminarDelCarrito,
-        eliminarContenidoCarrito,
+        cart,
+        //totalProducts: totalProducts.current,
     };
 
-    return <CarritoContext.Provider value={ctxValue}> {children} </CarritoContext.Provider>
+    return <CartContext.Provider value={ctxValue}> {children} </CartContext.Provider>
 };
