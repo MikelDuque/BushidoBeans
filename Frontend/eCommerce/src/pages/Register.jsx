@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../styles/register.css';
 import { validation } from '../utils/validationForm';
 import { useNavigate } from 'react-router-dom';
 import * as jwt_decode from 'jwt-decode';
-import Alert from './../components/Alerta';
+import Alert from './../components/Alert/Alert';
 import Input from '../components/Input';
 import { REGISTER_URL } from '../endpoints/config';
 import { useAuth } from '../context/AuthContext';

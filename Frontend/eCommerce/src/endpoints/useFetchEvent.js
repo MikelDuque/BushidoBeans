@@ -15,7 +15,7 @@ export default function useFetchEvent() {
       const data = await fetchEndpoint(url, type, token, params);    
       setFetchData(data);
 
-      setError(false);
+      setError();
 
       return data;
 

@@ -1,12 +1,11 @@
-import { useState } from "react";
-
 import { LOGIN_URL } from "../../../endpoints/config";
 import { useAuth } from "../../../context/AuthContext";
+import { validation } from '../../../utils/validationForm';
 import useFetchEvent from "../../../endpoints/useFetchEvent";
 
 import classes from "./Login.module.css";
 
-export default function Login(handleViewChange) {
+export default function Login({handleViewChange, setAlertMessage}) {
   
   /* ----- HOOKS ----- */
 
@@ -14,6 +13,7 @@ export default function Login(handleViewChange) {
 
   const {fetchingData, error, isLoading} = useFetchEvent();
 
+  
   /* ----- FUNCIONES ----- */
 
   async function handleLoginData(event) {
@@ -24,11 +24,33 @@ export default function Login(handleViewChange) {
       mail: form.email.value,
       password: form.password.value
     };
+
+    if(!dataValidator(loginData.mail, loginData.password)) return;
     
     const data = await fetchingData({url: LOGIN_URL, type: 'POST', params:loginData});
 
-    handleLogin(data.accessToken);
+    if(data) handleLogin(data.accessToken);
   };
+
+
+  function dataValidator(email, password) {
+    if (!validation.isValidEmail(email)) {
+      setAlertMessage("Por favor, introduce un formato de email válido.");
+      return false;
+    } 
+
+    if (!validation.isValidPassword(password)) {
+      setAlertMessage("Por favor, introduce un formato de email válido.");
+      return false;
+    }
+
+    if (error) {
+      setAlertMessage(error);
+      return false;
+    } 
+
+    return true; 
+  }
 
 
   /* ----- CUERPO DEL COMPONENTE ----- */
@@ -41,16 +63,13 @@ export default function Login(handleViewChange) {
       <form className={classes.formLogin} onSubmit={handleLoginData}>
           <div className={classes.contenedorEmail}>
               <input type="email" id="email" name="mail" placeholder="Email"/>
-              {error && <p className={classes.emailMessage}>{error.message}</p>} {/* Probar lo del error */}
           </div>
           <div className={classes.contenedorPassword}>
               <input type="password" id="password" name="password" placeholder="Contraseña"/>
-              {error && <p className={classes.passwordMessage}>{error.message}</p>} {/* Probar lo del error aquí tambien */}
           </div>
           <button type="submit" disabled={isLoading} className={classes.acceder}>
               {isLoading ? 'Cargando...' : 'Acceder'}
           </button>
-          {error && <p className={classes.errorMessage}>{error.message}</p>} {/* Lo mismo que antes */}
       </form>
     </div>
     <div className={classes.crearCuenta}>
@@ -61,4 +80,4 @@ export default function Login(handleViewChange) {
     </div>
   </div>
   );
-}
+};

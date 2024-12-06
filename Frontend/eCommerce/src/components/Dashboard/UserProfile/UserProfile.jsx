@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import * as jwtDecode from "jwt-decode";
 import "./UserProfile.css";
 import { PUT_USER, GET_USER_BY_ID } from "../../../endpoints/config";
-import Alert from "../../Alerta";
+import Alert from "../../Alert/Alert";
 import { useNavigate } from "react-router-dom";
 
 function UserProfile() {

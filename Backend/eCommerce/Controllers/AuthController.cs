@@ -25,22 +25,22 @@ public class AuthController : ControllerBase
 
 
     [HttpPost("Login")]
-    public async Task<ActionResult<LoginResult>> Login([FromBody] LoginRequest model)
+    public async Task<ActionResult> Login([FromBody] LoginRequest model)
     {
         bool isCorrect = await _userService.IsLoginCorrect(model.Mail, model.Password);
         
-        if (!isCorrect) return Unauthorized("Email o contraseña incorrectos");
+        if (!isCorrect) return BadRequest(new {message = "Email o contraseña incorrectos"});
 
         string stringToken = await _authService.Login(model);
         return Ok(new LoginResult { AccessToken = stringToken });
     }
 
     [HttpPost("Register")]
-    public async Task<ActionResult<LoginResult>> Register([FromBody] RegisterRequest userRequest)
+    public async Task<ActionResult> Register([FromBody] RegisterRequest userRequest)
     {     
         if (await _userService.GetByMailAsync(userRequest.Mail) == null)
         {
-            return Unauthorized("El usuario ya existe");
+            return BadRequest(new {message = "El usuario ya existe"});
         }
 
         string stringToken = await _authService.Register(userRequest);
