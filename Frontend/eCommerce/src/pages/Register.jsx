@@ -9,8 +9,8 @@ import { REGISTER_URL } from '../endpoints/config';
 import { useAuth } from '../context/AuthContext';
 
 function Register() {
-    const {login} = useAuth();
-    
+    const { login } = useAuth();
+
     const [emailError, setEmailError] = useState(null);
     const [passwordError, setPasswordError] = useState(null);
     const [nameError, setNameError] = useState(null);
@@ -24,11 +24,13 @@ function Register() {
         confirmPassword: '',
         name: '',
         surname: '',
-        address: '',
+        address: [{
+            addressee: '', 
+            phoneNumber: '', 
+            addressInfo: '' 
+        }],
         phone: '',
     });
-    
-
 
     const navigate = useNavigate();
 
@@ -65,12 +67,12 @@ function Register() {
 
         await registerUser(userRegister);
     };
-    
 
     const registerUser = async () => {
         const { confirmPassword, ...userDataToSend } = userRegister;
+
         console.log("user:", userDataToSend);
-        
+
         setIsLoading(true);
         try {
             const response = await fetch(REGISTER_URL, {
@@ -111,7 +113,11 @@ function Register() {
             confirmPassword: '',
             name: '',
             surname: '',
-            address: '',
+            address: [{
+                addressee: '',
+                phoneNumber: '',
+                addressInfo: ''
+            }],
             phone: '',
         });
     };
@@ -144,10 +150,20 @@ function Register() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setUserRegister((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
+
+        
+        if (name === 'addressee' || name === 'phoneNumber' || name === 'addressInfo') {
+            setUserRegister(prev => {
+                const updatedAddress = [...prev.address]; 
+                updatedAddress[0] = { ...updatedAddress[0], [name]: value }; 
+                return { ...prev, address: updatedAddress }; 
+            });
+        } else {
+            setUserRegister((prev) => ({
+                ...prev,
+                [name]: value,
+            }));
+        }
     };
 
     return (
@@ -241,10 +257,10 @@ function Register() {
                         <div className="contenedorPassword contenedorPassword-secundario">
                             <Input
                                 type="text"
-                                id="address"
-                                name="address"
+                                id="addressInfo"
+                                name="addressInfo"
                                 placeholder="Introduce tu dirección"
-                                value={userRegister.address}
+                                value={userRegister.address[0].addressInfo}
                                 onChange={handleChange}
                             />
                         </div>

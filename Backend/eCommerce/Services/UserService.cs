@@ -54,7 +54,7 @@ public class UserService
     List<Address> newAddresses = [new Address {
       Addressee = $"{userRequest.Name} {userRequest.Surname}",
       PhoneNumber = userRequest.Phone,
-      AddressInfo = userRequest.Address
+      AddressInfo = userRequest.Address.AddressInfo,
     }];
 
     User newUser = new User {
