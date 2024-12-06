@@ -59,6 +59,7 @@ public class UserService
       Password = AuthService.HashPassword(userRequest.Password),
       Name = userRequest.Name,
       Addresses = _unitOfWork.UserRepository.GetByMailAsync(userRequest.Mail).Result.Addresses,
+      //Address = userRequest.Address,
       Surname = userRequest.Surname,
       Phone = userRequest.Phone,
       Role = null
