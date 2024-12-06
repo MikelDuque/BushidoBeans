@@ -26,7 +26,8 @@ namespace eCommerce.Services
         // Crear nueva dirección
         public async Task<bool> CreateAddressAsync(AddressDto addressDto)
         {
-            var user = await _unitOfWork.UserRepository.GetByIdAsync(addressDto.UserId);
+            User user = await _unitOfWork.UserRepository.GetByIdAsync(addressDto.UserId);
+
             if (user == null)
             {
                 return false;  
@@ -38,7 +39,7 @@ namespace eCommerce.Services
                 PhoneNumber = addressDto.PhoneNumber,
                 AddressInfo = addressDto.AddressInfo,
                 UserId = addressDto.UserId,
-                User = user 
+                
             };
 
             await _unitOfWork.AddressRepository.InsertAsync(address);

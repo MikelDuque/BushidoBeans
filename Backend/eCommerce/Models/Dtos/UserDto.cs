@@ -12,4 +12,5 @@ public class UserDto
 
   public string Address { get; set; }
   public required string Role {get;set;}
+  
 }

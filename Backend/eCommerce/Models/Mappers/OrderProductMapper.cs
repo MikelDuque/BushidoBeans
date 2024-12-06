@@ -10,7 +10,6 @@ public class OrderProductMapper
    {
        return new OrderProductDto
        {
-           OrderId = orderProduct.OrderId,
            ProductId = orderProduct.ProductId,
            Image = orderProduct.Product.Image,
            Name = orderProduct.Product.Name,
@@ -28,7 +27,7 @@ public class OrderProductMapper
    {
        return new OrderProduct
        {
-           OrderId = orderProduct.OrderId,
+       
            ProductId = orderProduct.ProductId,
            PurchasePrice = orderProduct.PurchasePrice,
            Quantity = orderProduct.Quantity

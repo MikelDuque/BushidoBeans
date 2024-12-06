@@ -9,11 +9,11 @@ namespace eCommerce.Models.Mappers
         {
             return new AddressDto
             {
-                Id = address.Id,
                 Addressee = address.Addressee,
                 PhoneNumber = address.PhoneNumber,
                 AddressInfo = address.AddressInfo,
                 UserId = address.UserId
+                
             };
 
         }
