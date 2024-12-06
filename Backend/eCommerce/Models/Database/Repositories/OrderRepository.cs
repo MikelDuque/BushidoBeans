@@ -1,6 +1,7 @@
 using eCommerce.Models.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace eCommerce.Models.Database.Repositories;
 
@@ -16,10 +17,4 @@ public class OrderRepository : Repository<Order>
     .Include(order => order.OrderProducts).ThenInclude(orderProduct => orderProduct.Product)
     .FirstOrDefaultAsync();
   }
-
-    public new async Task<Order> InsertAsync(Order newOrder)
-    {
-        Order updatedOrder = InsertAsync(newOrder).Result; 
-        return await GetByIdAsync(updatedOrder.Id);
-    }
 }

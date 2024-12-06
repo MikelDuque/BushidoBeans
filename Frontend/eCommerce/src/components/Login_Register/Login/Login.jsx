@@ -17,12 +17,10 @@ export default function Login(handleViewChange) {
     password: null
   });
 
-  const {fetchData, error, isLoading} = useFetch({url: LOGIN_URL, type: 'POST', params:loginData});
-  console.log(error);
-
+  //const {fetchData, error, isLoading} = useFetch({url: LOGIN_URL, type: 'POST', params:loginData});
 
   useEffect(() => {
-    if(fetchData) handleLogin(fetchData.accessToken);
+    //if(fetchData) handleLogin(fetchData.accessToken);
   }, [fetchData])
  
 
@@ -36,6 +34,8 @@ export default function Login(handleViewChange) {
       mail: form.email.value,
       password: form.password.value
     });
+
+    handleLogin(fetchData.accessToken);
   };
 
 

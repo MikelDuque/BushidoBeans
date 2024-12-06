@@ -10,6 +10,7 @@ public class OrderProductMapper
    {
        return new OrderProductDto
        {
+           OrderId = orderProduct.OrderId,
            ProductId = orderProduct.ProductId,
            Image = orderProduct.Product.Image,
            Name = orderProduct.Product.Name,

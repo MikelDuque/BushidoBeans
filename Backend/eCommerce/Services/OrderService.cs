@@ -47,9 +47,11 @@ public class OrderService
             OrderProducts = _orderProductMapper.ToEntity(order.OrderProducts).ToList()
         };
 
-        Order finalOrder = await _unitOfWork.OrderRepository.InsertAsync(newOrder);
+        Order preFinalOrder = await _unitOfWork.OrderRepository.InsertAsync(newOrder);
         
         await _unitOfWork.SaveAsync();
+
+        Order finalOrder = await _unitOfWork.OrderRepository.GetByIdAsync(preFinalOrder.Id);
 
         return _orderMapper.ToDto(finalOrder);
     }

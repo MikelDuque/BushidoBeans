@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react"
 import fetchEndpoint from "./fetchEndpoint";
 
-export default function useFetch({url, type, params, token}) {
+export default function useFetch() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [fetchData, setFetchData] = useState(null);
 
-  async function fetchingData() {
+  async function fetchingData(url, type, params, token) {
     try {
       setIsLoading(true);
       const data = await fetchEndpoint(url, type, token, params);    
       setFetchData(data);
+      setError(null);
 
     } catch (error) {
       setError(error);
