@@ -2,12 +2,12 @@ import ListaDirecciones from "./ListaDirecciones/ListaDirecciones";
 import AnadirDireccion from "./AñadirDireccion/AñadirDireccion";
 import { useEffect, useState } from "react";
 import * as jwt_decode from "jwt-decode";
-import { GET_USER_BY_ID } from "../../endpoints/config";
+import { GET_ADDRESS_BY_ID, GET_USER_BY_ID } from "../../endpoints/config";
 import { useAuth } from '../../context/AuthContext.jsx';
 
 
 function DireccionEnvio() {
-    const [direcciones, setDirecciones] = useState(null);
+    const [direcciones, setDirecciones] = useState([]);
     const [cargando, setCargando] = useState(true); 
     const [userId, setUserId]= useState(null);
     const [user, setUser]= useState(null);
@@ -34,11 +34,11 @@ function DireccionEnvio() {
 
         async function getUserAddress(){
             try {
-                const response = await fetch(GET_USER_BY_ID(userId), {
+                const response = await fetch(GET_ADDRESS_BY_ID(userId), {
                 });
                 const data = await response.json();
-                console.log("data",data.address);
-                setDirecciones(data.address);
+                console.log("data",data);
+                setDirecciones(data);
             } catch (error) {
                 alert(error.message);
             }};
@@ -56,7 +56,7 @@ function DireccionEnvio() {
             <p className="subtitulo">Mis Direcciones</p> <br />
             {cargando ? (
                 <p>Cargando direcciones...</p>
-            ) : direcciones === null ? (
+            ) : direcciones.length >= 0 ? (
                 <>
                 <div>{direcciones}</div>
                 <ListaDirecciones direcciones={direcciones} />

@@ -4,6 +4,7 @@ import "./ListaDirecciones.css";
 
 function ListaDirecciones({ direcciones }) {
   const { handleButtonClick } = useCheckout();
+console.log(direcciones);
 
   return (
     <div className="container-lista-direcciones">
