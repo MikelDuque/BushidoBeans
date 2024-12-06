@@ -64,6 +64,7 @@ public class AuthService
             Password = userRequest.Password,
         };
         await _userService.InsertByMailAsync(userRequest);
+        
 
         return await Login(model);
     }

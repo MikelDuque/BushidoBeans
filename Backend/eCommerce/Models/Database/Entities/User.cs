@@ -16,10 +16,10 @@ public class User
 
     /* RELACIONES 1-M */
     public ICollection<Review> Reviews { get; } = [];
-    public ICollection<Order> Orders { get; } = [];
-    public ICollection<Address> Addresses { get; } = [];
+    public ICollection<Order> Orders { get; set; } = [];
+    public List<Address> Addresses { get; set; } = [];
 
     /* RELACIONES M-N */
     public List<Product> Products { get; } = [];
-    public List<CartProduct> CartProducts { get; } = [];
+    public List<CartProduct> CartProducts { get; set; } = [];
 }
