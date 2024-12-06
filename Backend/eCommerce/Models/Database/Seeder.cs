@@ -35,7 +35,7 @@ public class Seeder
                 Name = "Mikel",
                 Password = AuthService.HashPassword("Mikel#123456789") ,
                 Surname = "Platero Duque",
-                Address = "Avenida 1",
+                Addresses = [],
                 Phone = 639573559,
                 Role = "admin",
             },
@@ -44,7 +44,7 @@ public class Seeder
                 Name = "David",
                 Password = AuthService.HashPassword("David#1234567890") ,
                 Surname = "Andrino Ferrera",
-                Address = "Avenida 1",
+                Addresses = [],
                 Phone = 622222222,
                 Role = "admin"
             },
@@ -53,7 +53,7 @@ public class Seeder
                 Name = "Yasir",
                 Password = AuthService.HashPassword("Yasir#1234567890") ,
                 Surname = "Bel Maalem Ouhadou Abdenour",
-                Address = "Avenida 1",
+                Addresses = [],
                 Phone = 633333333,
                 Role = "admin"
             },
@@ -62,7 +62,7 @@ public class Seeder
                 Name = "Ivan",
                 Password = AuthService.HashPassword("Ivan#1234567890") ,
                 Surname = "Montes Gutierrez",
-                Address = "Avenida 1",
+                Addresses = [],
                 Phone = 644444444,
                 Role = "admin"
             },
@@ -71,7 +71,7 @@ public class Seeder
                 Name = "Raquel",
                 Password = AuthService.HashPassword("Raquel#1234567890") ,
                 Surname = "López Bermúdez",
-                Address = "Avenida 1",
+                Addresses = [],
                 Phone = 644444444,
                 Role = null
             }

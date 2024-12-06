@@ -23,10 +23,10 @@ function Login() {
     const handleCrearCuenta = () => navigate('/register');
     const handleLogoClick = () => navigate('/'); 
 
-    const fetchingData = async (url, data) => {
+    const fetchingData = async (data) => {
         setIsLoading(true);
         try {
-            const response = await fetch(url, {
+            const response = await fetch("https://localhost:7015/api/Auth/Login", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),

@@ -1,3 +1,4 @@
+using eCommerce.Models.Database.Entities;
 using System;
 
 namespace eCommerce.Models.Dtos;
@@ -9,5 +10,6 @@ public class RegisterRequest
   public required string Name {get; set;}
   public string Surname {get; set;}
   public required int Phone {get; set;}
-  public required string Address { get; set;}
+  public required Address Address { get; set;}
+
 }

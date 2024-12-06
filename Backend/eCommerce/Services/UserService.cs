@@ -2,6 +2,7 @@ using System;
 using eCommerce.Controllers;
 using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
+using eCommerce.Models.Enums;
 using eCommerce.Models.Mappers;
 
 namespace eCommerce.Services;
@@ -51,18 +52,21 @@ public class UserService
 
   public async Task<UserDto> InsertByMailAsync(RegisterRequest userRequest)
   {
-    User user = new User {
+        
+
+       User user = new User {
       Mail = userRequest.Mail,
       Password = AuthService.HashPassword(userRequest.Password),
       Name = userRequest.Name,
-      Address = userRequest.Address,
+      Addresses = _unitOfWork.UserRepository.GetByMailAsync(userRequest.Mail).Result.Addresses,
       Surname = userRequest.Surname,
       Phone = userRequest.Phone,
       Role = null
     };
 
+
     User newUser = await InsertAsync(user);
-    //Address address = await InsertAsync(user.Address);
+     
     return _mapper.ToDto(newUser);
   }
 
