@@ -1,47 +1,37 @@
-import { useState, useEffect } from "react"
+
+import { useState } from "react"
 import fetchEndpoint from "./fetchEndpoint";
 
-export default function useFetch({url, type, token, params}) {
+export default function useFetchEvent() {
+  const [fetchData, setFetchData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [fetchData, setFetchData] = useState(null);
 
-  async function fetchingData() {
+  async function fetchingData({url, type, token, params}) {
     
     try {
       setIsLoading(true);
 
       const data = await fetchEndpoint(url, type, token, params);    
       setFetchData(data);
-      
-      setError();
+
+      setError(false);
+
+      return data;
 
     } catch (error) {
-      setError(error);
+      setError(error)
       console.log("Error: ", error);
 
     } finally {
       setIsLoading(false);
     }
-  }
-
-  
-  useEffect(() => {
-    fetchingData();
-
-  }, [url, type, params])
-  
-
-  function refetch() {
-    console.log("refetching");
-    
-    fetchingData();
-  }
+  };
 
   return ({
     fetchData,
-    error,
+    fetchingData,
     isLoading,
-    refetch
+    error
   });
 };

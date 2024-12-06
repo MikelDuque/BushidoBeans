@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 import { LOGIN_URL } from "../../../endpoints/config";
 import { useAuth } from "../../../context/AuthContext";
-import useFetch from "../../../endpoints/useFetch";
+import useFetchEvent from "../../../endpoints/useFetchEvent";
 
 import classes from "./Login.module.css";
 
@@ -12,30 +12,22 @@ export default function Login(handleViewChange) {
 
   const {handleLogin} = useAuth();
 
-  const [loginData, setLoginData] = useState({
-    mail: null,
-    password: null
-  });
-
-  //const {fetchData, error, isLoading} = useFetch({url: LOGIN_URL, type: 'POST', params:loginData});
-
-  useEffect(() => {
-    //if(fetchData) handleLogin(fetchData.accessToken);
-  }, [fetchData])
- 
+  const {fetchingData, error, isLoading} = useFetchEvent();
 
   /* ----- FUNCIONES ----- */
 
-  function handleLoginData(event) {
+  async function handleLoginData(event) {
     event.preventDefault();
     const form = event.target;
 
-    setLoginData({
+    const loginData = {
       mail: form.email.value,
       password: form.password.value
-    });
+    };
+    
+    const data = await fetchingData({url: LOGIN_URL, type: 'POST', params:loginData});
 
-    handleLogin(fetchData.accessToken);
+    handleLogin(data.accessToken);
   };
 
 
