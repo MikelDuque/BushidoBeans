@@ -4,7 +4,7 @@ import HomeLayout from "./layouts/HomeLayout/HomeLayout";
 import CheckoutLayout from "./layouts/CheckoutLayout/CheckoutLayout";
 import Inicio from "./pages/Inicio/Inicio";
 import Catalogo from "./pages/Catalogo";
-import Login from './pages/Login';
+import Login from './pages/Login-Register/Login_Register';
 import Register from './pages/Register';
 import SobreNosotros from './pages/SobreNosotros';
 import DetallesProducto from './pages/DetallesProducto';

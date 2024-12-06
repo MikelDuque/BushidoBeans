@@ -22,6 +22,7 @@ function DetallesProducto() {
         addReview
     } = useReview();
     
+    /*
     useEffect(() => {
         const {isLoading, error, fetchData} = useFetch({Url:GET_PRODUCT_BY_ID(id), type:'GET', params:id});
 
@@ -30,7 +31,8 @@ function DetallesProducto() {
             setProductId(id);
         }
     }, [id]);   //¿Hace falta poner el id ahí?
-    
+    */
+
     /*
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);

@@ -34,7 +34,6 @@ export default function OpenedProduct({listElement, submit}) {
 
           <div>
             <label htmlFor="category">Categoría</label>
-            {console.log(listElement.category)}
             <select id="category" name="category" defaultValue={listElement.category}>
               <option value={1}>Café</option>
               <option value={2}>Té</option>

@@ -1,0 +1,121 @@
+.container {
+  display: inline-flex;
+  width: 75%;
+  background-color: var(--fondo-vistas);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 50px;
+}
+
+.login {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 50px;
+}
+
+.accede, .usaGmail {
+  text-align: center;
+  background-color: var(--fondo-vistas);
+  font-family: 'Poppins', sans-serif;
+  color: var(--texto-principal);
+}
+
+.accede {
+  margin-top: 10%;
+  font-size: var(--subtitulos-size);
+  font-weight: 600;
+}
+
+.usaGmail {
+  font-size: var(--subtitulos-principal);
+  font-weight: 400;
+  margin-bottom: 10%;
+}
+
+.contenedorEmail, .contenedorPassword {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--fondo-vistas);
+  width: 100%;
+  margin-bottom: 5%;
+}
+
+.acceder, .btnCrearCuenta {
+  width: 240px;
+  height: 100px;
+  background-color: var(--nav-footer);
+  color: var(--texto-claro);
+  border-radius: 41px;
+  font-size: var(--subtitulos-size);
+  font-weight: var(--font-weight-regular);
+  border: none;
+  cursor: pointer;
+  transition: background-color 1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.acceder {
+  margin: 5% auto 0 auto; /* Centra horizontalmente */
+}
+
+.acceder:hover, .btnCrearCuenta:hover {
+  color: var(--nav-hover);
+}
+
+.crearCuenta {
+  width: 40%;
+  padding-bottom: 10%;
+  background-color: var(--nav-footer);
+  border-radius: 200px 40px 40px 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnCrearCuenta {
+  margin-top: 10%;
+  border: 1px solid var(--texto-claro);
+}
+
+.btnCrearCuenta:hover {
+  border-color: var(--nav-hover);
+}
+
+.preguntaCuenta, .crearAhora {
+  text-align: center;
+  color: var(--texto-claro);
+  font-size: var(--subtitulos-size);
+  font-weight: var(--font-weight-regular);
+  background-color: var(--nav-footer);
+}
+
+.preguntaCuenta {
+  margin-bottom: 1%;
+}
+
+.crearAhora {
+  margin-bottom: 10%;
+}
+
+.logoBushidoBeans {
+  width: 350px;
+  margin: 5% 0;
+  background-color: transparent;
+  margin: 5%;
+}
+
+.passwordMessage, .emailMessage {
+  text-align: center;
+  color: red;
+  background-color: var(--fondo-vistas);
+  font-style: var(--subtitulos);
+}
+.logo-button{
+  border: none;
+  background-color: transparent;
+}
