@@ -6,10 +6,10 @@ import { jwtDecode } from 'jwt-decode';
 
 /* ----- Preparación Contexto ----- */
 
-const CarritoContext = createContext();
-export const useCarrito = () => {return useContext(CarritoContext)};
+const CartContext = createContext();
+export const useCart = () => {return useContext(CartContext)};
 
-export const CarritoProvider = ({ children }) => {
+export const CartProvider = ({ children }) => {
     const token = useAuth();
     const [carrito, setCarrito] = useState([]);
     //const [token, setToken] = useState(null);
@@ -315,5 +315,5 @@ export const CarritoProvider = ({ children }) => {
         eliminarContenidoCarrito,
     };
 
-    return <CarritoContext.Provider value={ctxValue}> {children} </CarritoContext.Provider>
+    return <CartContext.Provider value={ctxValue}> {children} </CartContext.Provider>
 };

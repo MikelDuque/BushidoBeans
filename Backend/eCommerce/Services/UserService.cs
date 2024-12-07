@@ -114,7 +114,7 @@ public class UserService
   public Task<bool> IsLoginCorrect(string mail, string password)
   {
     string hashedPassword = AuthService.HashPassword(password);
-    return _unitOfWork.UserRepository.IsLoginCorrect(mail, hashedPassword);
+    return _unitOfWork.UserRepository.IsLoginCorrect(mail.ToLowerInvariant(), hashedPassword);
   }
 
   public Task<User> GetByMailAsync(string mail)

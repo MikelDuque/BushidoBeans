@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { LOGIN_URL } from "../../../endpoints/config";
 import { useAuth } from "../../../context/AuthContext";
@@ -13,12 +13,17 @@ export default function Login({handleViewChange, setAlertMessage}) {
   /* ----- HOOKS Y CONSTS ----- */
 
   const {handleLogin} = useAuth();
-  const {fetchingData, error, isLoading} = useFetchEvent();
-
+  const {fetchingData, fetchError, isLoading} = useFetchEvent();
+  
   const [errors, setErrors] = useState({
     mailError: null,
     passError: null
   });
+
+  useEffect(() => {
+    if (typeof fetchError === 'string') {setAlertMessage(fetchError)};
+
+  }, [fetchError]);
 
   
   /* ----- FUNCIONES ----- */
@@ -27,22 +32,20 @@ export default function Login({handleViewChange, setAlertMessage}) {
     event.preventDefault();
     const form = event.target;
 
-    const loginData = {
+    const formData = {
       mail: form.email.value,
       password: form.password.value
     };
 
-    if(!dataValidator(loginData.mail, loginData.password)) return;
+    if(!dataValidator(formData.mail, formData.password)) return;
     
-    const data = await fetchingData({url: LOGIN_URL, type: 'POST', params:loginData});
+    const data = await fetchingData({url: LOGIN_URL, type: 'POST', params:formData});
 
     if(data) handleLogin(data.accessToken);
   };
 
 
   function dataValidator(email, password) {
-    console.log(!validation.isValidEmail(email));
-    
     if (!validation.isValidEmail(email)) {
       setErrors({mailError: "Por favor, introduce un formato de email válido."});
       return false;
@@ -50,11 +53,6 @@ export default function Login({handleViewChange, setAlertMessage}) {
 
     if (!validation.isValidPassword(password)) {
       setErrors({passError:"Por favor, introduce un formato de contraseña válido."});
-      return false;
-    }
-
-    if (error) {
-      setAlertMessage(error);
       return false;
     }
 

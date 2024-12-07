@@ -4,12 +4,10 @@ namespace eCommerce.Models.Dtos;
 
 public class CartProductDto
 {
- public long UserId { get; set; }
- public long ProductId { get; set; }
+ public long Id { get; set; }
  public string Image { get; set; }
  public string Name { get; set; }
  public decimal Price { get; set; }
  public int Stock { get; set; }
- public required int Quantity {  get; set; } 
-
+ public required int Quantity {  get; set; }
 }

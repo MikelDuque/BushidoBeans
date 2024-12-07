@@ -8,13 +8,11 @@ export default function useFetchEvent() {
   const [fetchError, setFetchError] = useState(null);
 
   async function fetchingData({url, type, token, params}) {
-    
     try {
       setIsLoading(true);
 
       const data = await fetchEndpoint(url, type, token, params);    
       setFetchData(data);
-
       setFetchError();
 
       return data;
@@ -30,8 +28,8 @@ export default function useFetchEvent() {
 
   return ({
     fetchData,
-    fetchingData,
     isLoading,
-    fetchError
+    fetchError,
+    fetchingData
   });
 };

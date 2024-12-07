@@ -1,9 +1,9 @@
 import classes from "./Counter.module.css";
 import { useState } from "react";
-import { useCarrito } from '../../context/CarritoContext'; 
+import { useCart } from '../../context/CartContext'; 
 
 export default function Quantity_Counter({productId, oldQuantity, stock}) {
-  const { agregarAlCarrito } = useCarrito();
+  const { agregarAlCarrito } = useCart();
   const [quantity, setQuantity] = useState(oldQuantity)
   console.log("stock", stock);
 

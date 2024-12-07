@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import { useModal } from "../../context/ModalContext";
-import { useCarrito } from '../../context/CarritoContext';
+import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
 
 import Modal from '../Modals/Modal';
@@ -18,7 +18,7 @@ function Header() {
   const {token, decodedToken, handleLogout} = useAuth();
   const {isOpen, openModal, closeModal} = useModal();
 
-  const { eliminarContenidoCarrito, totalProducts } = useCarrito();
+  const { deleteCart, totalProducts } = useCart();
 
 
   /* ----- FUNCIONES ----- */
@@ -46,11 +46,11 @@ function Header() {
         <a onClick={openModal} className={`${classes.nl} ${classes.cesta}`} data-count={totalProducts}/>
       </nav>
 
-        {isOpen && (
-          <Modal type="cart" titulo={"Tu Carro"} cancelFnc={eliminarContenidoCarrito} continueFnc={handleNavigateToCheckout} buttonValues={{continueVal:"Procesar compra", cancelVal:"Vaciar carro"}}>
-            <Cart closeCart={closeModal}/>
-          </Modal>
-        )}
+      {isOpen && (
+        <Modal type="cart" titulo={"Tu Carro"} cancelFnc={deleteCart} continueFnc={handleNavigateToCheckout} buttonValues={{continueVal:"Procesar compra", cancelVal:"Vaciar carro"}}>
+          <Cart closeCart={closeModal}/>
+        </Modal>
+      )}
     </header>
   );
 }

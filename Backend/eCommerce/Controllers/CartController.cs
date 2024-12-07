@@ -35,14 +35,14 @@ namespace eCommerce.Controllers
 
         [Authorize]
         [HttpPut("Update_Cart")]
-        public async Task<ActionResult> UpdateCartAsync([FromBody] CartDto cart)
+        public async Task<ActionResult> UpdateCartAsync([FromBody] Cart cart)
         {
             return Ok(await _cartService.UpdateCartAsync(cart));
         }
 
         [Authorize]
         [HttpPut("Update_CartProduct")]
-        public ActionResult<bool> UpdateCartProductAsync([FromBody] CartProductDto cartProduct)
+        public ActionResult<bool> UpdateCartProductAsync([FromBody] UpdatedCartProduct cartProduct)
         {
             Claim userClaimId = User.FindFirst("id");
             if (cartProduct == null) return BadRequest("Datos del producto no válidos.");
@@ -64,7 +64,7 @@ namespace eCommerce.Controllers
 
         [Authorize]
         [HttpDelete("Delete_CartProduct")]
-        public async Task<ActionResult> DeleteCartProductAsync([FromBody] CartProduct cartProduct)
+        public async Task<ActionResult> DeleteCartProductAsync([FromBody] UpdatedCartProduct cartProduct)
         {
             Claim userClaimId = User.FindFirst("id");
             if (userClaimId == null) return Unauthorized("Debes iniciar sesión para llevar a cabo esta acción");

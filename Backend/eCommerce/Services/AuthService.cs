@@ -40,7 +40,7 @@ public class AuthService
             },
 
             //Caducidad del token
-            Expires = DateTime.UtcNow.AddDays(5),
+            Expires = DateTime.UtcNow.AddHours(1),
 
             //Especificación de la clave y el algoritmo de firmado
             SigningCredentials = new SigningCredentials(

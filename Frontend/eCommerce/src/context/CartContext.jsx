@@ -1,181 +1,143 @@
-import { createContext, useState, useEffect, useContext } from "react";
-import useFetch from "../hooks/useHttpMikel";
-import { AuthContext } from "./AuthContext";
+import { createContext, useContext, useEffect, useState} from 'react';
 
-// Helpers
-const findItemIndex = (items, id) => items.findIndex((item) => item.id === id);
+import { useAuth } from './AuthContext';
+import useFetchEvent from '../endpoints/useFetchEvent';
+import useFetch from '../endpoints/useFetch';
+import { PUT_CART, DELETE_CARTPRODUCT , DELETE_CART_BY_ID, PUT_CARTPRODUCT} from "../endpoints/config";
 
-const saveCartToLocalStorage = (cart) => {
-  localStorage.setItem("shoppingCart", JSON.stringify({ items: cart }));
-};
+
+/* ----- Preparación Contexto ----- */
 
 const CartContext = createContext({
-  items: [],
-  addItem: () => {},
-  removeItem: () => {},
-  clearCart: () => {},
-});
-
-function CartContextProvider({ children }) {
-  const [items, setItems] = useState(() => {
-    const savedCart = localStorage.getItem("shoppingCart");
-    return savedCart ? JSON.parse(savedCart).items || [] : [];
-  });
-  const [updateCart, setUpdateCart] = useState(null);
-  const { isAuthenticated, setIsAuthenticated, authToken } =
-    useContext(AuthContext);
-  const [cartData, setCartData] = useState(null);
-
-  useEffect(() => {
-    const syncCart = (event) => {
-      if (event.key === "shoppingCart") {
-        if (event.newValue === null) {
-          console.log("La clave shoppingCart ha sido eliminada");
-          setItems([]);
-        } else {
-          setItems(JSON.parse(event.newValue).items || []);
-        }
-      }
-    };
-    window.addEventListener("storage", syncCart);
-    return () => {
-      window.removeEventListener("storage", syncCart);
-    };
-  }, []);
-
-  /*
-  const { fetchData, isLoading } = useFetch({
-    Url: "http://localhost:3000/cart",
-    type: "GET",
-    token: null,
-    params: null,
-    condition: isAuthenticated,
-  });
-
-  useEffect(() => {
-    if (!isLoading && fetchData) {
-      setCartData(fetchData);
-    }
-  }, [isLoading, fetchData]);
-  */
-
-  useEffect(() => {
-    if (isAuthenticated && cartData) {
-      const localCart = JSON.parse(localStorage.getItem("shoppingCart")) || {
-        items: [],
-      };
-      const mergedCart = [...localCart.items];
-
-      cartData.items.forEach((backendItem) => {
-        const existingIndex = mergedCart.findIndex(
-          (localItem) => localItem.id === backendItem.id
-        );
-
-        if (existingIndex !== -1) {
-          mergedCart[existingIndex].quantity += backendItem.quantity;
-        } else {
-          mergedCart.push(backendItem);
-        }
-      });
-
-      setItems(mergedCart);
-      localStorage.setItem(
-        "shoppingCart",
-        JSON.stringify({ items: mergedCart })
-      );
-
-      setIsAuthenticated(false);
-      setCartData(null);
-      setUpdateCart(mergedCart);
-    }
-  }, [isAuthenticated, cartData, setIsAuthenticated]);
-
-  /*
-  const { fetchData: cartUpdateResponse } = useFetch({
-    Url: "http://localhost:3000/cart/update",
-    type: "POST",
-    token: null,
-    params: { items: updateCart },
-    condition: updateCart,
-  });
-
-  useEffect(() => {
-    if (cartUpdateResponse) {
-      console.log("Carrito actualizado en el backend", cartUpdateResponse);
-    }
-  }, [cartUpdateResponse]);
-*/
-
-  const addItem = (item) => {
-    setItems((prevItems) => {
-      const indexItemAdd = findItemIndex(prevItems, item.id);
-      let updatedItems;
-
-      if (indexItemAdd === -1) {
-        updatedItems = [...prevItems, { ...item, quantity: 1 }];
-      } else {
-        updatedItems = [...prevItems];
-        updatedItems[indexItemAdd] = {
-          ...updatedItems[indexItemAdd],
-          quantity: updatedItems[indexItemAdd].quantity + 1,
-        };
-      }
-      saveCartToLocalStorage(updatedItems);
-      if (authToken) {
-        setUpdateCart(updatedItems);
-      }
-      return updatedItems;
-    });
-  };
-
-  const removeItem = (id) => {
-    setItems((prevItems) => {
-      const indexItemRemove = findItemIndex(prevItems, id);
-      if (indexItemRemove === -1) return prevItems;
-
-      const updatedItems = [...prevItems];
-      const existingItem = updatedItems[indexItemRemove];
-
-      if (existingItem.quantity === 1) {
-        updatedItems.splice(indexItemRemove, 1);
-      } else {
-        updatedItems[indexItemRemove] = {
-          ...existingItem,
-          quantity: existingItem.quantity - 1,
-        };
-      }
-      saveCartToLocalStorage(updatedItems);
-      if (authToken) {
-        setUpdateCart(updatedItems);
-      }
-      return updatedItems;
-    });
-  };
-
-  const clearCart = () => {
-    setItems([]);
-    localStorage.removeItem("shoppingCart");
-    if (authToken) {
-      setUpdateCart([]);
-    }
-  };
-
-  const clearCartLogout = () => {
-    setItems([]);
-    localStorage.removeItem("shoppingCart");
-  };
-
-  const ctxValue = {
-    items,
-    addItem,
-    removeItem,
-    clearCart,
-    clearCartLogout,
-  };
-
-  return (
-    <CartContext.Provider value={ctxValue}>{children}</CartContext.Provider>
-  );
+    cart: [],
+    totalProducts: 0,
+    updateCartProduct: () => {},
+    deleteCartProduct: () => {},
+    deleteCart: () => {}
 }
+    
+);
 
-export { CartContext, CartContextProvider };
+export function useCart() {return useContext(CartContext)};
+
+export function CartProvider({ children }) {
+
+    /* ----- Constantes Iniciales ----- */
+
+    const {token, decodedToken}  = useAuth();
+    const {fetchingData} = useFetchEvent();
+    //const {fetchData} = useFetch({url: PUT_CART, type: 'PUT', token: token, params:updateCart});
+
+    const [cart, setCart] = useState([]);
+    const totalProducts = getTotalProducts();
+
+    useEffect(() => {
+        mergeCart(); 
+    }, []);
+
+
+    /* ----- CART MERGE ----- */
+
+    async function mergeCart() {
+        setCart(token ? await getBackendCart() : getLocalCart());
+    }
+
+    function getLocalCart() {
+        const localCart = localStorage.getItem('cart');
+        return localCart ? JSON.parse(localCart) : [];
+    }
+
+    async function getBackendCart() {
+        const updateCart = {
+            id: decodedToken.id,
+            cartProducts: getLocalCart()
+        }
+        return await fetchingData({url: PUT_CART, type: 'PUT', token: token, params:updateCart});
+    };
+
+    console.log("cart", cart);
+
+
+    /* ----- PRIVATE FUNCTIONS ----- */
+
+    function handleCart(newCart) {
+        setCart(newCart);
+        if(!token) localStorage.setItem("cart", JSON.stringify(newCart));
+    };
+
+    function getTotalProducts() { 
+        console.log(cart.reduce((total, product) => total + product.quantity, 0));
+        return cart.reduce((total, product) => total + product.quantity, 0);
+    }
+
+    function updateCart(newProduct) {
+        const existsIndex = cart.findIndex((prevProduct) => prevProduct.id === newProduct.productId);
+        let updatedCart = [...cart];
+        
+        if (existsIndex !== -1) {
+            updatedCart[existsIndex] = {
+                ...updatedCart[existsIndex],
+                quantity: newProduct.quantity
+            }
+        } else {
+            updatedCart = [...updatedCart, {
+                ...newProduct,
+                quantity: newProduct.quantity,
+            }]
+        };
+        handleCart(updatedCart);
+    };
+
+    function deleteCartItem(id) {
+        const updatedCart = [...cart];
+
+        updatedCart.splice(id);
+
+        handleCart(updatedCart);
+    }
+
+
+    /* ----- METHODS ----- */
+
+    async function updateCartProduct(product) {
+        const updatedProduct = {
+            userId: decodedToken.id,
+            productId: product.id,
+            quantity: product.quantity
+        };
+
+        const backendProduct = await fetchingData({url: PUT_CARTPRODUCT, type: 'PUT', token: token, params: updatedProduct});
+
+        updateCart(backendProduct);
+    };
+
+    async function deleteCartProduct(productId) {
+        const deletedProduct = {
+            userId: decodedToken.id,
+            productId: productId
+        };
+
+        await fetchingData({url: DELETE_CARTPRODUCT, type: 'DELETE', token: token, params: deletedProduct});
+
+        deleteCartItem(productId);
+    }
+
+    async function deleteCart() {
+        await fetchingData({url: DELETE_CART_BY_ID, type: 'DELETE', token: token, params: decodedToken.id});
+
+        handleCart([]);
+    }
+
+
+    /* ----- Fin Context ----- */
+
+    const ctxValue = {
+        cart,
+        totalProducts,
+        updateCartProduct,
+        deleteCartProduct,
+        deleteCart
+    };
+
+    return <CartContext.Provider value={ctxValue}> {children} </CartContext.Provider>
+};

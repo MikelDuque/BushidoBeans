@@ -1,16 +1,12 @@
 import { useEffect } from "react";
 import classes from "./Counter.module.css";
 
-export default function Quantity_Counter({quantity, setQuantity, stock}) {
+export default function Quantity_Counter({quantity, handleQuantity, stock}) {
 
   useEffect(() => {
     if(quantity > stock) handleQuantity(stock);
     if (quantity < 0) handleQuantity(0);
   }), [quantity];
-  
-  function handleQuantity(newQuantity) {
-    setQuantity(newQuantity)
-  };
 
   function decrementCounter() {
     if(quantity > 0) handleQuantity(--quantity);

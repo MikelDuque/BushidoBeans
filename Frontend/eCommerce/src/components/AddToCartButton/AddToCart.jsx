@@ -1,9 +1,9 @@
 import React from 'react';
 import classes from './AddToCart.module.css';
-import { useCarrito } from '../../context/CarritoContext'; 
+import { useCart } from '../../context/CartContext'; 
 
 const AddToCartButton = ({product, quantity}) => {
-    const { agregarAlCarrito } = useCarrito(); 
+    const { agregarAlCarrito } = useCart(); 
 
     const handleAddToCart = (event) => {
         event.preventDefault();

@@ -19,27 +19,20 @@ export function AuthProvider({ children }) {
     const navigateTo = useNavigate()
 
     const [token, setToken] = useState(sessionStorage?.getItem('token') || null);
-    const decodedToken = useRef(token ||null);
-
+    const decodedToken = useRef(token ? jwtDecode(token) : null);
     
     useEffect(() => {
-        if (token) {
-            decodingToken();
-            handleExpiration();
-            console.log("decoded", decodedToken.current);
-        };
-    }, [token]);
+        //handleExpiration();
+        
+    }, []);
 
 
     /* ----- FUNCIONES ----- */
 
     function handleLogin(newToken) {
-        console.log("new token", newToken);
-        
         if (newToken) {
             sessionStorage.setItem('token', newToken);
             setToken(newToken);
-            //decodingToken();
             
             navigateTo('/');
         }
@@ -48,20 +41,22 @@ export function AuthProvider({ children }) {
     function handleLogout() {
         sessionStorage.removeItem('token');
         setToken(null);
+        decodedToken.current = null;
     };
 
-    function decodingToken() {
-        decodedToken.current = token ? jwtDecode(token) : null;
-    }
-
     function handleExpiration() {
-        const expiration = decodedToken.current;
+        if(!decodedToken.current) return;
 
-        console.log(expiration);
+        const expirationDate = decodedToken.current.exp;
+        const currentTime = Date.now().valueOf() / 1000;
         
-    }
+        console.log(`exp date ${expirationDate}, current ${currentTime}`);
 
-    // La variable para obtener el valor de caducidad es decodedToken.exp
+        if(expirationDate < currentTime) handleLogout();
+    };
+
+
+    /* ----- FINAL DEL CONTEXTO ----- */
 
     const contextValue = {
         token,

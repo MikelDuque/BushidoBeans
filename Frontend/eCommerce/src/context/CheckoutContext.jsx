@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { useCarrito } from './CarritoContext';
+import { useCart } from './CartContext';
 import { useAuth } from './AuthContext';
 import { POST_ORDER } from '../endpoints/config';
 
@@ -7,7 +7,7 @@ const CheckoutContext = createContext();
 
 export const CheckoutProvider = ({ children }) => {
   const { token } = useAuth();
-  const { carrito } = useCarrito(); 
+  const { carrito } = useCart(); 
 
   const [currentView, setCurrentView] = useState('cart');
   const [order, setOrder] = useState({

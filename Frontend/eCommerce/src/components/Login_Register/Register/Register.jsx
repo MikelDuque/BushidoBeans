@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { REGISTER_URL } from "../../../endpoints/config";
 import { useAuth } from "../../../context/AuthContext";
@@ -14,7 +14,7 @@ export default function Register({handleViewChange, setAlertMessage}) {
   /* ----- HOOKS Y CONSTS ----- */
 
   const {handleLogin} = useAuth();
-  const {fetchingData, error, isLoading} = useFetchEvent();
+  const {fetchingData, fetchError, isLoading} = useFetchEvent();
 
   const [errors, setErrors] = useState({
     mailError: null,
@@ -32,6 +32,11 @@ export default function Register({handleViewChange, setAlertMessage}) {
     phone: ''
   })
   const [showPasswordRequirements, setShowPasswordRequirements] = useState(false);
+
+  useEffect(() => {
+    if (typeof fetchError === 'string') {setAlertMessage(fetchError)};
+
+  }, [fetchError]);
 
 
   /* ----- FUNCIONES ----- */
@@ -112,11 +117,6 @@ export default function Register({handleViewChange, setAlertMessage}) {
 
     if (!validation.isValidName(name)) {
       setErrors({nameError: "Por favor, introduce un formato de nombre válido."});
-      return false;
-    }
-
-    if (error) {
-      setAlertMessage(error);
       return false;
     }
 

@@ -1,15 +1,14 @@
 import classes from "./Cart.module.css";
 import CartItem from "./Cart_Item/CartItem";
-import { useCarrito } from "../../../context/CarritoContext";
+import { useCart } from "../../../context/CartContext";
 import { API_BASE_URL } from "../../../endpoints/config";
 
 export default function Cart() {
-  const carrito = useCarrito();
+  const {cart} = useCart();
 
-  //DEFINIR CARTITEMS
   function cartMapper() {
-    return (carrito.length > 0 ? (
-      carrito.map((cartItem) => (
+    return (cart.length > 0 ? (
+      cart.map((cartItem) => (    
         <CartItem 
           key={cartItem.id}
           productData = {{
@@ -29,7 +28,7 @@ export default function Cart() {
   return (
     <>
       <ul className={classes.cart_list}>   
-        {cartMapper}
+        {cartMapper()}
       </ul>
     </>
 )};
