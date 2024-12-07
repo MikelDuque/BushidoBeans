@@ -1,28 +1,46 @@
 import { Routes, Route } from "react-router-dom";
+
+/* ----- LAYOUTS ----- */
 import BigLayout from "./layouts/BigLayout/BigLayout";
 import HomeLayout from "./layouts/HomeLayout/HomeLayout";
 import CheckoutLayout from "./layouts/CheckoutLayout/CheckoutLayout";
+
+
+/* ----- CONTEXTS ----- */
+import { ReviewProvider } from "./context/ReviewContext";
+import { CheckoutProvider } from './context/CheckoutContext';
+
+
+/* ----- RESTRICTED ROUTES ----- */
+import { AdminPrivateRoute } from "./utils/RestrictedRoute";
+
+/* ----- PAGES ----- */
 import Inicio from "./pages/Inicio/Inicio";
+import Login_Register from "./pages/Login-Register/Login_Register";
+
 import Catalogo from "./pages/Catalogo";
-import Login from './pages/Login-Register/Login_Register';
-import Register from './pages/Register';
-import SobreNosotros from './pages/SobreNosotros';
 import DetallesProducto from './pages/DetallesProducto';
-import NotFound from './components/NotFound';
+
 import Checkout from "./pages/Checkout/Checkout";
 import ConfirmarPedido from "./pages/Checkout/ConfirmarPedido";
-import { ReviewProvider } from "./context/ReviewContext";
-import DireccionEnvio from "./components/DireccionEnvio/DireccionEnvio";
-import { CheckoutProvider } from './context/CheckoutContext';
+
+import SobreNosotros from './pages/SobreNosotros';
+
 import User from "./components/Dashboard/UserData/User";
 import UserProfile from './components/Dashboard/UserProfile/UserProfile';
 import UserAddress from './components/Dashboard/UserAddress/UserAddress';
 import UserOrders from './components/Dashboard/UserOrders/UserOrders';
-import AdminView from "./pages/AdminView/AdminView";
-import { AdminPrivateRoute } from "./utils/RestrictedRoute";
-import Login_Register from "./pages/Login-Register/Login_Register";
 
-function App() { 
+import DireccionEnvio from "./components/DireccionEnvio/DireccionEnvio";
+
+import AdminView from "./pages/AdminView/AdminView";
+
+import NotFound from './pages/Error/NotFound';
+
+
+/* ----- RUTAS ----- */
+
+export default function App() { 
     return (
         <Routes>
             {/* ----- HOME LAYOUT ----- */}
@@ -33,21 +51,30 @@ function App() {
             {/* ----- GENERAL LAYOUT ----- */}
             <Route path="/" element={<BigLayout/>}>
                 <Route path="login_register" element={<Login_Register/>}/>
-                <Route path="/sobreNosotros" element={<SobreNosotros />} />
+                
                 <Route path="/catalogo" element={<Catalogo />} />
                 <Route path="/producto/:id" element={
                     <ReviewProvider>
                         <DetallesProducto />
                     </ReviewProvider>
                 } />
-                <Route path="/user" element={<User />} />
-                <Route path="/400" element={<NotFound />} />
-                <Route path="/direccion" element={<DireccionEnvio />} />
 
-                {/* ----- RUTAS PARA USUARIO ----- */}
+                <Route path="/sobreNosotros" element={<SobreNosotros />} />
+
+                <Route path="/user" element={<User />} />
                 <Route path="/user/profile" element={<UserProfile />} />
                 <Route path="/user/address" element={<UserAddress />} />
                 <Route path="/user/orders" element={<UserOrders />} />
+
+                <Route path="/direccion" element={<DireccionEnvio />} />
+
+                <Route path="/vistaAdmin" element={
+                    <AdminPrivateRoute>
+                        <AdminView />
+                    </AdminPrivateRoute>
+                }/>
+
+                <Route path="/400" element={<NotFound />} />
             </Route>
 
             {/* ----- CHECKOUT LAYOUT ----- */}
@@ -60,31 +87,6 @@ function App() {
             </Route>
 
             <Route path="/ConfirmarPedido" element={<ConfirmarPedido />} />
-        </Routes>
-    );
-};
-        {/* ----- GENERAL LAYOUT ----- */}
-        <Route path="/" element={<BigLayout/>}>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-
-            <Route path="/sobreNosotros" element={<SobreNosotros />} />
-
-            <Route path="/catalogo" element={<Catalogo />} />
-            <Route path="/producto/:id" element={
-                <ReviewProvider>
-                    <DetallesProducto />
-                </ReviewProvider>
-            } />
-
-            
-            <Route path="/vistaAdmin" element={
-                <AdminPrivateRoute>
-                    <AdminView />
-                </AdminPrivateRoute>
-            }/>
-
-            <Route path="400" element={<NotFound />} />
 
             {/* QUITAR ESTA RUTA; VIENE INCORPORADA EN EL CHEKOUT */}
             <Route path="/direccion" element={
@@ -92,7 +94,6 @@ function App() {
                     <DireccionEnvio />
 //                </DireccionProvider>
             } />
-
-        </Route>
-
-export default App;
+        </Routes>
+    );
+};

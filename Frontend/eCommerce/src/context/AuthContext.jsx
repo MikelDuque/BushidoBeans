@@ -13,22 +13,34 @@ const AuthContext = createContext({
 export function useAuth() {return useContext(AuthContext)};
 
 export function AuthProvider({ children }) {
+
+    /* ----- HOOKS Y CONSTS ----- */
+
     const navigateTo = useNavigate()
 
     const [token, setToken] = useState(sessionStorage?.getItem('token') || null);
-    const decodedToken = useRef(null);
+    const decodedToken = useRef(token ||null);
 
+    
     useEffect(() => {
-  
+        if (token) {
+            decodingToken();
+            handleExpiration();
+            console.log("decoded", decodedToken.current);
+        };
     }, [token]);
+
+
+    /* ----- FUNCIONES ----- */
 
     function handleLogin(newToken) {
         console.log("new token", newToken);
         
         if (newToken) {
-            setToken(newToken);
-            decodedToken.current = jwtDecode(newToken);
             sessionStorage.setItem('token', newToken);
+            setToken(newToken);
+            //decodingToken();
+            
             navigateTo('/');
         }
     };
@@ -38,11 +50,22 @@ export function AuthProvider({ children }) {
         setToken(null);
     };
 
+    function decodingToken() {
+        decodedToken.current = token ? jwtDecode(token) : null;
+    }
+
+    function handleExpiration() {
+        const expiration = decodedToken.current;
+
+        console.log(expiration);
+        
+    }
+
     // La variable para obtener el valor de caducidad es decodedToken.exp
 
     const contextValue = {
         token,
-        decodedToken,
+        decodedToken: decodedToken.current,
         handleLogin,
         handleLogout
     };

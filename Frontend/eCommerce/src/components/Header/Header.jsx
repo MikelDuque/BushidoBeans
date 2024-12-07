@@ -11,18 +11,17 @@ import Cart from "../Modals/Shopping_Cart/Cart";
 import classes from './Header.module.css';
 
 function Header() {
-  //HOOKS
-  const {
-    isOpen,
-    openModal,
-    closeModal
-  } = useModal();
 
+  /* ----- HOOKS Y CONSTS ----- */
   const navigate = useNavigate();
 
   const {token, decodedToken, handleLogout} = useAuth();
+  const {isOpen, openModal, closeModal} = useModal();
 
   const { eliminarContenidoCarrito, totalProducts } = useCarrito();
+
+
+  /* ----- FUNCIONES ----- */
 
   function handleNavigateToCheckout() {
     navigate('/checkout')
@@ -41,7 +40,7 @@ function Header() {
         {token ? (
           <Desplegable handleLogout={handleLogout} decodedToken={decodedToken} />
         ) : (
-          <NavLink className={`${classes.nl} ${classes.btnc}`} to="/login"> Login </NavLink>
+          <NavLink className={`${classes.nl} ${classes.btnc}`} to="/login_register"> Login </NavLink>
         )}
       
         <a onClick={openModal} className={`${classes.nl} ${classes.cesta}`} data-count={totalProducts}/>
@@ -81,8 +80,6 @@ const Desplegable = ({ handleLogout, decodedToken }) => {
   };
 
   function adminView() {
-    //const decodedToken = jwtDecode(token);
-    
     if (decodedToken?.role === "admin") {
       return (<NavLink className={`${classes.dnl} ${classes.desplOpcion}`} to="/vistaAdmin">Administración</NavLink>);
     }

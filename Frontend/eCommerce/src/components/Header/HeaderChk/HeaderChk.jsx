@@ -20,7 +20,7 @@ function HeaderChk() {
         {token ? (
           <Desplegable handleLogout={handleLogout} decodedToken={decodedToken}/>
         ) : (
-          <NavLink className={`${classes.nl} ${classes.btnc}`} to="/login"> Login </NavLink>
+          <NavLink className={`${classes.nl} ${classes.btnc}`} to="/login_register"> Login </NavLink>
         )}
       </nav>
     </header>
