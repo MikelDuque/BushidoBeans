@@ -38,7 +38,7 @@ public class AuthController : ControllerBase
     [HttpPost("Register")]
     public async Task<ActionResult> Register([FromBody] RegisterRequest userRequest)
     {     
-        if (await _userService.GetByMailAsync(userRequest.Mail) == null)
+        if (await _userService.GetByMailAsync(userRequest.Mail) != null)
         {
             return BadRequest(new {message = "El usuario ya existe"});
         }

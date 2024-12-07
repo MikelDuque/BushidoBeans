@@ -1,5 +1,6 @@
 
 import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 const AuthContext = createContext({
@@ -12,13 +13,13 @@ const AuthContext = createContext({
 export function useAuth() {return useContext(AuthContext)};
 
 export function AuthProvider({ children }) {
+    const navigateTo = useNavigate()
 
     const [token, setToken] = useState(sessionStorage?.getItem('token') || null);
     const decodedToken = useRef(null);
 
     useEffect(() => {
-        
-        
+  
     }, [token]);
 
     function handleLogin(newToken) {
@@ -28,11 +29,13 @@ export function AuthProvider({ children }) {
             setToken(newToken);
             decodedToken.current = jwtDecode(newToken);
             sessionStorage.setItem('token', newToken);
+            navigateTo('/');
         }
     };
 
     function handleLogout() {
         sessionStorage.removeItem('token');
+        setToken(null);
     };
 
     // La variable para obtener el valor de caducidad es decodedToken.exp

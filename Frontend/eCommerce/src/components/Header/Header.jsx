@@ -9,7 +9,6 @@ import Modal from '../Modals/Modal';
 import Cart from "../Modals/Shopping_Cart/Cart";
 
 import classes from './Header.module.css';
-import { jwtDecode } from 'jwt-decode';
 
 function Header() {
   //HOOKS
@@ -21,24 +20,13 @@ function Header() {
 
   const navigate = useNavigate();
 
-  const {token, decodedToken} = useAuth;
+  const {token, decodedToken, handleLogout} = useAuth();
 
   const { eliminarContenidoCarrito, totalProducts } = useCarrito();
 
   function handleNavigateToCheckout() {
     navigate('/checkout')
   }
-
-  
-
-  const isAuthenticated = false;
-
-  
-  const handleLogout = () => {
-    console.log("hola");
-    
-    //logout();
-  };
   
 
   return (
@@ -49,8 +37,8 @@ function Header() {
         <NavLink className={`${classes.nl} ${classes.btn}`} to="/catalogo"> Té </NavLink>
         <NavLink className={`${classes.nl} ${classes.btn}`} to="/catalogo"> Tienda </NavLink>
         <NavLink className={`${classes.nl} ${classes.btn}`} to="/sobreNosotros"> Nosotros </NavLink>
-
-        {isAuthenticated ? (
+        
+        {token ? (
           <Desplegable handleLogout={handleLogout} decodedToken={decodedToken} />
         ) : (
           <NavLink className={`${classes.nl} ${classes.btnc}`} to="/login"> Login </NavLink>

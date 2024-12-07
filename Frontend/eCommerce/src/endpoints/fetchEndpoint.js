@@ -6,7 +6,7 @@ export default async function fetchEndpoint(url, type, token, params) {
   const jsonResponse = await response.json();
 
   if (response.ok) return jsonResponse;
-
+  
   throw jsonResponse.message;
 
 };

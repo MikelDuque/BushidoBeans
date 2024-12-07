@@ -20,6 +20,7 @@ import UserAddress from './components/Dashboard/UserAddress/UserAddress';
 import UserOrders from './components/Dashboard/UserOrders/UserOrders';
 import AdminView from "./pages/AdminView/AdminView";
 import { AdminPrivateRoute } from "./utils/RestrictedRoute";
+import Login_Register from "./pages/Login-Register/Login_Register";
 
 function App() { 
     return (
@@ -31,8 +32,7 @@ function App() {
 
             {/* ----- GENERAL LAYOUT ----- */}
             <Route path="/" element={<BigLayout/>}>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
+                <Route path="login_register" element={<Login_Register/>}/>
                 <Route path="/sobreNosotros" element={<SobreNosotros />} />
                 <Route path="/catalogo" element={<Catalogo />} />
                 <Route path="/producto/:id" element={

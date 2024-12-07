@@ -3,7 +3,7 @@ import fetchEndpoint from "./fetchEndpoint";
 
 export default function useFetch({url, type, token, params}) {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [fetchError, setFetchError] = useState(null);
   const [fetchData, setFetchData] = useState(null);
 
   async function fetchingData() {
@@ -14,10 +14,10 @@ export default function useFetch({url, type, token, params}) {
       const data = await fetchEndpoint(url, type, token, params);    
       setFetchData(data);
       
-      setError();
+      setFetchError();
 
     } catch (error) {
-      setError(error);
+      setFetchError(error);
       console.log("Error: ", error);
 
     } finally {
@@ -40,7 +40,7 @@ export default function useFetch({url, type, token, params}) {
 
   return ({
     fetchData,
-    error,
+    fetchError,
     isLoading,
     refetch
   });

@@ -6,21 +6,17 @@ import Alert from "../../components/Alert/Alert";
 
 import classes from "./Login_Register.module.css";
 
-
-
 export default function Login_Register() {
   const [wannaLogin, setWannaLogin] = useState(true);
   const [alertMessage, setAlertMessage] = useState(null);
-  console.log(alertMessage);
-  
 
-  function handleViewChange(event) {
-    setWannaLogin(event.target.value)
-  }
+  function handleLoginView() {setWannaLogin(true)}
+  function handleRegisterView() {setWannaLogin(false)}
   
   return(
     <div className={classes.container_supremo}>
-      {wannaLogin ? <Login handleViewChange={handleViewChange} setAlertMessage={setAlertMessage}/> : <Register handleViewChange={handleViewChange} alertMessage={setAlertMessage}/>}
+      {console.log("wannalogin", wannaLogin)}
+      {wannaLogin ? <Login handleViewChange={handleRegisterView} setAlertMessage={setAlertMessage}/> : <Register handleViewChange={handleLoginView} alertMessage={setAlertMessage}/>}
       {alertMessage && <Alert message={alertMessage} onClose={() => setAlertMessage(null)} />}
     </div>
   );
