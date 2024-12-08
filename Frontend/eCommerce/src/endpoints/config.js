@@ -32,7 +32,7 @@ const API_CART_URL = `${API_BASE_URL}/api/Cart`;
 
   export function GET_CART_BY_ID(id) {return `${API_CART_URL}/${id}`};
   export const PUT_CART = `${API_CART_URL}/Update_Cart`;
-  export const PUT_CARTPRODUCT = `${API_CART_URL}/Update_CartPoduct`;
+  export const PUT_CARTPRODUCT = `${API_CART_URL}/Update_CartProduct`;
   export function DELETE_CART_BY_ID(id) {return `${API_CART_URL}/Delete_Cart/${id}`};
   export const DELETE_CARTPRODUCT = `${API_CART_URL}/Delete_CartProduct`;
 

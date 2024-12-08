@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState} from 'react';
+import { createContext, useContext, useEffect, useRef, useState} from 'react';
 
 import { useAuth } from './AuthContext';
 import useFetchEvent from '../endpoints/useFetchEvent';
@@ -14,9 +14,7 @@ const CartContext = createContext({
     updateCartProduct: () => {},
     deleteCartProduct: () => {},
     deleteCart: () => {}
-}
-    
-);
+});
 
 export function useCart() {return useContext(CartContext)};
 
@@ -26,36 +24,41 @@ export function CartProvider({ children }) {
 
     const {token, decodedToken}  = useAuth();
     const {fetchingData} = useFetchEvent();
-    //const {fetchData} = useFetch({url: PUT_CART, type: 'PUT', token: token, params:updateCart});
 
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState(getLocalCart());
     const totalProducts = getTotalProducts();
-
-    useEffect(() => {
-        mergeCart(); 
-    }, []);
+    const mergeParams = useRef({
+        id: 0,
+        cartProducts: []
+    });
 
 
     /* ----- CART MERGE ----- */
+    
+    const {fetchData} = useFetch({url: PUT_CART, type: 'PUT', token: token, params:mergeParams.current});
 
-    async function mergeCart() {
-        setCart(token ? await getBackendCart() : getLocalCart());
+    useEffect(() => {
+        setMergeParams();
+
+    }, [decodedToken]);
+
+    useEffect(() => {
+        if(token && fetchData) setCart(fetchData);
+
+    }, [token, fetchData]);
+
+
+    function setMergeParams() {
+        mergeParams.current = {
+            id: decodedToken ? decodedToken.id : 0,
+            cartProducts: getLocalCart()
+        }
     }
 
     function getLocalCart() {
         const localCart = localStorage.getItem('cart');
         return localCart ? JSON.parse(localCart) : [];
     }
-
-    async function getBackendCart() {
-        const updateCart = {
-            id: decodedToken.id,
-            cartProducts: getLocalCart()
-        }
-        return await fetchingData({url: PUT_CART, type: 'PUT', token: token, params:updateCart});
-    };
-
-    console.log("cart", cart);
 
 
     /* ----- PRIVATE FUNCTIONS ----- */
@@ -66,32 +69,32 @@ export function CartProvider({ children }) {
     };
 
     function getTotalProducts() { 
-        console.log(cart.reduce((total, product) => total + product.quantity, 0));
         return cart.reduce((total, product) => total + product.quantity, 0);
     }
 
     function updateCart(newProduct) {
-        const existsIndex = cart.findIndex((prevProduct) => prevProduct.id === newProduct.productId);
+        const existsIndex = cart.findIndex((prevProduct) => prevProduct.id === newProduct.id);
         let updatedCart = [...cart];
-        
-        if (existsIndex !== -1) {
+
+        if (existsIndex !== -1) {    
             updatedCart[existsIndex] = {
                 ...updatedCart[existsIndex],
                 quantity: newProduct.quantity
             }
-        } else {
+
+        } else { 
             updatedCart = [...updatedCart, {
                 ...newProduct,
                 quantity: newProduct.quantity,
             }]
-        };
+
+        };    
+
         handleCart(updatedCart);
     };
 
     function deleteCartItem(id) {
-        const updatedCart = [...cart];
-
-        updatedCart.splice(id);
+        const updatedCart = [...cart].filter((item) => item.id !== id);
 
         handleCart(updatedCart);
     }
@@ -100,30 +103,42 @@ export function CartProvider({ children }) {
     /* ----- METHODS ----- */
 
     async function updateCartProduct(product) {
-        const updatedProduct = {
-            userId: decodedToken.id,
-            productId: product.id,
-            quantity: product.quantity
-        };
+        if (token) {
+            const updatedProduct = {
+                userId: decodedToken.id,
+                productId: product.id,
+                quantity: product.quantity
+            };
+    
+            const isUpdated = await fetchingData({url: PUT_CARTPRODUCT, type: 'PUT', token: token, params: updatedProduct});
+    
+            if (!isUpdated) return;
+        }
 
-        const backendProduct = await fetchingData({url: PUT_CARTPRODUCT, type: 'PUT', token: token, params: updatedProduct});
-
-        updateCart(backendProduct);
+        updateCart(product);
     };
 
     async function deleteCartProduct(productId) {
-        const deletedProduct = {
-            userId: decodedToken.id,
-            productId: productId
-        };
+        if(token) {
+            const deletedProduct = {
+                userId: decodedToken.id,
+                productId: productId
+            };
+    
+            const isDeleted = await fetchingData({url: DELETE_CARTPRODUCT, type: 'DELETE', token: token, params: deletedProduct});
 
-        await fetchingData({url: DELETE_CARTPRODUCT, type: 'DELETE', token: token, params: deletedProduct});
-
+            if(!isDeleted) return;
+        }
+        
         deleteCartItem(productId);
     }
 
     async function deleteCart() {
-        await fetchingData({url: DELETE_CART_BY_ID, type: 'DELETE', token: token, params: decodedToken.id});
+        if (token) {
+            const isDeleted = await fetchingData({url: DELETE_CART_BY_ID(decodedToken.id), type: 'DELETE', token: token, params: decodedToken.id});
+
+            if(!isDeleted) return;
+        }
 
         handleCart([]);
     }

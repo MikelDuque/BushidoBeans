@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import fetchEndpoint from "./fetchEndpoint";
 
 export default function useFetch({url, type, token, params}) {
@@ -7,7 +7,6 @@ export default function useFetch({url, type, token, params}) {
   const [fetchData, setFetchData] = useState(null);
 
   async function fetchingData() {
-    
     try {
       setIsLoading(true);
 
@@ -23,7 +22,7 @@ export default function useFetch({url, type, token, params}) {
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   
   useEffect(() => {

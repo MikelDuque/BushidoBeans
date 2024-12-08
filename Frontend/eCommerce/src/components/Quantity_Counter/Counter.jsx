@@ -13,6 +13,7 @@ export default function Quantity_Counter({quantity, handleQuantity, stock}) {
   };
 
   function incrementCounter() {
+    console.log(`Hola, incremnt counter! Quantity es ${quantity}, y Stock ${stock}. Entra en el if? ${quantity <= stock}`);
     if(quantity < stock) handleQuantity(++quantity)
   };
 
