@@ -11,7 +11,8 @@ import { CheckoutProvider } from './context/CheckoutContext';
 
 
 /* ----- RESTRICTED ROUTES ----- */
-import { AdminPrivateRoute } from "./utils/RestrictedRoute";
+import { AdminPrivateRoute, LogoutPrivateRoute } from "./utils/RestrictedRoute";
+
 
 /* ----- PAGES ----- */
 import Inicio from "./pages/Inicio/Inicio";
@@ -76,12 +77,14 @@ export default function App() {
             <Route path="/" elements={<CheckoutLayout/>}>
                 <Route path="/checkout" element={
                     <CheckoutProvider>
-                        <Checkout />
+                        <LogoutPrivateRoute>
+                            <Checkout />
+                        </LogoutPrivateRoute>  
                     </CheckoutProvider>
                 }/>
             </Route>
 
-            <Route path="/ConfirmarPedido" element={<ConfirmarPedido />} />
+            <Route path="/confirmarPedido" element={<ConfirmarPedido />} />
 
             {/* QUITAR ESTA RUTA; VIENE INCORPORADA EN EL CHEKOUT */}
             <Route path="/direccion" element={

@@ -1,5 +1,5 @@
 import Subtotal from "../../components/Subtotal/Subtotal";
-import Checkout_Cart from "../Checkout/Checkout_Cart";
+import Checkout_Cart from "./Checkout_Cart";
 
 function ChkCart(){
   return(
