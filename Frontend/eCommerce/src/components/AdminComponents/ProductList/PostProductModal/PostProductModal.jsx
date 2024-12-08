@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import classes from './PostProductModal.module.css';
 
-export default function PostProductModal({ cancelFnc }) {
+export default function PostProductModal() {
     return (
         <form id="productForm" className={classes.formContainer} method="post">
             <div>

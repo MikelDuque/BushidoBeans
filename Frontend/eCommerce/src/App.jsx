@@ -7,7 +7,6 @@ import CheckoutLayout from "./layouts/CheckoutLayout/CheckoutLayout";
 
 
 /* ----- CONTEXTS ----- */
-import { ReviewProvider } from "./context/ReviewContext";
 import { CheckoutProvider } from './context/CheckoutContext';
 
 
@@ -19,7 +18,7 @@ import Inicio from "./pages/Inicio/Inicio";
 import Login_Register from "./pages/Login-Register/Login_Register";
 
 import Catalogo from "./pages/Catalogo";
-import DetallesProducto from './pages/DetallesProducto';
+import ProductDetails from './pages/Product_Details/ProductDetails';
 
 import Checkout from "./pages/Checkout/Checkout";
 import ConfirmarPedido from "./pages/Checkout/ConfirmarPedido";
@@ -50,14 +49,10 @@ export default function App() {
 
             {/* ----- GENERAL LAYOUT ----- */}
             <Route path="/" element={<BigLayout/>}>
-                <Route path="login_register" element={<Login_Register/>}/>
+                <Route path="login_register" element={<Login_Register/>} />
                 
                 <Route path="/catalogo" element={<Catalogo />} />
-                <Route path="/producto/:id" element={
-                    <ReviewProvider>
-                        <DetallesProducto />
-                    </ReviewProvider>
-                } />
+                <Route path="/producto/:id" element={<ProductDetails/>} />
 
                 <Route path="/sobreNosotros" element={<SobreNosotros />} />
 

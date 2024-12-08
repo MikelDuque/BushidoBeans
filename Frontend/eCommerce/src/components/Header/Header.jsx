@@ -13,19 +13,12 @@ import classes from './Header.module.css';
 function Header() {
 
   /* ----- HOOKS Y CONSTS ----- */
-  const navigate = useNavigate();
+  const navigateTo = useNavigate();
 
   const {token, decodedToken, handleLogout} = useAuth();
-  const {isOpen, openModal, closeModal} = useModal();
+  const {openModal, closeModal} = useModal();
 
   const { deleteCart, totalProducts } = useCart();
-
-
-  /* ----- FUNCIONES ----- */
-
-  function handleNavigateToCheckout() {
-    navigate('/checkout')
-  }
   
 
   return (
@@ -43,14 +36,13 @@ function Header() {
           <NavLink className={`${classes.nl} ${classes.btnc}`} to="/login_register"> Login </NavLink>
         )}
       
-        <a onClick={openModal} className={`${classes.nl} ${classes.cesta}`} data-count={totalProducts}/>
+        <a onClick={() => openModal("cart")} className={`${classes.nl} ${classes.cesta}`} data-count={totalProducts}/>
       </nav>
 
-      {isOpen && (
-        <Modal type="cart" titulo={"Tu Carro"} cancelFnc={deleteCart} continueFnc={handleNavigateToCheckout} buttonValues={{continueVal:"Procesar compra", cancelVal:"Vaciar carro"}}>
-          <Cart closeCart={closeModal}/>
-        </Modal>
-      )}
+      <Modal type="cart" titulo={"Tu Carro"} cancelFnc={deleteCart} continueFnc={() => navigateTo('/checkout')} buttonValues={{continueVal:"Procesar compra", cancelVal:"Vaciar carro"}}>
+        <Cart closeCart={closeModal}/>
+      </Modal>
+  
     </header>
   );
 }

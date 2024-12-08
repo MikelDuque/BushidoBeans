@@ -1,10 +1,11 @@
-import classes from './Product_Details.module.css';
+import classes from './ProductDetails_Card.module.css';
 import { useState } from 'react';
-import { getIntensidadImg } from '../../utils/intensidad';
-import Quantity_Counter from '../Quantity_Counter/Counter';
-import AddToCartButton from '../AddToCartButton/AddToCart';
+import { getIntensidadImg } from '../../../utils/intensidad';
+import Quantity_Counter from '../../Quantity_Counter/Counter';
+import AddToCartButton from '../../AddToCartButton/AddToCart';
+import { API_BASE_URL } from '../../../endpoints/config';
 
-export default function Product_Details({product}) {
+export default function ProductDetails_Card({product}) {
     const [cantidad, setCantidad] = useState(1);
 
     const intensidadImg = getIntensidadImg("café");
@@ -12,7 +13,7 @@ export default function Product_Details({product}) {
     return (   
         <div className={classes.container_info_producto}>
             <div className={classes.imagen_producto}>
-                <img src={`https://localhost:7015/${product.image}`} alt={product.name} />
+                <img src={`${API_BASE_URL}${product.image}`} alt={product.name} />
             </div>
 
             <div>
@@ -35,21 +36,9 @@ export default function Product_Details({product}) {
                     <span className={classes.texto}>{product.description}</span>
                 </p>
                 
-                <Quantity_Counter quantity={cantidad} setQuantity={setCantidad} stock={product.stock}/>
+                <Quantity_Counter quantity={cantidad} handleQuantity={setCantidad} stock={product.stock}/>
 
                 <AddToCartButton product={product} quantity={cantidad}/>
-
-                {/*
-                <div className={classes.counter_container}>
-                    <button className={classes.quantity_button} onClick={decrementCounter} disabled={cantidad <= 0}>-</button>
-                    <p>{cantidad}</p>
-                    <button className={classes.quantity_button} onClick={incrementCounter} disabled={cantidad >= product.stock}>+</button>
-                </div>
-
-                <button onClick={handleCarrito} className={classes.boton_agregar_carrito} disabled={product.stock <= 0 || cantidad > product.stock}>
-                    {product.stock > 0 ? 'Añadir al carrito' : 'Sin stock'}
-                </button>
-                */}
             </div>  
         </div>
     ); 

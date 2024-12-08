@@ -4,9 +4,7 @@ import { useCart } from "../../../context/CartContext";
 
 export default function Cart() {
   const {cart} = useCart();
-  console.log("que es cart", cart);
   
-
   function cartMapper() {
     return (cart.length > 0 ? (
       cart.map((cartItem) => (    
@@ -23,7 +21,6 @@ export default function Cart() {
       ))) : (<h4 className={classes.clearMessage}>Tu carrito está vacío</h4>)
     ); 
   };
-
   
   return (
     <>

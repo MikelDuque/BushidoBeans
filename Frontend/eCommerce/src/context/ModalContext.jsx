@@ -2,7 +2,7 @@ import { createContext, useState, useContext } from "react";
 
 const ModalContext = createContext ({
 
-  isOpen: false,
+  whichIsOpen: null,
   openModal: () => {},
   closeModal: () => {}
 
@@ -12,18 +12,21 @@ export const useModal = () => {return useContext(ModalContext)}
 
 
 export function ModalProvider({children}) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [whichIsOpen, setWhichIsOpen] = useState(null);
 
-  const openModal = () => {
-    setIsOpen(true);
+  console.log("which", whichIsOpen);
+  
+
+  function openModal(id) {
+    setWhichIsOpen(id);
   };
 
-  const closeModal = () => {
-    setIsOpen(false);
+  function closeModal() {
+    setWhichIsOpen(null);
   };
 
   const contextValue = {
-    isOpen,
+    whichIsOpen,
     openModal,
     closeModal
   };

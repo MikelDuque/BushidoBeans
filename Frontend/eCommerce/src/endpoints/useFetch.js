@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect } from "react"
 import fetchEndpoint from "./fetchEndpoint";
 
 export default function useFetch({url, type, token, params}) {

@@ -35,8 +35,6 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
         setDatosFiltrados(Array.isArray(data.filteredProducts)? data.filteredProducts:[]);  
         setTotalPaginas(data.totalPages); 
         
-        
-        
       } catch (error) {
         setError("Hubo un error al cargar los productos.");
       } finally {
@@ -57,8 +55,6 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
     setPaginaActual(0);
     setPaginaSeleccionada(0);
     
-    
-
   }, [filtro, ordenar, productosPorPagina]);
 
   return (
@@ -82,31 +78,14 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
           <p>{error}</p>
         ) : datosFiltrados.length > 0 ? (
           datosFiltrados.map(dataP => (
-            console.log("¿que es dataP?", dataP),
-            
-            
             <CardProduct
               key={dataP.id}
               product={dataP}
-              /*
-              id={dataP.id}
-              imagen={dataP.image}
-              nombre={dataP.name}
-              intensidad={dataP.intensity}
-              valoracion={dataP.score}
-              precio={dataP.price}
-              stock={dataP.stock}
-              */
             />
           ))
         ) : (
           <p>No se encontraron productos.</p>
-        )}
-
-          
-
-
-        
+        )}   
       </div>
 
         <ReactPaginate

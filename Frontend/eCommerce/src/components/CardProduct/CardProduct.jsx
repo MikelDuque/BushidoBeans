@@ -50,20 +50,4 @@ export function CardProduct({ product }) {
     );
 }
 
-/*
-CardProduct.propTypes = {
-    id: PropTypes.string, // Ahora el id es requerido como prop
-    imagen: PropTypes.string,
-    nombre: PropTypes.string.isRequired,
-    intensidad: PropTypes.number.isRequired,
-    valoracion: PropTypes.number.isRequired,
-    precio: PropTypes.number.isRequired,
-    stock: PropTypes.number.isRequired
-};
-
-CardProduct.defaultProps = {
-    soldout: false,
-    valoracion: 3,
-};
-*/
 export default CardProduct;

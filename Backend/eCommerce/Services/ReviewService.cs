@@ -2,6 +2,7 @@ using System;
 using eCommerce.Controllers;
 using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
+using eCommerce.Models.Enums;
 using eCommerce.Models.Mappers;
 
 namespace eCommerce.Services;
@@ -29,22 +30,22 @@ public class ReviewService
     return _mapper.ToDto(review);
   }
 
-  public async Task<Review> CreateReviewAsync(Review review)
+  public async Task<ReviewDto> CreateReviewAsync(ReviewDto review)
   {
 
     Review newReview = new Review
     {
-      Score = review.Score,
+      Score = (EScore)review.Score,
       Body = review.Body,
       PubliDate = DateTime.Now,
       ProductId = review.ProductId,
       UserId = review.UserId
     };
 
-    await _unitOfWork.ReviewRepository.InsertAsync(newReview);
+    Review postedReview = await _unitOfWork.ReviewRepository.InsertAsync(newReview);
     await _unitOfWork.SaveAsync();
 
-    return newReview;
+    return await GetByIdAsync(postedReview.Id);
   }
 
   public async Task<bool> DeleteReviewAsync(Review review)

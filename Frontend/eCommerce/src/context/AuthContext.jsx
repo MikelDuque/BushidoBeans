@@ -19,7 +19,7 @@ export function AuthProvider({ children }) {
     const navigateTo = useNavigate()
 
     const [token, setToken] = useState(sessionStorage?.getItem('token') || null);
-    const decodedToken = useRef(token ? jwtDecode(token) : null);
+    const decodedToken = useRef(token ? jwtDecode(token) : "");
     
     useEffect(() => {
         //handleExpiration();
