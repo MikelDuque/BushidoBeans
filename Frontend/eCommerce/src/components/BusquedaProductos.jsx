@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
-import { CardPrueba } from "../components/Card-Producto.jsx";
+import { CardProduct } from "./CardProduct/CardProduct.jsx";
 import ReactPaginate from 'react-paginate';
 import "../styles/Catalogo.css";
 import "../styles/Paginacion.css";
@@ -82,9 +82,13 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
           <p>{error}</p>
         ) : datosFiltrados.length > 0 ? (
           datosFiltrados.map(dataP => (
+            console.log("¿que es dataP?", dataP),
             
-            <CardPrueba 
+            
+            <CardProduct
               key={dataP.id}
+              product={dataP}
+              /*
               id={dataP.id}
               imagen={dataP.image}
               nombre={dataP.name}
@@ -92,6 +96,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
               valoracion={dataP.score}
               precio={dataP.price}
               stock={dataP.stock}
+              */
             />
           ))
         ) : (

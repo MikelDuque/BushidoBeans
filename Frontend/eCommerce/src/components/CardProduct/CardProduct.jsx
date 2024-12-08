@@ -1,27 +1,26 @@
-import PropTypes from "prop-types";
 import { useNavigate } from 'react-router-dom';
-import '../styles/CardPrueba.css';
-import { getIntensidadImg } from '../utils/intensidad';
-import AddToCartButton from "./AddToCartButton/AddToCart";
-export function CardPrueba({ id, imagen, nombre, intensidad, precio, stock, valoracion }) {
+import './CardProduct.css';
+import { getIntensidadImg } from '../../utils/intensidad';
+import AddToCartButton from "../AddToCartButton/AddToCart";
+export function CardProduct({ product }) {
     const navigate = useNavigate();
 
 
     const handlePageChange = () => {
-        navigate(`/producto/${id}`);  // Ahora se navega correctamente usando el id
+        navigate(`/producto/${product.id}`);  // Ahora se navega correctamente usando el id
     };
 
-    const checksoldout = stock > 0 ? "✅" : "❌";
-    const precioFormateado = precio.toFixed(2).replace('.', ',');
+    const checksoldout = product.stock > 0 ? "✅" : "❌";
+    const precioFormateado = product.price.toFixed(2).replace('.', ',');
     
     const valImg = "/recursos/star.svg";
 
-    const intensidadEmojis = Array(intensidad).fill(
-        <img src={getIntensidadImg(intensidad.toString())} alt="Intensidad" className="intensidadIcono" />
+    const intensidadEmojis = Array(product.intensity).fill(
+        <img src={getIntensidadImg(product.intensity.toString())} alt="Intensidad" className="intensidadIcono" />
     );
 
-    const estrellasCompletas = Math.floor(valoracion);
-    const tieneMediaEstrella = valoracion % 1 >= 0.5;
+    const estrellasCompletas = Math.floor(product.score);
+    const tieneMediaEstrella = product.score % 1 >= 0.5;
 
     const valoracionEstrellas = [
         
@@ -35,9 +34,9 @@ export function CardPrueba({ id, imagen, nombre, intensidad, precio, stock, valo
     ];
 
     return (
-        <div className={`cardPrueba ${stock <= 0 ? "sold-out" : ""}`}>
-            <img className="imgPrueba" src={`https://localhost:7015/${imagen}`} alt={nombre} />
-            <h4 className="productName" onClick={handlePageChange}>{nombre}</h4>
+        <div className={`CardProduct ${product.stock <= 0 ? "sold-out" : ""}`}>
+            <img className="imgPrueba" src={`https://localhost:7015/${product.image}`} alt={product.name} />
+            <h4 className="productName" onClick={handlePageChange}>{product.name}</h4>
 	    <div className="iconos">
                 {valoracionEstrellas}
             </div>
@@ -46,12 +45,13 @@ export function CardPrueba({ id, imagen, nombre, intensidad, precio, stock, valo
                 {intensidadEmojis}
             </div>
 	    <div className="detalles2">{precioFormateado} €</div>
-            <AddToCartButton className="botonPrueba" product={{id, image:imagen, name:nombre, price:precio, stock}} quantity={+1}></AddToCartButton>
+            <AddToCartButton className="botonPrueba" product={product}></AddToCartButton>
         </div>
     );
 }
 
-CardPrueba.propTypes = {
+/*
+CardProduct.propTypes = {
     id: PropTypes.string, // Ahora el id es requerido como prop
     imagen: PropTypes.string,
     nombre: PropTypes.string.isRequired,
@@ -61,8 +61,9 @@ CardPrueba.propTypes = {
     stock: PropTypes.number.isRequired
 };
 
-CardPrueba.defaultProps = {
+CardProduct.defaultProps = {
     soldout: false,
     valoracion: 3,
 };
-export default CardPrueba;
+*/
+export default CardProduct;

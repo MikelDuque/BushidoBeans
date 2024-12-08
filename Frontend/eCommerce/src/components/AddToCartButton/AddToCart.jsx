@@ -1,24 +1,20 @@
-import React from 'react';
 import classes from './AddToCart.module.css';
 import { useCart } from '../../context/CartContext'; 
 
 const AddToCartButton = ({product, quantity}) => {
-    const { agregarAlCarrito } = useCart(); 
+    const { cart, updateCartProduct } = useCart();
 
-    const handleAddToCart = (event) => {
-        event.preventDefault();
-        agregarAlCarrito({
-            id: product.id,
-            image: product.image,
-            name: product.name,
-            price: product.price,
-            stock: product.stock,
-            quantity: quantity
-        });
+    function handleAddToCart() {
+        const cartProduct = cart.find((cartItem) => cartItem.id === product.id) || {...product, quantity: 0}; 
+        
+        if (!quantity) {cartProduct.quantity++}
+        else {cartProduct.quantity = quantity};
+        
+        updateCartProduct(cartProduct)
     };
 
     return (
-        <button onClick={handleAddToCart} className={classes.button} disabled={quantity <= 0 || quantity >= product.stock}> Añadir al carrito </button>
+        <button onClick={handleAddToCart} className={classes.button} disabled={product.stock <= 0}> Añadir al carrito </button>
     );
 };
 

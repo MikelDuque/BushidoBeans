@@ -42,9 +42,11 @@ public class CartService
 
     public async Task<CartProductDto> UpdateCartProductAsync(UpdatedCartProduct newCartProduct)
     {
-        CartProduct cartProductBD = await UpdateOrInsertCartProductAsync(newCartProduct);
+        await UpdateOrInsertCartProductAsync(newCartProduct);
 
         await _unitOfWork.SaveAsync();
+
+        CartProduct cartProductBD = await _unitOfWork.CartProductRepository.GetByIdAsync(newCartProduct.UserId, newCartProduct.ProductId);
 
         return _cartProductMapper.ToDto(cartProductBD);
     }

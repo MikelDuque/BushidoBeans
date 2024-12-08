@@ -9,7 +9,7 @@ html, body {padding:0; margin:0; height:100%;}
 
 }
 
-.cardPrueba{
+.CardProduct{
   width: 1000px;
 
   display: grid;
@@ -64,16 +64,16 @@ html, body {padding:0; margin:0; height:100%;}
 }
 
 
-.cardPrueba.sold-out {
+.CardProduct.sold-out {
   color: #888;
 }
 
-.cardPrueba.sold-out img {
+.CardProduct.sold-out img {
   filter: grayscale();
   opacity: 0.8;
 }
 
-.cardPrueba.sold-out button {
+.CardProduct.sold-out button {
   display: none;
 }
 

@@ -8,7 +8,7 @@
 
 }
 
-.cardPrueba{
+.CardProduct{
   width: fit-content;
   align-items: center;
   justify-items: center;
@@ -78,21 +78,21 @@
 
 
 
-.cardPrueba.sold-out {
+.CardProduct.sold-out {
   color: #888;
 }
 
-.cardPrueba.sold-out img {
+.CardProduct.sold-out img {
   filter: grayscale();
   opacity: 0.8;
 }
 
-.cardPrueba.sold-out p {
+.CardProduct.sold-out p {
   filter: grayscale();
   opacity: 0.8;
 }
 
-.cardPrueba.sold-out button {
+.CardProduct.sold-out button {
   pointer-events: none;
   filter: grayscale();
   opacity: 0.8;

@@ -1,4 +1,4 @@
-import '../styles/CardPrueba.css';
+import './CardProduct/CardProduct.css';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect, useRef} from 'react';
 import '../styles/Popup.css';
