@@ -5,9 +5,6 @@ import { createPortal } from "react-dom"
 export default function Modal({continueFnc, cancelFnc, type, titulo, buttonValues, children}) {
 const {closeModal, whichIsOpen} = useModal();
 
-console.log(`which: ${whichIsOpen}, type: ${type}`);
-
-
   return createPortal(
     (whichIsOpen === type) && (
       <div className={classes.screen_container}>

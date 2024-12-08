@@ -4,7 +4,7 @@ import { REGISTER_URL } from "../../../endpoints/config";
 import { useAuth } from "../../../context/AuthContext";
 import useFetchEvent from "../../../endpoints/useFetchEvent";
 import { validation } from "../../../utils/validationForm";
-import Input from "../../Input";
+import Input from "../../Input/Input";
 
 import classes from "./Register.module.css";
 

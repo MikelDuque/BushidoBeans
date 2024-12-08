@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useCheckout } from "../../../context/CheckoutContext";
+import { useCheckout } from "../../../../context/CheckoutContext";
 import "./ListaDirecciones.css";
 
 function ListaDirecciones({ direcciones }) {

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import * as jwtDecode from "jwt-decode";
 import "./UserAddress.css";
 import Sidebar from "../UserSidebar/Sidebar";
-import AñadirDireccion from "../../DireccionEnvio/AñadirDireccion/AñadirDireccion"
+import AñadirDireccion from "../../CheckoutPages/DireccionEnvio/AñadirDireccion/AñadirDireccion"
 function UserAddress() {
     // const [addresses, setAddresses] = useState([]);
     const [loading, setLoading] = useState(true);

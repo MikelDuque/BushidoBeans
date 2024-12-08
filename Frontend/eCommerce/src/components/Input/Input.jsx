@@ -1,4 +1,4 @@
-import "./../styles/Input.css"
+import "./Input.css"
 
 function Input({ type, name, id, ref, placeholder, value, onChange, onFocus, onBlur }) {
     return (

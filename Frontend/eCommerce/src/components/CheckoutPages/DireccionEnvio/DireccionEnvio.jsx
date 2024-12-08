@@ -2,8 +2,8 @@ import ListaDirecciones from "./ListaDirecciones/ListaDirecciones";
 import AnadirDireccion from "./AñadirDireccion/AñadirDireccion";
 import { useEffect, useState } from "react";
 import * as jwt_decode from "jwt-decode";
-import { GET_USER_BY_ID } from "../../endpoints/config";
-import { useAuth } from '../../context/AuthContext.jsx';
+import { GET_USER_BY_ID } from "../../../endpoints/config";
+import { useAuth } from '../../../context/AuthContext.jsx';
 
 
 function DireccionEnvio() {

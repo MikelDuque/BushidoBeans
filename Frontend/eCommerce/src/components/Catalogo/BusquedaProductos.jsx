@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
-import { CardProduct } from "./CardProduct/CardProduct.jsx";
+import { CardProduct } from "../CardProduct/CardProduct.jsx";
 import ReactPaginate from 'react-paginate';
-import "../styles/Catalogo.css";
-import "../styles/Paginacion.css";
+import "../../pages/Catalogo/catalogo.css";
+import "./Paginacion.css";
 import { CircleLoader } from 'react-spinners';
-import { GET_FILTERED_PRODUCTS } from '../endpoints/config.js';
+import { GET_FILTERED_PRODUCTS } from '../../endpoints/config.js';
 
 const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   const [productoBuscado, setProductoBuscado] = useState('');

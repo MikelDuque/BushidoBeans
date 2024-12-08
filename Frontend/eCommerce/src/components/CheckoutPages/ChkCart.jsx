@@ -1,7 +1,7 @@
-import Subtotal from "../../components/Subtotal/Subtotal";
-import Checkout_Cart from "./Checkout_Cart";
+import Subtotal from "./Subtotal/Subtotal";
+import Checkout_Cart from "./CheckoutCart/Checkout_Cart";
 
-function ChkCart(){
+export default function ChkCart(){
   return(
     <>
     <Checkout_Cart />
@@ -9,5 +9,3 @@ function ChkCart(){
     </>
   )
 }
-
-export default ChkCart;

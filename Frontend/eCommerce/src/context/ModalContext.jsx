@@ -14,9 +14,6 @@ export const useModal = () => {return useContext(ModalContext)}
 export function ModalProvider({children}) {
   const [whichIsOpen, setWhichIsOpen] = useState(null);
 
-  console.log("which", whichIsOpen);
-  
-
   function openModal(id) {
     setWhichIsOpen(id);
   };

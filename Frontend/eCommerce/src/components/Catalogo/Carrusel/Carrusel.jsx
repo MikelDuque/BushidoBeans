@@ -1,6 +1,5 @@
-import React from 'react';
 import Slider from 'react-slick';
-import '../styles/Carrusel.css'
+import './Carrusel.css'
 const Carrusel = ({ images }) => {
   const settings = {
     dots: false,

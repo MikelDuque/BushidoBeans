@@ -1,10 +1,10 @@
 import classes from './Review_List.module.css';
 import Review from './Review/Review.jsx';
 import Average_Score from './Average_Score/Average_Score.jsx';
-import Modal from '../../Modals/Modal.jsx'
-import PostReview from '../../Modals/PostReview/PostReview.jsx';
-import { useAuth } from '../../../context/AuthContext.jsx';
-import { useModal } from '../../../context/ModalContext.jsx';
+import Modal from '../../../Modals/Modal.jsx'
+import PostReview from '../../../Modals/PostReview/PostReview.jsx';
+import { useAuth } from '../../../../context/AuthContext.jsx';
+import { useModal } from '../../../../context/ModalContext.jsx';
 
 function reviewMapper(reviews) {
   return (reviews.length > 0 ? (

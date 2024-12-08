@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import * as jwt_decode from "jwt-decode";
-import Input from "../../Input";
-import { POST_ADDRESS } from "../../../endpoints/config";
-import Alert from "../../Alert/Alert"; 
+import Input from "../../../Input/Input";
+import { POST_ADDRESS } from "../../../../endpoints/config";
+import Alert from "../../../Alert/Alert"; 
 import "./AñadirDireccion.css";
-import { useAuth } from '../../../context/AuthContext';
+import { useAuth } from '../../../../context/AuthContext';
 function AñadirDireccion() {
     const { token } = useAuth();
     const [formData, setFormData] = useState({

@@ -1,5 +1,5 @@
 import "./Subtotal.css";
-import { useCheckout } from "../../context/CheckoutContext"; // Importa el contexto
+import { useCheckout } from "../../../context/CheckoutContext"; // Importa el contexto
 
 function Subtotal({ view }) {
     const {handleButtonClick, calculateShipping, order} = useCheckout();

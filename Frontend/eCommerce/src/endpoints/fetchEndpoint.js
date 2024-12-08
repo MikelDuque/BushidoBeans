@@ -7,10 +7,10 @@ export default async function fetchEndpoint(url, type, token, params) {
 
   if (response.ok) return jsonResponse;
   
-  console.log("jsonResponse", jsonResponse.message);
+  console.log(`jsonResponse, ${jsonResponse.message}, status ${jsonResponse.status}`);
+  console.log(`response error, ${response.json}, status ${response.status}`);
   
   throw jsonResponse.message;
-
 };
 
 /* ------------------------- */

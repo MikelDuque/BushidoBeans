@@ -1,8 +1,8 @@
 import '../../CardProduct/CardProduct.css'
 import './PostReview.css';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import StarRating from '../../Product_Details/Review_List/StarRating/StarRating';
+import { useState } from 'react';
+import StarRating from '../../Catalogo/Product_Details/Review_List/StarRating/StarRating';
 import Alert from '../../Alert/Alert';
 import { useAuth } from '../../../context/AuthContext';
 import useFetchEvent from '../../../endpoints/useFetchEvent';
@@ -38,7 +38,7 @@ export default function PostReview() {
             score: selectedScore,
             body: form.body.value,
             productId: id,
-            userId: decodedToken.id
+            userId: decodedToken?.id || 0
         }
         
         const wasPosted = await fetchingData({url: POST_REVIEW, type: 'POST', token: token, params:newReview})

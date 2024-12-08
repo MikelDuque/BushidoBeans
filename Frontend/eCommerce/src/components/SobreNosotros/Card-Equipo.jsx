@@ -1,5 +1,4 @@
-import React from "react";
-import '../styles/Card.css';
+import './Card.css';
 function Card({ cargo, nombre, imagen }) {
     return (
         <div className='card'>

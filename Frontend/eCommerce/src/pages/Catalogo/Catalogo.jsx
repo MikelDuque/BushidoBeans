@@ -1,10 +1,8 @@
-import Header from "../components/Header/Header.jsx";
-import Footer from "../components/Footer/Footer.jsx";
-import Carrusel from "../components/Carrusel.jsx";
-import Filtro from "../components/Filtro.jsx";
-import "../styles/Catalogo.css";
+import Carrusel from "../../components/Catalogo/Carrusel/Carrusel.jsx";
+import Filtro from "../../components/Catalogo/Filtro/Filtro.jsx";
+import "./Catalogo.css";
 import { useState } from "react";
-import BusquedaProductos from "../components/BusquedaProductos.jsx";
+import BusquedaProductos from "../../components/Catalogo/BusquedaProductos.jsx";
 
 function Catalogo() {
   const imagenes = [

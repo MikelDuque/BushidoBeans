@@ -2,8 +2,8 @@ import { useParams } from 'react-router-dom';
 
 import { GET_PRODUCT_BY_ID } from '../../endpoints/config';
 import useFetch from '../../endpoints/useFetch';
-import ProductDetails_Card from '../../components/Product_Details/ProductCard/ProductDetails_Card';
-import Review_List from '../../components/Product_Details/Review_List/Review_List';
+import ProductDetails_Card from '../../components/catalogo/Product_Details/ProductCard/ProductDetails_Card';
+import Review_List from '../../components/Catalogo/Product_Details/Review_List/Review_List';
 
 import classes from './ProductDetails.module.css';
 

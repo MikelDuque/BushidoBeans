@@ -11,27 +11,31 @@ import { CheckoutProvider } from './context/CheckoutContext';
 
 
 /* ----- RESTRICTED ROUTES ----- */
-import { AdminPrivateRoute, LogoutPrivateRoute } from "./utils/RestrictedRoute";
+import {
+    AdminPrivateRoute,
+    LoginPrivateRoute,
+    LogoutPrivateRoute
+} from "./utils/RestrictedRoute";
 
 
 /* ----- PAGES ----- */
 import Inicio from "./pages/Inicio/Inicio";
 import Login_Register from "./pages/Login-Register/Login_Register";
 
-import Catalogo from "./pages/Catalogo";
+import Catalogo from "./pages/Catalogo/Catalogo";
 import ProductDetails from './pages/Product_Details/ProductDetails';
 
 import Checkout from "./pages/Checkout/Checkout";
 import ConfirmarPedido from "./pages/Checkout/ConfirmarPedido";
 
-import SobreNosotros from './pages/SobreNosotros';
+import SobreNosotros from './pages/SobreNosotros/SobreNosotros';
 
 import User from "./components/Dashboard/UserData/User";
 import UserProfile from './components/Dashboard/UserProfile/UserProfile';
 import UserAddress from './components/Dashboard/UserAddress/UserAddress';
 import UserOrders from './components/Dashboard/UserOrders/UserOrders';
 
-import DireccionEnvio from "./components/DireccionEnvio/DireccionEnvio";
+import DireccionEnvio from "./components/CheckoutPages/DireccionEnvio/DireccionEnvio";
 
 import AdminView from "./pages/AdminView/AdminView";
 
@@ -50,7 +54,11 @@ export default function App() {
 
             {/* ----- GENERAL LAYOUT ----- */}
             <Route path="/" element={<BigLayout/>}>
-                <Route path="login_register" element={<Login_Register/>} />
+                <Route path="login_register" element={
+                    <LoginPrivateRoute>
+                        <Login_Register/>
+                    </LoginPrivateRoute>
+                }/>
                 
                 <Route path="/catalogo" element={<Catalogo />} />
                 <Route path="/producto/:id" element={<ProductDetails/>} />
