@@ -31,5 +31,14 @@ namespace eCommerce.Controllers
         {
             return Ok(await _orderService.InsertOrderAsync(order));
         }
+
+        //[Authorize]
+        [HttpGet("Get_Orders")]
+        public async Task<ActionResult> GetOrdersByUserIdAsync(long userId)
+        {
+            var orders = await _orderService.GetOrdersByUserIdAsync(userId);
+            return Ok(orders);
+        }
+
     }
 }

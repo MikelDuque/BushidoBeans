@@ -54,7 +54,7 @@ function AñadirDireccion() {
             const nuevaDireccion = {
                 userId: userId,
                 addressee: `${formData.nombre} ${formData.apellido}`,
-                nameAddress: `${formData.direccion}, ${formData.ciudad}, ${formData.codigoPostal}, ${formData.pais}`,
+                addressInfo: `${formData.direccion}, ${formData.ciudad}, ${formData.codigoPostal}, ${formData.pais}`,
                 phoneNumber: formData.telefono,
             };
 
