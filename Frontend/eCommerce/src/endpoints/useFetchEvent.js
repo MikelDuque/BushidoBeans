@@ -1,27 +1,28 @@
 
 import { useState } from "react"
 import fetchEndpoint from "./fetchEndpoint";
+import { useAuth } from "../context/AuthContext";
 
 export default function useFetchEvent() {
+  const {startExpCountdown} = useAuth();
+
   const [fetchData, setFetchData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [fetchError, setFetchError] = useState(null);
 
-  async function fetchingData({url, type, token, params}) {
-    
+  async function fetchingData({url, type, token, params, needAuth}) {
     try {
       setIsLoading(true);
 
-      const data = await fetchEndpoint(url, type, token, params);    
+      const data = await fetchEndpoint(url, type, token, params, needAuth);    
       setFetchData(data);
-
-      setError(false);
+      setFetchError();
 
       return data;
 
     } catch (error) {
-      setError(error)
-      console.log("Error: ", error);
+      if(error === "Unauthorized") startExpCountdown();
+      setFetchError(error)
 
     } finally {
       setIsLoading(false);
@@ -30,8 +31,8 @@ export default function useFetchEvent() {
 
   return ({
     fetchData,
-    fetchingData,
     isLoading,
-    error
+    fetchError,
+    fetchingData
   });
 };

@@ -1,4 +1,4 @@
-import DireccionEnvio from "../DireccionEnvio/DireccionEnvio"
+import DireccionEnvio from "./DireccionEnvio/DireccionEnvio"
 
 function ChkAddress(){
   return(

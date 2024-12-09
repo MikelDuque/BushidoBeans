@@ -28,9 +28,9 @@ public class CartService
 
     /* ----- UPDATE ----- */
 
-    public async Task<List<CartProductDto>> UpdateCartAsync(CartDto cart)
+    public async Task<List<CartProductDto>> UpdateCartAsync(Cart cart)
     {
-        foreach (CartProductDto cartProduct in cart.CartProducts)
+        foreach (UpdatedCartProduct cartProduct in cart.CartProducts)
         {
             await UpdateOrInsertCartProductAsync(cartProduct);
         }
@@ -40,13 +40,15 @@ public class CartService
         return await GetCartByIdAsync(cart.Id);
     }
 
-    public async Task<CartProductDto> UpdateCartProductAsync(CartProductDto newCartProduct)
+    public async Task<CartProductDto> UpdateCartProductAsync(UpdatedCartProduct newCartProduct)
     {
         await UpdateOrInsertCartProductAsync(newCartProduct);
 
         await _unitOfWork.SaveAsync();
 
-        return newCartProduct;
+        CartProduct cartProductBD = await _unitOfWork.CartProductRepository.GetByIdAsync(newCartProduct.UserId, newCartProduct.ProductId);
+
+        return _cartProductMapper.ToDto(cartProductBD);
     }
 
 
@@ -64,7 +66,7 @@ public class CartService
         return await _unitOfWork.SaveAsync();
     }
 
-    public async Task<bool> DeleteCartProductAsync(CartProduct cartProduct)
+    public async Task<bool> DeleteCartProductAsync(UpdatedCartProduct cartProduct)
     {
         CartProduct cartProductBD = await _unitOfWork.CartProductRepository.GetByIdAsync(cartProduct.UserId, cartProduct.ProductId);
         
@@ -75,7 +77,7 @@ public class CartService
 
 
     /* ----- FUNCIONES PRIVADAS ----- */
-    private async Task<CartProduct> UpdateOrInsertCartProductAsync(CartProductDto newCartProduct)
+    private async Task<CartProduct> UpdateOrInsertCartProductAsync(UpdatedCartProduct newCartProduct)
     {
         CartProduct cartProductBD = await _unitOfWork.CartProductRepository.GetByIdAsync(newCartProduct.UserId, newCartProduct.ProductId);
 
@@ -92,10 +94,4 @@ public class CartService
 
         return cartProductBD;
     }
-
-
-
 }
-
-
-

@@ -2,33 +2,62 @@ import { useState } from "react";
 
 import { LOGIN_URL } from "../../../endpoints/config";
 import { useAuth } from "../../../context/AuthContext";
+import { validation } from '../../../utils/validationForm';
 import useFetchEvent from "../../../endpoints/useFetchEvent";
 
 import classes from "./Login.module.css";
 
-export default function Login(handleViewChange) {
+
+export default function Login({handleViewChange, setAlertMessage}) {
   
-  /* ----- HOOKS ----- */
+  /* ----- HOOKS Y CONSTS ----- */
 
   const {handleLogin} = useAuth();
-
-  const {fetchingData, error, isLoading} = useFetchEvent();
-
+  const {fetchingData, fetchError, isLoading} = useFetchEvent();
+  
+  const [errors, setErrors] = useState({
+    mailError: null,
+    passError: null
+  });
+  
   /* ----- FUNCIONES ----- */
 
   async function handleLoginData(event) {
     event.preventDefault();
     const form = event.target;
 
-    const loginData = {
+    const formData = {
       mail: form.email.value,
       password: form.password.value
     };
-    
-    const data = await fetchingData({url: LOGIN_URL, type: 'POST', params:loginData});
 
-    handleLogin(data.accessToken);
+    if(!dataValidator(formData.mail, formData.password)) return;
+    
+    const data = await fetchingData({url: LOGIN_URL, type: 'POST', params:formData, needAuth:false});
+    if (typeof fetchError === 'string') {setAlertMessage(fetchError)};
+
+    if(data) handleLogin(data.accessToken);
   };
+
+
+  function dataValidator(email, password) {
+    if (!validation.isValidEmail(email)) {
+      setErrors({mailError: "Por favor, introduce un formato de email válido."});
+      return false;
+    } 
+
+    if (!validation.isValidPassword(password)) {
+      setErrors({passError:"Por favor, introduce un formato de contraseña válido."});
+      return false;
+    }
+
+    setErrors({
+      mailError: null,
+      passError: null
+    });
+
+    return true; 
+  }
 
 
   /* ----- CUERPO DEL COMPONENTE ----- */
@@ -41,24 +70,23 @@ export default function Login(handleViewChange) {
       <form className={classes.formLogin} onSubmit={handleLoginData}>
           <div className={classes.contenedorEmail}>
               <input type="email" id="email" name="mail" placeholder="Email"/>
-              {error && <p className={classes.emailMessage}>{error.message}</p>} {/* Probar lo del error */}
+              {errors.mailError && <p className={classes.emailMessage}>{errors.mailError}</p>}
           </div>
           <div className={classes.contenedorPassword}>
               <input type="password" id="password" name="password" placeholder="Contraseña"/>
-              {error && <p className={classes.passwordMessage}>{error.message}</p>} {/* Probar lo del error aquí tambien */}
+              {errors.passError && <p className={classes.passwordMessage}>{errors.passError}</p>}
           </div>
           <button type="submit" disabled={isLoading} className={classes.acceder}>
               {isLoading ? 'Cargando...' : 'Acceder'}
           </button>
-          {error && <p className={classes.errorMessage}>{error.message}</p>} {/* Lo mismo que antes */}
       </form>
     </div>
     <div className={classes.crearCuenta}>
       <img src="../../public/logo.svg" alt="Bushido Beans" className={classes.logoBushidoBeans} />
       <p className={classes.preguntaCuenta}>¿Aún no tienes cuenta?</p>
       <p className={classes.crearAhora}>Crea tu cuenta ahora</p>
-      <button className={classes.btnCrearCuenta} value={false} onClick={() => handleViewChange}>Crear cuenta</button>
+      <button className={classes.btnCrearCuenta} value={true} onClick={handleViewChange}>Crear cuenta</button>
     </div>
   </div>
   );
-}
+};

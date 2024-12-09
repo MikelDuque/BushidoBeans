@@ -34,13 +34,14 @@ public class AuthService
             {
                 { "id", user.Id },
                 { ClaimTypes.Email, model.Mail },
+                { ClaimTypes.Authentication, user.Password },
                 { ClaimTypes.Role, user.Role },
                 { ClaimTypes.Name, user.Name },
                 { ClaimTypes.Surname, user.Surname }
             },
 
             //Caducidad del token
-            Expires = DateTime.UtcNow.AddDays(5),
+            Expires = DateTime.UtcNow.AddHours(1),
 
             //Especificación de la clave y el algoritmo de firmado
             SigningCredentials = new SigningCredentials(

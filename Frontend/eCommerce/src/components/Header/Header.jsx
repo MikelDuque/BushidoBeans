@@ -2,43 +2,23 @@ import { useState, useRef, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import { useModal } from "../../context/ModalContext";
-import { useCarrito } from '../../context/CarritoContext';
+import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
 
 import Modal from '../Modals/Modal';
 import Cart from "../Modals/Shopping_Cart/Cart";
 
 import classes from './Header.module.css';
-import { jwtDecode } from 'jwt-decode';
 
 function Header() {
-  //HOOKS
-  const {
-    isOpen,
-    openModal,
-    closeModal
-  } = useModal();
 
-  const navigate = useNavigate();
+  /* ----- HOOKS Y CONSTS ----- */
+  const navigateTo = useNavigate();
 
-  const {token, decodedToken} = useAuth;
+  const {token, decodedToken, handleLogout} = useAuth();
+  const {openModal, closeModal} = useModal();
 
-  const { eliminarContenidoCarrito, totalProducts } = useCarrito();
-
-  function handleNavigateToCheckout() {
-    navigate('/checkout')
-  }
-
-  
-
-  const isAuthenticated = false;
-
-  
-  const handleLogout = () => {
-    console.log("hola");
-    
-    //logout();
-  };
+  const { deleteCart, totalProducts } = useCart();
   
 
   return (
@@ -49,21 +29,20 @@ function Header() {
         <NavLink className={`${classes.nl} ${classes.btn}`} to="/catalogo"> Té </NavLink>
         <NavLink className={`${classes.nl} ${classes.btn}`} to="/catalogo"> Tienda </NavLink>
         <NavLink className={`${classes.nl} ${classes.btn}`} to="/sobreNosotros"> Nosotros </NavLink>
-
-        {isAuthenticated ? (
+        
+        {token ? (
           <Desplegable handleLogout={handleLogout} decodedToken={decodedToken} />
         ) : (
-          <NavLink className={`${classes.nl} ${classes.btnc}`} to="/login"> Login </NavLink>
+          <NavLink className={`${classes.nl} ${classes.btnc}`} to="/login_register"> Login </NavLink>
         )}
       
-        <a onClick={openModal} className={`${classes.nl} ${classes.cesta}`} data-count={totalProducts}/>
+        <a onClick={() => openModal("cart")} className={`${classes.nl} ${classes.cesta}`} data-count={totalProducts}/>
       </nav>
 
-        {isOpen && (
-          <Modal type="cart" titulo={"Tu Carro"} cancelFnc={eliminarContenidoCarrito} continueFnc={handleNavigateToCheckout} buttonValues={{continueVal:"Procesar compra", cancelVal:"Vaciar carro"}}>
-            <Cart closeCart={closeModal}/>
-          </Modal>
-        )}
+      <Modal type="cart" titulo={"Tu Carro"} cancelFnc={deleteCart} continueFnc={() => navigateTo('/checkout')} buttonValues={{continueVal:"Procesar compra", cancelVal:"Vaciar carro"}}>
+        <Cart closeCart={closeModal}/>
+      </Modal>
+  
     </header>
   );
 }
@@ -93,8 +72,6 @@ const Desplegable = ({ handleLogout, decodedToken }) => {
   };
 
   function adminView() {
-    //const decodedToken = jwtDecode(token);
-    
     if (decodedToken?.role === "admin") {
       return (<NavLink className={`${classes.dnl} ${classes.desplOpcion}`} to="/vistaAdmin">Administración</NavLink>);
     }

@@ -34,9 +34,10 @@ public class UserRepository : Repository<User>
 
     public async Task<bool> IsLoginCorrect(string mail, string password)
     {
-        if (await GetByMailAsync(mail) == null) return false;
+        User existedUser = await GetByMailAsync(mail);
         
-        User user = await GetByMailAsync(mail);
-        return user.Password == password;
+        if (existedUser == null) return false;
+        
+        return existedUser.Password == password;
     }
 }

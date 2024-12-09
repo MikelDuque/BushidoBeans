@@ -1,15 +1,15 @@
-export default async function fetchEndpoint(url, type, token, params) {
+export default async function fetchEndpoint(url, type, token, params, needAuth) {
+  console.log(`PETICION: URL: ${url}, tipo: ${type}, token: ${token}, params stringtify: ${JSON.stringify(params)}, needAuth: ${needAuth}`);
+  
+  const response = (token && needAuth) ?
+    await defineFetch(url, type, token, params).catch((error) => error.status === 401).then(() => {throw "Unauthorized"}) :
+    await defineFetch(url, type, token, params);
 
-  try {
-    console.log(`PETICION: URL: ${url}, tipo: ${type}, token: ${token}, params: ${params}, params stringtify: ${JSON.stringify(params)}`);
-    
-    const response = await defineFetch(url, type, token, params);
+  const jsonResponse = await response.json();
 
-    if (response.ok) return await response.json();
-
-    throw new Error("Solicitud a la API fallida");
-
-  } catch (error) {throw new Error(error)};
+  if (response.ok) return jsonResponse;
+  
+  throw jsonResponse.message;
 };
 
 /* ------------------------- */
