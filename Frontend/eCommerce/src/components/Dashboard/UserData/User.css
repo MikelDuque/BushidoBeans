@@ -3,8 +3,9 @@
     gap: 2rem;
     margin: 2rem auto;
     max-width: 1200px;
-    
+    width: 100%;
 }
+
 .user-container {
     flex: 3;
     background-color: var(--fondo-vistas);
@@ -51,4 +52,90 @@
 .user-button:hover {
     background-color: var(--nav-hover);
     color: var(--fondo-vistas);
+}
+
+/* Adaptaciones móviles */
+@media (max-width: 720px) {
+    .user-wrapper {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1rem;
+        max-width: 100%;
+    }
+
+    .user-container {
+        padding: 1.5rem;
+        border-radius: 1rem;
+    }
+
+    .user-container h2 {
+        font-size: 1.8rem; /* Ajusta el tamaño relativo */
+    }
+
+    .user-info p {
+        font-size: 1.4rem;
+        margin: 0.8rem 0;
+    }
+
+    .user-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .user-wrapper {
+        padding: 1rem;
+        gap: 1rem;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .user-container {
+        padding: 1rem;
+        border-radius: 0.8rem;
+        width: 100%;
+    }
+
+    .user-container h2 {
+        font-size: 1.6rem;
+    }
+
+    .user-info p {
+        font-size: 1.2rem;
+        margin: 0.5rem 0;
+    }
+
+    .user-button {
+        padding: 0.6rem 1.2rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .user-wrapper {
+        padding: 1rem;
+        gap: 1rem;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .user-container {
+        padding: 0.8rem;
+        border-radius: 0.5rem;
+        width: 100%;
+    }
+
+    .user-container h2 {
+        font-size: 1.4rem;
+    }
+
+    .user-info p {
+        font-size: 1rem;
+    }
+
+    .user-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
 }

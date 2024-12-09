@@ -2,18 +2,17 @@ import { useEffect, useState } from "react";
 import * as jwtDecode from "jwt-decode";
 import "./UserAddress.css";
 import Sidebar from "../UserSidebar/Sidebar";
-import AñadirDireccion from "../../DireccionEnvio/AñadirDireccion/AñadirDireccion";
+import AñadirDireccion from "../../CheckoutPages/DireccionEnvio/AñadirDireccion/AñadirDireccion.jsx";
 import { GET_ALL_ADDRESSES_BY_ID, DELETE_ADDRESS } from "../../../endpoints/config";
-import { useAuth } from "../../../context/AuthContext.jsx";
 
 function UserAddress() {
     const [addresses, setAddresses] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [showAddAddress, setShowAddAddress] = useState(false);
-    const { token } = useAuth();
-    const userId = jwtDecode.jwtDecode(token).id;
-
+    const  token  = localStorage.getItem("accessToken");
+    const decodedToken = jwtDecode.jwtDecode(token);
+    const userId = decodedToken.id;
     useEffect(() => {
         const fetchAddresses = async () => {
             try {
