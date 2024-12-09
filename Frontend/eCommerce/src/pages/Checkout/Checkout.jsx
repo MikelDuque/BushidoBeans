@@ -1,10 +1,8 @@
 import { useCheckout } from "../../context/CheckoutContext";
-import HeaderChk from "../../components/Header/HeaderChk/HeaderChk.jsx";
-import Footer from "../../components/Footer/Footer";
 import classes from './Checkout.module.css';
 import ChkCart from "../../components/CheckoutPages/ChkCart";
 import ChkAddress from "../../components/CheckoutPages/ChkAddress";
-import ConfirmarPedido from "../../components/CheckoutPages/Confirmacion/ConfirmarPedido.jsx";
+import ChkConfirm from "../../components/CheckoutPages/ChkConfirm.jsx";
 
 function Checkout() {
   const { currentView, handleButtonClick } = useCheckout('cart');
@@ -18,7 +16,6 @@ function Checkout() {
 
   return (
     <>
-      <HeaderChk />
       <div className={classes.checkoutContainer}>
         <div className={classes.buttonGroup}>
           <button
@@ -40,10 +37,9 @@ function Checkout() {
         <div className={classes.content}>
           {currentView === 'cart' && <ChkCart />}
           {currentView === 'address' && <ChkAddress />}
-          {currentView === 'confirm' && <ConfirmarPedido />}
+          {currentView === 'confirm' && <ChkConfirm/>}
         </div>
       </div>
-      <Footer />
     </>
   );
 }

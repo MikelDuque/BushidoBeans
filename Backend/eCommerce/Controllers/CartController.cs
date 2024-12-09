@@ -11,6 +11,7 @@ namespace eCommerce.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CartController : ControllerBase
     {
         private readonly CartService _cartService;
@@ -21,7 +22,6 @@ namespace eCommerce.Controllers
         }
 
 
-        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult> GetCartByIdAsync(long id)
         {
@@ -33,14 +33,12 @@ namespace eCommerce.Controllers
             return Ok(cartList);
         }
 
-        [Authorize]
         [HttpPut("Update_Cart")]
         public async Task<ActionResult> UpdateCartAsync([FromBody] Cart cart)
         {
             return Ok(await _cartService.UpdateCartAsync(cart));
         }
 
-        [Authorize]
         [HttpPut("Update_CartProduct")]
         public ActionResult<bool> UpdateCartProductAsync([FromBody] UpdatedCartProduct cartProduct)
         {
@@ -51,7 +49,6 @@ namespace eCommerce.Controllers
             return Ok(_cartService.UpdateCartProductAsync(cartProduct));
         }
 
-        [Authorize]
         [HttpDelete("Delete_Cart/{id}")]
         public async Task<ActionResult> DeleteCartByIdAsync(long id)
         {
@@ -62,7 +59,6 @@ namespace eCommerce.Controllers
             catch (NullReferenceException) {return BadRequest(new {message = "El item a eliminar no existe en la base de datos"});}
         }
 
-        [Authorize]
         [HttpDelete("Delete_CartProduct")]
         public async Task<ActionResult> DeleteCartProductAsync([FromBody] UpdatedCartProduct cartProduct)
         {

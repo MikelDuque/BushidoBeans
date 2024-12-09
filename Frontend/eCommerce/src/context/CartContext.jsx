@@ -42,11 +42,11 @@ export function CartProvider({ children }) {
 
     }, [decodedToken]);
 
-    useEffect(() => {
+    useEffect(() => {  
         if(token && fetchData) getBackendCart();
 
     }, [token, fetchData]);
-
+    
 
     function setMergeParams() {
         mergeParams.current = {
@@ -78,7 +78,7 @@ export function CartProvider({ children }) {
     }
 
     function updateCart(newProduct) {
-        const existsIndex = cart.findIndex((prevProduct) => prevProduct.id === newProduct.id);
+        const existsIndex = cart.findIndex((prevProduct) => prevProduct.productId === newProduct.productId);
         let updatedCart = [...cart];
 
         if (existsIndex !== -1) {    
@@ -99,7 +99,7 @@ export function CartProvider({ children }) {
     };
 
     function deleteCartItem(id) {
-        const updatedCart = [...cart].filter((item) => item.id !== id);
+        const updatedCart = [...cart].filter((item) => item.productId !== id);
 
         handleCart(updatedCart);
     }
@@ -111,7 +111,7 @@ export function CartProvider({ children }) {
         if (token) {
             const updatedProduct = {
                 userId: decodedToken.id,
-                productId: product.id,
+                productId: product.productId,
                 quantity: product.quantity
             };
     

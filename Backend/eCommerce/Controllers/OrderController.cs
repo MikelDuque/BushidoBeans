@@ -1,8 +1,6 @@
-﻿using eCommerce.Models.Database.Entities;
-using eCommerce.Models.Dtos;
+﻿using eCommerce.Models.Dtos;
 using eCommerce.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -10,6 +8,7 @@ namespace eCommerce.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class OrderController : ControllerBase
     {
         private readonly OrderService _orderService;
@@ -19,25 +18,31 @@ namespace eCommerce.Controllers
         }
 
 
-        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult> GetOrderByIdAsync(long id)
         {
+            Claim userClaimId = User.FindFirst("id");
+            if (userClaimId == null) return Unauthorized(new {Message = "Debes iniciar sesión para llevar a cabo esta acción"});
+
             return Ok(await _orderService.GetOrderByIdAsync(id));
         }
         
         [HttpPost("Insert_Order")]
         public async Task<ActionResult> PostOrder([FromBody]OrderDto order)
         {
+            Claim userClaimId = User.FindFirst("id");
+            if (userClaimId == null) return Unauthorized(new {Message = "Debes iniciar sesión para llevar a cabo esta acción"});
+
             return Ok(await _orderService.InsertOrderAsync(order));
         }
 
-        //[Authorize]
-        [HttpGet("Get_Orders")]
-        public async Task<ActionResult> GetOrdersByUserIdAsync(long userId)
+        [HttpGet("Get_User_Orders/{id}")]
+        public async Task<ActionResult> GetOrdersByUserIdAsync(long id)
         {
-            var orders = await _orderService.GetOrdersByUserIdAsync(userId);
-            return Ok(orders);
+            Claim userClaimId = User.FindFirst("id");
+            if (userClaimId == null) return Unauthorized(new {Message = "Debes iniciar sesión para llevar a cabo esta acción"});
+
+            return Ok(await _orderService.GetOrdersByUserIdAsync(id));
         }
 
     }

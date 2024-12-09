@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import * as jwtDecode from "jwt-decode";
 import "./UserProfile.css";
 import { PUT_USER, GET_USER_BY_ID } from "../../../endpoints/config";
 import Alert from "../../Alert/Alert";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context/AuthContext";
 
 function UserProfile() {
+    const {token, decodedToken} = useAuth();
+    const userId = decodedToken?.id || 0;
+
     const [user, setUser] = useState({
         id: "",
         name: "",
@@ -21,9 +24,6 @@ function UserProfile() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const token = localStorage.getItem("accessToken");
-                const userId = jwtDecode.jwtDecode(token).id;
-
                 const response = await fetch(GET_USER_BY_ID(userId), {
                     headers: { "Authorization": `Bearer ${token}` },
                 });

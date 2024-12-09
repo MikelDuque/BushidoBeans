@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
-import * as jwtDecode from "jwt-decode";
 import "./UserOrders.css";
 import Sidebar from "../UserSidebar/Sidebar";
-import { GET_ORDERS_BY_ID } from "../../../endpoints/config.js";
+import { GET_ORDERS_BY_USER_ID } from "../../../endpoints/config.js";
+import { useAuth } from "../../../context/AuthContext.jsx";
 function UserOrders() {
+    const {token, decodedToken} = useAuth();
+    const userId = decodedToken?.id || 0;
+
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -15,13 +18,7 @@ function UserOrders() {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const token = localStorage.getItem("accessToken");
-                if (!token) throw new Error("Token not found");
-
-                const decodedToken = jwtDecode.jwtDecode(token);
-                const userId = decodedToken.id;
-
-                const response = await fetch(GET_ORDERS_BY_ID(userId), {
+                const response = await fetch(GET_ORDERS_BY_USER_ID(userId), {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`,

@@ -48,13 +48,14 @@ const API_USER_URL = `${API_BASE_URL}/api/User`;
 const API_ORDER_URL = `${API_BASE_URL}/api/Order`;
 
   export function GET_ORDER_BY_ID(id) {return `${API_ORDER_URL}/${id}`};
-  export function GET_ORDERS_BY_ID(id) {return `${API_ORDER_URL}/Get_Orders?userId${id}`};
+  export function GET_ORDERS_BY_USER_ID(id) {return `${API_ORDER_URL}/Get_User_Orders/${id}`};
   export const POST_ORDER = `${API_ORDER_URL}/Insert_Order`;
 
-/* --- ADDRESS CONTROLLER --- */
 
+/* --- ADDRESS CONTROLLER --- */
 const API_ADDRESS_URL = `${API_BASE_URL}/api/Address`;
+
   export function GET_ADDRESS_BY_ID(id) {return `${API_ADDRESS_URL}/${id}`};
-  export function GET_ALL_ADDRESSES_BY_ID(id) {return `${API_ADDRESS_URL}/Get_All_Addresses?userId=${id}`};
+  export function GET_ADDRESSES_BY_USER_ID(id) {return `${API_ADDRESS_URL}/Get_User_Addresses/${id}`};
   export const POST_ADDRESS = `${API_ADDRESS_URL}/Insert_Address`;
-  export function DELETE_ADDRESS(id) {return `${API_ADDRESS_URL}/Delete_Address?id=${id}`};
+  export function DELETE_ADDRESS_BY_ID(id) {return `${API_ADDRESS_URL}/Delete_Address/${id}`};

@@ -19,7 +19,7 @@ export default function useFetch({url, type, token, params, needAuth}) {
       setFetchError();
 
     } catch (error) {
-      if(error === "Unauthorized") startExpCountdown()
+      if(error === "Unauthorized") {startExpCountdown, console.log("unauthorized")}
       setFetchError(error);
 
     } finally {

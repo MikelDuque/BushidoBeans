@@ -28,12 +28,10 @@ export function AuthProvider({ children }) {
     
 
     useEffect(() => {
-        console.log("token?", token);
-        
         if (token && logoutTime <= 0) startExpCountdown();
 
-        return () => {cancelCountdown()};
-    }, []);
+        return () => {instance.timer = cancelTimer();};
+    }, [decodedToken]);
 
 
     /* ----- FUNCIONES ----- */
@@ -56,12 +54,10 @@ export function AuthProvider({ children }) {
     /* ----- TOKEN EXPIRATION CONTROLL ----- */
 
     function startExpCountdown() { 
-        if(!token) return;
-        handleLogout();
-
-        //Sin un "Refresh token" no sirve el resto de la funcionalidad...
+        console.log("entraste en countdown");
         
-        /*
+        if(!token) return;
+        
         instance.timer = cancelTimer();
         instance.timer = setTimeout(() => {
             handleLogout();
@@ -69,24 +65,20 @@ export function AuthProvider({ children }) {
         }, 30000);
         
         handleDomEvents(true);
-        */
+        
     };
 
     function cancelCountdown() {
         instance.timer = cancelTimer();
         handleDomEvents(false);
-        relogin();
+        //relogin();    Sin un "Refresh token" no se puede terminar el componente...
     }
 
     async function relogin() {
         const loginData = {
             mail: decodedToken.current.email,
             password: decodedToken.current.password
-        };
-        console.log("loginData", loginData);
-        console.log("decodedToken", decodedToken.current);
-        
-        
+        };    
 
         const data = await fetchingData({url: LOGIN_URL, type: 'POST', params:loginData, needAuth:false});
 
