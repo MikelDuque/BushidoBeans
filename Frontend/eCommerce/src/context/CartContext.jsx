@@ -43,7 +43,7 @@ export function CartProvider({ children }) {
     }, [decodedToken]);
 
     useEffect(() => {
-        if(token && fetchData) setCart(fetchData);
+        if(token && fetchData) getBackendCart();
 
     }, [token, fetchData]);
 
@@ -58,6 +58,11 @@ export function CartProvider({ children }) {
     function getLocalCart() {
         const localCart = localStorage.getItem('cart');
         return localCart ? JSON.parse(localCart) : [];
+    }
+
+    function getBackendCart() {
+        setCart(fetchData);
+        localStorage.removeItem('cart');
     }
 
 

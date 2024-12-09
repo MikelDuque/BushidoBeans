@@ -7,31 +7,35 @@ import CheckoutLayout from "./layouts/CheckoutLayout/CheckoutLayout";
 
 
 /* ----- CONTEXTS ----- */
-import { ReviewProvider } from "./context/ReviewContext";
 import { CheckoutProvider } from './context/CheckoutContext';
 
 
 /* ----- RESTRICTED ROUTES ----- */
-import { AdminPrivateRoute } from "./utils/RestrictedRoute";
+import {
+    AdminPrivateRoute,
+    LoginPrivateRoute,
+    LogoutPrivateRoute
+} from "./utils/RestrictedRoute";
+
 
 /* ----- PAGES ----- */
 import Inicio from "./pages/Inicio/Inicio";
 import Login_Register from "./pages/Login-Register/Login_Register";
 
-import Catalogo from "./pages/Catalogo";
-import DetallesProducto from './pages/DetallesProducto';
+import Catalogo from "./pages/Catalogo/Catalogo";
+import ProductDetails from './pages/Product_Details/ProductDetails';
 
 import Checkout from "./pages/Checkout/Checkout";
-import ConfirmarPedido from "./pages/Checkout/ConfirmarPedido";
+//import ConfirmarPedido from "./pages/Checkout/ConfirmarPedido";
 
-import SobreNosotros from './pages/SobreNosotros';
+import SobreNosotros from './pages/SobreNosotros/SobreNosotros';
 
 import User from "./components/Dashboard/UserData/User";
 import UserProfile from './components/Dashboard/UserProfile/UserProfile';
 import UserAddress from './components/Dashboard/UserAddress/UserAddress';
 import UserOrders from './components/Dashboard/UserOrders/UserOrders';
 
-import DireccionEnvio from "./components/DireccionEnvio/DireccionEnvio";
+import DireccionEnvio from "./components/CheckoutPages/DireccionEnvio/DireccionEnvio";
 
 import AdminView from "./pages/AdminView/AdminView";
 
@@ -50,14 +54,14 @@ export default function App() {
 
             {/* ----- GENERAL LAYOUT ----- */}
             <Route path="/" element={<BigLayout/>}>
-                <Route path="login_register" element={<Login_Register/>}/>
+                <Route path="login_register" element={
+                    <LoginPrivateRoute>
+                        <Login_Register/>
+                    </LoginPrivateRoute>
+                }/>
                 
                 <Route path="/catalogo" element={<Catalogo />} />
-                <Route path="/producto/:id" element={
-                    <ReviewProvider>
-                        <DetallesProducto />
-                    </ReviewProvider>
-                } />
+                <Route path="/producto/:id" element={<ProductDetails/>} />
 
                 <Route path="/sobreNosotros" element={<SobreNosotros />} />
 
@@ -74,19 +78,21 @@ export default function App() {
                     </AdminPrivateRoute>
                 }/>
 
-                <Route path="/400" element={<NotFound />} />
+                <Route path="/NotFound" element={<NotFound />} />
             </Route>
 
             {/* ----- CHECKOUT LAYOUT ----- */}
             <Route path="/" elements={<CheckoutLayout/>}>
                 <Route path="/checkout" element={
                     <CheckoutProvider>
-                        <Checkout />
+                        <LogoutPrivateRoute>
+                            <Checkout />
+                        </LogoutPrivateRoute>  
                     </CheckoutProvider>
                 }/>
             </Route>
 
-            <Route path="/ConfirmarPedido" element={<ConfirmarPedido />} />
+            {/*<Route path="/confirmarPedido" element={<ConfirmarPedido />} />*/}
 
             {/* QUITAR ESTA RUTA; VIENE INCORPORADA EN EL CHEKOUT */}
             <Route path="/direccion" element={

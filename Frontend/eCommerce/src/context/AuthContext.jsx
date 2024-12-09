@@ -2,6 +2,7 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import useFetchEvent from "../endpoints/useFetchEvent";
 
 const AuthContext = createContext({
     token: null,
@@ -17,42 +18,57 @@ export function AuthProvider({ children }) {
     /* ----- HOOKS Y CONSTS ----- */
 
     const navigateTo = useNavigate()
+    const {fetchingData} = useFetchEvent();
 
-    const [token, setToken] = useState(sessionStorage?.getItem('token') || null);
+    const [token, setToken] = useState(sessionStorage.getItem('accessToken'));
     const decodedToken = useRef(token ? jwtDecode(token) : null);
+    //const logoutTimer = useRef(decodedToken?.exp - Date.now().valueOf() / 1000 || 0);
     
     useEffect(() => {
-        //handleExpiration();
         
-    }, []);
+    }, [token]);
 
 
     /* ----- FUNCIONES ----- */
 
     function handleLogin(newToken) {
         if (newToken) {
-            sessionStorage.setItem('token', newToken);
-            setToken(newToken);
+            sessionStorage.setItem('accessToken', newToken);
+            setToken(newToken);          
             
             navigateTo('/');
         }
     };
 
     function handleLogout() {
-        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('accessToken');
         setToken(null);
         decodedToken.current = null;
     };
 
-    function handleExpiration() {
-        if(!decodedToken.current) return;
 
-        const expirationDate = decodedToken.current.exp;
-        const currentTime = Date.now().valueOf() / 1000;
-        
-        console.log(`exp date ${expirationDate}, current ${currentTime}`);
+    function tokenExpControl() {
+        window.addEventListener(clearTimeout(logoutCountdown));
 
-        if(expirationDate < currentTime) handleLogout();
+        const logoutCountdown = setTimeout(() => {
+            handleLogout();
+        }, 15000);
+
+        clearTimeout(logoutCountdown);
+        window.removeEventListener(clearTimeout(logoutCountdown));
+
+        if(token) relogin();
+    };
+
+    async function relogin() {
+        const loginData = {
+            mail: decodedToken.current.mail,
+            password: decodedToken.current.password
+        };
+
+        const data = await fetchingData({url: LOGIN_URL, type: 'POST', params:loginData});
+
+        if(data) handleLogin(data.accessToken);
     };
 
 

@@ -22,8 +22,6 @@ const API_PRODUCT_URL = `${API_BASE_URL}/api/Product`;
 const API_REVIEW_URL = `${API_BASE_URL}/api/Review`;
 
   export function GET_REVIEW_BY_ID(id) {return `${API_REVIEW_URL}/${id}`};
-  //export function GET_REVIEWS_BY_PRODUCT_ID(id) {return `${API_REVIEW_URL}/Product_Reviews/${id}`};
-  //export function GET_REVIEWS_BY_USER_ID(id) {return `${API_REVIEW_URL}/User_Reviews/${id}`};
   export const POST_REVIEW = `${API_REVIEW_URL}/Insert_Review`;
 
 

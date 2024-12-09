@@ -1,0 +1,82 @@
+import { useState, useEffect } from 'react';
+import { GET_ORDER_BY_ID } from "../../../endpoints/config";
+import './Confirmacion.css';
+import { useCheckout } from '../../../context/CheckoutContext';
+import { useAuth } from '../../../context/AuthContext';
+
+function ConfirmarPedido() {
+  const { address } = useCheckout();
+  const { token, decodedToken } = useAuth();
+  const [datos, setDatos] = useState([]);
+  const [user, setUser] = useState(null);
+  const [userId, setUserId] = useState(null);
+
+  function dateFormatting(date) {
+    return new Date(date).toLocaleDateString('es-es', {year:"numeric", month:"long", day:"numeric", hour:"numeric", minute:"numeric"});
+  }
+
+  useEffect(() => {
+      if (decodedToken) {
+          try {
+              setUser(decodedToken.unique_name);  
+              setUserId(decodedToken.id);
+          } catch (error) {
+              console.error("Error al decodificar el token", error);
+          }
+      } else {
+          console.error("Token no encontrado");
+      }
+  }, []);
+
+  useEffect(() => {
+      const fetchData = async () => {
+          if (userId) {
+              try {
+                  const url = GET_ORDER_BY_ID(userId);
+                  const response = await fetch(url, { 
+                      method: 'GET', 
+                      headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                  });
+                  const data = await response.json();
+                  console.log("url", url);
+                  console.log("respuesta api", data);
+                  setDatos(data); 
+              } catch (error) { 
+                  alert("Hubo un error al cargar los productos.");
+              }
+          }
+      };
+      fetchData();
+  }, [userId]);
+    
+
+  return (
+    <>
+    {datos.totalProducts > 0 ? (
+      <div className="order-confirmation">
+        <h1>Confirmación de Pedido</h1>
+        <div><strong>Usuario:</strong> {user}</div>
+        <div><strong>Fecha de compra:</strong> {dateFormatting(datos.purchaseDate)}</div>
+        <div><strong>Precio total:</strong> {datos.totalPrice} €</div>
+        <div><strong>Productos Totales:</strong> {datos.totalProducts} productos</div>
+        <div><strong>Productos:</strong></div>
+        <ul>
+            <li>{datos.orderProducts}</li>
+        </ul>
+        <div>
+            <strong>Dirección:</strong>
+            <p>{address}</p>
+        </div>
+      </div>
+    ) : (
+      <div className='order-confirmation2'>No hay ningún pedido aún</div>
+    )}
+    </>
+  ) 
+  
+}
+
+export default ConfirmarPedido;
