@@ -1,13 +1,21 @@
 import { useState } from 'react';
-import ProductList from '../../components/AdminComponents/ProductList/ProductList.jsx';
-import UserList from '../../components/AdminComponents/UserList/UserList.jsx';
-import classes from './AdminView.module.css';
-import SwitchButton from '../../components/AdminComponents/SwitchButton/SwitchButton.jsx';
+
+//Modal
 import { useModal } from '../../context/ModalContext.jsx';
 import Modal from '../../components/Modals/Modal.jsx';
-import PostProductModal from '../../components/AdminComponents/ProductList/PostProductModal/PostProductModal.jsx';
+import PostProduct from '../../components/Modals/PostProduct/PostProduct.jsx';
+
+//Componentes
+import SwitchButton from '../../components/AdminComponents/SwitchButton/SwitchButton.jsx';
+import ProductList from '../../components/AdminComponents/ProductList/ProductList.jsx';
+import UserList from '../../components/AdminComponents/UserList/UserList.jsx';
+
+//Utilidades
 import { POST_PRODUCT } from '../../endpoints/config.js';
 import { useAuth } from '../../context/AuthContext.jsx';
+
+import classes from './AdminView.module.css';
+
 
 export default function AdminView() {
     const [view, setView] = useState(false);   
@@ -74,14 +82,8 @@ export default function AdminView() {
             {!view && (
                 <button className={classes.buttonAñadirProducto} onClick={() => openModal("postProduct")}>Añadir producto</button>
             )}
-            <Modal
-                buttonValues={{ continueVal: "Enviar", cancelVal: "Cancelar" }}
-                type="postProduct"
-                titulo="Nuevo Producto"
-                continueFnc={continueSubmit}  
-                cancelFnc={cancelSubmit}  
-            >
-                <PostProductModal />
+            <Modal type="postProduct" titulo="Nuevo Producto" continueFnc={continueSubmit} cancelFnc={cancelSubmit} buttonValues={{ continueVal: "Enviar", cancelVal: "Cancelar" }}>
+                <PostProduct />
             </Modal>
             <div className={classes.view_container}>
                 {view ? <UserList /> : <ProductList />}
