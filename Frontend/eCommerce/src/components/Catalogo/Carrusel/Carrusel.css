@@ -1,0 +1,31 @@
+
+.slick-slide img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    
+}
+
+.slick-prev, .slick-next {
+    color: #333;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.slick-prev {
+    left: 10px;
+}
+
+.slick-next {
+    right: 30px;
+}
+
+.slick-dots {
+    display: none;
+}
+

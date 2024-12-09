@@ -1,0 +1,11 @@
+.container {
+  border: 1px solid black;
+  list-style-type: none;
+  background-color: rgba(175, 220, 150, 0.25);
+  border-radius: 10px;
+}
+
+.deleteAlert {
+  height: fit-content;
+  padding: 0 20px;
+}

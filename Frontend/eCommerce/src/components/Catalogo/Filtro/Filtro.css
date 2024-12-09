@@ -1,0 +1,44 @@
+.filtro{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    width: 100%;
+    margin-top: 20px;
+    border-right: 2px solid var(--nav-footer);
+}
+
+.botonFiltroG {
+    height: auto;
+    width: 90%;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    padding: 5px;
+
+    border-radius: 12px;
+    text-align: left;
+    background-color: var(--fondo-vistas);
+    gap: 10px;
+}
+
+.botonFiltroG label {
+    font-family: var(--font-family-titulos-subtitulos);
+    font-size: var(--texto-size);
+    font-weight: var(--font-weight-regular);
+    
+}
+
+.botonFiltroG select {
+    width: 100%;
+    border-radius: 4px;
+    padding: 2px;
+    border: none;
+    outline: none;
+    background-color: var(--fondo-vistas);
+    cursor: pointer;
+    font-family: var(--font-family-texto);
+    font-size:  var(--texto-size);
+    font-weight: var(--font-weight-regular);
+    border: 1px solid #00000081 ;
+    box-shadow: 0px 0px 10px hsla(96, 79%, 70%, 0.333);
+
+}

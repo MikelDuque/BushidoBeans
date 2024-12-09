@@ -1,0 +1,20 @@
+.starContainer {
+    display: flex;
+    gap: 5px;
+    cursor: pointer;
+  }
+  
+  .star {
+    font-size: 50px;
+    color: gray;
+    transition: color 0.3s ease;
+  }
+  
+  .star.filled {
+    color: gold;
+  }
+  
+  .star:hover {
+    transform: scale(1.1);
+  }
+  

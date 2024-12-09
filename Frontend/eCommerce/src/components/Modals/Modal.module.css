@@ -1,0 +1,105 @@
+.screen_container{
+  position: absolute;
+  height: 100vh;
+}
+
+.overlay {
+  position:fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.50);
+  z-index: 100;
+}
+
+.modal {
+  position: fixed;
+  z-index: 101;
+  padding: 2rem;
+  max-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  background-color: var(--fondo-vistas);
+}
+
+.modal--cart {
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 30vw;
+}
+
+.modal--postProduct, .modal--postReview, .modal--deleteUser {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  border-radius: 20px;
+}
+
+.importantText {
+  font-family: var(--font-family-titulos-subtitulos);
+  font-size: var(--subtitulos-size);
+  color: var(--texto-principal);
+}
+
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.closeButton {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.content {
+  height: 100%;
+}
+
+
+/* BUTTONS */
+
+.buttonContainer {
+  height: 5rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+  
+.button {
+  min-width: 15rem;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background-color: var(--nav-footer);
+  color: var(--letras-nav);
+
+  &:hover {
+    background-color: var(--dark-hover);
+  }
+
+  &:active {
+    background-color: var(--nav-click);
+  }
+}
+
+
+.confirmBtn--deleteUser {
+  background-color: darkred;
+
+  &:hover {
+    background-color: red;
+  }
+
+  &:active {
+    background-color: lightcoral;
+  }
+}

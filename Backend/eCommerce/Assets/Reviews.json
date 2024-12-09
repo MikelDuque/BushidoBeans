@@ -1,0 +1,402 @@
+[
+  {
+    "Id": 1,
+    "Score": 3,
+    "Body": "Un café espresso auténtico, fuerte y con cuerpo, ideal para comenzar el día.",
+    "ProductId": 1,
+    "UserId": 1,
+    "PubliDate": "2024-11-11"
+  },
+  {
+    "Id": 2,
+    "Score": 2,
+    "Body": "Está bien, pero me gustaría que fuera un poco más fuerte.",
+    "ProductId": 1,
+    "UserId": 4,
+    "PubliDate": "2024-10-28"
+  },
+  {
+    "Id": 3,
+    "Score": 2,
+    "Body": "Es bueno, pero el sabor de vainilla es muy suave.",
+    "ProductId": 3,
+    "UserId": 2,
+    "PubliDate": "2024-10-16"
+  },
+  {
+    "Id": 4,
+    "Score": 3,
+    "Body": "Me encanta el toque de vainilla, la leche está bien espumada. Muy bueno.",
+    "ProductId": 3,
+    "UserId": 4,
+    "PubliDate": "2024-11-03"
+  },
+  {
+    "Id": 5,
+    "Score": 3,
+    "Body": "Delicioso y con un sabor único. Un toque de dulzura perfecto.",
+    "ProductId": 4,
+    "UserId": 1,
+    "PubliDate": "2024-10-20"
+  },
+  {
+    "Id": 6,
+    "Score": 2,
+    "Body": "Sabe bien, pero esperaba algo más fuerte para ser un café.",
+    "ProductId": 4,
+    "UserId": 3,
+    "PubliDate": "2024-11-01"
+  },
+  {
+    "Id": 7,
+    "Score": 3,
+    "Body": "El sabor del café cappuccino con un toque de cacao es increíble.",
+    "ProductId": 5,
+    "UserId": 5,
+    "PubliDate": "2024-11-09"
+  },
+  {
+    "Id": 8,
+    "Score": 3,
+    "Body": "Excelente, no me canso de tomarlo. Sabe fresco y suave.",
+    "ProductId": 5,
+    "UserId": 1,
+    "PubliDate": "2024-10-17"
+  },
+  {
+    "Id": 9,
+    "Score": 3,
+    "Body": "Me encanta el café frío, refrescante y suave, ideal para el calor.",
+    "ProductId": 7,
+    "UserId": 5,
+    "PubliDate": "2024-10-27"
+  },
+  {
+    "Id": 10,
+    "Score": 2,
+    "Body": "Está bien, pero esperaba algo más fuerte.",
+    "ProductId": 7,
+    "UserId": 3,
+    "PubliDate": "2024-10-12"
+  },
+  {
+    "Id": 11,
+    "Score": 3,
+    "Body": "El sabor de la avellana es delicioso, definitivamente lo compraré de nuevo.",
+    "ProductId": 9,
+    "UserId": 3,
+    "PubliDate": "2024-10-10"
+  },
+  {
+    "Id": 12,
+    "Score": 2,
+    "Body": "Buen sabor, pero un poco demasiado dulce para mi gusto.",
+    "ProductId": 9,
+    "UserId": 4,
+    "PubliDate": "2024-10-06"
+  },
+  {
+    "Id": 13,
+    "Score": 2,
+    "Body": "Me esperaba algo más fuerte, pero no está mal.",
+    "ProductId": 10,
+    "UserId": 2,
+    "PubliDate": "2024-10-09"
+  },
+  {
+    "Id": 14,
+    "Score": 3,
+    "Body": "Muy bueno, tiene el sabor que busco. Lo recomiendo.",
+    "ProductId": 10,
+    "UserId": 5,
+    "PubliDate": "2024-11-04"
+  },
+  {
+    "Id": 15,
+    "Score": 3,
+    "Body": "Excelente para una tarde tranquila. El sabor es perfecto.",
+    "ProductId": 11,
+    "UserId": 1,
+    "PubliDate": "2024-10-15"
+  },
+  {
+    "Id": 16,
+    "Score": 1,
+    "Body": "Demasiado dulce, no es lo que esperaba.",
+    "ProductId": 12,
+    "UserId": 4,
+    "PubliDate": "2024-10-19"
+  },
+  {
+    "Id": 17,
+    "Score": 3,
+    "Body": "El caramelo le da un toque muy especial. Me encanta.",
+    "ProductId": 12,
+    "UserId": 5,
+    "PubliDate": "2024-10-27"
+  },
+  {
+    "Id": 18,
+    "Score": 3,
+    "Body": "Ideal para los que prefieren algo más suave, y la leche es perfecta.",
+    "ProductId": 13,
+    "UserId": 2,
+    "PubliDate": "2024-10-03"
+  },
+  {
+    "Id": 19,
+    "Score": 3,
+    "Body": "Un té verde refrescante, muy agradable al gusto.",
+    "ProductId": 14,
+    "UserId": 1,
+    "PubliDate": "2024-10-13"
+  },
+  {
+    "Id": 20,
+    "Score": 2,
+    "Body": "Está bien, pero no me convenció del todo.",
+    "ProductId": 14,
+    "UserId": 3,
+    "PubliDate": "2024-10-25"
+  },
+  {
+    "Id": 21,
+    "Score": 3,
+    "Body": "El té negro tiene el sabor justo. Muy bueno para una mañana fría.",
+    "ProductId": 15,
+    "UserId": 2,
+    "PubliDate": "2024-10-08"
+  },
+  {
+    "Id": 22,
+    "Score": 1,
+    "Body": "No me gustó el sabor, esperaba algo más fuerte.",
+    "ProductId": 16,
+    "UserId": 4,
+    "PubliDate": "2024-10-14"
+  },
+  {
+    "Id": 23,
+    "Score": 3,
+    "Body": "Un té suave, perfecto para la noche.",
+    "ProductId": 16,
+    "UserId": 5,
+    "PubliDate": "2024-11-02"
+  },
+  {
+    "Id": 24,
+    "Score": 3,
+    "Body": "Me encanta el sabor fresco y floral de este té. Perfecto para relajarme por la tarde.",
+    "ProductId": 18,
+    "UserId": 1,
+    "PubliDate": "2024-11-03"
+  },
+  {
+    "Id": 25,
+    "Score": 2,
+    "Body": "Está bien, pero esperaba que tuviera un sabor más fuerte.",
+    "ProductId": 18,
+    "UserId": 2,
+    "PubliDate": "2024-10-28"
+  },
+  {
+    "Id": 26,
+    "Score": 3,
+    "Body": "Un té suave y refrescante, ideal para después de las comidas.",
+    "ProductId": 18,
+    "UserId": 3,
+    "PubliDate": "2024-10-25"
+  },
+  {
+    "Id": 27,
+    "Score": 1,
+    "Body": "No me gusta mucho el sabor, esperaba algo más fuerte.",
+    "ProductId": 19,
+    "UserId": 4,
+    "PubliDate": "2024-10-30"
+  },
+  {
+    "Id": 28,
+    "Score": 3,
+    "Body": "Este té con leche tiene un sabor delicioso, cremoso y justo lo que buscaba.",
+    "ProductId": 19,
+    "UserId": 5,
+    "PubliDate": "2024-10-24"
+  },
+  {
+    "Id": 29,
+    "Score": 2,
+    "Body": "Es un buen té, pero esperaba más sabor a leche.",
+    "ProductId": 19,
+    "UserId": 2,
+    "PubliDate": "2024-11-01"
+  },
+  {
+    "Id": 30,
+    "Score": 3,
+    "Body": "Un té fresco y delicioso. Perfecto para un día caluroso.",
+    "ProductId": 20,
+    "UserId": 1,
+    "PubliDate": "2024-11-04"
+  },
+  {
+    "Id": 31,
+    "Score": 2,
+    "Body": "Está bien, pero no es tan dulce como esperaba.",
+    "ProductId": 20,
+    "UserId": 3,
+    "PubliDate": "2024-10-22"
+  },
+  {
+    "Id": 32,
+    "Score": 3,
+    "Body": "Excelente opción para el verano. Muy refrescante y ligero.",
+    "ProductId": 20,
+    "UserId": 4,
+    "PubliDate": "2024-10-19"
+  },
+  {
+    "Id": 33,
+    "Score": 3,
+    "Body": "Un té especiado y cálido, perfecto para un día frío. Me encantó.",
+    "ProductId": 22,
+    "UserId": 3,
+    "PubliDate": "2024-10-27"
+  },
+  {
+    "Id": 34,
+    "Score": 3,
+    "Body": "El sabor es increíble, me encanta lo bien equilibradas que están las especias.",
+    "ProductId": 22,
+    "UserId": 4,
+    "PubliDate": "2024-10-19"
+  },
+  {
+    "Id": 35,
+    "Score": 2,
+    "Body": "Es rico, pero me gustaría que fuera un poco más intenso en sabor.",
+    "ProductId": 22,
+    "UserId": 5,
+    "PubliDate": "2024-11-02"
+  },
+  {
+    "Id": 36,
+    "Score": 3,
+    "Body": "Me encanta este té rooibos con limón, es muy refrescante y tiene un sabor único.",
+    "ProductId": 23,
+    "UserId": 1,
+    "PubliDate": "2024-10-26"
+  },
+  {
+    "Id": 37,
+    "Score": 2,
+    "Body": "Está bien, pero me parece un poco insípido.",
+    "ProductId": 23,
+    "UserId": 4,
+    "PubliDate": "2024-10-28"
+  },
+  {
+    "Id": 38,
+    "Score": 3,
+    "Body": "El té de hibisco es increíble, tiene un toque ácido que lo hace perfecto para el verano.",
+    "ProductId": 24,
+    "UserId": 2,
+    "PubliDate": "2024-10-21"
+  },
+  {
+    "Id": 39,
+    "Score": 3,
+    "Body": "Me encanta el sabor del hibisco, muy refrescante y con una acidez ligera.",
+    "ProductId": 24,
+    "UserId": 3,
+    "PubliDate": "2024-11-05"
+  },
+  {
+    "Id": 40,
+    "Score": 1,
+    "Body": "No me gustó mucho, demasiado ácido para mi gusto.",
+    "ProductId": 24,
+    "UserId": 5,
+    "PubliDate": "2024-10-22"
+  },
+  {
+    "Id": 41,
+    "Score": 2,
+    "Body": "La taza es bonita, pero la cerámica no es tan resistente como esperaba. Algo pesada, pero sigue siendo una buena compra.",
+    "ProductId": 26,
+    "UserId": 2,
+    "PubliDate": "2024-11-12"
+  },
+  {
+    "Id": 42,
+    "Score": 3,
+    "Body": "Perfecta para mi agua. Mantiene la temperatura bastante bien y el diseño es moderno y atractivo.",
+    "ProductId": 27,
+    "UserId": 4,
+    "PubliDate": "2024-11-14"
+  },
+  {
+    "Id": 43,
+    "Score": 1,
+    "Body": "La botella térmica no mantuvo mi bebida caliente por tanto tiempo como esperaba. No la recomiendo para viajes largos.",
+    "ProductId": 28,
+    "UserId": 1,
+    "PubliDate": "2024-11-13"
+  },
+  {
+    "Id": 44,
+    "Score": 2,
+    "Body": "Está bien, pero el café no queda tan fuerte como me gustaría. Si eres fan del café italiano tradicional, tal vez te decepcione.",
+    "ProductId": 29,
+    "UserId": 3,
+    "PubliDate": "2024-11-11"
+  },
+  {
+    "Id": 45,
+    "Score": 2,
+    "Body": "Es útil para viajes, pero no mantiene la temperatura tanto tiempo como esperaba. No está mal, pero podría mejorar.",
+    "ProductId": 31,
+    "UserId": 1,
+    "PubliDate": "2024-11-09"
+  },
+  {
+    "Id": 46,
+    "Score": 3,
+    "Body": "La botella térmica para café cumple su función perfectamente. Mi café se mantiene caliente durante todo el trayecto. Muy útil.",
+    "ProductId": 32,
+    "UserId": 2,
+    "PubliDate": "2024-11-08"
+  },
+  {
+    "Id": 47,
+    "Score": 2,
+    "Body": "Lorem ipsum odor amet, consectetuer adipiscing elit. Suscipit lacus mollis mattis in mollis. Interdum varius nostra consequat lectus finibus turpis iaculis. Dis class velit morbi nunc vivamus maximus tempor et dapibus. Ullamcorper porttitor vitae ligula interdum nam. Ex vivamus neque hac tincidunt dolor. Potenti aenean parturient odio felis odio pharetra commodo fusce. Nisi lobortis tempus dignissim in lacinia. Magna justo vehicula malesuada ad commodo in parturient. Senectus praesent auctor ullamcorper praesent cras auctor libero. Mauris gravida neque sollicitudin tincidunt nec nostra nec tempus. Hac pretium congue vestibulum suspendisse vivamus odio mauris. Risus sit eleifend penatibus sodales laoreet luctus senectus porttitor. Pellentesque nisi sed donec viverra porttitor adipiscing hendrerit. Etiam nullam euismod curabitur nibh odio blandit. Vel posuere ornare sollicitudin erat commodo lacus torquent ornare suscipit.",
+    "ProductId": 32,
+    "UserId": 1,
+    "PubliDate": "2024-11-19"
+  },
+  {
+    "Id": 48,
+    "Score": 1,
+    "Body": "",
+    "ProductId": 32,
+    "UserId": 3,
+    "PubliDate": "2024-11-19"
+  },
+  {
+    "Id": 49,
+    "Score": 3,
+    "Body": "Chulísima me encanta",
+    "ProductId": 32,
+    "UserId": 2,
+    "PubliDate": "2024-11-19"
+  },
+  {
+    "Id": 50,
+    "Score": 2,
+    "Body": "Lorem ipsum odor amet, consectetuer adipiscing elit. Dictum convallis lacus cubilia facilisi ultricies pellentesque tempor. Odio netus integer platea class lorem vulputate ex sem dolor. Cubilia accumsan sem nibh viverra justo nascetur sem accumsan. Lacinia magna dui finibus sodales; et mi bibendum. Nostra varius platea aliquam non sodales interdum curae. At sem pulvinar enim dictum dignissim. Imperdiet fames adipiscing ullamcorper adipiscing dis molestie dolor phasellus natoque.",
+    "ProductId": 32,
+    "UserId": 2,
+    "PubliDate": "2024-11-19"
+  }
+]

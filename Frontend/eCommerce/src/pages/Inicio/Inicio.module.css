@@ -1,0 +1,42 @@
+/* -----GENERAL----- */
+
+.container{
+  color: var(--letras-nav);
+  font-family: "Vollkorn", sans-serif;
+  background-color: var(--fondo-pagina);
+}
+
+
+/* -----CONTENIDO----- */
+.content{
+  display: inline-flex;
+  align-items: center;
+  margin: 5% 15%;
+}
+
+
+/* -----TEXTO----- */
+.texto{
+  
+  width: 50%;
+  text-align: justify;
+  margin: 0 5%;
+}
+.texto h2{
+  font-family: 'Poppins', sans-serif;
+  font-size: var(--subtitulos-size);
+  text-align: center;
+  margin-bottom: 15px;
+}
+.texto p{
+  font-family: 'Vollkorn', sans-serif;
+  font-size: var(--texto-size);
+}
+
+
+/* -----IMAGEN----- */
+.content img{
+  width: 40%;
+  margin: 0 5%;
+  border-radius: 20px;
+}

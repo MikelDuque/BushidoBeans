@@ -1,0 +1,75 @@
+/* ----- GENERAL CONTAINER ----- */
+
+.element_container {
+  height: 7rem;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+
+  border-bottom: 1px solid black;
+
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ----- DATA CONTAINER ----- */
+
+.data_container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+
+  align-items: center;
+  gap: 20px;
+  font-size: var(--texto-size);
+
+  h2 {
+    width: 10rem;
+    font-size: var(--texto-size);
+    font-family: var(--font-family-titulos-subtitulos);
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+/* ----- DATA ----- */
+
+.data {
+  display: flex;
+
+  gap: 30px;
+  align-items: center;
+  justify-items: center;
+
+  span {
+    width: 20rem;
+    padding-left: 30px;
+    border-left: 1px solid rgba(0, 0, 0, 0.50);
+
+    &.name {
+      width: 25rem;
+    }
+  }
+}
+
+/* ----- FORM ELEMENTS ----- */
+
+.button_container {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+
+  select {
+    height: 30px;
+    background-color: var(--fondo-vistas);
+    border: 1px solid black;
+    border-radius: 10px;
+    padding-left: 15px;
+  }
+
+  a {
+    color: darkred;
+    text-align: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+}

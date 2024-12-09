@@ -1,0 +1,31 @@
+.contenedor-catalogo{
+    background-color: var(--fondo-vistas);
+    width: 100%;
+    margin: 0 auto;
+    padding: 2%;
+}
+
+.contenedor-catalogo aside{
+    width: 20%;
+    margin-top: 15px;
+    position: sticky;
+    top: 0;
+    float: left;
+    display: grid;
+}
+.sectionFloat{
+    margin-bottom: 5%;
+}
+.carrusel-catalogo{
+    width: 100%;
+    height: 40vh;
+    border-radius: 20px;
+    background-color: transparent;
+    overflow: hidden; 
+}
+
+.botonCentrado{
+    padding: 2%;
+    display: flex;
+    justify-content: center;
+}

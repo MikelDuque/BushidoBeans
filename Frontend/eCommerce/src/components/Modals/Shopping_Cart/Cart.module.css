@@ -1,0 +1,16 @@
+.cart_list {
+  height: 100%;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  overflow-y: scroll;
+  color: black;
+  scrollbar-width: none
+}
+
+.clearMessage {
+  font-size: 2rem;
+}
