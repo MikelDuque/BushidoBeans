@@ -2,14 +2,14 @@ import { useParams } from 'react-router-dom';
 
 import { GET_PRODUCT_BY_ID } from '../../endpoints/config';
 import useFetch from '../../endpoints/useFetch';
-import ProductDetails_Card from '../../components/catalogo/Product_Details/ProductCard/ProductDetails_Card';
-import Review_List from '../../components/Catalogo/Product_Details/Review_List/Review_List';
+import ProductDetails_Card from '../../components/Product_Details/ProductCard/ProductDetails_Card';
+import Review_List from '../../components/Product_Details/Review_List/Review_List';
 
 import classes from './ProductDetails.module.css';
 
 export default function ProductDetails() { 
     const { id } = useParams();
-    const {fetchData: product, fetchError, isLoading} = useFetch({url:GET_PRODUCT_BY_ID(id), type:'GET'});
+    const {fetchData: product, fetchError, isLoading} = useFetch({url:GET_PRODUCT_BY_ID(id), type:'GET', needAuth:false});
 
     return (
         <div className={classes.container}>

@@ -75,9 +75,6 @@ export default function Register({handleViewChange, setAlertMessage}) {
     event.preventDefault();
     const form = event.target;
 
-    console.log((`mail ${form.mail.value}, pass ${form.password.value}, conf ${form.confirmPassword.value}, name ${form.name.value}, surname ${form.surname.value}, phone ${form.phone.value}, address ${form.address.value} `));
-    
-
     if(!dataValidator(form.mail.value, form.password.value, form.confirmPassword.value, form.name.value)) return;
 
     const registerData = {
@@ -91,7 +88,7 @@ export default function Register({handleViewChange, setAlertMessage}) {
 
     console.log("form", registerData);
     
-    const data = await fetchingData({url: REGISTER_URL, type: 'POST', params:registerData});
+    const data = await fetchingData({url: REGISTER_URL, type: 'POST', params:registerData, needAuth:false});
 
     if(data) handleLogin(data.accessToken);
   };

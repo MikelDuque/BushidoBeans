@@ -2,7 +2,7 @@ import '../../CardProduct/CardProduct.css'
 import './PostReview.css';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-import StarRating from '../../Catalogo/Product_Details/Review_List/StarRating/StarRating';
+import StarRating from '../../Product_Details/Review_List/StarRating/StarRating';
 import Alert from '../../Alert/Alert';
 import { useAuth } from '../../../context/AuthContext';
 import useFetchEvent from '../../../endpoints/useFetchEvent';
@@ -22,7 +22,7 @@ export default function PostReview() {
     const [alertMessage, setAlertMessage] = useState(null);
     const [scoreReset, setScoreReset] = useState(false);
 
-    const {fetchData: product, fetchError, isLoading} = useFetch({url:GET_PRODUCT_BY_ID(id), type:'GET'});
+    const {fetchData: product, fetchError, isLoading} = useFetch({url:GET_PRODUCT_BY_ID(id), type:'GET', needAuth:false});
 
 
     async function sendReview(event) {
@@ -41,7 +41,7 @@ export default function PostReview() {
             userId: decodedToken?.id || 0
         }
         
-        const wasPosted = await fetchingData({url: POST_REVIEW, type: 'POST', token: token, params:newReview})
+        const wasPosted = await fetchingData({url: POST_REVIEW, type: 'POST', token: token, params:newReview, needAuth:true})
         if(wasPosted) closeModal();
     };
 
@@ -72,7 +72,7 @@ export default function PostReview() {
 
                 <div className="usuario">
                     <img src="/recursos/iconUser.svg" alt="imagen usuario" />
-                    <h4 className="usuarioNombre">{`${decodedToken.unique_name} ${decodedToken.family_name}`}</h4>
+                    <h4 className="usuarioNombre">{`${decodedToken.unique_name || "N/A" } ${decodedToken.family_name || "N/A"}`}</h4>
                 </div>
 
                 <div className="formulario">

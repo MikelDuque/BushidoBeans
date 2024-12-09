@@ -16,7 +16,7 @@ export default function Login_Register() {
   return(
     <div className={classes.container_supremo}>
       {wannaLogin ? <Login handleViewChange={handleRegisterView} setAlertMessage={setAlertMessage}/> : <Register handleViewChange={handleLoginView} alertMessage={setAlertMessage}/>}
-      {alertMessage && <Alert message={alertMessage} onClose={() => setAlertMessage(null)} />}
+      <Alert message={alertMessage} onClose={() => setAlertMessage(null)} />
     </div>
   );
 };
