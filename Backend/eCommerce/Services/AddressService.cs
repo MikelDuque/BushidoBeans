@@ -2,6 +2,7 @@
 using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 using eCommerce.Models.Mappers;
+using Microsoft.EntityFrameworkCore;
 
 namespace eCommerce.Services
 {
@@ -47,5 +48,31 @@ namespace eCommerce.Services
 
             return await _unitOfWork.SaveAsync();
         }
+
+        public async Task<IEnumerable<AddressDto>> GetAllByUserIdAsync(long userId)
+        {
+            var addresses = await _unitOfWork.AddressRepository
+                .GetQueryable()
+                .Where(a => a.UserId == userId)
+                .ToListAsync();
+
+            return _mapper.ToDto(addresses);
+        }
+        public async Task<bool> DeleteAddressAsync(long id)
+        {
+            Address address = await _unitOfWork.AddressRepository.GetByIdAsync(id);
+
+            if (address == null)
+            {
+                return false; 
+            }
+
+            _unitOfWork.AddressRepository.Delete(address);
+
+            return await _unitOfWork.SaveAsync();
+        }
+
+
+
     }
 }
