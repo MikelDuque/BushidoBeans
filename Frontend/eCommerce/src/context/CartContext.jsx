@@ -35,7 +35,7 @@ export function CartProvider({ children }) {
 
     /* ----- CART MERGE ----- */
     
-    const {fetchData} = useFetch({url: PUT_CART, type: 'PUT', token: token, params:mergeParams.current});
+    const {fetchData} = useFetch({url: PUT_CART, type: 'PUT', token: token, params:mergeParams.current, needAuth:true});
 
     useEffect(() => {
         setMergeParams();
@@ -115,7 +115,7 @@ export function CartProvider({ children }) {
                 quantity: product.quantity
             };
     
-            const isUpdated = await fetchingData({url: PUT_CARTPRODUCT, type: 'PUT', token: token, params: updatedProduct});
+            const isUpdated = await fetchingData({url: PUT_CARTPRODUCT, type: 'PUT', token: token, params: updatedProduct, needAuth:true});
     
             if (!isUpdated) return;
         }
@@ -130,7 +130,7 @@ export function CartProvider({ children }) {
                 productId: productId
             };
     
-            const isDeleted = await fetchingData({url: DELETE_CARTPRODUCT, type: 'DELETE', token: token, params: deletedProduct});
+            const isDeleted = await fetchingData({url: DELETE_CARTPRODUCT, type: 'DELETE', token: token, params: deletedProduct, needAuth:true});
 
             if(!isDeleted) return;
         }
@@ -140,7 +140,7 @@ export function CartProvider({ children }) {
 
     async function deleteCart() {
         if (token) {
-            const isDeleted = await fetchingData({url: DELETE_CART_BY_ID(decodedToken.id), type: 'DELETE', token: token, params: decodedToken.id});
+            const isDeleted = await fetchingData({url: DELETE_CART_BY_ID(decodedToken.id), type: 'DELETE', token: token, params: decodedToken.id, needAuth:true});
 
             if(!isDeleted) return;
         }

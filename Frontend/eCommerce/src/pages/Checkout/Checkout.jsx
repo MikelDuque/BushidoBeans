@@ -4,8 +4,7 @@ import Footer from "../../components/Footer/Footer";
 import classes from './Checkout.module.css';
 import ChkCart from "../../components/CheckoutPages/ChkCart";
 import ChkAddress from "../../components/CheckoutPages/ChkAddress";
-import ConfirmarPedido from "./ConfirmarPedido.jsx";
-import Cart from "../../components/Modals/Shopping_Cart/Cart.jsx";
+import ConfirmarPedido from "../../components/CheckoutPages/Confirmacion/ConfirmarPedido.jsx";
 
 function Checkout() {
   const { currentView, handleButtonClick } = useCheckout('cart');

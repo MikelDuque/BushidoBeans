@@ -1,9 +1,9 @@
 import classes from './ProductDetails_Card.module.css';
 import { useState } from 'react';
-import { getIntensidadImg } from '../../../../utils/intensidad';
-import Quantity_Counter from '../../../Quantity_Counter/Counter';
-import AddToCartButton from '../../../AddToCartButton/AddToCart';
-import { API_BASE_URL } from '../../../../endpoints/config';
+import { getIntensidadImg } from '../../../utils/intensidad';
+import Quantity_Counter from '../../Quantity_Counter/Counter';
+import AddToCartButton from '../../AddToCartButton/AddToCart';
+import { API_BASE_URL } from '../../../endpoints/config';
 
 export default function ProductDetails_Card({product}) {
     const [cantidad, setCantidad] = useState(1);

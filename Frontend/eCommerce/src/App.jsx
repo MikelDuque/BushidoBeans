@@ -26,7 +26,7 @@ import Catalogo from "./pages/Catalogo/Catalogo";
 import ProductDetails from './pages/Product_Details/ProductDetails';
 
 import Checkout from "./pages/Checkout/Checkout";
-import ConfirmarPedido from "./pages/Checkout/ConfirmarPedido";
+//import ConfirmarPedido from "./pages/Checkout/ConfirmarPedido";
 
 import SobreNosotros from './pages/SobreNosotros/SobreNosotros';
 
@@ -78,7 +78,7 @@ export default function App() {
                     </AdminPrivateRoute>
                 }/>
 
-                <Route path="/400" element={<NotFound />} />
+                <Route path="/NotFound" element={<NotFound />} />
             </Route>
 
             {/* ----- CHECKOUT LAYOUT ----- */}
@@ -92,7 +92,7 @@ export default function App() {
                 }/>
             </Route>
 
-            <Route path="/confirmarPedido" element={<ConfirmarPedido />} />
+            {/*<Route path="/confirmarPedido" element={<ConfirmarPedido />} />*/}
 
             {/* QUITAR ESTA RUTA; VIENE INCORPORADA EN EL CHEKOUT */}
             <Route path="/direccion" element={

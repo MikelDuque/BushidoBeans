@@ -1,14 +1,15 @@
 
 import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import useFetchEvent from "../endpoints/useFetchEvent";
+import { LOGIN_URL } from "../endpoints/config";
 
 const AuthContext = createContext({
     token: null,
     decodedToken: null,
     handleLogin: () => {},
-    handleLogout: () => {}
+    handleLogout: () => {},
+    startExpCountdown: () => {}
 });
 
 export function useAuth() {return useContext(AuthContext)};
@@ -17,16 +18,22 @@ export function AuthProvider({ children }) {
 
     /* ----- HOOKS Y CONSTS ----- */
 
-    const navigateTo = useNavigate()
     const {fetchingData} = useFetchEvent();
 
     const [token, setToken] = useState(sessionStorage.getItem('accessToken'));
     const decodedToken = useRef(token ? jwtDecode(token) : null);
-    //const logoutTimer = useRef(decodedToken?.exp - Date.now().valueOf() / 1000 || 0);
     
+    const logoutTime = useRef(decodedToken.current?.exp *1000 - Date.now().valueOf() || 0);
+    const {current: instance} = useRef({});
+    
+
     useEffect(() => {
+        console.log("token?", token);
         
-    }, [token]);
+        if (token && logoutTime <= 0) startExpCountdown();
+
+        return () => {cancelCountdown()};
+    }, []);
 
 
     /* ----- FUNCIONES ----- */
@@ -34,9 +41,8 @@ export function AuthProvider({ children }) {
     function handleLogin(newToken) {
         if (newToken) {
             sessionStorage.setItem('accessToken', newToken);
-            setToken(newToken);          
-            
-            navigateTo('/');
+            setToken(newToken);
+            decodedToken.current = jwtDecode(newToken)     
         }
     };
 
@@ -47,29 +53,64 @@ export function AuthProvider({ children }) {
     };
 
 
-    function tokenExpControl() {
-        window.addEventListener(clearTimeout(logoutCountdown));
+    /* ----- TOKEN EXPIRATION CONTROLL ----- */
 
-        const logoutCountdown = setTimeout(() => {
+    function startExpCountdown() { 
+        if(!token) return;
+        handleLogout();
+
+        //Sin un "Refresh token" no sirve el resto de la funcionalidad...
+        
+        /*
+        instance.timer = cancelTimer();
+        instance.timer = setTimeout(() => {
             handleLogout();
-        }, 15000);
-
-        clearTimeout(logoutCountdown);
-        window.removeEventListener(clearTimeout(logoutCountdown));
-
-        if(token) relogin();
+            cancelCountdown();
+        }, 30000);
+        
+        handleDomEvents(true);
+        */
     };
+
+    function cancelCountdown() {
+        instance.timer = cancelTimer();
+        handleDomEvents(false);
+        relogin();
+    }
 
     async function relogin() {
         const loginData = {
-            mail: decodedToken.current.mail,
+            mail: decodedToken.current.email,
             password: decodedToken.current.password
         };
+        console.log("loginData", loginData);
+        console.log("decodedToken", decodedToken.current);
+        
+        
 
-        const data = await fetchingData({url: LOGIN_URL, type: 'POST', params:loginData});
+        const data = await fetchingData({url: LOGIN_URL, type: 'POST', params:loginData, needAuth:false});
 
         if(data) handleLogin(data.accessToken);
     };
+
+    function cancelTimer() {
+        if (instance.timer) clearTimeout(instance.timer);   
+        return 0;
+    }
+
+    function handleDomEvents(addOrRemove) {
+        addOrRemove ? (
+            window.addEventListener("click", cancelCountdown),
+            window.addEventListener("mousemove", cancelCountdown),
+            window.addEventListener("wheel", cancelCountdown),
+            window.addEventListener("keydown", cancelCountdown)
+        ) : (
+            window.removeEventListener("click", cancelCountdown),
+            window.removeEventListener("mousemove", cancelCountdown),
+            window.removeEventListener("wheel", cancelCountdown),
+            window.removeEventListener("keydown", cancelCountdown)
+        );
+    }
 
 
     /* ----- FINAL DEL CONTEXTO ----- */
@@ -78,7 +119,8 @@ export function AuthProvider({ children }) {
         token,
         decodedToken: decodedToken.current,
         handleLogin,
-        handleLogout
+        handleLogout,
+        startExpCountdown
     };
 
     return (<AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>);

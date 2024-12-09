@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import * as jwt_decode from 'jwt-decode';
-import { GET_ORDER_BY_ID } from "../../endpoints/config";
-import '../../styles/Confirmacion.css';
-import { useCheckout } from '../../context/CheckoutContext';
+import { useState, useEffect } from 'react';
+import { GET_ORDER_BY_ID } from "../../../endpoints/config";
+import './Confirmacion.css';
+import { useCheckout } from '../../../context/CheckoutContext';
+import { useAuth } from '../../../context/AuthContext';
 
 function ConfirmarPedido() {
   const { address } = useCheckout();
-  const [token, setToken]= useState(null);
+  const { token, decodedToken } = useAuth();
   const [datos, setDatos] = useState([]);
   const [user, setUser] = useState(null);
   const [userId, setUserId] = useState(null);
@@ -16,11 +16,8 @@ function ConfirmarPedido() {
   }
 
   useEffect(() => {
-      const token = localStorage.getItem('accessToken');
-      if (token) {
+      if (decodedToken) {
           try {
-              const decodedToken = jwt_decode.jwtDecode(token);
-              setToken(token);
               setUser(decodedToken.unique_name);  
               setUserId(decodedToken.id);
           } catch (error) {

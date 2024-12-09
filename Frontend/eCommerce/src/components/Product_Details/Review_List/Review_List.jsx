@@ -1,10 +1,12 @@
 import classes from './Review_List.module.css';
 import Review from './Review/Review.jsx';
 import Average_Score from './Average_Score/Average_Score.jsx';
-import Modal from '../../../Modals/Modal.jsx'
-import PostReview from '../../../Modals/PostReview/PostReview.jsx';
-import { useAuth } from '../../../../context/AuthContext.jsx';
-import { useModal } from '../../../../context/ModalContext.jsx';
+import Modal from '../../Modals/Modal.jsx'
+import PostReview from '../../Modals/PostReview/PostReview.jsx';
+import { useAuth } from '../../../context/AuthContext.jsx';
+import { useModal } from '../../../context/ModalContext.jsx';
+import Alert from '../../Alert/Alert.jsx';
+import { useState } from 'react';
 
 function reviewMapper(reviews) {
   return (reviews.length > 0 ? (
@@ -27,8 +29,10 @@ export default function Review_List({ data }) {
   const {token} = useAuth();
   const {openModal} = useModal();
 
+  const [alertMessage, setAlertMessage] = useState(null);
+
   function shouldIOpen() {
-    if(token) openModal("postReview");
+    token ? openModal("postReview") : setAlertMessage("Debe tener cuenta para publicar una reseña");
   }
 
   return (
@@ -36,6 +40,7 @@ export default function Review_List({ data }) {
       <Modal type="postReview" titulo="Escribe una reseña" buttonValues={null}>
         <PostReview/>
       </Modal>
+      <Alert message={alertMessage} onClose={() => setAlertMessage(null)}/>
       
       <div className={classes.reviews_container}>
         <div className={classes.leftSide}>

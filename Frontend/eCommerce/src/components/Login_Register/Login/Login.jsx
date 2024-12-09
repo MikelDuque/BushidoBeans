@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { LOGIN_URL } from "../../../endpoints/config";
 import { useAuth } from "../../../context/AuthContext";
@@ -19,12 +19,6 @@ export default function Login({handleViewChange, setAlertMessage}) {
     mailError: null,
     passError: null
   });
-
-  useEffect(() => {
-    if (typeof fetchError === 'string') {setAlertMessage(fetchError)};
-
-  }, [fetchError]);
-
   
   /* ----- FUNCIONES ----- */
 
@@ -39,7 +33,8 @@ export default function Login({handleViewChange, setAlertMessage}) {
 
     if(!dataValidator(formData.mail, formData.password)) return;
     
-    const data = await fetchingData({url: LOGIN_URL, type: 'POST', params:formData});
+    const data = await fetchingData({url: LOGIN_URL, type: 'POST', params:formData, needAuth:false});
+    if (typeof fetchError === 'string') {setAlertMessage(fetchError)};
 
     if(data) handleLogin(data.accessToken);
   };

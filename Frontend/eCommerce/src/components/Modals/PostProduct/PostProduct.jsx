@@ -1,4 +1,4 @@
-import classes from './PostProductModal.module.css';
+import classes from './PostProduct.module.css';
 
 export default function PostProductModal() {
     return (
