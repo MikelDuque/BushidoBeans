@@ -10,8 +10,7 @@ public class CartProductMapper
    {
        return new CartProductDto
        {
-           UserId = cartProduct.UserId,
-           ProductId = cartProduct.ProductId,
+           Id = cartProduct.ProductId,
            Image = cartProduct.Product.Image,
            Name = cartProduct.Product.Name,
            Price = cartProduct.Product.Price,
@@ -24,19 +23,18 @@ public class CartProductMapper
        return cartProducts.Select(ToDto);
    }
 
-
    //TO ENTITY
-   public CartProduct ToEntity(CartProductDto cartProductDto)
+   public CartProduct ToEntity(UpdatedCartProduct updatedCartProduct)
    {
     return new CartProduct
     {
-        UserId = cartProductDto.UserId,
-        ProductId = cartProductDto.ProductId,
-        Quantity = cartProductDto.Quantity
+        UserId = updatedCartProduct.UserId,
+        ProductId = updatedCartProduct.ProductId,
+        Quantity = updatedCartProduct.Quantity
     };
    }
-    public IEnumerable<CartProduct> ToEntity(IEnumerable<CartProductDto> cartProductsDto)
+    public IEnumerable<CartProduct> ToEntity(IEnumerable<UpdatedCartProduct> newCartProducts)
    {
-       return cartProductsDto.Select(ToEntity);
+       return newCartProducts.Select(ToEntity);
    }
 }

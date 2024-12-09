@@ -14,22 +14,17 @@ public class AuthService
 {
     private readonly UnitOfWork _unitOfWork;
     private readonly TokenValidationParameters _tokenParameters;
+    private readonly UserService _userService;
 
-    public AuthService(UnitOfWork unitOfWork, IOptionsMonitor<JwtBearerOptions> jwtOptions)
+    public AuthService(UnitOfWork unitOfWork, IOptionsMonitor<JwtBearerOptions> jwtOptions, UserService userService)
     {
         _unitOfWork = unitOfWork;
         _tokenParameters = jwtOptions.Get(JwtBearerDefaults.AuthenticationScheme)
         .TokenValidationParameters;
+        _userService = userService;
     }
 
-    public static string HashPassword(string password)
-    {
-        byte[] inputBytes = Encoding.UTF8.GetBytes(password);
-        byte[] inputHash = SHA256.HashData(inputBytes);
-        return Encoding.UTF8.GetString(inputHash);
-    }
-
-    public async Task<string> LoginResult (LoginRequest model) {
+    public async Task<string> Login(LoginRequest model) {
         User user = await _unitOfWork.UserRepository.GetByMailAsync(model.Mail);
 
         SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
@@ -45,7 +40,7 @@ public class AuthService
             },
 
             //Caducidad del token
-            Expires = DateTime.UtcNow.AddDays(5),
+            Expires = DateTime.UtcNow.AddSeconds(30), //AddHours(1),
 
             //Especificación de la clave y el algoritmo de firmado
             SigningCredentials = new SigningCredentials(
@@ -60,4 +55,26 @@ public class AuthService
 
         return stringToken;
     }
+
+    public async Task<string> Register(RegisterRequest userRequest)
+    {
+        
+        LoginRequest model = new LoginRequest {
+            Mail = userRequest.Mail,
+            Password = userRequest.Password,
+        };
+
+        await _userService.InsertByMailAsync(userRequest);
+
+        return await Login(model);
+    }
+
+    /* OTROS MÉTODOS */
+    public static string HashPassword(string password)
+    {
+        byte[] inputBytes = Encoding.UTF8.GetBytes(password);
+        byte[] inputHash = SHA256.HashData(inputBytes);
+        return Encoding.UTF8.GetString(inputHash);
+    }
+    
 }

@@ -10,8 +10,9 @@ public class OrderProduct
    public decimal PurchasePrice { get; set; }
 
   
+   /* RELACIONES 1-M */
    [ForeignKey(nameof(Order))]
-   public required long OrderId { get; set; }
+   public long OrderId { get; set; }
    public Order Order { get; set; }
 
    [ForeignKey(nameof(Product))]

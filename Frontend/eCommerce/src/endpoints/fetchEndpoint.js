@@ -1,35 +1,37 @@
-export default async function fetchEndpoint(Url, type, token, params) {
-  try {
-    console.log(`URL: ${Url}, tipo: ${type}, token: ${token}, params: ${params}`);
-    
-    const response = await defineFetch(Url, type, token, params);
+export default async function fetchEndpoint(url, type, token, params) {
 
-    if (response.ok) return await response.json();
+  console.log(`PETICION: URL: ${url}, tipo: ${type}, token: ${token}, params: ${params}, params stringtify: ${JSON.stringify(params)}`);
+  
+  const response = await defineFetch(url, type, token, params);
+  const jsonResponse = await response.json();
 
-    throw new Error("Solicitud a la API fallida");
-
-  } catch (error) {throw new Error(error)};
+  if (response.ok) return jsonResponse;
+  
+  console.log(`jsonResponse, ${jsonResponse.message}, status ${jsonResponse.status}`);
+  console.log(`response error, ${response.json}, status ${response.status}`);
+  
+  throw jsonResponse.message;
 };
 
 /* ------------------------- */
-/*
-async function defineFetch(Url, type, token, params) {
+
+async function defineFetch(url, type, token, params) {
   
   if(type !== 'GET' && params) return (
-    await fetch(Url, {
-    method: type,
-    headers: existToken(token),
-    body: params
+    await fetch(url, {
+      method: type,
+      headers: printHeaders(token),
+      body: JSON.stringify(params)
   }));
 
-  return await fetch(Url, {headers: existToken(token)});
+  return await fetch(url, {headers: printHeaders(token)});
 }
 
-function existToken(token) {
-  if(token == null) return ({'Content-Type': 'application/json'});
+function printHeaders(token) {
+  if(token  === null) return ({'Content-Type': 'application/json'});
 
   return ({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
   }); 
-}*/
+}

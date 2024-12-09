@@ -5,7 +5,16 @@ namespace eCommerce.Models.Mappers;
 
 public class UserMapper
 {
-    //Mapea los datos de un Usuario al DTO de Usuario
+    private readonly OrderMapper _orderMapper;
+    private readonly AddressMapper _addressMapper;
+
+    public UserMapper(OrderMapper orderMapper, AddressMapper addressMapper)
+  {
+    _orderMapper = orderMapper;
+    _addressMapper = addressMapper;
+  }
+
+    //TO DTO
     public UserDto ToDto(User user)
     {
         return new UserDto()
@@ -15,21 +24,22 @@ public class UserMapper
             Name = user.Name,
             Surname = user.Surname,
             Phone = user.Phone,
-            Role = user.Role
+            Role = user.Role,
+            Addresses = _addressMapper.ToDto(user.Addresses).ToList(),
+            Orders = _orderMapper.ToDto(user.Orders).ToList()
         };
     }
 
-    //Mapea los datos de todos los Usuarios al DTO de Usuario
     public IEnumerable<UserDto> ToDto(IEnumerable<User> users)
     {
         return users.Select(ToDto);
     }
 
-    /*
-    //Mapea los datos de un DTO de usuario a la entidad Usuario
+    
+    //TO ENTITY
     public User ToEntity(UserDto user)
     {
-        return new User()
+        return new User
         {
             Id = user.Id,
             Mail = user.Mail,
@@ -40,10 +50,9 @@ public class UserMapper
         };
     }
 
-    //Mapea los datos de todos los DTO de usuario a la entidad Usuario
     public IEnumerable<User> ToEntity(IEnumerable<UserDto> users)
     {
         return users.Select(ToEntity);
     }
-    */
+    
 }

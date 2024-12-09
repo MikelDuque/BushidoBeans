@@ -4,6 +4,7 @@ using eCommerce.Models.Database.Repositories;
 using eCommerce.Models.Mappers;
 using eCommerce.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
@@ -42,7 +43,6 @@ public class Program
         builder.Services.AddScoped<UserRepository>();
         builder.Services.AddScoped<ProductRepository>();
         builder.Services.AddScoped<ReviewRepository>();
-        builder.Services.AddScoped<CartRepository>();
         builder.Services.AddScoped<CartProductRepository>();
         builder.Services.AddScoped<OrderRepository>();
         builder.Services.AddScoped<OrderProductRepository>();
@@ -62,7 +62,6 @@ public class Program
         builder.Services.AddTransient<UserMapper>();
         builder.Services.AddTransient<ProductMapper>();
         builder.Services.AddTransient<ReviewMapper>();
-        builder.Services.AddTransient<CartMapper>();
         builder.Services.AddTransient<CartProductMapper>();
         builder.Services.AddTransient<OrderMapper>();
         builder.Services.AddTransient<OrderProductMapper>();
@@ -106,6 +105,21 @@ public class Program
 
         //por defecto el navegador bloqueará las peticiones debido a la política de CORS.
         //por eso hay que habilitar Cors
+
+        
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
+        
+
+
+        /*
         if (builder.Environment.IsDevelopment())
         {
             builder.Services.AddCors(options =>
@@ -118,7 +132,7 @@ public class Program
                 });
             });
         }
-
+        */
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -132,11 +146,7 @@ public class Program
         app.UseHttpsRedirection();
 
         //Configuración de Cors para aceptar cualquier petición
-        app.UseCors(options =>
-            options.AllowAnyHeader()
-            .AllowAnyMethod()
-            .AllowAnyOrigin()
-        );
+        app.UseCors();
 
         //Habilita la autenticación
         app.UseAuthentication();
@@ -144,7 +154,10 @@ public class Program
         app.UseAuthorization();
 
         //Permite transmitir archivos estáticos
-        app.UseStaticFiles();
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"))
+        });
 
         app.MapControllers();
 
@@ -164,7 +177,9 @@ public class Program
             Seeder seeder = new Seeder(dbContext);
             await seeder.SeedAsync();
         }
+
     }
+    
 }
 
 

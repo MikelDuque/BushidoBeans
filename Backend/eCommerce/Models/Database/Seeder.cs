@@ -21,55 +21,108 @@ public class Seeder
 
     private async Task Seed()
     {
-        Category[] categories =
-        [
-            new Category {Name = "Coffee"},
-            new Category {Name = "Tea"},
-            new Category {Name = "Others"}
-        ];
+        /* ----- USERS ----- */
 
         User[] users =
         [
             new User {
                 Mail = "mikel@gmail.es",
-                Name = "Mikel",
                 Password = AuthService.HashPassword("Mikel#123456789") ,
+                Name = "Mikel",
                 Surname = "Platero Duque",
-                Phone = 639573559,
+                Phone = 123456789,
                 Role = "admin",
             },
             new User {
                 Mail = "david@gmail.es",
-                Name = "David",
                 Password = AuthService.HashPassword("David#1234567890") ,
+                Name = "David",
                 Surname = "Andrino Ferrera",
-                Phone = 622222222,
+                Phone = 123456789,
                 Role = "admin"
             },
             new User {
                 Mail = "yasir@gmail.es",
-                Name = "Yasir",
                 Password = AuthService.HashPassword("Yasir#1234567890") ,
+                Name = "Yasir",
                 Surname = "Bel Maalem Ouhadou Abdenour",
-                Phone = 633333333,
+                Phone = 123456789,
                 Role = "admin"
             },
             new User {
                 Mail = "ivan@gmail.es",
-                Name = "Ivan",
                 Password = AuthService.HashPassword("Ivan#1234567890") ,
+                Name = "Ivan",
                 Surname = "Montes Gutierrez",
-                Phone = 644444444,
+                Phone = 123456789,
                 Role = "admin"
             },
             new User {
                 Mail = "raquel@gmail.es",
-                Name = "Raquel",
                 Password = AuthService.HashPassword("Raquel#1234567890") ,
+                Name = "Raquel",
                 Surname = "López Bermúdez",
-                Phone = 644444444,
+                Phone = 123456789,
                 Role = null
+            },
+            new User {
+                Mail = "jose@gmail.es",
+                Password = AuthService.HashPassword("Jose#1234567890"),
+                Name = "José",
+                Surname = "Santos Garrido",
+                Phone = 123456789,
+                Role = "admin"
             }
+        ];
+
+        Address[] addresses =
+        [
+            new Address {
+                Addressee = "Mikel Platero Duque",
+                PhoneNumber = 123456789,
+                AddressInfo = "C/ de la Mariantonieta, 51, Málaga (España)",
+                UserId = 1
+            },
+            new Address {
+                Addressee = "David Andrino Ferrera",
+                PhoneNumber = 123456789,
+                AddressInfo = "C/ de la Mariantonieta, 52, Málaga (España)",
+                UserId = 2
+            },
+            new Address {
+                Addressee = "Yasir Bel Maalem",
+                PhoneNumber = 123456789,
+                AddressInfo = "C/ de la Mariantonieta, 53, Málaga (España)",
+                UserId = 3
+            },
+            new Address {
+                Addressee = "Ivan Montes Gutierrez",
+                PhoneNumber = 123456789,
+                AddressInfo = "C/ de la Mariantonieta, 54, Málaga (España)",
+                UserId = 4
+            },
+            new Address {
+                Addressee = "Raquel López Bermúdez",
+                PhoneNumber = 123456789,
+                AddressInfo = "C/ de la Mariantonieta, 55, Málaga (España)",
+                UserId = 5
+            },
+            new Address {
+                Addressee = "José Santos Garrido",
+                PhoneNumber = 123456789,
+                AddressInfo = "C/ de la Mariantonieta, 56, Málaga (España)",
+                UserId = 6
+            }
+        ];
+
+
+        /* ----- PRODUCTS ----- */
+
+        Category[] categories =
+        [
+            new Category {Name = "Coffee"},
+            new Category {Name = "Tea"},
+            new Category {Name = "Others"}
         ];
 
         Product[] products = JsonSerializer.Deserialize<Product[]>(
@@ -80,14 +133,8 @@ public class Seeder
             File.ReadAllText("Assets/Reviews.json")
         );
 
-        /* BORRAR */
-        Cart[] carts =
-        [
-            new Cart {Id = 1},
-            new Cart {Id = 2},
-            new Cart {Id = 3},
-            new Cart {Id = 4}
-        ];
+
+        /* ----- SHOPING CART ----- */
 
         CartProduct[] cartProducts =
         [
@@ -149,22 +196,17 @@ public class Seeder
             
         ];
 
-        Address[] addresses =
-        [
-            new Address {
-                Id = 1,
-                Addressee = "Antuan",
-                PhoneNumber = 738573958,
-                AddressInfo = "C/ de la Mariantonieta, 58, Málaga (España)",
-                UserId = 1
-            }
-        ];
+        
+        /* ----- ORDERS ----- */
 
         Order[] orders =
         [
             new Order {
-                Id = 1,
-                UserId = 1
+                UserId = 1,
+                AddressId = 1,
+                TotalPrice = 10.5M,
+                TotalProducts = 3,
+                PurchaseDate = DateTime.Now
             }
         ];
 
@@ -175,30 +217,33 @@ public class Seeder
                 OrderId = 1,
                 ProductId = 1,
                 Quantity = 2,
-                PurchasePrice = 2.5M,
+                PurchasePrice = 1.75M,
             },
-            
             new OrderProduct
             {
                 OrderId = 1,
                 ProductId = 32,
-                Quantity = 8,
-                PurchasePrice = 1M
-            },
-            new OrderProduct
-            {
-                OrderId = 1,
-                ProductId = 8,
                 Quantity = 1,
-                PurchasePrice = 1.75M
-            },
+                PurchasePrice = 3.5M
+            }
         ];
 
-        //Añadimos el rango de usuarios a la BDD
-        await _dbContext.Categories.AddRangeAsync(categories);
-        await _dbContext.SaveChangesAsync();
+
+        /* ----- INCLUSIÓN DATOS EN SEEDER ----- */
+
+
+        //Users
 
         await _dbContext.Users.AddRangeAsync(users);
+        await _dbContext.SaveChangesAsync();
+
+        await _dbContext.Addresses.AddRangeAsync(addresses);
+        await _dbContext.SaveChangesAsync();
+
+
+        //Products
+
+        await _dbContext.Categories.AddRangeAsync(categories);
         await _dbContext.SaveChangesAsync();
 
         await _dbContext.Products.AddRangeAsync(products);
@@ -207,18 +252,19 @@ public class Seeder
         await _dbContext.Reviews.AddRangeAsync(reviews);
         await _dbContext.SaveChangesAsync();
 
-        //await _dbContext.Carts.AddRangeAsync(carts);
+
+        //Cart
         
         await _dbContext.CartProducts.AddRangeAsync(cartProducts);
         await _dbContext.SaveChangesAsync();
 
-//        await _dbContext.Addresses.AddRangeAsync(addresses);
-//        await _dbContext.SaveChangesAsync();
 
-//        await _dbContext.Orders.AddRangeAsync(orders);
-//        await _dbContext.SaveChangesAsync();
+        //Orders
 
-//        await _dbContext.OrderProducts.AddRangeAsync(orderProducts);
-//        await _dbContext.SaveChangesAsync();
+        await _dbContext.Orders.AddRangeAsync(orders);
+        await _dbContext.SaveChangesAsync();
+
+        await _dbContext.OrderProducts.AddRangeAsync(orderProducts);
+        await _dbContext.SaveChangesAsync();
     }
 }

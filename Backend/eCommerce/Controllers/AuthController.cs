@@ -1,21 +1,16 @@
 using eCommerce.Models.Dtos;
 using eCommerce.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 
 namespace eCommerce.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 public class AuthController : ControllerBase
 {
-    // Obtenemos por inyeccion los parametros preestablecidos para crear los token
     private readonly TokenValidationParameters _tokenParameters;
-
     private readonly UserService _userService;
     private readonly AuthService _authService;
 
@@ -28,19 +23,27 @@ public class AuthController : ControllerBase
         _authService = authService;
     }
 
-    [HttpPost("Inicio_Sesion")]
-    public async Task<ActionResult<LoginResult>> Login([FromBody] LoginRequest model)
+
+    [HttpPost("Login")]
+    public async Task<ActionResult> Login([FromBody] LoginRequest model)
     {
-        bool userExists = await _userService.ThisUserExists(model.Mail, model.Password);
+        bool isCorrect = await _userService.IsLoginCorrect(model.Mail, model.Password);
         
-        if (userExists)
+        if (!isCorrect) return BadRequest(new {message = "Email o contraseña incorrectos"});
+
+        string stringToken = await _authService.Login(model);
+        return Ok(new LoginResult { AccessToken = stringToken });
+    }
+
+    [HttpPost("Register")]
+    public async Task<ActionResult> Register([FromBody] RegisterRequest userRequest)
+    {     
+        if (await _userService.GetByMailAsync(userRequest.Mail) != null)
         {
-            string stringToken = await _authService.LoginResult(model);
-            return Ok(new LoginResult { AccessToken = stringToken });
+            return BadRequest(new {message = "El usuario ya existe"});
         }
-        else
-        {
-            return Unauthorized("Email o contraseña incorrectos");
-        }
+
+        string stringToken = await _authService.Register(userRequest);
+        return Ok(new LoginResult { AccessToken = stringToken });
     }
 }

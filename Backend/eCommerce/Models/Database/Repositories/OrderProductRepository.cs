@@ -13,7 +13,6 @@ public class OrderProductRepository : Repository<OrderProduct>
   public async Task<OrderProduct> GetByIdAsync(object idOrder, object idProduct)
   {
     return await GetQueryable().Where(orderProduct => orderProduct.OrderId == (long)idOrder && orderProduct.ProductId == (long)idProduct)
-    .Include(orderProduct => orderProduct.Order)
     .Include(orderProduct => orderProduct.Product)
     .FirstOrDefaultAsync();
   }

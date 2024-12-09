@@ -2,23 +2,27 @@ import React, { useState, useEffect } from 'react';
 import * as jwt_decode from 'jwt-decode';
 import { GET_ORDER_BY_ID } from "../../endpoints/config";
 import '../../styles/Confirmacion.css';
-
-
+import { useCheckout } from '../../context/CheckoutContext';
 
 function ConfirmarPedido() {
+  const { address } = useCheckout();
+  const [token, setToken]= useState(null);
   const [datos, setDatos] = useState([]);
   const [user, setUser] = useState(null);
   const [userId, setUserId] = useState(null);
+
+  function dateFormatting(date) {
+    return new Date(date).toLocaleDateString('es-es', {year:"numeric", month:"long", day:"numeric", hour:"numeric", minute:"numeric"});
+  }
 
   useEffect(() => {
       const token = localStorage.getItem('accessToken');
       if (token) {
           try {
               const decodedToken = jwt_decode.jwtDecode(token);
-              console.log(decodedToken)
+              setToken(token);
               setUser(decodedToken.unique_name);  
               setUserId(decodedToken.id);
-              console.log("id: ", decodedToken.id);
           } catch (error) {
               console.error("Error al decodificar el token", error);
           }
@@ -34,7 +38,10 @@ function ConfirmarPedido() {
                   const url = GET_ORDER_BY_ID(userId);
                   const response = await fetch(url, { 
                       method: 'GET', 
-                      headers: { 'Content-Type': 'application/json' } 
+                      headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
                   });
                   const data = await response.json();
                   console.log("url", url);
@@ -47,13 +54,6 @@ function ConfirmarPedido() {
       };
       fetchData();
   }, [userId]);
-
-    
-    console.log("data", datos);
-    console.log("userId", datos.userId);
-    console.log("totalPrice", datos.totalPrice);
-    console.log("totalProducts", datos.totalProducts);
-    console.log("purchaseDate", datos.purchaseDate);
     
 
   return (
@@ -62,16 +62,16 @@ function ConfirmarPedido() {
       <div className="order-confirmation">
         <h1>Confirmación de Pedido</h1>
         <div><strong>Usuario:</strong> {user}</div>
-        <div><strong>Precio total:</strong> {datos.totalPrice}</div>
-        <div><strong>Productos Totales:</strong> {datos.totalProducts}</div>
-        <div><strong>Fecha de compra:</strong> {datos.purchaseDate}</div>
+        <div><strong>Fecha de compra:</strong> {dateFormatting(datos.purchaseDate)}</div>
+        <div><strong>Precio total:</strong> {datos.totalPrice} €</div>
+        <div><strong>Productos Totales:</strong> {datos.totalProducts} productos</div>
         <div><strong>Productos:</strong></div>
         <ul>
             <li>{datos.orderProducts}</li>
         </ul>
         <div>
             <strong>Dirección:</strong>
-            {/* Dirección */}
+            <p>{address}</p>
         </div>
       </div>
     ) : (

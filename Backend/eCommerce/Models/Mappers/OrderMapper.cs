@@ -6,10 +6,12 @@ namespace eCommerce.Models.Mappers;
 public class OrderMapper
 {
   private readonly OrderProductMapper _orderProductMapper;
+  private readonly AddressMapper _addressMapper;
 
-  public OrderMapper(OrderProductMapper orderProductMapper)
+  public OrderMapper(OrderProductMapper orderProductMapper, AddressMapper addressMapper)
   {
     _orderProductMapper = orderProductMapper;
+    _addressMapper = addressMapper;
   }
 
   //TO DTO
@@ -18,10 +20,12 @@ public class OrderMapper
     return new OrderDto
     {
       Id = order.Id,
-      TotalPrice = TotalPrice(order.OrderProducts),
-      TotalProducts = TotalProducts(order.OrderProducts),
+      TotalPrice = order.TotalPrice,
+      TotalProducts = order.TotalProducts,
       PurchaseDate = order.PurchaseDate,
-      UserId = order.UserId
+      UserId = order.UserId,
+      Address = _addressMapper.ToDto(order.Address),
+      OrderProducts = _orderProductMapper.ToDto(order.OrderProducts).ToList()
     };
   }
   public IEnumerable<OrderDto> ToDto(IEnumerable<Order> orders)
@@ -34,35 +38,15 @@ public class OrderMapper
   {
     return new Order
     {
-      Id = orderDto.Id,
       TotalPrice = orderDto.TotalPrice,
       TotalProducts = orderDto.TotalProducts,
-      PurchaseDate = DateTime.Now,
-      UserId = orderDto.UserId
+      PurchaseDate = orderDto.PurchaseDate,
+      UserId = orderDto.UserId,
+      AddressId = orderDto.AddressId
     };
   }
   public IEnumerable<Order> ToEntity(IEnumerable<OrderDto> ordersDto)
   {
     return ordersDto.Select(ToEntity);
-  }
-
-
-  /* FUNCIONES PRIVADAS */
-
-  private decimal TotalPrice(IEnumerable<OrderProduct> orderProducts) {
-    decimal totalPrice = 0;
-
-    orderProducts.ToList().ForEach((orderProduct) => totalPrice += orderProduct.PurchasePrice);
-
-    return totalPrice;
-  }
-
-  private int TotalProducts(IEnumerable<OrderProduct> orderProducts) {
-    
-    int totalProducts = 0;
-
-    orderProducts.ToList().ForEach((product) => totalProducts += product.Quantity);
-
-    return totalProducts;
   }
 }

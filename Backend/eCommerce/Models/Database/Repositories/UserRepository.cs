@@ -1,8 +1,5 @@
 ﻿using eCommerce.Models.Database.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.EntityFrameworkCore.Query.Internal;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace eCommerce.Models.Database.Repositories;
 
@@ -14,14 +11,14 @@ public class UserRepository : Repository<User>
     }
 
     public new async Task<User> GetByIdAsync(object id)
-   {
+    {
       return await GetQueryable().Where(user => user.Id == (long)id)
-      //.Include(user => user.Cart)
-      .Include(user => user.Reviews!)
+      .Include(user => user.Reviews)
       .Include(user => user.CartProducts).ThenInclude(cartProduct => cartProduct.Product)
-      .Include(user => user.Orders!)
+      .Include(user => user.Orders)
+      .Include(user => user.Addresses)
       .FirstOrDefaultAsync();
-   }
+    }
 
     public async Task<User> GetByMailAsync(string mail)
     {
@@ -35,18 +32,12 @@ public class UserRepository : Repository<User>
         return user.Role;
     }
 
-    public async Task<bool> ExistByMailAsync(string mail)
+    public async Task<bool> IsLoginCorrect(string mail, string password)
     {
-        return await GetByMailAsync(mail) != null;
-    }
-
-    public async Task<bool> ThisUserExists(string mail, string password)
-    {
-        if (await ExistByMailAsync(mail))
-        {
-            User user = await GetByMailAsync(mail);
-            return user.Password == password;
-        }
-        return false;
+        User existedUser = await GetByMailAsync(mail);
+        
+        if (existedUser == null) return false;
+        
+        return existedUser.Password == password;
     }
 }

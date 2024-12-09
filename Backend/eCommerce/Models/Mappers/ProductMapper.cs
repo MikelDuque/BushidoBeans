@@ -22,8 +22,8 @@ public class ProductMapper
             Image = product.Image,
             Name = product.Name,
             Description = product.Description,
-            Category = (ECategory)product.CategoryId,
-            Intensity = product.Intensity,
+            Category = product.CategoryId,
+            Intensity = (int)product.Intensity,
             Price = product.Price,
             Stock = product.Stock,
             TotalReviews = product.Reviews.Count,
@@ -36,6 +36,27 @@ public class ProductMapper
         return products.Select(ToDto);
     }
 
+    //TO ENTITY
+    public Product ToEntity(ProductDto product)
+    {
+        return new Product()
+        {
+            Image = product.Image,
+            Name = product.Name,
+            Description = product.Description,
+            CategoryId = product.Category,
+            Intensity = (EIntensity)product.Intensity,
+            Price = product.Price,
+            Stock = product.Stock
+        };
+    }
+    public IEnumerable<Product> ToEntity(IEnumerable<ProductDto> products)
+    {
+        return products.Select(ToEntity);
+    }
+
+
+    /* ----- FUNCIONES PRIVADAS ----- */
     private double Score(Product product) {
         double score = 0;
 

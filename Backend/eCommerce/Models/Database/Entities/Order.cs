@@ -5,7 +5,6 @@ namespace eCommerce.Models.Database.Entities;
 
 public class Order
 {
-    [JsonIgnore]
   public long Id { get; set; }
   public decimal TotalPrice { get; set; }
   public int TotalProducts { get; set; }
@@ -16,14 +15,12 @@ public class Order
   [ForeignKey(nameof(User))]
   public long UserId { get; set; }
   public User User { get; set; }
-    /*
-    [ForeignKey(nameof(Address))]
-    [JsonIgnore]
+
+  [ForeignKey(nameof(Address))]
   public long AddressId { get; set; }
   public Address Address { get; set; }
-    */
 
-  /* RELACIONES M-N */
-  public List<OrderProduct> OrderProducts { get; } = [];
-  public List<Product> Products { get; } = [];
+    /* RELACIONES M-N */
+    public List<OrderProduct> OrderProducts { get; set; } = [];
+  public List<Product> Products { get; set; } = [];
 }

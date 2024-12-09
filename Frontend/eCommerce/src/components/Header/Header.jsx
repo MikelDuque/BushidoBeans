@@ -1,33 +1,25 @@
-import classes from './Header.module.css';
-import { useContext, useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ModalContext } from "../../context/ModalContext";
-import { useCarrito } from '../../context/CarritoContext';
+import { useState, useRef, useEffect } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+
+import { useModal } from "../../context/ModalContext";
+import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
-import { NavLink } from "react-router-dom";
+
 import Modal from '../Modals/Modal';
 import Cart from "../Modals/Shopping_Cart/Cart";
 
+import classes from './Header.module.css';
+
 function Header() {
-  //HOOKS
-  const {
-    isOpen,
-    openModal,
-    closeModal
-  } = useContext(ModalContext);
 
-  const navigate = useNavigate();
+  /* ----- HOOKS Y CONSTS ----- */
+  const navigateTo = useNavigate();
 
-  const { eliminarContenidoCarrito, totalProducts } = useCarrito();
+  const {token, decodedToken, handleLogout} = useAuth();
+  const {openModal, closeModal} = useModal();
 
-  function handleNavigateToCheckout() {
-    navigate('/checkout')
-  }
-
-  const { isAuthenticated, logout } = useAuth();
-  const handleLogout = () => {
-    logout();
-  };
+  const { deleteCart, totalProducts } = useCart();
+  
 
   return (
     <header>
@@ -37,21 +29,20 @@ function Header() {
         <NavLink className={`${classes.nl} ${classes.btn}`} to="/catalogo"> Té </NavLink>
         <NavLink className={`${classes.nl} ${classes.btn}`} to="/catalogo"> Tienda </NavLink>
         <NavLink className={`${classes.nl} ${classes.btn}`} to="/sobreNosotros"> Nosotros </NavLink>
-
-        {isAuthenticated ? (
-          <Desplegable handleLogout={handleLogout} />
+        
+        {token ? (
+          <Desplegable handleLogout={handleLogout} decodedToken={decodedToken} />
         ) : (
-          <NavLink className={`${classes.nl} ${classes.btnc}`} to="/login"> Login </NavLink>
+          <NavLink className={`${classes.nl} ${classes.btnc}`} to="/login_register"> Login </NavLink>
         )}
       
-        <a onClick={openModal} className={`${classes.nl} ${classes.cesta}`} data-count={totalProducts}/>
+        <a onClick={() => openModal("cart")} className={`${classes.nl} ${classes.cesta}`} data-count={totalProducts}/>
       </nav>
 
-        {isOpen && (
-          <Modal closeModal={closeModal} type="cart" titulo={"Tu Carro"} cancelFnc={eliminarContenidoCarrito} continueFnc={handleNavigateToCheckout} buttonValues={{continueVal:"Procesar compra", cancelVal:"Vaciar carro"}}>
-            <Cart closeCart={closeModal}/>
-          </Modal>
-        )}
+      <Modal type="cart" titulo={"Tu Carro"} cancelFnc={deleteCart} continueFnc={() => navigateTo('/checkout')} buttonValues={{continueVal:"Procesar compra", cancelVal:"Vaciar carro"}}>
+        <Cart closeCart={closeModal}/>
+      </Modal>
+  
     </header>
   );
 }
@@ -59,9 +50,16 @@ function Header() {
 
 // -----DESPLEGABLE----- //
 
-const Desplegable = ({ handleLogout }) => {
+const Desplegable = ({ handleLogout, decodedToken }) => {
   const [abierto, setAbierto] = useState(false);
   const desplegableRef = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener('mousedown', clickFuera);
+    return () => {
+      document.removeEventListener('mousedown', clickFuera);
+    };
+  }, []);
 
   const abrirDesplegable = () => {
     setAbierto((prev) => !prev);
@@ -73,25 +71,26 @@ const Desplegable = ({ handleLogout }) => {
     }
   };
 
-  useEffect(() => {
-    document.addEventListener('mousedown', clickFuera);
-    return () => {
-      document.removeEventListener('mousedown', clickFuera);
-    };
-  }, []);
+  function adminView() {
+    if (decodedToken?.role === "admin") {
+      return (<NavLink className={`${classes.dnl} ${classes.desplOpcion}`} to="/vistaAdmin">Administración</NavLink>);
+    }
+  }
 
   return (
     <div className={classes.despl} ref={desplegableRef}>
       <div className={`${classes.desplToggle} ${abierto ? 'active' : ''}`} onClick={abrirDesplegable} />
       {abierto && (
         <div className={classes.desplMenu}>
-          <NavLink className={`${classes.dnl} ${classes.desplOpcion}`} to="">Ver Perfil</NavLink>
-          <NavLink className={`${classes.dnl} ${classes.desplOpcion}`} to="">Administración</NavLink>
+          <NavLink className={`${classes.dnl} ${classes.desplOpcion}`} to="/user">Ver Perfil</NavLink>
+          {adminView()}
           <div className={classes.desplOpcion} onClick={handleLogout}>Cerrar Sesión</div>
         </div>
       )}
     </div>
   );
 };
+
+
 
 export default Header;

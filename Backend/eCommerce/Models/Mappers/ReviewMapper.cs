@@ -1,6 +1,6 @@
-using eCommerce.Controllers;
 using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
+using eCommerce.Models.Enums;
 
 namespace eCommerce.Models.Mappers;
 
@@ -12,7 +12,7 @@ public class ReviewMapper
         return new ReviewDto
         {
             Id = review.Id,
-            Score = review.Score,
+            Score = (int)review.Score,
             Body = review.Body,
             PubliDate = review.PubliDate,
             
@@ -31,7 +31,7 @@ public class ReviewMapper
     {
         return new Review
         {
-            Score = review.Score,
+            Score = (EScore)review.Score,
             Body = review.Body,
             PubliDate = review.PubliDate,
             ProductId = review.ProductId,

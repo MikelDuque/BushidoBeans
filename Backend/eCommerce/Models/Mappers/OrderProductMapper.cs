@@ -20,6 +20,22 @@ public class OrderProductMapper
    }
    public IEnumerable<OrderProductDto> ToDto(IEnumerable<OrderProduct> orderProducts)
    {
-      return orderProducts.Select(ToDto);
+     return orderProducts.Select(ToDto);
+   }
+
+   //TO ENTITY
+   public OrderProduct ToEntity(OrderProductDto orderProduct)
+   {
+       return new OrderProduct
+       {
+       
+           ProductId = orderProduct.ProductId,
+           PurchasePrice = orderProduct.PurchasePrice,
+           Quantity = orderProduct.Quantity
+       };
+   }
+   public IEnumerable<OrderProduct> ToEntity(IEnumerable<OrderProductDto> orderProducts)
+   {
+      return orderProducts.Select(ToEntity);
    }
 }
