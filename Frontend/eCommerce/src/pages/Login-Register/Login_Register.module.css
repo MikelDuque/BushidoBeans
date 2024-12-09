@@ -1,0 +1,9 @@
+.container_supremo {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: var(--fondo-pagina);
+  height: 100%;
+}

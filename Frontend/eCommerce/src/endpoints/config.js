@@ -22,8 +22,6 @@ const API_PRODUCT_URL = `${API_BASE_URL}/api/Product`;
 const API_REVIEW_URL = `${API_BASE_URL}/api/Review`;
 
   export function GET_REVIEW_BY_ID(id) {return `${API_REVIEW_URL}/${id}`};
-  //export function GET_REVIEWS_BY_PRODUCT_ID(id) {return `${API_REVIEW_URL}/Product_Reviews/${id}`};
-  //export function GET_REVIEWS_BY_USER_ID(id) {return `${API_REVIEW_URL}/User_Reviews/${id}`};
   export const POST_REVIEW = `${API_REVIEW_URL}/Insert_Review`;
 
 
@@ -32,7 +30,7 @@ const API_CART_URL = `${API_BASE_URL}/api/Cart`;
 
   export function GET_CART_BY_ID(id) {return `${API_CART_URL}/${id}`};
   export const PUT_CART = `${API_CART_URL}/Update_Cart`;
-  export const PUT_CARTPRODUCT = `${API_CART_URL}/Update_CartPoduct`;
+  export const PUT_CARTPRODUCT = `${API_CART_URL}/Update_CartProduct`;
   export function DELETE_CART_BY_ID(id) {return `${API_CART_URL}/Delete_Cart/${id}`};
   export const DELETE_CARTPRODUCT = `${API_CART_URL}/Delete_CartProduct`;
 
@@ -52,3 +50,8 @@ const API_ORDER_URL = `${API_BASE_URL}/api/Order`;
   export function GET_ORDER_BY_ID(id) {return `${API_ORDER_URL}/${id}`};
   export const POST_ORDER = `${API_ORDER_URL}/Insert_Order`;
 
+/* --- ORDER CONTROLLER --- */
+
+const API_ADDRESS_URL = `${API_BASE_URL}/api/Address`;
+  export function GET_ADDRESS_BY_ID(id) {return `${API_ADDRESS_URL}/${id}`};
+  export const POST_ADDRESS = `${API_ADDRESS_URL}/Insert_Address`;

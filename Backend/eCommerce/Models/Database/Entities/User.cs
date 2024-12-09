@@ -7,7 +7,7 @@ public class User
 {
     public long Id { get; set; }
     public required string Mail { get; set; }
-    public required string Password { get; set; }
+    public string Password { get; set; }
     public required string Name { get; set; }
     public string Surname { get; set; }
     public int Phone { get; set; }
@@ -15,10 +15,10 @@ public class User
 
     /* RELACIONES 1-M */
     public ICollection<Review> Reviews { get; } = [];
-    public ICollection<Order> Orders { get; } = [];
-    public ICollection<Address> Addresses { get; } = [];
+    public ICollection<Order> Orders { get; set; } = [];
+    public ICollection<Address> Addresses { get; set; } = [];
 
     /* RELACIONES M-N */
     public List<Product> Products { get; } = [];
-    public List<CartProduct> CartProducts { get; } = [];
+    public List<CartProduct> CartProducts { get; set; } = [];
 }

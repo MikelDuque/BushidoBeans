@@ -1,17 +1,24 @@
 .button {
-    grid-column: span 2;
-    justify-self: center;
-    border-radius: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.89);
-    height: 40px;
-    width: 80%;
-    font-family: var(--font-family-titulos-subtitulos);
-    background-color: var(--fondo-vistas);
-    color: rgb(11, 37, 17);
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  .boton:hover {
-    background-color: yellow; /* Cambia el fondo a amarillo en hover */
-    color: green; /* Cambia el texto a verde en hover */
-  }
+  grid-column: span 2;
+  justify-self: center;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.89);
+  height: 40px;
+  width: 80%;
+  font-family: var(--font-family-titulos-subtitulos);
+  background-color: var(--fondo-vistas);
+  color: rgb(11, 37, 17);
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: yellow;
+  color: green;
+}
+
+.button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

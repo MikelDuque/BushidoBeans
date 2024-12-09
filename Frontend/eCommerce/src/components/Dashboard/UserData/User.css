@@ -1,0 +1,54 @@
+.user-wrapper {
+    display: flex;
+    gap: 2rem;
+    margin: 2rem auto;
+    max-width: 1200px;
+    
+}
+.user-container {
+    flex: 3;
+    background-color: var(--fondo-vistas);
+    border: 1px solid var(--dark-brown);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    color: var(--texto-oscuro);
+    font-family: var(--font-family-texto);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-container h2 {
+    font-family: var(--font-family-titulos-subtitulos);
+    font-size: var(--titulos-size);
+    color: var(--nav-footer);
+    margin-bottom: 2rem;
+}
+
+.user-info {
+    margin-bottom: 2rem;
+}
+
+.user-info p {
+    font-size: var(--texto-size);
+    margin: 1rem 0;
+}
+
+.user-info strong {
+    color: var(--texto-principal);
+}
+
+.user-button {
+    padding: 1rem 2rem;
+    background-color: var(--nav-footer);
+    color: var(--letras-nav);
+    border: none;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    font-size: var(--texto-size);
+    font-family: var(--font-family-titulos-subtitulos);
+    transition: all 0.3s ease;
+}
+
+.user-button:hover {
+    background-color: var(--nav-hover);
+    color: var(--fondo-vistas);
+}

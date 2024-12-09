@@ -1,5 +1,7 @@
 using eCommerce.Models.Database.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace eCommerce.Models.Database.Repositories;
 
