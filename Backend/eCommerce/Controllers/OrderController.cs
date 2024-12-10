@@ -33,6 +33,7 @@ namespace eCommerce.Controllers
             Claim userClaimId = User.FindFirst("id");
             if (userClaimId == null) return Unauthorized(new {Message = "Debes iniciar sesión para llevar a cabo esta acción"});
 
+            if (order == null) return BadRequest(new { message = "Pedido Incorrecto" });
             return Ok(await _orderService.InsertOrderAsync(order));
         }
 
