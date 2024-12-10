@@ -17,7 +17,7 @@ function UserProfile() {
     const [isEditing, setIsEditing] = useState(false);
     const [alertMessage, setAlertMessage] = useState(""); 
     const navigate = useNavigate();
-    const token = localStorage.getItem("accessToken");
+    const token = sessionStorage.getItem("accessToken");
     const userId = jwtDecode.jwtDecode(token).id;
 
     useEffect(() => {
@@ -69,7 +69,7 @@ function UserProfile() {
         <div className="user-profile-wrapper">
             <p className="titulo">Editar Perfil</p>
             <div className="user-profile-container">
-                {["mail", "name", "surname", "role", "phone"].map((key) => (
+                {["mail", "name", "surname", "phone"].map((key) => (
                     <div key={key} className="user-profile-row">
                         <label className="texto" htmlFor={key}>
                             {key.charAt(0).toUpperCase() + key.slice(1)}:
