@@ -10,7 +10,7 @@ function Checkout() {
   const isButtonDisabled = (button) => {
     if (currentView === 'cart' && button !== 'cart') return true;
     if (currentView === 'address' && button === 'confirm') return true;
-    if (currentView === 'confirm') return false;
+    if (currentView === 'confirm') return true;
     return false;
   };
 

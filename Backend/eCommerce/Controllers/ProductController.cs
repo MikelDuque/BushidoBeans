@@ -45,7 +45,7 @@ public class ProductController : ControllerBase
   {
     Claim userClaimId = User.FindFirst("id");
     if (userClaimId == null) return Unauthorized("Debes iniciar sesion para llevar a cabo esta accion");
-    Debug.WriteLine("hola" + new StreamReader(HttpContext.Request.Body, Encoding.UTF8).ReadToEndAsync());
+   
     return Ok(await _service.UpdateProductDetailsAsync(product));
   }
 

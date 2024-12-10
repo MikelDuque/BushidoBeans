@@ -18,7 +18,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
 
 
   useEffect(() => {
-    // Llamada a la API cuando cambian el filtro, orden, o búsqueda
+    
     const fetchData = async () => {
       setError(null);
 
@@ -46,7 +46,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   }, [productoBuscado, filtro, ordenar, paginaActual, productosPorPagina]);
 
   const handlePageChange = ({selected: selectedPage}) => {
-    setPaginaActual(selectedPage+1); // Cambia la página actual según la selección del usuario
+    setPaginaActual(selectedPage+1); 
     setPaginaSeleccionada(selectedPage);
     
   };
@@ -92,7 +92,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
           previousLabel={'←'}
           nextLabel={'→'}
           breakLabel={'...'}
-          pageCount={totalPaginas} // Cálculo del número de páginas
+          pageCount={totalPaginas} 
           marginPagesDisplayed={2}
           pageRangeDisplayed={3}
           onPageChange={handlePageChange}
@@ -115,7 +115,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
 export default BusquedaProductos;
 
 BusquedaProductos.propTypes = {
-  filtro: PropTypes.string.isRequired, // Ahora el id es requerido como prop
+  filtro: PropTypes.string.isRequired, 
   ordenar: PropTypes.string.isRequired,
   productosPorPagina: PropTypes.number.isRequired,
 };
