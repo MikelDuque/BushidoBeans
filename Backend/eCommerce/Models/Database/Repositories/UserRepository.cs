@@ -15,7 +15,8 @@ public class UserRepository : Repository<User>
       return await GetQueryable().Where(user => user.Id == (long)id)
       .Include(user => user.Reviews)
       .Include(user => user.CartProducts).ThenInclude(cartProduct => cartProduct.Product)
-      .Include(user => user.Orders)
+      .Include(user => user.Orders).ThenInclude(order => order.Address)
+      .Include(user => user.Orders).ThenInclude(order => order.OrderProducts)
       .Include(user => user.Addresses)
       .FirstOrDefaultAsync();
     }
