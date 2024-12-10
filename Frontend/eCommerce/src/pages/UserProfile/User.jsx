@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import * as jwtDecode from "jwt-decode";
 import "./User.css";
-import { GET_USER_BY_ID } from "../../../endpoints/config.js";
+import { GET_USER_BY_ID } from "../../endpoints/config.js";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../UserSidebar/Sidebar";
+import Sidebar from "../../components/Dashboard/UserSidebar/Sidebar.jsx";
+import { useAuth } from "../../context/AuthContext.jsx";
 
 function User() {
+    const {token, decodedToken} = useAuth();
+    const userId = decodedToken?.id || 0;
+
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -18,12 +21,6 @@ function User() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const token = localStorage.getItem("accessToken");
-                if (!token) throw new Error("Token not found");
-
-                const decodedToken = jwtDecode.jwtDecode(token);
-                const userId = decodedToken.id;
-
                 const response = await fetch(GET_USER_BY_ID(userId), {
                     headers: {
                         "Content-Type": "application/json",
@@ -32,6 +29,8 @@ function User() {
                 });
 
                 if (response.ok) {
+                    console.log("response", response);
+                    
                     const data = await response.json();
                     setUser(data);
                 } else {

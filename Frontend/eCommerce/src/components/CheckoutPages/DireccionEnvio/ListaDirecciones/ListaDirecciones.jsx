@@ -2,8 +2,7 @@ import { useCheckout } from "../../../../context/CheckoutContext";
 import "./ListaDirecciones.css";
 
 function ListaDirecciones({ direcciones }) {
-  const { handleButtonClick } = useCheckout();
-console.log(direcciones);
+  const { handleButtonClick, handleSelectedAddress } = useCheckout();
 
   return (
     <div className="container-lista-direcciones">
@@ -11,10 +10,10 @@ console.log(direcciones);
       {direcciones.length > 0 ? (
         <ul className="lista-direcciones">
           {direcciones.map((direccion, index) => (
-            <li className="item-direccion" key={index} onClick={() => handleButtonClick('confirm')}>
-              <p>{direccion.nombre}</p>
-              <p>{direccion.calle}, {direccion.ciudad} ({direccion.provincia}), {direccion.codigopostal}</p>
-              <p>{direccion.telefono}</p>
+            <li className="item-direccion" key={index} onClick={() => {handleSelectedAddress(direccion.id), handleButtonClick('confirm')}}>
+              <p>{direccion.addressee}</p>
+              <p>{direccion.phoneNumber}</p>
+              <p>{direccion.addressInfo}</p>
             </li>
           ))}
         </ul>

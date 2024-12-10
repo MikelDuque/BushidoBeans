@@ -1,12 +1,15 @@
-import { useState, useEffect } from "react";
-import * as jwt_decode from "jwt-decode";
+import { useState } from "react";
 import Input from "../../../Input/Input";
 import { POST_ADDRESS } from "../../../../endpoints/config";
 import Alert from "../../../Alert/Alert"; 
 import "./AñadirDireccion.css";
 import { useAuth } from '../../../../context/AuthContext';
+
 function AñadirDireccion() {
-    const { token } = useAuth();
+    const { token, decodedToken } = useAuth();
+    const userId = decodedToken ? decodedToken.id : 0;
+
+
     const [formData, setFormData] = useState({
         nombre: "",
         apellido: "",
@@ -17,24 +20,7 @@ function AñadirDireccion() {
         telefono: "",
     });
 
-    useEffect(() => {
-        const token = localStorage.getItem('accessToken');
-        if (token) {
-            try {
-                const decodedToken = jwt_decode.jwtDecode(token);
-                console.log(decodedToken) 
-                setUserId(decodedToken.id);
-            } catch (error) {
-                console.error("Error al decodificar el token", error);
-            }
-        } else {
-            console.error("Error al decodificar el token");
-        }
-    }, []); 
-
     const [alertMessage, setAlertMessage] = useState(""); 
-    const [showAlert, setShowAlert] = useState(false); 
-    const [userId, setUserId]= useState(null);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -54,7 +40,7 @@ function AñadirDireccion() {
             const nuevaDireccion = {
                 userId: userId,
                 addressee: `${formData.nombre} ${formData.apellido}`,
-                nameAddress: `${formData.direccion}, ${formData.ciudad}, ${formData.codigoPostal}, ${formData.pais}`,
+                addressInfo: `${formData.direccion}, ${formData.ciudad}, ${formData.codigoPostal}, ${formData.pais}`,
                 phoneNumber: formData.telefono,
             };
 
@@ -72,27 +58,20 @@ function AñadirDireccion() {
 
             if (response.ok) {
                 setAlertMessage("Dirección añadida correctamente.");
-                setShowAlert(true);
             } else {
                 const errorData = await response.json();
                 setAlertMessage(`Error: ${errorData.message || "No se pudo añadir la dirección."}`);
-                setShowAlert(true);
             }
         } catch (error) {
             console.error("Error al añadir dirección:", error);
             setAlertMessage("Hubo un error al intentar añadir la dirección.");
-            setShowAlert(true);
         }
-    };
-
-    const closeAlert = () => {
-        setShowAlert(false); // Cerrar la alerta
     };
 
     return (
         <div className="container-añadir-direccion">
             <h1 className="titulo-añadir-direccion">Añadir Dirección</h1>
-            {showAlert && <Alert message={alertMessage} onClose={closeAlert} />} 
+            <Alert message={alertMessage} onClose={() => setAlertMessage(null)} /> 
             <form className="form-añadir-direccion" onSubmit={handleAñadirDireccion}>
                 <div className="form-group">
                     <label htmlFor="nombre" className="label"></label>

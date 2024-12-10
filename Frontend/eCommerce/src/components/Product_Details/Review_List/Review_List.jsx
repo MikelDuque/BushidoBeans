@@ -37,9 +37,12 @@ export default function Review_List({ data }) {
 
   return (
     <>
+      {token && 
       <Modal type="postReview" titulo="Escribe una reseña" buttonValues={null}>
         <PostReview/>
       </Modal>
+      }
+
       <Alert message={alertMessage} onClose={() => setAlertMessage(null)}/>
       
       <div className={classes.reviews_container}>

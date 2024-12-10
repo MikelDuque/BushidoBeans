@@ -20,6 +20,9 @@ public class DataContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        optionsBuilder.LogTo(Console.WriteLine);
+        optionsBuilder.EnableSensitiveDataLogging();
+
         string baseDir = AppDomain.CurrentDomain.BaseDirectory;
         string connectionString = "Server=db10882.databaseasp.net; Database=db10882; Uid=db10882; Pwd=9q-Nx%Y48An!;";
 

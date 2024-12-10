@@ -9,6 +9,7 @@ namespace eCommerce.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class UserController : ControllerBase
 {
     private readonly UserService _service;
@@ -22,13 +23,20 @@ public class UserController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult> GetByIdAsync(long id)
     {
+        Claim userClaimId = User.FindFirst("id");
+        if (userClaimId == null) return Unauthorized(new {Message = "Debe iniciar sesión para llevar a cabo esta acción"});
+
         return Ok(await _service.GetByIdAsync(id));
     }
 
+    [Authorize(Roles = "admin")]
     [HttpGet("Get_Users")]
-    public async Task<IEnumerable<UserDto>> GetAllAsync()
+    public async Task<ActionResult> GetAllAsync()
     {
-        return await _service.GetAllAsync();
+        Claim userClaimId = User.FindFirst("id");
+        if (userClaimId == null) return Unauthorized(new {Message = "Debe iniciar sesión para llevar a cabo esta acción"});
+
+        return Ok(await _service.GetAllAsync());
     }
 
     [Authorize(Roles = "admin")]
@@ -36,7 +44,7 @@ public class UserController : ControllerBase
     public async Task<ActionResult<UserDto>> UpdateAsync([FromBody]User user)
     {
         Claim userClaimId = User.FindFirst("id");
-        if (userClaimId == null) return Unauthorized("Debes iniciar sesión para llevar a cabo esta acción");
+        if (userClaimId == null) return Unauthorized(new {Message = "Debes iniciar sesión para llevar a cabo esta acción"});
 
         return Ok(await _service.UpdateAsync(user));
     }
@@ -46,7 +54,7 @@ public class UserController : ControllerBase
     public async Task<ActionResult<UserDto>> UpdateUserRole([FromBody] HandleRole userRole)
     {
         Claim userClaimId = User.FindFirst("id");
-        if (userClaimId == null) return Unauthorized("Debe iniciar sesión para llevar a cabo esta acción");
+        if (userClaimId == null) return Unauthorized(new {Message = "Debes iniciar sesión para llevar a cabo esta acción"});
 
         return Ok(await _service.UpdateRole(userRole));
     }
@@ -57,7 +65,7 @@ public class UserController : ControllerBase
     public async Task<ActionResult<UserDto>> DeleteAsyncUser(long id)
     {
         Claim userClaimId = User.FindFirst("id");
-        if (userClaimId == null) return Unauthorized("Debe iniciar sesión para llevar a cabo esta acción");
+        if (userClaimId == null) return Unauthorized(new {Message = "Debes iniciar sesión para llevar a cabo esta acción"});
 
         await _service.DeleteAsyncUserById(id);
 

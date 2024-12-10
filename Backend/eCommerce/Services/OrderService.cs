@@ -2,6 +2,7 @@
 using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 using eCommerce.Models.Mappers;
+using Microsoft.EntityFrameworkCore;
 
 namespace eCommerce.Services;
 
@@ -20,7 +21,6 @@ public class OrderService
 
 
     /* ----- GET ----- */
-
     public async Task<OrderDto> GetOrderByIdAsync(long orderId)
     {
         Order order = await _unitOfWork.OrderRepository.GetByIdAsync(orderId);
@@ -28,9 +28,17 @@ public class OrderService
         return _orderMapper.ToDto(order);
     }
 
+    public async Task<IEnumerable<OrderDto>> GetOrdersByUserIdAsync(long userId)
+    {
+        var orders = await _unitOfWork.OrderRepository
+            .GetQueryable()
+            .Where(o => o.UserId == userId)
+            .ToListAsync();
+        return _orderMapper.ToDto(orders);
+    }
+
 
     /* ----- INSERT ----- */
-
     public async Task<OrderDto> InsertOrderAsync(OrderDto order)
     {
 
@@ -62,5 +70,5 @@ public class OrderService
         _unitOfWork.OrderRepository.Delete(orderBD);
 
         return await _unitOfWork.SaveAsync();
-    } 
+    }
 }

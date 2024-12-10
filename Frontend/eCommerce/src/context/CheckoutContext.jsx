@@ -5,13 +5,7 @@ import { POST_ORDER } from '../endpoints/config';
 import useFetchEvent from '../endpoints/useFetchEvent';
 
 
-const CheckoutContext = createContext({
-  totalPrice: 0,
-  totalProducts: 0,
-  orderProducts: [],
-  userId: 0,
-  addressId: 0
-});
+const CheckoutContext = createContext();
 
 export function useCheckout() {return useContext(CheckoutContext)};
 
@@ -25,31 +19,46 @@ export function CheckoutProvider({ children }) {
     totalPrice: 0.0,
     totalProducts: 0,
     orderProducts: [],
-    userId: decodedToken.id || 0,
+    userId: decodedToken?.id || 0,
     addressId: 0
   });
 
   useEffect(() => {
     handleOrderProducts();
     handleTotalPrice();
-  }, []);
+  }, [cart]);
 
 
   // Función para cambiar el estado de la vista
   const handleButtonClick = (view) => {
     setCurrentView(view);
+
+    if(view === 'confirm') sendOrder();
   };
 
-  function handleOrder(newOrder) {
-    setOrder(newOrder)
-  }
-
   function handleOrderProducts() {
-    
+    let orderProducts = [];
+
+    cart.forEach((cartItem) => {
+    orderProducts = [...cart, {
+      ...cartItem,
+      purchasePrice: cartItem.price
+    }]});
+
     setOrder(estadoPrevio => ({
       ...estadoPrevio,
-      orderProducts: JSON.parse(JSON.stringify(cart))
-    }))
+      orderProducts: [...orderProducts]
+
+    }));
+
+    /*
+    setOrder(estadoPrevio => ({
+      ...estadoPrevio.map((item) => {
+        estadoPrevio = [...cart, {
+          ...item,
+          purchasePrice: item.price
+        }]})}));
+        */
   }
 
   function handleTotalPrice() {
@@ -61,6 +70,13 @@ export function CheckoutProvider({ children }) {
     }))
   }
 
+  function handleSelectedAddress(id) {
+    setOrder(estadoPrevio => ({
+      ...estadoPrevio,
+      addressId: id
+    }))
+  }
+
   const calculateShipping = () => {
     const shippingPrice = order.totalPrice > 35 ? 0 : 2.99;
     return shippingPrice.toFixed(2);
@@ -69,8 +85,13 @@ export function CheckoutProvider({ children }) {
 
   //FETCHING
   async function sendOrder() {
+    console.log("order", order);
+    
 
-    const postedOrder = await fetchingData({url: POST_ORDER, type: 'POST', token: token, params:order});
+    const postedOrder = await fetchingData({url: POST_ORDER, type: 'POST', token: token, params:order, needAuth:true});
+
+    console.log("posted", postedOrder);
+    
   };
 
 
@@ -81,6 +102,7 @@ export function CheckoutProvider({ children }) {
     order,
     handleButtonClick,
     calculateShipping,
+    handleSelectedAddress
   };
 
   return (<CheckoutContext.Provider value={ctxValue}> {children} </CheckoutContext.Provider>);

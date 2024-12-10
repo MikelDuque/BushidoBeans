@@ -15,9 +15,7 @@ public class CartService
         _cartProductMapper = cartProductMapper;
     }
 
-
     /* ----- GET ----- */
-
     public async Task<List<CartProductDto>> GetCartByIdAsync(long userId)
     {
         User user = await _unitOfWork.UserRepository.GetByIdAsync(userId);
@@ -25,9 +23,7 @@ public class CartService
         return _cartProductMapper.ToDto(user.CartProducts).ToList();
     }
 
-
     /* ----- UPDATE ----- */
-
     public async Task<List<CartProductDto>> UpdateCartAsync(Cart cart)
     {
         foreach (UpdatedCartProduct cartProduct in cart.CartProducts)
@@ -53,7 +49,6 @@ public class CartService
 
 
     /* ----- DELETE ----- */
-
     public async Task<bool> DeleteCartAsync(long id)
     {
         User user = await _unitOfWork.UserRepository.GetByIdAsync(id);

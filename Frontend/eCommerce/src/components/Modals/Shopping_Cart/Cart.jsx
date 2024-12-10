@@ -9,9 +9,9 @@ export default function Cart() {
     return (cart.length > 0 ? (
       cart.map((cartItem) => (    
         <CartItem 
-          key={cartItem.id}
+          key={cartItem.productId}
           productData = {{
-            id: cartItem.id,
+            productId: cartItem.productId,
             image: cartItem.image,
             name: cartItem.name,
             price: cartItem.price,

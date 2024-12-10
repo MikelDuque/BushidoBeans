@@ -34,7 +34,6 @@ public class AuthService
             {
                 { "id", user.Id },
                 { ClaimTypes.Email, model.Mail },
-                { ClaimTypes.Authentication, user.Password },
                 { ClaimTypes.Role, user.Role },
                 { ClaimTypes.Name, user.Name },
                 { ClaimTypes.Surname, user.Surname }
