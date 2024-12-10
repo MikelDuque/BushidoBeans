@@ -17,8 +17,6 @@ function Footer() {
       <p>Área legal.</p>
       <p>Cookies.</p>
       </div>
-      
-      
 
       <div className={classes.redes}>
         <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
@@ -31,7 +29,6 @@ function Footer() {
 
       <p className={classes.end}>© 2024 Bushido Beans. Todos los derechos reservados.</p>
 
-      
     </footer>
   );
 }
