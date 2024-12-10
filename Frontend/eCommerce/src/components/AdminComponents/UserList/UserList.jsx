@@ -12,7 +12,7 @@ export default function UserList() {
     const [error, setError] = useState(null);
 
     const {closeModal, openModal} = useModal();
-    const { token, decodedTokenRef } = useAuth();
+    const { token, decodedToken } = useAuth();
 
     useEffect(() => {
         if (token) getUsers();
@@ -31,9 +31,9 @@ export default function UserList() {
             setError(error.message);
         }
     };
-
+    
     const handleUpdate = (event) => {
-        const loggedUser = decodedTokenRef.current.id;
+        const loggedUser = decodedToken?.id;
         console.log("usuario", loggedUser);
         
         const thisElement = event.target;
@@ -62,7 +62,6 @@ export default function UserList() {
             else {getUsers()}
         } catch (error) {
             setError(error.message);
-            console.log();
             console.log("Error: ", error.message);  
         }
     };
