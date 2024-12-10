@@ -2,7 +2,6 @@
 using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 using eCommerce.Models.Mappers;
-using Microsoft.EntityFrameworkCore;
 
 namespace eCommerce.Services;
 
@@ -30,11 +29,9 @@ public class OrderService
 
     public async Task<IEnumerable<OrderDto>> GetOrdersByUserIdAsync(long userId)
     {
-        var orders = await _unitOfWork.OrderRepository
-            .GetQueryable()
-            .Where(o => o.UserId == userId)
-            .ToListAsync();
-        return _orderMapper.ToDto(orders);
+        User thisUser = await _unitOfWork.UserRepository.GetByIdAsync(userId);
+            
+        return _orderMapper.ToDto(thisUser.Orders);
     }
 
 

@@ -10,7 +10,6 @@ import { GET_PRODUCT_BY_ID, POST_REVIEW } from '../../../endpoints/config';
 import useFetch from '../../../endpoints/useFetch';
 import { useModal } from '../../../context/ModalContext';
 
-//obtener producto
 export default function PostReview() {
     const { id } = useParams();
 
