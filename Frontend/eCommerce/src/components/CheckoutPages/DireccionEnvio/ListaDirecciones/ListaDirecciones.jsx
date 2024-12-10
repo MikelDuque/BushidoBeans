@@ -10,7 +10,7 @@ function ListaDirecciones({ direcciones }) {
       {direcciones.length > 0 ? (
         <ul className="lista-direcciones">
           {direcciones.map((direccion, index) => (
-            <li className="item-direccion" key={index} onClick={() => {handleSelectedAddress(direccion.id), handleButtonClick('confirm')}}>
+            <li className="item-direccion" key={index} onClick={() => {handleSelectedAddress(direccion.id); handleButtonClick('confirm')}}>
               <p>{direccion.addressee}</p>
               <p>{direccion.phoneNumber}</p>
               <p>{direccion.addressInfo}</p>
