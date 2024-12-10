@@ -1,26 +1,24 @@
 /* -----GENERAL----- */
 footer{
+  display: flex;
   background: var(--nav-footer);
-  height: 22vh;
   font-family: 'Vollkorn', sans-serif;
   font-size: var(--texto-size);
   font-weight: var(--font-weight-regular);
   color: var(--letras-nav);
-  position: relative;
-  clear: both;
+  justify-content: space-between;
+  padding: 10px;
 }
 
 /* -----LOGO----- */
 .fLogo{
-  display: inline-block;
+  padding: 10px;
   height: 100px;
-  width: 240px;
+  min-width: 240px;
+  margin: auto 0;
   background-image: url(recursos/FootLogoD.png);
   background-size: cover;
   transition: transform 0.2s ease;
-  position: relative;
-  top: 25px;
-  left: 50px;
 }
 .fLogo:hover{
   transform: scale(1.05);
@@ -31,24 +29,17 @@ footer{
 }
 
 /* -----REDES SOCIALES----- */
-.redes{
+.redes a{
+  padding: 5px 10px;
   display: flex;
-  gap: 100px;
+  align-items: center;
+  transition: transform 0.2s ease;
+  text-decoration: none;
+  color: inherit;
 }
 .redes img{
   width: 40px;
   height: 40px;
-  position: relative;
-  top: -10px;
-}
-.redes a{
-  display: flex;
-  position: relative;
-  top: -60px;
-  left: 30%;
-  transition: transform 0.2s ease;
-  text-decoration: none;
-  color: inherit;
 }
 .redes a:hover {
   transform: scale(1.05);
@@ -60,9 +51,8 @@ footer{
 
 
 /* -----DERECHOS----- */
-footer p{
+.terms{
   text-align: center;
+  padding: 10px;
   color: #fffdea8d;
-  position: relative;
-  bottom: 40px;
 }
