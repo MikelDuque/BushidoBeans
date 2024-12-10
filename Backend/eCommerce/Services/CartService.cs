@@ -21,6 +21,8 @@ public class CartService
         User user = await _unitOfWork.UserRepository.GetByIdAsync(userId);
 
         return _cartProductMapper.ToDto(user.CartProducts).ToList();
+
+
     }
 
     /* ----- UPDATE ----- */

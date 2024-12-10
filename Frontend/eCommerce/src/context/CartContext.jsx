@@ -28,7 +28,7 @@ export function CartProvider({ children }) {
     const [cart, setCart] = useState(getLocalCart());
     const totalProducts = getTotalProducts();
     const mergeParams = useRef({
-        id: 0,
+        id: null,
         cartProducts: []
     });
 
@@ -50,7 +50,7 @@ export function CartProvider({ children }) {
 
     function setMergeParams() {
         mergeParams.current = {
-            id: decodedToken ? decodedToken.id : 0,
+            id: decodedToken ? decodedToken.id : null,
             cartProducts: getLocalCart()
         }
     }
