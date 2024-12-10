@@ -5,13 +5,7 @@ import { POST_ORDER } from '../endpoints/config';
 import useFetchEvent from '../endpoints/useFetchEvent';
 
 
-const CheckoutContext = createContext({
-  totalPrice: 0,
-  totalProducts: 0,
-  orderProducts: [],
-  userId: 0,
-  addressId: 0
-});
+const CheckoutContext = createContext();
 
 export function useCheckout() {return useContext(CheckoutContext)};
 
@@ -25,14 +19,21 @@ export function CheckoutProvider({ children }) {
     totalPrice: 0.0,
     totalProducts: 0,
     orderProducts: [],
-    userId: decodedToken.id || 0,
-    addressId: 0
+    userId: decodedToken?.id || 0,
+    addressId: 0,
+    address: {
+      id: 0,
+      addressee: null,
+      phoneNumber: 0,
+      addressInfo: null,
+      userId: 0
+    }
   });
 
   useEffect(() => {
     handleOrderProducts();
     handleTotalPrice();
-  }, []);
+  }, [cart]);
 
 
   // Función para cambiar el estado de la vista
@@ -41,15 +42,54 @@ export function CheckoutProvider({ children }) {
   };
 
   function handleOrder(newOrder) {
-    setOrder(newOrder)
+    setOrder(newOrder);
   }
 
   function handleOrderProducts() {
-    
+    const orderProducts = [];
+
+    cart.map((cartItem) => {
+      orderProducts.push({
+        orderId: 0,
+        productId: cartItem.productId,
+        image: cartItem.image,
+        name: cartItem.name,
+        purchasePrice: cartItem.price,
+        quantity: cartItem.quantity
+      })
+    })
+
     setOrder(estadoPrevio => ({
       ...estadoPrevio,
-      orderProducts: JSON.parse(JSON.stringify(cart))
+      orderProducts: [...orderProducts]
     }))
+
+
+    /*
+    let orderProducts = [];
+
+    cart.forEach((cartItem) => {
+      orderProducts = [...cart, {
+        ...cartItem,
+        purchasePrice: cartItem.price
+      }]
+    });
+
+    setOrder(estadoPrevio => ({
+      ...estadoPrevio,
+      orderProducts: [...orderProducts]
+
+    }));
+    */
+
+    /*
+    setOrder(estadoPrevio => ({
+      ...estadoPrevio.map((item) => {
+        estadoPrevio = [...cart, {
+          ...item,
+          purchasePrice: item.price
+        }]})}));
+        */
   }
 
   function handleTotalPrice() {
@@ -61,6 +101,17 @@ export function CheckoutProvider({ children }) {
     }))
   }
 
+  function handleSelectedAddress(id) {
+    console.log("id direcciones", id);
+    console.log("carrito", cart);
+    
+    
+    setOrder(estadoPrevio => ({
+      ...estadoPrevio,
+      addressId: id
+    }))
+  }
+
   const calculateShipping = () => {
     const shippingPrice = order.totalPrice > 35 ? 0 : 2.99;
     return shippingPrice.toFixed(2);
@@ -69,8 +120,12 @@ export function CheckoutProvider({ children }) {
 
   //FETCHING
   async function sendOrder() {
+    console.log("order a entregar", order);
+    
+    const postedOrder = await fetchingData({url: POST_ORDER, type: 'POST', token: token, params:order, needAuth:true});
 
-    const postedOrder = await fetchingData({url: POST_ORDER, type: 'POST', token: token, params:order});
+    console.log("posted", postedOrder);
+    if (postedOrder) handleOrder(postedOrder);
   };
 
 
@@ -81,6 +136,8 @@ export function CheckoutProvider({ children }) {
     order,
     handleButtonClick,
     calculateShipping,
+    handleSelectedAddress,
+    handleOrder
   };
 
   return (<CheckoutContext.Provider value={ctxValue}> {children} </CheckoutContext.Provider>);

@@ -11,8 +11,8 @@ export default function UserList() {
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
 
-    const {closeModal, openModal, isOpen} = useModal();
-    const { token, decodedTokenRef } = useAuth();
+    const {closeModal, openModal} = useModal();
+    const { token, decodedToken } = useAuth();
 
     useEffect(() => {
         if (token) getUsers();
@@ -31,9 +31,9 @@ export default function UserList() {
             setError(error.message);
         }
     };
-
+    
     const handleUpdate = (event) => {
-        const loggedUser = decodedTokenRef.current.id;
+        const loggedUser = decodedToken?.id;
         console.log("usuario", loggedUser);
         
         const thisElement = event.target;
@@ -62,7 +62,6 @@ export default function UserList() {
             else {getUsers()}
         } catch (error) {
             setError(error.message);
-            console.log();
             console.log("Error: ", error.message);  
         }
     };
@@ -89,26 +88,18 @@ export default function UserList() {
 
     return (
         <div>
-            {error ? <p>Error: {error}</p> : 
+            {error ? <p>{error}</p> : 
                 <ul className={classes.container}>
                     {users.length > 0 ? (users.map((listElement, i) => (
-                        <li key={i}> <UserListElement listElement={listElement} changeRol={handleUpdate} deleteUser={handleDelete}/> </li>
+                        <li key={i}> <UserListElement listElement={listElement} changeRol={handleUpdate} deleteUser={() => openModal("deleteUser")}/> </li>
                     ))) : <p>No existen elementos que listar</p>}
                 </ul>
             }
-
-            {isOpen && (
-                <Modal
-                buttonValues={{ continueVal: "Eliminar", cancelVal: "Cancelar" }}
-                type="confirmDelete"
-                titulo="¿Eliminar usuario?"
-                continueFnc={handleDelete}  
-                cancelFnc={closeModal}>
-                    <div>
-                        Hola
+                <Modal type="deleteUser" titulo="¿Eliminar usuario?" continueFnc={handleDelete} cancelFnc={closeModal} buttonValues={{continueVal: "Eliminar", cancelVal: "Cancelar"}}>
+                    <div className={classes.deleteAlert}>
+                        <h1>Una vez eliminado no podrá deshacer la acción...</h1>
                     </div>
                 </Modal>
-            )}
 
             {/*
             {!currentUser && (

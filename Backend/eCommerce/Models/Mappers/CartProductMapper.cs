@@ -10,7 +10,7 @@ public class CartProductMapper
    {
        return new CartProductDto
        {
-           Id = cartProduct.ProductId,
+           ProductId = cartProduct.ProductId,
            Image = cartProduct.Product.Image,
            Name = cartProduct.Product.Name,
            Price = cartProduct.Product.Price,

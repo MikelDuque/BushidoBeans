@@ -1,33 +1,34 @@
-import { useState, useEffect } from 'react';
-import { GET_ORDER_BY_ID } from "../../../endpoints/config";
+import { useEffect, useState } from 'react';
+import { API_BASE_URL, POST_ORDER } from "../../../endpoints/config";
 import './Confirmacion.css';
 import { useCheckout } from '../../../context/CheckoutContext';
 import { useAuth } from '../../../context/AuthContext';
+import useFetch from "../../../endpoints/useFetch.js";
+import { useCart } from '../../../context/CartContext.jsx';
 
 function ConfirmarPedido() {
-  const { address } = useCheckout();
-  const { token, decodedToken } = useAuth();
-  const [datos, setDatos] = useState([]);
-  const [user, setUser] = useState(null);
-  const [userId, setUserId] = useState(null);
+  const { token } = useAuth();
+  const { deleteCart } = useCart();
+  const { order } = useCheckout();
+  const [postedOrder, setPostedOrder] = useState(null);
+
+  const {fetchData, isLoading} = useFetch({url: POST_ORDER, type: 'POST', token: token, params:order, needAuth:true});
+
+  
+  useEffect(() => {
+    if(!postedOrder) {
+      setPostedOrder(fetchData)
+      deleteCart(order.userId)
+    };
+    
+  }, [fetchData]);
 
   function dateFormatting(date) {
     return new Date(date).toLocaleDateString('es-es', {year:"numeric", month:"long", day:"numeric", hour:"numeric", minute:"numeric"});
   }
 
-  useEffect(() => {
-      if (decodedToken) {
-          try {
-              setUser(decodedToken.unique_name);  
-              setUserId(decodedToken.id);
-          } catch (error) {
-              console.error("Error al decodificar el token", error);
-          }
-      } else {
-          console.error("Token no encontrado");
-      }
-  }, []);
 
+/*
   useEffect(() => {
       const fetchData = async () => {
           if (userId) {
@@ -41,8 +42,6 @@ function ConfirmarPedido() {
                     }
                   });
                   const data = await response.json();
-                  console.log("url", url);
-                  console.log("respuesta api", data);
                   setDatos(data); 
               } catch (error) { 
                   alert("Hubo un error al cargar los productos.");
@@ -51,32 +50,45 @@ function ConfirmarPedido() {
       };
       fetchData();
   }, [userId]);
-    
+  */
 
   return (
     <>
-    {datos.totalProducts > 0 ? (
+    {isLoading ? <span>Cargando el pedido...</span> : 
+    (postedOrder ? (
       <div className="order-confirmation">
-        <h1>Confirmación de Pedido</h1>
-        <div><strong>Usuario:</strong> {user}</div>
-        <div><strong>Fecha de compra:</strong> {dateFormatting(datos.purchaseDate)}</div>
-        <div><strong>Precio total:</strong> {datos.totalPrice} €</div>
-        <div><strong>Productos Totales:</strong> {datos.totalProducts} productos</div>
+        <h1>Confirmación de Pedido (ID: {postedOrder.id})</h1>
+        <div><strong>Usuario:</strong>{postedOrder.address?.addressee}</div>
+        <div><strong>Fecha de compra:</strong> {dateFormatting(postedOrder.purchaseDate)}</div>
+        <div><strong>Precio total:</strong> {postedOrder.totalPrice} €</div>
+        <div><strong>Productos Totales:</strong> {postedOrder.totalProducts} productos</div>
+        <div><strong>Teléfono:</strong>{postedOrder.address?.phoneNumber}</div>
+        <div><strong>Dirección:</strong><p>{postedOrder.address?.addressInfo}</p></div>
+        
         <div><strong>Productos:</strong></div>
-        <ul>
-            <li>{datos.orderProducts}</li>
+        
+        <ul className='listaProductos'>
+          {(postedOrder.orderProducts?.length > 0 ? (
+            postedOrder.orderProducts?.map((orderItem) => (
+            <li key={orderItem.productId}>
+              <div><img src={`${API_BASE_URL}${orderItem.image}`}/></div>
+                <ul className='contenedorDeDatos'>
+                  <li><strong>Producto:</strong>{orderItem.name}</li>
+                  <li><strong>Precio:</strong>{orderItem.purchasePrice} €</li>
+                  <li><strong>Cantidad:</strong>{orderItem.quantity}</li>
+                </ul>
+            </li>
+            ))) : (<h4>Tu pedido está vacío</h4>)
+          )}
         </ul>
-        <div>
-            <strong>Dirección:</strong>
-            <p>{address}</p>
-        </div>
+        
       </div>
     ) : (
       <div className='order-confirmation2'>No hay ningún pedido aún</div>
-    )}
+    ))}
+    
     </>
   ) 
-  
 }
 
 export default ConfirmarPedido;

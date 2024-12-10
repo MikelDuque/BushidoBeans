@@ -2,15 +2,20 @@ import { useEffect } from 'react';
 import classes from './Alert.module.css';
 
 const Alert = ({ message, onClose }) => {
+    
+    
     useEffect(() => {
         const timer = setTimeout(onClose, 3000); // Oculta la alerta después de 3 segundos
+        
         return () => clearTimeout(timer);
-    }, [onClose]);
+    }, [onClose, message]);
 
     return (
+        (message && 
         <div className={classes.alert}>
             <p>{message}</p>
         </div>
+        )
     );
 };
 

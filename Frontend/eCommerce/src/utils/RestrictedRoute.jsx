@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext";
 
 export function LoginPrivateRoute({children}) {
   const {token} = useAuth();
+  const location = useLocation();
 
   if (token) {
     const previousPath = location.pathname === "" ? "/" : location.pathname;

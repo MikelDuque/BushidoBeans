@@ -30,7 +30,7 @@ import Checkout from "./pages/Checkout/Checkout";
 
 import SobreNosotros from './pages/SobreNosotros/SobreNosotros';
 
-import User from "./components/Dashboard/UserData/User";
+import User from "./pages/UserProfile/User";
 import UserProfile from './components/Dashboard/UserProfile/UserProfile';
 import UserAddress from './components/Dashboard/UserAddress/UserAddress';
 import UserOrders from './components/Dashboard/UserOrders/UserOrders';
@@ -82,7 +82,7 @@ export default function App() {
             </Route>
 
             {/* ----- CHECKOUT LAYOUT ----- */}
-            <Route path="/" elements={<CheckoutLayout/>}>
+            <Route path="/" element={<CheckoutLayout/>}>
                 <Route path="/checkout" element={
                     <CheckoutProvider>
                         <LogoutPrivateRoute>

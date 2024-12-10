@@ -35,18 +35,18 @@ export function CartProvider({ children }) {
 
     /* ----- CART MERGE ----- */
     
-    const {fetchData} = useFetch({url: PUT_CART, type: 'PUT', token: token, params:mergeParams.current});
+    const {fetchData} = useFetch({url: PUT_CART, type: 'PUT', token: token, params:mergeParams.current, needAuth:true});
 
     useEffect(() => {
         setMergeParams();
 
     }, [decodedToken]);
 
-    useEffect(() => {
+    useEffect(() => {  
         if(token && fetchData) getBackendCart();
 
     }, [token, fetchData]);
-
+    
 
     function setMergeParams() {
         mergeParams.current = {
@@ -78,7 +78,7 @@ export function CartProvider({ children }) {
     }
 
     function updateCart(newProduct) {
-        const existsIndex = cart.findIndex((prevProduct) => prevProduct.id === newProduct.id);
+        const existsIndex = cart.findIndex((prevProduct) => prevProduct.productId === newProduct.productId);
         let updatedCart = [...cart];
 
         if (existsIndex !== -1) {    
@@ -99,7 +99,7 @@ export function CartProvider({ children }) {
     };
 
     function deleteCartItem(id) {
-        const updatedCart = [...cart].filter((item) => item.id !== id);
+        const updatedCart = [...cart].filter((item) => item.productId !== id);
 
         handleCart(updatedCart);
     }
@@ -111,11 +111,11 @@ export function CartProvider({ children }) {
         if (token) {
             const updatedProduct = {
                 userId: decodedToken.id,
-                productId: product.id,
+                productId: product.productId,
                 quantity: product.quantity
             };
     
-            const isUpdated = await fetchingData({url: PUT_CARTPRODUCT, type: 'PUT', token: token, params: updatedProduct});
+            const isUpdated = await fetchingData({url: PUT_CARTPRODUCT, type: 'PUT', token: token, params: updatedProduct, needAuth:true});
     
             if (!isUpdated) return;
         }
@@ -130,7 +130,7 @@ export function CartProvider({ children }) {
                 productId: productId
             };
     
-            const isDeleted = await fetchingData({url: DELETE_CARTPRODUCT, type: 'DELETE', token: token, params: deletedProduct});
+            const isDeleted = await fetchingData({url: DELETE_CARTPRODUCT, type: 'DELETE', token: token, params: deletedProduct, needAuth:true});
 
             if(!isDeleted) return;
         }
@@ -140,7 +140,7 @@ export function CartProvider({ children }) {
 
     async function deleteCart() {
         if (token) {
-            const isDeleted = await fetchingData({url: DELETE_CART_BY_ID(decodedToken.id), type: 'DELETE', token: token, params: decodedToken.id});
+            const isDeleted = await fetchingData({url: DELETE_CART_BY_ID(decodedToken.id), type: 'DELETE', token: token, params: decodedToken.id, needAuth:true});
 
             if(!isDeleted) return;
         }

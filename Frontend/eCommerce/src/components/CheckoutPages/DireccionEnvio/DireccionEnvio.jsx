@@ -1,16 +1,25 @@
 import ListaDirecciones from "./ListaDirecciones/ListaDirecciones";
 import AnadirDireccion from "./AñadirDireccion/AñadirDireccion";
 import { useEffect, useState } from "react";
-import * as jwt_decode from "jwt-decode";
-import { GET_ALL_ADDRESSES_BY_ID } from "../../../endpoints/config";
+import { GET_ADDRESSES_BY_USER_ID } from "../../../endpoints/config";
 import { useAuth } from "../../../context/AuthContext.jsx";
+import useFetch from "../../../endpoints/useFetch.js";
 
 function DireccionEnvio() {
-    const [direcciones, setDirecciones] = useState(null);
-    const [cargando, setCargando] = useState(true);
-    const [userId, setUserId] = useState(null);
-    const { token } = useAuth();
+    const {token, decodedToken} = useAuth();
+    const userId = decodedToken?.id || 0;
 
+    const [direcciones, setDirecciones] = useState(null);
+    //const [cargando, setCargando] = useState(true);
+
+    const {fetchData, isLoading} = useFetch({url: GET_ADDRESSES_BY_USER_ID(userId), type: 'GET', token: token, needAuth:true});
+
+    useEffect(() => {
+        setDirecciones(fetchData);
+
+    }, [fetchData]);
+
+    /*
     useEffect(() => {
         const tokenId = localStorage.getItem("accessToken");
         if (tokenId) {
@@ -24,42 +33,48 @@ function DireccionEnvio() {
             console.error("Token no encontrado en localStorage");
         }
     }, [token]);
+    */
 
+    /*
     useEffect(() => {
         if (userId) {
             const getUserAddresses = async () => {
                 try {
-                    const response = await fetch(GET_ALL_ADDRESSES_BY_ID(userId), {
+                    const response = await fetch(GET_ADDRESSES_BY_USER_ID(userId), {
                         method: "GET",
                         headers: {
                             Authorization: `Bearer ${token}`,
-                        },
+                        }
                     });
+                    
 
                     if (!response.ok) {
                         throw new Error("Error al obtener las direcciones");
                     }
 
                     const data = await response.json();
-                    setDirecciones(data.address || []);
+                    console.log("data direcciones", data);
+                    
+                    setDirecciones(data || []);
                     setCargando(false);
                 } catch (error) {
-                    console.error("Error al obtener las direcciones:", error);
                     setCargando(false);
                 }
             };
 
             getUserAddresses();
         }
-    }, [userId, token]);
+    }, [cargando]);
+    */
 
     return (
         <>
             <p className="subtitulo">Mis Direcciones</p>
             <br />
-            {cargando ? (
+            {isLoading ? (
+                console.log("direcciones", direcciones),
                 <p>Cargando direcciones...</p>
-            ) : direcciones && direcciones.length > 0 ? (
+            ) : direcciones?.length > 0 ? (
                 <>
                     <ListaDirecciones direcciones={direcciones} />
                 </>

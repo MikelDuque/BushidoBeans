@@ -9,7 +9,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.50);
   z-index: 100;
 }
 
@@ -33,7 +33,7 @@
   width: 30vw;
 }
 
-.modal--postProduct, .modal--postReview{
+.modal--postProduct, .modal--postReview, .modal--deleteUser {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -41,7 +41,7 @@
   border-radius: 20px;
 }
 
-.text {
+.importantText {
   font-family: var(--font-family-titulos-subtitulos);
   font-size: var(--subtitulos-size);
   color: var(--texto-principal);
@@ -62,6 +62,9 @@
   height: 100%;
 }
 
+
+/* BUTTONS */
+
 .buttonContainer {
   height: 5rem;
 
@@ -69,12 +72,34 @@
   flex-direction: row;
   justify-content: space-evenly;
 }
-
-.buttonContainer button {
-  padding: 10px;
+  
+.button {
+  min-width: 15rem;
+  padding: 10px 20px;
   border-radius: 10px;
   border: none;
   cursor: pointer;
   background-color: var(--nav-footer);
   color: var(--letras-nav);
+
+  &:hover {
+    background-color: var(--dark-hover);
+  }
+
+  &:active {
+    background-color: var(--nav-click);
+  }
+}
+
+
+.confirmBtn--deleteUser {
+  background-color: darkred;
+
+  &:hover {
+    background-color: red;
+  }
+
+  &:active {
+    background-color: lightcoral;
+  }
 }

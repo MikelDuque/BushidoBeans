@@ -9,15 +9,15 @@ const {closeModal, whichIsOpen} = useModal();
     (whichIsOpen === type) && (
       <div className={classes.screen_container}>
       <div className={`${classes.modal} ${classes[`modal--${type}`]}`}>
-        <div className={`${classes.headerContainer} ${classes.text}`}>
+        <div className={`${classes.headerContainer} ${classes.importantText}`}>
           <h4>{titulo}</h4>
           <a className={`${classes.closeButton}`} onClick={closeModal}>X</a>
         </div>
         <div className={classes.content}>{children}</div>
         {(buttonValues !== null) && (
-          <div className={`${classes.buttonContainer} ${classes.text}`}>
-          <button className={classes.text} onClick={()=> {continueFnc(); closeModal();}}>{buttonValues.continueVal}</button>
-          <button className={classes.text} onClick={cancelFnc}>{buttonValues.cancelVal}</button>
+          <div className={`${classes.buttonContainer} ${classes.importantText}`}>
+          <button className={`${classes.importantText} ${classes.button} ${classes[`confirmBtn--${type}`]}`} onClick={()=> {continueFnc(), closeModal()}}>{buttonValues.continueVal}</button>
+          <button className={`${classes.importantText} ${classes.button} ${classes[`cancelBtn--${type}`]}`} onClick={cancelFnc}>{buttonValues.cancelVal}</button>
         </div>
         )}
       </div>

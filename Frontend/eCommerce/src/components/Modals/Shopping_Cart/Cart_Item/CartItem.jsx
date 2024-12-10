@@ -9,11 +9,11 @@ export default function CartItem({productData}) {
   function handleQuantity(newQuantity) {
     productData.quantity = newQuantity;
 
-    newQuantity <= 0 ? deleteCartProduct(productData.id) : updateCartProduct(productData);
+    newQuantity <= 0 ? deleteCartProduct(productData.productId) : updateCartProduct(productData);
   }
 
   return (
-    <li id={productData.id} className={classes.cart_item}>
+    <li id={productData.productId} className={classes.cart_item}>
         <img src={`${API_BASE_URL}${productData.image}`} alt="img Producto" />
         <div className={classes.data_container}>
           <h3 className={classes.importantText}>{productData.name}</h3>
@@ -22,7 +22,7 @@ export default function CartItem({productData}) {
             <Quantity_Counter quantity={productData.quantity} handleQuantity={handleQuantity} stock={productData.stock}/>
           </div>
         </div>
-        <a className={classes.importantText} onClick={() => deleteCartProduct(productData.id)}>X</a>
+        <a className={classes.importantText} onClick={() => deleteCartProduct(productData.productId)}>X</a>
       </li>
   );
 }

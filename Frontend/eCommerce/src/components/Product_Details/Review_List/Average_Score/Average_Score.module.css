@@ -1,0 +1,44 @@
+.average_score {
+  position: sticky;
+  top: 20px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.average_score h3 {
+  text-align: center;
+  font-family: var(--font-family-titulos-subtitulos);
+  font-size: var(--subtitulos-size);
+  font-weight: var(--font-weight-regular);
+}
+
+.starImg {
+  position: relative;
+  width: 80%;
+}
+
+.starImg img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.starImg::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+
+  background-image: url("/recursos/star.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  filter: contrast(0%);
+}
