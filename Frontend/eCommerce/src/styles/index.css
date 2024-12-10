@@ -48,7 +48,7 @@ main {
     font-family: var(--font-family-texto);
     font-size: var(--texto-size);
     font-weight: var(--font-weight-regular);
-    color: var(--nav-footer);
+    color: var(--nav-footer) ;
 
 }
 .titulo{

@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-
+import './styles/index.css'
 /* ----- LAYOUTS ----- */
 import BigLayout from "./layouts/BigLayout/BigLayout";
 import HomeLayout from "./layouts/HomeLayout/HomeLayout";

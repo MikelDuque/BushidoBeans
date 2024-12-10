@@ -17,12 +17,13 @@ function UserProfile() {
     const [isEditing, setIsEditing] = useState(false);
     const [alertMessage, setAlertMessage] = useState(""); 
     const navigate = useNavigate();
+    const token = localStorage.getItem("accessToken");
+    const userId = jwtDecode.jwtDecode(token).id;
 
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const token = localStorage.getItem("accessToken");
-                const userId = jwtDecode.jwtDecode(token).id;
+                
 
                 const response = await fetch(GET_USER_BY_ID(userId), {
                     headers: { "Authorization": `Bearer ${token}` },
@@ -45,6 +46,7 @@ function UserProfile() {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
                 },
                 body: JSON.stringify(user),
             });
@@ -67,20 +69,20 @@ function UserProfile() {
         <div className="user-profile-wrapper">
             <p className="titulo">Editar Perfil</p>
             <div className="user-profile-container">
-                {Object.entries(user).map(([key, value]) => (
-                    key !== "id" && (
-                        <div key={key} className="user-profile-row">
-                            <label className="texto" htmlFor={key}>{key.charAt(0).toUpperCase() + key.slice(1)}:</label>
-                            <input
-                                type="text"
-                                name={key}
-                                id={key}
-                                value={value}
-                                onChange={handleChange}
-                                disabled={!isEditing}
-                            />
-                        </div>
-                    )
+                {["mail", "name", "surname", "role", "phone"].map((key) => (
+                    <div key={key} className="user-profile-row">
+                        <label className="texto" htmlFor={key}>
+                            {key.charAt(0).toUpperCase() + key.slice(1)}:
+                        </label>
+                        <input
+                            type="text"
+                            name={key}
+                            id={key}
+                            value={user[key]}
+                            onChange={handleChange}
+                            disabled={!isEditing}
+                        />
+                    </div>
                 ))}
                 <div className="user-profile-buttons">
                     {isEditing ? (
