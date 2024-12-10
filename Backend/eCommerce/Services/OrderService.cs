@@ -2,8 +2,7 @@
 using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 using eCommerce.Models.Mappers;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.IdentityModel.Tokens;
+using Microsoft.EntityFrameworkCore;
 
 namespace eCommerce.Services;
 
@@ -22,7 +21,6 @@ public class OrderService
 
 
     /* ----- GET ----- */
-
     public async Task<OrderDto> GetOrderByIdAsync(long orderId)
     {
         Order order = await _unitOfWork.OrderRepository.GetByIdAsync(orderId);
@@ -30,9 +28,17 @@ public class OrderService
         return _orderMapper.ToDto(order);
     }
 
+    public async Task<IEnumerable<OrderDto>> GetOrdersByUserIdAsync(long userId)
+    {
+        var orders = await _unitOfWork.OrderRepository
+            .GetQueryable()
+            .Where(o => o.UserId == userId)
+            .ToListAsync();
+        return _orderMapper.ToDto(orders);
+    }
+
 
     /* ----- INSERT ----- */
-
     public async Task<OrderDto> InsertOrderAsync(OrderDto order)
     {
 
@@ -41,16 +47,18 @@ public class OrderService
             UserId = order.UserId,
             TotalPrice = order.OrderProducts.Aggregate<OrderProductDto, decimal>(0, (total, orderProduct) => total += orderProduct.Quantity * orderProduct.PurchasePrice),
             TotalProducts = order.OrderProducts.Sum((orderProduct) => orderProduct.Quantity),
-            PurchaseDate = DateTime.Now 
+            PurchaseDate = DateTime.Now,
+            AddressId = order.AddressId,
+            OrderProducts = _orderProductMapper.ToEntity(order.OrderProducts).ToList()
         };
 
-        await _unitOfWork.OrderRepository.InsertAsync(newOrder);
-
-        await InsertOrderProductsAsync(order.OrderProducts);
-
+        Order preFinalOrder = await _unitOfWork.OrderRepository.InsertAsync(newOrder);
+        
         await _unitOfWork.SaveAsync();
 
-        return order;
+        Order finalOrder = await _unitOfWork.OrderRepository.GetByIdAsync(preFinalOrder.Id);
+
+        return _orderMapper.ToDto(finalOrder);
     }
 
    
@@ -61,33 +69,6 @@ public class OrderService
         
         _unitOfWork.OrderRepository.Delete(orderBD);
 
-        /*
-        foreach (OrderProduct orderProduct in order.OrderProducts.ToList())
-        {
-            await DeleteOrderProductAsync(orderProduct);
-        }
-        */
-
         return await _unitOfWork.SaveAsync();
-    } 
-/*
-    public async Task<bool> DeleteOrderProductAsync(OrderProduct orderProduct)
-    {
-        _unitOfWork.OrderProductRepository.Delete(orderProduct);
-
-        return await _unitOfWork.SaveAsync();
-    }
-*/
-
-    /* ----- FUNCIONES PRIVADAS  ----- */
-
-     private async Task InsertOrderProductsAsync(List<OrderProductDto> newOrderProducts) {
-
-        List<OrderProduct> orderProducts = _orderProductMapper.ToEntity(newOrderProducts).ToList();
-
-        foreach (OrderProduct orderProduct in orderProducts)
-        {
-            await _unitOfWork.OrderProductRepository.InsertAsync(orderProduct);
-        }
     }
 }

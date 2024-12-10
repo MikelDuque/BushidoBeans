@@ -20,7 +20,7 @@ public class OrderProductMapper
    }
    public IEnumerable<OrderProductDto> ToDto(IEnumerable<OrderProduct> orderProducts)
    {
-      return orderProducts.Select(ToDto);
+     return orderProducts.Select(ToDto);
    }
 
    //TO ENTITY
@@ -28,7 +28,7 @@ public class OrderProductMapper
    {
        return new OrderProduct
        {
-           OrderId = orderProduct.OrderId,
+       
            ProductId = orderProduct.ProductId,
            PurchasePrice = orderProduct.PurchasePrice,
            Quantity = orderProduct.Quantity

@@ -47,7 +47,6 @@ public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity :
         return await _dbContext.SaveChangesAsync() > 0;
     }
 
-    //Función para saber si existe en la base de datos
     public async Task<bool> ExistAsync(object id)
     {
         return await GetByIdAsync(id) != null;

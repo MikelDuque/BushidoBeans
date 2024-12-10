@@ -1,37 +1,90 @@
 import { useState } from 'react';
 
+//Modal
+import { useModal } from '../../context/ModalContext.jsx';
+import Modal from '../../components/Modals/Modal.jsx';
+import PostProduct from '../../components/Modals/PostProduct/PostProduct.jsx';
+
+//Componentes
+import SwitchButton from '../../components/AdminComponents/SwitchButton/SwitchButton.jsx';
 import ProductList from '../../components/AdminComponents/ProductList/ProductList.jsx';
 import UserList from '../../components/AdminComponents/UserList/UserList.jsx';
 
+//Utilidades
+import { POST_PRODUCT } from '../../endpoints/config.js';
+import { useAuth } from '../../context/AuthContext.jsx';
+
 import classes from './AdminView.module.css';
-import SwitchButton from '../../components/AdminComponents/SwitchButton/SwitchButton.jsx';
-import Accordion from '../../utils/GenericAccordion/Accordion.jsx';
+
 
 export default function AdminView() {
-    const [view, setView] = useState(false);    // False: "productList", True: "userList"
+    const [view, setView] = useState(false);   
+    const { openModal, closeModal } = useModal(); 
+    const {token} = useAuth();
 
     function handleView(view) {
         setView(view);
     }
 
-    const carritoPrueba = [];
+    const continueSubmit = async () => {
+        
+        const form = document.getElementById("productForm");  
+        const formData = new FormData(form);
+        const formData2 = Object.fromEntries(formData.entries());
 
-    for (let i = 0; i < 25; i++) {
-        carritoPrueba.push({
-            id: i,
-            image: "https://i.pinimg.com/1200x/fb/8a/e7/fb8ae7c303d6e25bdc91f85c16be2704.jpg",
-            name: "Este es un nombre de prueba",
-            category: 2,
-            price: 2.55,
-            stock: 20,
-            intensity: 0,
-            description: "owihngfowiknofknwef"
-        });
+        const productToPost = {
+            name: formData2.name,
+            price: parseFloat(formData2.price),
+            stock: parseInt(formData2.stock),
+            intensity: parseInt(formData2.intensity),
+            image: formData2.image,
+            description: formData2.description,
+            category: parseInt(formData2.category)
+        };
+        console.log("token", token);
+        console.log();
+        
+        console.log("esto se envia", productToPost);
+
+        try {
+            console.log("token prueba", token);
+            
+            const response = await fetch(POST_PRODUCT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(productToPost)
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al actualizar el producto');
+            }
+
+            console.log("Producto creado exitosamente");
+        } catch (error) {
+            alert("No ha sido posible hacer el fetch");
+            console.error(error);
+        } finally {
+            closeModal();  
+        }
+    };
+
+    
+    const cancelSubmit = () => {
+        closeModal(); 
     };
 
     return (
         <div className={classes.container}>
-            <SwitchButton setView={handleView}/>
+            <SwitchButton setView={handleView} />
+            {!view && (
+                <button className={classes.buttonAñadirProducto} onClick={() => openModal("postProduct")}>Añadir producto</button>
+            )}
+            <Modal type="postProduct" titulo="Nuevo Producto" continueFnc={continueSubmit} cancelFnc={cancelSubmit} buttonValues={{ continueVal: "Enviar", cancelVal: "Cancelar" }}>
+                <PostProduct />
+            </Modal>
             <div className={classes.view_container}>
                 {view ? <UserList /> : <ProductList />}
             </div>

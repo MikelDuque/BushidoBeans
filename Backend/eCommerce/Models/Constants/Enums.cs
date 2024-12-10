@@ -7,7 +7,7 @@ public enum EIntensity
     Strong,
 }
 
-public enum ECategory
+public enum ECategory : long
 {
     All,
     Coffee,

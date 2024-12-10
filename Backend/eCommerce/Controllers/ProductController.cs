@@ -2,7 +2,11 @@ using eCommerce.Models.Database.Entities;
 using eCommerce.Models.Dtos;
 using eCommerce.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+using System.Security.Claims;
+using System.Text;
 
 namespace eCommerce.Controllers;
 
@@ -24,7 +28,7 @@ public class ProductController : ControllerBase
   }
 
   [HttpGet("Filtered_Products")]
-  public async Task<Catalog> GetFilteredProducts([FromBody]Filter filter)
+  public async Task<Catalog> GetFilteredProducts([FromQuery]Filter filter)
   {
     return await _service.GetFilteredProducts(filter);
   }
@@ -37,15 +41,20 @@ public class ProductController : ControllerBase
 
   [Authorize(Roles = "admin")]
   [HttpPut("Update_Product")]
-  public async Task<ProductDto> UpdateProductAsync([FromBody]ProductDto product)
+  public async Task<ActionResult<ProductDto>> UpdateProductAsync([FromBody]ProductDto product)
   {
-    return await _service.UpdateProductDetailsAsync(product);
+    Claim userClaimId = User.FindFirst("id");
+    if (userClaimId == null) return Unauthorized("Debes iniciar sesion para llevar a cabo esta accion");
+    Debug.WriteLine("hola" + new StreamReader(HttpContext.Request.Body, Encoding.UTF8).ReadToEndAsync());
+    return Ok(await _service.UpdateProductDetailsAsync(product));
   }
 
   [Authorize(Roles = "admin")]
   [HttpPost("Create_Product")]
-  public async Task<ProductDto> CreateProductAsync([FromBody]ProductDto product)
+  public async Task<ActionResult<ProductDto>> CreateProductAsync([FromBody]ProductDto product)
   {
-    return await _service.CreateProductAsync(product);
+    Claim userClaimId = User.FindFirst("id");
+    if (userClaimId == null) return Unauthorized("Debes iniciar sesi�n para llevar a cabo esta acci�n");
+    return Ok(await _service.CreateProductAsync(product));
   }
 }

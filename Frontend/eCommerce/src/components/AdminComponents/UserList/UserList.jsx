@@ -1,109 +1,108 @@
 import { useState, useEffect } from 'react';
-import { GET_USERS } from "../../../endpoints/config";
-import {jwtDecode} from 'jwt-decode';
+import { DELETE_USER_BY_ID, GET_USERS } from "../../../endpoints/config";
 
 import classes from "./UserList.module.css"
+import UserListElement from './UserListElement/UserListElement';
+import { useAuth } from '../../../context/AuthContext';
+import Modal from '../../../components/Modals/Modal.jsx';
+import { useModal } from '../../../context/ModalContext.jsx';
 
 export default function UserList() {
-    const [currentUser, setCurrentUser] = useState(null);
     const [users, setUsers] = useState([]);
-    const [selectedUser, setSelectedUser] = useState(null);
     const [error, setError] = useState(null);
-    const [token, setToken] = useState(null);
 
-    
-    useEffect(() => {
-        const storedToken = localStorage.getItem('accessToken');
-        if (storedToken) {
-            try {
-                const decodedToken = jwtDecode(storedToken);
-                setCurrentUser(decodedToken);
-                setToken(storedToken);
-            } catch (error) {
-                console.error("Error al decodificar el token", error);
-                localStorage.removeItem('accessToken');
-            }
-        }
-    }, []); 
+    const {closeModal, openModal} = useModal();
+    const { token, decodedTokenRef } = useAuth();
 
     useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const response = await fetch(GET_USERS, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                const data = await response.json();
-                setUsers(data);
-            } catch (error) {
-                setError(error.message);
-            }
-        };
-
-        if (token) {
-            fetchUsers();
-        }
+        if (token) getUsers();
     }, [token]);
 
-    const handleUserSelect = (user) => {
-        if (!currentUser) {
-            alert("Por favor, inicie sesión");
-            return;
-        }
-
-        if (user.id !== currentUser.id) {
-            setSelectedUser(user);
-        } else {
-            alert("No puedes editar tu propio usuario.");
-        }
-    };
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setSelectedUser((prevUser) => ({
-            ...prevUser,
-            [name]: value,
-        }));
-    };
-
-    const handleUpdate = async () => {
-        if (!selectedUser) {
-            alert("No hay usuario seleccionado");
-            return;
-        }
-
-        const userToUpdate = {
-            role: selectedUser.role,
-            name: selectedUser.name,
-        };
-
+    async function getUsers(){
         try {
-            const response = await fetch('https://localhost:7015/api/User/Update_User', {
-                method: 'PUT',
+            const response = await fetch(GET_USERS, {
                 headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(userToUpdate),
+                    'Authorization': `Bearer ${token}`
+                }
             });
-
-            if (!response.ok) {
-                throw new Error('Error al actualizar el usuario');
-            } else {
-                setUsers((prevUsers) =>
-                    prevUsers.map((user) =>
-                        user.id === selectedUser.id ? selectedUser : user
-                    )
-                );
-                setSelectedUser(null);
-            }
+            const data = await response.json();
+            setUsers(data || []);
         } catch (error) {
             setError(error.message);
         }
     };
 
+    const handleUpdate = (event) => {
+        const loggedUser = decodedTokenRef.current.id;
+        console.log("usuario", loggedUser);
+        
+        const thisElement = event.target;
+
+        const userToUpdate = {
+            UserId: thisElement.id,
+            Role: thisElement.value === "usuario" ? null : thisElement.value
+        };
+        
+        if(loggedUser != thisElement.id) {updateUser(userToUpdate)}
+        else {alert("No puedes modificar tu propio usuario")}
+    };
+
+    const updateUser = async (userToUpdate) => {
+        try {
+            const response = await fetch('https://localhost:7015/api/User/Update_UserRole', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(userToUpdate),
+            });
+
+            if (!response.ok) {throw new Error('Error al actualizar el usuario');}
+            else {getUsers()}
+        } catch (error) {
+            setError(error.message);
+            console.log();
+            console.log("Error: ", error.message);  
+        }
+    };
+
+    const handleDelete = async (event) => {
+        const thisElement = event.target;  
+
+        try {
+            const response = await fetch(DELETE_USER_BY_ID(thisElement.id), {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {throw new Error('Error al eliminar el usuario');}
+            else {getUsers()}
+        } catch (error) {
+            setError(error.message);
+            console.log();
+            console.log("Error: ", error.message);
+        }
+    }
+
     return (
-        <div className="container mx-auto p-4">
+        <div>
+            {error ? <p>{error}</p> : 
+                <ul className={classes.container}>
+                    {users.length > 0 ? (users.map((listElement, i) => (
+                        <li key={i}> <UserListElement listElement={listElement} changeRol={handleUpdate} deleteUser={() => openModal("deleteUser")}/> </li>
+                    ))) : <p>No existen elementos que listar</p>}
+                </ul>
+            }
+                <Modal type="deleteUser" titulo="¿Eliminar usuario?" continueFnc={handleDelete} cancelFnc={closeModal} buttonValues={{continueVal: "Eliminar", cancelVal: "Cancelar"}}>
+                    <div className={classes.deleteAlert}>
+                        <h1>Una vez eliminado no podrá deshacer la acción...</h1>
+                    </div>
+                </Modal>
+
+            {/*
             {!currentUser && (
                 <p className="text-red-500">Por favor, inicie sesión para ver esta página</p>
             )}
@@ -129,37 +128,36 @@ export default function UserList() {
                         <div className="mt-6 p-4 border rounded">
                             <h3 className="text-xl font-semibold mb-4">Editar Usuario</h3>
                             <div className="space-y-4">
-                                <label className="block">
-                                    <span className="text-gray-700">Rol: </span>
-                                    <input
-                                        type="text"
-                                        name="id"
-                                        value={selectedUser.role}
+                                <div className='block'>
+                                <label htmlFor='Role' className="text-gray-700">Rol de: {selectedUser.name}</label>
+                                    <select
+                                        id='role'
+                                        name='role'
+                                        defaultValue={selectedUser.role}
                                         onChange={handleInputChange}
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-                                        readOnly 
-                                    />
-                                </label>
-                                <label className="block">
-                                    <span className="text-gray-700">Nombre:</span>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        value={selectedUser.name}
-                                        onChange={handleInputChange}
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-                                    />
-                                </label>
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm" 
+                                    >
+                                        <option value="string">Sin rol</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+
+                                </div>
+                                
+                                
                                 <button 
                                     onClick={handleUpdate}
                                     className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                                
+                                    Actualizar
                                 </button>
+                                
                             </div>
                         </div>
                     )}
                 </>
             )}
+            */}
+
         </div>
     );
 };
+

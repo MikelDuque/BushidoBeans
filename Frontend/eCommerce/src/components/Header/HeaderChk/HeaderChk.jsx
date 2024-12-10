@@ -6,10 +6,7 @@ import { NavLink } from "react-router-dom";
 
 function HeaderChk() {
 
-  const { isAuthenticated, logout } = useAuth();
-  const handleLogout = () => {
-    logout();
-  };
+  const {token, decodedToken, handleLogout} = useAuth();
 
   return (
     <header>
@@ -20,10 +17,10 @@ function HeaderChk() {
         <NavLink className={`${classes.nl} ${classes.btn}`} to="/catalogo"> Tienda </NavLink>
         <NavLink className={`${classes.nl} ${classes.btn}`} to="/sobreNosotros"> Nosotros </NavLink>
 
-        {isAuthenticated ? (
-          <Desplegable handleLogout={handleLogout} />
+        {token ? (
+          <Desplegable handleLogout={handleLogout} decodedToken={decodedToken}/>
         ) : (
-          <NavLink className={`${classes.nl} ${classes.btnc}`} to="/login"> Login </NavLink>
+          <NavLink className={`${classes.nl} ${classes.btnc}`} to="/login_register"> Login </NavLink>
         )}
       </nav>
     </header>

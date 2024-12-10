@@ -1,9 +1,0 @@
-/* Contenedor de la información del producto */
-.container-producto {
-    height: 100%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    background-color: var(--fondo-vistas);
-}

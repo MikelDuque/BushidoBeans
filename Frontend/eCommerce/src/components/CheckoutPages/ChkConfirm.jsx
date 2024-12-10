@@ -1,7 +1,9 @@
+import ConfirmarPedido from "./Confirmacion/ConfirmarPedido";
+
 function ChkConfirm(){
   return(
     <>
-    CONFIRM
+    <ConfirmarPedido/>
     </>
   )
 }

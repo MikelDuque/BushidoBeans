@@ -1,23 +1,28 @@
 import classes from "./CartItem.module.css"
-import { useCarrito } from "../../../../context/CarritoContext";
+import { useCart } from "../../../../context/CartContext";
 import Quantity_Counter from "../../../Quantity_Counter/Counter";
-import { useEffect, useState } from "react";
+import { API_BASE_URL } from "../../../../endpoints/config";
 
 export default function CartItem({productData}) {
-  const {eliminarDelCarrito, agregarAlCarrito} = useCarrito();
-  const [quantity, setQuantity] = useState(productData.quantity);
+  const {updateCartProduct, deleteCartProduct} = useCart();
+
+  function handleQuantity(newQuantity) {
+    productData.quantity = newQuantity;
+
+    newQuantity <= 0 ? deleteCartProduct(productData.productId) : updateCartProduct(productData);
+  }
 
   return (
-    <li id={productData.id} className={classes.cart_item}>
-        <img src={productData.image} alt="img Producto" />
+    <li id={productData.productId} className={classes.cart_item}>
+        <img src={`${API_BASE_URL}${productData.image}`} alt="img Producto" />
         <div className={classes.data_container}>
           <h3 className={classes.importantText}>{productData.name}</h3>
           <div className={classes.complementary_data}>
             <p>{productData.price} €</p>
-            <Quantity_Counter quantity={quantity} setQuantity={setQuantity} stock={productData.stock}/>
+            <Quantity_Counter quantity={productData.quantity} handleQuantity={handleQuantity} stock={productData.stock}/>
           </div>
         </div>
-        <a className={classes.importantText} onClick={(e) => {e.preventDefault(), eliminarDelCarrito(productData.id)}}>X</a>
+        <a className={classes.importantText} onClick={() => deleteCartProduct(productData.productId)}>X</a>
       </li>
   );
 }

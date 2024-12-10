@@ -1,68 +1,79 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { useCarrito } from './CarritoContext';
+import { useCart } from './CartContext';
 import { useAuth } from './AuthContext';
 import { POST_ORDER } from '../endpoints/config';
+import useFetchEvent from '../endpoints/useFetchEvent';
+
 
 const CheckoutContext = createContext();
 
-export const CheckoutProvider = ({ children }) => {
-  const { token } = useAuth();
-  const { carrito } = useCarrito(); 
+export function useCheckout() {return useContext(CheckoutContext)};
+
+export function CheckoutProvider({ children }) {
+  const { token, decodedToken } = useAuth();
+  const { cart } = useCart(); 
+  const { fetchingData } = useFetchEvent();
 
   const [currentView, setCurrentView] = useState('cart');
   const [order, setOrder] = useState({
-    id: 0,
     totalPrice: 0.0,
     totalProducts: 0,
-    purchaseDate: null,
-    orderProducts: []
+    orderProducts: [],
+    userId: decodedToken?.id || 0,
+    addressId: 0
   });
-  const [address, setAddress] = useState(null);
 
   useEffect(() => {
     handleOrderProducts();
     handleTotalPrice();
-    handleAddress("C/ Frederick Terman, 3, Campanillas, 29590, Málaga");
-  }, []);
+  }, [cart]);
 
 
-  
   // Función para cambiar el estado de la vista
   const handleButtonClick = (view) => {
     setCurrentView(view);
+
+    if(view === 'confirm') sendOrder();
   };
 
-  function handleOrder(newOrder) {
-    setOrder(newOrder)
-  }
-
-  function handleAddress(actualAddress) {
-    setAddress(actualAddress)
-  }
-
   function handleOrderProducts() {
-    console.log("carrito", carrito);
-    console.log("carrito checkout", order.orderProducts);
-    
-    
+    let orderProducts = [];
+
+    cart.forEach((cartItem) => {
+    orderProducts = [...cart, {
+      ...cartItem,
+      purchasePrice: cartItem.price
+    }]});
 
     setOrder(estadoPrevio => ({
       ...estadoPrevio,
-      orderProducts: JSON.parse(JSON.stringify(carrito))
-    }))
+      orderProducts: [...orderProducts]
+
+    }));
+
+    /*
+    setOrder(estadoPrevio => ({
+      ...estadoPrevio.map((item) => {
+        estadoPrevio = [...cart, {
+          ...item,
+          purchasePrice: item.price
+        }]})}));
+        */
   }
 
   function handleTotalPrice() {
-    console.log("CARRO", carrito);
-    
-    const subtotal = (!carrito || carrito.length === 0) ? 0 : carrito.reduce((total, item) => total + item.price * item.quantity, 0);
-    console.log("subtotal", subtotal);
-    console.log("productos", order.orderProducts);
-    
+    const subtotal = (cart || cart.length > 0) ? cart.reduce((total, item) => total + item.price * item.quantity, 0) : 0;
     
     setOrder(estadoPrevio => ({
       ...estadoPrevio,
       totalPrice: subtotal
+    }))
+  }
+
+  function handleSelectedAddress(id) {
+    setOrder(estadoPrevio => ({
+      ...estadoPrevio,
+      addressId: id
     }))
   }
 
@@ -73,21 +84,14 @@ export const CheckoutProvider = ({ children }) => {
 
 
   //FETCHING
-  const sendOrder = async () => {
-    try {
-      const response = await fetch(POST_ORDER, {
-        method: 'POST',
-        headers: {
-          'Content-Type' : 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify(order),
-      });
+  async function sendOrder() {
+    console.log("order", order);
     
-      if (response.ok) console.log("Order almacenado correctamente");
-      else throw new Error("Solicitud a la API fallida");
 
-    } catch (error) {console.log(error);}
+    const postedOrder = await fetchingData({url: POST_ORDER, type: 'POST', token: token, params:order, needAuth:true});
+
+    console.log("posted", postedOrder);
+    
   };
 
 
@@ -96,12 +100,10 @@ export const CheckoutProvider = ({ children }) => {
   const ctxValue = {
     currentView,
     order,
-    address,
     handleButtonClick,
     calculateShipping,
+    handleSelectedAddress
   };
 
   return (<CheckoutContext.Provider value={ctxValue}> {children} </CheckoutContext.Provider>);
 };
-
-export const useCheckout = () => useContext(CheckoutContext);

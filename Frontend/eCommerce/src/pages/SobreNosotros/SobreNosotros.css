@@ -1,0 +1,271 @@
+@import "/node_modules/slick-carousel/slick/slick.css";
+@import "/node_modules/slick-carousel/slick/slick-theme.css";
+@import url(https://fonts.googleapis.com/css2?family=Poppins&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Poppins&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap);
+
+.padree .texto {
+    color: var(--nav-footer); /* Verde oscuro */
+}
+
+.padree .subtitulo {
+    color: var(--nav-footer);
+}
+
+.container-titulo p{
+    color: var(--nav-footer);
+}
+.container-descripcion p{
+    color: var(--nav-footer);
+    font-size: 16px;
+}
+
+
+.carrusel {
+    width: 1527px;
+    height: 388px;
+    margin: 2% auto 0;
+    border-radius: 20px;
+    background-color: transparent;
+    overflow: hidden;
+}
+
+.container-descripcion{
+    display: flex;
+    flex: 2;
+    align-items: center;
+    
+}
+
+.imagen-logo-bushido-beans{
+    width: 100%;
+    max-width: 543px;
+    height: auto;
+
+}
+.descripcion{
+    text-align: justify;
+    padding: 5%;
+    color: var(--nav-footer);
+}
+.separador{
+    width: 90%;
+    margin: 0 auto;
+    border-top: 2px solid var(--nav-footer);
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+.separador-secundario{
+    width: 80%;
+    margin: 0 auto;
+    border-top: 1.5px solid var(--nav-footer);
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+.descripcion{
+    color: black;
+}
+.container-equipo{
+    display: flex;
+    flex: 2;
+    align-items: center;
+    flex-direction: column;
+}
+.titulo-equipo{
+    text-align: center;
+}
+.subtitulo-equipo{
+    text-align: center;
+    padding: 1%;
+}
+
+.container-componentes{
+    
+    margin-top: 5%;
+    width: 90%;
+    display: flex;
+    flex: 4;
+    align-items: center;
+    flex-direction: row;
+}
+
+
+.container-informacionAdicional {
+    display: flex; 
+    margin-top: 20px; 
+    margin: 0; 
+    margin-bottom: 5%;
+}
+
+.container-informacion {
+    width: 50%; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+}
+
+.container-maps {
+    margin-top: 3%;
+    width: 40%;
+    display: flex;
+    justify-content: flex-end;
+    
+}
+
+.map-container iframe{
+    border-radius: 10px;
+}
+
+.container-dondeEstamos,
+.container-redesSociales {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%; 
+}
+
+.container-direccion-contacto,
+.container-img-redesSociales {
+    padding: 10%;
+    width: 100%; 
+    border: 2px solid var(--nav-footer);
+    border-radius: 50px;
+    margin-bottom: 10px;
+}
+
+.separador-informacionAdicional {
+    width: 100%;
+    border-top: 1.5px solid var(--nav-footer);
+    margin-top: 1%;
+    margin-bottom: 3%;
+}
+.container-img-redesSociales {
+    padding: 10%;
+    width: 100%; 
+    display: flex;
+    justify-content: center; 
+    gap: 2%; 
+}
+
+.redes-sociales-item {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+}
+.ig{
+    margin-top: 6%;
+}
+.tw{
+    margin-top: 12%;
+}
+.fc{
+    margin-top: 8%;
+}
+.container-mision {
+    background-color: var(--nav-footer);
+    margin: 0 auto;
+    width: 95%;
+    height: 80vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    justify-content: center; 
+    padding: 2%; /* Espacio alrededor del contenido */
+    border-radius: 20px;
+}
+
+.imagen-mision {
+    width: 90%; /* Ajusta el tamaño de la imagen aquí */
+    height: auto;
+    margin-right: 2%; /* Separación de la imagen y el texto */
+    border-radius: 10px;
+}
+.texto-mision{
+    color: var(--fondo-vistas);
+    margin:0 auto;
+    justify-content: center;
+    align-items: center;
+    padding: 5%;
+    text-align: justify;
+
+}
+
+
+/* Estilos para la sección de Visión */
+.container-vision {
+    width: 95%;
+    height: 80vh;
+    margin: 0 auto;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+}
+.titulo-vision{
+    font-size: 100px;
+}
+.titulo-mision{
+    color: var(--fondo-vistas);
+    align-items: top;
+    font-size: 100px;
+    text-align: center;
+}
+.texto-vision {
+    color: var(--nav-footer); /* Ajusta el color si es necesario */
+    margin: 0 auto;
+    font-size: 30px;
+    
+    
+
+}
+
+.container-valores {
+    background-color: var(--nav-footer);
+    margin: 0 auto;
+    width: 95%;
+    height: 85vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 2%;
+    border-radius: 20px;
+    
+}
+
+.container-imagen-valores {
+    width: 50%;
+    height: auto;
+    padding-left: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagen-valores {
+    width:90%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.container-valores ul {
+    padding-left: 20px;
+    color: var(--fondo-vistas);
+    text-align: left;
+    max-width: 45%;
+}
+
+.container-valores ul li {
+    margin:  -40px; /* Ajusta el espacio entre los elementos */
+    letter-spacing: 1px;
+    padding-bottom: 20px;
+    
+}
+
+.spanBeans{
+    font-weight: bolder;
+    font-size: 30px;
+}
+
