@@ -22,6 +22,7 @@
 }
 .imagen-logo-bushido-beans{
     width: 50%;
+    max-width: 60rem;
     height: auto;
 }
 .descripcion-texto{
@@ -30,11 +31,41 @@
     text-align: justify;
     color: var(--nav-footer);
     padding-right: 5%;
+    max-width: 55%;
+    font-size: var(--subtitulos-size);
 }
 .separador{
     width: 90%;
     border-top: 2px solid var(--nav-footer);
 }
+.container-mision {
+    background-color: var(--nav-footer);
+    width: 90%;
+    display: flex;
+    align-items: center; 
+    padding: 2rem; 
+    border-radius: 20px;
+}
+.imagen-mision {
+    min-width: 30rem;
+    max-width: 40rem;
+    border-radius: 20px;
+}
+.container-texto-mision{
+    text-align: center;
+    max-width: 50%;
+    color: var(--letras-nav);
+    margin: auto;
+}
+.container-texto-mision h1{
+    font-size: var(--titulos-size);
+    font-family: Poppins, sans-serif;
+}
+.container-texto-mision p{
+    font-size: var(--subtitulos-size);
+}
+
+
 
 
 ----------------------------------------
@@ -51,13 +82,6 @@
 .container-titulo p{
     color: var(--nav-footer);
 }
-.container-descripcion p{
-    color: var(--nav-footer);
-    font-size: 16px;
-}
-
-
-
 
 .separador{
     width: 90%;
@@ -167,34 +191,7 @@
 .fc{
     margin-top: 8%;
 }
-.container-mision {
-    background-color: var(--nav-footer);
-    margin: 0 auto;
-    width: 95%;
-    height: 80vh;
-    display: flex;
-    flex-direction: row;
-    align-items: center; 
-    justify-content: center; 
-    padding: 2%; /* Espacio alrededor del contenido */
-    border-radius: 20px;
-}
 
-.imagen-mision {
-    width: 90%; /* Ajusta el tamaño de la imagen aquí */
-    height: auto;
-    margin-right: 2%; /* Separación de la imagen y el texto */
-    border-radius: 10px;
-}
-.texto-mision{
-    color: var(--fondo-vistas);
-    margin:0 auto;
-    justify-content: center;
-    align-items: center;
-    padding: 5%;
-    text-align: justify;
-
-}
 
 
 /* Estilos para la sección de Visión */
@@ -213,12 +210,7 @@
 .titulo-vision{
     font-size: 100px;
 }
-.titulo-mision{
-    color: var(--fondo-vistas);
-    align-items: top;
-    font-size: 100px;
-    text-align: center;
-}
+
 .texto-vision {
     color: var(--nav-footer); /* Ajusta el color si es necesario */
     margin: 0 auto;

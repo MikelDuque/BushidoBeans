@@ -32,11 +32,10 @@ function SobreNosotros() {
             <hr className='separador' />
 
             <div className='container-mision'>
-                <div className='container-imagen-mision'><img src="/recursos/mision.jpg" alt="" className='imagen-mision' /></div>
+                <img src="/recursos/mision.jpg" alt="" className='imagen-mision' />
                 <div className='container-texto-mision'>
-                    <p className='titulo titulo-mision'>Mision</p><br />
-                    <i>
-                        <p className='titulo texto-mision'>Ofrecer una experiencia de café excepcional que inspire y conecte, respetando los principios de calidad, sostenibilidad y pasión por el arte del café.</p></i>
+                    <h1>Mision</h1>
+                    <p>Ofrecer una experiencia de café excepcional que inspire y conecte, respetando los principios de calidad, sostenibilidad y pasión por el arte del café.</p>
                 </div>
             </div>
 
