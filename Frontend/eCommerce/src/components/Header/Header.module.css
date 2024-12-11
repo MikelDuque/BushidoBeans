@@ -46,17 +46,17 @@ header {
 .hLogo {
   height: 45px;
   width: 45px;
-  background-image: url(recursos/LogoD.png);
+  background-image: url('recursos/LogoD.png');
   background-size: cover;
   justify-self: right;
 }
 
 .hLogo:hover {
-  background-image: url(recursos/LogoH.png);
+  background-image: url('recursos/LogoH.png');
 }
 
 .hLogo:active {
-  background-image: url(recursos/LogoA.png);
+  background-image: url('recursos/LogoA.png');
 }
 
 
@@ -69,20 +69,20 @@ header {
 .desplToggle {
   height: 40px;
   width: 40px;
-  background-image: url(recursos/PerfilD.png);
+  background-image: url('recursos/PerfilD.png');
   background-size: cover;
   transition: 0.2s ease;
 }
 
 .desplToggle:hover {
   transform: scale(1.05);
-  background-image: url(recursos/PerfilH.png);
+  background-image: url('recursos/PerfilH.png');
 }
 
 .desplToggle:active,
 .desplToggle.active {
   transform: scale(1.05);
-  background-image: url(recursos/PerfilA.png);
+  background-image: url('recursos/PerfilA.png');
 }
 
 
@@ -126,17 +126,17 @@ header {
 .cesta {
   height: 50px;
   width: 50px;
-  background-image: url(recursos/CestaD.png);
+  background-image: url('recursos/CestaD.png');
   background-size: cover;
   justify-self: right;
 }
 
 .cesta:hover {
-  background-image: url(recursos/CestaH.png);
+  background-image: url('recursos/CestaH.png');
 }
 
 .cesta:active {
-  background-image: url(recursos/CestaA.png);
+  background-image: url('recursos/CestaA.png');
 }
 
 
@@ -189,17 +189,17 @@ header {
   .hLogo {
     height: 6rem;
     width: 15rem;
-    background-image: url(recursos/FootLogoD.png);
+    background-image: url('recursos/FootLogoD.png');
     background-size: cover;
     justify-self: left;
   }
 
   .hLogo:hover {
-    background-image: url(recursos/FootLogoH.png);
+    background-image: url('recursos/FootLogoH.png');
   }
 
   .hLogo:active {
-    background-image: url(Footrecursos/FootLogoA.png);
+    background-image: url('recursos/FootLogoA.png');
   }
 }
 
@@ -219,17 +219,17 @@ header {
   .hLogo {
     height: 4.5rem;
     width: 4.5rem;
-    background-image: url(recursos/LogoD.png);
+    background-image: url('recursos/LogoD.png');
     background-size: cover;
     justify-self: left;
   }
 
   .hLogo:hover {
-    background-image: url(recursos/LogoH.png);
+    background-image: url('recursos/LogoH.png');
   }
 
   .hLogo:active {
-    background-image: url(Footrecursos/LogoA.png);
+    background-image: url('recursos/LogoA.png');
   }
 
   .hbutton{
@@ -250,18 +250,18 @@ header {
   .hbutton{
     height: 40px;
     width: 40px;
-    background-image: url(recursos/DesplD.png);
+    background-image: url('recursos/DesplD.png');
     background-size: cover;
     justify-self: left;
     transition: 0.2s ease;
   }
   .hbutton:hover {
     transform: scale(1.05);
-    background-image: url(recursos/DesplH.png);
+    background-image: url('recursos/DesplH.png');
   }
   
   .hbutton:active {
-    background-image: url(recursos/DesplA.png);
+    background-image: url('recursos/DesplA.png');
     
   }
 }
