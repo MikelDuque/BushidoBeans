@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
 import "./UserOrders.css";
 import Sidebar from "../UserSidebar/Sidebar";
-import { API_BASE_URL, GET_ORDERS_BY_USER_ID, GET_ORDER_BY_ID } from "../../../endpoints/config.js";
+import { GET_ORDERS_BY_USER_ID } from "../../../endpoints/config.js";
 import { useAuth } from "../../../context/AuthContext.jsx";
-
 function UserOrders() {
-    const { token, decodedToken } = useAuth();
+    const {token, decodedToken} = useAuth();
     const userId = decodedToken?.id || 0;
 
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    // const orders = [
+    //     { id: 1, purchaseDate: "2023-05-01T00:00:00Z", totalPrice: 100, products: [{ id: 1, name: "Producto 1", price: 50, image: "./image.png", cartProducts: [{ quantity: 1 }] }, { id: 1, name: "Producto 2", price: 50, image: "image_url", cartProducts: [{ quantity: 1 }] }, { id: 1, name: "Producto 1", price: 50, image: "image_url", cartProducts: [{ quantity: 1 }] },] },
+    //     { id: 2, purchaseDate: "2023-05-02T00:00:00Z", totalPrice: 150, products: [{ id: 2, name: "Producto 2", price: 75, image: "image_url", cartProducts: [{ quantity: 2 }] }] },
+    //     { id: 3, purchaseDate: "2023-05-03T00:00:00Z", totalPrice: 200, products: [{ id: 3, name: "Producto 3", price: 100, image: "image_url", cartProducts: [{ quantity: 1 }] }] }
+    // ];
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                // Obtener las órdenes del usuario
                 const response = await fetch(GET_ORDERS_BY_USER_ID(userId), {
                     headers: {
                         "Content-Type": "application/json",
@@ -24,29 +26,10 @@ function UserOrders() {
                 });
 
                 if (response.ok) {
-                    const orderSummaries = await response.json();
-
-                    // Obtener detalles completos de cada orden
-                    const detailedOrders = await Promise.all(
-                        orderSummaries.map(async (order) => {
-                            const detailResponse = await fetch(GET_ORDER_BY_ID(order.id), {
-                                headers: {
-                                    "Content-Type": "application/json",
-                                    "Authorization": `Bearer ${token}`,
-                                },
-                            });
-
-                            if (detailResponse.ok) {
-                                return await detailResponse.json();
-                            } else {
-                                throw new Error(`Error fetching details for order ID: ${order.id}`);
-                            }
-                        })
-                    );
-
-                    setOrders(detailedOrders);
+                    const data = await response.json();
+                    setOrders(data);
                 } else {
-                    throw new Error("Failed to fetch order summaries");
+                    throw new Error("Failed to fetch orders");
                 }
             } catch (error) {
                 setError(error.message);
@@ -56,7 +39,7 @@ function UserOrders() {
         };
 
         fetchOrders();
-    }, [userId, token]);
+    }, []);
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
@@ -74,12 +57,12 @@ function UserOrders() {
                             <p><strong>Total:</strong> ${order.totalPrice}</p>
                             <h3>Productos:</h3>
                             <div className="order-products">
-                                {order.orderProducts?.map((product) => (
-                                    <div key={product.productId} className="order-product">
-                                        <img src={`${API_BASE_URL}${product.image}`} alt={product.name} className="product-image" />
+                                {order.products.map((product) => (
+                                    <div key={product.id} className="order-product">
+                                        <img src={product.image} alt={product.name} className="product-image" />
                                         <p><strong>Producto:</strong> {product.name}</p>
-                                        <p><strong>Cantidad:</strong> {product.quantity}</p>
-                                        <p><strong>Precio:</strong> ${product.purchasePrice}</p>
+                                        <p><strong>Cantidad:</strong> {product.cartProducts[0].quantity}</p>
+                                        <p><strong>Precio:</strong> ${product.price}</p>
                                     </div>
                                 ))}
                             </div>

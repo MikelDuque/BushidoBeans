@@ -20,8 +20,6 @@ export default function Layout() {
         setHasScrolledIntro(true);
       }, 4000);
     }
-
-    return clearTimeout();
   }, []);
 
   return(

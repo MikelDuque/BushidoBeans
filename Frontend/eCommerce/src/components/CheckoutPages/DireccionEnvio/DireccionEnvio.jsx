@@ -19,6 +19,54 @@ function DireccionEnvio() {
 
     }, [fetchData]);
 
+    /*
+    useEffect(() => {
+        const tokenId = localStorage.getItem("accessToken");
+        if (tokenId) {
+            try {
+                const decodedToken = jwt_decode.jwtDecode(token);
+                setUserId(decodedToken.id);
+            } catch (error) {
+                console.error("Error al decodificar el token", error);
+            }
+        } else {
+            console.error("Token no encontrado en localStorage");
+        }
+    }, [token]);
+    */
+
+    /*
+    useEffect(() => {
+        if (userId) {
+            const getUserAddresses = async () => {
+                try {
+                    const response = await fetch(GET_ADDRESSES_BY_USER_ID(userId), {
+                        method: "GET",
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        }
+                    });
+                    
+
+                    if (!response.ok) {
+                        throw new Error("Error al obtener las direcciones");
+                    }
+
+                    const data = await response.json();
+                    console.log("data direcciones", data);
+                    
+                    setDirecciones(data || []);
+                    setCargando(false);
+                } catch (error) {
+                    setCargando(false);
+                }
+            };
+
+            getUserAddresses();
+        }
+    }, [cargando]);
+    */
+
     return (
         <>
             <p className="subtitulo">Mis Direcciones</p>
