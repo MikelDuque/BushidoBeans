@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import classes from './Intro.module.css';
 
 const ScrollIntro = () => {
@@ -17,7 +17,6 @@ const ScrollIntro = () => {
         }, 3500);   //Delay antes de animación
 
         return () => clearTimeout(timer);
-        document.body.style.overflow = '';
     }, []
     );
 

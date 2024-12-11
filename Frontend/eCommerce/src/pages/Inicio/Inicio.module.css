@@ -1,42 +1,60 @@
 /* -----GENERAL----- */
 
-.container{
+.container {
   color: var(--letras-nav);
   font-family: "Vollkorn", sans-serif;
   background-color: var(--fondo-pagina);
+  padding: 5%;
 }
 
 
 /* -----CONTENIDO----- */
-.content{
-  display: inline-flex;
+.article1,
+.article2 {
+  display: flex;
   align-items: center;
-  margin: 5% 15%;
+  justify-content: center;
+  gap: 5rem;
+  padding-bottom: 10rem;
 }
 
+.article1 {
+  flex-direction: row-reverse;
+}
 
 /* -----TEXTO----- */
-.texto{
-  
-  width: 50%;
+.texto {
+  max-width: 40rem;
   text-align: justify;
-  margin: 0 5%;
 }
-.texto h2{
+
+.texto h2 {
   font-family: 'Poppins', sans-serif;
   font-size: var(--subtitulos-size);
   text-align: center;
-  margin-bottom: 15px;
+  padding: 1.5rem 0rem;
 }
-.texto p{
+
+.texto p {
   font-family: 'Vollkorn', sans-serif;
   font-size: var(--texto-size);
 }
 
 
 /* -----IMAGEN----- */
-.content img{
+.article1 img,
+.article2 img {
+  max-width: 40rem;
+  min-width: 25rem;
   width: 40%;
-  margin: 0 5%;
   border-radius: 20px;
+}
+
+@media (max-width: 830px) {
+  .article1,
+  .article2 {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
 }
