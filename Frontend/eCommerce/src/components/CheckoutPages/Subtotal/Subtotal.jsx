@@ -4,7 +4,27 @@ import { useCheckout } from "../../../context/CheckoutContext"; // Importa el co
 function Subtotal({ view }) {
     const {handleButtonClick, calculateShipping, order} = useCheckout();
 
-    /*
+    
+    const sendOrder = async (data) => {
+            const response = await fetch("https://localhost:7015/api/Order", {
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json'
+                    
+                },
+                body: JSON.stringify(data),
+            });
+    
+            if (response.ok) {
+                alert("Order enviada correctamente");
+                               
+            } else {
+                setError("Error al enviar la review:");
+                
+            }
+      
+    };
+/*
     const handleSubtotal = () => {
         if (!carrito || carrito.length === 0) return 0;
         return carrito.reduce((total, item) => total + item.price * item.quantity, 0);
