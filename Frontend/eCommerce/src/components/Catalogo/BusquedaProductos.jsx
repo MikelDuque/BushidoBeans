@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 import { CardProduct } from "../CardProduct/CardProduct.jsx";
 import ReactPaginate from 'react-paginate';
-import "../../pages/Catalogo/catalogo.css";
+import "../../pages/Catalogo/Catalogo.css";
 import "./Paginacion.css";
 import { CircleLoader } from 'react-spinners';
 import { GET_FILTERED_PRODUCTS } from '../../endpoints/config.js';
