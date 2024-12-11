@@ -25,7 +25,7 @@ public class AuthService
     }
 
     public async Task<string> Login(LoginRequest model) {
-        User user = await _unitOfWork.UserRepository.GetByMailAsync(model.Mail);
+        User user = await _unitOfWork.UserRepository.GetByMailAsync(model.Mail.ToLowerInvariant());
 
         SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
         {
@@ -60,7 +60,7 @@ public class AuthService
     {
         
         LoginRequest model = new LoginRequest {
-            Mail = userRequest.Mail,
+            Mail = userRequest.Mail.ToLowerInvariant(),
             Password = userRequest.Password,
         };
 
