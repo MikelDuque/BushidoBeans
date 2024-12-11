@@ -1,42 +1,21 @@
-import React, { useEffect, useState } from "react";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
-import ScrollIntro from "../../components/Intro/Intro";
 import classes from './Inicio.module.css';
 
 
 function Inicio() {
-  const [hasScrolledIntro, setHasScrolledIntro] = useState(false);
-
-  useEffect(() => {
-    const introShown = sessionStorage.getItem("hasScrolledIntro");
-
-    if (introShown === "true") {
-      document.body.style.overflow = "";
-      setHasScrolledIntro(true);
-    } else {
-      setTimeout(() => {
-        sessionStorage.setItem("hasScrolledIntro", "true");
-        setHasScrolledIntro(true);
-      }, 4000);
-    }
-  }, []);
-
-
   return (
     <>
       <div className={classes.container}>
-        <div className={classes.content}>
+        <div className={classes.article1}>
+          <img src="recursos/LataBushidoBInicio.jpg" alt="Lata de café" />
           <div className={classes.texto}>
             <h2>Nueva forma de disfrutar tu café</h2>
             <p>
               ¡Descubre la energía y el sabor de nuestra nueva lata de café bebible! Perfecta para esos momentos en los que necesitas un impulso rápido, nuestra bebida combina la intensidad del café recién hecho con la comodidad de un formato listo para llevar. Disfruta de un sabor rico y auténtico en cada sorbo, sin necesidad de preparación. Ya sea en casa, en la oficina o en movimiento, nuestra lata de café es tu compañera ideal para mantenerte alerta y productivo. ¡Prueba el café que se adapta a tu ritmo de vida y  despierta tus sentidos en cualquier lugar!
             </p>
           </div>
-          <img src="recursos/LataBushidoBInicio.jpg" alt="Lata de café" />
         </div>
 
-        <div className={classes.content}>
+        <div className={classes.article2}>
           <img src="recursos/TermoBushidoBInicio.jpg" alt="Termo de café" />
           <div className={classes.texto}>
             <h2>¡Bienvenido!</h2>

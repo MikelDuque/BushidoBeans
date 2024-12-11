@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
-import { DELETE_USER_BY_ID, GET_USERS } from "../../../endpoints/config";
+
+import { DELETE_USER_BY_ID, GET_USERS, PUT_USER_ROLE } from "../../../endpoints/config";
+
 
 import classes from "./UserList.module.css"
 import UserListElement from './UserListElement/UserListElement';
@@ -49,7 +51,9 @@ export default function UserList() {
 
     const updateUser = async (userToUpdate) => {
         try {
-            const response = await fetch('https://localhost:7015/api/User/Update_UserRole', {
+
+            const response = await fetch(PUT_USER_ROLE, {
+
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

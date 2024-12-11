@@ -81,7 +81,7 @@ export default function Register({handleViewChange, setAlertMessage}) {
       mail: form.mail.value,
       password: form.password.value,
       name: form.name.value,
-      surname: form.name.value,
+      surname: form.surname.value,
       phone: form.phone.value,
       address: form.address.value
     }; 
@@ -129,7 +129,7 @@ export default function Register({handleViewChange, setAlertMessage}) {
   return (
     <div className={classes.container_secundario}>
       <div className={`${classes.login} ${classes.login_secundario}`}>
-        <img src="../../public/logo-secundario.svg" alt="Logo" className={classes.logoBushidoBeans_secundario} />
+        <img src="/logo-secundario.svg" alt="Logo" className={classes.logoBushidoBeans_secundario} />
           <p className={`${classes.preguntaCuenta_secundario} ${classes.accede} subtitulo`}>¿Ya tienes cuenta?</p>
           <button className={`${classes.acceder} ${classes.acceder_secundario}`} value={false} onClick={handleViewChange}>Acceder</button>
       </div>
