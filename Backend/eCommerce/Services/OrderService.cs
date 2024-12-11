@@ -30,7 +30,7 @@ public class OrderService
     public async Task<IEnumerable<OrderDto>> GetOrdersByUserIdAsync(long userId)
     {
         User thisUser = await _unitOfWork.UserRepository.GetByIdAsync(userId);
-            
+
         return _orderMapper.ToDto(thisUser.Orders);
     }
 
