@@ -4,7 +4,7 @@
   color: var(--letras-nav);
   font-family: "Vollkorn", sans-serif;
   background-color: var(--fondo-pagina);
-
+  padding: 5%;
 }
 
 
@@ -15,7 +15,7 @@
   align-items: center;
   justify-content: center;
   gap: 5rem;
-  padding: 5%;
+  padding-bottom: 10rem;
 }
 
 .article1 {
@@ -24,7 +24,7 @@
 
 /* -----TEXTO----- */
 .texto {
-  width: 50%;
+  max-width: 40rem;
   text-align: justify;
 }
 
@@ -36,7 +36,6 @@
 }
 
 .texto p {
-  min-width: 300px;
   font-family: 'Vollkorn', sans-serif;
   font-size: var(--texto-size);
 }
@@ -45,7 +44,8 @@
 /* -----IMAGEN----- */
 .article1 img,
 .article2 img {
-  min-width: 300px;
+  max-width: 40rem;
+  min-width: 25rem;
   width: 40%;
   border-radius: 20px;
 }
