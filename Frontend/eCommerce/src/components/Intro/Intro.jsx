@@ -25,7 +25,7 @@ const ScrollIntro = () => {
         <div>
             {esVisible && (
                 <div className={classes.introDiv}>
-                    <img className={classes.introImg} src='../recursos/LogoIntro.png'/>
+                    <img className={classes.introImg} src='/recursos/LogoIntro.png'/>
                 </div>
             )}
         </div>
