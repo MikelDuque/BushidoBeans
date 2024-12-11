@@ -103,3 +103,19 @@
     background-color: lightcoral;
   }
 }
+
+@media (max-width: 1500px) {
+  .modal--cart {
+    width: 40vw;
+  }
+}
+@media (max-width: 1100px) {
+  .modal--cart {
+    width: 60vw;
+  }
+}
+@media (max-width: 750px) {
+  .modal--cart {
+    width: 99vw;
+  }
+}
