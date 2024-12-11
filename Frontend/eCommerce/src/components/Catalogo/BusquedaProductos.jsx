@@ -6,7 +6,6 @@ import "../../pages/Catalogo/Catalogo.css";
 import "./Paginacion.css";
 import { CircleLoader } from 'react-spinners';
 import { GET_FILTERED_PRODUCTS } from '../../endpoints/config.js';
-import useFetch from '../../endpoints/useFetch.js';
 
 const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   const [productoBuscado, setProductoBuscado] = useState('');
