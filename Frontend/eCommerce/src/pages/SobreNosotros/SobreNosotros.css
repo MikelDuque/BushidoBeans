@@ -10,6 +10,13 @@
     padding: 1rem;
     gap: 2rem;
 }
+.container-sobre-nosotros h1{
+    font-size: var(--titulos-size);
+    font-family: Poppins, sans-serif;
+}
+.container-sobre-nosotros p{
+    font-size: var(--subtitulos-size);
+}
 .carrusel {
     width: 90%;
     border-radius: 20px;
@@ -23,7 +30,7 @@
 .imagen-logo-bushido-beans{
     width: 50%;
     max-width: 60rem;
-    height: auto;
+    min-width: 40rem;
 }
 .descripcion-texto{
     display: flex;
@@ -38,35 +45,34 @@
     width: 90%;
     border-top: 2px solid var(--nav-footer);
 }
-.container-mision {
+.container-mision, .container-valores {
     background-color: var(--nav-footer);
     width: 90%;
+    min-width: 34rem;
     display: flex;
     align-items: center; 
     padding: 2rem; 
     border-radius: 20px;
 }
-.imagen-mision {
-    min-width: 30rem;
+.imagen-mision, .imagen-valores {
     max-width: 40rem;
+    min-width: 30rem;
     border-radius: 20px;
 }
-.container-texto-mision{
-    text-align: center;
+.container-texto-mision, .container-texto-valores{
+    text-align: justify;
     max-width: 50%;
     color: var(--letras-nav);
     margin: auto;
+    padding: 2rem;
 }
-.container-texto-mision h1{
-    font-size: var(--titulos-size);
-    font-family: Poppins, sans-serif;
+.container-texto-mision h1, .container-texto-valores h1{
+    text-align: center;
 }
-.container-texto-mision p{
-    font-size: var(--subtitulos-size);
+.spanBeans{
+    font-weight: bolder;
+    font-size: 30px;
 }
-
-
-
 
 ----------------------------------------
 
@@ -195,76 +201,10 @@
 
 
 /* Estilos para la sección de Visión */
-.container-vision {
-    width: 95%;
-    height: 80vh;
-    margin: 0 auto;
-    padding: 2%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    
-}
-.titulo-vision{
-    font-size: 100px;
-}
 
-.texto-vision {
-    color: var(--nav-footer); /* Ajusta el color si es necesario */
-    margin: 0 auto;
-    font-size: 30px;
-    
-    
 
-}
 
-.container-valores {
-    background-color: var(--nav-footer);
-    margin: 0 auto;
-    width: 95%;
-    height: 85vh;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 2%;
-    border-radius: 20px;
-    
-}
 
-.container-imagen-valores {
-    width: 50%;
-    height: auto;
-    padding-left: 2%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.imagen-valores {
-    width:90%;
-    height: auto;
-    border-radius: 10px;
-}
 
-.container-valores ul {
-    padding-left: 20px;
-    color: var(--fondo-vistas);
-    text-align: left;
-    max-width: 45%;
-}
-
-.container-valores ul li {
-    margin:  -40px; /* Ajusta el espacio entre los elementos */
-    letter-spacing: 1px;
-    padding-bottom: 20px;
-    
-}
-
-.spanBeans{
-    font-weight: bolder;
-    font-size: 30px;
-}
 
