@@ -6,6 +6,7 @@ import "../../pages/Catalogo/Catalogo.css";
 import "./Paginacion.css";
 import { CircleLoader } from 'react-spinners';
 import { GET_FILTERED_PRODUCTS } from '../../endpoints/config.js';
+import useFetch from '../../endpoints/useFetch.js';
 
 const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   const [productoBuscado, setProductoBuscado] = useState('');
@@ -34,12 +35,13 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
         }
 
         const response = await fetch(GET_FILTERED_PRODUCTS, {
-          method: 'GET',
+          method: 'POST',
           headers: {
-              'Content-Type' : 'application/json'
+            'Content-Type' : 'application/json'
           },
           body: JSON.stringify(backendFilter)
       });
+      
       /*
         const response = await fetch(`${Url}?Search=${productoBuscado}&Category=${filtro}&Order=${ordenar}&IncludeStockless=true&ProductsPerPage=${productosPorPagina}&CurrentPage=${paginaActual}`
           , {method: 'GET', headers:{'Content-Type':'aplication/json'}});

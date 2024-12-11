@@ -67,7 +67,7 @@ public class Seeder
             },
             new User {
                 Mail = "jose@gmail.es",
-                Password = AuthService.HashPassword("Jose#1234567890"),
+                Password = AuthService.HashPassword("Jose#123456789"),
                 Name = "José",
                 Surname = "Santos Garrido",
                 Phone = 123456789,
