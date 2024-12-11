@@ -41,6 +41,7 @@ const API_USER_URL = `${API_BASE_URL}/api/User`;
   export function GET_USER_BY_ID(id) {return `${API_USER_URL}/${id}`};
   export const GET_USERS = `${API_USER_URL}/Get_Users`;
   export const PUT_USER = `${API_USER_URL}/Update_User`;
+  export const PUT_USER_ROLE = `${API_USER_URL}/Update_UserRole`;
   export function DELETE_USER_BY_ID(id) {return `${API_USER_URL}/Delete_User/${id}`};
 
 
