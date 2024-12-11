@@ -3,6 +3,43 @@
 @import url(https://fonts.googleapis.com/css2?family=Poppins&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=Poppins&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap);
 
+.container-sobre-nosotros{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    gap: 2rem;
+}
+.carrusel {
+    width: 90%;
+    border-radius: 20px;
+    overflow: hidden;
+}
+.container-descripcion{
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+}
+.imagen-logo-bushido-beans{
+    width: 50%;
+    height: auto;
+}
+.descripcion-texto{
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    color: var(--nav-footer);
+    padding-right: 5%;
+}
+.separador{
+    width: 90%;
+    border-top: 2px solid var(--nav-footer);
+}
+
+
+----------------------------------------
+
+
 .padree .texto {
     color: var(--nav-footer); /* Verde oscuro */
 }
@@ -20,39 +57,11 @@
 }
 
 
-.carrusel {
-    width: 1527px;
-    height: 388px;
-    margin: 2% auto 0;
-    border-radius: 20px;
-    background-color: transparent;
-    overflow: hidden;
-}
 
-.container-descripcion{
-    display: flex;
-    flex: 2;
-    align-items: center;
-    
-}
 
-.imagen-logo-bushido-beans{
-    width: 100%;
-    max-width: 543px;
-    height: auto;
-
-}
-.descripcion{
-    text-align: justify;
-    padding: 5%;
-    color: var(--nav-footer);
-}
 .separador{
     width: 90%;
-    margin: 0 auto;
     border-top: 2px solid var(--nav-footer);
-    margin-top: 3%;
-    margin-bottom: 3%;
 }
 .separador-secundario{
     width: 80%;
@@ -61,9 +70,7 @@
     margin-top: 1%;
     margin-bottom: 1%;
 }
-.descripcion{
-    color: black;
-}
+
 .container-equipo{
     display: flex;
     flex: 2;
