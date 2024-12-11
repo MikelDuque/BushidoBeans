@@ -32,7 +32,7 @@ function Subtotal({ view }) {
                 </p>
             )}
 
-            <button className="btn-direccion" onSubmit={sendOrder} onClick={() => handleButtonClick('address')}>
+            <button className="btn-direccion" onSubmit={""} onClick={() => handleButtonClick('address')}>
                 {view === "checkout" ? "Continuar" : "Pago"}    
                   
             </button>
