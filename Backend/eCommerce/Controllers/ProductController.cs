@@ -28,7 +28,7 @@ public class ProductController : ControllerBase
   }
 
   [HttpGet("Filtered_Products")]
-  public async Task<Catalog> GetFilteredProducts([FromQuery]Filter filter)
+  public async Task<Catalog> GetFilteredProducts([FromBody]Filter filter)
   {
     return await _service.GetFilteredProducts(filter);
   }
