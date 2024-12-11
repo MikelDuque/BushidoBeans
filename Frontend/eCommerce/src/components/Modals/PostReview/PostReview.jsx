@@ -6,7 +6,7 @@ import StarRating from '../../Product_Details/Review_List/StarRating/StarRating'
 import Alert from '../../Alert/Alert';
 import { useAuth } from '../../../context/AuthContext';
 import useFetchEvent from '../../../endpoints/useFetchEvent';
-import { GET_PRODUCT_BY_ID, POST_REVIEW } from '../../../endpoints/config';
+import { API_BASE_URL, GET_PRODUCT_BY_ID, POST_REVIEW } from '../../../endpoints/config';
 import useFetch from '../../../endpoints/useFetch';
 import { useModal } from '../../../context/ModalContext';
 
@@ -55,7 +55,7 @@ export default function PostReview() {
                 <div className="productoInfo">
                     <img
                         className="imgInfo"
-                        src={`https://localhost:7015/${product.image}`}
+                        src={`${API_BASE_URL}${product.image}`}
                         alt={product.name}
                     />
                     <div className="infoDerecha">
