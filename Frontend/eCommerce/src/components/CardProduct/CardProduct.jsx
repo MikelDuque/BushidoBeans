@@ -35,7 +35,7 @@ export function CardProduct({ product }) {
 
     return (
         <div className={`CardProduct ${product.stock <= 0 ? "sold-out" : ""}`}>
-            <img className="imgPrueba" src={`${API_BASE_URL} ${product.image}`} alt={product.name} />
+            <img className="imgPrueba" src={`https://localhost:7015/${product.image}`} alt={product.name} />
             <h4 className="productName" onClick={handlePageChange}>{product.name}</h4>
 	    <div className="iconos">
                 {valoracionEstrellas}
