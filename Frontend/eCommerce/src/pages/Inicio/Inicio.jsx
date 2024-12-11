@@ -3,6 +3,7 @@ import classes from './Inicio.module.css';
 
 
 function Inicio() {
+  /*
   const [setHasScrolledIntro] = useState(false);
 
   useEffect(() => {
@@ -17,8 +18,10 @@ function Inicio() {
         setHasScrolledIntro(true);
       }, 4000);
     }
-  }, []);
 
+    return clearTimeout();
+  }, []);
+  */
 
   return (
     <>
