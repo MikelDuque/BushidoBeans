@@ -23,10 +23,27 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
       setError(null);
 
       try {
-        const Url = GET_FILTERED_PRODUCTS
+
+        const backendFilter = {
+          search: productoBuscado,
+          category: filtro,
+          order: ordenar,
+          includeStockless: true,
+          productsPerPage: productosPorPagina,
+          currentPage: paginaActual
+        }
+
+        const response = await fetch(GET_FILTERED_PRODUCTS, {
+          method: 'GET',
+          headers: {
+              'Content-Type' : 'application/json'
+          },
+          body: JSON.stringify(backendFilter)
+      });
+      /*
         const response = await fetch(`${Url}?Search=${productoBuscado}&Category=${filtro}&Order=${ordenar}&IncludeStockless=true&ProductsPerPage=${productosPorPagina}&CurrentPage=${paginaActual}`
           , {method: 'GET', headers:{'Content-Type':'aplication/json'}});
-        
+        */
         if (!response.ok) throw new Error("Error al cargar los productos");
         setLoading (false);
 

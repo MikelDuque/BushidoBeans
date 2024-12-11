@@ -28,7 +28,7 @@ public class ProductRepository : Repository<Product>
         Dictionary<int, List<Product>> diccionarioFinal = [];
         TextComparer _textComparer = new();
 
-        IQueryable<Product> query = FilterByCategoryAndStock(filter.IncludeStockless, filter.Category);
+        IQueryable<Product> query = FilterByCategoryAndStock(filter.IncludeStockless, (ECategory)filter.Category);
 
         List<Product> listaProductosBuscados = _textComparer.SearchFilter(query, filter.Search).ToList();
 
@@ -39,7 +39,7 @@ public class ProductRepository : Repository<Product>
         //Si la lista de productos buscados es distinta a la query original, transformala a la nueva query
         query = listaProductosBuscados == query.ToList() ? query : listaProductosBuscados.AsQueryable();
 
-        query = ApplyOrder(query, filter.Order);
+        query = ApplyOrder(query, (EOrder)filter.Order);
 
         int totalProductosFiltrados = query.Count();
 
