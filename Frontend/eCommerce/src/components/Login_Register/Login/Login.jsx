@@ -82,7 +82,7 @@ export default function Login({handleViewChange, setAlertMessage}) {
       </form>
     </div>
     <div className={classes.crearCuenta}>
-      <img src="../../public/logo.svg" alt="Bushido Beans" className={classes.logoBushidoBeans} />
+      <img src="/logo.svg" alt="Bushido Beans" className={classes.logoBushidoBeans} />
       <p className={classes.preguntaCuenta}>¿Aún no tienes cuenta?</p>
       <p className={classes.crearAhora}>Crea tu cuenta ahora</p>
       <button className={classes.btnCrearCuenta} value={true} onClick={handleViewChange}>Crear cuenta</button>

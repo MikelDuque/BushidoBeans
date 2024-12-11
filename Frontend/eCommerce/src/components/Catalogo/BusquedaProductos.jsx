@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 import { CardProduct } from "../CardProduct/CardProduct.jsx";
 import ReactPaginate from 'react-paginate';
-import "../../pages/Catalogo/catalogo.css";
+import "../../pages/Catalogo/Catalogo.css";
 import "./Paginacion.css";
 import { CircleLoader } from 'react-spinners';
 import { GET_FILTERED_PRODUCTS } from '../../endpoints/config.js';
@@ -18,15 +18,33 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
 
 
   useEffect(() => {
-    // Llamada a la API cuando cambian el filtro, orden, o búsqueda
+    
     const fetchData = async () => {
       setError(null);
 
       try {
-        const Url = GET_FILTERED_PRODUCTS
+
+        const backendFilter = {
+          search: productoBuscado,
+          category: filtro,
+          order: ordenar,
+          includeStockless: true,
+          productsPerPage: productosPorPagina,
+          currentPage: paginaActual
+        }
+
+        const response = await fetch(GET_FILTERED_PRODUCTS, {
+          method: 'POST',
+          headers: {
+            'Content-Type' : 'application/json'
+          },
+          body: JSON.stringify(backendFilter)
+      });
+      
+      /*
         const response = await fetch(`${Url}?Search=${productoBuscado}&Category=${filtro}&Order=${ordenar}&IncludeStockless=true&ProductsPerPage=${productosPorPagina}&CurrentPage=${paginaActual}`
           , {method: 'GET', headers:{'Content-Type':'aplication/json'}});
-        
+        */
         if (!response.ok) throw new Error("Error al cargar los productos");
         setLoading (false);
 
@@ -36,7 +54,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
         setTotalPaginas(data.totalPages); 
         
       } catch (error) {
-        setError("Hubo un error al cargar los productos.");
+        setError("Hubo un error al cargar los productos: ", error);
       } finally {
         setLoading(false);
       }
@@ -46,7 +64,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   }, [productoBuscado, filtro, ordenar, paginaActual, productosPorPagina]);
 
   const handlePageChange = ({selected: selectedPage}) => {
-    setPaginaActual(selectedPage+1); // Cambia la página actual según la selección del usuario
+    setPaginaActual(selectedPage+1); 
     setPaginaSeleccionada(selectedPage);
     
   };
@@ -92,7 +110,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
           previousLabel={'←'}
           nextLabel={'→'}
           breakLabel={'...'}
-          pageCount={totalPaginas} // Cálculo del número de páginas
+          pageCount={totalPaginas} 
           marginPagesDisplayed={2}
           pageRangeDisplayed={3}
           onPageChange={handlePageChange}
@@ -115,7 +133,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
 export default BusquedaProductos;
 
 BusquedaProductos.propTypes = {
-  filtro: PropTypes.string.isRequired, // Ahora el id es requerido como prop
+  filtro: PropTypes.string.isRequired, 
   ordenar: PropTypes.string.isRequired,
   productosPorPagina: PropTypes.number.isRequired,
 };

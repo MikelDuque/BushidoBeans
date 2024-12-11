@@ -11,7 +11,7 @@ export default function ProductList() {
 
     useEffect(() => {
         if(token) getProducts();
-    }, [token]);
+    }, [products]);
 
     async function getProducts() {
         try {

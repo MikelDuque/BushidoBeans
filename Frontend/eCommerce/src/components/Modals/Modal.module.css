@@ -104,6 +104,7 @@
   }
 }
 
+/* ----- RESPONSIVE ----- */
 @media (max-width: 1500px) {
   .modal--cart {
     width: 40vw;

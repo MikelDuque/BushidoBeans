@@ -35,7 +35,7 @@ public class Seeder
             },
             new User {
                 Mail = "david@gmail.es",
-                Password = AuthService.HashPassword("David#1234567890") ,
+                Password = AuthService.HashPassword("David#123456789") ,
                 Name = "David",
                 Surname = "Andrino Ferrera",
                 Phone = 123456789,
@@ -43,7 +43,7 @@ public class Seeder
             },
             new User {
                 Mail = "yasir@gmail.es",
-                Password = AuthService.HashPassword("Yasir#1234567890") ,
+                Password = AuthService.HashPassword("Yasir#123456789") ,
                 Name = "Yasir",
                 Surname = "Bel Maalem Ouhadou Abdenour",
                 Phone = 123456789,
@@ -51,7 +51,7 @@ public class Seeder
             },
             new User {
                 Mail = "ivan@gmail.es",
-                Password = AuthService.HashPassword("Ivan#1234567890") ,
+                Password = AuthService.HashPassword("Ivan#123456789") ,
                 Name = "Ivan",
                 Surname = "Montes Gutierrez",
                 Phone = 123456789,
@@ -59,7 +59,7 @@ public class Seeder
             },
             new User {
                 Mail = "raquel@gmail.es",
-                Password = AuthService.HashPassword("Raquel#1234567890") ,
+                Password = AuthService.HashPassword("Raquel#123456789") ,
                 Name = "Raquel",
                 Surname = "López Bermúdez",
                 Phone = 123456789,
@@ -67,7 +67,7 @@ public class Seeder
             },
             new User {
                 Mail = "jose@gmail.es",
-                Password = AuthService.HashPassword("Jose#1234567890"),
+                Password = AuthService.HashPassword("Jose#123456789"),
                 Name = "José",
                 Surname = "Santos Garrido",
                 Phone = 123456789,

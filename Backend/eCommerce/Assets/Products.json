@@ -1,7 +1,7 @@
 [
   {
     "Id": 1,
-    "Image": "/images/cafeEspresso.jpeg",
+    "Image": "/images/products/cafeEspresso.jpeg",
     "Name": "Café Espresso",
     "Description": "Un espresso auténtico, fuerte y con cuerpo, ideal para comenzar el día.",
     "NutritionalInfo": "Energia: 100 kcal, Grasas: 1g, Azúcares: 0g",
@@ -13,7 +13,7 @@
   },
   {
     "Id": 2,
-    "Image": "/images/cafeOscuro.jpeg",
+    "Image": "/images/products/cafeOscuro.jpeg",
     "Name": "Café Americano",
     "Description": "Un café suave y diluido, perfecto para los que disfrutan de un sabor más ligero.",
     "NutritionalInfo": "Energia: 110 kcal, Grasas: 1g, Azúcares: 1g",
@@ -25,7 +25,7 @@
   },
   {
     "Id": 3,
-    "Image": "/images/cafeLatteVainilla.jpeg",
+    "Image": "/images/products/cafeLatteVainilla.jpeg",
     "Name": "Café Latte",
     "Description": "Un café avainillado con leche cremosa, ideal para quienes prefieren una bebida dulce.",
     "NutritionalInfo": "Energia: 150 kcal, Grasas: 6g, Azúcares: 12g",
@@ -37,7 +37,7 @@
   },
   {
     "Id": 4,
-    "Image": "/images/drinkHalloWeen.jpeg",
+    "Image": "/images/products/drinkHalloWeen.jpeg",
     "Name": "Café HalloWeen",
     "Description": "Un café terrorificamente dulce, para morir del gusto.",
     "NutritionalInfo": "Energia: 160 kcal, Grasas: 7g, Azúcares: 15g",
@@ -49,7 +49,7 @@
   },
   {
     "Id": 5,
-    "Image": "./images/cafeConLeche.jpeg",
+    "Image": "./images/products/cafeConLeche.jpeg",
     "Name": "Café Cappuccino",
     "Description": "Un clásico con leche espumosa y un toque de cacao en polvo.",
     "NutritionalInfo": "Energia: 130 kcal, Grasas: 4g, Azúcares: 8g",
@@ -61,7 +61,7 @@
   },
   {
     "Id": 6,
-    "Image": "../images/cafeVainilla.jpeg",
+    "Image": "../images/products/cafeVainilla.jpeg",
     "Name": "Café Vainilla",
     "Description": "Un espresso con sabor a vainilla, ideal para los que buscan un toque diferente.",
     "NutritionalInfo": "Energia: 120 kcal, Grasas: 2g, Azúcares: 1g",
@@ -73,7 +73,7 @@
   },
   {
     "Id": 7,
-    "Image": "images/cafeFrio.jpeg",
+    "Image": "images/products/cafeFrio.jpeg",
     "Name": "Café Cold Brew",
     "Description": "Café frío, con un sabor suave y refrescante, perfecto para los días calurosos.",
     "NutritionalInfo": "Energia: 110 kcal, Grasas: 1g, Azúcares: 0g",
@@ -85,7 +85,7 @@
   },
   {
     "Id": 8,
-    "Image": "/images/cafeIrish.jpeg",
+    "Image": "/images/products/cafeIrish.jpeg",
     "Name": "Café Irish",
     "Description": "Un café con un toque de whisky irlandés, ideal para una experiencia única.",
     "NutritionalInfo": "Energia: 180 kcal, Grasas: 8g, Azúcares: 10g",
@@ -97,7 +97,7 @@
   },
   {
     "Id": 9,
-    "Image": "/images/cafeHazelnut.jpeg",
+    "Image": "/images/products/cafeHazelnut.jpeg",
     "Name": "Café Avellana",
     "Description": "Un café con sabor a avellana, ideal para los amantes de lo dulce y la avellana.",
     "NutritionalInfo": "Energia: 140 kcal, Grasas: 5g, Azúcares: 12g",
@@ -109,7 +109,7 @@
   },
   {
     "Id": 10,
-    "Image": "/images/cafent.jpeg",
+    "Image": "/images/products/cafent.jpeg",
     "Name": "Café de la Casa",
     "Description": "Un café suave y equilibrado para todos los gustos, ideal para cualquier momento del día.",
     "NutritionalInfo": "Energia: 120 kcal, Grasas: 3g, Azúcares: 2g",
@@ -121,7 +121,7 @@
   },
   {
     "Id": 11,
-    "Image": "/images/cafeLateChai.jpeg",
+    "Image": "/images/products/cafeLateChai.jpeg",
     "Name": "Café Chai",
     "Description": "Un café estilo chai, ideal para disfrutar en una tarde relajante.",
     "NutritionalInfo": "Energia: 170 kcal, Grasas: 8g, Azúcares: 10g",
@@ -133,7 +133,7 @@
   },
   {
     "Id": 12,
-    "Image": "/images/cafeCaramel.jpeg",
+    "Image": "/images/products/cafeCaramel.jpeg",
     "Name": "Café Caramelizado",
     "Description": "Café con un toque dulce de caramelo, para los que disfrutan del café con un toque especial.",
     "NutritionalInfo": "Energia: 160 kcal, Grasas: 6g, Azúcares: 14g",
@@ -145,7 +145,7 @@
   },
   {
     "Id": 13,
-    "Image": "/images/cafeConLeche.jpeg",
+    "Image": "/images/products/cafeConLeche.jpeg",
     "Name": "Café Cortado",
     "Description": "Un café espresso con un toque de leche, ideal para quienes prefieren una mezcla suave.",
     "NutritionalInfo": "Energia: 130 kcal, Grasas: 4g, Azúcares: 2g",
@@ -157,7 +157,7 @@
   },
   {
     "Id": 14,
-    "Image": "/images/teaHerbal.jpeg",
+    "Image": "/images/products/teaHerbal.jpeg",
     "Name": "Té Verde Orgánico",
     "Description": "Un té verde orgánico que promueve la salud con su toque refrescante.",
     "NutritionalInfo": "Energia: 5 kcal, Grasas: 0g, Azúcares: 0g",
@@ -169,7 +169,7 @@
   },
   {
     "Id": 15,
-    "Image": "/images/teNegro.jpeg",
+    "Image": "/images/products/teNegro.jpeg",
     "Name": "Té Negro",
     "Description": "Un té negro clásico, ideal para una bebida revitalizante.",
     "NutritionalInfo": "Energia: 10 kcal, Grasas: 0g, Azúcares: 0g",
@@ -181,7 +181,7 @@
   },
   {
     "Id": 16,
-    "Image": "/images/teDouck.jpeg",
+    "Image": "/images/products/teDouck.jpeg",
     "Name": "Té Douck",
     "Description": "Un té herbal, naturalmente libre de cafeína y con un sabor suave.",
     "NutritionalInfo": "Energia: 5 kcal, Grasas: 0g, Azúcares: 0g",
@@ -193,7 +193,7 @@
   },
   {
     "Id": 17,
-    "Image": "/images/teFruit.jpeg",
+    "Image": "/images/products/teFruit.jpeg",
     "Name": "Té Afrutado",
     "Description": "Un té afrutado, con un sabor para los más atrevidos.",
     "NutritionalInfo": "Energia: 7 kcal, Grasas: 0g, Azúcares: 0g",
@@ -205,7 +205,7 @@
   },
   {
     "Id": 18,
-    "Image": "/images/teMenta.jpeg",
+    "Image": "/images/products/teMenta.jpeg",
     "Name": "Té Menta",
     "Description": "Té verde mentolado, para una experiencia floral y relajante.",
     "NutritionalInfo": "Energia: 5 kcal, Grasas: 0g, Azúcares: 0g",
@@ -217,7 +217,7 @@
   },
   {
     "Id": 19,
-    "Image": "/images/teMilk.jpeg",
+    "Image": "/images/products/teMilk.jpeg",
     "Name": "Té con Leche",
     "Description": "Té con leche concentrado, con un sabor umami y muchos beneficios antioxidantes.",
     "NutritionalInfo": "Energia: 10 kcal, Grasas: 0g, Azúcares: 0g",
@@ -229,7 +229,7 @@
   },
   {
     "Id": 20,
-    "Image": "/images/teIced.jpeg",
+    "Image": "/images/products/teIced.jpeg",
     "Name": "Té Frío",
     "Description": "Un té refrescante con un toque dulce y floral.",
     "NutritionalInfo": "Energia: 0 kcal, Grasas: 0g, Azúcares: 0g",
@@ -241,7 +241,7 @@
   },
   {
     "Id": 21,
-    "Image": "/images/teEarlGrey.jpeg",
+    "Image": "/images/products/teEarlGrey.jpeg",
     "Name": "Té Earl Grey",
     "Description": "Té negro aromatizado con aceite de bergamota, para un sabor único.",
     "NutritionalInfo": "Energia: 10 kcal, Grasas: 0g, Azúcares: 0g",
@@ -253,7 +253,7 @@
   },
   {
     "Id": 22,
-    "Image": "/images/teChai.jpeg",
+    "Image": "/images/products/teChai.jpeg",
     "Name": "Té Chai",
     "Description": "Un té especiado con canela, cardamomo y otras especias, para una bebida cálida y reconfortante.",
     "NutritionalInfo": "Energia: 5 kcal, Grasas: 0g, Azúcares: 0g",
@@ -265,7 +265,7 @@
   },
   {
     "Id": 23,
-    "Image": "/images/teRooibos.jpeg",
+    "Image": "/images/products/teRooibos.jpeg",
     "Name": "Té Rooibos Limón",
     "Description": "Rooibos con un toque de limón, refrescante y libre de cafeína.",
     "NutritionalInfo": "Energia: 5 kcal, Grasas: 0g, Azúcares: 0g",
@@ -277,7 +277,7 @@
   },
   {
     "Id": 24,
-    "Image": "/images/teHibisco.jpeg",
+    "Image": "/images/products/teHibisco.jpeg",
     "Name": "Té de Hibisco",
     "Description": "Un té rojo, floral y ácido, perfecto para el calor del verano.",
     "NutritionalInfo": "Energia: 0 kcal, Grasas: 0g, Azúcares: 0g",
@@ -289,7 +289,7 @@
   },
   {
     "Id": 25,
-    "Image": "/images/termoAcero.jpeg",
+    "Image": "/images/products/termoAcero.jpeg",
     "Name": "Termo de acero inoxidable",
     "Description": "Termo de alta calidad para mantener tus bebidas calientes o frías.",
     "NutritionalInfo": null,
@@ -301,7 +301,7 @@
   },
   {
     "Id": 26,
-    "Image": "/images/tazaCeramica.jpeg",
+    "Image": "/images/products/tazaCeramica.jpeg",
     "Name": "Taza cerámica",
     "Description": "Taza de cerámica con diseño exclusivo.",
     "NutritionalInfo": null,
@@ -313,7 +313,7 @@
   },
   {
     "Id": 27,
-    "Image": "/images/botellaReutilizable.jpeg",
+    "Image": "/images/products/botellaReutilizable.jpeg",
     "Name": "Botella de agua",
     "Description": "Botella reutilizable para mantener tu agua fresca.",
     "NutritionalInfo": null,
@@ -325,7 +325,7 @@
   },
   {
     "Id": 28,
-    "Image": "/images/botellaTermica.jpeg",
+    "Image": "/images/products/botellaTermica.jpeg",
     "Name": "Botella térmica",
     "Description": "Mantén tus bebidas calientes con esta botella térmica de alta calidad.",
     "NutritionalInfo": null,
@@ -337,7 +337,7 @@
   },
   {
     "Id": 29,
-    "Image": "/images/cafetera.jpeg",
+    "Image": "/images/products/cafetera.jpeg",
     "Name": "Cafetera italiana",
     "Description": "Cafetera para preparar un delicioso café al estilo tradicional italiano.",
     "NutritionalInfo": null,
@@ -349,7 +349,7 @@
   },
   {
     "Id": 30,
-    "Image": "/images/tazaInfusor.jpeg",
+    "Image": "/images/products/tazaInfusor.jpeg",
     "Name": "Taza con infusor",
     "Description": "Taza ideal para preparar tés de hojas sueltas.",
     "NutritionalInfo": null,
@@ -361,7 +361,7 @@
   },
   {
     "Id": 31,
-    "Image": "/images/botellaViaje.jpeg",
+    "Image": "/images/products/botellaViaje.jpeg",
     "Name": "Botella termal de viaje",
     "Description": "Botella termal que mantiene tus bebidas a la temperatura ideal mientras viajas.",
     "NutritionalInfo": null,
@@ -373,7 +373,7 @@
   },
   {
     "Id": 32,
-    "Image": "/images/botellaTermica2.jpeg",
+    "Image": "/images/products/botellaTermica2.jpeg",
     "Name": "Botella térmica para café",
     "Description": "Botella térmica especialmente diseñada para mantener el café caliente.",
     "NutritionalInfo": null,

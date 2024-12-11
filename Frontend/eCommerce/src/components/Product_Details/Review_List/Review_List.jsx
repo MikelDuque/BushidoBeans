@@ -28,7 +28,6 @@ function reviewMapper(reviews) {
 export default function Review_List({ data }) {
   const {token} = useAuth();
   const {openModal} = useModal();
-
   const [alertMessage, setAlertMessage] = useState(null);
 
   function shouldIOpen() {
@@ -39,11 +38,11 @@ export default function Review_List({ data }) {
     <>
       {token && 
       <Modal type="postReview" titulo="Escribe una reseña" buttonValues={null}>
-        <PostReview/>
+        <PostReview />
       </Modal>
       }
 
-      <Alert message={alertMessage} onClose={() => setAlertMessage(null)}/>
+      <Alert message={alertMessage} onClose={() => setAlertMessage(null)} />
       
       <div className={classes.reviews_container}>
         <div className={classes.leftSide}>
@@ -56,4 +55,4 @@ export default function Review_List({ data }) {
       </div>
     </>
   );
-};
+}

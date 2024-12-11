@@ -1,8 +1,10 @@
+
 .login_secundario {
   background-color: var(--fondo-vistas);
   border-radius: 40px 200px 200px 40px;
   padding-bottom: 10%;
-
+  width: 40%;
+  height: 85vh;
 }
 
 .container_secundario {
@@ -15,7 +17,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.register {
+.register{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,11 +37,29 @@
 }
 
 .acceder_secundario {
+  width: 240px;
+  height: 100px;
+  background-color: var(--nav-footer);
+  color: var(--texto-claro);
+  border-radius: 41px;
+  font-size: var(--subtitulos-size);
+  font-weight: var(--font-weight-regular);
+  border: none;
+  cursor: pointer;
+  transition: background-color 1s;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 29%;
 }
 
+.acceder_secundario:hover{
+  color: var(--nav-hover);
+}
+.btnCrearCuenta:hover{
+  background-color:var(--nav-hover) ;
+  border-color: var(--nav-hover) ;
+}
 .contenedorEmail_secundario,
 .contenedorPassword_secundario {
   display: flex;
@@ -64,15 +84,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 5% auto;
+  margin: 5%;
+  
 }
 
-.preguntaCuenta_terciario {
-  color: var(--texto-claro);
+.accede{
   text-align: center;
-  font-size: var(--subtitulos-principal);
-  font-weight: 400;
-  padding: 1%;
+  padding-bottom: 5%;
 }
 
 .emailMessage_secundario,
@@ -94,4 +112,10 @@
 
 .password_requirements li {
   margin: 5px 0;
+}
+.logoBushidoBeans_secundario{
+  padding-left: 15%;
+}
+.preguntaCuenta_terciario{
+  color: var(--fondo-vistas);
 }

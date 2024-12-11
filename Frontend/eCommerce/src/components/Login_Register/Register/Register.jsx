@@ -129,13 +129,13 @@ export default function Register({handleViewChange, setAlertMessage}) {
   return (
     <div className={classes.container_secundario}>
       <div className={`${classes.login} ${classes.login_secundario}`}>
-        <img src="../../public/logo-secundario.svg" alt="Logo" className={classes.logoBushidoBeans_secundario} />
-          <p className={`${classes.preguntaCuenta_secundario} ${classes.accede}`}>¿Ya tienes cuenta?</p>
+        <img src="/logo-secundario.svg" alt="Logo" className={classes.logoBushidoBeans_secundario} />
+          <p className={`${classes.preguntaCuenta_secundario} ${classes.accede} subtitulo`}>¿Ya tienes cuenta?</p>
           <button className={`${classes.acceder} ${classes.acceder_secundario}`} value={false} onClick={handleViewChange}>Acceder</button>
       </div>
       <div className={classes.register}>
-        <p className={classes.preguntaCuenta_terciario}>Crea tu cuenta</p>
-        <p className={classes.preguntaCuenta_terciario}>Añade tus datos personales</p>
+        <p className={`${classes.preguntaCuenta_terciario} titulo`}>Crea tu cuenta</p>
+        <p className={`${classes.preguntaCuenta_terciario} titulo`}>Añade tus datos personales</p>
         <form className={classes.formRegister} onSubmit={handleRegisterData}>
           <div className={`${classes.contenedorEmail} ${classes.contenedorEmail_secundario}`}>
             <Input
@@ -213,7 +213,7 @@ export default function Register({handleViewChange, setAlertMessage}) {
           </div>
           <div className={`${classes.contenedorPassword} ${classes.contenedorPassword_secundario}`}>
             <Input
-              type="number"
+              type="text"
               id="phone"
               name="phone"
               placeholder="Introduce tu número de teléfono"

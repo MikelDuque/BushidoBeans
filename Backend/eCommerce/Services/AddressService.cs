@@ -26,13 +26,9 @@ namespace eCommerce.Services
 
         public async Task<IEnumerable<AddressDto>> GetAllByUserIdAsync(long userId)
         {
-
-            List<Address> addresses = await _unitOfWork.AddressRepository
-                .GetQueryable()
-                .Where(a => a.UserId == userId)
-                .ToListAsync();
-
-            return _mapper.ToDto(addresses);
+            User thisUser = await _unitOfWork.UserRepository.GetByIdAsync(userId);
+            
+            return _mapper.ToDto(thisUser.Addresses);
         }
 
         public async Task<bool> CreateAddressAsync(AddressDto addressDto)

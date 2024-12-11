@@ -27,8 +27,8 @@ public class ProductController : ControllerBase
     return await _service.GetProductByIdAsync(id);
   }
 
-  [HttpGet("Filtered_Products")]
-  public async Task<Catalog> GetFilteredProducts([FromQuery]Filter filter)
+  [HttpPost("Filtered_Products")]
+  public async Task<Catalog> GetFilteredProducts([FromBody]Filter filter)
   {
     return await _service.GetFilteredProducts(filter);
   }
@@ -45,7 +45,7 @@ public class ProductController : ControllerBase
   {
     Claim userClaimId = User.FindFirst("id");
     if (userClaimId == null) return Unauthorized("Debes iniciar sesion para llevar a cabo esta accion");
-    Debug.WriteLine("hola" + new StreamReader(HttpContext.Request.Body, Encoding.UTF8).ReadToEndAsync());
+   
     return Ok(await _service.UpdateProductDetailsAsync(product));
   }
 

@@ -91,8 +91,7 @@ public class Program
             //Accedemos a la clase settings donde esta el get de JwtKey (Donde se encuentra nuestra clave)
             Settings settings = builder.Configuration.GetSection(Settings.SECTION_NAME).Get<Settings>()!;
             //nuestra clave se guarda en la variable key
-            string key = settings.JwtKey;
-            //string key = Environment.GetEnvironmentVariable("JWT_KEY");
+            string key = Environment.GetEnvironmentVariable("JWT_KEY");
 
             options.TokenValidationParameters = new TokenValidationParameters
             {
@@ -107,32 +106,16 @@ public class Program
         //por eso hay que habilitar Cors
 
         
-            builder.Services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(builder =>
-                {
-                    builder.AllowAnyOrigin()
-                    .AllowAnyHeader()
-                    .AllowAnyMethod();
-                });
-            });
-        
-
-
-        /*
-        if (builder.Environment.IsDevelopment())
+        builder.Services.AddCors(options =>
         {
-            builder.Services.AddCors(options =>
+            options.AddDefaultPolicy(builder =>
             {
-                options.AddDefaultPolicy(builder =>
-                {
-                    builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod();
-                });
+                builder.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
             });
-        }
-        */
+        });
+        
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
