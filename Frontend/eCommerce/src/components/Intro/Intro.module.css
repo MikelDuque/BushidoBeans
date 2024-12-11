@@ -1,4 +1,7 @@
 /* -----FONDO----- */
+.introHidden{
+  display: none;
+}
 .introDiv {
   display: flex;
   height: 99vh;
@@ -21,5 +24,17 @@
 @keyframes aparecerImagen {
   to {
       opacity: 1;
+  }
+}
+
+@media (max-width: 500px) {
+  .introDisplay {
+    display: none;
+  }
+  .introHidden{
+    display: flex;
+  }
+  .introImg {
+    width: 40%;
   }
 }
