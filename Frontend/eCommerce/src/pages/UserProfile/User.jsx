@@ -59,7 +59,7 @@ function User() {
                     <p><strong>Apellido:</strong> {user.surname}</p>
                     <p><strong>Email:</strong> {user.mail}</p>
                     <p><strong>Teléfono:</strong> {user.phone}</p>
-                    <p><strong>Rol:</strong> <span className="highlight">{user.role}</span></p>
+                    {user.role === "admin" && (<p><strong>Rol:</strong> <span className="highlight">{user.role}</span></p>)}
                 </div>
                 <button className="user-button" onClick={handleEditClick}>Editar Información</button>
             </div>

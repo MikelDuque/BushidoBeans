@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./UserOrders.css";
 import Sidebar from "../UserSidebar/Sidebar";
-import { GET_ORDERS_BY_USER_ID, GET_ORDER_BY_ID } from "../../../endpoints/config.js";
+import { GET_ORDERS_BY_USER_ID, GET_ORDER_BY_ID, API_BASE_URL } from "../../../endpoints/config.js";
 import { useAuth } from "../../../context/AuthContext.jsx";
 
 function UserOrders() {
@@ -76,7 +76,7 @@ function UserOrders() {
                             <div className="order-products">
                                 {order.orderProducts?.map((product) => (
                                     <div key={product.productId} className="order-product">
-                                        <img src={`https://localhost:7015/${product.image}`} alt={product.name} className="product-image" />
+                                        <img src={`${API_BASE_URL}${product.image}`} alt={product.name} className="product-image" />
                                         <p><strong>Producto:</strong> {product.name}</p>
                                         <p><strong>Cantidad:</strong> {product.quantity}</p>
                                         <p><strong>Precio:</strong> ${product.purchasePrice}</p>
