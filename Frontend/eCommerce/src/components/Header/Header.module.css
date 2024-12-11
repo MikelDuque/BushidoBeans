@@ -234,12 +234,6 @@ header {
 
   .hbutton {
     position: relative;
-    height: 40px;
-    width: 40px;
-    background-image: url('recursos/DesplD.png');
-    background-size: cover;
-    justify-self: left;
-    transition: 0.2s ease;
   }
 
   .hmenu {
@@ -253,6 +247,15 @@ header {
     text-align: center;
     padding: 5px;
     z-index: 1;
+  }
+
+  .hbutton {
+    height: 40px;
+    width: 40px;
+    background-image: url('recursos/DesplD.png');
+    background-size: cover;
+    justify-self: left;
+    transition: 0.2s ease;
   }
 
   .hbutton:hover {

@@ -3,6 +3,7 @@ import './CardProduct.css';
 import { getIntensidadImg } from '../../utils/intensidad';
 import AddToCartButton from "../AddToCartButton/AddToCart";
 import { API_BASE_URL } from '../../endpoints/config';
+import { API_BASE_URL } from '../../endpoints/config';
 export function CardProduct({ product }) {
     const navigate = useNavigate();
 
