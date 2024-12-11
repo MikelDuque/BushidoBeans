@@ -54,6 +54,7 @@ export default function App() {
 
             {/* ----- GENERAL LAYOUT ----- */}
             <Route path="/" element={<BigLayout/>}>
+                <Route index element={<Inicio />} />
                 <Route path="login_register" element={
                     <LoginPrivateRoute>
                         <Login_Register/>
