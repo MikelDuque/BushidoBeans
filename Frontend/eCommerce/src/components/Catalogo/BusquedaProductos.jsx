@@ -36,7 +36,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
         setTotalPaginas(data.totalPages); 
         
       } catch (error) {
-        setError("Hubo un error al cargar los productos.");
+        setError("Hubo un error al cargar los productos: ", error);
       } finally {
         setLoading(false);
       }

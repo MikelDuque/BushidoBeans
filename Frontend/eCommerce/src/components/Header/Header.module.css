@@ -40,15 +40,15 @@ header{
 .hLogo{
   height: 50px;
   width: 50px;
-  background-image: url(recursos/LogoD.png);
+  background-image: url("public/recursos/LogoD.png");
   background-size: cover;
   margin: 5px 15px 0;
 }
 .hLogo:hover{
-  background-image: url(recursos/LogoH.png);
+  background-image: url("/recursos/LogoH.png");
 }
 .hLogo:active{
-  background-image: url(recursos/LogoA.png);
+  background-image: url(/recursos/LogoA.png);
 }
 
 
