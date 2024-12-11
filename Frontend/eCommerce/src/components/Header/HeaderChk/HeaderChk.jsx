@@ -10,7 +10,7 @@ import Cart from "../../Modals/Shopping_Cart/Cart";
 
 import classes from './../Header.module.css';
 
-function Header() {
+function HeaderChk() {
 
   /* ----- HOOKS Y CONSTS ----- */
   const navigateTo = useNavigate();
@@ -151,4 +151,4 @@ const MenuDesplegable = () => {
   );
 };
 
-export default Header;
+export default HeaderChk;
