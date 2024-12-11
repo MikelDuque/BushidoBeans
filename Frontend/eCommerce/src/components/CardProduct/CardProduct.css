@@ -1,35 +1,34 @@
-.inventario{
+.inventario {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 1%;
   justify-items: center;
   padding: 10px;
-  
+  background-color: var(--fondo-vistas);
 
 }
 
-.CardProduct{
-  width: fit-content;
+.CardProduct {
+  width: 100%; /* Ajusta al 100% del contenedor */
+  max-width: 300px; /* Limita el ancho máximo */
   align-items: center;
   justify-items: center;
   display: grid;
-  grid-template-columns: auto-fit(2, 1fr);
+  grid-template-columns: 1fr;
   padding: 10px;
   border-radius: 12px;
   box-shadow: 0px 0px 10px hsla(96, 65%, 49%, 0.333);
   text-align: center;
-  background-color: var(--nav-footer);  
+  background-color: var(--nav-footer);
   gap: 12px;
   font-family: var(--font-family-texto);
   font-size: var(--texto-size);
   font-weight: var(--font-weight-regular);
   color: white;
-
   
-
 }
 
-.productName{
+.productName {
   font-family: var(--font-family-titulos-subtitulos);
   font-size: var(--subtitulos-size);
   font-weight: var(--font-weight-bold);
@@ -38,29 +37,24 @@
   grid-column: span 2;
 }
 
-
-
-
-.imgPrueba{
+.imgPrueba {
   height: auto;
   grid-column: span 2;
   align-items: center;
   border-radius: 10px;
-  width: 100%;
+  width: 100%; /* Asegura que no se salga del contenedor */
   display: block;
   margin: 0 auto;
   border: 1px solid black;
   box-shadow: 0px 0px 10px hsla(96, 65%, 49%, 0.333);
-  grid-column: span 2;
-
 }
 
-.iconos{
+.iconos {
   display: flex;
   gap: 5px;
 }
 
-.detalles{
+.detalles {
   display: flex;
   justify-content: space-between;
   font-family: var(--font-family-titulos-subtitulos);
@@ -70,13 +64,11 @@
   
 }
 
-.detalles2{
+.detalles2 {
   font-family: var(--font-family-titulos-subtitulos);
   font-size: var(--subtitulos-size);
   font-weight: var(--font-weight-regular);
 }
-
-
 
 .CardProduct.sold-out {
   color: #888;
@@ -97,7 +89,6 @@
   filter: grayscale();
   opacity: 0.8;
 }
-
 
 /* Estilos para el botón transparente sin borde */
 .botonCardClick {
@@ -125,13 +116,28 @@
   color: green; /* Cambia el texto a verde en hover */
 }
 
-.botonCardClick{
+.botonCardClick {
   background: transparent;
   border: none;
 }
-@media (max-width: 500px){
-  .imgPrueba{
-    height: auto;
-    width: 100%;
+
+@media (max-width: 600px) {
+  .CardProduct {
+    width: 90%; 
+    max-width: 280px; 
+    margin: 0 auto; 
+  }
+  .busqueda-wrapper{
+    background-color: var(--fondo-vistas);
+  }
+}
+
+@media (max-width: 360px) {
+
+  .CardProduct {
+    width: 100%; 
+    max-width: 250px; 
+    margin: 0 auto;
+
   }
 }

@@ -76,7 +76,7 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   }, [filtro, ordenar, productosPorPagina]);
 
   return (
-    <div>
+    <div className='busqueda-wrapper'>
       <div className='botonCentrado'>
         <input
           className='botonBusqueda'

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./UserOrders.css";
 import Sidebar from "../UserSidebar/Sidebar";
-import { API_BASE_URL, GET_ORDERS_BY_USER_ID, GET_ORDER_BY_ID } from "../../../endpoints/config.js";
+import { GET_ORDERS_BY_USER_ID, GET_ORDER_BY_ID, API_BASE_URL } from "../../../endpoints/config.js";
 import { useAuth } from "../../../context/AuthContext.jsx";
 
 function UserOrders() {

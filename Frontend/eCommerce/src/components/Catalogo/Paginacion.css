@@ -4,9 +4,7 @@
     align-items: center;
     list-style-type: none;
     padding: 0;
-    margin-top: 20px;
-
-    
+    margin-top: 20%;
 }
 
 .page-item {
@@ -57,3 +55,11 @@
     color: #ffffff;
     background-color: #3e8e41;  /* Fondo verde en hover */
 }
+
+@media (max-width: 600px) {
+    .pagination {
+        justify-content: center;        
+        margin-top: 95%;
+    }
+}
+
