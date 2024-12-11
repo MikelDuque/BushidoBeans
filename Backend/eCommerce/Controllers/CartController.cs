@@ -38,7 +38,7 @@ namespace eCommerce.Controllers
         [HttpPut("Update_Cart")]
         public async Task<ActionResult> UpdateCartAsync([FromBody] Cart cart)
         {
-            if (cart.Id == null || cart.Id == 0) return BadRequest(new { message = "No existe usuario con ese ID" });
+            if (cart.Id == null || cart.Id == 0) return BadRequest(new { message = "No existe carrito con ese ID" });
             return Ok(await _cartService.UpdateCartAsync(cart));
         }
 
@@ -46,7 +46,7 @@ namespace eCommerce.Controllers
         public ActionResult<bool> UpdateCartProductAsync([FromBody] UpdatedCartProduct cartProduct)
         {
             Claim userClaimId = User.FindFirst("id");
-            if (userClaimId == null) return Unauthorized("Debes iniciar sesión para llevar a cabo esta acción");
+            //if (userClaimId == null) return Unauthorized("Debes iniciar sesión para llevar a cabo esta acción");
 
             if (cartProduct == null) return BadRequest(new { message = "Datos del producto no válidos." });
             return Ok(_cartService.UpdateCartProductAsync(cartProduct));
