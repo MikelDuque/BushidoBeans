@@ -1,22 +1,20 @@
 /* -----GENERAL----- */
 footer{
+  display: flex;
   background: var(--nav-footer);
   font-family: 'Vollkorn', sans-serif;
   font-size: var(--texto-size);
   font-weight: var(--font-weight-regular);
   color: var(--letras-nav);
+  justify-content: space-between;
   padding: 10px;
-}
-.fContent{
-  display: flex;
-  justify-content: space-around;
 }
 
 /* -----LOGO----- */
 .fLogo{
   padding: 10px;
   height: 100px;
-  width: 240px;
+  min-width: 240px;
   margin: auto 0;
   background-image: url('recursos/FootLogoD.png');
   background-size: cover;
@@ -32,7 +30,7 @@ footer{
 
 /* -----REDES SOCIALES----- */
 .redes a{
-  padding: 5px 10px 0px;
+  padding: 5px 10px;
   display: flex;
   align-items: center;
   transition: transform 0.2s ease;
@@ -51,12 +49,13 @@ footer{
   color: var(--nav-click);
 }
 
+
 /* -----DERECHOS----- */
 .terms{
-  margin:  auto 0;
   text-align: center;
   padding: 10px;
   color: #fffdea8d;
+
 }
 .end {
   text-align: center;

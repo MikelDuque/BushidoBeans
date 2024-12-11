@@ -11,11 +11,9 @@ const ScrollIntro = () => {
 
         const timer = setTimeout(() => {
             window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
-            setTimeout(() => {
-                setEsVisible(false);
-                window.scrollTo({ top: 0 });
-                document.body.style.overflow = '';
-            }, 450);     //Tiempo de animación
+            setTimeout(() => { setEsVisible(false);
+            window.scrollTo({top: 0});
+            document.body.style.overflow = ''; }, 450);     //Tiempo de animación
         }, 3500);   //Delay antes de animación
 
         return () => clearTimeout(timer);
@@ -24,20 +22,11 @@ const ScrollIntro = () => {
 
     return (
         <div>
-            <div className={classes.introDisplay}>
-                {esVisible && (
-                    <div className={classes.introDiv}>
-                        <img className={classes.introImg} src='../recursos/LogoIntro.png' />
-                    </div>
-                )}
-            </div>
-            <div className={classes.introHidden}>
-                {esVisible && (
-                    <div className={classes.introDiv}>
-                        <img className={classes.introImg} src='../recursos/LogoD.png' />
-                    </div>
-                )}
-            </div>
+            {esVisible && (
+                <div className={classes.introDiv}>
+                    <img className={classes.introImg} src='/recursos/LogoIntro.png'/>
+                </div>
+            )}
         </div>
     );
 };
