@@ -232,4 +232,36 @@ header {
     background-image: url(Footrecursos/LogoA.png);
   }
 
+  .hbutton{
+    position: relative;
+  }
+  .hmenu{
+    display: grid;
+    grid-column: 1;
+    position: absolute;
+    top: 5rem;
+    left: 0;
+    background-color: var(--nav-footer);
+    width: 100%;
+    text-align: center;
+    padding: 5px;
+    z-index: 1;
+  }
+  .hbutton{
+    height: 40px;
+    width: 40px;
+    background-image: url(recursos/DesplD.png);
+    background-size: cover;
+    justify-self: left;
+    transition: 0.2s ease;
+  }
+  .hbutton:hover {
+    transform: scale(1.05);
+    background-image: url(recursos/DesplH.png);
+  }
+  
+  .hbutton:active {
+    background-image: url(recursos/DesplA.png);
+    
+  }
 }

@@ -143,16 +143,14 @@ const MenuDesplegable = () => {
 
   return (
     <div>
-      <button onClick={toggleMenu} className={classes.boton}>
-        Menu
-      </button>
+      <div onClick={toggleMenu} className={classes.hbutton}/>
 
       {isOpen && (
-        <div className={classes.menu}>
-          <NavLink className={classes.nl} to="/catalogo">Café</NavLink>
-          <NavLink className={classes.nl} to="/catalogo">Té</NavLink>
-          <NavLink className={classes.nl} to="/catalogo">Tienda</NavLink>
-          <NavLink className={classes.nl} to="/sobreNosotros">Nosotros</NavLink>
+        <div className={classes.hmenu}>
+          <NavLink className={classes.nl} to="/catalogo" onClick={toggleMenu}>Café</NavLink>
+          <NavLink className={classes.nl} to="/catalogo" onClick={toggleMenu}>Té</NavLink>
+          <NavLink className={classes.nl} to="/catalogo" onClick={toggleMenu}>Tienda</NavLink>
+          <NavLink className={classes.nl} to="/sobreNosotros" onClick={toggleMenu}>Nosotros</NavLink>
         </div>
       )}
     </div>
