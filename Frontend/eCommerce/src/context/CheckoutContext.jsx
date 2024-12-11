@@ -20,14 +20,7 @@ export function CheckoutProvider({ children }) {
     totalProducts: 0,
     orderProducts: [],
     userId: decodedToken?.id || 0,
-    addressId: 0,
-    address: {
-      id: 0,
-      addressee: null,
-      phoneNumber: 0,
-      addressInfo: null,
-      userId: 0
-    }
+    addressId: 0
   });
 
   useEffect(() => {
@@ -39,48 +32,24 @@ export function CheckoutProvider({ children }) {
   // Función para cambiar el estado de la vista
   const handleButtonClick = (view) => {
     setCurrentView(view);
+
+    if(view === 'confirm') sendOrder();
   };
 
-  function handleOrder(newOrder) {
-    setOrder(newOrder);
-  }
-
   function handleOrderProducts() {
-    const orderProducts = [];
-
-    cart.map((cartItem) => {
-      orderProducts.push({
-        orderId: 0,
-        productId: cartItem.productId,
-        image: cartItem.image,
-        name: cartItem.name,
-        purchasePrice: cartItem.price,
-        quantity: cartItem.quantity
-      })
-    })
-
-    setOrder(estadoPrevio => ({
-      ...estadoPrevio,
-      orderProducts: [...orderProducts]
-    }))
-
-
-    /*
     let orderProducts = [];
 
     cart.forEach((cartItem) => {
-      orderProducts = [...cart, {
-        ...cartItem,
-        purchasePrice: cartItem.price
-      }]
-    });
+    orderProducts = [...cart, {
+      ...cartItem,
+      purchasePrice: cartItem.price
+    }]});
 
     setOrder(estadoPrevio => ({
       ...estadoPrevio,
       orderProducts: [...orderProducts]
 
     }));
-    */
 
     /*
     setOrder(estadoPrevio => ({
@@ -102,10 +71,6 @@ export function CheckoutProvider({ children }) {
   }
 
   function handleSelectedAddress(id) {
-    console.log("id direcciones", id);
-    console.log("carrito", cart);
-    
-    
     setOrder(estadoPrevio => ({
       ...estadoPrevio,
       addressId: id
@@ -120,12 +85,13 @@ export function CheckoutProvider({ children }) {
 
   //FETCHING
   async function sendOrder() {
-    console.log("order a entregar", order);
+    console.log("order", order);
     
+
     const postedOrder = await fetchingData({url: POST_ORDER, type: 'POST', token: token, params:order, needAuth:true});
 
     console.log("posted", postedOrder);
-    if (postedOrder) handleOrder(postedOrder);
+    
   };
 
 
@@ -136,8 +102,7 @@ export function CheckoutProvider({ children }) {
     order,
     handleButtonClick,
     calculateShipping,
-    handleSelectedAddress,
-    handleOrder
+    handleSelectedAddress
   };
 
   return (<CheckoutContext.Provider value={ctxValue}> {children} </CheckoutContext.Provider>);

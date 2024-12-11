@@ -6,10 +6,10 @@ import BusquedaProductos from "../../components/Catalogo/BusquedaProductos.jsx";
 
 function Catalogo() {
   const imagenes = [
-    "recursos/imgCarrusel1.png",
-    "recursos/imgCarrusel3.jpg",
-    "recursos/imgCarrusel4.jpg",
-    "recursos/imgCarrusel2.jpg",
+    "../../public/recursos/imgCarrusel1.png",
+    "../../public/recursos/imgCarrusel2.jpg",
+    "../../public/recursos/imgCarrusel3.jpg",
+    "../../public/recursos/imgCarrusel4.jpg",
   ];
 
   const [filtro, setFiltro] = useState('0');

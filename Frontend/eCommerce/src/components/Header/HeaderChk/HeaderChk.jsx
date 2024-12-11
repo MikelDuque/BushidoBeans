@@ -1,17 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-
 import { useAuth } from '../../../context/AuthContext';
-
 
 import classes from './../Header.module.css';
 
 function HeaderChk() {
 
   /* ----- HOOKS Y CONSTS ----- */
-
   const { token, decodedToken, handleLogout } = useAuth();
-
 
   return (
     <header>
@@ -64,7 +60,6 @@ function HeaderChk() {
             <NavLink className={`${classes.nl} ${classes.btnc}`} to="/login_register"> Login </NavLink>
           )}
         </div>
-
       </nav>
     </header>
   );

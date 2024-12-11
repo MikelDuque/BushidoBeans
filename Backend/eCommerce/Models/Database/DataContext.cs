@@ -24,7 +24,7 @@ public class DataContext : DbContext
         optionsBuilder.EnableSensitiveDataLogging();
 
         string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-        string connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+        string connectionString = "Server=db10882.databaseasp.net; Database=db10882; Uid=db10882; Pwd=9q-Nx%Y48An!;";
 
         #if DEBUG
         optionsBuilder.UseSqlite($"DataSource={baseDir}{DATABASE_PATH}");

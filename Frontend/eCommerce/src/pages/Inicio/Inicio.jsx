@@ -1,7 +1,28 @@
+import React, { useEffect, useState } from "react";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
+import ScrollIntro from "../../components/Intro/Intro";
 import classes from './Inicio.module.css';
 
 
 function Inicio() {
+  const [hasScrolledIntro, setHasScrolledIntro] = useState(false);
+
+  useEffect(() => {
+    const introShown = sessionStorage.getItem("hasScrolledIntro");
+
+    if (introShown === "true") {
+      document.body.style.overflow = "";
+      setHasScrolledIntro(true);
+    } else {
+      setTimeout(() => {
+        sessionStorage.setItem("hasScrolledIntro", "true");
+        setHasScrolledIntro(true);
+      }, 4000);
+    }
+  }, []);
+
+
   return (
     <>
       <div className={classes.container}>

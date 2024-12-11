@@ -2,7 +2,6 @@
   "name": "ecommerce",
   "private": true,
   "version": "0.0.0",
-  "homepage": "bushido-beans.vercel.app",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "cors": "^2.8.5",
     "framer-motion": "^11.11.10",
     "install": "^0.13.0",
     "jwt-decode": "^4.0.0",
