@@ -1,4 +1,4 @@
-import "../../pages/sobreNosotros/SobreNosotros.css";
+import "../../pages/SobreNosotros/SobreNosotros.css";
 
 function Maps(direccion){
     return (
