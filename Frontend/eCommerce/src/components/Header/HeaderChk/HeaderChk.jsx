@@ -16,9 +16,9 @@ function Header() {
   const navigateTo = useNavigate();
 
   const { token, decodedToken, handleLogout } = useAuth();
-  const { openModal, closeModal } = useModal();
+  const { closeModal } = useModal();
 
-  const { deleteCart, totalProducts } = useCart();
+  const { deleteCart } = useCart();
 
 
   return (
