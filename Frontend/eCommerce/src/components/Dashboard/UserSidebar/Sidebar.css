@@ -1,5 +1,5 @@
 .user-sidebar {
-    position: sticky; 
+   
     top: 0; 
     width: 250px; 
     height: 70vh; 
@@ -58,7 +58,7 @@
         width: 100%; 
         height: 20vh;
         flex-direction: row; 
-        overflow-x: hidden;
+        overflow: hidden;
     }
 
     .user-sidebar ul {
