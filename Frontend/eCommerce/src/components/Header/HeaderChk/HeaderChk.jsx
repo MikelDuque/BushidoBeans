@@ -1,9 +1,8 @@
+import classes from '../Header.module.css';
 import { useState, useRef, useEffect } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-
-import { useModal } from "../../../context/ModalContext";
-import { useCart } from '../../../context/CartContext';
 import { useAuth } from '../../../context/AuthContext';
+import { NavLink } from "react-router-dom";
+
 
 import Modal from '../../Modals/Modal';
 import Cart from "../../Modals/Shopping_Cart/Cart";
@@ -24,79 +23,28 @@ function HeaderChk() {
   return (
     <header>
       <nav>
+        <NavLink className={`${classes.nl} ${classes.hLogo}`} to="/" end />
+        <NavLink className={`${classes.nl} ${classes.btn}`} to="/catalogo"> Café </NavLink>
+        <NavLink className={`${classes.nl} ${classes.btn}`} to="/catalogo"> Té </NavLink>
+        <NavLink className={`${classes.nl} ${classes.btn}`} to="/catalogo"> Tienda </NavLink>
+        <NavLink className={`${classes.nl} ${classes.btn}`} to="/sobreNosotros"> Nosotros </NavLink>
 
-        <div className={classes.hDisplay}>
-          <NavLink className={`${classes.nl} ${classes.hLogo}`} to="/" end />
-          <div className={classes.btns1}>
-            <NavLink className={classes.nl} to="/catalogo"> Café </NavLink>
-            <NavLink className={classes.nl} to="/catalogo"> Té </NavLink>
-            <NavLink className={classes.nl} to="/catalogo"> Tienda </NavLink>
-            <NavLink className={classes.nl} to="/sobreNosotros"> Nosotros </NavLink>
-          </div><div></div>
-
-          {token ? (
-            <Desplegable handleLogout={handleLogout} decodedToken={decodedToken} />
-          ) : (
-            <NavLink className={`${classes.nl} ${classes.btnc}`} to="/login_register"> Login </NavLink>
-          )}
-        </div>
-
-
-        <div className={classes.hHidden}>
-          <div className={classes.btns2}>
-          <NavLink className={`${classes.nl} ${classes.hLogo}`} to="/" end />
-
-          {token ? (
-            <Desplegable handleLogout={handleLogout} decodedToken={decodedToken} />
-          ) : (
-            <NavLink className={`${classes.nl} ${classes.btnc}`} to="/login_register"> Login </NavLink>
-          )}</div>
-
-          <div className={classes.btns1}>
-            <NavLink className={classes.nl} to="/catalogo"> Café </NavLink>
-            <NavLink className={classes.nl} to="/catalogo"> Té </NavLink>
-            <NavLink className={classes.nl} to="/catalogo"> Tienda </NavLink>
-            <NavLink className={classes.nl} to="/sobreNosotros"> Nosotros </NavLink>
-          </div>
-        </div>
-
-        <div className={classes.hMovil}>
-          
-          <NavLink className={`${classes.nl} ${classes.hLogo}`} to="/" end />
-          
-          <MenuDesplegable/>
-
-          {token ? (
-            <Desplegable handleLogout={handleLogout} decodedToken={decodedToken} />
-          ) : (
-            <NavLink className={`${classes.nl} ${classes.btnc}`} to="/login_register"> Login </NavLink>
-          )}
-        </div>
-
-
+        {token ? (
+          <Desplegable handleLogout={handleLogout} decodedToken={decodedToken}/>
+        ) : (
+          <NavLink className={`${classes.nl} ${classes.btnc}`} to="/login_register"> Login </NavLink>
+        )}
       </nav>
-
-      <Modal type="cart" titulo={"Tu Carro"} cancelFnc={deleteCart} continueFnc={() => navigateTo('/checkout')} buttonValues={{ continueVal: "Procesar compra", cancelVal: "Vaciar carro" }}>
-        <Cart closeCart={closeModal} />
-      </Modal>
-
     </header>
   );
 }
 
 
-// -----DESPLEGABLES----- //
+// -----DESPLEGABLE----- //
 
-const Desplegable = ({ handleLogout, decodedToken }) => {
+const Desplegable = ({ handleLogout }) => {
   const [abierto, setAbierto] = useState(false);
   const desplegableRef = useRef(null);
-
-  useEffect(() => {
-    document.addEventListener('mousedown', clickFuera);
-    return () => {
-      document.removeEventListener('mousedown', clickFuera);
-    };
-  }, []);
 
   const abrirDesplegable = () => {
     setAbierto((prev) => !prev);
@@ -108,25 +56,27 @@ const Desplegable = ({ handleLogout, decodedToken }) => {
     }
   };
 
-  function adminView() {
-    if (decodedToken?.role === "admin") {
-      return (<NavLink className={`${classes.dnl} ${classes.desplOpcion}`} to="/vistaAdmin">Administración</NavLink>);
-    }
-  }
+  useEffect(() => {
+    document.addEventListener('mousedown', clickFuera);
+    return () => {
+      document.removeEventListener('mousedown', clickFuera);
+    };
+  }, []);
 
   return (
     <div className={classes.despl} ref={desplegableRef}>
       <div className={`${classes.desplToggle} ${abierto ? 'active' : ''}`} onClick={abrirDesplegable} />
       {abierto && (
         <div className={classes.desplMenu}>
-          <NavLink className={`${classes.dnl} ${classes.desplOpcion}`} to="/user">Ver Perfil</NavLink>
-          {adminView()}
+          <NavLink className={`${classes.dnl} ${classes.desplOpcion}`} to="">Ver Perfil</NavLink>
+          <NavLink className={`${classes.dnl} ${classes.desplOpcion}`} to="">Administración</NavLink>
           <div className={classes.desplOpcion} onClick={handleLogout}>Cerrar Sesión</div>
         </div>
       )}
     </div>
   );
 };
+
 
 const MenuDesplegable = () => {
   const [isOpen, setIsOpen] = useState(false);

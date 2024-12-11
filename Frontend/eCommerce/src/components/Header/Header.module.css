@@ -1,88 +1,78 @@
 /* -----GENERAL----- */
-header {
+header{
   background-color: var(--nav-footer);
+  height: 60px;
   font-family: 'Poppins', sans-serif;
   font-size: var(--titulos-size);
   font-weight: var(--font-weight-bold);
+  position: relative;
 }
 
-.hDisplay {
-  display: grid;
-  grid-template-columns: 1fr 10fr 8fr 1fr 1fr;
-  align-items: center;
-  padding: 5px 10px;
-  gap: 2rem;
-}
-
-.hHidden,
-.hMovil {
-  display: none;
-}
 
 /* -----BOTONES DEL HEADER----- */
-.nl {
+.nl{
+  display: inline-flex;
   color: var(--letras-nav);
   text-decoration: none;
   transition: 0.2s ease;
-  padding: 0px 10px;
 }
-
-.nl:hover {
+.nl:hover{
   transform: scale(1.05);
   color: var(--nav-hover);
 }
-
 .nl:active {
   color: var(--nav-click);
 }
-
-.btns1 {
-  display: flex;
-  gap: 3rem;
-  justify-self: left;
+.btn{
+  position: relative;
+  bottom: 15px;
+  margin: 0 60px;
 }
+.btnc{
+  position: absolute;
+  top: 13px;
+  right: 70px;
+  margin: 0 30px;
+}
+
 
 /* -----LOGO----- */
-.hLogo {
-  height: 45px;
-  width: 45px;
-  background-image: url('recursos/LogoD.png');
+.hLogo{
+  height: 50px;
+  width: 50px;
+  background-image: url("/recursos/LogoD.png");
   background-size: cover;
-  justify-self: right;
+  margin: 5px 15px 0;
 }
-
-.hLogo:hover {
-  background-image: url('recursos/LogoH.png');
+.hLogo:hover{
+  background-image: url("/recursos/LogoH.png");
 }
-
-.hLogo:active {
-  background-image: url('recursos/LogoA.png');
+.hLogo:active{
+  background-image: url("/recursos/LogoA.png");
 }
 
 
 /* -----BOTON DESPLEGABLE----- */
 .despl {
-  position: relative;
-  justify-self: right;
+  position: absolute;
+  top: 10px;
+  right: 70px;
+  margin: 0 30px;
 }
-
 .desplToggle {
   height: 40px;
   width: 40px;
-  background-image: url('recursos/PerfilD.png');
+  background-image: url("/recursos/PerfilD.png");
   background-size: cover;
   transition: 0.2s ease;
 }
-
-.desplToggle:hover {
+.desplToggle:hover{
   transform: scale(1.05);
-  background-image: url('recursos/PerfilH.png');
+  background-image: url("/recursos/PerfilH.png");
 }
-
-.desplToggle:active,
-.desplToggle.active {
+.desplToggle:active, .desplToggle.active{
   transform: scale(1.05);
-  background-image: url('recursos/PerfilA.png');
+  background-image: url("/recursos/PerfilA.png");
 }
 
 
@@ -90,7 +80,7 @@ header {
 .desplMenu {
   position: absolute;
   top: 130%;
-  left: -9.5rem;
+  left: -45px;
   background-color: #295026;
   border: 1px solid #203E1D;
   border-radius: 5px;
@@ -100,51 +90,44 @@ header {
   color: var(--letras-nav);
   z-index: 1000;
 }
-
 .desplOpcion {
   display: block;
   padding: 10px;
   cursor: pointer;
   transition: 0.2s ease;
 }
-
 .desplOpcion:hover {
   color: var(--nav-hover);
 }
-
 .desplOpcion:active {
   color: var(--nav-click);
 }
-
-.dnl {
+.dnl{
   text-decoration: none;
   color: inherit;
 }
 
 
 /* -----BOTON CESTA----- */
-.cesta {
+.cesta{
   height: 50px;
   width: 50px;
-  background-image: url('recursos/CestaD.png');
+  background-image: url("/recursos/CestaD.png");
   background-size: cover;
-  justify-self: right;
+  position: absolute;
+  top: 5px;
+  right: 20px;
 }
-
-.cesta:hover {
-  background-image: url('recursos/CestaH.png');
+.cesta:hover{
+  background-image: url("/recursos/CestaH.png");
 }
-
-.cesta:active {
-  background-image: url('recursos/CestaA.png');
+.cesta:active{
+  background-image: url("/recursos/CestaA.png");
 }
-
-
 .cesta[data-count="0"]::after {
   content: "";
   visibility: hidden;
 }
-
 .cesta::after {
   content: attr(data-count);
   position: absolute;
@@ -162,55 +145,7 @@ header {
   height: 20px;
 }
 
-@media (max-width: 705px) {
-  .hDisplay {
-    display: none;
-  }
 
-  .hHidden {
-    display: block;
-  }
-
-  .btns2 {
-    display: grid;
-    grid-template-columns: 3fr 7fr 1fr;
-    align-items: center;
-    padding: 5px 10px;
-    gap: 2rem;
-  }
-
-  .btns1 {
-    display: flex;
-    justify-content: center;
-    width: 99%;
-    padding: 5px;
-  }
-
-  .hLogo {
-    height: 6rem;
-    width: 15rem;
-    background-image: url('recursos/FootLogoD.png');
-    background-size: cover;
-    justify-self: left;
-  }
-
-  .hLogo:hover {
-    background-image: url('recursos/FootLogoH.png');
-  }
-
-  .hLogo:active {
-    background-image: url('recursos/FootLogoA.png');
-  }
-}
-
-@media (max-width: 475px) {
-  .hMovil {
-    display: flex;
-    align-items: center;
-    padding: 5px 10px;
-    justify-content: center;
-    gap: 3rem;
-  }
 
   .hHidden {
     display: none;
@@ -264,4 +199,3 @@ header {
     background-image: url('recursos/DesplA.png');
     
   }
-}
