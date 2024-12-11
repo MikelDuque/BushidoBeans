@@ -1,25 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-
-import { useModal } from "../../../context/ModalContext";
-import { useCart } from '../../../context/CartContext';
+import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
-
-import Modal from '../../Modals/Modal';
-import Cart from "../../Modals/Shopping_Cart/Cart";
 
 import classes from './../Header.module.css';
 
 function HeaderChk() {
 
   /* ----- HOOKS Y CONSTS ----- */
-  const navigateTo = useNavigate();
-
   const { token, decodedToken, handleLogout } = useAuth();
-  const { openModal, closeModal } = useModal();
-
-  const { deleteCart, totalProducts } = useCart();
-
 
   return (
     <header>
@@ -72,14 +60,7 @@ function HeaderChk() {
             <NavLink className={`${classes.nl} ${classes.btnc}`} to="/login_register"> Login </NavLink>
           )}
         </div>
-
-
       </nav>
-
-      <Modal type="cart" titulo={"Tu Carro"} cancelFnc={deleteCart} continueFnc={() => navigateTo('/checkout')} buttonValues={{ continueVal: "Procesar compra", cancelVal: "Vaciar carro" }}>
-        <Cart closeCart={closeModal} />
-      </Modal>
-
     </header>
   );
 }
