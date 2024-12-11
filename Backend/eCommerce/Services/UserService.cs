@@ -119,6 +119,6 @@ public class UserService
 
   public Task<User> GetByMailAsync(string mail)
   {
-    return _unitOfWork.UserRepository.GetByMailAsync(mail.ToLowerInvariant());
+    return _unitOfWork.UserRepository.GetByMailAsync(mail);
   }
 }
