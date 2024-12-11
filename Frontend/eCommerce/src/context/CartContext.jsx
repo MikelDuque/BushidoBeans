@@ -43,7 +43,11 @@ export function CartProvider({ children }) {
     }, [decodedToken]);
 
     useEffect(() => {  
-        if(token && fetchData) getBackendCart();
+        if(token && fetchData) {
+            getBackendCart()
+        } else {
+            setCart(getLocalCart());
+        }
 
     }, [token, fetchData]);
     

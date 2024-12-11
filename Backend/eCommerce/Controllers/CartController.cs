@@ -28,7 +28,6 @@ namespace eCommerce.Controllers
             Claim userClaimId = User.FindFirst("id");
             if (userClaimId == null) return Unauthorized("Debes iniciar sesión para llevar a cabo esta acción");
 
-
             if (id == null || id == 0) return BadRequest(new { message = "No existe usuario con ese ID" });
             List<CartProductDto> cartList = await _cartService.GetCartByIdAsync(id);
             if (cartList.IsNullOrEmpty()) return BadRequest(new {message = "El carrito está vacío"});
