@@ -12,8 +12,8 @@ public class OrderProductMapper
        {
            OrderId = orderProduct.OrderId,
            ProductId = orderProduct.ProductId,
-           Image = orderProduct.Product.Image,
-           Name = orderProduct.Product.Name,
+           Image = orderProduct.Product?.Image,
+           Name = orderProduct.Product?.Name,
            PurchasePrice = orderProduct.PurchasePrice,
            Quantity = orderProduct.Quantity
        };
