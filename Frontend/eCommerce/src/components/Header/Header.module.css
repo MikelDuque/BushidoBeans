@@ -124,6 +124,7 @@ header {
 
 /* -----BOTON CESTA----- */
 .cesta {
+  position: relative;
   height: 50px;
   width: 50px;
   background-image: url('recursos/CestaD.png');
