@@ -31,7 +31,8 @@ const BusquedaProductos = ({
           productsPerPage: productosPorPagina,
           currentPage: paginaActual,
         };
-
+            console.log('ave?', backendFilter);
+           console.log('2', filtro)
         const response = await fetch(GET_FILTERED_PRODUCTS, {
           method: 'POST',
           headers: {
@@ -84,8 +85,8 @@ const BusquedaProductos = ({
 };
 
 BusquedaProductos.propTypes = {
-  filtro: PropTypes.string.isRequired,
-  ordenar: PropTypes.string.isRequired,
+  filtro: PropTypes.number.isRequired,
+  ordenar: PropTypes.number.isRequired,
   productosPorPagina: PropTypes.number.isRequired,
   paginaActual: PropTypes.number.isRequired,
   setTotalPaginas: PropTypes.func.isRequired,
