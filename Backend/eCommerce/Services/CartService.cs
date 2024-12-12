@@ -28,6 +28,7 @@ public class CartService
     {
         foreach (UpdatedCartProduct cartProduct in cart.CartProducts)
         {
+            cartProduct.UserId = cart.Id;
             await UpdateOrInsertCartProductAsync(cartProduct);
         }
 
@@ -51,9 +52,10 @@ public class CartService
     /* ----- DELETE ----- */
     public async Task<bool> DeleteCartAsync(long id)
     {
-        User user = await _unitOfWork.UserRepository.GetByIdAsync(id);
+        User userDB = await _unitOfWork.UserRepository.GetByIdAsync(id);
 
-        foreach (CartProduct cartProduct in user.CartProducts.ToList())
+        
+        foreach (CartProduct cartProduct in userDB.CartProducts.ToList())
         {
             _unitOfWork.CartProductRepository.Delete(cartProduct);
         }

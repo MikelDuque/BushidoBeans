@@ -24,15 +24,17 @@ namespace eCommerce.Controllers
             Claim userClaimId = User.FindFirst("id");
             if (userClaimId == null) return Unauthorized(new {Message = "Debes iniciar sesión para llevar a cabo esta acción"});
 
+            if (id <= 0) return BadRequest(new {Message= "El ID del pedido es inválido."});
             return Ok(await _orderService.GetOrderByIdAsync(id));
         }
         
         [HttpPost("Insert_Order")]
-        public async Task<ActionResult> PostOrder([FromBody]OrderDto order)
+        public async Task<ActionResult> InsertOrder([FromBody]OrderDto order)
         {
             Claim userClaimId = User.FindFirst("id");
             if (userClaimId == null) return Unauthorized(new {Message = "Debes iniciar sesión para llevar a cabo esta acción"});
 
+            if (order == null) return BadRequest(new {message = "El pedido a introducir es Incorrecto" });
             return Ok(await _orderService.InsertOrderAsync(order));
         }
 
@@ -40,8 +42,9 @@ namespace eCommerce.Controllers
         public async Task<ActionResult> GetOrdersByUserIdAsync(long id)
         {
             Claim userClaimId = User.FindFirst("id");
-            if (userClaimId == null) return Unauthorized(new {Message = "Debes iniciar sesión para llevar a cabo esta acción"});
+            if (userClaimId == null) return Unauthorized(new { Message = "Debes iniciar sesión para llevar a cabo esta acción" });
 
+            if (id <= 0) return BadRequest(new {Message= "El ID introducido es inválido."});
             return Ok(await _orderService.GetOrdersByUserIdAsync(id));
         }
 

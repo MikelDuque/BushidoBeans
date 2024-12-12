@@ -22,15 +22,17 @@ public class ProductController : ControllerBase
     }
   
   [HttpGet("{id}")]
-  public async Task<ProductDto> GetProductByIdAsync(long id)
+  public async Task<ActionResult> GetProductByIdAsync(long id)
   {
-    return await _service.GetProductByIdAsync(id);
+    if (id <= 0) return BadRequest(new {Message= "El ID del usuario es inválido."});
+    return Ok(await _service.GetProductByIdAsync(id));
   }
 
-  [HttpGet("Filtered_Products")]
-  public async Task<Catalog> GetFilteredProducts([FromQuery]Filter filter)
+  [HttpPost("Filtered_Products")]
+  public async Task<ActionResult> GetFilteredProducts([FromBody]Filter filter)
   {
-    return await _service.GetFilteredProducts(filter);
+    if (filter == null) return BadRequest(new {Message= "El filtro introducido es inválido."});
+    return Ok(await _service.GetFilteredProducts(filter));
   }
 
   [HttpGet("Get_Products")]
@@ -41,11 +43,12 @@ public class ProductController : ControllerBase
 
   [Authorize(Roles = "admin")]
   [HttpPut("Update_Product")]
-  public async Task<ActionResult<ProductDto>> UpdateProductAsync([FromBody]ProductDto product)
+  public async Task<ActionResult> UpdateProductAsync([FromBody]ProductDto product)
   {
     Claim userClaimId = User.FindFirst("id");
     if (userClaimId == null) return Unauthorized("Debes iniciar sesion para llevar a cabo esta accion");
-    Debug.WriteLine("hola" + new StreamReader(HttpContext.Request.Body, Encoding.UTF8).ReadToEndAsync());
+   
+    if (product == null) return BadRequest(new {Message= "El producto a actualizar es inválido."});
     return Ok(await _service.UpdateProductDetailsAsync(product));
   }
 
@@ -55,6 +58,8 @@ public class ProductController : ControllerBase
   {
     Claim userClaimId = User.FindFirst("id");
     if (userClaimId == null) return Unauthorized("Debes iniciar sesi�n para llevar a cabo esta acci�n");
+
+    if (product == null) return BadRequest(new {Message= "El producto a crear es inválido."});
     return Ok(await _service.CreateProductAsync(product));
   }
 }
