@@ -16,6 +16,10 @@ function ConfirmarPedido() {
 
   
   useEffect(() => {
+    console.log("order", order);
+    
+    console.log("postedOrder", postedOrder);
+    
     if(!postedOrder) {
       setPostedOrder(fetchData)
       deleteCart(order.userId)
