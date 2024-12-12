@@ -45,3 +45,21 @@
   scrollbar-width: none;
 }
 
+@media (max-width: 425px){
+  .leftSide{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .leftSide button{
+    width: 40%;
+  }
+  .review_list{
+    display: flex;
+    flex-direction: column;
+    
+  }
+  .review{
+    
+  }
+}

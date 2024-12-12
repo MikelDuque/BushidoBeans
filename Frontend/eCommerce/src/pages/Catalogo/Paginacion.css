@@ -55,11 +55,19 @@
     color: #ffffff;
     background-color: #3e8e41;  /* Fondo verde en hover */
 }
-
+@media (max-width: 768px){
+    .pagination{
+        margin-bottom: 10%;
+    }
+}
 @media (max-width: 600px) {
     .pagination {
         justify-content: center;        
         margin-top: 95%;
     }
 }
-
+@media (max-width: 320px){
+    .pagination{
+        margin-bottom: 20%;
+    }
+}
