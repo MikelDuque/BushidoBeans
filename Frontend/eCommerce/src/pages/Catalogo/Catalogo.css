@@ -49,6 +49,10 @@
         justify-content: center;
         margin-bottom: 15px;
     }
+    .inventario {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1%;
+    }
 }
 /* Diseño responsive para max-width 750px */
 @media (max-width: 750px) {
@@ -81,7 +85,7 @@
 }
 
 /* Diseño responsive para max-width 600px */
-@media (max-width: 600px) {
+@media (max-width: 425px) {
     .contenedor-catalogo {
         padding: 4%;
     }
@@ -108,12 +112,21 @@
         flex-direction: column;
         align-items: center;
     }
+    .inventario {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1%;
+    }
 }
-
+@media (max-width: 375px){
+    .inventario {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1%;
+    }
+}
 /* Diseño responsive para max-width 360px */
-@media (max-width: 360px) {
+@media (max-width: 320px) {
     .contenedor-catalogo {
-        padding: 5%;
+        padding: 3%;
     }
 
     .carrusel-catalogo {
@@ -133,9 +146,11 @@
         align-items: stretch;
         gap: 10px;
     }
-
-    .contenedor-catalogo aside {
-        margin-bottom: 25px;
-        padding: 0;
+    .sectionFloat{
+        margin-bottom: 170%;
+    }
+    .inventario {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2%;
     }
 }

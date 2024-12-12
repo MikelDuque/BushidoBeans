@@ -3,15 +3,14 @@ import ReactPaginate from 'react-paginate';
 import BusquedaProductos from '../../components/Catalogo/BusquedaProductos.jsx';
 import Carrusel from '../../components/Catalogo/Carrusel/Carrusel.jsx';
 import Filtro from '../../components/Catalogo/Filtro/Filtro.jsx';
-import "./Paginacion.css"
 import './Catalogo.css';
-
+import "./Paginacion.css"
 function Catalogo() {
   const imagenes = [
-    "../../public/recursos/imgCarrusel1.png",
-    "../../public/recursos/imgCarrusel2.jpg",
-    "../../public/recursos/imgCarrusel3.jpg",
-    "../../public/recursos/imgCarrusel4.jpg",
+    'recursos/imgCarrusel1.png',
+    'recursos/imgCarrusel3.jpg',
+    'recursos/imgCarrusel4.jpg',
+    'recursos/imgCarrusel2.jpg',
   ];
 
   const [filtro, setFiltro] = useState('0');
@@ -63,7 +62,7 @@ function Catalogo() {
                 { value: '5', label: '5 productos' },
                 { value: '10', label: '10 productos' },
                 { value: '20', label: '20 productos' },
-                { value: '30', label: '30 productos' },
+                // { value: '30', label: '30 productos' },
               ]}
               label='Mostrar'
               onChange={setProductosPorPagina}

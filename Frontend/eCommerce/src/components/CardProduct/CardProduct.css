@@ -5,12 +5,12 @@
   justify-items: center;
   padding: 10px;
   background-color: var(--fondo-vistas);
-
+ 
 }
 
 .CardProduct {
-  width: 100%; /* Ajusta al 100% del contenedor */
-  max-width: 300px; /* Limita el ancho máximo */
+  width: 100%; 
+  max-width: 300px; 
   align-items: center;
   justify-items: center;
   display: grid;
@@ -132,12 +132,25 @@
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 375px){
+  .CardProduct {
+    width: 90%; 
+    max-width: 270px; 
+    margin: 0 auto; 
+  }
+  .detalles2, .iconos {
+    display: none;
+}
+}
 
+@media (max-width: 320px){
   .CardProduct {
     width: 100%; 
-    max-width: 250px; 
-    margin: 0 auto;
-
+    max-width: 260px; 
+    margin: 0 auto; 
   }
+  .detalles2, .iconos {
+    display: none;
 }
+}
+

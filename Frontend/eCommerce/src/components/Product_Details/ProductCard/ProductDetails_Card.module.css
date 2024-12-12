@@ -1,7 +1,3 @@
-
-
-
-
 /* Contenedor de la información del producto */
 .container_info_producto {
   display: flex;
@@ -10,7 +6,8 @@
   align-items: center;
   justify-content: center;
   background-color: var(--nav-footer);
-  color: var(--fondo-vistas); /* Color general de texto */
+  color: var(--fondo-vistas);
+  /* Color general de texto */
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -38,7 +35,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: var(--fondo-vistas); /* Asegura el color en toda la sección */
+  color: var(--fondo-vistas);
+  /* Asegura el color en toda la sección */
 }
 
 /* Estilo de los textos en detalles */
@@ -58,7 +56,7 @@
 }
 
 
-.añadirReseña{
+.añadirReseña {
   width: 200px;
   border-radius: 10px;
   background-color: aqua;
@@ -85,7 +83,7 @@
 }
 
 .boton_agregar_carrito:hover {
-  background-color: var(--nav-hover); 
+  background-color: var(--nav-hover);
 }
 
 /* Botones de cantidad */
@@ -100,7 +98,7 @@
 }
 
 .boton_cantidad:hover {
-  background-color: var(--nav-hover); 
+  background-color: var(--nav-hover);
 }
 
 .boton_cantidad:disabled {
@@ -113,7 +111,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px; /* Espacio entre los botones y el contador */
+  gap: 10px;
+  /* Espacio entre los botones y el contador */
   margin-top: 10px;
   width: 100%;
   box-sizing: border-box;
@@ -145,10 +144,25 @@
 }
 
 .quantity_button:hover {
-  background-color: var(--nav-hover); 
+  background-color: var(--nav-hover);
 }
 
 .quantity_button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+@media (max-width: 425px) {
+  .container_info_producto {
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-direction: column;
+  }
+  .container_boton_cantidad{
+    justify-content: center;
+  }
 }
