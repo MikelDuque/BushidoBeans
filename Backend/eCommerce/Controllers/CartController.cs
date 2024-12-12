@@ -43,13 +43,13 @@ namespace eCommerce.Controllers
         }
 
         [HttpPut("Update_CartProduct")]
-        public ActionResult<bool> UpdateCartProductAsync([FromBody] UpdatedCartProduct cartProduct)
+        public async Task<ActionResult> UpdateCartProductAsync([FromBody] UpdatedCartProduct cartProduct)
         {
             Claim userClaimId = User.FindFirst("id");
             if (userClaimId == null) return Unauthorized("Debes iniciar sesión para llevar a cabo esta acción");
 
             if (cartProduct == null) return BadRequest(new { message = "Datos del producto no válidos." });
-            return Ok(_cartService.UpdateCartProductAsync(cartProduct));
+            return Ok(await _cartService.UpdateCartProductAsync(cartProduct));
         }
 
         [HttpDelete("Delete_Cart/{id}")]

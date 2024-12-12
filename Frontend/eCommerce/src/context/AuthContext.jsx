@@ -20,7 +20,7 @@ export function AuthProvider({ children }) {
 
     const {fetchingData} = useFetchEvent();
 
-    const [token, setToken] = useState(sessionStorage.getItem('accessToken'));
+    const [token, setToken] = useState(localStorage.getItem('accessToken'));
     const decodedToken = useRef(token ? jwtDecode(token) : null);
     
     const logoutTime = useRef(decodedToken.current?.exp *1000 - Date.now().valueOf() || 0);
@@ -38,14 +38,14 @@ export function AuthProvider({ children }) {
 
     function handleLogin(newToken) {
         if (newToken) {
-            sessionStorage.setItem('accessToken', newToken);
+            localStorage.setItem('accessToken', newToken);
             setToken(newToken);
             decodedToken.current = jwtDecode(newToken)     
         }
     };
 
     function handleLogout() {
-        sessionStorage.removeItem('accessToken');
+        localStorage.removeItem('accessToken');
         setToken(null);
         decodedToken.current = null;
     };

@@ -51,11 +51,11 @@ export function CheckoutProvider({ children }) {
     cart.map((cartItem) => {
       orderProducts.push({
         orderId: 0,
-        productId: cartItem.productId,
-        image: cartItem.image,
-        name: cartItem.name,
-        purchasePrice: cartItem.price,
-        quantity: cartItem.quantity
+        productId: [...cartItem.id],
+        image: [...cartItem.image],
+        name: [...cartItem.name],
+        purchasePrice: [...cartItem.price],
+        quantity: [...cartItem.quantity]
       })
     })
 
