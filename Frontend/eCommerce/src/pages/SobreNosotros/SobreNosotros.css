@@ -17,6 +17,10 @@
 .container-sobre-nosotros p{
     font-size: var(--subtitulos-size);
 }
+.separador{
+    width: 90%;
+    border-top: 2px solid var(--nav-footer);
+}
 .carrusel {
     width: 90%;
     border-radius: 20px;
@@ -41,10 +45,6 @@
     max-width: 55%;
     font-size: var(--subtitulos-size);
 }
-.separador{
-    width: 90%;
-    border-top: 2px solid var(--nav-footer);
-}
 .container-mision, .container-valores {
     background-color: var(--nav-footer);
     width: 90%;
@@ -59,14 +59,14 @@
     min-width: 30rem;
     border-radius: 20px;
 }
-.container-texto-mision, .container-texto-valores{
+.mision-texto, .valores-texto{
     text-align: justify;
     max-width: 50%;
     color: var(--letras-nav);
     margin: auto;
     padding: 2rem;
 }
-.container-texto-mision h1, .container-texto-valores h1{
+.mision-texto h1, .valores-texto h1{
     text-align: center;
 }
 .spanBeans{
@@ -74,56 +74,20 @@
     font-size: 30px;
 }
 
+.container-equipo{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 3rem;
+}
+.container-cards{
+    display: flex;
+}
+
 ----------------------------------------
 
 
-.padree .texto {
-    color: var(--nav-footer); /* Verde oscuro */
-}
 
-.padree .subtitulo {
-    color: var(--nav-footer);
-}
-
-.container-titulo p{
-    color: var(--nav-footer);
-}
-
-.separador{
-    width: 90%;
-    border-top: 2px solid var(--nav-footer);
-}
-.separador-secundario{
-    width: 80%;
-    margin: 0 auto;
-    border-top: 1.5px solid var(--nav-footer);
-    margin-top: 1%;
-    margin-bottom: 1%;
-}
-
-.container-equipo{
-    display: flex;
-    flex: 2;
-    align-items: center;
-    flex-direction: column;
-}
-.titulo-equipo{
-    text-align: center;
-}
-.subtitulo-equipo{
-    text-align: center;
-    padding: 1%;
-}
-
-.container-componentes{
-    
-    margin-top: 5%;
-    width: 90%;
-    display: flex;
-    flex: 4;
-    align-items: center;
-    flex-direction: row;
-}
 
 
 .container-informacionAdicional {
@@ -197,14 +161,4 @@
 .fc{
     margin-top: 8%;
 }
-
-
-
-/* Estilos para la sección de Visión */
-
-
-
-
-
-
 

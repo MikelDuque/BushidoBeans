@@ -49,7 +49,6 @@
 .titulo {
     font-size: 1.8rem; 
     font-weight: var(--font-weight-bold);
-    margin-bottom: 2rem;
     color: var(--primary-text);
     text-align: center; 
 }

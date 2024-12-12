@@ -34,8 +34,7 @@ function SobreNosotros() {
 
             <div className='container-mision'>
                 <img src="/recursos/mision.jpg" alt="" className='imagen-mision' />
-
-                <div className='container-texto-mision'>
+                <div className='mision-texto'>
                     <h1>Misión</h1>
                     <p>Ofrecer una experiencia de café excepcional que inspire y conecte, respetando los principios de calidad, sostenibilidad y pasión por el arte del café.</p><br/><br/>
                     <h1>Visión</h1>
@@ -46,7 +45,7 @@ function SobreNosotros() {
             <hr className='separador' />
 
             <div className='container-valores'>
-                <div className="container-texto-valores">
+                <div className="valores-texto">
                     <h1>Valores</h1>
                     <p><span className='spanBeans'>B</span>ienestar: Fomentamos un entorno positivo y saludable, tanto para nuestros colaboradores como para los clientes, apoyando prácticas que generen bienestar en toda la cadena de producción.</p><br/><br/>
                     <p><span className='spanBeans'>E</span>xcelencia: Nos comprometemos a ofrecer siempre el mejor café, desde el origen hasta el momento en que llega a la taza de cada cliente.</p><br/><br/>
@@ -55,33 +54,25 @@ function SobreNosotros() {
                     <p><span className='spanBeans'>S</span>ostenibilidad: Priorizamos prácticas responsables que respetan el entorno y apoyan un futuro más verde, reduciendo el impacto ambiental de nuestras operaciones.</p>
                     </div>
                 <img className='imagen-valores' src="/recursos/valores.jpg" alt=""/>
-
             </div>
 
             <hr className='separador' />
 
             <div className='container-equipo'>
-                <div className='container-titulo'>
-                    <p className='titulo titulo-equipo'>Nuestro Equipo</p>
-                    <hr className='separador-secundario' />
-                    <p className='subtitulo subtitulo-equipo'>Nos une la pasión por la tecnología, el aprendizaje continuo, el café y el té, con el fin de mejorar la vida de nuestros clientes</p>
-                </div>
-                <div className='padree'>
+                <div className="equipo-text">
+                <h1>Nuestro Equipo</h1>
+                <p>Nos une la pasión por la tecnología, el aprendizaje continuo, el café y el té, con el fin de mejorar la vida de nuestros clientes</p></div>
 
-                    <div className='container-componentes'>
-                        <Card nombre="Ivan Montes" cargo="Marketing" imagen={kirby}></Card>
-                        <Card nombre="David Andrino" cargo="Logistica" imagen={sonic}></Card>
-                        <Card nombre="Yasir Bel Maalem" cargo="Full Stack Developer" imagen={pikachu}></Card>
-                        <Card nombre="Mikel Duque" cargo="CEO & Fundador" imagen={link}></Card>
-                    </div>
-                </div>
+                <div className='container-cards'>
+                    <Card nombre="Ivan Montes" cargo="Marketing" imagen={kirby}></Card>
+                    <Card nombre="David Andrino" cargo="Logistica" imagen={sonic}></Card>
+                    <Card nombre="Yasir Bel Maalem" cargo="Full Stack Developer" imagen={pikachu}></Card>
+                    <Card nombre="Mikel Duque" cargo="CEO & Fundador" imagen={link}></Card>
+                </div> 
             </div>
 
             <hr className='separador' />
-            <div className='padree'>
-
-
-
+            
 
                 <div className='container-informacionAdicional'>
                     <div className='container-informacion'>
@@ -118,7 +109,7 @@ function SobreNosotros() {
                     </div>
                 </div>
             </div>
-        </div>
+        
     );
 
 }

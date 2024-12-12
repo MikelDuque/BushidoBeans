@@ -34,7 +34,6 @@
     font-size: var(--subtitulos-size);
     font-weight: var(--font-weight-regular);
     color: var(--nav-footer);
-    margin-bottom: 10px;
 }
 
 .envio {
