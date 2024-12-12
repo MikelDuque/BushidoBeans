@@ -3,40 +3,48 @@
 @import url(https://fonts.googleapis.com/css2?family=Poppins&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=Poppins&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap);
 
-.container-sobre-nosotros{
+.container-sobre-nosotros {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 1rem;
     gap: 2rem;
 }
-.container-sobre-nosotros h1{
+
+.container-sobre-nosotros h1 {
     font-size: var(--titulos-size);
     font-family: Poppins, sans-serif;
 }
-.container-sobre-nosotros p{
+
+.container-sobre-nosotros p {
     font-size: var(--subtitulos-size);
+    font-family: Vollkorn, sans-serif;
 }
-.separador{
+
+.separador {
     width: 90%;
     border-top: 2px solid var(--nav-footer);
 }
+
 .carrusel {
     width: 90%;
     border-radius: 20px;
     overflow: hidden;
 }
-.container-descripcion{
+
+.container-descripcion {
     display: flex;
     align-items: center;
     gap: 5rem;
 }
-.imagen-logo-bushido-beans{
+
+.imagen-logo-bushido-beans {
     width: 50%;
     max-width: 60rem;
     min-width: 40rem;
 }
-.descripcion-texto{
+
+.descripcion-texto {
     display: flex;
     flex-direction: column;
     text-align: justify;
@@ -45,120 +53,174 @@
     max-width: 55%;
     font-size: var(--subtitulos-size);
 }
-.container-mision, .container-valores {
+
+.container-mision,
+.container-valores {
     background-color: var(--nav-footer);
     width: 90%;
-    min-width: 34rem;
+    min-width: 44rem;
     display: flex;
-    align-items: center; 
-    padding: 2rem; 
+    align-items: center;
+    padding: 2rem;
     border-radius: 20px;
 }
-.imagen-mision, .imagen-valores {
+
+.imagen-mision,
+.imagen-valores {
     max-width: 40rem;
     min-width: 30rem;
     border-radius: 20px;
 }
-.mision-texto, .valores-texto{
+
+.mision-texto,
+.valores-texto {
     text-align: justify;
     max-width: 50%;
     color: var(--letras-nav);
     margin: auto;
     padding: 2rem;
 }
-.mision-texto h1, .valores-texto h1{
+
+.mision-texto h1,
+.valores-texto h1 {
     text-align: center;
 }
-.spanBeans{
+
+.spanBeans {
     font-weight: bolder;
     font-size: 30px;
 }
 
-.container-equipo{
+.container-equipo {
     display: flex;
     flex-direction: column;
     text-align: center;
     gap: 3rem;
 }
-.container-cards{
+
+.container-cards {
     display: flex;
 }
 
-----------------------------------------
-
-
-
-
-
 .container-informacionAdicional {
-    display: flex; 
-    margin-top: 20px; 
-    margin: 0; 
-    margin-bottom: 5%;
+    display: flex;
+    gap: 2rem;
+    padding-bottom: 5rem;
 }
 
 .container-informacion {
-    width: 50%; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-}
-
-.container-maps {
-    margin-top: 3%;
-    width: 40%;
-    display: flex;
-    justify-content: flex-end;
-    
-}
-
-.map-container iframe{
-    border-radius: 10px;
-}
-
-.container-dondeEstamos,
-.container-redesSociales {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 60%; 
+    gap: 2rem;
+    align-items: center
 }
 
-.container-direccion-contacto,
-.container-img-redesSociales {
-    padding: 10%;
-    width: 100%; 
+.dondeEstamos-texto,
+.container-redesSociales {
+    padding: 1.5rem;
     border: 2px solid var(--nav-footer);
-    border-radius: 50px;
-    margin-bottom: 10px;
+    border-radius: 10px;
+    font-size: var(--subtitulos-size);
 }
 
-.separador-informacionAdicional {
-    width: 100%;
-    border-top: 1.5px solid var(--nav-footer);
-    margin-top: 1%;
-    margin-bottom: 3%;
-}
-.container-img-redesSociales {
-    padding: 10%;
-    width: 100%; 
-    display: flex;
-    justify-content: center; 
-    gap: 2%; 
+.dondeEstamos-texto h1,
+.container-redesSociales h1 {
+    text-align: center;
+    font-size: var(--subtitulos-size);
 }
 
 .redes-sociales-item {
     display: flex;
-    flex-direction: column; 
-    align-items: center; 
-}
-.ig{
-    margin-top: 6%;
-}
-.tw{
-    margin-top: 12%;
-}
-.fc{
-    margin-top: 8%;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
 }
 
+.map-container {
+    width: 70rem;
+    height: 100%;
+}
+
+
+@media (max-width: 1000px) {
+
+    .container-mision,
+    .container-descripcion,
+    .container-informacionAdicional {
+        flex-direction: column;
+    }
+
+    .container-descripcion {
+        gap: 0;
+    }
+
+    .container-valores {
+        flex-direction: column-reverse;
+    }
+
+    .descripcion-texto,
+    .mision-texto,
+    .valores-texto {
+        padding: 0;
+        max-width: 95%;
+    }
+
+    .container-cards {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .imagen-mision,
+    .imagen-valores {
+        padding-bottom: 2rem;
+    }
+
+    .dondeEstamos-texto,
+    .container-redesSociales {
+        padding: 1.5rem;
+        border: 2px solid var(--nav-footer);
+        border-radius: 10px;
+        font-size: var(--subtitulos-size);
+    }
+
+    .container-informacion {
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .map-container {
+        width: 100%;
+        height: 30rem;
+    }
+}
+
+@media (max-width: 540px) {
+    .container-informacion {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .imagen-logo-bushido-beans {
+        position: relative;
+        right: 3rem;
+    }
+}
+
+@media (max-width: 475px) {
+    .container-mision,
+    .container-valores {
+        min-width: 0;
+    }
+    .imagen-mision,
+    .imagen-valores {
+        width: 100%;
+        min-width: 0;
+    }
+    .descripcion-texto {
+        padding: 0;
+        max-width: 85%;
+    }
+    .imagen-logo-bushido-beans {
+        position: relative;
+        right: 4rem;
+    }
+}
