@@ -9,21 +9,18 @@ import { useCart } from '../../../context/CartContext.jsx';
 function ConfirmarPedido() {
   const { token } = useAuth();
   const { deleteCart } = useCart();
-  const { order } = useCheckout();
+  const { order, handleOrder } = useCheckout();
   const [postedOrder, setPostedOrder] = useState(null);
 
   const {fetchData, isLoading} = useFetch({url: POST_ORDER, type: 'POST', token: token, params:order, needAuth:true});
 
   
   useEffect(() => {
-    console.log("order", order);
-    
-    console.log("postedOrder", postedOrder);
-    
     if(!postedOrder) {
       setPostedOrder(fetchData)
       deleteCart(order.userId)
-    };
+      handleOrder(null)
+    }
     
   }, [fetchData]);
 
