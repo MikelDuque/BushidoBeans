@@ -125,11 +125,10 @@ public class Program
             app.UseSwaggerUI();
         }
 
-
-        app.UseHttpsRedirection();
-
         //Configuración de Cors para aceptar cualquier petición
         app.UseCors();
+
+        app.UseHttpsRedirection();
 
         //Habilita la autenticación
         app.UseAuthentication();

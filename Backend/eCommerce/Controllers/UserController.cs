@@ -26,6 +26,7 @@ public class UserController : ControllerBase
         Claim userClaimId = User.FindFirst("id");
         if (userClaimId == null) return Unauthorized(new {Message = "Debe iniciar sesión para llevar a cabo esta acción"});
 
+        if (id <= 0) return BadRequest(new {Message= "El ID del usuario es inválido."});
         return Ok(await _service.GetByIdAsync(id));
     }
 
@@ -45,6 +46,7 @@ public class UserController : ControllerBase
         Claim userClaimId = User.FindFirst("id");
         if (userClaimId == null) return Unauthorized(new {Message = "Debes iniciar sesión para llevar a cabo esta acción"});
 
+        if (user == null) return BadRequest(new {Message= "El usuario a actualizar es inválido."});
         return Ok(await _service.UpdateAsync(user));
     }
 
@@ -55,20 +57,20 @@ public class UserController : ControllerBase
         Claim userClaimId = User.FindFirst("id");
         if (userClaimId == null) return Unauthorized(new {Message = "Debes iniciar sesión para llevar a cabo esta acción"});
 
+        if (userRole == null) return BadRequest(new {Message= "El role a actualizar es inválido."});
         return Ok(await _service.UpdateRole(userRole));
     }
 
 
     [Authorize(Roles = "admin")]
     [HttpDelete("Delete_User/{id}")]
-    public async Task<ActionResult<UserDto>> DeleteAsyncUser(long id)
+    public async Task<ActionResult> DeleteAsyncUser(long id)
     {
         Claim userClaimId = User.FindFirst("id");
         if (userClaimId == null) return Unauthorized(new {Message = "Debes iniciar sesión para llevar a cabo esta acción"});
 
-        await _service.DeleteAsyncUserById(id);
-
-        return NoContent();
+        if (id <= 0) return BadRequest(new {Message= "El ID del usuario es inválido."});
+        return Ok(await _service.DeleteAsyncUserById(id));
     }
     
 }
