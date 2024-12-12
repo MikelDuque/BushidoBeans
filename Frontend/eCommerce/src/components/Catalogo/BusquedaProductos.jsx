@@ -5,22 +5,26 @@ import ReactPaginate from 'react-paginate';
 import "../../pages/Catalogo/catalogo.css";
 import "./Paginacion.css";
 import { CircleLoader } from 'react-spinners';
+import '../../pages/Catalogo/Catalogo.css';
 import { GET_FILTERED_PRODUCTS } from '../../endpoints/config.js';
 
-const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
+const BusquedaProductos = ({
+  filtro,
+  ordenar,
+  productosPorPagina,
+  paginaActual,
+  setTotalPaginas,
+  onLoadingStateChange
+}) => {
   const [productoBuscado, setProductoBuscado] = useState('');
   const [datosFiltrados, setDatosFiltrados] = useState([]);
-  const [paginaActual, setPaginaActual] = useState(0);
-  const [paginaSeleccionada, setPaginaSeleccionada] = useState(0); 
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [totalPaginas, setTotalPaginas] = useState(1); 
-
 
   useEffect(() => {
     // Llamada a la API cuando cambian el filtro, orden, o búsqueda
     const fetchData = async () => {
       setError(null);
+      onLoadingStateChange(true);
 
       try {
         const Url = GET_FILTERED_PRODUCTS
@@ -32,13 +36,12 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
 
         const data = await response.json();
 
-        setDatosFiltrados(Array.isArray(data.filteredProducts)? data.filteredProducts:[]);  
-        setTotalPaginas(data.totalPages); 
-        
+        setDatosFiltrados(Array.isArray(data.filteredProducts) ? data.filteredProducts : []);
+        setTotalPaginas(data.totalPages);
       } catch (error) {
         setError("Hubo un error al cargar los productos.");
       } finally {
-        setLoading(false);
+        onLoadingStateChange(false);
       }
     };
 
@@ -62,30 +65,23 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
       <div className='botonCentrado'>
         <input
           className='botonBusqueda'
-          type="text"
-          placeholder="Buscar..."
+          type='text'
+          placeholder='Buscar...'
           value={productoBuscado}
-          onChange={e => {
-            setProductoBuscado(e.target.value);
-          }}
+          onChange={(e) => setProductoBuscado(e.target.value)}
         />
       </div>
- 
-      <div className="inventario">
-        {loading ? (
-          <CircleLoader color='#295026' size={100}  />
-        ) : error ? (
+
+      <div className='inventario'>
+        {error ? (
           <p>{error}</p>
         ) : datosFiltrados.length > 0 ? (
-          datosFiltrados.map(dataP => (
-            <CardProduct
-              key={dataP.id}
-              product={dataP}
-            />
+          datosFiltrados.map((dataP) => (
+            <CardProduct key={dataP.id} product={dataP} />
           ))
         ) : (
           <p>No se encontraron productos.</p>
-        )}   
+        )}
       </div>
 
         <ReactPaginate
@@ -112,10 +108,13 @@ const BusquedaProductos = ({ filtro, ordenar, productosPorPagina = 10 }) => {
   );
 };
 
-export default BusquedaProductos;
-
 BusquedaProductos.propTypes = {
   filtro: PropTypes.string.isRequired, // Ahora el id es requerido como prop
   ordenar: PropTypes.string.isRequired,
   productosPorPagina: PropTypes.number.isRequired,
+  paginaActual: PropTypes.number.isRequired,
+  setTotalPaginas: PropTypes.func.isRequired,
+  onLoadingStateChange: PropTypes.func.isRequired,
 };
+
+export default BusquedaProductos;
