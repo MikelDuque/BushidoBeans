@@ -12,6 +12,10 @@ import { useModal } from '../../../context/ModalContext.jsx';
 export default function UserList() {
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
+    const [userToDelete, setUserToDelete] = useState({
+        userId: 0,
+        delete: false
+    });
 
     const {closeModal, openModal} = useModal();
     const { token, decodedToken } = useAuth();
@@ -19,6 +23,10 @@ export default function UserList() {
     useEffect(() => {
         if (token) getUsers();
     }, [token]);
+
+    useEffect(() => {  
+        if (userToDelete.delete) handleDelete();
+    }, [userToDelete])
 
     async function getUsers(){
         try {
@@ -36,13 +44,12 @@ export default function UserList() {
     
     const handleUpdate = (event) => {
         const loggedUser = decodedToken?.id;
-        console.log("usuario", loggedUser);
         
-        const thisElement = event.target;
+        const thisElement = event.target;  
 
         const userToUpdate = {
-            UserId: thisElement.id,
-            Role: thisElement.value === "usuario" ? null : thisElement.value
+            userId: thisElement.id,
+            role: thisElement.value === "usuario" ? null : thisElement.value
         };
         
         if(loggedUser != thisElement.id) {updateUser(userToUpdate)}
@@ -70,22 +77,28 @@ export default function UserList() {
         }
     };
 
-    const handleDelete = async (event) => {
-        const thisElement = event.target;  
+    function shouldDelete(event) {
+        const thisElement = event.target;
+        
+        setUserToDelete({userId: thisElement.id, delete: userToDelete.delete})
+        openModal("deleteUser")
+    }
 
+    const handleDelete = async () => {
+        
         try {
-            const response = await fetch(DELETE_USER_BY_ID(thisElement.id), {
+            const response = await fetch(DELETE_USER_BY_ID(userToDelete.userId), {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`
-                }
+                },
+                body: JSON.stringify(userToDelete.userId)
             });
 
             if (!response.ok) {throw new Error('Error al eliminar el usuario');}
             else {getUsers()}
         } catch (error) {
             setError(error.message);
-            console.log();
             console.log("Error: ", error.message);
         }
     }
@@ -95,11 +108,11 @@ export default function UserList() {
             {error ? <p>{error}</p> : 
                 <ul className={classes.container}>
                     {users.length > 0 ? (users.map((listElement, i) => (
-                        <li key={i}> <UserListElement listElement={listElement} changeRol={handleUpdate} deleteUser={() => openModal("deleteUser")}/> </li>
+                        <li key={i}> <UserListElement listElement={listElement} changeRol={handleUpdate} deleteUser={shouldDelete}/> </li>
                     ))) : <p>No existen elementos que listar</p>}
                 </ul>
             }
-                <Modal type="deleteUser" titulo="¿Eliminar usuario?" continueFnc={handleDelete} cancelFnc={closeModal} buttonValues={{continueVal: "Eliminar", cancelVal: "Cancelar"}}>
+                <Modal type="deleteUser" titulo="¿Eliminar usuario?" continueFnc={() => setUserToDelete({delete:true, userId:userToDelete.userId})} cancelFnc={closeModal} buttonValues={{continueVal: "Eliminar", cancelVal: "Cancelar"}}>
                     <div className={classes.deleteAlert}>
                         <h1>Una vez eliminado no podrá deshacer la acción...</h1>
                     </div>

@@ -35,22 +35,27 @@ export function CartProvider({ children }) {
 
     /* ----- CART MERGE ----- */
     
-    const {fetchData} = useFetch({url: PUT_CART, type: 'PUT', token: token, params:mergeParams.current, needAuth:true});
+    const {fetchData} = useFetch({url:PUT_CART, type: 'PUT', token: token, params:mergeParams.current, needAuth:true});
 
     useEffect(() => {
         setMergeParams();
 
-    }, [decodedToken]);
+    }, [token]);
 
     useEffect(() => {  
-        if(token && fetchData) getBackendCart();
+        if(token && fetchData) {   
+            getBackendCart();
 
-    }, [token, fetchData]);
+        } else {
+            setCart(getLocalCart());
+        }
+
+    }, [token, fetchData, mergeParams.current]);
     
 
     function setMergeParams() {
         mergeParams.current = {
-            id: decodedToken ? decodedToken.id : 0,
+            id: decodedToken?.id || 0,
             cartProducts: getLocalCart()
         }
     }
@@ -60,7 +65,7 @@ export function CartProvider({ children }) {
         return localCart ? JSON.parse(localCart) : [];
     }
 
-    function getBackendCart() {
+    function getBackendCart() {  
         setCart(fetchData);
         localStorage.removeItem('cart');
     }
@@ -107,10 +112,10 @@ export function CartProvider({ children }) {
 
     /* ----- METHODS ----- */
 
-    async function updateCartProduct(product) {
+    async function updateCartProduct(product) { 
         if (token) {
             const updatedProduct = {
-                userId: decodedToken.id,
+                userId: decodedToken?.id,
                 productId: product.productId,
                 quantity: product.quantity
             };
@@ -126,7 +131,7 @@ export function CartProvider({ children }) {
     async function deleteCartProduct(productId) {
         if(token) {
             const deletedProduct = {
-                userId: decodedToken.id,
+                userId: decodedToken?.id,
                 productId: productId
             };
     
@@ -138,9 +143,9 @@ export function CartProvider({ children }) {
         deleteCartItem(productId);
     }
 
-    async function deleteCart() {
+    async function deleteCart() {   
         if (token) {
-            const isDeleted = await fetchingData({url: DELETE_CART_BY_ID(decodedToken.id), type: 'DELETE', token: token, params: decodedToken.id, needAuth:true});
+            const isDeleted = await fetchingData({url: DELETE_CART_BY_ID(decodedToken?.id), type: 'DELETE', token: token, params: decodedToken?.id, needAuth:true});
 
             if(!isDeleted) return;
         }

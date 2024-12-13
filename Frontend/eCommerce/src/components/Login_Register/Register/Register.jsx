@@ -81,7 +81,7 @@ export default function Register({handleViewChange, setAlertMessage}) {
       mail: form.mail.value,
       password: form.password.value,
       name: form.name.value,
-      surname: form.name.value,
+      surname: form.surname.value,
       phone: form.phone.value,
       address: form.address.value
     }; 
