@@ -28,8 +28,7 @@ namespace eCommerce.Controllers
             Claim userClaimId = User.FindFirst("id");
             if (userClaimId == null) return Unauthorized("Debes iniciar sesión para llevar a cabo esta acción");
 
-
-            if (id == null || id == 0) return BadRequest(new { message = "No existe usuario con ese ID" });
+            if (id <= 0) return BadRequest(new {Message= "El ID del usuario es inválido."});
             List<CartProductDto> cartList = await _cartService.GetCartByIdAsync(id);
             if (cartList.IsNullOrEmpty()) return BadRequest(new {message = "El carrito está vacío"});
             return Ok(cartList);
@@ -38,18 +37,19 @@ namespace eCommerce.Controllers
         [HttpPut("Update_Cart")]
         public async Task<ActionResult> UpdateCartAsync([FromBody] Cart cart)
         {
-            if (cart.Id == null || cart.Id == 0) return BadRequest(new { message = "No existe usuario con ese ID" });
+            if (cart == null) return BadRequest(new {Message= "El carrito a actualizar es inválido."});
+            if (cart.Id <= 0) return BadRequest(new {Message= "El ID del usuario es inválido."});
             return Ok(await _cartService.UpdateCartAsync(cart));
         }
 
         [HttpPut("Update_CartProduct")]
-        public ActionResult<bool> UpdateCartProductAsync([FromBody] UpdatedCartProduct cartProduct)
+        public async Task<ActionResult> UpdateCartProductAsync([FromBody] UpdatedCartProduct cartProduct)
         {
             Claim userClaimId = User.FindFirst("id");
             if (userClaimId == null) return Unauthorized("Debes iniciar sesión para llevar a cabo esta acción");
 
             if (cartProduct == null) return BadRequest(new { message = "Datos del producto no válidos." });
-            return Ok(_cartService.UpdateCartProductAsync(cartProduct));
+            return Ok(await _cartService.UpdateCartProductAsync(cartProduct));
         }
 
         [HttpDelete("Delete_Cart/{id}")]
@@ -58,7 +58,8 @@ namespace eCommerce.Controllers
             Claim userClaimId = User.FindFirst("id");
             if (userClaimId == null) return Unauthorized("Debes iniciar sesión para llevar a cabo esta acción");
 
-            try { return Ok(await _cartService.DeleteCartAsync(id));}
+            if (id <= 0) return BadRequest(new {Message= "El ID del usuario es inválido."});
+            try {return Ok(await _cartService.DeleteCartAsync(id));}
             catch (NullReferenceException) {return BadRequest(new {message = "El item a eliminar no existe en la base de datos"});}
         }
 
@@ -68,6 +69,7 @@ namespace eCommerce.Controllers
             Claim userClaimId = User.FindFirst("id");
             if (userClaimId == null) return Unauthorized("Debes iniciar sesión para llevar a cabo esta acción");
 
+            if (cartProduct == null) return BadRequest(new {Message= "El producto a eliminar es inválido."});
             try {return Ok( await _cartService.DeleteCartProductAsync(cartProduct));}
             catch (Exception) { return BadRequest(new {message = "El item ha eliminar no existe en la base de datos"});}
         }

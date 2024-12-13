@@ -9,7 +9,7 @@ export default function Cart() {
     return (cart.length > 0 ? (
       cart.map((cartItem) => (    
         <CartItem 
-          key={cartItem.productId}
+          key={cartItem.id}
           productData = {{
             productId: cartItem.productId,
             image: cartItem.image,

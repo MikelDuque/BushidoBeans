@@ -19,9 +19,10 @@ public class AddressController : Controller
     }
 
     [HttpGet("{id}")]
-    public async Task<AddressDto> GetByIdAsync(long id)
+    public async Task<ActionResult> GetByIdAsync(long id)
     {
-        return await _service.GetByIdAsync(id);
+        if (id <= 0) return BadRequest(new {Message= "El ID de la dirección introducido es inválido"});
+        return Ok(await _service.GetByIdAsync(id));
     }
 
     [HttpGet("Get_User_Addresses/{id}")]
@@ -31,16 +32,12 @@ public class AddressController : Controller
         Claim userClaimId = User.FindFirst("id");
         if (userClaimId == null) return Unauthorized(new {Message = "Debe iniciar sesión para llevar a cabo esta acción"});
 
+        if (id <= 0) return BadRequest(new {Message= "El ID del usuario es inválido."});
         try
         {
-            if (id <= 0) return BadRequest("El ID del usuario es inválido.");
-
             IEnumerable<AddressDto> addresses = await _service.GetAllByUserIdAsync(id);
-
             if (addresses == null || !addresses.Any()) return NotFound("No se encontraron direcciones para este usuario.");
-
             return Ok(addresses);
-
         }
         catch (Exception ex) {return StatusCode(500, $"Error al obtener las direcciones: {ex.Message}");}
     }
@@ -66,6 +63,7 @@ public class AddressController : Controller
         if (userClaimId == null) return Unauthorized(new {Message = "Debe iniciar sesión para llevar a cabo esta acción"});
 
 
+        if (id <= 0) return BadRequest(new {Message= "El ID de la dirección es inválido."});
         bool isDeleted = await _service.DeleteAddressAsync(id);
         if (!isDeleted) return NotFound(new {Message = "Dirección no encontrada" });
 

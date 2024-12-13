@@ -12,8 +12,8 @@ export default function Quantity_Counter({quantity, handleQuantity, stock}) {
     if(quantity > 0) handleQuantity(--quantity);
   };
 
-  function incrementCounter() {
-    if(quantity < stock) handleQuantity(++quantity)
+  function incrementCounter() { 
+    if(quantity < stock) handleQuantity(++quantity);
   };
 
   return (

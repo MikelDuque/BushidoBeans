@@ -10,17 +10,11 @@ public class UserService
 {
   private readonly UnitOfWork _unitOfWork;
   private readonly UserMapper _mapper;
-  private readonly CartService _cartService;
-  private readonly ReviewService _reviewService;
-  private readonly OrderService _orderService;
 
   public UserService(UnitOfWork unitOfWork, UserMapper mapper, CartService cartService, ReviewService reviewService, OrderService orderService)
   {
     _unitOfWork = unitOfWork;
     _mapper = mapper;
-    _cartService = cartService;
-    _reviewService = reviewService;
-    _orderService = orderService;
   }
 
 
@@ -28,7 +22,7 @@ public class UserService
 
   public async Task<UserDto> GetByIdAsync(long id)
   {
-    User user = await _unitOfWork.UserRepository.GetByIdAsync(id);
+    User user = await _unitOfWork.UserRepository.GetUserDataByIdAsync(id);
     return _mapper.ToDto(user);
   }
 
@@ -73,11 +67,14 @@ public class UserService
 
     /* ----- UPDATE ----- */
 
-    public async Task<UserDto> UpdateAsync(User user)
+    public async Task<UserDto> UpdateAsync(UserDto user)
     {
       User userEntity = await _unitOfWork.UserRepository.GetByIdAsync(user.Id) ?? throw new Exception("El usuario especificado no existe");
 
-      userEntity = user;
+      userEntity.Mail = user.Mail;
+      userEntity.Name = user.Name;
+      userEntity.Surname = user.Surname;
+      userEntity.Phone = user.Phone;
 
       _unitOfWork.UserRepository.Update(userEntity);
 

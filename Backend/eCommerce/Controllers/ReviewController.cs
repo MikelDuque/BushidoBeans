@@ -25,9 +25,10 @@ public class ReviewController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ReviewDto> GetByIdAsync(long id)
+    public async Task<ActionResult> GetByIdAsync(long id)
     {
-        return await _service.GetByIdAsync(id);
+        if (id <= 0) return BadRequest(new {Message= "El ID del usuario es inválido."});
+        return Ok(await _service.GetByIdAsync(id));
     }
 
     [Authorize]
@@ -35,11 +36,9 @@ public class ReviewController : ControllerBase
     public async Task<ActionResult> CreateReviewAsync([FromBody] ReviewDto review)
     {
         Claim userClaimId = User.FindFirst("id");
-
         if (userClaimId == null) return Unauthorized(new {message = "Debes iniciar sesión para llevar a cabo esta acción"});
 
-        if (review == null) return BadRequest(new {message ="Datos de la reseña no válidos."});
-
+        if (review == null) return BadRequest(new {message= "Datos de la reseña inválidos."});
         return Ok(await _service.CreateReviewAsync(review));
     }
 }
