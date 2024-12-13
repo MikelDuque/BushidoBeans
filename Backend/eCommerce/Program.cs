@@ -105,17 +105,28 @@ public class Program
         //por defecto el navegador bloqueará las peticiones debido a la política de CORS.
         //por eso hay que habilitar Cors
 
-        
-        builder.Services.AddCors(options =>
+         
+         builder.Services.AddCors(options =>
+         {
+             options.AddDefaultPolicy(builder =>
+             {
+                 builder.AllowAnyOrigin()
+                 .AllowAnyHeader()
+                 .AllowAnyMethod();
+             });
+         });
+         
+
+        /*if (builder.Environment.IsDevelopment())
         {
-            options.AddDefaultPolicy(builder =>
+            builder.Services.AddCors(options =>
             {
-                builder.AllowAnyOrigin()
-                .AllowAnyHeader()
-                .AllowAnyMethod();
+                options.AddPolicy("AllowFrontend", policy =>
+                {
+                    policy.WithOrigins("https://localhost:5173").AllowAnyHeader().AllowAnyMethod();
+                });
             });
-        });
-        
+        }*/
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
