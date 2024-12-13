@@ -1,24 +1,23 @@
 import { useEffect, useState } from "react";
-import * as jwtDecode from "jwt-decode";
 import "./UserProfile.css";
 import { PUT_USER, GET_USER_BY_ID } from "../../../endpoints/config";
 import Alert from "../../Alert/Alert";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context/AuthContext";
 
 function UserProfile() {
     const [user, setUser] = useState({
         id: "",
+        mail: "",
         name: "",
         surname: "",
-        mail: "",
-        phone: "",
-        role: ""
+        phone: ""
     });
     const [isEditing, setIsEditing] = useState(false);
+    const {token, decodedToken} = useAuth();
     const [alertMessage, setAlertMessage] = useState(""); 
     const navigate = useNavigate();
-    const token = sessionStorage.getItem("accessToken");
-    const userId = jwtDecode.jwtDecode(token).id;
+    const userId = decodedToken?.id;
 
     useEffect(() => {
         const fetchUser = async () => {

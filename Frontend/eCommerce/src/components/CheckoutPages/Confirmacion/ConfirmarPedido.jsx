@@ -18,8 +18,8 @@ function ConfirmarPedido() {
   useEffect(() => {
     if(!postedOrder) {
       setPostedOrder(fetchData)
-      deleteCart(order.userId)
-    };
+      deleteCart(order?.userId)
+    }
     
   }, [fetchData]);
 

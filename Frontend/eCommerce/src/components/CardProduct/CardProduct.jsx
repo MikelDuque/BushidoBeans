@@ -48,7 +48,7 @@ export function CardProduct({ product }) {
                 {intensidadEmojis}
             </div>
 	    <div className="detalles2">{precioFormateado} €</div>
-            <AddToCartButton className="botonPrueba" product={product}></AddToCartButton>
+            <AddToCartButton className="botonPrueba" product={product} quantity={+1}></AddToCartButton>
         </div>
     );
 }

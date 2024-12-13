@@ -1,25 +1,7 @@
-import { useEffect, useState } from "react";
 import classes from './Inicio.module.css';
 
 
 function Inicio() {
-  const [setHasScrolledIntro] = useState(false);
-
-  useEffect(() => {
-    const introShown = sessionStorage.getItem("hasScrolledIntro");
-
-    if (introShown === "true") {
-      document.body.style.overflow = "";
-      setHasScrolledIntro(true);
-    } else {
-      setTimeout(() => {
-        sessionStorage.setItem("hasScrolledIntro", "true");
-        setHasScrolledIntro(true);
-      }, 4000);
-    }
-  }, []);
-
-
   return (
     <>
       <div className={classes.container}>

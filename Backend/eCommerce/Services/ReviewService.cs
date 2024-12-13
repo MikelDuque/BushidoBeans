@@ -57,7 +57,7 @@ public class ReviewService
 
   public async Task<bool> DeleteReviewsAsync(object id)
   {
-    User user = await _unitOfWork.UserRepository.GetByIdAsync(id);
+    User user = await _unitOfWork.UserRepository.GetUserDataByIdAsync(id);
     bool isDeleted = false;
 
     foreach (Review review in user.Reviews.ToList())

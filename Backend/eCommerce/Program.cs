@@ -106,15 +106,15 @@ public class Program
         //por eso hay que habilitar Cors
 
         
-            builder.Services.AddCors(options =>
+        builder.Services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(builder =>
             {
-                options.AddDefaultPolicy(builder =>
-                {
-                    builder.AllowAnyOrigin()
-                    .AllowAnyHeader()
-                    .AllowAnyMethod();
-                });
+                builder.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
             });
+        });
         
         var app = builder.Build();
 
@@ -125,11 +125,10 @@ public class Program
             app.UseSwaggerUI();
         }
 
-
-        app.UseHttpsRedirection();
-
         //Configuración de Cors para aceptar cualquier petición
         app.UseCors();
+
+        app.UseHttpsRedirection();
 
         //Habilita la autenticación
         app.UseAuthentication();

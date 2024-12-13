@@ -20,14 +20,7 @@ export function CheckoutProvider({ children }) {
     totalProducts: 0,
     orderProducts: [],
     userId: decodedToken?.id || 0,
-    addressId: 0,
-    address: {
-      id: 0,
-      addressee: null,
-      phoneNumber: 0,
-      addressInfo: null,
-      userId: 0
-    }
+    addressId: 0
   });
 
   useEffect(() => {
@@ -49,6 +42,7 @@ export function CheckoutProvider({ children }) {
     const orderProducts = [];
 
     cart.map((cartItem) => {
+      console.log("cartItem", cartItem);
       orderProducts.push({
         orderId: 0,
         productId: cartItem.productId,
@@ -58,6 +52,9 @@ export function CheckoutProvider({ children }) {
         quantity: cartItem.quantity
       })
     })
+
+    console.log("orderProducts", orderProducts);
+    
 
     setOrder(estadoPrevio => ({
       ...estadoPrevio,
@@ -102,10 +99,6 @@ export function CheckoutProvider({ children }) {
   }
 
   function handleSelectedAddress(id) {
-    console.log("id direcciones", id);
-    console.log("carrito", cart);
-    
-    
     setOrder(estadoPrevio => ({
       ...estadoPrevio,
       addressId: id

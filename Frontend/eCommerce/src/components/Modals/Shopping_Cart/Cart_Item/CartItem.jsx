@@ -7,9 +7,10 @@ export default function CartItem({productData}) {
   const {updateCartProduct, deleteCartProduct} = useCart();
 
   function handleQuantity(newQuantity) {
+    
     productData.quantity = newQuantity;
-
-    newQuantity <= 0 ? deleteCartProduct(productData.productId) : updateCartProduct(productData);
+    
+    newQuantity <= 0 ? deleteCartProduct(productData.id) : updateCartProduct(productData);
   }
 
   return (

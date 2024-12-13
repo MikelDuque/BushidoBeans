@@ -28,11 +28,13 @@ function User() {
                     },
                 });
 
-                if (response.ok) {
-                    console.log("response", response);
-                    
-                    const data = await response.json();
+                console.log("response", response);
+                
+
+                if (response.ok) {       
+                    const data = await response.json();     
                     setUser(data);
+
                 } else {
                     throw new Error("Failed to fetch user data");
                 }
@@ -59,7 +61,7 @@ function User() {
                     <p><strong>Apellido:</strong> {user.surname}</p>
                     <p><strong>Email:</strong> {user.mail}</p>
                     <p><strong>Teléfono:</strong> {user.phone}</p>
-                    {user.role === "admin" && (<p><strong>Rol:</strong> <span className="highlight">{user.role}</span></p>)}
+                    {user.role == null && <p><strong>Rol:</strong> <span className="highlight">{user.role}</span></p>}
                 </div>
                 <button className="user-button" onClick={handleEditClick}>Editar Información</button>
             </div>
