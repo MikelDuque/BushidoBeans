@@ -41,7 +41,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPut("Update_User")]
-    public async Task<ActionResult<UserDto>> UpdateAsync([FromBody]User user)
+    public async Task<ActionResult<UserDto>> UpdateAsync([FromBody]UserDto user)
     {
         Claim userClaimId = User.FindFirst("id");
         if (userClaimId == null) return Unauthorized(new {Message = "Debes iniciar sesión para llevar a cabo esta acción"});

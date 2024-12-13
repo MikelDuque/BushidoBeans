@@ -26,14 +26,14 @@ namespace eCommerce.Services
 
         public async Task<IEnumerable<AddressDto>> GetAllByUserIdAsync(long userId)
         {
-            User thisUser = await _unitOfWork.UserRepository.GetByIdAsync(userId);
+            User thisUser = await _unitOfWork.UserRepository.GetUserDataByIdAsync(userId);
             
             return _mapper.ToDto(thisUser.Addresses);
         }
 
         public async Task<bool> CreateAddressAsync(AddressDto addressDto)
         {
-            User user = await _unitOfWork.UserRepository.GetByIdAsync(addressDto.UserId);
+            User user = await _unitOfWork.UserRepository.GetUserDataByIdAsync(addressDto.UserId);
 
             if (user == null) return false;  
 

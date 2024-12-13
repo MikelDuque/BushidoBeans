@@ -50,6 +50,7 @@ public class OrderService
         };
 
         Order preFinalOrder = await _unitOfWork.OrderRepository.InsertAsync(newOrder);
+        ChangePoductsStock(order.OrderProducts);
         
         await _unitOfWork.SaveAsync();
 
@@ -67,5 +68,17 @@ public class OrderService
         _unitOfWork.OrderRepository.Delete(orderBD);
 
         return await _unitOfWork.SaveAsync();
+    }
+
+
+    /* ----- FUNCIONES PRIVADAS ----- */
+    
+    private async void ChangePoductsStock(List<OrderProductDto> orderProducts) {
+        foreach (OrderProductDto product in orderProducts)
+        {
+            Product productEntity = await _unitOfWork.ProductRepository.GetByIdAsync(product.ProductId) ?? throw new ArgumentException("El producto no ha sido encontrado");
+            productEntity.Stock -= product.Quantity;
+            _unitOfWork.ProductRepository.Update(productEntity);
+        }
     }
 }

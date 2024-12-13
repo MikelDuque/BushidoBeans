@@ -10,7 +10,7 @@ public class UserRepository : Repository<User>
 
     }
 
-    public new async Task<User> GetByIdAsync(object id)
+    public async Task<User> GetUserDataByIdAsync(object id)
     {
       return await GetQueryable().Where(user => user.Id == (long)id)
       .Include(user => user.Reviews)
