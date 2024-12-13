@@ -10,17 +10,11 @@ public class UserService
 {
   private readonly UnitOfWork _unitOfWork;
   private readonly UserMapper _mapper;
-  private readonly CartService _cartService;
-  private readonly ReviewService _reviewService;
-  private readonly OrderService _orderService;
 
   public UserService(UnitOfWork unitOfWork, UserMapper mapper, CartService cartService, ReviewService reviewService, OrderService orderService)
   {
     _unitOfWork = unitOfWork;
     _mapper = mapper;
-    _cartService = cartService;
-    _reviewService = reviewService;
-    _orderService = orderService;
   }
 
 
