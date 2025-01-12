@@ -7,7 +7,7 @@ export function LoginPrivateRoute({children}) {
 
   if (token) {
     const previousPath = location.pathname === "" ? "/" : location.pathname;
-
+    
     return <Navigate to="/" state={{page: previousPath}} replace/>
   }
 

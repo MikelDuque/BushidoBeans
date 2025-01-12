@@ -24,7 +24,9 @@ export default function UserList() {
         if (token) getUsers();
     }, [token]);
 
-    useEffect(() => {  
+    useEffect(() => { 
+        console.log("user a eliminar", userToDelete);
+        
         if (userToDelete.delete) handleDelete();
     }, [userToDelete])
 
@@ -80,11 +82,13 @@ export default function UserList() {
     function shouldDelete(event) {
         const thisElement = event.target;
         
-        setUserToDelete({userId: thisElement.id, delete: userToDelete.delete})
+        //setUserToDelete({userId: thisElement.id, delete: userToDelete.delete})
+        setUserToDelete((statusPrevious) => ({...statusPrevious, userId: thisElement.id}))
         openModal("deleteUser")
     }
 
     const handleDelete = async () => {
+        setUserToDelete({userId: 0, delete: false});
         
         try {
             const response = await fetch(DELETE_USER_BY_ID(userToDelete.userId), {
@@ -112,7 +116,7 @@ export default function UserList() {
                     ))) : <p>No existen elementos que listar</p>}
                 </ul>
             }
-                <Modal type="deleteUser" titulo="¿Eliminar usuario?" continueFnc={() => setUserToDelete({delete:true, userId:userToDelete.userId})} cancelFnc={closeModal} buttonValues={{continueVal: "Eliminar", cancelVal: "Cancelar"}}>
+                <Modal type="deleteUser" titulo="¿Eliminar usuario?" continueFnc={() => setUserToDelete((statusPrevious) => ({...statusPrevious, delete: true}))} cancelFnc={closeModal} buttonValues={{continueVal: "Eliminar", cancelVal: "Cancelar"}}>
                     <div className={classes.deleteAlert}>
                         <h1>Una vez eliminado no podrá deshacer la acción...</h1>
                     </div>

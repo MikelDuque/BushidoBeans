@@ -39,6 +39,17 @@ export function CheckoutProvider({ children }) {
   }
 
   function handleOrderProducts() {
+    
+    setOrder(estadoPrevio => ({
+      ...estadoPrevio,
+      orderProducts: cart.map((cartItem) => ({
+        ...cartItem,
+          orderId: 0,
+          purchasePrice: cartItem.price
+        }))
+    }))
+
+    /*
     const orderProducts = [];
 
     cart.map((cartItem) => {
@@ -53,13 +64,11 @@ export function CheckoutProvider({ children }) {
       })
     })
 
-    console.log("orderProducts", orderProducts);
-    
-
     setOrder(estadoPrevio => ({
       ...estadoPrevio,
       orderProducts: [...orderProducts]
     }))
+    */
 
 
     /*
@@ -86,7 +95,7 @@ export function CheckoutProvider({ children }) {
           ...item,
           purchasePrice: item.price
         }]})}));
-        */
+    */
   }
 
   function handleTotalPrice() {
