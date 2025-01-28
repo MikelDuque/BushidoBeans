@@ -1,6 +1,5 @@
 # BushidoBeans
 <h3>Proyecto E-Commerce</h3>
-<h2>Bushido Beans</h2>
 
 <p>Realizado por David Andrino Ferreira, Iván Montes Gutiérrez, Miguel Ángel Platero Duque y Yasir Bel Maalem Ouhadou</p>
 
